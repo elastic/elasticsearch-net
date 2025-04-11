@@ -17,35 +17,212 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class FlattenedProperty : IProperty
+internal sealed partial class FlattenedPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>
 {
-	[JsonInclude, JsonPropertyName("boost")]
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropDepthLimit = System.Text.Json.JsonEncodedText.Encode("depth_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropEagerGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("eager_global_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+	private static readonly System.Text.Json.JsonEncodedText PropSplitQueriesOnWhitespace = System.Text.Json.JsonEncodedText.Encode("split_queries_on_whitespace");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<int?> propDepthLimit = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<bool?> propEagerGlobalOrdinals = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions?> propIndexOptions = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<string?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<string?> propSimilarity = default;
+		LocalJsonValue<bool?> propSplitQueriesOnWhitespace = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propDepthLimit.TryReadProperty(ref reader, options, PropDepthLimit, null))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propEagerGlobalOrdinals.TryReadProperty(ref reader, options, PropEagerGlobalOrdinals, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			{
+				continue;
+			}
+
+			if (propSplitQueriesOnWhitespace.TryReadProperty(ref reader, options, PropSplitQueriesOnWhitespace, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			DepthLimit = propDepthLimit.Value,
+			DocValues = propDocValues.Value,
+			Dynamic = propDynamic.Value,
+			EagerGlobalOrdinals = propEagerGlobalOrdinals.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			Index = propIndex.Value,
+			IndexOptions = propIndexOptions.Value,
+			Meta = propMeta.Value,
+			NullValue = propNullValue.Value,
+			Properties = propProperties.Value,
+			Similarity = propSimilarity.Value,
+			SplitQueriesOnWhitespace = propSplitQueriesOnWhitespace.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropDepthLimit, value.DepthLimit, null, null);
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSplitQueriesOnWhitespace, value.SplitQueriesOnWhitespace, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyConverter))]
+public sealed partial class FlattenedProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public FlattenedProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FlattenedProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public double? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("depth_limit")]
 	public int? DepthLimit { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
 	/// <summary>
@@ -53,113 +230,93 @@ public sealed partial class FlattenedProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("null_value")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-	[JsonInclude, JsonPropertyName("split_queries_on_whitespace")]
 	public bool? SplitQueriesOnWhitespace { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "flattened";
 }
 
-public sealed partial class FlattenedPropertyDescriptor<TDocument> : SerializableDescriptor<FlattenedPropertyDescriptor<TDocument>>, IBuildableDescriptor<FlattenedProperty>
+public readonly partial struct FlattenedPropertyDescriptor<TDocument>
 {
-	internal FlattenedPropertyDescriptor(Action<FlattenedPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Instance { get; init; }
 
-	public FlattenedPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FlattenedPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private double? BoostValue { get; set; }
-	private int? DepthLimitValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private bool? EagerGlobalOrdinalsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private string? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
-	private bool? SplitQueriesOnWhitespaceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public FlattenedPropertyDescriptor<TDocument> Boost(double? boost)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FlattenedPropertyDescriptor()
 	{
-		BoostValue = boost;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> DepthLimit(int? depthLimit)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Boost(double? value)
 	{
-		DepthLimitValue = depthLimit;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> DepthLimit(int? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.DepthLimit = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> DocValues(bool? value = true)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> EagerGlobalOrdinals(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.EagerGlobalOrdinals = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Index(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? value)
 	{
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -167,264 +324,174 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public FlattenedPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> NullValue(string? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Meta()
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> NullValue(string? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> Similarity(string? similarity)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SimilarityValue = similarity;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> SplitQueriesOnWhitespace(bool? splitQueriesOnWhitespace = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		SplitQueriesOnWhitespaceValue = splitQueriesOnWhitespace;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Similarity(string? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Similarity = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> SplitQueriesOnWhitespace(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DepthLimitValue.HasValue)
-		{
-			writer.WritePropertyName("depth_limit");
-			writer.WriteNumberValue(DepthLimitValue.Value);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (EagerGlobalOrdinalsValue.HasValue)
-		{
-			writer.WritePropertyName("eager_global_ordinals");
-			writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NullValueValue))
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteStringValue(NullValueValue);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
-		if (SplitQueriesOnWhitespaceValue.HasValue)
-		{
-			writer.WritePropertyName("split_queries_on_whitespace");
-			writer.WriteBooleanValue(SplitQueriesOnWhitespaceValue.Value);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("flattened");
-		writer.WriteEndObject();
+		Instance.SplitQueriesOnWhitespace = value;
+		return this;
 	}
 
-	FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		Boost = BoostValue,
-		DepthLimit = DepthLimitValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Index = IndexValue,
-		IndexOptions = IndexOptionsValue,
-		Meta = MetaValue,
-		NullValue = NullValueValue,
-		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
-		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
-public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor<FlattenedPropertyDescriptor>, IBuildableDescriptor<FlattenedProperty>
+public readonly partial struct FlattenedPropertyDescriptor
 {
-	internal FlattenedPropertyDescriptor(Action<FlattenedPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Instance { get; init; }
 
-	public FlattenedPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FlattenedPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private double? BoostValue { get; set; }
-	private int? DepthLimitValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private bool? EagerGlobalOrdinalsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private string? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
-	private bool? SplitQueriesOnWhitespaceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public FlattenedPropertyDescriptor Boost(double? boost)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FlattenedPropertyDescriptor()
 	{
-		BoostValue = boost;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public FlattenedPropertyDescriptor DepthLimit(int? depthLimit)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Boost(double? value)
 	{
-		DepthLimitValue = depthLimit;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor DepthLimit(int? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.DepthLimit = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor DocValues(bool? value = true)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor EagerGlobalOrdinals(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.EagerGlobalOrdinals = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor IgnoreAbove(int? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Index(bool? value = true)
 	{
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.Index = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? value)
+	{
+		Instance.IndexOptions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -432,170 +499,93 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public FlattenedPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor NullValue(string? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Meta()
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor NullValue(string? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor Similarity(string? similarity)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SimilarityValue = similarity;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor SplitQueriesOnWhitespace(bool? splitQueriesOnWhitespace = true)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		SplitQueriesOnWhitespaceValue = splitQueriesOnWhitespace;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public FlattenedPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Similarity(string? value)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DepthLimitValue.HasValue)
-		{
-			writer.WritePropertyName("depth_limit");
-			writer.WriteNumberValue(DepthLimitValue.Value);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (EagerGlobalOrdinalsValue.HasValue)
-		{
-			writer.WritePropertyName("eager_global_ordinals");
-			writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NullValueValue))
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteStringValue(NullValueValue);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
-		if (SplitQueriesOnWhitespaceValue.HasValue)
-		{
-			writer.WritePropertyName("split_queries_on_whitespace");
-			writer.WriteBooleanValue(SplitQueriesOnWhitespaceValue.Value);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("flattened");
-		writer.WriteEndObject();
+		Instance.Similarity = value;
+		return this;
 	}
 
-	FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor SplitQueriesOnWhitespace(bool? value = true)
 	{
-		Boost = BoostValue,
-		DepthLimit = DepthLimitValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Index = IndexValue,
-		IndexOptions = IndexOptionsValue,
-		Meta = MetaValue,
-		NullValue = NullValueValue,
-		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
-		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.SplitQueriesOnWhitespace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
+	{
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

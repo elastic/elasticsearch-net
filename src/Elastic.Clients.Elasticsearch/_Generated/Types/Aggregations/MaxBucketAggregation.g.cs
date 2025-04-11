@@ -17,25 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class MaxBucketAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object?> propBucketsPath = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?> propGapPolicy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBucketsPath.TryReadProperty(ref reader, options, PropBucketsPath, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BucketsPath = propBucketsPath.Value,
+			Format = propFormat.Value,
+			GapPolicy = propGapPolicy.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationConverter))]
 public sealed partial class MaxBucketAggregation
 {
+#if NET7_0_OR_GREATER
+	public MaxBucketAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MaxBucketAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MaxBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("buckets_path")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+	public object? BucketsPath { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,7 +112,6 @@ public sealed partial class MaxBucketAggregation
 	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -51,33 +119,37 @@ public sealed partial class MaxBucketAggregation
 	/// Policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(MaxBucketAggregation maxBucketAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MaxBucket(maxBucketAggregation);
 }
 
-public sealed partial class MaxBucketAggregationDescriptor : SerializableDescriptor<MaxBucketAggregationDescriptor>
+public readonly partial struct MaxBucketAggregationDescriptor
 {
-	internal MaxBucketAggregationDescriptor(Action<MaxBucketAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation Instance { get; init; }
 
-	public MaxBucketAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MaxBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MaxBucketAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public MaxBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	public Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor BucketsPath(object? value)
 	{
-		BucketsPathValue = bucketsPath;
-		return Self;
+		Instance.BucketsPath = value;
+		return this;
 	}
 
 	/// <summary>
@@ -86,10 +158,10 @@ public sealed partial class MaxBucketAggregationDescriptor : SerializableDescrip
 	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
 	/// </para>
 	/// </summary>
-	public MaxBucketAggregationDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,33 +169,22 @@ public sealed partial class MaxBucketAggregationDescriptor : SerializableDescrip
 	/// Policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	public MaxBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	public Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
-		GapPolicyValue = gapPolicy;
-		return Self;
+		Instance.GapPolicy = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BucketsPathValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("buckets_path");
-			JsonSerializer.Serialize(writer, BucketsPathValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (GapPolicyValue is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

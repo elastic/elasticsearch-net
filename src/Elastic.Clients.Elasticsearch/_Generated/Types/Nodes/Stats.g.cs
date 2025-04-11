@@ -17,115 +17,342 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class StatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Stats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveSelection = System.Text.Json.JsonEncodedText.Encode("adaptive_selection");
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
+	private static readonly System.Text.Json.JsonEncodedText PropBreakers = System.Text.Json.JsonEncodedText.Encode("breakers");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery");
+	private static readonly System.Text.Json.JsonEncodedText PropFs = System.Text.Json.JsonEncodedText.Encode("fs");
+	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host");
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip");
+	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os");
+	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptCache = System.Text.Json.JsonEncodedText.Encode("script_cache");
+	private static readonly System.Text.Json.JsonEncodedText PropThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Stats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>?> propAdaptiveSelection = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propAttributes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>?> propBreakers = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Discovery?> propDiscovery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.FileSystem?> propFs = default;
+		LocalJsonValue<string?> propHost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Http?> propHttp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.IndexingPressure?> propIndexingPressure = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats?> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Ingest?> propIngest = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Jvm?> propJvm = default;
+		LocalJsonValue<string?> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.OperatingSystem?> propOs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Process?> propProcess = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>?> propRoles = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Scripting?> propScript = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>?> propScriptCache = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>?> propThreadPool = default;
+		LocalJsonValue<long?> propTimestamp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Transport?> propTransport = default;
+		LocalJsonValue<string?> propTransportAddress = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAdaptiveSelection.TryReadProperty(ref reader, options, PropAdaptiveSelection, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static System.Collections.Generic.IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propBreakers.TryReadProperty(ref reader, options, PropBreakers, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propDiscovery.TryReadProperty(ref reader, options, PropDiscovery, null))
+			{
+				continue;
+			}
+
+			if (propFs.TryReadProperty(ref reader, options, PropFs, null))
+			{
+				continue;
+			}
+
+			if (propHost.TryReadProperty(ref reader, options, PropHost, null))
+			{
+				continue;
+			}
+
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
+			{
+				continue;
+			}
+
+			if (propIndexingPressure.TryReadProperty(ref reader, options, PropIndexingPressure, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
+
+			if (propIp.TryReadProperty(ref reader, options, PropIp, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propJvm.TryReadProperty(ref reader, options, PropJvm, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propOs.TryReadProperty(ref reader, options, PropOs, null))
+			{
+				continue;
+			}
+
+			if (propProcess.TryReadProperty(ref reader, options, PropProcess, null))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, null)))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propScriptCache.TryReadProperty(ref reader, options, PropScriptCache, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>(o, null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propThreadPool.TryReadProperty(ref reader, options, PropThreadPool, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			{
+				continue;
+			}
+
+			if (propTransport.TryReadProperty(ref reader, options, PropTransport, null))
+			{
+				continue;
+			}
+
+			if (propTransportAddress.TryReadProperty(ref reader, options, PropTransportAddress, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Stats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AdaptiveSelection = propAdaptiveSelection.Value,
+			Attributes = propAttributes.Value,
+			Breakers = propBreakers.Value,
+			Discovery = propDiscovery.Value,
+			Fs = propFs.Value,
+			Host = propHost.Value,
+			Http = propHttp.Value,
+			IndexingPressure = propIndexingPressure.Value,
+			Indices = propIndices.Value,
+			Ingest = propIngest.Value,
+			Ip = propIp.Value,
+			Jvm = propJvm.Value,
+			Name = propName.Value,
+			Os = propOs.Value,
+			Process = propProcess.Value,
+			Roles = propRoles.Value,
+			Script = propScript.Value,
+			ScriptCache = propScriptCache.Value,
+			ThreadPool = propThreadPool.Value,
+			Timestamp = propTimestamp.Value,
+			Transport = propTransport.Value,
+			TransportAddress = propTransportAddress.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Stats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdaptiveSelection, value.AdaptiveSelection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, v, null, null));
+		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropBreakers, value.Breakers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>(o, v, null, null));
+		writer.WriteProperty(options, PropDiscovery, value.Discovery, null, null);
+		writer.WriteProperty(options, PropFs, value.Fs, null, null);
+		writer.WriteProperty(options, PropHost, value.Host, null, null);
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropIp, value.Ip, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropJvm, value.Jvm, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropOs, value.Os, null, null);
+		writer.WriteProperty(options, PropProcess, value.Process, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropScriptCache, value.ScriptCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>(o, v, null)));
+		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, v, null, null));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
+		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.StatsConverter))]
 public sealed partial class Stats
 {
+#if NET7_0_OR_GREATER
+	public Stats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Stats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Stats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Statistics about adaptive replica selection.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("adaptive_selection")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? AdaptiveSelection { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? AdaptiveSelection { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains a list of attributes for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("attributes")]
-	[ReadOnlyFieldDictionaryConverter(typeof(string))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, string>? Attributes { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Attributes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about the field data circuit breaker.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("breakers")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? Breakers { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? Breakers { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains node discovery statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("discovery")]
-	public Elastic.Clients.Elasticsearch.Nodes.Discovery? Discovery { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Discovery? Discovery { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// File system information, data path, free disk space, read/write stats.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fs")]
-	public Elastic.Clients.Elasticsearch.Nodes.FileSystem? Fs { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.FileSystem? Fs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Network host for the node, based on the network host setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("host")]
-	public string? Host { get; init; }
+	public string? Host { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// HTTP connection information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("http")]
-	public Elastic.Clients.Elasticsearch.Nodes.Http? Http { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Http? Http { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains indexing pressure statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexing_pressure")]
-	public Elastic.Clients.Elasticsearch.Nodes.IndexingPressure? IndexingPressure { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.IndexingPressure? IndexingPressure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indices stats about size, document count, indexing and deletion times, search times, field cache size, merges and flushes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStats? Indices { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStats? Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about ingest preprocessing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ingest")]
-	public Elastic.Clients.Elasticsearch.Nodes.Ingest? Ingest { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Ingest? Ingest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// IP address and port for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ip")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string>? Ip { get; init; }
+	public System.Collections.Generic.ICollection<string>? Ip { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// JVM stats, memory pool information, garbage collection, buffer pools, number of loaded/unloaded classes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("jvm")]
-	public Elastic.Clients.Elasticsearch.Nodes.Jvm? Jvm { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Jvm? Jvm { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -133,66 +360,56 @@ public sealed partial class Stats
 	/// Based on the node name setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; init; }
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Operating system stats, load average, mem, swap.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("os")]
-	public Elastic.Clients.Elasticsearch.Nodes.OperatingSystem? Os { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.OperatingSystem? Os { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Process statistics, memory consumption, cpu usage, open file descriptors.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("process")]
-	public Elastic.Clients.Elasticsearch.Nodes.Process? Process { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Process? Process { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Roles assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("roles")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains script statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Nodes.Scripting? Script { get; init; }
-	[JsonInclude, JsonPropertyName("script_cache")]
-	public IReadOnlyDictionary<string, Union<Elastic.Clients.Elasticsearch.Nodes.ScriptCache, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>>? ScriptCache { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Scripting? Script { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>? ScriptCache { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about each thread pool, including current size, queue and rejected tasks.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("thread_pool")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? ThreadPool { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long? Timestamp { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? ThreadPool { get; set; }
+	public long? Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Transport statistics about sent and received bytes in cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transport")]
-	public Elastic.Clients.Elasticsearch.Nodes.Transport? Transport { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Transport? Transport { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Host and port for the transport layer, used for internal communication between nodes in a cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transport_address")]
-	public string? TransportAddress { get; init; }
+	public string? TransportAddress { get; set; }
 }

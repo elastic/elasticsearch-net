@@ -17,24 +17,135 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class DateHistogramGroupingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropDelay = System.Text.Json.JsonEncodedText.Encode("delay");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCalendarInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDelay = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFixedInterval = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propInterval = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCalendarInterval.TryReadProperty(ref reader, options, PropCalendarInterval, null))
+			{
+				continue;
+			}
+
+			if (propDelay.TryReadProperty(ref reader, options, PropDelay, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFixedInterval.TryReadProperty(ref reader, options, PropFixedInterval, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CalendarInterval = propCalendarInterval.Value,
+			Delay = propDelay.Value,
+			Field = propField.Value,
+			FixedInterval = propFixedInterval.Value,
+			Format = propFormat.Value,
+			Interval = propInterval.Value,
+			TimeZone = propTimeZone.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCalendarInterval, value.CalendarInterval, null, null);
+		writer.WriteProperty(options, PropDelay, value.Delay, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingConverter))]
 public sealed partial class DateHistogramGrouping
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateHistogramGrouping(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public DateHistogramGrouping()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DateHistogramGrouping()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DateHistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The interval of time buckets to be generated when rolling up.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("calendar_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? CalendarInterval { get; set; }
 
 	/// <summary>
@@ -46,7 +157,6 @@ public sealed partial class DateHistogramGrouping
 	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delay")]
 	public Elastic.Clients.Elasticsearch.Duration? Delay { get; set; }
 
 	/// <summary>
@@ -54,19 +164,19 @@ public sealed partial class DateHistogramGrouping
 	/// The date field that is to be rolled up.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The interval of time buckets to be generated when rolling up.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("interval")]
 	public Elastic.Clients.Elasticsearch.Duration? Interval { get; set; }
 
 	/// <summary>
@@ -76,35 +186,37 @@ public sealed partial class DateHistogramGrouping
 	/// By default, rollup documents are stored in <c>UTC</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 }
 
-public sealed partial class DateHistogramGroupingDescriptor<TDocument> : SerializableDescriptor<DateHistogramGroupingDescriptor<TDocument>>
+public readonly partial struct DateHistogramGroupingDescriptor<TDocument>
 {
-	internal DateHistogramGroupingDescriptor(Action<DateHistogramGroupingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Instance { get; init; }
 
-	public DateHistogramGroupingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateHistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? CalendarIntervalValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? DelayValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? IntervalValue { get; set; }
-	private string? TimeZoneValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateHistogramGroupingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The interval of time buckets to be generated when rolling up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Duration? calendarInterval)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		CalendarIntervalValue = calendarInterval;
-		return Self;
+		Instance.CalendarInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,10 +228,10 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? delay)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		DelayValue = delay;
-		return Self;
+		Instance.Delay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -127,10 +239,10 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	/// The date field that is to be rolled up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -138,21 +250,10 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	/// The date field that is to be rolled up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -160,22 +261,22 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	/// The interval of time buckets to be generated when rolling up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FixedIntervalValue = fixedInterval;
-		return Self;
+		Instance.FixedInterval = value;
+		return this;
 	}
 
-	public DateHistogramGroupingDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public DateHistogramGroupingDescriptor<TDocument> Interval(Elastic.Clients.Elasticsearch.Duration? interval)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Interval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		IntervalValue = interval;
-		return Self;
+		Instance.Interval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -185,82 +286,49 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	/// By default, rollup documents are stored in <c>UTC</c>.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor<TDocument> TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (CalendarIntervalValue is not null)
-		{
-			writer.WritePropertyName("calendar_interval");
-			JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
-		}
-
-		if (DelayValue is not null)
-		{
-			writer.WritePropertyName("delay");
-			JsonSerializer.Serialize(writer, DelayValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (FixedIntervalValue is not null)
-		{
-			writer.WritePropertyName("fixed_interval");
-			JsonSerializer.Serialize(writer, FixedIntervalValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (IntervalValue is not null)
-		{
-			writer.WritePropertyName("interval");
-			JsonSerializer.Serialize(writer, IntervalValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DateHistogramGroupingDescriptor : SerializableDescriptor<DateHistogramGroupingDescriptor>
+public readonly partial struct DateHistogramGroupingDescriptor
 {
-	internal DateHistogramGroupingDescriptor(Action<DateHistogramGroupingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Instance { get; init; }
 
-	public DateHistogramGroupingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateHistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? CalendarIntervalValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? DelayValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? IntervalValue { get; set; }
-	private string? TimeZoneValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateHistogramGroupingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The interval of time buckets to be generated when rolling up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Duration? calendarInterval)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		CalendarIntervalValue = calendarInterval;
-		return Self;
+		Instance.CalendarInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,10 +340,10 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? delay)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		DelayValue = delay;
-		return Self;
+		Instance.Delay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -283,10 +351,10 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	/// The date field that is to be rolled up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -294,21 +362,10 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	/// The date field that is to be rolled up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
-	public DateHistogramGroupingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -316,22 +373,22 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	/// The interval of time buckets to be generated when rolling up.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FixedIntervalValue = fixedInterval;
-		return Self;
+		Instance.FixedInterval = value;
+		return this;
 	}
 
-	public DateHistogramGroupingDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public DateHistogramGroupingDescriptor Interval(Elastic.Clients.Elasticsearch.Duration? interval)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Interval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		IntervalValue = interval;
-		return Self;
+		Instance.Interval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -341,53 +398,17 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	/// By default, rollup documents are stored in <c>UTC</c>.
 	/// </para>
 	/// </summary>
-	public DateHistogramGroupingDescriptor TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (CalendarIntervalValue is not null)
-		{
-			writer.WritePropertyName("calendar_interval");
-			JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
-		}
-
-		if (DelayValue is not null)
-		{
-			writer.WritePropertyName("delay");
-			JsonSerializer.Serialize(writer, DelayValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (FixedIntervalValue is not null)
-		{
-			writer.WritePropertyName("fixed_interval");
-			JsonSerializer.Serialize(writer, FixedIntervalValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (IntervalValue is not null)
-		{
-			writer.WritePropertyName("interval");
-			JsonSerializer.Serialize(writer, IntervalValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor(new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

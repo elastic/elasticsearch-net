@@ -17,97 +17,187 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public sealed partial class Retention
+internal sealed partial class RetentionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention>
 {
-	/// <summary>
-	/// <para>
-	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("expire_after")]
-	public Elastic.Clients.Elasticsearch.Duration ExpireAfter { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropExpireAfter = System.Text.Json.JsonEncodedText.Encode("expire_after");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxCount = System.Text.Json.JsonEncodedText.Encode("max_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMinCount = System.Text.Json.JsonEncodedText.Encode("min_count");
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("max_count")]
-	public int MaxCount { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Minimum number of snapshots to retain, even if the snapshots have expired.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("min_count")]
-	public int MinCount { get; set; }
-}
-
-public sealed partial class RetentionDescriptor : SerializableDescriptor<RetentionDescriptor>
-{
-	internal RetentionDescriptor(Action<RetentionDescriptor> configure) => configure.Invoke(this);
-
-	public RetentionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propExpireAfter = default;
+		LocalJsonValue<int> propMaxCount = default;
+		LocalJsonValue<int> propMinCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExpireAfter.TryReadProperty(ref reader, options, PropExpireAfter, null))
+			{
+				continue;
+			}
+
+			if (propMaxCount.TryReadProperty(ref reader, options, PropMaxCount, null))
+			{
+				continue;
+			}
+
+			if (propMinCount.TryReadProperty(ref reader, options, PropMinCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ExpireAfter = propExpireAfter.Value,
+			MaxCount = propMaxCount.Value,
+			MinCount = propMinCount.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration ExpireAfterValue { get; set; }
-	private int MaxCountValue { get; set; }
-	private int MinCountValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
-	/// </para>
-	/// </summary>
-	public RetentionDescriptor ExpireAfter(Elastic.Clients.Elasticsearch.Duration expireAfter)
-	{
-		ExpireAfterValue = expireAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
-	/// </para>
-	/// </summary>
-	public RetentionDescriptor MaxCount(int maxCount)
-	{
-		MaxCountValue = maxCount;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Minimum number of snapshots to retain, even if the snapshots have expired.
-	/// </para>
-	/// </summary>
-	public RetentionDescriptor MinCount(int minCount)
-	{
-		MinCountValue = minCount;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("expire_after");
-		JsonSerializer.Serialize(writer, ExpireAfterValue, options);
-		writer.WritePropertyName("max_count");
-		writer.WriteNumberValue(MaxCountValue);
-		writer.WritePropertyName("min_count");
-		writer.WriteNumberValue(MinCountValue);
+		writer.WriteProperty(options, PropExpireAfter, value.ExpireAfter, null, null);
+		writer.WriteProperty(options, PropMaxCount, value.MaxCount, null, null);
+		writer.WriteProperty(options, PropMinCount, value.MinCount, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionConverter))]
+public sealed partial class Retention
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Retention(Elastic.Clients.Elasticsearch.Duration expireAfter, int maxCount, int minCount)
+	{
+		ExpireAfter = expireAfter;
+		MaxCount = maxCount;
+		MinCount = minCount;
+	}
+#if NET7_0_OR_GREATER
+	public Retention()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Retention()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Retention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration ExpireAfter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum number of snapshots to retain, even if the snapshots have expired.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MinCount { get; set; }
+}
+
+public readonly partial struct RetentionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetentionDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetentionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor ExpireAfter(Elastic.Clients.Elasticsearch.Duration value)
+	{
+		Instance.ExpireAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor MaxCount(int value)
+	{
+		Instance.MaxCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Minimum number of snapshots to retain, even if the snapshots have expired.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor MinCount(int value)
+	{
+		Instance.MinCount = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention Build(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor(new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

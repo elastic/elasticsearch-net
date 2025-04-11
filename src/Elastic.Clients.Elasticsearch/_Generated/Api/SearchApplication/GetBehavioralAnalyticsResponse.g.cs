@@ -17,21 +17,42 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
+using System;
+using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class GetBehavioralAnalyticsResponse : DictionaryResponse<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection>
+internal sealed partial class GetBehavioralAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse>
 {
-	public GetBehavioralAnalyticsResponse(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection> dictionary) : base(dictionary)
+	public override Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Analytics = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection>(o, null, null)!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Analytics, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponseConverter))]
+public sealed partial class GetBehavioralAnalyticsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetBehavioralAnalyticsResponse()
 	{
 	}
 
-	public GetBehavioralAnalyticsResponse() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetBehavioralAnalyticsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
+		_ = sentinel;
 	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection> Analytics { get; set; }
 }

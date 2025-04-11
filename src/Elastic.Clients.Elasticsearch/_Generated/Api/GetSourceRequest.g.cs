@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class GetSourceRequestParameters : RequestParameters
+public sealed partial class GetSourceRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -106,6 +99,35 @@ public sealed partial class GetSourceRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
+internal sealed partial class GetSourceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GetSourceRequest>
+{
+	public override Elastic.Clients.Elasticsearch.GetSourceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GetSourceRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get a document's source.
@@ -124,15 +146,27 @@ public sealed partial class GetSourceRequestParameters : RequestParameters
 /// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 /// </code>
 /// </summary>
-public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GetSourceRequestConverter))]
+public sealed partial class GetSourceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetSourceRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetSourceRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetSourceRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetSourceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetSource;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceGetSource;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -140,11 +174,32 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	/// <summary>
 	/// <para>
+	/// A unique document identifier.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index that contains the document.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// The node or shard the operation should be performed on.
 	/// By default, the operation is randomized between the shard replicas.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
@@ -152,7 +207,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
@@ -161,7 +215,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -169,7 +222,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -177,7 +229,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 	/// <summary>
@@ -185,7 +236,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// A comma-separated list of source fields to exclude in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
@@ -193,7 +243,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// A comma-separated list of source fields to include in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
@@ -201,7 +250,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
@@ -210,7 +258,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// It must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
@@ -218,7 +265,6 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 	/// The version type.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
@@ -240,63 +286,268 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 /// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 /// </code>
 /// </summary>
-public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescriptor<GetSourceRequestDescriptor<TDocument>, GetSourceRequestParameters>
+public readonly partial struct GetSourceRequestDescriptor
 {
-	internal GetSourceRequestDescriptor(Action<GetSourceRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.GetSourceRequest Instance { get; init; }
 
-	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.GetSourceRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public GetSourceRequestDescriptor(TDocument document) : this(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document))
+	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(index, id);
 	}
 
-	public GetSourceRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index) : this(index, Elastic.Clients.Elasticsearch.Id.From(document))
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetSourceRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public GetSourceRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id) : this(typeof(TDocument), id)
+	public static explicit operator Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.GetSourceRequest instance) => new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A unique document identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.Id = value;
+		return this;
 	}
 
-	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : this(typeof(TDocument), id)
+	/// <summary>
+	/// <para>
+	/// The name of the index that contains the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
+		Instance.Index = value;
+		return this;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetSource;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "get_source";
-
-	public GetSourceRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public GetSourceRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
-	public GetSourceRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public GetSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public GetSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public GetSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public GetSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public GetSourceRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-	public GetSourceRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
-	public GetSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-
-	public GetSourceRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// By default, the operation is randomized between the shard replicas.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Preference(string? value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Preference = value;
+		return this;
 	}
 
-	public GetSourceRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Realtime(bool? value = true)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance.Realtime = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Refresh(bool? value = true)
 	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of stored fields to return as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of stored fields to return as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GetSourceRequest Build(System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor(new Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -318,46 +569,271 @@ public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescr
 /// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 /// </code>
 /// </summary>
-public sealed partial class GetSourceRequestDescriptor : RequestDescriptor<GetSourceRequestDescriptor, GetSourceRequestParameters>
+public readonly partial struct GetSourceRequestDescriptor<TDocument>
 {
-	internal GetSourceRequestDescriptor(Action<GetSourceRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.GetSourceRequest Instance { get; init; }
 
-	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.GetSourceRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetSource;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "get_source";
-
-	public GetSourceRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public GetSourceRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
-	public GetSourceRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public GetSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public GetSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public GetSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public GetSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public GetSourceRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-	public GetSourceRequestDescriptor Version(long? version) => Qs("version", version);
-	public GetSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-
-	public GetSourceRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(index, id);
 	}
 
-	public GetSourceRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public GetSourceRequestDescriptor(TDocument document)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public GetSourceRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(typeof(TDocument), id);
+	}
+
+	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(typeof(TDocument), id);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetSourceRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.GetSourceRequest instance) => new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A unique document identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the index that contains the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// By default, the operation is randomized between the shard replicas.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Realtime(bool? value = true)
+	{
+		Instance.Realtime = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of stored fields to return as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of stored fields to return as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version number for concurrency control.
+	/// It must match the current version of the document for the request to succeed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GetSourceRequest Build(System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

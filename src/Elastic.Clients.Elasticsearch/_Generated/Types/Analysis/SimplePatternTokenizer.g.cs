@@ -17,74 +17,135 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class SimplePatternTokenizer : ITokenizer
+internal sealed partial class SimplePatternTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer>
 {
-	[JsonInclude, JsonPropertyName("pattern")]
+	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propPattern = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPattern.TryReadProperty(ref reader, options, PropPattern, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Pattern = propPattern.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerConverter))]
+public sealed partial class SimplePatternTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public SimplePatternTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SimplePatternTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SimplePatternTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Pattern { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "simple_pattern";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class SimplePatternTokenizerDescriptor : SerializableDescriptor<SimplePatternTokenizerDescriptor>, IBuildableDescriptor<SimplePatternTokenizer>
+public readonly partial struct SimplePatternTokenizerDescriptor
 {
-	internal SimplePatternTokenizerDescriptor(Action<SimplePatternTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer Instance { get; init; }
 
-	public SimplePatternTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimplePatternTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private string? PatternValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public SimplePatternTokenizerDescriptor Pattern(string? pattern)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimplePatternTokenizerDescriptor()
 	{
-		PatternValue = pattern;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SimplePatternTokenizerDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer(Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor Pattern(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Pattern = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(PatternValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(PatternValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("simple_pattern");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	SimplePatternTokenizer IBuildableDescriptor<SimplePatternTokenizer>.Build() => new()
-	{
-		Pattern = PatternValue,
-		Version = VersionValue
-	};
 }

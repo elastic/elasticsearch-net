@@ -17,26 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class TermSuggestOptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match");
+	private static readonly System.Text.Json.JsonEncodedText PropFreq = System.Text.Json.JsonEncodedText.Encode("freq");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlighted = System.Text.Json.JsonEncodedText.Encode("highlighted");
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCollateMatch = default;
+		LocalJsonValue<long> propFreq = default;
+		LocalJsonValue<string?> propHighlighted = default;
+		LocalJsonValue<double> propScore = default;
+		LocalJsonValue<string> propText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollateMatch.TryReadProperty(ref reader, options, PropCollateMatch, null))
+			{
+				continue;
+			}
+
+			if (propFreq.TryReadProperty(ref reader, options, PropFreq, null))
+			{
+				continue;
+			}
+
+			if (propHighlighted.TryReadProperty(ref reader, options, PropHighlighted, null))
+			{
+				continue;
+			}
+
+			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
+			{
+				continue;
+			}
+
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CollateMatch = propCollateMatch.Value,
+			Freq = propFreq.Value,
+			Highlighted = propHighlighted.Value,
+			Score = propScore.Value,
+			Text = propText.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch, null, null);
+		writer.WriteProperty(options, PropFreq, value.Freq, null, null);
+		writer.WriteProperty(options, PropHighlighted, value.Highlighted, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, null);
+		writer.WriteProperty(options, PropText, value.Text, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOptionConverter))]
 public sealed partial class TermSuggestOption
 {
-	[JsonInclude, JsonPropertyName("collate_match")]
-	public bool? CollateMatch { get; init; }
-	[JsonInclude, JsonPropertyName("freq")]
-	public long Freq { get; init; }
-	[JsonInclude, JsonPropertyName("highlighted")]
-	public string? Highlighted { get; init; }
-	[JsonInclude, JsonPropertyName("score")]
-	public double Score { get; init; }
-	[JsonInclude, JsonPropertyName("text")]
-	public string Text { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermSuggestOption(long freq, double score, string text)
+	{
+		Freq = freq;
+		Score = score;
+		Text = text;
+	}
+#if NET7_0_OR_GREATER
+	public TermSuggestOption()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TermSuggestOption()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TermSuggestOption(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? CollateMatch { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Freq { get; set; }
+	public string? Highlighted { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Score { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Text { get; set; }
 }

@@ -17,22 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class RollupJobStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentPosition = System.Text.Json.JsonEncodedText.Encode("current_position");
+	private static readonly System.Text.Json.JsonEncodedText PropJobState = System.Text.Json.JsonEncodedText.Encode("job_state");
+	private static readonly System.Text.Json.JsonEncodedText PropUpgradedDocId = System.Text.Json.JsonEncodedText.Encode("upgraded_doc_id");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propCurrentPosition = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Rollup.IndexingJobState> propJobState = default;
+		LocalJsonValue<bool?> propUpgradedDocId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrentPosition.TryReadProperty(ref reader, options, PropCurrentPosition, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propJobState.TryReadProperty(ref reader, options, PropJobState, null))
+			{
+				continue;
+			}
+
+			if (propUpgradedDocId.TryReadProperty(ref reader, options, PropUpgradedDocId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CurrentPosition = propCurrentPosition.Value,
+			JobState = propJobState.Value,
+			UpgradedDocId = propUpgradedDocId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrentPosition, value.CurrentPosition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropJobState, value.JobState, null, null);
+		writer.WriteProperty(options, PropUpgradedDocId, value.UpgradedDocId, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.RollupJobStatusConverter))]
 public sealed partial class RollupJobStatus
 {
-	[JsonInclude, JsonPropertyName("current_position")]
-	public IReadOnlyDictionary<string, object>? CurrentPosition { get; init; }
-	[JsonInclude, JsonPropertyName("job_state")]
-	public Elastic.Clients.Elasticsearch.Rollup.IndexingJobState JobState { get; init; }
-	[JsonInclude, JsonPropertyName("upgraded_doc_id")]
-	public bool? UpgradedDocId { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RollupJobStatus(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState jobState)
+	{
+		JobState = jobState;
+	}
+#if NET7_0_OR_GREATER
+	public RollupJobStatus()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RollupJobStatus()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RollupJobStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? CurrentPosition { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Rollup.IndexingJobState JobState { get; set; }
+	public bool? UpgradedDocId { get; set; }
 }

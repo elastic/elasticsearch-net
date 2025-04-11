@@ -17,139 +17,151 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<MatchPhrasePrefixQuery>
+internal sealed partial class MatchPhrasePrefixQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery>
 {
-	public override MatchPhrasePrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxExpansions = System.Text.Json.JsonEncodedText.Encode("max_expansions");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropSlop = System.Text.Json.JsonEncodedText.Encode("slop");
+	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		var variant = new MatchPhrasePrefixQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			var value = reader.ReadValue<string>(options, null);
+			reader.Read();
+			return new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
-				var property = reader.GetString();
-				if (property == "analyzer")
-				{
-					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_expansions")
-				{
-					variant.MaxExpansions = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "slop")
-				{
-					variant.Slop = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "zero_terms_query")
-				{
-					variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
-					continue;
-				}
-			}
+				Field = propField.Value,
+				Query = value
+			};
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<int?> propMaxExpansions = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<int?> propSlop = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?> propZeroTermsQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propSlop.TryReadProperty(ref reader, options, PropSlop, null))
+			{
+				continue;
+			}
+
+			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			MaxExpansions = propMaxExpansions.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value,
+			Slop = propSlop.Value,
+			ZeroTermsQuery = propZeroTermsQuery.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, MatchPhrasePrefixQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize MatchPhrasePrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Analyzer))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(value.Analyzer);
-		}
-
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.MaxExpansions.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(value.MaxExpansions.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(value.Query);
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.Slop.HasValue)
-		{
-			writer.WritePropertyName("slop");
-			writer.WriteNumberValue(value.Slop.Value);
-		}
-
-		if (value.ZeroTermsQuery is not null)
-		{
-			writer.WritePropertyName("zero_terms_query");
-			JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
-		}
-
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropSlop, value.Slop, null, null);
+		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(MatchPhrasePrefixQueryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryConverter))]
 public sealed partial class MatchPhrasePrefixQuery
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Field field, string query)
+	{
+		Field = field;
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public MatchPhrasePrefixQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
 	/// <summary>
@@ -168,7 +180,11 @@ public sealed partial class MatchPhrasePrefixQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -182,7 +198,11 @@ public sealed partial class MatchPhrasePrefixQuery
 	/// Text you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public string Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -198,36 +218,36 @@ public sealed partial class MatchPhrasePrefixQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(MatchPhrasePrefixQuery matchPhrasePrefixQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchPhrasePrefix(matchPhrasePrefixQuery);
 }
 
-public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhrasePrefixQueryDescriptor<TDocument>>
+public readonly partial struct MatchPhrasePrefixQueryDescriptor<TDocument>
 {
-	internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Instance { get; init; }
 
-	public MatchPhrasePrefixQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchPhrasePrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? MaxExpansionsValue { get; set; }
-	private string QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private int? SlopValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchPhrasePrefixQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to convert text in the query value into tokens.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -238,28 +258,22 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -267,10 +281,10 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	/// Maximum number of terms to which the last provided term of the query value will expand.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
-		MaxExpansionsValue = maxExpansions;
-		return Self;
+		Instance.MaxExpansions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -278,16 +292,16 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	/// Text you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public MatchPhrasePrefixQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -295,10 +309,10 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	/// Maximum number of positions allowed between matching tokens.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor<TDocument> Slop(int? slop)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Slop(int? value)
 	{
-		SlopValue = slop;
-		return Self;
+		Instance.Slop = value;
+		return this;
 	}
 
 	/// <summary>
@@ -306,88 +320,49 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
-		ZeroTermsQueryValue = zeroTermsQuery;
-		return Self;
+		Instance.ZeroTermsQuery = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MaxExpansionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(MaxExpansionsValue.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (SlopValue.HasValue)
-		{
-			writer.WritePropertyName("slop");
-			writer.WriteNumberValue(SlopValue.Value);
-		}
-
-		if (ZeroTermsQueryValue is not null)
-		{
-			writer.WritePropertyName("zero_terms_query");
-			JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescriptor<MatchPhrasePrefixQueryDescriptor>
+public readonly partial struct MatchPhrasePrefixQueryDescriptor
 {
-	internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Instance { get; init; }
 
-	public MatchPhrasePrefixQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchPhrasePrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? MaxExpansionsValue { get; set; }
-	private string QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private int? SlopValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchPhrasePrefixQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to convert text in the query value into tokens.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -398,28 +373,22 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public MatchPhrasePrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public MatchPhrasePrefixQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public MatchPhrasePrefixQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -427,10 +396,10 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	/// Maximum number of terms to which the last provided term of the query value will expand.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor MaxExpansions(int? maxExpansions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor MaxExpansions(int? value)
 	{
-		MaxExpansionsValue = maxExpansions;
-		return Self;
+		Instance.MaxExpansions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,16 +407,16 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	/// Text you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public MatchPhrasePrefixQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -455,10 +424,10 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	/// Maximum number of positions allowed between matching tokens.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor Slop(int? slop)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Slop(int? value)
 	{
-		SlopValue = slop;
-		return Self;
+		Instance.Slop = value;
+		return this;
 	}
 
 	/// <summary>
@@ -466,58 +435,17 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
 	/// </para>
 	/// </summary>
-	public MatchPhrasePrefixQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
-		ZeroTermsQueryValue = zeroTermsQuery;
-		return Self;
+		Instance.ZeroTermsQuery = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MaxExpansionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(MaxExpansionsValue.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (SlopValue.HasValue)
-		{
-			writer.WritePropertyName("slop");
-			writer.WriteNumberValue(SlopValue.Value);
-		}
-
-		if (ZeroTermsQueryValue is not null)
-		{
-			writer.WritePropertyName("zero_terms_query");
-			JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

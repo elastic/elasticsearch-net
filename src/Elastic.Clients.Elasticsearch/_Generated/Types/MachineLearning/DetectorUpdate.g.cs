@@ -17,18 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DetectorUpdateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCustomRules = System.Text.Json.JsonEncodedText.Encode("custom_rules");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorIndex = System.Text.Json.JsonEncodedText.Encode("detector_index");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>?> propCustomRules = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<int> propDetectorIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCustomRules.TryReadProperty(ref reader, options, PropCustomRules, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDetectorIndex.TryReadProperty(ref reader, options, PropDetectorIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CustomRules = propCustomRules.Value,
+			Description = propDescription.Value,
+			DetectorIndex = propDetectorIndex.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCustomRules, value.CustomRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDetectorIndex, value.DetectorIndex, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateConverter))]
 public sealed partial class DetectorUpdate
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorUpdate(int detectorIndex)
+	{
+		DetectorIndex = detectorIndex;
+	}
+#if NET7_0_OR_GREATER
+	public DetectorUpdate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DetectorUpdate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// An array of custom rule objects, which enable you to customize the way detectors operate.
@@ -36,15 +112,13 @@ public sealed partial class DetectorUpdate
 	/// Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("custom_rules")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of the detector.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -53,24 +127,31 @@ public sealed partial class DetectorUpdate
 	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detector_index")]
-	public int DetectorIndex { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DetectorIndex { get; set; }
 }
 
-public sealed partial class DetectorUpdateDescriptor<TDocument> : SerializableDescriptor<DetectorUpdateDescriptor<TDocument>>
+public readonly partial struct DetectorUpdateDescriptor<TDocument>
 {
-	internal DetectorUpdateDescriptor(Action<DetectorUpdateDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Instance { get; init; }
 
-	public DetectorUpdateDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorUpdateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRulesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> CustomRulesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>> CustomRulesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>[] CustomRulesDescriptorActions { get; set; }
-	private string? DescriptionValue { get; set; }
-	private int DetectorIndexValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorUpdateDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -79,125 +160,11 @@ public sealed partial class DetectorUpdateDescriptor<TDocument> : SerializableDe
 	/// Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	public DetectorUpdateDescriptor<TDocument> CustomRules(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? customRules)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesValue = customRules;
-		return Self;
+		Instance.CustomRules = value;
+		return this;
 	}
-
-	public DetectorUpdateDescriptor<TDocument> CustomRules(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> descriptor)
-	{
-		CustomRulesValue = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptor = descriptor;
-		return Self;
-	}
-
-	public DetectorUpdateDescriptor<TDocument> CustomRules(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>> configure)
-	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptorAction = configure;
-		return Self;
-	}
-
-	public DetectorUpdateDescriptor<TDocument> CustomRules(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>[] configure)
-	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
-	public DetectorUpdateDescriptor<TDocument> Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector.
-	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
-	/// </para>
-	/// </summary>
-	public DetectorUpdateDescriptor<TDocument> DetectorIndex(int detectorIndex)
-	{
-		DetectorIndexValue = detectorIndex;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (CustomRulesDescriptor is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(CustomRulesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			foreach (var action in CustomRulesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesValue is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			JsonSerializer.Serialize(writer, CustomRulesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("detector_index");
-		writer.WriteNumberValue(DetectorIndexValue);
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class DetectorUpdateDescriptor : SerializableDescriptor<DetectorUpdateDescriptor>
-{
-	internal DetectorUpdateDescriptor(Action<DetectorUpdateDescriptor> configure) => configure.Invoke(this);
-
-	public DetectorUpdateDescriptor() : base()
-	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRulesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor CustomRulesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor> CustomRulesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>[] CustomRulesDescriptorActions { get; set; }
-	private string? DescriptionValue { get; set; }
-	private int DetectorIndexValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -206,40 +173,29 @@ public sealed partial class DetectorUpdateDescriptor : SerializableDescriptor<De
 	/// Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	public DetectorUpdateDescriptor CustomRules(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? customRules)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesValue = customRules;
-		return Self;
+		Instance.CustomRules = [.. values];
+		return this;
 	}
 
-	public DetectorUpdateDescriptor CustomRules(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of custom rule objects, which enable you to customize the way detectors operate.
+	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
+	/// Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>?[] actions)
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptor = descriptor;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>.Build(action));
+		}
 
-	public DetectorUpdateDescriptor CustomRules(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor> configure)
-	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptorAction = configure;
-		return Self;
-	}
-
-	public DetectorUpdateDescriptor CustomRules(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>[] configure)
-	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = configure;
-		return Self;
+		Instance.CustomRules = items;
+		return this;
 	}
 
 	/// <summary>
@@ -247,10 +203,10 @@ public sealed partial class DetectorUpdateDescriptor : SerializableDescriptor<De
 	/// A description of the detector.
 	/// </para>
 	/// </summary>
-	public DetectorUpdateDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -259,54 +215,132 @@ public sealed partial class DetectorUpdateDescriptor : SerializableDescriptor<De
 	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
 	/// </para>
 	/// </summary>
-	public DetectorUpdateDescriptor DetectorIndex(int detectorIndex)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> DetectorIndex(int value)
 	{
-		DetectorIndexValue = detectorIndex;
-		return Self;
+		Instance.DetectorIndex = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (CustomRulesDescriptor is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(CustomRulesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			foreach (var action in CustomRulesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesValue is not null)
+public readonly partial struct DetectorUpdateDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorUpdateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorUpdateDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// An array of custom rule objects, which enable you to customize the way detectors operate.
+	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
+	/// Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
+	{
+		Instance.CustomRules = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of custom rule objects, which enable you to customize the way detectors operate.
+	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
+	/// Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
+	{
+		Instance.CustomRules = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of custom rule objects, which enable you to customize the way detectors operate.
+	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
+	/// Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("custom_rules");
-			JsonSerializer.Serialize(writer, CustomRulesValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor.Build(action));
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
+		Instance.CustomRules = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of custom rule objects, which enable you to customize the way detectors operate.
+	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
+	/// Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<T>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<T>.Build(action));
 		}
 
-		writer.WritePropertyName("detector_index");
-		writer.WriteNumberValue(DetectorIndexValue);
-		writer.WriteEndObject();
+		Instance.CustomRules = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A description of the detector.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor Description(string? value)
+	{
+		Instance.Description = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the detector.
+	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor DetectorIndex(int value)
+	{
+		Instance.DetectorIndex = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

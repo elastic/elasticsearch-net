@@ -17,18 +17,76 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class TermsGroupingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.TermsGrouping>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Fields = propFields.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.TermsGrouping value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingConverter))]
 public sealed partial class TermsGrouping
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsGrouping(Elastic.Clients.Elasticsearch.Fields fields)
+	{
+		Fields = fields;
+	}
+#if NET7_0_OR_GREATER
+	public TermsGrouping()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TermsGrouping()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TermsGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The set of fields that you wish to collect terms for.
@@ -36,20 +94,31 @@ public sealed partial class TermsGrouping
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 }
 
-public sealed partial class TermsGroupingDescriptor<TDocument> : SerializableDescriptor<TermsGroupingDescriptor<TDocument>>
+public readonly partial struct TermsGroupingDescriptor<TDocument>
 {
-	internal TermsGroupingDescriptor(Action<TermsGroupingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Instance { get; init; }
 
-	public TermsGroupingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsGroupingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -58,30 +127,52 @@ public sealed partial class TermsGroupingDescriptor<TDocument> : SerializableDes
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	public TermsGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The set of fields that you wish to collect terms for.
+	/// This array can contain fields that are both keyword and numerics.
+	/// Order does not matter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		writer.WriteEndObject();
+		Instance.Fields = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class TermsGroupingDescriptor : SerializableDescriptor<TermsGroupingDescriptor>
+public readonly partial struct TermsGroupingDescriptor
 {
-	internal TermsGroupingDescriptor(Action<TermsGroupingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Instance { get; init; }
 
-	public TermsGroupingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsGroupingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -90,17 +181,30 @@ public sealed partial class TermsGroupingDescriptor : SerializableDescriptor<Ter
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	public TermsGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The set of fields that you wish to collect terms for.
+	/// This array can contain fields that are both keyword and numerics.
+	/// Order does not matter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		writer.WriteEndObject();
+		Instance.Fields = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor(new Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

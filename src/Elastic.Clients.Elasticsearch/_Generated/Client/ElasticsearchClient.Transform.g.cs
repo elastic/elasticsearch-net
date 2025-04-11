@@ -18,2378 +18,633 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public partial class TransformManagementNamespacedClient : NamespacedClientProxy
+public partial class TransformManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="TransformManagementNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected TransformManagementNamespacedClient() : base()
 	{
 	}
 
-	internal TransformManagementNamespacedClient(ElasticsearchClient client) : base(client)
+	internal TransformManagementNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteTransformResponse DeleteTransform(DeleteTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteTransformRequest, DeleteTransformResponse, DeleteTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteTransformRequest, DeleteTransformResponse, DeleteTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteTransformResponse DeleteTransform(DeleteTransformRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<DeleteTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a transform.
-	/// Deletes a transform.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<DeleteTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformResponse GetTransform(GetTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetTransformRequest, GetTransformResponse, GetTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetTransformRequest, GetTransformResponse, GetTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformResponse GetTransform(GetTransformRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId, Action<GetTransformRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformResponse GetTransform()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTransformRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformResponse GetTransform(Action<GetTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetTransformRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTransformRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transforms.
-	/// Retrieves configuration information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTransformRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformStatsResponse GetTransformStats(GetTransformStatsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetTransformStatsRequest, GetTransformStatsResponse, GetTransformStatsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetTransformStatsRequest, GetTransformStatsResponse, GetTransformStatsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformStatsResponse GetTransformStats(GetTransformStatsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTransformStatsRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId, Action<GetTransformStatsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetTransformStatsRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTransformStatsRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get transform stats.
-	/// Retrieves usage information for transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, Action<GetTransformStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTransformStatsRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(PreviewTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PreviewTransformRequest, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(PreviewTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PreviewTransformRequest, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(PreviewTransformRequestDescriptor<TTransform> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>();
-		descriptor.BeforeRequest();
-		return DoRequest<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest)
-	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(PreviewTransformRequestDescriptor<TTransform> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Preview a transform.
-	/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-	/// </para>
-	/// <para>
-	/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-	/// types of the source index and the transform aggregations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform(PutTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutTransformRequest, PutTransformResponse, PutTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync(PutTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutTransformRequest, PutTransformResponse, PutTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform<TDocument>(PutTransformRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutTransformRequestDescriptor<TDocument>(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutTransformRequestDescriptor<TDocument>(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform(PutTransformRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId)
-	{
-		var descriptor = new PutTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(PutTransformRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutTransformRequestDescriptor<TDocument>(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutTransformRequestDescriptor<TDocument>(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync(PutTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a transform.
-	/// Creates a transform.
-	/// </para>
-	/// <para>
-	/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-	/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-	/// unique row per entity.
-	/// </para>
-	/// <para>
-	/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-	/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-	/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-	/// in the latest object.
-	/// </para>
-	/// <para>
-	/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-	/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-	/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-	/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-	/// attempts unauthorized operations.
-	/// </para>
-	/// <para>
-	/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-	/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-	/// give users any privileges on <c>.data-frame-internal*</c> indices.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetTransformResponse ResetTransform(ResetTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ResetTransformRequest, ResetTransformResponse, ResetTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ResetTransformRequest, ResetTransformResponse, ResetTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetTransformResponse ResetTransform(ResetTransformRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ResetTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<ResetTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ResetTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ResetTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset a transform.
-	/// Resets a transform.
-	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
-	/// If the destination index was created by the transform, it is deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<ResetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ResetTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ScheduleNowTransformResponse ScheduleNowTransform(ScheduleNowTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ScheduleNowTransformRequest, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(ScheduleNowTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ScheduleNowTransformRequest, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ScheduleNowTransformResponse ScheduleNowTransform(ScheduleNowTransformRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ScheduleNowTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<ScheduleNowTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ScheduleNowTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(ScheduleNowTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScheduleNowTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
-	/// </para>
-	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
-	/// is called again in the meantime.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<ScheduleNowTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScheduleNowTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartTransformResponse StartTransform(StartTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StartTransformRequest, StartTransformResponse, StartTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartTransformResponse> StartTransformAsync(StartTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StartTransformRequest, StartTransformResponse, StartTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartTransformResponse StartTransform(StartTransformRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<StartTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StartTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartTransformResponse> StartTransformAsync(StartTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start a transform.
-	/// Starts a transform.
-	/// </para>
-	/// <para>
-	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
-	/// set to <c>1</c> and the <c>auto_expand_replicas</c> is set to <c>0-1</c>. If it is a pivot transform, it deduces the mapping
-	/// definitions for the destination index from the source indices and the transform aggregations. If fields in the
-	/// destination index are derived from scripts (as in the case of <c>scripted_metric</c> or <c>bucket_script</c> aggregations),
-	/// the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce
-	/// mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
-	/// start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
-	/// in a pivot transform.
-	/// </para>
-	/// <para>
-	/// When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
-	/// created the transform, they occur when you start the transform—​with the exception of privilege checks. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
-	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
-	/// destination indices, the transform fails when it attempts unauthorized operations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<StartTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopTransformResponse StopTransform(StopTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StopTransformRequest, StopTransformResponse, StopTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StopTransformRequest, StopTransformResponse, StopTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopTransformResponse StopTransform(StopTransformRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId, Action<StopTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StopTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop transforms.
-	/// Stops one or more transforms.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, Action<StopTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform(UpdateTransformRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<UpdateTransformRequest, UpdateTransformResponse, UpdateTransformRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(UpdateTransformRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequest, UpdateTransformResponse, UpdateTransformRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform<TDocument>(UpdateTransformRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpdateTransformRequestDescriptor<TDocument>(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpdateTransformRequestDescriptor<TDocument>(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(transformId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform(UpdateTransformRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor> configureRequest)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(UpdateTransformRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor<TDocument>(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor<TDocument>(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(UpdateTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor(transformId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a transform.
-	/// Updates certain properties of a transform.
-	/// </para>
-	/// <para>
-	/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-	/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-	/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-	/// time of update and runs with those privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpgradeTransformsResponse UpgradeTransforms(UpgradeTransformsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse UpgradeTransforms(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<UpgradeTransformsRequest, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(UpgradeTransformsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse UpgradeTransforms()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse UpgradeTransforms(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse> UpgradeTransformsAsync(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<UpgradeTransformsRequest, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpgradeTransformsResponse UpgradeTransforms(UpgradeTransformsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse> UpgradeTransformsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpgradeTransformsResponse UpgradeTransforms()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse> UpgradeTransformsAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpgradeTransformsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpgradeTransformsResponse UpgradeTransforms(Action<UpgradeTransformsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new UpgradeTransformsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(UpgradeTransformsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpgradeTransformsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Upgrade all transforms.
-	/// Transforms are compatible across minor versions and between supported major versions.
-	/// However, over time, the format of transform configuration information may change.
-	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-	/// It also cleans up the internal data structures that store the transform state and checkpoints.
-	/// The upgrade does not affect the source and destination indices.
-	/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-	/// </para>
-	/// <para>
-	/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-	/// Resolve the issue then re-run the process again.
-	/// A summary is returned when the upgrade is finished.
-	/// </para>
-	/// <para>
-	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-	/// You may want to perform a recent cluster backup prior to the upgrade.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(Action<UpgradeTransformsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpgradeTransformsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request, cancellationToken);
 	}
 }

@@ -17,67 +17,137 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class LatestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Latest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropUniqueKey = System.Text.Json.JsonEncodedText.Encode("unique_key");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.Latest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propUniqueKey = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSort.TryReadProperty(ref reader, options, PropSort, null))
+			{
+				continue;
+			}
+
+			if (propUniqueKey.TryReadProperty(ref reader, options, PropUniqueKey, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Sort = propSort.Value,
+			UniqueKey = propUniqueKey.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Latest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSort, value.Sort, null, null);
+		writer.WriteProperty(options, PropUniqueKey, value.UniqueKey, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.LatestConverter))]
 public sealed partial class Latest
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Latest(Elastic.Clients.Elasticsearch.Field sort, Elastic.Clients.Elasticsearch.Fields uniqueKey)
+	{
+		Sort = sort;
+		UniqueKey = uniqueKey;
+	}
+#if NET7_0_OR_GREATER
+	public Latest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Latest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies the date field that is used to identify the latest documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	public Elastic.Clients.Elasticsearch.Field Sort { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Sort { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies an array of one or more fields that are used to group the data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unique_key")]
-	[JsonConverter(typeof(FieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields UniqueKey { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields UniqueKey { get; set; }
 }
 
-public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor<LatestDescriptor<TDocument>>
+public readonly partial struct LatestDescriptor<TDocument>
 {
-	internal LatestDescriptor(Action<LatestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Latest Instance { get; init; }
 
-	public LatestDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Latest instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields UniqueKeyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Latest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the date field that is used to identify the latest documents.
 	/// </para>
 	/// </summary>
-	public LatestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field sort)
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field value)
 	{
-		SortValue = sort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
-	public LatestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
-	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -85,10 +155,10 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	/// Specifies the date field that is used to identify the latest documents.
 	/// </para>
 	/// </summary>
-	public LatestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -96,54 +166,60 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	/// Specifies an array of one or more fields that are used to group the data.
 	/// </para>
 	/// </summary>
-	public LatestDescriptor<TDocument> UniqueKey(Elastic.Clients.Elasticsearch.Fields uniqueKey)
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> UniqueKey(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		UniqueKeyValue = uniqueKey;
-		return Self;
+		Instance.UniqueKey = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies an array of one or more fields that are used to group the data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> UniqueKey(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("sort");
-		JsonSerializer.Serialize(writer, SortValue, options);
-		writer.WritePropertyName("unique_key");
-		JsonSerializer.Serialize(writer, UniqueKeyValue, options);
-		writer.WriteEndObject();
+		Instance.UniqueKey = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Latest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDescriptor>
+public readonly partial struct LatestDescriptor
 {
-	internal LatestDescriptor(Action<LatestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Latest Instance { get; init; }
 
-	public LatestDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Latest instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields UniqueKeyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Latest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the date field that is used to identify the latest documents.
 	/// </para>
 	/// </summary>
-	public LatestDescriptor Sort(Elastic.Clients.Elasticsearch.Field sort)
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor Sort(Elastic.Clients.Elasticsearch.Field value)
 	{
-		SortValue = sort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
-	public LatestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
-	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -151,10 +227,10 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	/// Specifies the date field that is used to identify the latest documents.
 	/// </para>
 	/// </summary>
-	public LatestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -162,19 +238,28 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	/// Specifies an array of one or more fields that are used to group the data.
 	/// </para>
 	/// </summary>
-	public LatestDescriptor UniqueKey(Elastic.Clients.Elasticsearch.Fields uniqueKey)
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor UniqueKey(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		UniqueKeyValue = uniqueKey;
-		return Self;
+		Instance.UniqueKey = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies an array of one or more fields that are used to group the data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor UniqueKey<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("sort");
-		JsonSerializer.Serialize(writer, SortValue, options);
-		writer.WritePropertyName("unique_key");
-		JsonSerializer.Serialize(writer, UniqueKeyValue, options);
-		writer.WriteEndObject();
+		Instance.UniqueKey = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Latest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

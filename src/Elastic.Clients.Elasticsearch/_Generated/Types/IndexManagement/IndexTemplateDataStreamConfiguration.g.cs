@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexTemplateDataStreamConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowCustomRouting = System.Text.Json.JsonEncodedText.Encode("allow_custom_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowCustomRouting = default;
+		LocalJsonValue<bool?> propHidden = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowCustomRouting.TryReadProperty(ref reader, options, PropAllowCustomRouting, null))
+			{
+				continue;
+			}
+
+			if (propHidden.TryReadProperty(ref reader, options, PropHidden, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowCustomRouting = propAllowCustomRouting.Value,
+			Hidden = propHidden.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowCustomRouting, value.AllowCustomRouting, null, null);
+		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationConverter))]
 public sealed partial class IndexTemplateDataStreamConfiguration
 {
+#if NET7_0_OR_GREATER
+	public IndexTemplateDataStreamConfiguration()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexTemplateDataStreamConfiguration()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If true, the data stream supports custom routing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_custom_routing")]
 	public bool? AllowCustomRouting { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class IndexTemplateDataStreamConfiguration
 	/// If true, the data stream is hidden.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hidden")]
 	public bool? Hidden { get; set; }
 }
 
-public sealed partial class IndexTemplateDataStreamConfigurationDescriptor : SerializableDescriptor<IndexTemplateDataStreamConfigurationDescriptor>
+public readonly partial struct IndexTemplateDataStreamConfigurationDescriptor
 {
-	internal IndexTemplateDataStreamConfigurationDescriptor(Action<IndexTemplateDataStreamConfigurationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration Instance { get; init; }
 
-	public IndexTemplateDataStreamConfigurationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplateDataStreamConfigurationDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AllowCustomRoutingValue { get; set; }
-	private bool? HiddenValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplateDataStreamConfigurationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If true, the data stream supports custom routing.
 	/// </para>
 	/// </summary>
-	public IndexTemplateDataStreamConfigurationDescriptor AllowCustomRouting(bool? allowCustomRouting = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor AllowCustomRouting(bool? value = true)
 	{
-		AllowCustomRoutingValue = allowCustomRouting;
-		return Self;
+		Instance.AllowCustomRouting = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class IndexTemplateDataStreamConfigurationDescriptor : Ser
 	/// If true, the data stream is hidden.
 	/// </para>
 	/// </summary>
-	public IndexTemplateDataStreamConfigurationDescriptor Hidden(bool? hidden = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor Hidden(bool? value = true)
 	{
-		HiddenValue = hidden;
-		return Self;
+		Instance.Hidden = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AllowCustomRoutingValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("allow_custom_routing");
-			writer.WriteBooleanValue(AllowCustomRoutingValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (HiddenValue.HasValue)
-		{
-			writer.WritePropertyName("hidden");
-			writer.WriteBooleanValue(HiddenValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

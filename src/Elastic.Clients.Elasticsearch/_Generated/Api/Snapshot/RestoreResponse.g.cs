@@ -17,19 +17,74 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class RestoreResponse : ElasticsearchResponse
+internal sealed partial class RestoreResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse>
 {
-	[JsonInclude, JsonPropertyName("accepted")]
-	public bool? Accepted { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotRestore? Snapshot { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAccepted = System.Text.Json.JsonEncodedText.Encode("accepted");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAccepted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotRestore?> propSnapshot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccepted.TryReadProperty(ref reader, options, PropAccepted, null))
+			{
+				continue;
+			}
+
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Accepted = propAccepted.Value,
+			Snapshot = propSnapshot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccepted, value.Accepted, null, null);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RestoreResponseConverter))]
+public sealed partial class RestoreResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RestoreResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RestoreResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? Accepted { get; set; }
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotRestore? Snapshot { get; set; }
 }

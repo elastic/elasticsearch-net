@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class RolloverRequestParameters : RequestParameters
+public sealed partial class RolloverRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,6 +31,14 @@ public sealed partial class RolloverRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+	/// <summary>
+	/// <para>
+	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+	/// Only allowed on data streams.
+	/// </para>
+	/// </summary>
+	public bool? Lazy { get => Q<bool?>("lazy"); set => Q("lazy", value); }
 
 	/// <summary>
 	/// <para>
@@ -62,6 +63,72 @@ public sealed partial class RolloverRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+}
+
+internal sealed partial class RolloverRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions?> propConditions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propConditions.TryReadProperty(ref reader, options, PropConditions, null))
+			{
+				continue;
+			}
+
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aliases = propAliases.Value,
+			Conditions = propConditions.Value,
+			Mappings = propMappings.Value,
+			Settings = propSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropConditions, value.Conditions, null, null);
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -118,19 +185,32 @@ public sealed partial class RolloverRequestParameters : RequestParameters
 /// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 /// </para>
 /// </summary>
-public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestConverter))]
+public sealed partial class RolloverRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RolloverRequest(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RolloverRequest(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex) : base(r => r.Required("alias", alias).Optional("new_index", newIndex))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public RolloverRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RolloverRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRollover;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementRollover;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -138,11 +218,38 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 
 	/// <summary>
 	/// <para>
+	/// Name of the data stream or index alias to roll over.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexAlias Alias { get => P<Elastic.Clients.Elasticsearch.IndexAlias>("alias"); set => PR("alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// Supports date math.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName? NewIndex { get => P<Elastic.Clients.Elasticsearch.IndexName?>("new_index"); set => PO("new_index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+	/// <summary>
+	/// <para>
+	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+	/// Only allowed on data streams.
+	/// </para>
+	/// </summary>
+	public bool? Lazy { get => Q<bool?>("lazy"); set => Q("lazy", value); }
 
 	/// <summary>
 	/// <para>
@@ -150,7 +257,6 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -159,7 +265,6 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -168,7 +273,6 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -177,8 +281,7 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// Data streams do not support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
-	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -189,7 +292,6 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("conditions")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? Conditions { get; set; }
 
 	/// <summary>
@@ -198,7 +300,6 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
@@ -207,8 +308,7 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// Data streams do not support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("settings")]
-	public IDictionary<string, object>? Settings { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
 /// <summary>
@@ -265,51 +365,117 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 /// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 /// </para>
 /// </summary>
-public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescriptor<RolloverRequestDescriptor<TDocument>, RolloverRequestParameters>
+public readonly partial struct RolloverRequestDescriptor
 {
-	internal RolloverRequestDescriptor(Action<RolloverRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Instance { get; init; }
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex) : base(r => r.Required("alias", alias).Optional("new_index", newIndex))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : this(alias, typeof(TDocument))
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRollover;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.rollover";
-
-	public RolloverRequestDescriptor<TDocument> DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
-	public RolloverRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public RolloverRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public RolloverRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public RolloverRequestDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias alias)
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
 	{
-		RouteValues.Required("alias", alias);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias, newIndex);
 	}
 
-	public RolloverRequestDescriptor<TDocument> NewIndex(Elastic.Clients.Elasticsearch.IndexName? newIndex)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public RolloverRequestDescriptor()
 	{
-		RouteValues.Optional("new_index", newIndex);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? ConditionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor ConditionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor> ConditionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
-	private IDictionary<string, object>? SettingsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the data stream or index alias to roll over.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias value)
+	{
+		Instance.Alias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// Supports date math.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor NewIndex(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.NewIndex = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor DryRun(bool? value = true)
+	{
+		Instance.DryRun = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+	/// Only allowed on data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Lazy(bool? value = true)
+	{
+		Instance.Lazy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -317,10 +483,104 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	/// Data streams do not support this parameter.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
-		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>());
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases()
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.IndexName key, Elastic.Clients.Elasticsearch.IndexManagement.Alias value)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null));
+		}
+
+		Instance.Aliases = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.IndexName key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor AddAlias<T>(Elastic.Clients.Elasticsearch.IndexName key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -332,28 +592,40 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor<TDocument> Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? conditions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? value)
 	{
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = null;
-		ConditionsValue = conditions;
-		return Self;
+		Instance.Conditions = value;
+		return this;
 	}
 
-	public RolloverRequestDescriptor<TDocument> Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Conditions()
 	{
-		ConditionsValue = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptor = descriptor;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(null);
+		return this;
 	}
 
-	public RolloverRequestDescriptor<TDocument> Conditions(Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Conditions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor>? action)
 	{
-		ConditionsValue = null;
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = configure;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -362,28 +634,46 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = null;
-		MappingsValue = mappings;
-		return Self;
+		Instance.Mappings = value;
+		return this;
 	}
 
-	public RolloverRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings()
 	{
-		MappingsValue = null;
-		MappingsDescriptorAction = null;
-		MappingsDescriptor = descriptor;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
+		return this;
 	}
 
-	public RolloverRequestDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
 	{
-		MappingsValue = null;
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = configure;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
+	{
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -392,60 +682,91 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	/// Data streams do not support this parameter.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor<TDocument> Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Settings()
 	{
-		writer.WriteStartObject();
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
-		}
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-		if (ConditionsDescriptor is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
-		}
-		else if (ConditionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor(ConditionsDescriptorAction), options);
-		}
-		else if (ConditionsValue is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, ConditionsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
 
-		if (MappingsDescriptor is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-		}
-		else if (MappingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
-		}
-		else if (MappingsValue is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor AddSetting(string key, object value)
+	{
+		Instance.Settings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Settings.Add(key, value);
+		return this;
+	}
 
-		if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -503,51 +824,117 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 /// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 /// </para>
 /// </summary>
-public sealed partial class RolloverRequestDescriptor : RequestDescriptor<RolloverRequestDescriptor, RolloverRequestParameters>
+public readonly partial struct RolloverRequestDescriptor<TDocument>
 {
-	internal RolloverRequestDescriptor(Action<RolloverRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Instance { get; init; }
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex) : base(r => r.Required("alias", alias).Optional("new_index", newIndex))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRollover;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.rollover";
-
-	public RolloverRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
-	public RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public RolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public RolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public RolloverRequestDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias alias)
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
 	{
-		RouteValues.Required("alias", alias);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias, newIndex);
 	}
 
-	public RolloverRequestDescriptor NewIndex(Elastic.Clients.Elasticsearch.IndexName? newIndex)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public RolloverRequestDescriptor()
 	{
-		RouteValues.Optional("new_index", newIndex);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? ConditionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor ConditionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor> ConditionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-	private IDictionary<string, object>? SettingsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the data stream or index alias to roll over.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias value)
+	{
+		Instance.Alias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// Supports date math.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> NewIndex(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.NewIndex = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> DryRun(bool? value = true)
+	{
+		Instance.DryRun = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+	/// Only allowed on data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Lazy(bool? value = true)
+	{
+		Instance.Lazy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -555,10 +942,85 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	/// Data streams do not support this parameter.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
-		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>());
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases()
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.IndexName key, Elastic.Clients.Elasticsearch.IndexManagement.Alias value)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null));
+		}
+
+		Instance.Aliases = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.IndexName key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -570,28 +1032,40 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? conditions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? value)
 	{
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = null;
-		ConditionsValue = conditions;
-		return Self;
+		Instance.Conditions = value;
+		return this;
 	}
 
-	public RolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Conditions()
 	{
-		ConditionsValue = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptor = descriptor;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(null);
+		return this;
 	}
 
-	public RolloverRequestDescriptor Conditions(Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Conditions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor>? action)
 	{
-		ConditionsValue = null;
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = configure;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -600,28 +1074,34 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = null;
-		MappingsValue = mappings;
-		return Self;
+		Instance.Mappings = value;
+		return this;
 	}
 
-	public RolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Mappings()
 	{
-		MappingsValue = null;
-		MappingsDescriptorAction = null;
-		MappingsDescriptor = descriptor;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public RolloverRequestDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
 	{
-		MappingsValue = null;
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = configure;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -630,59 +1110,90 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	/// Data streams do not support this parameter.
 	/// </para>
 	/// </summary>
-	public RolloverRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Settings()
 	{
-		writer.WriteStartObject();
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
-		}
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-		if (ConditionsDescriptor is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
-		}
-		else if (ConditionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor(ConditionsDescriptorAction), options);
-		}
-		else if (ConditionsValue is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, ConditionsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
 
-		if (MappingsDescriptor is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-		}
-		else if (MappingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-		}
-		else if (MappingsValue is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> AddSetting(string key, object value)
+	{
+		Instance.Settings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Settings.Add(key, value);
+		return this;
+	}
 
-		if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

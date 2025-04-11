@@ -17,19 +17,133 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class CompositeGeoTileGridAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingBucket = System.Text.Json.JsonEncodedText.Encode("missing_bucket");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingOrder = System.Text.Json.JsonEncodedText.Encode("missing_order");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoBounds?> propBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<bool?> propMissingBucket = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?> propMissingOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<int?> propPrecision = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType?> propValueType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBounds.TryReadProperty(ref reader, options, PropBounds, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, null))
+			{
+				continue;
+			}
+
+			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propValueType.TryReadProperty(ref reader, options, PropValueType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Bounds = propBounds.Value,
+			Field = propField.Value,
+			MissingBucket = propMissingBucket.Value,
+			MissingOrder = propMissingOrder.Value,
+			Order = propOrder.Value,
+			Precision = propPrecision.Value,
+			Script = propScript.Value,
+			ValueType = propValueType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBounds, value.Bounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, null);
+		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationConverter))]
 public sealed partial class CompositeGeoTileGridAggregation
 {
-	[JsonInclude, JsonPropertyName("bounds")]
+#if NET7_0_OR_GREATER
+	public CompositeGeoTileGridAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CompositeGeoTileGridAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
 	/// <summary>
@@ -37,15 +151,10 @@ public sealed partial class CompositeGeoTileGridAggregation
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("missing_bucket")]
 	public bool? MissingBucket { get; set; }
-	[JsonInclude, JsonPropertyName("missing_order")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-	[JsonInclude, JsonPropertyName("precision")]
 	public int? Precision { get; set; }
 
 	/// <summary>
@@ -53,46 +162,39 @@ public sealed partial class CompositeGeoTileGridAggregation
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("value_type")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 }
 
-public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument> : SerializableDescriptor<CompositeGeoTileGridAggregationDescriptor<TDocument>>
+public readonly partial struct CompositeGeoTileGridAggregationDescriptor<TDocument>
 {
-	internal CompositeGeoTileGridAggregationDescriptor(Action<CompositeGeoTileGridAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Instance { get; init; }
 
-	public CompositeGeoTileGridAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeGeoTileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private bool? MissingBucketValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private int? PrecisionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
-
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeGeoTileGridAggregationDescriptor()
 	{
-		BoundsValue = bounds;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Bounds = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -100,10 +202,10 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -111,34 +213,34 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> MissingBucket(bool? value = true)
 	{
-		MissingBucketValue = missingBucket;
-		return Self;
+		Instance.MissingBucket = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? value)
 	{
-		MissingOrderValue = missingOrder;
-		return Self;
+		Instance.MissingOrder = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Precision(int? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Precision(int? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
 	/// <summary>
@@ -146,135 +248,83 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? value)
 	{
-		ValueTypeValue = valueType;
-		return Self;
+		Instance.ValueType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (BoundsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("bounds");
-			JsonSerializer.Serialize(writer, BoundsValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MissingBucketValue.HasValue)
-		{
-			writer.WritePropertyName("missing_bucket");
-			writer.WriteBooleanValue(MissingBucketValue.Value);
-		}
-
-		if (MissingOrderValue is not null)
-		{
-			writer.WritePropertyName("missing_order");
-			JsonSerializer.Serialize(writer, MissingOrderValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (ValueTypeValue is not null)
-		{
-			writer.WritePropertyName("value_type");
-			JsonSerializer.Serialize(writer, ValueTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CompositeGeoTileGridAggregationDescriptor : SerializableDescriptor<CompositeGeoTileGridAggregationDescriptor>
+public readonly partial struct CompositeGeoTileGridAggregationDescriptor
 {
-	internal CompositeGeoTileGridAggregationDescriptor(Action<CompositeGeoTileGridAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Instance { get; init; }
 
-	public CompositeGeoTileGridAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeGeoTileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private bool? MissingBucketValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private int? PrecisionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
-
-	public CompositeGeoTileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeGeoTileGridAggregationDescriptor()
 	{
-		BoundsValue = bounds;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Bounds = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -282,10 +332,10 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -293,34 +343,34 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor MissingBucket(bool? missingBucket = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor MissingBucket(bool? value = true)
 	{
-		MissingBucketValue = missingBucket;
-		return Self;
+		Instance.MissingBucket = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? value)
 	{
-		MissingOrderValue = missingOrder;
-		return Self;
+		Instance.MissingOrder = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor Precision(int? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Precision(int? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
 	/// <summary>
@@ -328,97 +378,50 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public CompositeGeoTileGridAggregationDescriptor ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? value)
 	{
-		ValueTypeValue = valueType;
-		return Self;
+		Instance.ValueType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BoundsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("bounds");
-			JsonSerializer.Serialize(writer, BoundsValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MissingBucketValue.HasValue)
-		{
-			writer.WritePropertyName("missing_bucket");
-			writer.WriteBooleanValue(MissingBucketValue.Value);
-		}
-
-		if (MissingOrderValue is not null)
-		{
-			writer.WritePropertyName("missing_order");
-			JsonSerializer.Serialize(writer, MissingOrderValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (ValueTypeValue is not null)
-		{
-			writer.WritePropertyName("value_type");
-			JsonSerializer.Serialize(writer, ValueTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class ConnectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.Connection>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropTarget = System.Text.Json.JsonEncodedText.Encode("target");
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+
+	public override Elastic.Clients.Elasticsearch.Graph.Connection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<long> propSource = default;
+		LocalJsonValue<long> propTarget = default;
+		LocalJsonValue<double> propWeight = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propTarget.TryReadProperty(ref reader, options, PropTarget, null))
+			{
+				continue;
+			}
+
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.Connection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DocCount = propDocCount.Value,
+			Source = propSource.Value,
+			Target = propTarget.Value,
+			Weight = propWeight.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.Connection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropTarget, value.Target, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.ConnectionConverter))]
 public sealed partial class Connection
 {
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("source")]
-	public long Source { get; init; }
-	[JsonInclude, JsonPropertyName("target")]
-	public long Target { get; init; }
-	[JsonInclude, JsonPropertyName("weight")]
-	public double Weight { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Connection(long docCount, long source, long target, double weight)
+	{
+		DocCount = docCount;
+		Source = source;
+		Target = target;
+		Weight = weight;
+	}
+#if NET7_0_OR_GREATER
+	public Connection()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Connection()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Connection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Target { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Weight { get; set; }
 }

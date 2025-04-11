@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public sealed partial class SubmitAsyncSearchRequestParameters : RequestParameters
+public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -94,7 +87,7 @@ public sealed partial class SubmitAsyncSearchRequestParameters : RequestParamete
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -137,8 +130,7 @@ public sealed partial class SubmitAsyncSearchRequestParameters : RequestParamete
 	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
@@ -240,410 +232,321 @@ public sealed partial class SubmitAsyncSearchRequestParameters : RequestParamete
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAsyncSearchRequest>
+internal sealed partial class SubmitAsyncSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest>
 {
-	public override SubmitAsyncSearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropDocvalueFields = System.Text.Json.JsonEncodedText.Encode("docvalue_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropExt = System.Text.Json.JsonEncodedText.Encode("ext");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesBoost = System.Text.Json.JsonEncodedText.Encode("indices_boost");
+	private static readonly System.Text.Json.JsonEncodedText PropKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropPit = System.Text.Json.JsonEncodedText.Encode("pit");
+	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNoPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("seq_no_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggest = System.Text.Json.JsonEncodedText.Encode("suggest");
+	private static readonly System.Text.Json.JsonEncodedText PropTerminateAfter = System.Text.Json.JsonEncodedText.Encode("terminate_after");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackScores = System.Text.Json.JsonEncodedText.Encode("track_scores");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new SubmitAsyncSearchRequest();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propDocvalueFields = default;
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propExt = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propFields = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Highlight?> propHighlight = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>?> propIndicesBoost = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?> propKnn = default;
+		LocalJsonValue<double?> propMinScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?> propPit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propPostFilter = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?> propRescore = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<bool?> propSeqNoPrimaryTerm = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Suggester?> propSuggest = default;
+		LocalJsonValue<long?> propTerminateAfter = default;
+		LocalJsonValue<string?> propTimeout = default;
+		LocalJsonValue<bool?> propTrackScores = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?> propTrackTotalHits = default;
+		LocalJsonValue<bool?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "collapse")
-				{
-					variant.Collapse = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "docvalue_fields")
-				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "explain")
-				{
-					variant.Explain = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ext")
-				{
-					variant.Ext = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fields")
-				{
-					variant.Fields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "highlight")
-				{
-					variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Highlight?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices_boost")
-				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "knn")
-				{
-					variant.Knn = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "min_score")
-				{
-					variant.MinScore = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "pit")
-				{
-					variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "post_filter")
-				{
-					variant.PostFilter = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "profile")
-				{
-					variant.Profile = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "rescore")
-				{
-					variant.Rescore = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "runtime_mappings")
-				{
-					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "script_fields")
-				{
-					variant.ScriptFields = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "search_after")
-				{
-					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "seq_no_primary_term")
-				{
-					variant.SeqNoPrimaryTerm = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "size")
-				{
-					variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "slice")
-				{
-					variant.Slice = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SlicedScroll?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "sort")
-				{
-					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_source")
-				{
-					variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stats")
-				{
-					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stored_fields")
-				{
-					variant.StoredFields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "suggest")
-				{
-					variant.Suggest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Suggester?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "terminate_after")
-				{
-					variant.TerminateAfter = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "timeout")
-				{
-					variant.Timeout = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "track_scores")
-				{
-					variant.TrackScores = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "track_total_hits")
-				{
-					variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "version")
-				{
-					variant.Version = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCollapse.TryReadProperty(ref reader, options, PropCollapse, null))
+			{
+				continue;
+			}
+
+			if (propDocvalueFields.TryReadProperty(ref reader, options, PropDocvalueFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
+			{
+				continue;
+			}
+
+			if (propExplain.TryReadProperty(ref reader, options, PropExplain, null))
+			{
+				continue;
+			}
+
+			if (propExt.TryReadProperty(ref reader, options, PropExt, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryReadProperty(ref reader, options, PropHighlight, null))
+			{
+				continue;
+			}
+
+			if (propIndicesBoost.TryReadProperty(ref reader, options, PropIndicesBoost, static System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>(o, static System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<Elastic.Clients.Elasticsearch.IndexName, double>(o, null, null))))
+			{
+				continue;
+			}
+
+			if (propKnn.TryReadProperty(ref reader, options, PropKnn, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.KnnSearch>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propPit.TryReadProperty(ref reader, options, PropPit, null))
+			{
+				continue;
+			}
+
+			if (propPostFilter.TryReadProperty(ref reader, options, PropPostFilter, null))
+			{
+				continue;
+			}
+
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propRescore.TryReadProperty(ref reader, options, PropRescore, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryReadProperty(ref reader, options, PropScriptFields, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSeqNoPrimaryTerm.TryReadProperty(ref reader, options, PropSeqNoPrimaryTerm, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propStats.TryReadProperty(ref reader, options, PropStats, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStoredFields.TryReadProperty(ref reader, options, PropStoredFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propSuggest.TryReadProperty(ref reader, options, PropSuggest, null))
+			{
+				continue;
+			}
+
+			if (propTerminateAfter.TryReadProperty(ref reader, options, PropTerminateAfter, null))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (propTrackScores.TryReadProperty(ref reader, options, PropTrackScores, null))
+			{
+				continue;
+			}
+
+			if (propTrackTotalHits.TryReadProperty(ref reader, options, PropTrackTotalHits, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			Collapse = propCollapse.Value,
+			DocvalueFields = propDocvalueFields.Value,
+			Explain = propExplain.Value,
+			Ext = propExt.Value,
+			Fields = propFields.Value,
+			From = propFrom.Value,
+			Highlight = propHighlight.Value,
+			IndicesBoost = propIndicesBoost.Value,
+			Knn = propKnn.Value,
+			MinScore = propMinScore.Value,
+			Pit = propPit.Value,
+			PostFilter = propPostFilter.Value,
+			Profile = propProfile.Value,
+			Query = propQuery.Value,
+			Rescore = propRescore.Value,
+			RuntimeMappings = propRuntimeMappings.Value,
+			ScriptFields = propScriptFields.Value,
+			SearchAfter = propSearchAfter.Value,
+			SeqNoPrimaryTerm = propSeqNoPrimaryTerm.Value,
+			Size = propSize.Value,
+			Slice = propSlice.Value,
+			Sort = propSort.Value,
+			Source = propSource.Value,
+			Stats = propStats.Value,
+			StoredFields = propStoredFields.Value,
+			Suggest = propSuggest.Value,
+			TerminateAfter = propTerminateAfter.Value,
+			Timeout = propTimeout.Value,
+			TrackScores = propTrackScores.Value,
+			TrackTotalHits = propTrackTotalHits.Value,
+			Version = propVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, SubmitAsyncSearchRequest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.Collapse is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, value.Collapse, options);
-		}
-
-		if (value.DocvalueFields is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, value.DocvalueFields, options);
-		}
-
-		if (value.Explain.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(value.Explain.Value);
-		}
-
-		if (value.Ext is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, value.Ext, options);
-		}
-
-		if (value.Fields is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, value.Fields, options);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.Highlight is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, value.Highlight, options);
-		}
-
-		if (value.IndicesBoost is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, value.IndicesBoost, options);
-		}
-
-		if (value.Knn is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, value.Knn, options);
-		}
-
-		if (value.MinScore.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(value.MinScore.Value);
-		}
-
-		if (value.Pit is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, value.Pit, options);
-		}
-
-		if (value.PostFilter is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, value.PostFilter, options);
-		}
-
-		if (value.Profile.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(value.Profile.Value);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.Rescore is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, value.Rescore, options);
-		}
-
-		if (value.RuntimeMappings is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
-		}
-
-		if (value.ScriptFields is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, value.ScriptFields, options);
-		}
-
-		if (value.SearchAfter is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, value.SearchAfter, options);
-		}
-
-		if (value.SeqNoPrimaryTerm.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Slice is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, value.Slice, options);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
-		}
-
-		if (value.Source is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, value.Source, options);
-		}
-
-		if (value.Stats is not null)
-		{
-			writer.WritePropertyName("stats");
-			JsonSerializer.Serialize(writer, value.Stats, options);
-		}
-
-		if (value.StoredFields is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			new FieldsConverter().Write(writer, value.StoredFields, options);
-		}
-
-		if (value.Suggest is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, value.Suggest, options);
-		}
-
-		if (value.TerminateAfter.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(value.TerminateAfter.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.Timeout))
-		{
-			writer.WritePropertyName("timeout");
-			writer.WriteStringValue(value.Timeout);
-		}
-
-		if (value.TrackScores.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(value.TrackScores.Value);
-		}
-
-		if (value.TrackTotalHits is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, value.TrackTotalHits, options);
-		}
-
-		if (value.Version.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(value.Version.Value);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
+		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
+		writer.WriteProperty(options, PropExt, value.Ext, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);
+		writer.WriteProperty(options, PropIndicesBoost, value.IndicesBoost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? v) => w.WriteCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.IndexName, double>(o, v, null, null)));
+		writer.WriteProperty(options, PropKnn, value.Knn, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.KnnSearch>(o, v, null));
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropPit, value.Pit, null, null);
+		writer.WriteProperty(options, PropPostFilter, value.PostFilter, null, null);
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropRescore, value.Rescore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(o, v, null));
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, v, null, null));
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropSeqNoPrimaryTerm, value.SeqNoPrimaryTerm, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropStats, value.Stats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropSuggest, value.Suggest, null, null);
+		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter, null, null);
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteProperty(options, PropTrackScores, value.TrackScores, null, null);
+		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -663,20 +566,31 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 /// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(SubmitAsyncSearchRequestConverter))]
-public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncSearchRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestConverter))]
+public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>
 {
-	public SubmitAsyncSearchRequest()
-	{
-	}
-
 	public SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public SubmitAsyncSearchRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SubmitAsyncSearchRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.AsyncSearchSubmit;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -684,10 +598,16 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of index names to search; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -695,7 +615,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Indicate if an error should be returned if there is a partial search failure or timeout
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
@@ -703,7 +622,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// The analyzer to use for the query string
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
@@ -711,7 +629,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
@@ -720,7 +637,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 	/// <summary>
@@ -728,7 +644,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// The default value is the only supported value.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
@@ -736,7 +651,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// The default operator for query string query (AND or OR)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
@@ -744,7 +658,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// The field to use as default where no field prefix is given in the query string
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
@@ -752,15 +665,13 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
@@ -768,7 +679,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -777,7 +687,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Ongoing async searches and any saved search results are deleted after this period.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
@@ -785,7 +694,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
 	/// <summary>
@@ -793,7 +701,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
@@ -801,17 +708,13 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	[JsonIgnore]
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
 	/// Specify the node or shard the operation should be performed on (default: random)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
@@ -819,7 +722,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Query in the Lucene query string syntax
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
@@ -827,7 +729,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Specify if request cache should be used for this request or not, defaults to true
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 	/// <summary>
@@ -835,7 +736,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
@@ -843,7 +743,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// A comma-separated list of specific routing values
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -851,7 +750,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Search operation type
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -859,7 +757,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// A list of fields to exclude from the returned _source field
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
@@ -867,7 +764,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// A list of fields to extract and return from the _source field
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
@@ -875,7 +771,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Specifies which field to use for suggestions.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 	/// <summary>
@@ -883,7 +778,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Specify suggest mode
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 	/// <summary>
@@ -891,7 +785,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// How many suggestions to return in response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
 	/// <summary>
@@ -899,7 +792,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// The source text for which the suggestions should be returned.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 	/// <summary>
@@ -907,7 +799,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -916,11 +807,8 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
-	[JsonInclude, JsonPropertyName("collapse")]
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
@@ -929,15 +817,13 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docvalue_fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
@@ -945,8 +831,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Configuration of search extensions defined by Elasticsearch plugins.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ext")]
-	public IDictionary<string, object>? Ext { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Ext { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -954,8 +839,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -964,9 +848,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// search_after parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
-	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
@@ -974,25 +856,21 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices_boost")]
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("knn")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.KnnSearch))]
-	public ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in the search results.
+	/// not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 
 	/// <summary>
@@ -1001,11 +879,8 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pit")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
-	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
-	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
@@ -1013,11 +888,8 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-	[JsonInclude, JsonPropertyName("rescore")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Rescore))]
-	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -1025,18 +897,15 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Retrieve a script evaluation (based on different fields) for each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script_fields")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-	[JsonInclude, JsonPropertyName("search_after")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -1044,7 +913,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// of each hit. See Optimistic concurrency control.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
@@ -1054,13 +922,9 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// hits, use the search_after parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -1068,7 +932,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
@@ -1078,8 +941,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// the indices stats API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stats")]
-	public ICollection<string>? Stats { get; set; }
+	public System.Collections.Generic.ICollection<string>? Stats { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -1089,10 +951,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stored_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
-	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
 	/// <summary>
@@ -1102,7 +961,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// before sorting. Defaults to 0, which does not terminate query execution early.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terminate_after")]
 	public long? TerminateAfter { get; set; }
 
 	/// <summary>
@@ -1112,7 +970,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public string? Timeout { get; set; }
 
 	/// <summary>
@@ -1120,7 +977,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
@@ -1131,7 +987,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
@@ -1139,7 +994,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
 
@@ -1158,153 +1012,467 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 /// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
 /// </para>
 /// </summary>
-public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchRequestParameters>
+public readonly partial struct SubmitAsyncSearchRequestDescriptor
 {
-	internal SubmitAsyncSearchRequestDescriptor(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Instance { get; init; }
 
-	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(indices);
 	}
 
 	public SubmitAsyncSearchRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
+	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "async_search.submit";
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to search; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
-	private bool? ExplainValue { get; set; }
-	private IDictionary<string, object>? ExtValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
-	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> KnnDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> KnnDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
-	private double? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
-	private bool? ProfileValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private bool? SeqNoPrimaryTermValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-	private ICollection<string>? StatsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> SuggestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>> SuggestDescriptorAction { get; set; }
-	private long? TerminateAfterValue { get; set; }
-	private string? TimeoutValue { get; set; }
-	private bool? TrackScoresValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
-	private bool? VersionValue { get; set; }
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
+	/// <summary>
+	/// <para>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? value = true)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.AllowNoIndices = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
+	/// <summary>
+	/// <para>
+	/// Indicate if an error should be returned if there is a partial search failure or timeout
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AllowPartialSearchResults(bool? value = true)
 	{
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = null;
-		CollapseValue = collapse;
-		return Self;
+		Instance.AllowPartialSearchResults = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The analyzer to use for the query string
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Analyzer(string? value)
 	{
-		CollapseValue = null;
-		CollapseDescriptorAction = null;
-		CollapseDescriptor = descriptor;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
-		CollapseValue = null;
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzeWildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Affects how often partial results become available, which happens whenever shard results are reduced.
+	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor BatchedReduceSize(long? value)
+	{
+		Instance.BatchedReduceSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default value is the only supported value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
+	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default operator for query string query (AND or OR)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
+	{
+		Instance.DefaultOperator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field to use as default where no field prefix is given in the query string
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Df(string? value)
+	{
+		Instance.Df = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies how long the async search needs to be available.
+	/// Ongoing async searches and any saved search results are deleted after this period.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor KeepOnCompletion(bool? value = true)
+	{
+		Instance.KeepOnCompletion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Lenient(bool? value = true)
+	{
+		Instance.Lenient = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(int? value)
+	{
+		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify the node or shard the operation should be performed on (default: random)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? value)
+	{
+		Instance.QueryLuceneSyntax = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify if request cache should be used for this request or not, defaults to true
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RequestCache(bool? value = true)
+	{
+		Instance.RequestCache = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of specific routing values
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Search operation type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to extract and return from the _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to extract and return from the _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies which field to use for suggestions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.SuggestField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies which field to use for suggestions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.SuggestField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify suggest mode
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
+	{
+		Instance.SuggestMode = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// How many suggestions to return in response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestSize(long? value)
+	{
+		Instance.SuggestSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The source text for which the suggestions should be returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestText(string? value)
+	{
+		Instance.SuggestText = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Blocks and waits until the search is completed up to a certain timeout.
+	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
+	{
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddAggregation<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
+	{
+		Instance.Collapse = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
+	{
+		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
+	{
+		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1313,40 +1481,58 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsValue = docvalueFields;
-		return Self;
+		Instance.DocvalueFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptor = descriptor;
-		return Self;
+		Instance.DocvalueFields = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.Build(action));
+		}
+
+		Instance.DocvalueFields = items;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>.Build(action));
+		}
+
+		Instance.DocvalueFields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1354,10 +1540,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Explain(bool? explain = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Explain(bool? value = true)
 	{
-		ExplainValue = explain;
-		return Self;
+		Instance.Explain = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1365,10 +1551,39 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Configuration of search extensions defined by Elasticsearch plugins.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Ext = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Ext()
+	{
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddExt(string key, object value)
+	{
+		Instance.Ext ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Ext.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -1377,40 +1592,58 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
+		Instance.Fields = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1420,34 +1653,28 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// search_after parameter.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> From(int? from)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = null;
-		HighlightValue = highlight;
-		return Self;
+		Instance.Highlight = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
 	{
-		HighlightValue = null;
-		HighlightDescriptorAction = null;
-		HighlightDescriptor = descriptor;
-		return Self;
+		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Highlight<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>> action)
 	{
-		HighlightValue = null;
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = configure;
-		return Self;
+		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1455,10 +1682,39 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
-		IndicesBoostValue = indicesBoost;
-		return Self;
+		Instance.IndicesBoost = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IndicesBoost()
+	{
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
+	{
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddIndicesBoost(Elastic.Clients.Elasticsearch.IndexName key, double value)
+	{
+		Instance.IndicesBoost ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>();
+		Instance.IndicesBoost.Add(new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>(key, value));
+		return this;
 	}
 
 	/// <summary>
@@ -1466,52 +1722,67 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? knn)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
-		KnnDescriptor = null;
-		KnnDescriptorAction = null;
-		KnnDescriptorActions = null;
-		KnnValue = knn;
-		return Self;
+		Instance.Knn = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
-		KnnValue = null;
-		KnnDescriptorAction = null;
-		KnnDescriptorActions = null;
-		KnnDescriptor = descriptor;
-		return Self;
+		Instance.Knn = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] actions)
 	{
-		KnnValue = null;
-		KnnDescriptor = null;
-		KnnDescriptorActions = null;
-		KnnDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.KnnSearchDescriptor.Build(action));
+		}
+
+		Instance.Knn = items;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn<T>(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<T>>[] actions)
 	{
-		KnnValue = null;
-		KnnDescriptor = null;
-		KnnDescriptorAction = null;
-		KnnDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.KnnSearchDescriptor<T>.Build(action));
+		}
+
+		Instance.Knn = items;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in the search results.
+	/// not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? minScore)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MinScore(double? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1520,58 +1791,46 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
-		PitDescriptor = null;
-		PitDescriptorAction = null;
-		PitValue = pit;
-		return Self;
+		Instance.Pit = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
-		PitValue = null;
-		PitDescriptorAction = null;
-		PitDescriptor = descriptor;
-		return Self;
+		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		PitValue = null;
-		PitDescriptor = null;
-		PitDescriptorAction = configure;
-		return Self;
+		Instance.PostFilter = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? postFilter)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		PostFilterDescriptor = null;
-		PostFilterDescriptorAction = null;
-		PostFilterValue = postFilter;
-		return Self;
+		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor PostFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		PostFilterValue = null;
-		PostFilterDescriptorAction = null;
-		PostFilterDescriptor = descriptor;
-		return Self;
+		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> PostFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Profile(bool? value = true)
 	{
-		PostFilterValue = null;
-		PostFilterDescriptor = null;
-		PostFilterDescriptorAction = configure;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1579,64 +1838,68 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
-		RescoreDescriptor = null;
-		RescoreDescriptorAction = null;
-		RescoreDescriptorActions = null;
-		RescoreValue = rescore;
-		return Self;
+		Instance.Rescore = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
-		RescoreValue = null;
-		RescoreDescriptorAction = null;
-		RescoreDescriptorActions = null;
-		RescoreDescriptor = descriptor;
-		return Self;
+		Instance.Rescore = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] actions)
 	{
-		RescoreValue = null;
-		RescoreDescriptor = null;
-		RescoreDescriptorActions = null;
-		RescoreDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.Build(action));
+		}
+
+		Instance.Rescore = items;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(params Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Rescore<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<T>>[] actions)
 	{
-		RescoreValue = null;
-		RescoreDescriptor = null;
-		RescoreDescriptorAction = null;
-		RescoreDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<T>.Build(action));
+		}
+
+		Instance.Rescore = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1645,10 +1908,88 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -1656,16 +1997,58 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Retrieve a script evaluation (based on different fields) for each hit.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>());
-		return Self;
+		Instance.ScriptFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	/// <summary>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ScriptFields()
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddScriptField(string key, Elastic.Clients.Elasticsearch.ScriptField value)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AddScriptField(string key, System.Action<Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> action)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	{
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -1674,10 +2057,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// of each hit. See Optimistic concurrency control.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? value = true)
 	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
+		Instance.SeqNoPrimaryTerm = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1687,70 +2070,64 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// hits, use the search_after parameter.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
-		SliceDescriptor = null;
-		SliceDescriptorAction = null;
-		SliceValue = slice;
-		return Self;
+		Instance.Slice = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
-		SliceValue = null;
-		SliceDescriptorAction = null;
-		SliceDescriptor = descriptor;
-		return Self;
+		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
-		SliceValue = null;
-		SliceDescriptor = null;
-		SliceDescriptorAction = configure;
-		return Self;
+		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1759,10 +2136,34 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1772,10 +2173,23 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// the indices stats API.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Stats(ICollection<string>? stats)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
-		StatsValue = stats;
-		return Self;
+		Instance.Stats = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Stats(params string[] values)
+	{
+		Instance.Stats = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -1786,34 +2200,48 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		StoredFieldsValue = storedFields;
-		return Self;
+		Instance.StoredFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? suggest)
+	/// <summary>
+	/// <para>
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		SuggestDescriptor = null;
-		SuggestDescriptorAction = null;
-		SuggestValue = suggest;
-		return Self;
+		Instance.StoredFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
-		SuggestValue = null;
-		SuggestDescriptorAction = null;
-		SuggestDescriptor = descriptor;
-		return Self;
+		Instance.Suggest = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Suggest(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Suggest()
 	{
-		SuggestValue = null;
-		SuggestDescriptor = null;
-		SuggestDescriptorAction = configure;
-		return Self;
+		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor>? action)
+	{
+		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Suggest<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>>? action)
+	{
+		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1823,10 +2251,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// before sorting. Defaults to 0, which does not terminate query execution early.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TerminateAfter(long? value)
 	{
-		TerminateAfterValue = terminateAfter;
-		return Self;
+		Instance.TerminateAfter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1836,10 +2264,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Timeout(string? timeout)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Timeout(string? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1847,10 +2275,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TrackScores(bool? value = true)
 	{
-		TrackScoresValue = trackScores;
-		return Self;
+		Instance.TrackScores = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1861,10 +2289,24 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
-		TrackTotalHitsValue = trackTotalHits;
-		return Self;
+		Instance.TrackTotalHits = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	{
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1872,397 +2314,65 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Version(bool? version = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Version(bool? value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			return new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CollapseDescriptor is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseDescriptor, options);
-		}
-		else if (CollapseDescriptorAction is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
-		}
-		else if (CollapseValue is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (DocvalueFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			foreach (var action in DocvalueFieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsValue is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ExtValue is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, ExtValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (HighlightDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightDescriptor, options);
-		}
-		else if (HighlightDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
-		}
-		else if (HighlightValue is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightValue, options);
-		}
-
-		if (IndicesBoostValue is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-		}
-
-		if (KnnDescriptor is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, KnnDescriptor, options);
-		}
-		else if (KnnDescriptorAction is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>(KnnDescriptorAction), options);
-		}
-		else if (KnnDescriptorActions is not null)
-		{
-			writer.WritePropertyName("knn");
-			if (KnnDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in KnnDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>(action), options);
-			}
-
-			if (KnnDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (KnnValue is not null)
-		{
-			writer.WritePropertyName("knn");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.KnnSearch>(KnnValue, writer, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (PitDescriptor is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitDescriptor, options);
-		}
-		else if (PitDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
-		}
-		else if (PitValue is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitValue, options);
-		}
-
-		if (PostFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, PostFilterDescriptor, options);
-		}
-		else if (PostFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(PostFilterDescriptorAction), options);
-		}
-		else if (PostFilterValue is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, PostFilterValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (RescoreDescriptor is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, RescoreDescriptor, options);
-		}
-		else if (RescoreDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
-		}
-		else if (RescoreDescriptorActions is not null)
-		{
-			writer.WritePropertyName("rescore");
-			if (RescoreDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in RescoreDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(action), options);
-			}
-
-			if (RescoreDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (RescoreValue is not null)
-		{
-			writer.WritePropertyName("rescore");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(RescoreValue, writer, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SliceDescriptor is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceDescriptor, options);
-		}
-		else if (SliceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
-		}
-		else if (SliceValue is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (StatsValue is not null)
-		{
-			writer.WritePropertyName("stats");
-			JsonSerializer.Serialize(writer, StatsValue, options);
-		}
-
-		if (StoredFieldsValue is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, StoredFieldsValue, options);
-		}
-
-		if (SuggestDescriptor is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, SuggestDescriptor, options);
-		}
-		else if (SuggestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>(SuggestDescriptorAction), options);
-		}
-		else if (SuggestValue is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, SuggestValue, options);
-		}
-
-		if (TerminateAfterValue.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(TerminateAfterValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(TimeoutValue))
-		{
-			writer.WritePropertyName("timeout");
-			writer.WriteStringValue(TimeoutValue);
-		}
-
-		if (TrackScoresValue.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(TrackScoresValue.Value);
-		}
-
-		if (TrackTotalHitsValue is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -2281,153 +2391,448 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 /// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
 /// </para>
 /// </summary>
-public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescriptor<SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters>
+public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 {
-	internal SubmitAsyncSearchRequestDescriptor(Action<SubmitAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Instance { get; init; }
 
-	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(indices);
 	}
 
 	public SubmitAsyncSearchRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
+	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "async_search.submit";
-
-	public SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public SubmitAsyncSearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-	public SubmitAsyncSearchRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-	public SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-	public SubmitAsyncSearchRequestDescriptor BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
-	public SubmitAsyncSearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public SubmitAsyncSearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-	public SubmitAsyncSearchRequestDescriptor Df(string? df) => Qs("df", df);
-	public SubmitAsyncSearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public SubmitAsyncSearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
-	public SubmitAsyncSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public SubmitAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public SubmitAsyncSearchRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
-	public SubmitAsyncSearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
-	public SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
-	public SubmitAsyncSearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
-	public SubmitAsyncSearchRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-	public SubmitAsyncSearchRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public SubmitAsyncSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public SubmitAsyncSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public SubmitAsyncSearchRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
-	public SubmitAsyncSearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
-	public SubmitAsyncSearchRequestDescriptor SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
-	public SubmitAsyncSearchRequestDescriptor SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
-	public SubmitAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-	public SubmitAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public SubmitAsyncSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to search; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
-	private bool? ExplainValue { get; set; }
-	private IDictionary<string, object>? ExtValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
-	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor KnnDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> KnnDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] KnnDescriptorActions { get; set; }
-	private double? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
-	private bool? ProfileValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private bool? SeqNoPrimaryTermValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor SliceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-	private ICollection<string>? StatsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
-	private long? TerminateAfterValue { get; set; }
-	private string? TimeoutValue { get; set; }
-	private bool? TrackScoresValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
-	private bool? VersionValue { get; set; }
-
-	public SubmitAsyncSearchRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
+	/// <summary>
+	/// <para>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>());
-		return Self;
+		Instance.AllowNoIndices = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
+	/// <summary>
+	/// <para>
+	/// Indicate if an error should be returned if there is a partial search failure or timeout
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
 	{
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = null;
-		CollapseValue = collapse;
-		return Self;
+		Instance.AllowPartialSearchResults = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The analyzer to use for the query string
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Analyzer(string? value)
 	{
-		CollapseValue = null;
-		CollapseDescriptorAction = null;
-		CollapseDescriptor = descriptor;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
-		CollapseValue = null;
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzeWildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Affects how often partial results become available, which happens whenever shard results are reduced.
+	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> BatchedReduceSize(long? value)
+	{
+		Instance.BatchedReduceSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default value is the only supported value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
+	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default operator for query string query (AND or OR)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
+	{
+		Instance.DefaultOperator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field to use as default where no field prefix is given in the query string
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Df(string? value)
+	{
+		Instance.Df = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies how long the async search needs to be available.
+	/// Ongoing async searches and any saved search results are deleted after this period.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
+	{
+		Instance.KeepOnCompletion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Lenient(bool? value = true)
+	{
+		Instance.Lenient = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
+	{
+		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify the node or shard the operation should be performed on (default: random)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
+	{
+		Instance.QueryLuceneSyntax = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify if request cache should be used for this request or not, defaults to true
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RequestCache(bool? value = true)
+	{
+		Instance.RequestCache = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of specific routing values
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Search operation type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to extract and return from the _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to extract and return from the _source field
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies which field to use for suggestions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.SuggestField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies which field to use for suggestions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
+	{
+		Instance.SuggestField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify suggest mode
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
+	{
+		Instance.SuggestMode = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// How many suggestions to return in response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestSize(long? value)
+	{
+		Instance.SuggestSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The source text for which the suggestions should be returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestText(string? value)
+	{
+		Instance.SuggestText = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Blocks and waits until the search is completed up to a certain timeout.
+	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
+	{
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
+	{
+		Instance.Collapse = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
+	{
+		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -2436,40 +2841,40 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsValue = docvalueFields;
-		return Self;
+		Instance.DocvalueFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptor = descriptor;
-		return Self;
+		Instance.DocvalueFields = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>.Build(action));
+		}
 
-	public SubmitAsyncSearchRequestDescriptor DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
-	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = configure;
-		return Self;
+		Instance.DocvalueFields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -2477,10 +2882,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Explain(bool? explain = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
-		ExplainValue = explain;
-		return Self;
+		Instance.Explain = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2488,10 +2893,39 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Configuration of search extensions defined by Elasticsearch plugins.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Ext = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Ext()
+	{
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddExt(string key, object value)
+	{
+		Instance.Ext ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Ext.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -2500,40 +2934,40 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
+		Instance.Fields = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>.Build(action));
+		}
 
-	public SubmitAsyncSearchRequestDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		Instance.Fields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -2543,34 +2977,22 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// search_after parameter.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor From(int? from)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = null;
-		HighlightValue = highlight;
-		return Self;
+		Instance.Highlight = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
-		HighlightValue = null;
-		HighlightDescriptorAction = null;
-		HighlightDescriptor = descriptor;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> configure)
-	{
-		HighlightValue = null;
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = configure;
-		return Self;
+		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -2578,10 +3000,39 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
-		IndicesBoostValue = indicesBoost;
-		return Self;
+		Instance.IndicesBoost = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost()
+	{
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
+	{
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddIndicesBoost(Elastic.Clients.Elasticsearch.IndexName key, double value)
+	{
+		Instance.IndicesBoost ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>();
+		Instance.IndicesBoost.Add(new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>(key, value));
+		return this;
 	}
 
 	/// <summary>
@@ -2589,52 +3040,50 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Knn(ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? knn)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
-		KnnDescriptor = null;
-		KnnDescriptorAction = null;
-		KnnDescriptorActions = null;
-		KnnValue = knn;
-		return Self;
+		Instance.Knn = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Knn(Elastic.Clients.Elasticsearch.KnnSearchDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
-		KnnValue = null;
-		KnnDescriptorAction = null;
-		KnnDescriptorActions = null;
-		KnnDescriptor = descriptor;
-		return Self;
+		Instance.Knn = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Knn(Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] actions)
 	{
-		KnnValue = null;
-		KnnDescriptor = null;
-		KnnDescriptorActions = null;
-		KnnDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>.Build(action));
+		}
 
-	public SubmitAsyncSearchRequestDescriptor Knn(params Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] configure)
-	{
-		KnnValue = null;
-		KnnDescriptor = null;
-		KnnDescriptorAction = null;
-		KnnDescriptorActions = configure;
-		return Self;
+		Instance.Knn = items;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in the search results.
+	/// not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor MinScore(double? minScore)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2643,58 +3092,40 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
-		PitDescriptor = null;
-		PitDescriptorAction = null;
-		PitValue = pit;
-		return Self;
+		Instance.Pit = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
-		PitValue = null;
-		PitDescriptorAction = null;
-		PitDescriptor = descriptor;
-		return Self;
+		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Pit(Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		PitValue = null;
-		PitDescriptor = null;
-		PitDescriptorAction = configure;
-		return Self;
+		Instance.PostFilter = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? postFilter)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		PostFilterDescriptor = null;
-		PostFilterDescriptorAction = null;
-		PostFilterValue = postFilter;
-		return Self;
+		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
-		PostFilterValue = null;
-		PostFilterDescriptorAction = null;
-		PostFilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor PostFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		PostFilterValue = null;
-		PostFilterDescriptor = null;
-		PostFilterDescriptorAction = configure;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2702,64 +3133,45 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Rescore = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Rescore(ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
-		RescoreDescriptor = null;
-		RescoreDescriptorAction = null;
-		RescoreDescriptorActions = null;
-		RescoreValue = rescore;
-		return Self;
+		Instance.Rescore = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] actions)
 	{
-		RescoreValue = null;
-		RescoreDescriptorAction = null;
-		RescoreDescriptorActions = null;
-		RescoreDescriptor = descriptor;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>.Build(action));
+		}
 
-	public SubmitAsyncSearchRequestDescriptor Rescore(Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor> configure)
-	{
-		RescoreValue = null;
-		RescoreDescriptor = null;
-		RescoreDescriptorActions = null;
-		RescoreDescriptorAction = configure;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Rescore(params Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] configure)
-	{
-		RescoreValue = null;
-		RescoreDescriptor = null;
-		RescoreDescriptorAction = null;
-		RescoreDescriptorActions = configure;
-		return Self;
+		Instance.Rescore = items;
+		return this;
 	}
 
 	/// <summary>
@@ -2768,10 +3180,62 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -2779,16 +3243,58 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Retrieve a script evaluation (based on different fields) for each hit.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>());
-		return Self;
+		Instance.ScriptFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	/// <summary>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields()
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddScriptField(string key, Elastic.Clients.Elasticsearch.ScriptField value)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AddScriptField(string key, System.Action<Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> action)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	{
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -2797,10 +3303,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// of each hit. See Optimistic concurrency control.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
 	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
+		Instance.SeqNoPrimaryTerm = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2810,70 +3316,46 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// hits, use the search_after parameter.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
-		SliceDescriptor = null;
-		SliceDescriptorAction = null;
-		SliceValue = slice;
-		return Self;
+		Instance.Slice = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
-		SliceValue = null;
-		SliceDescriptorAction = null;
-		SliceDescriptor = descriptor;
-		return Self;
+		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SliceValue = null;
-		SliceDescriptor = null;
-		SliceDescriptorAction = configure;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
+		}
 
-	public SubmitAsyncSearchRequestDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = items;
+		return this;
 	}
 
 	/// <summary>
@@ -2882,10 +3364,22 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -2895,10 +3389,23 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// the indices stats API.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Stats(ICollection<string>? stats)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
-		StatsValue = stats;
-		return Self;
+		Instance.Stats = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Stats(params string[] values)
+	{
+		Instance.Stats = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -2909,34 +3416,42 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		StoredFieldsValue = storedFields;
-		return Self;
+		Instance.StoredFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? suggest)
+	/// <summary>
+	/// <para>
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		SuggestDescriptor = null;
-		SuggestDescriptorAction = null;
-		SuggestValue = suggest;
-		return Self;
+		Instance.StoredFields = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
-		SuggestValue = null;
-		SuggestDescriptorAction = null;
-		SuggestDescriptor = descriptor;
-		return Self;
+		Instance.Suggest = value;
+		return this;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Suggest(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Suggest()
 	{
-		SuggestValue = null;
-		SuggestDescriptor = null;
-		SuggestDescriptorAction = configure;
-		return Self;
+		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>>? action)
+	{
+		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -2946,10 +3461,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// before sorting. Defaults to 0, which does not terminate query execution early.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor TerminateAfter(long? terminateAfter)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TerminateAfter(long? value)
 	{
-		TerminateAfterValue = terminateAfter;
-		return Self;
+		Instance.TerminateAfter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2959,10 +3474,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Timeout(string? timeout)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Timeout(string? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2970,10 +3485,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor TrackScores(bool? trackScores = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TrackScores(bool? value = true)
 	{
-		TrackScoresValue = trackScores;
-		return Self;
+		Instance.TrackScores = value;
+		return this;
 	}
 
 	/// <summary>
@@ -2984,10 +3499,24 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
-		TrackTotalHitsValue = trackTotalHits;
-		return Self;
+		Instance.TrackTotalHits = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	{
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -2995,396 +3524,64 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Version(bool? version = true)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Version(bool? value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			return new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CollapseDescriptor is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseDescriptor, options);
-		}
-		else if (CollapseDescriptorAction is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor(CollapseDescriptorAction), options);
-		}
-		else if (CollapseValue is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (DocvalueFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			foreach (var action in DocvalueFieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsValue is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ExtValue is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, ExtValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (HighlightDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightDescriptor, options);
-		}
-		else if (HighlightDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
-		}
-		else if (HighlightValue is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightValue, options);
-		}
-
-		if (IndicesBoostValue is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-		}
-
-		if (KnnDescriptor is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, KnnDescriptor, options);
-		}
-		else if (KnnDescriptorAction is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor(KnnDescriptorAction), options);
-		}
-		else if (KnnDescriptorActions is not null)
-		{
-			writer.WritePropertyName("knn");
-			if (KnnDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in KnnDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor(action), options);
-			}
-
-			if (KnnDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (KnnValue is not null)
-		{
-			writer.WritePropertyName("knn");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.KnnSearch>(KnnValue, writer, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (PitDescriptor is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitDescriptor, options);
-		}
-		else if (PitDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
-		}
-		else if (PitValue is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitValue, options);
-		}
-
-		if (PostFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, PostFilterDescriptor, options);
-		}
-		else if (PostFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(PostFilterDescriptorAction), options);
-		}
-		else if (PostFilterValue is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, PostFilterValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (RescoreDescriptor is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, RescoreDescriptor, options);
-		}
-		else if (RescoreDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(RescoreDescriptorAction), options);
-		}
-		else if (RescoreDescriptorActions is not null)
-		{
-			writer.WritePropertyName("rescore");
-			if (RescoreDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in RescoreDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(action), options);
-			}
-
-			if (RescoreDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (RescoreValue is not null)
-		{
-			writer.WritePropertyName("rescore");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(RescoreValue, writer, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SliceDescriptor is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceDescriptor, options);
-		}
-		else if (SliceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SlicedScrollDescriptor(SliceDescriptorAction), options);
-		}
-		else if (SliceValue is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (StatsValue is not null)
-		{
-			writer.WritePropertyName("stats");
-			JsonSerializer.Serialize(writer, StatsValue, options);
-		}
-
-		if (StoredFieldsValue is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, StoredFieldsValue, options);
-		}
-
-		if (SuggestDescriptor is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, SuggestDescriptor, options);
-		}
-		else if (SuggestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor(SuggestDescriptorAction), options);
-		}
-		else if (SuggestValue is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, SuggestValue, options);
-		}
-
-		if (TerminateAfterValue.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(TerminateAfterValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(TimeoutValue))
-		{
-			writer.WritePropertyName("timeout");
-			writer.WriteStringValue(TimeoutValue);
-		}
-
-		if (TrackScoresValue.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(TrackScoresValue.Value);
-		}
-
-		if (TrackTotalHitsValue is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

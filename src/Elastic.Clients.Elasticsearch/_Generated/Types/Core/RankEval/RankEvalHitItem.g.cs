@@ -17,20 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+internal sealed partial class RankEvalHitItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHit = System.Text.Json.JsonEncodedText.Encode("hit");
+	private static readonly System.Text.Json.JsonEncodedText PropRating = System.Text.Json.JsonEncodedText.Encode("rating");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit> propHit = default;
+		LocalJsonValue<double?> propRating = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHit.TryReadProperty(ref reader, options, PropHit, null))
+			{
+				continue;
+			}
+
+			if (propRating.TryReadProperty(ref reader, options, PropRating, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Hit = propHit.Value,
+			Rating = propRating.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHit, value.Hit, null, null);
+		writer.WriteProperty(options, PropRating, value.Rating, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItemConverter))]
 public sealed partial class RankEvalHitItem
 {
-	[JsonInclude, JsonPropertyName("hit")]
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit Hit { get; init; }
-	[JsonInclude, JsonPropertyName("rating")]
-	public double? Rating { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalHitItem(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit hit)
+	{
+		Hit = hit;
+	}
+#if NET7_0_OR_GREATER
+	public RankEvalHitItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankEvalHitItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalHitItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit Hit { get; set; }
+	public double? Rating { get; set; }
 }

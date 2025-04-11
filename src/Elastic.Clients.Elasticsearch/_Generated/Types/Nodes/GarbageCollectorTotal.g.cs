@@ -17,39 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class GarbageCollectorTotalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionCount = System.Text.Json.JsonEncodedText.Encode("collection_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionTime = System.Text.Json.JsonEncodedText.Encode("collection_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionTimeInMillis = System.Text.Json.JsonEncodedText.Encode("collection_time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCollectionCount = default;
+		LocalJsonValue<string?> propCollectionTime = default;
+		LocalJsonValue<long?> propCollectionTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollectionCount.TryReadProperty(ref reader, options, PropCollectionCount, null))
+			{
+				continue;
+			}
+
+			if (propCollectionTime.TryReadProperty(ref reader, options, PropCollectionTime, null))
+			{
+				continue;
+			}
+
+			if (propCollectionTimeInMillis.TryReadProperty(ref reader, options, PropCollectionTimeInMillis, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CollectionCount = propCollectionCount.Value,
+			CollectionTime = propCollectionTime.Value,
+			CollectionTimeInMillis = propCollectionTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollectionCount, value.CollectionCount, null, null);
+		writer.WriteProperty(options, PropCollectionTime, value.CollectionTime, null, null);
+		writer.WriteProperty(options, PropCollectionTimeInMillis, value.CollectionTimeInMillis, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotalConverter))]
 public sealed partial class GarbageCollectorTotal
 {
+#if NET7_0_OR_GREATER
+	public GarbageCollectorTotal()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GarbageCollectorTotal()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GarbageCollectorTotal(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total number of JVM garbage collectors that collect objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collection_count")]
-	public long? CollectionCount { get; init; }
+	public long? CollectionCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total time spent by JVM collecting objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collection_time")]
-	public string? CollectionTime { get; init; }
+	public string? CollectionTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total time, in milliseconds, spent by JVM collecting objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collection_time_in_millis")]
-	public long? CollectionTimeInMillis { get; init; }
+	public long? CollectionTimeInMillis { get; set; }
 }

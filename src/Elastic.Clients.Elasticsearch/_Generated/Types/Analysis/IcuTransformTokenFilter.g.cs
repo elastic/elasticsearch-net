@@ -17,86 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class IcuTransformTokenFilter : ITokenFilter
+internal sealed partial class IcuTransformTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("dir")]
-	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? Dir { get; set; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropDir = System.Text.Json.JsonEncodedText.Encode("dir");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection?> propDir = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDir.TryReadProperty(ref reader, options, PropDir, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dir = propDir.Value,
+			Id = propId.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDir, value.Dir, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterConverter))]
+public sealed partial class IcuTransformTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuTransformTokenFilter(string id)
+	{
+		Id = id;
+	}
+#if NET7_0_OR_GREATER
+	public IcuTransformTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IcuTransformTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? Dir { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
+
 	public string Type => "icu_transform";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class IcuTransformTokenFilterDescriptor : SerializableDescriptor<IcuTransformTokenFilterDescriptor>, IBuildableDescriptor<IcuTransformTokenFilter>
+public readonly partial struct IcuTransformTokenFilterDescriptor
 {
-	internal IcuTransformTokenFilterDescriptor(Action<IcuTransformTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter Instance { get; init; }
 
-	public IcuTransformTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuTransformTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? DirValue { get; set; }
-	private string IdValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public IcuTransformTokenFilterDescriptor Dir(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? dir)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuTransformTokenFilterDescriptor()
 	{
-		DirValue = dir;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IcuTransformTokenFilterDescriptor Id(string id)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor Dir(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Dir = value;
+		return this;
 	}
 
-	public IcuTransformTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor Id(string value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (DirValue is not null)
-		{
-			writer.WritePropertyName("dir");
-			JsonSerializer.Serialize(writer, DirValue, options);
-		}
-
-		writer.WritePropertyName("id");
-		writer.WriteStringValue(IdValue);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("icu_transform");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	IcuTransformTokenFilter IBuildableDescriptor<IcuTransformTokenFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor> action)
 	{
-		Dir = DirValue,
-		Id = IdValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

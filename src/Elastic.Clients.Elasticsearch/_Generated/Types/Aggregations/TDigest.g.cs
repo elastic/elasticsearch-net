@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class TDigestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TDigest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TDigest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propCompression = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompression.TryReadProperty(ref reader, options, PropCompression, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.TDigest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Compression = propCompression.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TDigest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompression, value.Compression, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TDigestConverter))]
 public sealed partial class TDigest
 {
+#if NET7_0_OR_GREATER
+	public TDigest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TDigest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TDigest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("compression")]
 	public int? Compression { get; set; }
 }
 
-public sealed partial class TDigestDescriptor : SerializableDescriptor<TDigestDescriptor>
+public readonly partial struct TDigestDescriptor
 {
-	internal TDigestDescriptor(Action<TDigestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.TDigest Instance { get; init; }
 
-	public TDigestDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TDigestDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TDigest instance)
 	{
+		Instance = instance;
 	}
 
-	private int? CompressionValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TDigestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.TDigest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TDigest instance) => new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
 	/// </para>
 	/// </summary>
-	public TDigestDescriptor Compression(int? compression)
+	public Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor Compression(int? value)
 	{
-		CompressionValue = compression;
-		return Self;
+		Instance.Compression = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.TDigest Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (CompressionValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("compression");
-			writer.WriteNumberValue(CompressionValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.TDigest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.TDigest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

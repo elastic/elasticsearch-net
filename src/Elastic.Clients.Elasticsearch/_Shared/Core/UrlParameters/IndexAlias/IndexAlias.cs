@@ -4,15 +4,22 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(IndexAliasConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public class IndexAlias : IEquatable<IndexAlias>, IUrlParameter
+public class IndexAlias :
+	IEquatable<IndexAlias>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<IndexAlias>
+#endif
 {
 	internal IndexAlias(string index) => Alias = index;
 
@@ -53,6 +60,26 @@ public class IndexAlias : IEquatable<IndexAlias>, IUrlParameter
 			return (TypeHashCode * 397) ^ (Alias.GetHashCode());
 		}
 	}
+
+	#region IParsable
+
+	public static IndexAlias Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out IndexAlias? result)
+	{
+		if (string.IsNullOrEmpty(s))
+		{
+			result = null;
+			return false;
+		}
+
+		result = new IndexAlias(s);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class IndexAliasConverter : JsonConverter<IndexAlias>

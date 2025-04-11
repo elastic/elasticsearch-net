@@ -17,28 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class DiscoveryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Discovery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterApplierStats = System.Text.Json.JsonEncodedText.Encode("cluster_applier_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterStateQueue = System.Text.Json.JsonEncodedText.Encode("cluster_state_queue");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterStateUpdate = System.Text.Json.JsonEncodedText.Encode("cluster_state_update");
+	private static readonly System.Text.Json.JsonEncodedText PropPublishedClusterStates = System.Text.Json.JsonEncodedText.Encode("published_cluster_states");
+	private static readonly System.Text.Json.JsonEncodedText PropSerializedClusterStates = System.Text.Json.JsonEncodedText.Encode("serialized_cluster_states");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Discovery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats?> propClusterApplierStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue?> propClusterStateQueue = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>?> propClusterStateUpdate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates?> propPublishedClusterStates = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState?> propSerializedClusterStates = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterApplierStats.TryReadProperty(ref reader, options, PropClusterApplierStats, null))
+			{
+				continue;
+			}
+
+			if (propClusterStateQueue.TryReadProperty(ref reader, options, PropClusterStateQueue, null))
+			{
+				continue;
+			}
+
+			if (propClusterStateUpdate.TryReadProperty(ref reader, options, PropClusterStateUpdate, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPublishedClusterStates.TryReadProperty(ref reader, options, PropPublishedClusterStates, null))
+			{
+				continue;
+			}
+
+			if (propSerializedClusterStates.TryReadProperty(ref reader, options, PropSerializedClusterStates, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Discovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClusterApplierStats = propClusterApplierStats.Value,
+			ClusterStateQueue = propClusterStateQueue.Value,
+			ClusterStateUpdate = propClusterStateUpdate.Value,
+			PublishedClusterStates = propPublishedClusterStates.Value,
+			SerializedClusterStates = propSerializedClusterStates.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Discovery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterApplierStats, value.ClusterApplierStats, null, null);
+		writer.WriteProperty(options, PropClusterStateQueue, value.ClusterStateQueue, null, null);
+		writer.WriteProperty(options, PropClusterStateUpdate, value.ClusterStateUpdate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>(o, v, null, null));
+		writer.WriteProperty(options, PropPublishedClusterStates, value.PublishedClusterStates, null, null);
+		writer.WriteProperty(options, PropSerializedClusterStates, value.SerializedClusterStates, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.DiscoveryConverter))]
 public sealed partial class Discovery
 {
-	[JsonInclude, JsonPropertyName("cluster_applier_stats")]
-	public Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats? ClusterApplierStats { get; init; }
+#if NET7_0_OR_GREATER
+	public Discovery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Discovery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Discovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats? ClusterApplierStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics for the cluster state queue of the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_state_queue")]
-	public Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue? ClusterStateQueue { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue? ClusterStateQueue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -48,16 +134,13 @@ public sealed partial class Discovery
 	/// The human-readable fields with a <c>_time</c> suffix are only returned if requested with the <c>?human=true</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_state_update")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>? ClusterStateUpdate { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>? ClusterStateUpdate { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics for the published cluster states of the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("published_cluster_states")]
-	public Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates? PublishedClusterStates { get; init; }
-	[JsonInclude, JsonPropertyName("serialized_cluster_states")]
-	public Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState? SerializedClusterStates { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates? PublishedClusterStates { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState? SerializedClusterStates { get; set; }
 }

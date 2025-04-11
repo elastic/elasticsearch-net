@@ -17,91 +17,150 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class AccessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.Access>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication");
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
+
+	public override Elastic.Clients.Elasticsearch.Security.Access Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>?> propReplication = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>?> propSearch = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propReplication.TryReadProperty(ref reader, options, PropReplication, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSearch.TryReadProperty(ref reader, options, PropSearch, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.SearchAccess>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Replication = propReplication.Value,
+			Search = propSearch.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.Access value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropReplication, value.Replication, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>(o, v, null));
+		writer.WriteProperty(options, PropSearch, value.Search, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.SearchAccess>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.AccessConverter))]
 public sealed partial class Access
 {
+#if NET7_0_OR_GREATER
+	public Access()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Access()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A list of indices permission entries for cross-cluster replication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("replication")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? Replication { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? Replication { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permission entries for cross-cluster search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? Search { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? Search { get; set; }
 }
 
-public sealed partial class AccessDescriptor<TDocument> : SerializableDescriptor<AccessDescriptor<TDocument>>
+public readonly partial struct AccessDescriptor<TDocument>
 {
-	internal AccessDescriptor(Action<AccessDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.Access Instance { get; init; }
 
-	public AccessDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AccessDescriptor(Elastic.Clients.Elasticsearch.Security.Access instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? ReplicationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor ReplicationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor> ReplicationDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] ReplicationDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? SearchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> SearchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>> SearchDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>>[] SearchDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AccessDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.Access instance) => new Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permission entries for cross-cluster replication.
 	/// </para>
 	/// </summary>
-	public AccessDescriptor<TDocument> Replication(ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? replication)
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? value)
 	{
-		ReplicationDescriptor = null;
-		ReplicationDescriptorAction = null;
-		ReplicationDescriptorActions = null;
-		ReplicationValue = replication;
-		return Self;
+		Instance.Replication = value;
+		return this;
 	}
 
-	public AccessDescriptor<TDocument> Replication(Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster replication.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(params Elastic.Clients.Elasticsearch.Security.ReplicationAccess[] values)
 	{
-		ReplicationValue = null;
-		ReplicationDescriptorAction = null;
-		ReplicationDescriptorActions = null;
-		ReplicationDescriptor = descriptor;
-		return Self;
+		Instance.Replication = [.. values];
+		return this;
 	}
 
-	public AccessDescriptor<TDocument> Replication(Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster replication.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(params System.Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] actions)
 	{
-		ReplicationValue = null;
-		ReplicationDescriptor = null;
-		ReplicationDescriptorActions = null;
-		ReplicationDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor.Build(action));
+		}
 
-	public AccessDescriptor<TDocument> Replication(params Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] configure)
-	{
-		ReplicationValue = null;
-		ReplicationDescriptor = null;
-		ReplicationDescriptorAction = null;
-		ReplicationDescriptorActions = configure;
-		return Self;
+		Instance.Replication = items;
+		return this;
 	}
 
 	/// <summary>
@@ -109,167 +168,110 @@ public sealed partial class AccessDescriptor<TDocument> : SerializableDescriptor
 	/// A list of indices permission entries for cross-cluster search.
 	/// </para>
 	/// </summary>
-	public AccessDescriptor<TDocument> Search(ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? search)
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? value)
 	{
-		SearchDescriptor = null;
-		SearchDescriptorAction = null;
-		SearchDescriptorActions = null;
-		SearchValue = search;
-		return Self;
+		Instance.Search = value;
+		return this;
 	}
 
-	public AccessDescriptor<TDocument> Search(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(params Elastic.Clients.Elasticsearch.Security.SearchAccess[] values)
 	{
-		SearchValue = null;
-		SearchDescriptorAction = null;
-		SearchDescriptorActions = null;
-		SearchDescriptor = descriptor;
-		return Self;
+		Instance.Search = [.. values];
+		return this;
 	}
 
-	public AccessDescriptor<TDocument> Search(Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(params System.Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>>[] actions)
 	{
-		SearchValue = null;
-		SearchDescriptor = null;
-		SearchDescriptorActions = null;
-		SearchDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Search = items;
+		return this;
 	}
 
-	public AccessDescriptor<TDocument> Search(params Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>>[] configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.Access Build(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>>? action)
 	{
-		SearchValue = null;
-		SearchDescriptor = null;
-		SearchDescriptorAction = null;
-		SearchDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ReplicationDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("replication");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ReplicationDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ReplicationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("replication");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor(ReplicationDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ReplicationDescriptorActions is not null)
-		{
-			writer.WritePropertyName("replication");
-			writer.WriteStartArray();
-			foreach (var action in ReplicationDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ReplicationValue is not null)
-		{
-			writer.WritePropertyName("replication");
-			JsonSerializer.Serialize(writer, ReplicationValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SearchDescriptor is not null)
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, SearchDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (SearchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>(SearchDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (SearchDescriptorActions is not null)
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStartArray();
-			foreach (var action in SearchDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (SearchValue is not null)
-		{
-			writer.WritePropertyName("search");
-			JsonSerializer.Serialize(writer, SearchValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class AccessDescriptor : SerializableDescriptor<AccessDescriptor>
+public readonly partial struct AccessDescriptor
 {
-	internal AccessDescriptor(Action<AccessDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.Access Instance { get; init; }
 
-	public AccessDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AccessDescriptor(Elastic.Clients.Elasticsearch.Security.Access instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? ReplicationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor ReplicationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor> ReplicationDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] ReplicationDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? SearchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor SearchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor> SearchDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor>[] SearchDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AccessDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.AccessDescriptor(Elastic.Clients.Elasticsearch.Security.Access instance) => new Elastic.Clients.Elasticsearch.Security.AccessDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Security.AccessDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permission entries for cross-cluster replication.
 	/// </para>
 	/// </summary>
-	public AccessDescriptor Replication(ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? replication)
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? value)
 	{
-		ReplicationDescriptor = null;
-		ReplicationDescriptorAction = null;
-		ReplicationDescriptorActions = null;
-		ReplicationValue = replication;
-		return Self;
+		Instance.Replication = value;
+		return this;
 	}
 
-	public AccessDescriptor Replication(Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster replication.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(params Elastic.Clients.Elasticsearch.Security.ReplicationAccess[] values)
 	{
-		ReplicationValue = null;
-		ReplicationDescriptorAction = null;
-		ReplicationDescriptorActions = null;
-		ReplicationDescriptor = descriptor;
-		return Self;
+		Instance.Replication = [.. values];
+		return this;
 	}
 
-	public AccessDescriptor Replication(Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster replication.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(params System.Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] actions)
 	{
-		ReplicationValue = null;
-		ReplicationDescriptor = null;
-		ReplicationDescriptorActions = null;
-		ReplicationDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor.Build(action));
+		}
 
-	public AccessDescriptor Replication(params Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] configure)
-	{
-		ReplicationValue = null;
-		ReplicationDescriptor = null;
-		ReplicationDescriptorAction = null;
-		ReplicationDescriptorActions = configure;
-		return Self;
+		Instance.Replication = items;
+		return this;
 	}
 
 	/// <summary>
@@ -277,107 +279,67 @@ public sealed partial class AccessDescriptor : SerializableDescriptor<AccessDesc
 	/// A list of indices permission entries for cross-cluster search.
 	/// </para>
 	/// </summary>
-	public AccessDescriptor Search(ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? search)
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? value)
 	{
-		SearchDescriptor = null;
-		SearchDescriptorAction = null;
-		SearchDescriptorActions = null;
-		SearchValue = search;
-		return Self;
+		Instance.Search = value;
+		return this;
 	}
 
-	public AccessDescriptor Search(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(params Elastic.Clients.Elasticsearch.Security.SearchAccess[] values)
 	{
-		SearchValue = null;
-		SearchDescriptorAction = null;
-		SearchDescriptorActions = null;
-		SearchDescriptor = descriptor;
-		return Self;
+		Instance.Search = [.. values];
+		return this;
 	}
 
-	public AccessDescriptor Search(Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(params System.Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor>[] actions)
 	{
-		SearchValue = null;
-		SearchDescriptor = null;
-		SearchDescriptorActions = null;
-		SearchDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor.Build(action));
+		}
+
+		Instance.Search = items;
+		return this;
 	}
 
-	public AccessDescriptor Search(params Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permission entries for cross-cluster search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<T>>[] actions)
 	{
-		SearchValue = null;
-		SearchDescriptor = null;
-		SearchDescriptorAction = null;
-		SearchDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<T>.Build(action));
+		}
+
+		Instance.Search = items;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.Access Build(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ReplicationDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("replication");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ReplicationDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ReplicationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("replication");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor(ReplicationDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ReplicationDescriptorActions is not null)
-		{
-			writer.WritePropertyName("replication");
-			writer.WriteStartArray();
-			foreach (var action in ReplicationDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ReplicationValue is not null)
-		{
-			writer.WritePropertyName("replication");
-			JsonSerializer.Serialize(writer, ReplicationValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SearchDescriptor is not null)
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, SearchDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (SearchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor(SearchDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (SearchDescriptorActions is not null)
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStartArray();
-			foreach (var action in SearchDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (SearchValue is not null)
-		{
-			writer.WritePropertyName("search");
-			JsonSerializer.Serialize(writer, SearchValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.AccessDescriptor(new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

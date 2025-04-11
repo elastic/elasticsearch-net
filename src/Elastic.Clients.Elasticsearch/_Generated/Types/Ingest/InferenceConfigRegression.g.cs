@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class InferenceConfigRegressionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propNumTopFeatureImportanceValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propResultsField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			{
+				continue;
+			}
+
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumTopFeatureImportanceValues = propNumTopFeatureImportanceValues.Value,
+			ResultsField = propResultsField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionConverter))]
 public sealed partial class InferenceConfigRegression
 {
+#if NET7_0_OR_GREATER
+	public InferenceConfigRegression()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public InferenceConfigRegression()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
 	/// <summary>
@@ -42,32 +102,37 @@ public sealed partial class InferenceConfigRegression
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfig(InferenceConfigRegression inferenceConfigRegression) => Elastic.Clients.Elasticsearch.Ingest.InferenceConfig.Regression(inferenceConfigRegression);
 }
 
-public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : SerializableDescriptor<InferenceConfigRegressionDescriptor<TDocument>>
+public readonly partial struct InferenceConfigRegressionDescriptor<TDocument>
 {
-	internal InferenceConfigRegressionDescriptor(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Instance { get; init; }
 
-	public InferenceConfigRegressionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigRegressionDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigRegressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	public InferenceConfigRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -75,10 +140,10 @@ public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : Ser
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigRegressionDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -86,62 +151,54 @@ public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : Ser
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigRegressionDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
-	public InferenceConfigRegressionDescriptor<TDocument> ResultsField(Expression<Func<TDocument, object>> resultsField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>>? action)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (NumTopFeatureImportanceValuesValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
+			return new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("results_field");
-			JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class InferenceConfigRegressionDescriptor : SerializableDescriptor<InferenceConfigRegressionDescriptor>
+public readonly partial struct InferenceConfigRegressionDescriptor
 {
-	internal InferenceConfigRegressionDescriptor(Action<InferenceConfigRegressionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Instance { get; init; }
 
-	public InferenceConfigRegressionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigRegressionDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigRegressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	public InferenceConfigRegressionDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -149,10 +206,10 @@ public sealed partial class InferenceConfigRegressionDescriptor : SerializableDe
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigRegressionDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -160,38 +217,22 @@ public sealed partial class InferenceConfigRegressionDescriptor : SerializableDe
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigRegressionDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
-	public InferenceConfigRegressionDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor>? action)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (NumTopFeatureImportanceValuesValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
+			return new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("results_field");
-			JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor(new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

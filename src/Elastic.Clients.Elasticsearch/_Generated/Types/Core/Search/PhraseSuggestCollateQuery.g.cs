@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class PhraseSuggestCollateQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<string?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryConverter))]
 public sealed partial class PhraseSuggestCollateQuery
 {
+#if NET7_0_OR_GREATER
+	public PhraseSuggestCollateQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PhraseSuggestCollateQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The search template ID.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class PhraseSuggestCollateQuery
 	/// The query source.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 
-public sealed partial class PhraseSuggestCollateQueryDescriptor : SerializableDescriptor<PhraseSuggestCollateQueryDescriptor>
+public readonly partial struct PhraseSuggestCollateQueryDescriptor
 {
-	internal PhraseSuggestCollateQueryDescriptor(Action<PhraseSuggestCollateQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Instance { get; init; }
 
-	public PhraseSuggestCollateQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestCollateQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private string? SourceValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestCollateQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The search template ID.
 	/// </para>
 	/// </summary>
-	public PhraseSuggestCollateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class PhraseSuggestCollateQueryDescriptor : SerializableDe
 	/// The query source.
 	/// </para>
 	/// </summary>
-	public PhraseSuggestCollateQueryDescriptor Source(string? source)
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor Source(string? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(SourceValue))
-		{
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

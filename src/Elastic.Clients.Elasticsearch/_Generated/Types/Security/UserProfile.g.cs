@@ -17,26 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class UserProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserProfile>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
+	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid");
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
+
+	public override Elastic.Clients.Elasticsearch.Security.UserProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propData = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propLabels = default;
+		LocalJsonValue<string> propUid = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.UserProfileUser> propUser = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propData.TryReadProperty(ref reader, options, PropData, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propUid.TryReadProperty(ref reader, options, PropUid, null))
+			{
+				continue;
+			}
+
+			if (propUser.TryReadProperty(ref reader, options, PropUser, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.UserProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Data = propData.Value,
+			Enabled = propEnabled.Value,
+			Labels = propLabels.Value,
+			Uid = propUid.Value,
+			User = propUser.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UserProfile value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropUid, value.Uid, null, null);
+		writer.WriteProperty(options, PropUser, value.User, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UserProfileConverter))]
 public sealed partial class UserProfile
 {
-	[JsonInclude, JsonPropertyName("data")]
-	public IReadOnlyDictionary<string, object> Data { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool? Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("labels")]
-	public IReadOnlyDictionary<string, object> Labels { get; init; }
-	[JsonInclude, JsonPropertyName("uid")]
-	public string Uid { get; init; }
-	[JsonInclude, JsonPropertyName("user")]
-	public Elastic.Clients.Elasticsearch.Security.UserProfileUser User { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserProfile(System.Collections.Generic.IReadOnlyDictionary<string, object> data, System.Collections.Generic.IReadOnlyDictionary<string, object> labels, string uid, Elastic.Clients.Elasticsearch.Security.UserProfileUser user)
+	{
+		Data = data;
+		Labels = labels;
+		Uid = uid;
+		User = user;
+	}
+#if NET7_0_OR_GREATER
+	public UserProfile()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UserProfile()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UserProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Data { get; set; }
+	public bool? Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Labels { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Uid { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.UserProfileUser User { get; set; }
 }

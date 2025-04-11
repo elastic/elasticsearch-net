@@ -17,76 +17,103 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class RepositoryVerifyIntegrityRequestParameters : RequestParameters
+public sealed partial class RepositoryVerifyIntegrityRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Number of threads to use for reading blob contents
+	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies how many blobs to verify at once.
 	/// </para>
 	/// </summary>
 	public int? BlobThreadPoolConcurrency { get => Q<int?>("blob_thread_pool_concurrency"); set => Q("blob_thread_pool_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of snapshots to verify concurrently within each index
+	/// The maximum number of index snapshots to verify concurrently within each index verification.
 	/// </para>
 	/// </summary>
 	public int? IndexSnapshotVerificationConcurrency { get => Q<int?>("index_snapshot_verification_concurrency"); set => Q("index_snapshot_verification_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of indices to verify concurrently
+	/// The number of indices to verify concurrently.
+	/// The default behavior is to use the entire <c>snapshot_meta</c> thread pool.
 	/// </para>
 	/// </summary>
 	public int? IndexVerificationConcurrency { get => Q<int?>("index_verification_concurrency"); set => Q("index_verification_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Rate limit for individual blob verification
+	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies the maximum amount of data that Elasticsearch will read from the repository every second.
 	/// </para>
 	/// </summary>
 	public string? MaxBytesPerSec { get => Q<string?>("max_bytes_per_sec"); set => Q("max_bytes_per_sec", value); }
 
 	/// <summary>
 	/// <para>
-	/// Maximum permitted number of failed shard snapshots
+	/// The number of shard snapshot failures to track during integrity verification, in order to avoid excessive resource usage.
+	/// If your repository contains more than this number of shard snapshot failures, the verification will fail.
 	/// </para>
 	/// </summary>
 	public int? MaxFailedShardSnapshots { get => Q<int?>("max_failed_shard_snapshots"); set => Q("max_failed_shard_snapshots", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of threads to use for reading metadata
+	/// The maximum number of snapshot metadata operations to run concurrently.
+	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
 	/// </para>
 	/// </summary>
 	public int? MetaThreadPoolConcurrency { get => Q<int?>("meta_thread_pool_concurrency"); set => Q("meta_thread_pool_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of snapshots to verify concurrently
+	/// The number of snapshots to verify concurrently.
+	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
 	/// </para>
 	/// </summary>
 	public int? SnapshotVerificationConcurrency { get => Q<int?>("snapshot_verification_concurrency"); set => Q("snapshot_verification_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to verify the contents of individual blobs
+	/// Indicates whether to verify the checksum of every data blob in the repository.
+	/// If this feature is enabled, Elasticsearch will read the entire repository contents, which may be extremely slow and expensive.
 	/// </para>
 	/// </summary>
 	public bool? VerifyBlobContents { get => Q<bool?>("verify_blob_contents"); set => Q("verify_blob_contents", value); }
+}
+
+internal sealed partial class RepositoryVerifyIntegrityRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -148,16 +175,38 @@ public sealed partial class RepositoryVerifyIntegrityRequestParameters : Request
 /// <para>
 /// NOTE: This API may not work correctly in a mixed-version cluster.
 /// </para>
+/// <para>
+/// The default values for the parameters of this API are designed to limit the impact of the integrity verification on other activities in your cluster.
+/// For instance, by default it will only use at most half of the <c>snapshot_meta</c> threads to verify the integrity of each snapshot, allowing other snapshot operations to use the other half of this thread pool.
+/// If you modify these parameters to speed up the verification process, you risk disrupting other snapshot-related operations in your cluster.
+/// For large repositories, consider setting up a separate single-node Elasticsearch cluster just for running the integrity verification API.
+/// </para>
+/// <para>
+/// The response exposes implementation details of the analysis which may change from version to version.
+/// The response body format is therefore not considered stable and may be different in newer versions.
+/// </para>
 /// </summary>
-public sealed partial class RepositoryVerifyIntegrityRequest : PlainRequest<RepositoryVerifyIntegrityRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestConverter))]
+public sealed partial class RepositoryVerifyIntegrityRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("repository", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public RepositoryVerifyIntegrityRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRepositoryVerifyIntegrity;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotRepositoryVerifyIntegrity;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -165,66 +214,74 @@ public sealed partial class RepositoryVerifyIntegrityRequest : PlainRequest<Repo
 
 	/// <summary>
 	/// <para>
-	/// Number of threads to use for reading blob contents
+	/// The name of the snapshot repository.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies how many blobs to verify at once.
+	/// </para>
+	/// </summary>
 	public int? BlobThreadPoolConcurrency { get => Q<int?>("blob_thread_pool_concurrency"); set => Q("blob_thread_pool_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of snapshots to verify concurrently within each index
+	/// The maximum number of index snapshots to verify concurrently within each index verification.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? IndexSnapshotVerificationConcurrency { get => Q<int?>("index_snapshot_verification_concurrency"); set => Q("index_snapshot_verification_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of indices to verify concurrently
+	/// The number of indices to verify concurrently.
+	/// The default behavior is to use the entire <c>snapshot_meta</c> thread pool.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? IndexVerificationConcurrency { get => Q<int?>("index_verification_concurrency"); set => Q("index_verification_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Rate limit for individual blob verification
+	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies the maximum amount of data that Elasticsearch will read from the repository every second.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? MaxBytesPerSec { get => Q<string?>("max_bytes_per_sec"); set => Q("max_bytes_per_sec", value); }
 
 	/// <summary>
 	/// <para>
-	/// Maximum permitted number of failed shard snapshots
+	/// The number of shard snapshot failures to track during integrity verification, in order to avoid excessive resource usage.
+	/// If your repository contains more than this number of shard snapshot failures, the verification will fail.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? MaxFailedShardSnapshots { get => Q<int?>("max_failed_shard_snapshots"); set => Q("max_failed_shard_snapshots", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of threads to use for reading metadata
+	/// The maximum number of snapshot metadata operations to run concurrently.
+	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? MetaThreadPoolConcurrency { get => Q<int?>("meta_thread_pool_concurrency"); set => Q("meta_thread_pool_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Number of snapshots to verify concurrently
+	/// The number of snapshots to verify concurrently.
+	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? SnapshotVerificationConcurrency { get => Q<int?>("snapshot_verification_concurrency"); set => Q("snapshot_verification_concurrency", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to verify the contents of individual blobs
+	/// Indicates whether to verify the checksum of every data blob in the repository.
+	/// If this feature is enabled, Elasticsearch will read the entire repository contents, which may be extremely slow and expensive.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? VerifyBlobContents { get => Q<bool?>("verify_blob_contents"); set => Q("verify_blob_contents", value); }
 }
 
@@ -287,39 +344,192 @@ public sealed partial class RepositoryVerifyIntegrityRequest : PlainRequest<Repo
 /// <para>
 /// NOTE: This API may not work correctly in a mixed-version cluster.
 /// </para>
+/// <para>
+/// The default values for the parameters of this API are designed to limit the impact of the integrity verification on other activities in your cluster.
+/// For instance, by default it will only use at most half of the <c>snapshot_meta</c> threads to verify the integrity of each snapshot, allowing other snapshot operations to use the other half of this thread pool.
+/// If you modify these parameters to speed up the verification process, you risk disrupting other snapshot-related operations in your cluster.
+/// For large repositories, consider setting up a separate single-node Elasticsearch cluster just for running the integrity verification API.
+/// </para>
+/// <para>
+/// The response exposes implementation details of the analysis which may change from version to version.
+/// The response body format is therefore not considered stable and may be different in newer versions.
+/// </para>
 /// </summary>
-public sealed partial class RepositoryVerifyIntegrityRequestDescriptor : RequestDescriptor<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityRequestParameters>
+public readonly partial struct RepositoryVerifyIntegrityRequestDescriptor
 {
-	internal RepositoryVerifyIntegrityRequestDescriptor(Action<RepositoryVerifyIntegrityRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest Instance { get; init; }
 
-	public RepositoryVerifyIntegrityRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("repository", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RepositoryVerifyIntegrityRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRepositoryVerifyIntegrity;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "snapshot.repository_verify_integrity";
-
-	public RepositoryVerifyIntegrityRequestDescriptor BlobThreadPoolConcurrency(int? blobThreadPoolConcurrency) => Qs("blob_thread_pool_concurrency", blobThreadPoolConcurrency);
-	public RepositoryVerifyIntegrityRequestDescriptor IndexSnapshotVerificationConcurrency(int? indexSnapshotVerificationConcurrency) => Qs("index_snapshot_verification_concurrency", indexSnapshotVerificationConcurrency);
-	public RepositoryVerifyIntegrityRequestDescriptor IndexVerificationConcurrency(int? indexVerificationConcurrency) => Qs("index_verification_concurrency", indexVerificationConcurrency);
-	public RepositoryVerifyIntegrityRequestDescriptor MaxBytesPerSec(string? maxBytesPerSec) => Qs("max_bytes_per_sec", maxBytesPerSec);
-	public RepositoryVerifyIntegrityRequestDescriptor MaxFailedShardSnapshots(int? maxFailedShardSnapshots) => Qs("max_failed_shard_snapshots", maxFailedShardSnapshots);
-	public RepositoryVerifyIntegrityRequestDescriptor MetaThreadPoolConcurrency(int? metaThreadPoolConcurrency) => Qs("meta_thread_pool_concurrency", metaThreadPoolConcurrency);
-	public RepositoryVerifyIntegrityRequestDescriptor SnapshotVerificationConcurrency(int? snapshotVerificationConcurrency) => Qs("snapshot_verification_concurrency", snapshotVerificationConcurrency);
-	public RepositoryVerifyIntegrityRequestDescriptor VerifyBlobContents(bool? verifyBlobContents = true) => Qs("verify_blob_contents", verifyBlobContents);
-
-	public RepositoryVerifyIntegrityRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
+	public RepositoryVerifyIntegrityRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
 	{
-		RouteValues.Required("repository", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest(name);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public RepositoryVerifyIntegrityRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot repository.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies how many blobs to verify at once.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor BlobThreadPoolConcurrency(int? value)
+	{
+		Instance.BlobThreadPoolConcurrency = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of index snapshots to verify concurrently within each index verification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor IndexSnapshotVerificationConcurrency(int? value)
+	{
+		Instance.IndexSnapshotVerificationConcurrency = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of indices to verify concurrently.
+	/// The default behavior is to use the entire <c>snapshot_meta</c> thread pool.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor IndexVerificationConcurrency(int? value)
+	{
+		Instance.IndexVerificationConcurrency = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies the maximum amount of data that Elasticsearch will read from the repository every second.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor MaxBytesPerSec(string? value)
+	{
+		Instance.MaxBytesPerSec = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard snapshot failures to track during integrity verification, in order to avoid excessive resource usage.
+	/// If your repository contains more than this number of shard snapshot failures, the verification will fail.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor MaxFailedShardSnapshots(int? value)
+	{
+		Instance.MaxFailedShardSnapshots = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of snapshot metadata operations to run concurrently.
+	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor MetaThreadPoolConcurrency(int? value)
+	{
+		Instance.MetaThreadPoolConcurrency = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of snapshots to verify concurrently.
+	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor SnapshotVerificationConcurrency(int? value)
+	{
+		Instance.SnapshotVerificationConcurrency = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to verify the checksum of every data blob in the repository.
+	/// If this feature is enabled, Elasticsearch will read the entire repository contents, which may be extremely slow and expensive.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor VerifyBlobContents(bool? value = true)
+	{
+		Instance.VerifyBlobContents = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

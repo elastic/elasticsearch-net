@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetRecordsRequestParameters : RequestParameters
+public sealed partial class GetRecordsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -45,6 +38,99 @@ public sealed partial class GetRecordsRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
+}
+
+internal sealed partial class GetRecordsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDesc = System.Text.Json.JsonEncodedText.Encode("desc");
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeInterim = System.Text.Json.JsonEncodedText.Encode("exclude_interim");
+	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page");
+	private static readonly System.Text.Json.JsonEncodedText PropRecordScore = System.Text.Json.JsonEncodedText.Encode("record_score");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDesc = default;
+		LocalJsonValue<System.DateTimeOffset?> propEnd = default;
+		LocalJsonValue<bool?> propExcludeInterim = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
+		LocalJsonValue<double?> propRecordScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSort = default;
+		LocalJsonValue<System.DateTimeOffset?> propStart = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDesc.TryReadProperty(ref reader, options, PropDesc, null))
+			{
+				continue;
+			}
+
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propExcludeInterim.TryReadProperty(ref reader, options, PropExcludeInterim, null))
+			{
+				continue;
+			}
+
+			if (propPage.TryReadProperty(ref reader, options, PropPage, null))
+			{
+				continue;
+			}
+
+			if (propRecordScore.TryReadProperty(ref reader, options, PropRecordScore, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, null))
+			{
+				continue;
+			}
+
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Desc = propDesc.Value,
+			End = propEnd.Value,
+			ExcludeInterim = propExcludeInterim.Value,
+			Page = propPage.Value,
+			RecordScore = propRecordScore.Value,
+			Sort = propSort.Value,
+			Start = propStart.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDesc, value.Desc, null, null);
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropExcludeInterim, value.ExcludeInterim, null, null);
+		writer.WriteProperty(options, PropPage, value.Page, null, null);
+		writer.WriteProperty(options, PropRecordScore, value.RecordScore, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, null);
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -62,15 +148,27 @@ public sealed partial class GetRecordsRequestParameters : RequestParameters
 /// number of detectors.
 /// </para>
 /// </summary>
-public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestConverter))]
+public sealed partial class GetRecordsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRecordsRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetRecordsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRecordsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetRecords;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetRecords;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -78,10 +176,20 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Skips the specified number of records.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -89,7 +197,6 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	/// Specifies the maximum number of records to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -97,7 +204,6 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	/// Refer to the description for the <c>desc</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("desc")]
 	public bool? Desc { get; set; }
 
 	/// <summary>
@@ -105,17 +211,14 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end")]
-	public DateTimeOffset? End { get; set; }
+	public System.DateTimeOffset? End { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>exclude_interim</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude_interim")]
 	public bool? ExcludeInterim { get; set; }
-	[JsonInclude, JsonPropertyName("page")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
 	/// <summary>
@@ -123,7 +226,6 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	/// Refer to the description for the <c>record_score</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("record_score")]
 	public double? RecordScore { get; set; }
 
 	/// <summary>
@@ -131,7 +233,6 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
 	/// <summary>
@@ -139,8 +240,7 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start")]
-	public DateTimeOffset? Start { get; set; }
+	public System.DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
@@ -158,50 +258,72 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 /// number of detectors.
 /// </para>
 /// </summary>
-public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDescriptor<GetRecordsRequestDescriptor<TDocument>, GetRecordsRequestParameters>
+public readonly partial struct GetRecordsRequestDescriptor
 {
-	internal GetRecordsRequestDescriptor(Action<GetRecordsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Instance { get; init; }
 
-	public GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetRecords;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.get_records";
-
-	public GetRecordsRequestDescriptor<TDocument> From(int? from) => Qs("from", from);
-	public GetRecordsRequestDescriptor<TDocument> Size(int? size) => Qs("size", size);
-
-	public GetRecordsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(jobId);
 	}
 
-	private bool? DescValue { get; set; }
-	private DateTimeOffset? EndValue { get; set; }
-	private bool? ExcludeInterimValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Page? PageValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor PageDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
-	private double? RecordScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
-	private DateTimeOffset? StartValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetRecordsRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of records.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of records to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>desc</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> Desc(bool? desc = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Desc(bool? value = true)
 	{
-		DescValue = desc;
-		return Self;
+		Instance.Desc = value;
+		return this;
 	}
 
 	/// <summary>
@@ -209,10 +331,10 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> End(DateTimeOffset? end)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor End(System.DateTimeOffset? value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
 	/// <summary>
@@ -220,34 +342,28 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	/// Refer to the description for the <c>exclude_interim</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> ExcludeInterim(bool? excludeInterim = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor ExcludeInterim(bool? value = true)
 	{
-		ExcludeInterimValue = excludeInterim;
-		return Self;
+		Instance.ExcludeInterim = value;
+		return this;
 	}
 
-	public GetRecordsRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
-		PageDescriptor = null;
-		PageDescriptorAction = null;
-		PageValue = page;
-		return Self;
+		Instance.Page = value;
+		return this;
 	}
 
-	public GetRecordsRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Page()
 	{
-		PageValue = null;
-		PageDescriptorAction = null;
-		PageDescriptor = descriptor;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
+		return this;
 	}
 
-	public GetRecordsRequestDescriptor<TDocument> Page(Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		PageValue = null;
-		PageDescriptor = null;
-		PageDescriptorAction = configure;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -255,10 +371,10 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	/// Refer to the description for the <c>record_score</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> RecordScore(double? recordScore)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor RecordScore(double? value)
 	{
-		RecordScoreValue = recordScore;
-		return Self;
+		Instance.RecordScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -266,10 +382,10 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,21 +393,10 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		SortValue = sort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
-	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -299,68 +404,60 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (DescValue.HasValue)
-		{
-			writer.WritePropertyName("desc");
-			writer.WriteBooleanValue(DescValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (EndValue is not null)
-		{
-			writer.WritePropertyName("end");
-			JsonSerializer.Serialize(writer, EndValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ExcludeInterimValue.HasValue)
-		{
-			writer.WritePropertyName("exclude_interim");
-			writer.WriteBooleanValue(ExcludeInterimValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (PageDescriptor is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageDescriptor, options);
-		}
-		else if (PageDescriptorAction is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(PageDescriptorAction), options);
-		}
-		else if (PageValue is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (RecordScoreValue.HasValue)
-		{
-			writer.WritePropertyName("record_score");
-			writer.WriteNumberValue(RecordScoreValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (StartValue is not null)
-		{
-			writer.WritePropertyName("start");
-			JsonSerializer.Serialize(writer, StartValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -379,50 +476,72 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 /// number of detectors.
 /// </para>
 /// </summary>
-public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetRecordsRequestDescriptor, GetRecordsRequestParameters>
+public readonly partial struct GetRecordsRequestDescriptor<TDocument>
 {
-	internal GetRecordsRequestDescriptor(Action<GetRecordsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Instance { get; init; }
 
-	public GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetRecords;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.get_records";
-
-	public GetRecordsRequestDescriptor From(int? from) => Qs("from", from);
-	public GetRecordsRequestDescriptor Size(int? size) => Qs("size", size);
-
-	public GetRecordsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(jobId);
 	}
 
-	private bool? DescValue { get; set; }
-	private DateTimeOffset? EndValue { get; set; }
-	private bool? ExcludeInterimValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Page? PageValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor PageDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
-	private double? RecordScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
-	private DateTimeOffset? StartValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetRecordsRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of records.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of records to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>desc</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor Desc(bool? desc = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Desc(bool? value = true)
 	{
-		DescValue = desc;
-		return Self;
+		Instance.Desc = value;
+		return this;
 	}
 
 	/// <summary>
@@ -430,10 +549,10 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor End(DateTimeOffset? end)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
 	/// <summary>
@@ -441,34 +560,28 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	/// Refer to the description for the <c>exclude_interim</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor ExcludeInterim(bool? excludeInterim = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> ExcludeInterim(bool? value = true)
 	{
-		ExcludeInterimValue = excludeInterim;
-		return Self;
+		Instance.ExcludeInterim = value;
+		return this;
 	}
 
-	public GetRecordsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
-		PageDescriptor = null;
-		PageDescriptorAction = null;
-		PageValue = page;
-		return Self;
+		Instance.Page = value;
+		return this;
 	}
 
-	public GetRecordsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Page()
 	{
-		PageValue = null;
-		PageDescriptorAction = null;
-		PageDescriptor = descriptor;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
+		return this;
 	}
 
-	public GetRecordsRequestDescriptor Page(Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		PageValue = null;
-		PageDescriptor = null;
-		PageDescriptorAction = configure;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -476,10 +589,10 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	/// Refer to the description for the <c>record_score</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor RecordScore(double? recordScore)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> RecordScore(double? value)
 	{
-		RecordScoreValue = recordScore;
-		return Self;
+		Instance.RecordScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -487,10 +600,10 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -498,21 +611,10 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		SortValue = sort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
-	public GetRecordsRequestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
-	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -520,67 +622,59 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetRecordsRequestDescriptor Start(DateTimeOffset? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (DescValue.HasValue)
-		{
-			writer.WritePropertyName("desc");
-			writer.WriteBooleanValue(DescValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (EndValue is not null)
-		{
-			writer.WritePropertyName("end");
-			JsonSerializer.Serialize(writer, EndValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ExcludeInterimValue.HasValue)
-		{
-			writer.WritePropertyName("exclude_interim");
-			writer.WriteBooleanValue(ExcludeInterimValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (PageDescriptor is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageDescriptor, options);
-		}
-		else if (PageDescriptorAction is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(PageDescriptorAction), options);
-		}
-		else if (PageValue is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (RecordScoreValue.HasValue)
-		{
-			writer.WritePropertyName("record_score");
-			writer.WriteNumberValue(RecordScoreValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (StartValue is not null)
-		{
-			writer.WritePropertyName("start");
-			JsonSerializer.Serialize(writer, StartValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

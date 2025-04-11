@@ -17,25 +17,183 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class EnrichProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMatches = System.Text.Json.JsonEncodedText.Encode("max_matches");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropOverride = System.Text.Json.JsonEncodedText.Encode("override");
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyName = System.Text.Json.JsonEncodedText.Encode("policy_name");
+	private static readonly System.Text.Json.JsonEncodedText PropShapeRelation = System.Text.Json.JsonEncodedText.Encode("shape_relation");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<int?> propMaxMatches = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<bool?> propOverride = default;
+		LocalJsonValue<string> propPolicyName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoShapeRelation?> propShapeRelation = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propMaxMatches.TryReadProperty(ref reader, options, PropMaxMatches, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propOverride.TryReadProperty(ref reader, options, PropOverride, null))
+			{
+				continue;
+			}
+
+			if (propPolicyName.TryReadProperty(ref reader, options, PropPolicyName, null))
+			{
+				continue;
+			}
+
+			if (propShapeRelation.TryReadProperty(ref reader, options, PropShapeRelation, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			MaxMatches = propMaxMatches.Value,
+			OnFailure = propOnFailure.Value,
+			Override = propOverride.Value,
+			PolicyName = propPolicyName.Value,
+			ShapeRelation = propShapeRelation.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropMaxMatches, value.MaxMatches, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropOverride, value.Override, null, null);
+		writer.WriteProperty(options, PropPolicyName, value.PolicyName, null, null);
+		writer.WriteProperty(options, PropShapeRelation, value.ShapeRelation, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorConverter))]
 public sealed partial class EnrichProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichProcessor(Elastic.Clients.Elasticsearch.Field field, string policyName, Elastic.Clients.Elasticsearch.Field targetField)
+	{
+		Field = field;
+		PolicyName = policyName;
+		TargetField = targetField;
+	}
+#if NET7_0_OR_GREATER
+	public EnrichProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EnrichProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -44,23 +202,24 @@ public sealed partial class EnrichProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -68,7 +227,6 @@ public sealed partial class EnrichProcessor
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -78,7 +236,6 @@ public sealed partial class EnrichProcessor
 	/// In order to avoid documents getting too large, the maximum allowed value is 128.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_matches")]
 	public int? MaxMatches { get; set; }
 
 	/// <summary>
@@ -86,8 +243,7 @@ public sealed partial class EnrichProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -95,7 +251,6 @@ public sealed partial class EnrichProcessor
 	/// When set to <c>false</c>, such fields will not be touched.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
 
 	/// <summary>
@@ -103,8 +258,11 @@ public sealed partial class EnrichProcessor
 	/// The name of the enrich policy to use.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("policy_name")]
-	public string PolicyName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string PolicyName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -112,7 +270,6 @@ public sealed partial class EnrichProcessor
 	/// This option is only used for <c>geo_match</c> enrich policy types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shape_relation")]
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelation { get; set; }
 
 	/// <summary>
@@ -121,7 +278,6 @@ public sealed partial class EnrichProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -130,35 +286,31 @@ public sealed partial class EnrichProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
-	public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(EnrichProcessor enrichProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Enrich(enrichProcessor);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 }
 
-public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableDescriptor<EnrichProcessorDescriptor<TDocument>>
+public readonly partial struct EnrichProcessorDescriptor<TDocument>
 {
-	internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Instance { get; init; }
 
-	public EnrichProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private int? MaxMatchesValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private bool? OverrideValue { get; set; }
-	private string PolicyNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelationValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -166,10 +318,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -178,10 +330,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -190,22 +342,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -213,10 +353,32 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -224,10 +386,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -235,10 +397,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -248,10 +410,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// In order to avoid documents getting too large, the maximum allowed value is 128.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> MaxMatches(int? maxMatches)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> MaxMatches(int? value)
 	{
-		MaxMatchesValue = maxMatches;
-		return Self;
+		Instance.MaxMatches = value;
+		return this;
 	}
 
 	/// <summary>
@@ -259,40 +421,38 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public EnrichProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public EnrichProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
 
-	public EnrichProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -301,10 +461,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// When set to <c>false</c>, such fields will not be touched.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> Override(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
-		OverrideValue = value;
-		return Self;
+		Instance.Override = value;
+		return this;
 	}
 
 	/// <summary>
@@ -312,10 +472,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// The name of the enrich policy to use.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> PolicyName(string policyName)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> PolicyName(string value)
 	{
-		PolicyNameValue = policyName;
-		return Self;
+		Instance.PolicyName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -324,10 +484,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// This option is only used for <c>geo_match</c> enrich policy types.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
-		ShapeRelationValue = shapeRelation;
-		return Self;
+		Instance.ShapeRelation = value;
+		return this;
 	}
 
 	/// <summary>
@@ -336,10 +496,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -348,10 +508,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -360,139 +520,39 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public EnrichProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (MaxMatchesValue.HasValue)
-		{
-			writer.WritePropertyName("max_matches");
-			writer.WriteNumberValue(MaxMatchesValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (OverrideValue.HasValue)
-		{
-			writer.WritePropertyName("override");
-			writer.WriteBooleanValue(OverrideValue.Value);
-		}
-
-		writer.WritePropertyName("policy_name");
-		writer.WriteStringValue(PolicyNameValue);
-		if (ShapeRelationValue is not null)
-		{
-			writer.WritePropertyName("shape_relation");
-			JsonSerializer.Serialize(writer, ShapeRelationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WritePropertyName("target_field");
-		JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<EnrichProcessorDescriptor>
+public readonly partial struct EnrichProcessorDescriptor
 {
-	internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Instance { get; init; }
 
-	public EnrichProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private int? MaxMatchesValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private bool? OverrideValue { get; set; }
-	private string PolicyNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelationValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -500,10 +560,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -512,10 +572,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -524,22 +584,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public EnrichProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -547,10 +595,32 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -558,10 +628,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -569,10 +639,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -582,10 +652,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// In order to avoid documents getting too large, the maximum allowed value is 128.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor MaxMatches(int? maxMatches)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor MaxMatches(int? value)
 	{
-		MaxMatchesValue = maxMatches;
-		return Self;
+		Instance.MaxMatches = value;
+		return this;
 	}
 
 	/// <summary>
@@ -593,40 +663,55 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public EnrichProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public EnrichProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
-	public EnrichProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -635,10 +720,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// When set to <c>false</c>, such fields will not be touched.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor Override(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Override(bool? value = true)
 	{
-		OverrideValue = value;
-		return Self;
+		Instance.Override = value;
+		return this;
 	}
 
 	/// <summary>
@@ -646,10 +731,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// The name of the enrich policy to use.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor PolicyName(string policyName)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor PolicyName(string value)
 	{
-		PolicyNameValue = policyName;
-		return Self;
+		Instance.PolicyName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -658,10 +743,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// This option is only used for <c>geo_match</c> enrich policy types.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
-		ShapeRelationValue = shapeRelation;
-		return Self;
+		Instance.ShapeRelation = value;
+		return this;
 	}
 
 	/// <summary>
@@ -670,10 +755,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -682,10 +767,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -694,112 +779,17 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public EnrichProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public EnrichProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (MaxMatchesValue.HasValue)
-		{
-			writer.WritePropertyName("max_matches");
-			writer.WriteNumberValue(MaxMatchesValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (OverrideValue.HasValue)
-		{
-			writer.WritePropertyName("override");
-			writer.WriteBooleanValue(OverrideValue.Value);
-		}
-
-		writer.WritePropertyName("policy_name");
-		writer.WriteStringValue(PolicyNameValue);
-		if (ShapeRelationValue is not null)
-		{
-			writer.WritePropertyName("shape_relation");
-			JsonSerializer.Serialize(writer, ShapeRelationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WritePropertyName("target_field");
-		JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

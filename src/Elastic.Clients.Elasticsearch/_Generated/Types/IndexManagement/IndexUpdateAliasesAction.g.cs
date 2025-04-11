@@ -17,241 +17,431 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[JsonConverter(typeof(IndexUpdateAliasesActionConverter))]
+internal sealed partial class IndexUpdateAliasesActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantAdd = System.Text.Json.JsonEncodedText.Encode("add");
+	private static readonly System.Text.Json.JsonEncodedText VariantRemove = System.Text.Json.JsonEncodedText.Encode("remove");
+	private static readonly System.Text.Json.JsonEncodedText VariantRemoveIndex = System.Text.Json.JsonEncodedText.Encode("remove_index");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantAdd))
+			{
+				variantType = VariantAdd.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRemove))
+			{
+				variantType = VariantRemove.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRemoveIndex))
+			{
+				variantType = VariantRemoveIndex.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "add":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction)value.Variant, null, null);
+				break;
+			case "remove":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction)value.Variant, null, null);
+				break;
+			case "remove_index":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionConverter))]
 public sealed partial class IndexUpdateAliasesAction
 {
-	internal IndexUpdateAliasesAction(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public IndexUpdateAliasesAction()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexUpdateAliasesAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddAction? Add { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>("add"); set => SetVariant("add", value); }
 
-	public static IndexUpdateAliasesAction Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction addAction) => new IndexUpdateAliasesAction("add", addAction);
-	public static IndexUpdateAliasesAction Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction removeAction) => new IndexUpdateAliasesAction("remove", removeAction);
-	public static IndexUpdateAliasesAction RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction removeIndexAction) => new IndexUpdateAliasesAction("remove_index", removeIndexAction);
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction? Remove { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>("remove"); set => SetVariant("remove", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction? RemoveIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>("remove_index"); set => SetVariant("remove_index", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.AddAction value) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction { Add = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction value) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction { Remove = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction value) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction { RemoveIndex = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class IndexUpdateAliasesActionConverter : JsonConverter<IndexUpdateAliasesAction>
+public readonly partial struct IndexUpdateAliasesActionDescriptor<TDocument>
 {
-	public override IndexUpdateAliasesAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexUpdateAliasesActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "add")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "remove")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "remove_index")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IndexUpdateAliasesAction' from the response.");
-		}
-
-		var result = new IndexUpdateAliasesAction(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IndexUpdateAliasesAction value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexUpdateAliasesActionDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "add":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction)value.Variant, options);
-					break;
-				case "remove":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction)value.Variant, options);
-					break;
-				case "remove_index":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction? value)
+	{
+		Instance.Add = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Add()
+	{
+		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Add(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>>? action)
+	{
+		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction? value)
+	{
+		Instance.Remove = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Remove()
+	{
+		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Remove(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor>? action)
+	{
+		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction? value)
+	{
+		Instance.RemoveIndex = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex()
+	{
+		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor>? action)
+	{
+		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IndexUpdateAliasesActionDescriptor<TDocument> : SerializableDescriptor<IndexUpdateAliasesActionDescriptor<TDocument>>
+public readonly partial struct IndexUpdateAliasesActionDescriptor
 {
-	internal IndexUpdateAliasesActionDescriptor(Action<IndexUpdateAliasesActionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction Instance { get; init; }
 
-	public IndexUpdateAliasesActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexUpdateAliasesActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private IndexUpdateAliasesActionDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexUpdateAliasesActionDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private IndexUpdateAliasesActionDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Add = value;
+		return this;
 	}
 
-	public IndexUpdateAliasesActionDescriptor<TDocument> Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction addAction) => Set(addAction, "add");
-	public IndexUpdateAliasesActionDescriptor<TDocument> Add(Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>> configure) => Set(configure, "add");
-	public IndexUpdateAliasesActionDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction removeAction) => Set(removeAction, "remove");
-	public IndexUpdateAliasesActionDescriptor<TDocument> Remove(Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor> configure) => Set(configure, "remove");
-	public IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction removeIndexAction) => Set(removeIndexAction, "remove_index");
-	public IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex(Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor> configure) => Set(configure, "remove_index");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class IndexUpdateAliasesActionDescriptor : SerializableDescriptor<IndexUpdateAliasesActionDescriptor>
-{
-	internal IndexUpdateAliasesActionDescriptor(Action<IndexUpdateAliasesActionDescriptor> configure) => configure.Invoke(this);
-
-	public IndexUpdateAliasesActionDescriptor() : base()
-	{
+		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor.Build(null);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private IndexUpdateAliasesActionDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor>? action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor.Build(action);
+		return this;
 	}
 
-	private IndexUpdateAliasesActionDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Adds a data stream or index to an alias.
+	/// If the alias doesn’t exist, the <c>add</c> action creates it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<T>>? action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public IndexUpdateAliasesActionDescriptor Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction addAction) => Set(addAction, "add");
-	public IndexUpdateAliasesActionDescriptor Add<TDocument>(Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor> configure) => Set(configure, "add");
-	public IndexUpdateAliasesActionDescriptor Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction removeAction) => Set(removeAction, "remove");
-	public IndexUpdateAliasesActionDescriptor Remove(Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor> configure) => Set(configure, "remove");
-	public IndexUpdateAliasesActionDescriptor RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction removeIndexAction) => Set(removeIndexAction, "remove_index");
-	public IndexUpdateAliasesActionDescriptor RemoveIndex(Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor> configure) => Set(configure, "remove_index");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Remove = value;
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Remove()
+	{
+		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(null);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Removes a data stream or index from an alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Remove(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor>? action)
+	{
+		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction? value)
+	{
+		Instance.RemoveIndex = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor RemoveIndex()
+	{
+		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes an index.
+	/// You cannot use this action on aliases or data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor RemoveIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor>? action)
+	{
+		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

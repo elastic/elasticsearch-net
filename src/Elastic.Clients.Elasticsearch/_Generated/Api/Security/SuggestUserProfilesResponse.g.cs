@@ -17,38 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SuggestUserProfilesResponse : ElasticsearchResponse
+internal sealed partial class SuggestUserProfilesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropProfiles = System.Text.Json.JsonEncodedText.Encode("profiles");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile>> propProfiles = default;
+		LocalJsonValue<long> propTook = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.TotalUserProfiles> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propProfiles.TryReadProperty(ref reader, options, PropProfiles, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfile>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Profiles = propProfiles.Value,
+			Took = propTook.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropProfiles, value.Profiles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.UserProfile>(o, v, null));
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponseConverter))]
+public sealed partial class SuggestUserProfilesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestUserProfilesResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SuggestUserProfilesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A list of profile documents, ordered by relevance, that match the search criteria.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profiles")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of milliseconds it took Elasticsearch to run the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("took")]
-	public long Took { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Took { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Metadata about the number of matching profiles.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; set; }
 }

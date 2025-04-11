@@ -17,33 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class RescoreQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("rescore_query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryWeight = System.Text.Json.JsonEncodedText.Encode("query_weight");
+	private static readonly System.Text.Json.JsonEncodedText PropRescoreQueryWeight = System.Text.Json.JsonEncodedText.Encode("rescore_query_weight");
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
+		LocalJsonValue<double?> propQueryWeight = default;
+		LocalJsonValue<double?> propRescoreQueryWeight = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.ScoreMode?> propScoreMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryWeight.TryReadProperty(ref reader, options, PropQueryWeight, null))
+			{
+				continue;
+			}
+
+			if (propRescoreQueryWeight.TryReadProperty(ref reader, options, PropRescoreQueryWeight, null))
+			{
+				continue;
+			}
+
+			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Query = propQuery.Value,
+			QueryWeight = propQueryWeight.Value,
+			RescoreQueryWeight = propRescoreQueryWeight.Value,
+			ScoreMode = propScoreMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryWeight, value.QueryWeight, null, null);
+		writer.WriteProperty(options, PropRescoreQueryWeight, value.RescoreQueryWeight, null, null);
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryConverter))]
 public sealed partial class RescoreQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public RescoreQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RescoreQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The query to use for rescoring.
 	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rescore_query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Relative importance of the original query versus the rescore query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_weight")]
 	public double? QueryWeight { get; set; }
 
 	/// <summary>
@@ -51,7 +138,6 @@ public sealed partial class RescoreQuery
 	/// Relative importance of the rescore query versus the original query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rescore_query_weight")]
 	public double? RescoreQueryWeight { get; set; }
 
 	/// <summary>
@@ -59,26 +145,27 @@ public sealed partial class RescoreQuery
 	/// Determines how scores are combined.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreMode { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(RescoreQuery rescoreQuery) => Elastic.Clients.Elasticsearch.Core.Search.Rescore.Query(rescoreQuery);
 }
 
-public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDescriptor<RescoreQueryDescriptor<TDocument>>
+public readonly partial struct RescoreQueryDescriptor<TDocument>
 {
-	internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Instance { get; init; }
 
-	public RescoreQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private double? QueryWeightValue { get; set; }
-	private double? RescoreQueryWeightValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreModeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery instance) => new Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -86,118 +173,11 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	public RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
-
-	public RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public RescoreQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Relative importance of the original query versus the rescore query.
-	/// </para>
-	/// </summary>
-	public RescoreQueryDescriptor<TDocument> QueryWeight(double? queryWeight)
-	{
-		QueryWeightValue = queryWeight;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Relative importance of the rescore query versus the original query.
-	/// </para>
-	/// </summary>
-	public RescoreQueryDescriptor<TDocument> RescoreQueryWeight(double? rescoreQueryWeight)
-	{
-		RescoreQueryWeightValue = rescoreQueryWeight;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Determines how scores are combined.
-	/// </para>
-	/// </summary>
-	public RescoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? scoreMode)
-	{
-		ScoreModeValue = scoreMode;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (QueryWeightValue.HasValue)
-		{
-			writer.WritePropertyName("query_weight");
-			writer.WriteNumberValue(QueryWeightValue.Value);
-		}
-
-		if (RescoreQueryWeightValue.HasValue)
-		{
-			writer.WritePropertyName("rescore_query_weight");
-			writer.WriteNumberValue(RescoreQueryWeightValue.Value);
-		}
-
-		if (ScoreModeValue is not null)
-		{
-			writer.WritePropertyName("score_mode");
-			JsonSerializer.Serialize(writer, ScoreModeValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<RescoreQueryDescriptor>
-{
-	internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor> configure) => configure.Invoke(this);
-
-	public RescoreQueryDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private double? QueryWeightValue { get; set; }
-	private double? RescoreQueryWeightValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreModeValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -205,28 +185,10 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
-	}
-
-	public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
-	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public RescoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -234,10 +196,10 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	/// Relative importance of the original query versus the rescore query.
 	/// </para>
 	/// </summary>
-	public RescoreQueryDescriptor QueryWeight(double? queryWeight)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> QueryWeight(double? value)
 	{
-		QueryWeightValue = queryWeight;
-		return Self;
+		Instance.QueryWeight = value;
+		return this;
 	}
 
 	/// <summary>
@@ -245,10 +207,10 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	/// Relative importance of the rescore query versus the original query.
 	/// </para>
 	/// </summary>
-	public RescoreQueryDescriptor RescoreQueryWeight(double? rescoreQueryWeight)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> RescoreQueryWeight(double? value)
 	{
-		RescoreQueryWeightValue = rescoreQueryWeight;
-		return Self;
+		Instance.RescoreQueryWeight = value;
+		return this;
 	}
 
 	/// <summary>
@@ -256,49 +218,114 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	/// Determines how scores are combined.
 	/// </para>
 	/// </summary>
-	public RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? scoreMode)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? value)
 	{
-		ScoreModeValue = scoreMode;
-		return Self;
+		Instance.ScoreMode = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-		if (QueryWeightValue.HasValue)
-		{
-			writer.WritePropertyName("query_weight");
-			writer.WriteNumberValue(QueryWeightValue.Value);
-		}
+public readonly partial struct RescoreQueryDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Instance { get; init; }
 
-		if (RescoreQueryWeightValue.HasValue)
-		{
-			writer.WritePropertyName("rescore_query_weight");
-			writer.WriteNumberValue(RescoreQueryWeightValue.Value);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery instance)
+	{
+		Instance = instance;
+	}
 
-		if (ScoreModeValue is not null)
-		{
-			writer.WritePropertyName("score_mode");
-			JsonSerializer.Serialize(writer, ScoreModeValue, options);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery instance) => new Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The query to use for rescoring.
+	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The query to use for rescoring.
+	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The query to use for rescoring.
+	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Relative importance of the original query versus the rescore query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor QueryWeight(double? value)
+	{
+		Instance.QueryWeight = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Relative importance of the rescore query versus the original query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor RescoreQueryWeight(double? value)
+	{
+		Instance.RescoreQueryWeight = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Determines how scores are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? value)
+	{
+		Instance.ScoreMode = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

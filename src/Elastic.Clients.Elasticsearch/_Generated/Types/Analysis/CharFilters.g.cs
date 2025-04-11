@@ -17,137 +17,150 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public partial class CharFilters : IsADictionary<string, ICharFilter>
+internal sealed partial class CharFiltersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CharFilters>
+{
+	public override Elastic.Clients.Elasticsearch.Analysis.CharFilters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Analysis.CharFilters(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, null, null)));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CharFilters value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.CharFiltersConverter))]
+public sealed partial class CharFilters : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>
 {
 	public CharFilters()
 	{
 	}
 
-	public CharFilters(IDictionary<string, ICharFilter> container) : base(container)
+	public CharFilters(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(string name, ICharFilter charFilter) => BackingDictionary.Add(Sanitize(name), charFilter);
-	public bool TryGetCharFilter(string name, [NotNullWhen(returnValue: true)] out ICharFilter charFilter) => BackingDictionary.TryGetValue(Sanitize(name), out charFilter);
+	public void Add(string key, Elastic.Clients.Elasticsearch.Analysis.ICharFilter value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetCharFilter(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.Analysis.ICharFilter value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetCharFilter<T>(string name, [NotNullWhen(returnValue: true)] out T? charFilter) where T : class, ICharFilter
+	public bool TryGetCharFilter<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, ICharFilter
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			charFilter = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		charFilter = null;
+		value = null;
 		return false;
 	}
 }
 
-public sealed partial class CharFiltersDescriptor : IsADictionaryDescriptor<CharFiltersDescriptor, CharFilters, string, ICharFilter>
+public readonly partial struct CharFiltersDescriptor
 {
-	public CharFiltersDescriptor() : base(new CharFilters())
+	private readonly Elastic.Clients.Elasticsearch.Analysis.CharFilters _items = new();
+
+	private Elastic.Clients.Elasticsearch.Analysis.CharFilters Value => _items;
+
+	public CharFiltersDescriptor()
 	{
 	}
 
-	public CharFiltersDescriptor(CharFilters charFilters) : base(charFilters ?? new CharFilters())
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor HtmlStrip(string key, Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter value)
 	{
+		_items.Add(key, value);
+		return this;
 	}
 
-	public CharFiltersDescriptor HtmlStrip(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor HtmlStrip(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterName, configure);
-	public CharFiltersDescriptor HtmlStrip(string charFilterName, HtmlStripCharFilter htmlStripCharFilter) => AssignVariant(charFilterName, htmlStripCharFilter);
-	public CharFiltersDescriptor IcuNormalization(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor IcuNormalization(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterName, configure);
-	public CharFiltersDescriptor IcuNormalization(string charFilterName, IcuNormalizationCharFilter icuNormalizationCharFilter) => AssignVariant(charFilterName, icuNormalizationCharFilter);
-	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterName, configure);
-	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName, KuromojiIterationMarkCharFilter kuromojiIterationMarkCharFilter) => AssignVariant(charFilterName, kuromojiIterationMarkCharFilter);
-	public CharFiltersDescriptor Mapping(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor, MappingCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor Mapping(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor, MappingCharFilter>(charFilterName, configure);
-	public CharFiltersDescriptor Mapping(string charFilterName, MappingCharFilter mappingCharFilter) => AssignVariant(charFilterName, mappingCharFilter);
-	public CharFiltersDescriptor PatternReplace(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor PatternReplace(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterName, configure);
-	public CharFiltersDescriptor PatternReplace(string charFilterName, PatternReplaceCharFilter patternReplaceCharFilter) => AssignVariant(charFilterName, patternReplaceCharFilter);
-}
-
-internal sealed partial class CharFilterInterfaceConverter : JsonConverter<ICharFilter>
-{
-	public override ICharFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor HtmlStrip(string key)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
-
-		switch (type)
-		{
-			case "html_strip":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter>(ref reader, options);
-			case "icu_normalizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter>(ref reader, options);
-			case "kuromoji_iteration_mark":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>(ref reader, options);
-			case "mapping":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>(ref reader, options);
-			case "pattern_replace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ICharFilter));
-				return null;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor.Build(null));
+		return this;
 	}
 
-	public override void Write(Utf8JsonWriter writer, ICharFilter value, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor HtmlStrip(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor>? action)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "html_strip":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter), options);
-				return;
-			case "icu_normalizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter), options);
-				return;
-			case "kuromoji_iteration_mark":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter), options);
-				return;
-			case "mapping":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter), options);
-				return;
-			case "pattern_replace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor.Build(action));
+		return this;
 	}
-}
 
-[JsonConverter(typeof(CharFilterInterfaceConverter))]
-public partial interface ICharFilter
-{
-	public string? Type { get; }
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor IcuNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor IcuNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor IcuNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor KuromojiIterationMark(string key, Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor KuromojiIterationMark(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor Mapping(string key, Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor Mapping(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor Mapping(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor PatternReplace(string key, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor PatternReplace(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.CharFilters Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.CharFilters();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }

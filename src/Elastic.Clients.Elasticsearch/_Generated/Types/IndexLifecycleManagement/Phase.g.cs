@@ -17,92 +17,136 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class PhaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+	private static readonly System.Text.Json.JsonEncodedText PropMinAge = System.Text.Json.JsonEncodedText.Encode("min_age");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions?> propActions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMinAge = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, null))
+			{
+				continue;
+			}
+
+			if (propMinAge.TryReadProperty(ref reader, options, PropMinAge, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Actions = propActions.Value,
+			MinAge = propMinAge.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, null);
+		writer.WriteProperty(options, PropMinAge, value.MinAge, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseConverter))]
 public sealed partial class Phase
 {
-	[JsonInclude, JsonPropertyName("actions")]
+#if NET7_0_OR_GREATER
+	public Phase()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Phase()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? Actions { get; set; }
-	[JsonInclude, JsonPropertyName("min_age")]
 	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
 }
 
-public sealed partial class PhaseDescriptor : SerializableDescriptor<PhaseDescriptor>
+public readonly partial struct PhaseDescriptor
 {
-	internal PhaseDescriptor(Action<PhaseDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase Instance { get; init; }
 
-	public PhaseDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhaseDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? ActionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor ActionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor> ActionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? MinAgeValue { get; set; }
-
-	public PhaseDescriptor Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? actions)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhaseDescriptor()
 	{
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsValue = actions;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PhaseDescriptor Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? value)
 	{
-		ActionsValue = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptor = descriptor;
-		return Self;
+		Instance.Actions = value;
+		return this;
 	}
 
-	public PhaseDescriptor Actions(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor Actions()
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = configure;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor.Build(null);
+		return this;
 	}
 
-	public PhaseDescriptor MinAge(Elastic.Clients.Elasticsearch.Duration? minAge)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor>? action)
 	{
-		MinAgeValue = minAge;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor MinAge(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		writer.WriteStartObject();
-		if (ActionsDescriptor is not null)
+		Instance.MinAge = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsDescriptor, options);
-		}
-		else if (ActionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(ActionsDescriptorAction), options);
-		}
-		else if (ActionsValue is not null)
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MinAgeValue is not null)
-		{
-			writer.WritePropertyName("min_age");
-			JsonSerializer.Serialize(writer, MinAgeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

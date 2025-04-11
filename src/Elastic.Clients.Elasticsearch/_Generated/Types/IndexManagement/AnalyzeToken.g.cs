@@ -17,28 +17,149 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class AnalyzeTokenConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEndOffset = System.Text.Json.JsonEncodedText.Encode("end_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropPosition = System.Text.Json.JsonEncodedText.Encode("position");
+	private static readonly System.Text.Json.JsonEncodedText PropPositionLength = System.Text.Json.JsonEncodedText.Encode("positionLength");
+	private static readonly System.Text.Json.JsonEncodedText PropStartOffset = System.Text.Json.JsonEncodedText.Encode("start_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propEndOffset = default;
+		LocalJsonValue<long> propPosition = default;
+		LocalJsonValue<long?> propPositionLength = default;
+		LocalJsonValue<long> propStartOffset = default;
+		LocalJsonValue<string> propToken = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEndOffset.TryReadProperty(ref reader, options, PropEndOffset, null))
+			{
+				continue;
+			}
+
+			if (propPosition.TryReadProperty(ref reader, options, PropPosition, null))
+			{
+				continue;
+			}
+
+			if (propPositionLength.TryReadProperty(ref reader, options, PropPositionLength, null))
+			{
+				continue;
+			}
+
+			if (propStartOffset.TryReadProperty(ref reader, options, PropStartOffset, null))
+			{
+				continue;
+			}
+
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EndOffset = propEndOffset.Value,
+			Position = propPosition.Value,
+			PositionLength = propPositionLength.Value,
+			StartOffset = propStartOffset.Value,
+			Token = propToken.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEndOffset, value.EndOffset, null, null);
+		writer.WriteProperty(options, PropPosition, value.Position, null, null);
+		writer.WriteProperty(options, PropPositionLength, value.PositionLength, null, null);
+		writer.WriteProperty(options, PropStartOffset, value.StartOffset, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeTokenConverter))]
 public sealed partial class AnalyzeToken
 {
-	[JsonInclude, JsonPropertyName("end_offset")]
-	public long EndOffset { get; init; }
-	[JsonInclude, JsonPropertyName("position")]
-	public long Position { get; init; }
-	[JsonInclude, JsonPropertyName("positionLength")]
-	public long? Positionlength { get; init; }
-	[JsonInclude, JsonPropertyName("start_offset")]
-	public long StartOffset { get; init; }
-	[JsonInclude, JsonPropertyName("token")]
-	public string Token { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalyzeToken(long endOffset, long position, long startOffset, string token, string type)
+	{
+		EndOffset = endOffset;
+		Position = position;
+		StartOffset = startOffset;
+		Token = token;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public AnalyzeToken()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AnalyzeToken()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalyzeToken(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long EndOffset { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Position { get; set; }
+	public long? PositionLength { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long StartOffset { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Token { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

@@ -17,18 +17,103 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConfidenceInterval = System.Text.Json.JsonEncodedText.Encode("confidence_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropEfConstruction = System.Text.Json.JsonEncodedText.Encode("ef_construction");
+	private static readonly System.Text.Json.JsonEncodedText PropM = System.Text.Json.JsonEncodedText.Encode("m");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propConfidenceInterval = default;
+		LocalJsonValue<int?> propEfConstruction = default;
+		LocalJsonValue<int?> propM = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConfidenceInterval.TryReadProperty(ref reader, options, PropConfidenceInterval, null))
+			{
+				continue;
+			}
+
+			if (propEfConstruction.TryReadProperty(ref reader, options, PropEfConstruction, null))
+			{
+				continue;
+			}
+
+			if (propM.TryReadProperty(ref reader, options, PropM, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ConfidenceInterval = propConfidenceInterval.Value,
+			EfConstruction = propEfConstruction.Value,
+			M = propM.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, null);
+		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, null);
+		writer.WriteProperty(options, PropM, value.M, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsConverter))]
 public sealed partial class DenseVectorIndexOptions
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public DenseVectorIndexOptions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DenseVectorIndexOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The confidence interval to use when quantizing the vectors. Can be any value between and including <c>0.90</c> and
@@ -47,7 +132,6 @@ public sealed partial class DenseVectorIndexOptions
 	/// Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("confidence_interval")]
 	public float? ConfidenceInterval { get; set; }
 
 	/// <summary>
@@ -55,10 +139,9 @@ public sealed partial class DenseVectorIndexOptions
 	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ef_construction")]
 	public int? EfConstruction { get; set; }
 
 	/// <summary>
@@ -66,33 +149,41 @@ public sealed partial class DenseVectorIndexOptions
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("m")]
-	public int? m { get; set; }
+	public int? M { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of kNN algorithm to use.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Type { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Type { get; set; }
 }
 
-public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptor<DenseVectorIndexOptionsDescriptor>
+public readonly partial struct DenseVectorIndexOptionsDescriptor
 {
-	internal DenseVectorIndexOptionsDescriptor(Action<DenseVectorIndexOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Instance { get; init; }
 
-	public DenseVectorIndexOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorIndexOptionsDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private float? ConfidenceIntervalValue { get; set; }
-	private int? EfConstructionValue { get; set; }
-	private int? mValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorIndexOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions instance) => new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -112,10 +203,10 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	/// Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
 	/// </para>
 	/// </summary>
-	public DenseVectorIndexOptionsDescriptor ConfidenceInterval(float? confidenceInterval)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor ConfidenceInterval(float? value)
 	{
-		ConfidenceIntervalValue = confidenceInterval;
-		return Self;
+		Instance.ConfidenceInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -123,13 +214,13 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
-	public DenseVectorIndexOptionsDescriptor EfConstruction(int? efConstruction)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor EfConstruction(int? value)
 	{
-		EfConstructionValue = efConstruction;
-		return Self;
+		Instance.EfConstruction = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,13 +228,13 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
-	public DenseVectorIndexOptionsDescriptor m(int? m)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor M(int? value)
 	{
-		mValue = m;
-		return Self;
+		Instance.M = value;
+		return this;
 	}
 
 	/// <summary>
@@ -151,35 +242,17 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	/// The type of kNN algorithm to use.
 	/// </para>
 	/// </summary>
-	public DenseVectorIndexOptionsDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType type)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ConfidenceIntervalValue.HasValue)
-		{
-			writer.WritePropertyName("confidence_interval");
-			writer.WriteNumberValue(ConfidenceIntervalValue.Value);
-		}
-
-		if (EfConstructionValue.HasValue)
-		{
-			writer.WritePropertyName("ef_construction");
-			writer.WriteNumberValue(EfConstructionValue.Value);
-		}
-
-		if (mValue.HasValue)
-		{
-			writer.WritePropertyName("m");
-			writer.WriteNumberValue(mValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class IpRangeAggregationRangeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropMask = System.Text.Json.JsonEncodedText.Encode("mask");
+	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFrom = default;
+		LocalJsonValue<string?> propMask = default;
+		LocalJsonValue<string?> propTo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propMask.TryReadProperty(ref reader, options, PropMask, null))
+			{
+				continue;
+			}
+
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			Mask = propMask.Value,
+			To = propTo.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropMask, value.Mask, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeConverter))]
 public sealed partial class IpRangeAggregationRange
 {
+#if NET7_0_OR_GREATER
+	public IpRangeAggregationRange()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IpRangeAggregationRange()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Start of the range.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class IpRangeAggregationRange
 	/// IP range defined as a CIDR mask.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mask")]
 	public string? Mask { get; set; }
 
 	/// <summary>
@@ -50,31 +118,37 @@ public sealed partial class IpRangeAggregationRange
 	/// End of the range.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; set; }
 }
 
-public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDescriptor<IpRangeAggregationRangeDescriptor>
+public readonly partial struct IpRangeAggregationRangeDescriptor
 {
-	internal IpRangeAggregationRangeDescriptor(Action<IpRangeAggregationRangeDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange Instance { get; init; }
 
-	public IpRangeAggregationRangeDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpRangeAggregationRangeDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange instance)
 	{
+		Instance = instance;
 	}
 
-	private string? FromValue { get; set; }
-	private string? MaskValue { get; set; }
-	private string? ToValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpRangeAggregationRangeDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Start of the range.
 	/// </para>
 	/// </summary>
-	public IpRangeAggregationRangeDescriptor From(string? from)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor From(string? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -82,10 +156,10 @@ public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDesc
 	/// IP range defined as a CIDR mask.
 	/// </para>
 	/// </summary>
-	public IpRangeAggregationRangeDescriptor Mask(string? mask)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor Mask(string? value)
 	{
-		MaskValue = mask;
-		return Self;
+		Instance.Mask = value;
+		return this;
 	}
 
 	/// <summary>
@@ -93,33 +167,22 @@ public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDesc
 	/// End of the range.
 	/// </para>
 	/// </summary>
-	public IpRangeAggregationRangeDescriptor To(string? to)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor To(string? value)
 	{
-		ToValue = to;
-		return Self;
+		Instance.To = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FromValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteStringValue(FromValue);
+			return new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(MaskValue))
-		{
-			writer.WritePropertyName("mask");
-			writer.WriteStringValue(MaskValue);
-		}
-
-		if (!string.IsNullOrEmpty(ToValue))
-		{
-			writer.WritePropertyName("to");
-			writer.WriteStringValue(ToValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

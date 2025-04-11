@@ -5,234 +5,404 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Elastic.Clients.Elasticsearch.Fluent;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class PropertiesDescriptor<TDocument>
-		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
+public readonly partial struct PropertiesDescriptor<TDocument>
 {
 	// SCALAR OVERLOADS
 	// Scalar are manually added to a partial class which seems reasonable.
 
 	// int
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> propertyName) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> propertyName)
+	{
+		_items.Add(propertyName, IntegerNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, IntegerNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<int>>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<int>>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, IntegerNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int?>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int?>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, IntegerNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<int?>>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<int?>>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, IntegerNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// float
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, float>> propertyName) =>
-		AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, float>> propertyName)
+	{
+		_items.Add(propertyName, FloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, float>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, float>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, FloatNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<float>>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<float>>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, FloatNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, float?>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, float?>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, FloatNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<float?>>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<float?>>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, FloatNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// byte
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, byte>> propertyName) =>
-		AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, byte>> propertyName)
+	{
+		_items.Add(propertyName, ByteNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, byte>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, byte>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ByteNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<byte>>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<byte>>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ByteNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, byte?>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, byte?>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ByteNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<byte?>>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<byte?>>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ByteNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// short
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, short>> propertyName) =>
-		AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, short>> propertyName)
+	{
+		_items.Add(propertyName, ShortNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, short>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, short>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ShortNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<short>>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<short>>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ShortNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, short?>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, short?>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ShortNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<short?>>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<short?>>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, ShortNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// long
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, long>> propertyName) =>
-		AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, long>> propertyName)
+	{
+		_items.Add(propertyName, LongNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, long>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, long>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, LongNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<long>>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<long>>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, LongNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, long?>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, long?>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, LongNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<long?>>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<long?>>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, LongNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// decimal
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, decimal>> propertyName) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, decimal>> propertyName)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, decimal>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, decimal>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<decimal>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<decimal>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, decimal?>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, decimal?>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<decimal?>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<decimal?>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// double
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, double>> propertyName) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, double>> propertyName)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, double>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, double>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<double>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<double>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, double?>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, double?>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<double?>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<double?>>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DoubleNumberPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// date time
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTime>> propertyName) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTime>> propertyName)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTime>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTime>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTime>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTime>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTime?>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTime?>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTime?>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTime?>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// date time offset
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTimeOffset>> propertyName) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTimeOffset>> propertyName)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTimeOffset>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTimeOffset>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTimeOffset>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTimeOffset>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTimeOffset?>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, DateTimeOffset?>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTimeOffset?>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<DateTimeOffset?>>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, DatePropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// bool
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, bool>> propertyName) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, bool>> propertyName)
+	{
+		_items.Add(propertyName, BooleanPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, bool>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, bool>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, BooleanPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<bool>>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<bool>>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, BooleanPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, bool?>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, bool?>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, BooleanPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<bool?>>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<bool?>>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, BooleanPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// char
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, char>> propertyName) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, char>> propertyName)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, char>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, char>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<char>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<char>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, char?>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, char?>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<char?>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<char?>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// GUID
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, Guid>> propertyName) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, Guid>> propertyName)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, Guid>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, Guid>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<Guid>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<Guid>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, Guid?>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, Guid?>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<Guid?>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
+
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<Guid?>>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, KeywordPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
 	// string
 
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, string>> propertyName) =>
-		AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
-
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, string>> propertyName, Action<TextPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
-
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<string>>> propertyName, Action<TextPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
-
-	// Skipping these for now
-	//public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName) =>
-	//	AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
-
-	//public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-	//	AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
-
-	// This will remain non-code-generated
-	protected override PropertiesDescriptor<TDocument> AssignVariant(PropertyName name, IProperty type)
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, string>> propertyName)
 	{
-		type.ThrowIfNull(nameof(type));
+		_items.Add(propertyName, TextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-		if (name.IsConditionless())
-			throw new ArgumentException($"Could not get property name for {type.GetType().Name} mapping.");
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, string>> propertyName, Action<TextPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, TextPropertyDescriptor<TDocument>.Build(configure));
+		return this;
+	}
 
-		return Assign(name, type);
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, IEnumerable<string>>> propertyName, Action<TextPropertyDescriptor<TDocument>> configure)
+	{
+		_items.Add(propertyName, TextPropertyDescriptor<TDocument>.Build(configure));
+		return this;
 	}
 }

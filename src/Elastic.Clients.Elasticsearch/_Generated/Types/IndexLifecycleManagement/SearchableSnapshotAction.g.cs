@@ -17,58 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class SearchableSnapshotAction
+internal sealed partial class SearchableSnapshotActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction>
 {
-	[JsonInclude, JsonPropertyName("force_merge_index")]
-	public bool? ForceMergeIndex { get; set; }
-	[JsonInclude, JsonPropertyName("snapshot_repository")]
-	public string SnapshotRepository { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropForceMergeIndex = System.Text.Json.JsonEncodedText.Encode("force_merge_index");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepository = System.Text.Json.JsonEncodedText.Encode("snapshot_repository");
 
-public sealed partial class SearchableSnapshotActionDescriptor : SerializableDescriptor<SearchableSnapshotActionDescriptor>
-{
-	internal SearchableSnapshotActionDescriptor(Action<SearchableSnapshotActionDescriptor> configure) => configure.Invoke(this);
-
-	public SearchableSnapshotActionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private bool? ForceMergeIndexValue { get; set; }
-	private string SnapshotRepositoryValue { get; set; }
-
-	public SearchableSnapshotActionDescriptor ForceMergeIndex(bool? forceMergeIndex = true)
-	{
-		ForceMergeIndexValue = forceMergeIndex;
-		return Self;
-	}
-
-	public SearchableSnapshotActionDescriptor SnapshotRepository(string snapshotRepository)
-	{
-		SnapshotRepositoryValue = snapshotRepository;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ForceMergeIndexValue.HasValue)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propForceMergeIndex = default;
+		LocalJsonValue<string> propSnapshotRepository = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("force_merge_index");
-			writer.WriteBooleanValue(ForceMergeIndexValue.Value);
+			if (propForceMergeIndex.TryReadProperty(ref reader, options, PropForceMergeIndex, null))
+			{
+				continue;
+			}
+
+			if (propSnapshotRepository.TryReadProperty(ref reader, options, PropSnapshotRepository, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		writer.WritePropertyName("snapshot_repository");
-		writer.WriteStringValue(SnapshotRepositoryValue);
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ForceMergeIndex = propForceMergeIndex.Value,
+			SnapshotRepository = propSnapshotRepository.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropForceMergeIndex, value.ForceMergeIndex, null, null);
+		writer.WriteProperty(options, PropSnapshotRepository, value.SnapshotRepository, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionConverter))]
+public sealed partial class SearchableSnapshotAction
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchableSnapshotAction(string snapshotRepository)
+	{
+		SnapshotRepository = snapshotRepository;
+	}
+#if NET7_0_OR_GREATER
+	public SearchableSnapshotAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SearchableSnapshotAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchableSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? ForceMergeIndex { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string SnapshotRepository { get; set; }
+}
+
+public readonly partial struct SearchableSnapshotActionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchableSnapshotActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchableSnapshotActionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor ForceMergeIndex(bool? value = true)
+	{
+		Instance.ForceMergeIndex = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor SnapshotRepository(string value)
+	{
+		Instance.SnapshotRepository = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

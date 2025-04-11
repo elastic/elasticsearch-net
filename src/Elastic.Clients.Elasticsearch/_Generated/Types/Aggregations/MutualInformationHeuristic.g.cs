@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class MutualInformationHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeNegatives = System.Text.Json.JsonEncodedText.Encode("include_negatives");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propBackgroundIsSuperset = default;
+		LocalJsonValue<bool?> propIncludeNegatives = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackgroundIsSuperset.TryReadProperty(ref reader, options, PropBackgroundIsSuperset, null))
+			{
+				continue;
+			}
+
+			if (propIncludeNegatives.TryReadProperty(ref reader, options, PropIncludeNegatives, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BackgroundIsSuperset = propBackgroundIsSuperset.Value,
+			IncludeNegatives = propIncludeNegatives.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBackgroundIsSuperset, value.BackgroundIsSuperset, null, null);
+		writer.WriteProperty(options, PropIncludeNegatives, value.IncludeNegatives, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicConverter))]
 public sealed partial class MutualInformationHeuristic
 {
+#if NET7_0_OR_GREATER
+	public MutualInformationHeuristic()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MutualInformationHeuristic()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("background_is_superset")]
 	public bool? BackgroundIsSuperset { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class MutualInformationHeuristic
 	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include_negatives")]
 	public bool? IncludeNegatives { get; set; }
 }
 
-public sealed partial class MutualInformationHeuristicDescriptor : SerializableDescriptor<MutualInformationHeuristicDescriptor>
+public readonly partial struct MutualInformationHeuristicDescriptor
 {
-	internal MutualInformationHeuristicDescriptor(Action<MutualInformationHeuristicDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic Instance { get; init; }
 
-	public MutualInformationHeuristicDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MutualInformationHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? BackgroundIsSupersetValue { get; set; }
-	private bool? IncludeNegativesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MutualInformationHeuristicDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
 	/// </para>
 	/// </summary>
-	public MutualInformationHeuristicDescriptor BackgroundIsSuperset(bool? backgroundIsSuperset = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor BackgroundIsSuperset(bool? value = true)
 	{
-		BackgroundIsSupersetValue = backgroundIsSuperset;
-		return Self;
+		Instance.BackgroundIsSuperset = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class MutualInformationHeuristicDescriptor : SerializableD
 	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
 	/// </para>
 	/// </summary>
-	public MutualInformationHeuristicDescriptor IncludeNegatives(bool? includeNegatives = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor IncludeNegatives(bool? value = true)
 	{
-		IncludeNegativesValue = includeNegatives;
-		return Self;
+		Instance.IncludeNegatives = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BackgroundIsSupersetValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("background_is_superset");
-			writer.WriteBooleanValue(BackgroundIsSupersetValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IncludeNegativesValue.HasValue)
-		{
-			writer.WritePropertyName("include_negatives");
-			writer.WriteBooleanValue(IncludeNegativesValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,63 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ThreadCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ThreadCount>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active");
+	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed");
+	private static readonly System.Text.Json.JsonEncodedText PropLargest = System.Text.Json.JsonEncodedText.Encode("largest");
+	private static readonly System.Text.Json.JsonEncodedText PropQueue = System.Text.Json.JsonEncodedText.Encode("queue");
+	private static readonly System.Text.Json.JsonEncodedText PropRejected = System.Text.Json.JsonEncodedText.Encode("rejected");
+	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.ThreadCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propActive = default;
+		LocalJsonValue<long?> propCompleted = default;
+		LocalJsonValue<long?> propLargest = default;
+		LocalJsonValue<long?> propQueue = default;
+		LocalJsonValue<long?> propRejected = default;
+		LocalJsonValue<long?> propThreads = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActive.TryReadProperty(ref reader, options, PropActive, null))
+			{
+				continue;
+			}
+
+			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, null))
+			{
+				continue;
+			}
+
+			if (propLargest.TryReadProperty(ref reader, options, PropLargest, null))
+			{
+				continue;
+			}
+
+			if (propQueue.TryReadProperty(ref reader, options, PropQueue, null))
+			{
+				continue;
+			}
+
+			if (propRejected.TryReadProperty(ref reader, options, PropRejected, null))
+			{
+				continue;
+			}
+
+			if (propThreads.TryReadProperty(ref reader, options, PropThreads, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.ThreadCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Active = propActive.Value,
+			Completed = propCompleted.Value,
+			Largest = propLargest.Value,
+			Queue = propQueue.Value,
+			Rejected = propRejected.Value,
+			Threads = propThreads.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ThreadCount value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActive, value.Active, null, null);
+		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
+		writer.WriteProperty(options, PropLargest, value.Largest, null, null);
+		writer.WriteProperty(options, PropQueue, value.Queue, null, null);
+		writer.WriteProperty(options, PropRejected, value.Rejected, null, null);
+		writer.WriteProperty(options, PropThreads, value.Threads, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ThreadCountConverter))]
 public sealed partial class ThreadCount
 {
+#if NET7_0_OR_GREATER
+	public ThreadCount()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ThreadCount()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ThreadCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of active threads in the thread pool.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("active")]
-	public long? Active { get; init; }
+	public long? Active { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of tasks completed by the thread pool executor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completed")]
-	public long? Completed { get; init; }
+	public long? Completed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Highest number of active threads in the thread pool.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("largest")]
-	public long? Largest { get; init; }
+	public long? Largest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of tasks in queue for the thread pool.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("queue")]
-	public long? Queue { get; init; }
+	public long? Queue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of tasks rejected by the thread pool executor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rejected")]
-	public long? Rejected { get; init; }
+	public long? Rejected { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of threads in the thread pool.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("threads")]
-	public long? Threads { get; init; }
+	public long? Threads { get; set; }
 }

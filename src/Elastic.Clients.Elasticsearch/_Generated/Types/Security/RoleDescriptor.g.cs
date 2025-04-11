@@ -17,188 +17,174 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class RoleDescriptorConverter : JsonConverter<RoleDescriptor>
+internal sealed partial class RoleDescriptorxConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>
 {
-	public override RoleDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteIndices = System.Text.Json.JsonEncodedText.Encode("remote_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropRestriction = System.Text.Json.JsonEncodedText.Encode("restriction");
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
+	private static readonly System.Text.Json.JsonEncodedText PropTransientMetadata = System.Text.Json.JsonEncodedText.Encode("transient_metadata");
+
+	public override Elastic.Clients.Elasticsearch.Security.RoleDescriptorx Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new RoleDescriptor();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?> propApplications = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>?> propCluster = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>?> propGlobal = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>?> propIndices = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?> propRemoteCluster = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?> propRemoteIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Restriction?> propRestriction = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRunAs = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propTransientMetadata = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propApplications.TryReadProperty(ref reader, options, PropApplications, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, null)))
 			{
-				var property = reader.GetString();
-				if (property == "applications")
-				{
-					variant.Applications = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "cluster")
-				{
-					variant.Cluster = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "description")
-				{
-					variant.Description = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "global")
-				{
-					variant.Global = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices" || property == "index")
-				{
-					variant.Indices = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "metadata")
-				{
-					variant.Metadata = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "remote_cluster")
-				{
-					variant.RemoteCluster = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "remote_indices")
-				{
-					variant.RemoteIndices = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "restriction")
-				{
-					variant.Restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.Restriction?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "run_as")
-				{
-					variant.RunAs = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "transient_metadata")
-				{
-					variant.TransientMetadata = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)) || propIndices.TryReadProperty(ref reader, options, PropIndices1, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRemoteIndices.TryReadProperty(ref reader, options, PropRemoteIndices, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRestriction.TryReadProperty(ref reader, options, PropRestriction, null))
+			{
+				continue;
+			}
+
+			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTransientMetadata.TryReadProperty(ref reader, options, PropTransientMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Applications = propApplications.Value,
+			Cluster = propCluster.Value,
+			Description = propDescription.Value,
+			Global = propGlobal.Value,
+			Indices = propIndices.Value,
+			Metadata = propMetadata.Value,
+			RemoteCluster = propRemoteCluster.Value,
+			RemoteIndices = propRemoteIndices.Value,
+			Restriction = propRestriction.Value,
+			RunAs = propRunAs.Value,
+			TransientMetadata = propTransientMetadata.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, RoleDescriptor value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Applications is not null)
-		{
-			writer.WritePropertyName("applications");
-			JsonSerializer.Serialize(writer, value.Applications, options);
-		}
-
-		if (value.Cluster is not null)
-		{
-			writer.WritePropertyName("cluster");
-			JsonSerializer.Serialize(writer, value.Cluster, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Description))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(value.Description);
-		}
-
-		if (value.Global is not null)
-		{
-			writer.WritePropertyName("global");
-			JsonSerializer.Serialize(writer, value.Global, options);
-		}
-
-		if (value.Indices is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, value.Indices, options);
-		}
-
-		if (value.Metadata is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, value.Metadata, options);
-		}
-
-		if (value.RemoteCluster is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			JsonSerializer.Serialize(writer, value.RemoteCluster, options);
-		}
-
-		if (value.RemoteIndices is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			JsonSerializer.Serialize(writer, value.RemoteIndices, options);
-		}
-
-		if (value.Restriction is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, value.Restriction, options);
-		}
-
-		if (value.RunAs is not null)
-		{
-			writer.WritePropertyName("run_as");
-			JsonSerializer.Serialize(writer, value.RunAs, options);
-		}
-
-		if (value.TransientMetadata is not null)
-		{
-			writer.WritePropertyName("transient_metadata");
-			JsonSerializer.Serialize(writer, value.TransientMetadata, options);
-		}
-
+		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropGlobal, value.Global, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRemoteIndices, value.RemoteIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRestriction, value.Restriction, null, null);
+		writer.WriteProperty(options, PropRunAs, value.RunAs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTransientMetadata, value.TransientMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(RoleDescriptorConverter))]
-public sealed partial class RoleDescriptor
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleDescriptorxConverter))]
+public sealed partial class RoleDescriptorx
 {
+#if NET7_0_OR_GREATER
+	public RoleDescriptorx()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RoleDescriptorx()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A list of application privilege entries
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -212,21 +198,21 @@ public sealed partial class RoleDescriptor
 	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permissions entries.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public IDictionary<string, object>? Metadata { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -234,14 +220,14 @@ public sealed partial class RoleDescriptor
 	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permissions for remote clusters.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -257,86 +243,66 @@ public sealed partial class RoleDescriptor
 	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? RunAs { get; set; }
-	public IDictionary<string, object>? TransientMetadata { get; set; }
+	public System.Collections.Generic.ICollection<string>? RunAs { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? TransientMetadata { get; set; }
 }
 
-public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDescriptor<RoleDescriptorDescriptor<TDocument>>
+public readonly partial struct RoleDescriptorxDescriptor<TDocument>
 {
-	internal RoleDescriptorDescriptor(Action<RoleDescriptorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.RoleDescriptorx Instance { get; init; }
 
-	public RoleDescriptorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleDescriptorxDescriptor(Elastic.Clients.Elasticsearch.Security.RoleDescriptorx instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? ApplicationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor ApplicationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor> ApplicationsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] ApplicationsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? ClusterValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? GlobalValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor GlobalDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> GlobalDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] GlobalDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> IndicesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>> IndicesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] IndicesDescriptorActions { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteClusterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor RemoteClusterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> RemoteClusterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] RemoteClusterDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> RemoteIndicesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> RemoteIndicesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] RemoteIndicesDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.Restriction? RestrictionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor RestrictionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> RestrictionDescriptorAction { get; set; }
-	private ICollection<string>? RunAsValue { get; set; }
-	private IDictionary<string, object>? TransientMetadataValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleDescriptorxDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.RoleDescriptorx instance) => new Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A list of application privilege entries
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Applications(ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? applications)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Applications(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? value)
 	{
-		ApplicationsDescriptor = null;
-		ApplicationsDescriptorAction = null;
-		ApplicationsDescriptorActions = null;
-		ApplicationsValue = applications;
-		return Self;
+		Instance.Applications = value;
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Applications(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of application privilege entries
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Applications(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[] values)
 	{
-		ApplicationsValue = null;
-		ApplicationsDescriptorAction = null;
-		ApplicationsDescriptorActions = null;
-		ApplicationsDescriptor = descriptor;
-		return Self;
+		Instance.Applications = [.. values];
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Applications(Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A list of application privilege entries
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Applications(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] actions)
 	{
-		ApplicationsValue = null;
-		ApplicationsDescriptor = null;
-		ApplicationsDescriptorActions = null;
-		ApplicationsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor.Build(action));
+		}
 
-	public RoleDescriptorDescriptor<TDocument> Applications(params Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] configure)
-	{
-		ApplicationsValue = null;
-		ApplicationsDescriptor = null;
-		ApplicationsDescriptorAction = null;
-		ApplicationsDescriptorActions = configure;
-		return Self;
+		Instance.Applications = items;
+		return this;
 	}
 
 	/// <summary>
@@ -344,10 +310,21 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Cluster(ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? cluster)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
-		ClusterValue = cluster;
-		return Self;
+		Instance.Cluster = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
+	{
+		Instance.Cluster = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -355,10 +332,10 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// Optional description of the role descriptor
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -366,40 +343,38 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Global(ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? global)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Global(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? value)
 	{
-		GlobalDescriptor = null;
-		GlobalDescriptorAction = null;
-		GlobalDescriptorActions = null;
-		GlobalValue = global;
-		return Self;
+		Instance.Global = value;
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Global(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Global(params Elastic.Clients.Elasticsearch.Security.GlobalPrivilege[] values)
 	{
-		GlobalValue = null;
-		GlobalDescriptorAction = null;
-		GlobalDescriptorActions = null;
-		GlobalDescriptor = descriptor;
-		return Self;
+		Instance.Global = [.. values];
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Global(Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Global(params System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] actions)
 	{
-		GlobalValue = null;
-		GlobalDescriptor = null;
-		GlobalDescriptorActions = null;
-		GlobalDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action));
+		}
 
-	public RoleDescriptorDescriptor<TDocument> Global(params Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] configure)
-	{
-		GlobalValue = null;
-		GlobalDescriptor = null;
-		GlobalDescriptorAction = null;
-		GlobalDescriptorActions = configure;
-		return Self;
+		Instance.Global = items;
+		return this;
 	}
 
 	/// <summary>
@@ -407,40 +382,38 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// A list of indices permissions entries.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Indices(ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? indices)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? value)
 	{
-		IndicesDescriptor = null;
-		IndicesDescriptorAction = null;
-		IndicesDescriptorActions = null;
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions entries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Indices(params Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[] values)
 	{
-		IndicesValue = null;
-		IndicesDescriptorAction = null;
-		IndicesDescriptorActions = null;
-		IndicesDescriptor = descriptor;
-		return Self;
+		Instance.Indices = [.. values];
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Indices(Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions entries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Indices(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] actions)
 	{
-		IndicesValue = null;
-		IndicesDescriptor = null;
-		IndicesDescriptorActions = null;
-		IndicesDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>.Build(action));
+		}
 
-	public RoleDescriptorDescriptor<TDocument> Indices(params Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] configure)
-	{
-		IndicesValue = null;
-		IndicesDescriptor = null;
-		IndicesDescriptorAction = null;
-		IndicesDescriptorActions = configure;
-		return Self;
+		Instance.Indices = items;
+		return this;
 	}
 
 	/// <summary>
@@ -448,10 +421,39 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Metadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Metadata()
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -460,40 +462,40 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RemoteCluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? value)
 	{
-		RemoteClusterDescriptor = null;
-		RemoteClusterDescriptorAction = null;
-		RemoteClusterDescriptorActions = null;
-		RemoteClusterValue = remoteCluster;
-		return Self;
+		Instance.RemoteCluster = value;
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RemoteCluster(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[] values)
 	{
-		RemoteClusterValue = null;
-		RemoteClusterDescriptorAction = null;
-		RemoteClusterDescriptorActions = null;
-		RemoteClusterDescriptor = descriptor;
-		return Self;
+		Instance.RemoteCluster = [.. values];
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> RemoteCluster(Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RemoteCluster(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] actions)
 	{
-		RemoteClusterValue = null;
-		RemoteClusterDescriptor = null;
-		RemoteClusterDescriptorActions = null;
-		RemoteClusterDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor.Build(action));
+		}
 
-	public RoleDescriptorDescriptor<TDocument> RemoteCluster(params Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] configure)
-	{
-		RemoteClusterValue = null;
-		RemoteClusterDescriptor = null;
-		RemoteClusterDescriptorAction = null;
-		RemoteClusterDescriptorActions = configure;
-		return Self;
+		Instance.RemoteCluster = items;
+		return this;
 	}
 
 	/// <summary>
@@ -501,40 +503,38 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// A list of indices permissions for remote clusters.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RemoteIndices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? value)
 	{
-		RemoteIndicesDescriptor = null;
-		RemoteIndicesDescriptorAction = null;
-		RemoteIndicesDescriptorActions = null;
-		RemoteIndicesValue = remoteIndices;
-		return Self;
+		Instance.RemoteIndices = value;
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RemoteIndices(params Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[] values)
 	{
-		RemoteIndicesValue = null;
-		RemoteIndicesDescriptorAction = null;
-		RemoteIndicesDescriptorActions = null;
-		RemoteIndicesDescriptor = descriptor;
-		return Self;
+		Instance.RemoteIndices = [.. values];
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> RemoteIndices(Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RemoteIndices(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] actions)
 	{
-		RemoteIndicesValue = null;
-		RemoteIndicesDescriptor = null;
-		RemoteIndicesDescriptorActions = null;
-		RemoteIndicesDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>.Build(action));
+		}
 
-	public RoleDescriptorDescriptor<TDocument> RemoteIndices(params Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] configure)
-	{
-		RemoteIndicesValue = null;
-		RemoteIndicesDescriptor = null;
-		RemoteIndicesDescriptorAction = null;
-		RemoteIndicesDescriptorActions = configure;
-		return Self;
+		Instance.RemoteIndices = items;
+		return this;
 	}
 
 	/// <summary>
@@ -542,28 +542,21 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// Restriction for when the role descriptor is allowed to be effective.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? restriction)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? value)
 	{
-		RestrictionDescriptor = null;
-		RestrictionDescriptorAction = null;
-		RestrictionValue = restriction;
-		return Self;
+		Instance.Restriction = value;
+		return this;
 	}
 
-	public RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> Restriction(System.Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> action)
 	{
-		RestrictionValue = null;
-		RestrictionDescriptorAction = null;
-		RestrictionDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor<TDocument> Restriction(Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> configure)
-	{
-		RestrictionValue = null;
-		RestrictionDescriptor = null;
-		RestrictionDescriptorAction = configure;
-		return Self;
+		Instance.Restriction = Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -573,527 +566,10 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor<TDocument> RunAs(ICollection<string>? runAs)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
-		RunAsValue = runAs;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor<TDocument> TransientMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		TransientMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ApplicationsDescriptor is not null)
-		{
-			writer.WritePropertyName("applications");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ApplicationsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ApplicationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("applications");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(ApplicationsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ApplicationsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("applications");
-			writer.WriteStartArray();
-			foreach (var action in ApplicationsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ApplicationsValue is not null)
-		{
-			writer.WritePropertyName("applications");
-			JsonSerializer.Serialize(writer, ApplicationsValue, options);
-		}
-
-		if (ClusterValue is not null)
-		{
-			writer.WritePropertyName("cluster");
-			JsonSerializer.Serialize(writer, ClusterValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (GlobalDescriptor is not null)
-		{
-			writer.WritePropertyName("global");
-			JsonSerializer.Serialize(writer, GlobalDescriptor, options);
-		}
-		else if (GlobalDescriptorAction is not null)
-		{
-			writer.WritePropertyName("global");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(GlobalDescriptorAction), options);
-		}
-		else if (GlobalDescriptorActions is not null)
-		{
-			writer.WritePropertyName("global");
-			if (GlobalDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in GlobalDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(action), options);
-			}
-
-			if (GlobalDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (GlobalValue is not null)
-		{
-			writer.WritePropertyName("global");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(GlobalValue, writer, options);
-		}
-
-		if (IndicesDescriptor is not null)
-		{
-			writer.WritePropertyName("indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IndicesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IndicesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>(IndicesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IndicesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("indices");
-			writer.WriteStartArray();
-			foreach (var action in IndicesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
-
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
-
-		if (RemoteClusterDescriptor is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RemoteClusterDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteClusterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(RemoteClusterDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteClusterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStartArray();
-			foreach (var action in RemoteClusterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (RemoteClusterValue is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			JsonSerializer.Serialize(writer, RemoteClusterValue, options);
-		}
-
-		if (RemoteIndicesDescriptor is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RemoteIndicesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteIndicesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>(RemoteIndicesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteIndicesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			writer.WriteStartArray();
-			foreach (var action in RemoteIndicesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (RemoteIndicesValue is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			JsonSerializer.Serialize(writer, RemoteIndicesValue, options);
-		}
-
-		if (RestrictionDescriptor is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, RestrictionDescriptor, options);
-		}
-		else if (RestrictionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(RestrictionDescriptorAction), options);
-		}
-		else if (RestrictionValue is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, RestrictionValue, options);
-		}
-
-		if (RunAsValue is not null)
-		{
-			writer.WritePropertyName("run_as");
-			JsonSerializer.Serialize(writer, RunAsValue, options);
-		}
-
-		if (TransientMetadataValue is not null)
-		{
-			writer.WritePropertyName("transient_metadata");
-			JsonSerializer.Serialize(writer, TransientMetadataValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<RoleDescriptorDescriptor>
-{
-	internal RoleDescriptorDescriptor(Action<RoleDescriptorDescriptor> configure) => configure.Invoke(this);
-
-	public RoleDescriptorDescriptor() : base()
-	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? ApplicationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor ApplicationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor> ApplicationsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] ApplicationsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? ClusterValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? GlobalValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor GlobalDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> GlobalDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] GlobalDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor IndicesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor> IndicesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] IndicesDescriptorActions { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteClusterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor RemoteClusterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> RemoteClusterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] RemoteClusterDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor RemoteIndicesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> RemoteIndicesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] RemoteIndicesDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.Restriction? RestrictionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor RestrictionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> RestrictionDescriptorAction { get; set; }
-	private ICollection<string>? RunAsValue { get; set; }
-	private IDictionary<string, object>? TransientMetadataValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Applications(ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? applications)
-	{
-		ApplicationsDescriptor = null;
-		ApplicationsDescriptorAction = null;
-		ApplicationsDescriptorActions = null;
-		ApplicationsValue = applications;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Applications(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor descriptor)
-	{
-		ApplicationsValue = null;
-		ApplicationsDescriptorAction = null;
-		ApplicationsDescriptorActions = null;
-		ApplicationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Applications(Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor> configure)
-	{
-		ApplicationsValue = null;
-		ApplicationsDescriptor = null;
-		ApplicationsDescriptorActions = null;
-		ApplicationsDescriptorAction = configure;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Applications(params Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] configure)
-	{
-		ApplicationsValue = null;
-		ApplicationsDescriptor = null;
-		ApplicationsDescriptorAction = null;
-		ApplicationsDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Cluster(ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? cluster)
-	{
-		ClusterValue = cluster;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Global(ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? global)
-	{
-		GlobalDescriptor = null;
-		GlobalDescriptorAction = null;
-		GlobalDescriptorActions = null;
-		GlobalValue = global;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Global(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor descriptor)
-	{
-		GlobalValue = null;
-		GlobalDescriptorAction = null;
-		GlobalDescriptorActions = null;
-		GlobalDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Global(Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> configure)
-	{
-		GlobalValue = null;
-		GlobalDescriptor = null;
-		GlobalDescriptorActions = null;
-		GlobalDescriptorAction = configure;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Global(params Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] configure)
-	{
-		GlobalValue = null;
-		GlobalDescriptor = null;
-		GlobalDescriptorAction = null;
-		GlobalDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Indices(ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? indices)
-	{
-		IndicesDescriptor = null;
-		IndicesDescriptorAction = null;
-		IndicesDescriptorActions = null;
-		IndicesValue = indices;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Indices(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor descriptor)
-	{
-		IndicesValue = null;
-		IndicesDescriptorAction = null;
-		IndicesDescriptorActions = null;
-		IndicesDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Indices(Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor> configure)
-	{
-		IndicesValue = null;
-		IndicesDescriptor = null;
-		IndicesDescriptorActions = null;
-		IndicesDescriptorAction = configure;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Indices(params Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] configure)
-	{
-		IndicesValue = null;
-		IndicesDescriptor = null;
-		IndicesDescriptorAction = null;
-		IndicesDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
-	{
-		RemoteClusterDescriptor = null;
-		RemoteClusterDescriptorAction = null;
-		RemoteClusterDescriptorActions = null;
-		RemoteClusterValue = remoteCluster;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor)
-	{
-		RemoteClusterValue = null;
-		RemoteClusterDescriptorAction = null;
-		RemoteClusterDescriptorActions = null;
-		RemoteClusterDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor RemoteCluster(Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> configure)
-	{
-		RemoteClusterValue = null;
-		RemoteClusterDescriptor = null;
-		RemoteClusterDescriptorActions = null;
-		RemoteClusterDescriptorAction = configure;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor RemoteCluster(params Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] configure)
-	{
-		RemoteClusterValue = null;
-		RemoteClusterDescriptor = null;
-		RemoteClusterDescriptorAction = null;
-		RemoteClusterDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
-	{
-		RemoteIndicesDescriptor = null;
-		RemoteIndicesDescriptorAction = null;
-		RemoteIndicesDescriptorActions = null;
-		RemoteIndicesValue = remoteIndices;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor descriptor)
-	{
-		RemoteIndicesValue = null;
-		RemoteIndicesDescriptorAction = null;
-		RemoteIndicesDescriptorActions = null;
-		RemoteIndicesDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor RemoteIndices(Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> configure)
-	{
-		RemoteIndicesValue = null;
-		RemoteIndicesDescriptor = null;
-		RemoteIndicesDescriptorActions = null;
-		RemoteIndicesDescriptorAction = configure;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor RemoteIndices(params Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] configure)
-	{
-		RemoteIndicesValue = null;
-		RemoteIndicesDescriptor = null;
-		RemoteIndicesDescriptorAction = null;
-		RemoteIndicesDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
-	public RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? restriction)
-	{
-		RestrictionDescriptor = null;
-		RestrictionDescriptorAction = null;
-		RestrictionValue = restriction;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor descriptor)
-	{
-		RestrictionValue = null;
-		RestrictionDescriptorAction = null;
-		RestrictionDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleDescriptorDescriptor Restriction(Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> configure)
-	{
-		RestrictionValue = null;
-		RestrictionDescriptor = null;
-		RestrictionDescriptorAction = configure;
-		return Self;
+		Instance.RunAs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1103,220 +579,458 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
-	public RoleDescriptorDescriptor RunAs(ICollection<string>? runAs)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> RunAs(params string[] values)
 	{
-		RunAsValue = runAs;
-		return Self;
+		Instance.RunAs = [.. values];
+		return this;
 	}
 
-	public RoleDescriptorDescriptor TransientMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> TransientMetadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		TransientMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.TransientMetadata = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> TransientMetadata()
 	{
-		writer.WriteStartObject();
-		if (ApplicationsDescriptor is not null)
-		{
-			writer.WritePropertyName("applications");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ApplicationsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ApplicationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("applications");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(ApplicationsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ApplicationsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("applications");
-			writer.WriteStartArray();
-			foreach (var action in ApplicationsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(action), options);
-			}
+		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (ApplicationsValue is not null)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> TransientMetadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument> AddTransientMetadatum(string key, object value)
+	{
+		Instance.TransientMetadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.TransientMetadata.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.RoleDescriptorx Build(System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("applications");
-			JsonSerializer.Serialize(writer, ApplicationsValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ClusterValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct RoleDescriptorxDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.RoleDescriptorx Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleDescriptorxDescriptor(Elastic.Clients.Elasticsearch.Security.RoleDescriptorx instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleDescriptorxDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor(Elastic.Clients.Elasticsearch.Security.RoleDescriptorx instance) => new Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A list of application privilege entries
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Applications(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? value)
+	{
+		Instance.Applications = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of application privilege entries
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Applications(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[] values)
+	{
+		Instance.Applications = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of application privilege entries
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Applications(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("cluster");
-			JsonSerializer.Serialize(writer, ClusterValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor.Build(action));
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
+		Instance.Applications = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
+	{
+		Instance.Cluster = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
+	{
+		Instance.Cluster = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional description of the role descriptor
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Description(string? value)
+	{
+		Instance.Description = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Global(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? value)
+	{
+		Instance.Global = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Global(params Elastic.Clients.Elasticsearch.Security.GlobalPrivilege[] values)
+	{
+		Instance.Global = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Global(params System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
+			items.Add(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action));
 		}
 
-		if (GlobalDescriptor is not null)
-		{
-			writer.WritePropertyName("global");
-			JsonSerializer.Serialize(writer, GlobalDescriptor, options);
-		}
-		else if (GlobalDescriptorAction is not null)
-		{
-			writer.WritePropertyName("global");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(GlobalDescriptorAction), options);
-		}
-		else if (GlobalDescriptorActions is not null)
-		{
-			writer.WritePropertyName("global");
-			if (GlobalDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in GlobalDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(action), options);
-			}
+		Instance.Global = items;
+		return this;
+	}
 
-			if (GlobalDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (GlobalValue is not null)
-		{
-			writer.WritePropertyName("global");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(GlobalValue, writer, options);
-		}
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions entries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
 
-		if (IndicesDescriptor is not null)
-		{
-			writer.WritePropertyName("indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IndicesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IndicesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor(IndicesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IndicesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("indices");
-			writer.WriteStartArray();
-			foreach (var action in IndicesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor(action), options);
-			}
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions entries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Indices(params Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[] values)
+	{
+		Instance.Indices = [.. values];
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (IndicesValue is not null)
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions entries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Indices(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor.Build(action));
 		}
 
-		if (MetadataValue is not null)
+		Instance.Indices = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions entries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Indices<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<T>.Build(action));
 		}
 
-		if (RemoteClusterDescriptor is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RemoteClusterDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteClusterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(RemoteClusterDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteClusterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStartArray();
-			foreach (var action in RemoteClusterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(action), options);
-			}
+		Instance.Indices = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (RemoteClusterValue is not null)
-		{
-			writer.WritePropertyName("remote_cluster");
-			JsonSerializer.Serialize(writer, RemoteClusterValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Metadata = value;
+		return this;
+	}
 
-		if (RemoteIndicesDescriptor is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RemoteIndicesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteIndicesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor(RemoteIndicesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RemoteIndicesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			writer.WriteStartArray();
-			foreach (var action in RemoteIndicesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor(action), options);
-			}
+	/// <summary>
+	/// <para>
+	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Metadata()
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (RemoteIndicesValue is not null)
-		{
-			writer.WritePropertyName("remote_indices");
-			JsonSerializer.Serialize(writer, RemoteIndicesValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
 
-		if (RestrictionDescriptor is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, RestrictionDescriptor, options);
-		}
-		else if (RestrictionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(RestrictionDescriptorAction), options);
-		}
-		else if (RestrictionValue is not null)
-		{
-			writer.WritePropertyName("restriction");
-			JsonSerializer.Serialize(writer, RestrictionValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
 
-		if (RunAsValue is not null)
+	/// <summary>
+	/// <para>
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteCluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? value)
+	{
+		Instance.RemoteCluster = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteCluster(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[] values)
+	{
+		Instance.RemoteCluster = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteCluster(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("run_as");
-			JsonSerializer.Serialize(writer, RunAsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor.Build(action));
 		}
 
-		if (TransientMetadataValue is not null)
+		Instance.RemoteCluster = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteIndices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? value)
+	{
+		Instance.RemoteIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteIndices(params Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[] values)
+	{
+		Instance.RemoteIndices = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteIndices(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("transient_metadata");
-			JsonSerializer.Serialize(writer, TransientMetadataValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.RemoteIndices = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RemoteIndices<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<T>.Build(action));
+		}
+
+		Instance.RemoteIndices = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? value)
+	{
+		Instance.Restriction = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor Restriction(System.Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> action)
+	{
+		Instance.Restriction = Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RunAs(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RunAs = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor RunAs(params string[] values)
+	{
+		Instance.RunAs = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor TransientMetadata(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.TransientMetadata = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor TransientMetadata()
+	{
+		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor TransientMetadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor AddTransientMetadatum(string key, object value)
+	{
+		Instance.TransientMetadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.TransientMetadata.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.RoleDescriptorx Build(System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor(new Elastic.Clients.Elasticsearch.Security.RoleDescriptorx(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

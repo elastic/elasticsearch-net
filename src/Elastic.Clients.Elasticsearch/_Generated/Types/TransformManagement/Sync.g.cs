@@ -17,211 +17,222 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-[JsonConverter(typeof(SyncConverter))]
-public sealed partial class Sync
+internal sealed partial class SyncConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Sync>
 {
-	internal Sync(string variantName, object variant)
+	private static readonly System.Text.Json.JsonEncodedText VariantTime = System.Text.Json.JsonEncodedText.Encode("time");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.Sync Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
-	}
-
-	internal object Variant { get; }
-	internal string VariantName { get; }
-
-	public static Sync Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync timeSync) => new Sync("time", timeSync);
-
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
-	{
-		result = default;
-		if (Variant is T variant)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			result = variant;
-			return true;
-		}
-
-		return false;
-	}
-}
-
-internal sealed partial class SyncConverter : JsonConverter<Sync>
-{
-	public override Sync Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantTime))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "time")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantTime.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>(options, null);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Sync' from the response.");
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new Sync(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Sync value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Sync value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "time":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync)value.Variant, options);
-					break;
-			}
+			case null:
+				break;
+			case "time":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.TransformManagement.Sync)}'.");
 		}
 
 		writer.WriteEndObject();
 	}
 }
 
-public sealed partial class SyncDescriptor<TDocument> : SerializableDescriptor<SyncDescriptor<TDocument>>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.SyncConverter))]
+public sealed partial class Sync
 {
-	internal SyncDescriptor(Action<SyncDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public SyncDescriptor() : base()
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public Sync()
 	{
 	}
-
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private SyncDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+#endif
+#if !NET7_0_OR_GREATER
+	public Sync()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	private SyncDescriptor<TDocument> Set(object variant, string variantName)
-	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
+	/// <summary>
+	/// <para>
+	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSync? Time { get => GetVariant<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>("time"); set => SetVariant("time", value); }
 
-	public SyncDescriptor<TDocument> Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync timeSync) => Set(timeSync, "time");
-	public SyncDescriptor<TDocument> Time(Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync value) => new Elastic.Clients.Elasticsearch.TransformManagement.Sync { Time = value };
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			return result;
 		}
 
-		writer.WriteEndObject();
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-public sealed partial class SyncDescriptor : SerializableDescriptor<SyncDescriptor>
+public readonly partial struct SyncDescriptor<TDocument>
 {
-	internal SyncDescriptor(Action<SyncDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Sync Instance { get; init; }
 
-	public SyncDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Sync instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private SyncDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SyncDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private SyncDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Sync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Time = value;
+		return this;
 	}
 
-	public SyncDescriptor Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync timeSync) => Set(timeSync, "time");
-	public SyncDescriptor Time<TDocument>(Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor> configure) => Set(configure, "time");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> Time(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Sync Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-		writer.WriteEndObject();
+public readonly partial struct SyncDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Sync Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Sync instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SyncDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Sync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync? value)
+	{
+		Instance.Time = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor Time(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor> action)
+	{
+		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor Time<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<T>> action)
+	{
+		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Sync Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,54 +17,146 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class TopRightBottomLeftGeoBounds
+internal sealed partial class TopRightBottomLeftGeoBoundsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds>
 {
-	[JsonInclude, JsonPropertyName("bottom_left")]
-	public Elastic.Clients.Elasticsearch.GeoLocation BottomLeft { get; set; }
-	[JsonInclude, JsonPropertyName("top_right")]
-	public Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropBottomLeft = System.Text.Json.JsonEncodedText.Encode("bottom_left");
+	private static readonly System.Text.Json.JsonEncodedText PropTopRight = System.Text.Json.JsonEncodedText.Encode("top_right");
 
-public sealed partial class TopRightBottomLeftGeoBoundsDescriptor : SerializableDescriptor<TopRightBottomLeftGeoBoundsDescriptor>
-{
-	internal TopRightBottomLeftGeoBoundsDescriptor(Action<TopRightBottomLeftGeoBoundsDescriptor> configure) => configure.Invoke(this);
-
-	public TopRightBottomLeftGeoBoundsDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation> propBottomLeft = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation> propTopRight = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBottomLeft.TryReadProperty(ref reader, options, PropBottomLeft, null))
+			{
+				continue;
+			}
+
+			if (propTopRight.TryReadProperty(ref reader, options, PropTopRight, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BottomLeft = propBottomLeft.Value,
+			TopRight = propTopRight.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoLocation BottomLeftValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation TopRightValue { get; set; }
-
-	public TopRightBottomLeftGeoBoundsDescriptor BottomLeft(Elastic.Clients.Elasticsearch.GeoLocation bottomLeft)
-	{
-		BottomLeftValue = bottomLeft;
-		return Self;
-	}
-
-	public TopRightBottomLeftGeoBoundsDescriptor TopRight(Elastic.Clients.Elasticsearch.GeoLocation topRight)
-	{
-		TopRightValue = topRight;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("bottom_left");
-		JsonSerializer.Serialize(writer, BottomLeftValue, options);
-		writer.WritePropertyName("top_right");
-		JsonSerializer.Serialize(writer, TopRightValue, options);
+		writer.WriteProperty(options, PropBottomLeft, value.BottomLeft, null, null);
+		writer.WriteProperty(options, PropTopRight, value.TopRight, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsConverter))]
+public sealed partial class TopRightBottomLeftGeoBounds
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.GeoLocation bottomLeft, Elastic.Clients.Elasticsearch.GeoLocation topRight)
+	{
+		BottomLeft = bottomLeft;
+		TopRight = topRight;
+	}
+#if NET7_0_OR_GREATER
+	public TopRightBottomLeftGeoBounds()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TopRightBottomLeftGeoBounds()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.GeoLocation BottomLeft { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; set; }
+}
+
+public readonly partial struct TopRightBottomLeftGeoBoundsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopRightBottomLeftGeoBoundsDescriptor(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopRightBottomLeftGeoBoundsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds instance) => new Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor BottomLeft(Elastic.Clients.Elasticsearch.GeoLocation value)
+	{
+		Instance.BottomLeft = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor BottomLeft(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		Instance.BottomLeft = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor TopRight(Elastic.Clients.Elasticsearch.GeoLocation value)
+	{
+		Instance.TopRight = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor TopRight(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		Instance.TopRight = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds Build(System.Action<Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor(new Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

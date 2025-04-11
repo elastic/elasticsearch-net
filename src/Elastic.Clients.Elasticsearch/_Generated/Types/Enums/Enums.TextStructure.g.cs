@@ -17,111 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
-[JsonConverter(typeof(EcsCompatibilityTypeConverter))]
+internal sealed partial class EcsCompatibilityTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
+	private static readonly System.Text.Json.JsonEncodedText MemberV1 = System.Text.Json.JsonEncodedText.Encode("v1");
+
+	public override Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDisabled))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.Disabled;
+		}
+
+		if (reader.ValueTextEquals(MemberV1))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.V1;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDisabled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.Disabled;
+		}
+
+		if (string.Equals(value, MemberV1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.V1;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.Disabled:
+				writer.WriteStringValue(MemberDisabled);
+				break;
+			case Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.V1:
+				writer.WriteStringValue(MemberV1);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class FormatTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FormatType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDelimited = System.Text.Json.JsonEncodedText.Encode("delimited");
+	private static readonly System.Text.Json.JsonEncodedText MemberNdjson = System.Text.Json.JsonEncodedText.Encode("ndjson");
+	private static readonly System.Text.Json.JsonEncodedText MemberSemiStructuredText = System.Text.Json.JsonEncodedText.Encode("semi_structured_text");
+	private static readonly System.Text.Json.JsonEncodedText MemberXml = System.Text.Json.JsonEncodedText.Encode("xml");
+
+	public override Elastic.Clients.Elasticsearch.TextStructure.FormatType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDelimited))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.Delimited;
+		}
+
+		if (reader.ValueTextEquals(MemberNdjson))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.Ndjson;
+		}
+
+		if (reader.ValueTextEquals(MemberSemiStructuredText))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.SemiStructuredText;
+		}
+
+		if (reader.ValueTextEquals(MemberXml))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.Xml;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDelimited.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.Delimited;
+		}
+
+		if (string.Equals(value, MemberNdjson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.Ndjson;
+		}
+
+		if (string.Equals(value, MemberSemiStructuredText.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.SemiStructuredText;
+		}
+
+		if (string.Equals(value, MemberXml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.TextStructure.FormatType.Xml;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.TextStructure.FormatType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.FormatType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Delimited:
+				writer.WriteStringValue(MemberDelimited);
+				break;
+			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Ndjson:
+				writer.WriteStringValue(MemberNdjson);
+				break;
+			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.SemiStructuredText:
+				writer.WriteStringValue(MemberSemiStructuredText);
+				break;
+			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Xml:
+				writer.WriteStringValue(MemberXml);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.TextStructure.FormatType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.TextStructure.FormatType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.FormatType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeConverter))]
 public enum EcsCompatibilityType
 {
-	[EnumMember(Value = "v1")]
-	V1,
-	[EnumMember(Value = "disabled")]
-	Disabled
+	[System.Runtime.Serialization.EnumMember(Value = "disabled")]
+	Disabled,
+	[System.Runtime.Serialization.EnumMember(Value = "v1")]
+	V1
 }
 
-internal sealed class EcsCompatibilityTypeConverter : JsonConverter<EcsCompatibilityType>
-{
-	public override EcsCompatibilityType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "v1":
-				return EcsCompatibilityType.V1;
-			case "disabled":
-				return EcsCompatibilityType.Disabled;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, EcsCompatibilityType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case EcsCompatibilityType.V1:
-				writer.WriteStringValue("v1");
-				return;
-			case EcsCompatibilityType.Disabled:
-				writer.WriteStringValue("disabled");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(FormatTypeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.FormatTypeConverter))]
 public enum FormatType
 {
-	[EnumMember(Value = "xml")]
-	Xml,
-	[EnumMember(Value = "semi_structured_text")]
-	SemiStructuredText,
-	[EnumMember(Value = "ndjson")]
+	[System.Runtime.Serialization.EnumMember(Value = "delimited")]
+	Delimited,
+	[System.Runtime.Serialization.EnumMember(Value = "ndjson")]
 	Ndjson,
-	[EnumMember(Value = "delimited")]
-	Delimited
-}
-
-internal sealed class FormatTypeConverter : JsonConverter<FormatType>
-{
-	public override FormatType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "xml":
-				return FormatType.Xml;
-			case "semi_structured_text":
-				return FormatType.SemiStructuredText;
-			case "ndjson":
-				return FormatType.Ndjson;
-			case "delimited":
-				return FormatType.Delimited;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, FormatType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case FormatType.Xml:
-				writer.WriteStringValue("xml");
-				return;
-			case FormatType.SemiStructuredText:
-				writer.WriteStringValue("semi_structured_text");
-				return;
-			case FormatType.Ndjson:
-				writer.WriteStringValue("ndjson");
-				return;
-			case FormatType.Delimited:
-				writer.WriteStringValue("delimited");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "semi_structured_text")]
+	SemiStructuredText,
+	[System.Runtime.Serialization.EnumMember(Value = "xml")]
+	Xml
 }

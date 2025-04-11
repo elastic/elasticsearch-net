@@ -17,32 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationClassificationMetricsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccuracy = System.Text.Json.JsonEncodedText.Encode("accuracy");
+	private static readonly System.Text.Json.JsonEncodedText PropAucRoc = System.Text.Json.JsonEncodedText.Encode("auc_roc");
+	private static readonly System.Text.Json.JsonEncodedText PropMulticlassConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("multiclass_confusion_matrix");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propAccuracy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc?> propAucRoc = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMulticlassConfusionMatrix = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propPrecision = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propRecall = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccuracy.TryReadProperty(ref reader, options, PropAccuracy, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propAucRoc.TryReadProperty(ref reader, options, PropAucRoc, null))
+			{
+				continue;
+			}
+
+			if (propMulticlassConfusionMatrix.TryReadProperty(ref reader, options, PropMulticlassConfusionMatrix, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRecall.TryReadProperty(ref reader, options, PropRecall, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Accuracy = propAccuracy.Value,
+			AucRoc = propAucRoc.Value,
+			MulticlassConfusionMatrix = propMulticlassConfusionMatrix.Value,
+			Precision = propPrecision.Value,
+			Recall = propRecall.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccuracy, value.Accuracy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropAucRoc, value.AucRoc, null, null);
+		writer.WriteProperty(options, PropMulticlassConfusionMatrix, value.MulticlassConfusionMatrix, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRecall, value.Recall, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsConverter))]
 public sealed partial class DataframeEvaluationClassificationMetrics
 {
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationClassificationMetrics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeEvaluationClassificationMetrics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Accuracy of predictions (per-class and overall).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("accuracy")]
-	public IDictionary<string, object>? Accuracy { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Accuracy { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("auc_roc")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
 	/// <summary>
@@ -50,51 +136,80 @@ public sealed partial class DataframeEvaluationClassificationMetrics
 	/// Multiclass confusion matrix.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("multiclass_confusion_matrix")]
-	public IDictionary<string, object>? MulticlassConfusionMatrix { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? MulticlassConfusionMatrix { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Precision of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
-	public IDictionary<string, object>? Precision { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Precision { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Recall of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("recall")]
-	public IDictionary<string, object>? Recall { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Recall { get; set; }
 }
 
-public sealed partial class DataframeEvaluationClassificationMetricsDescriptor : SerializableDescriptor<DataframeEvaluationClassificationMetricsDescriptor>
+public readonly partial struct DataframeEvaluationClassificationMetricsDescriptor
 {
-	internal DataframeEvaluationClassificationMetricsDescriptor(Action<DataframeEvaluationClassificationMetricsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics Instance { get; init; }
 
-	public DataframeEvaluationClassificationMetricsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics instance)
 	{
+		Instance = instance;
 	}
 
-	private IDictionary<string, object>? AccuracyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRocValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor AucRocDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor> AucRocDescriptorAction { get; set; }
-	private IDictionary<string, object>? MulticlassConfusionMatrixValue { get; set; }
-	private IDictionary<string, object>? PrecisionValue { get; set; }
-	private IDictionary<string, object>? RecallValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationMetricsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Accuracy of predictions (per-class and overall).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsDescriptor Accuracy(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		AccuracyValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Accuracy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy()
+	{
+		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AddAccuracy(string key, object value)
+	{
+		Instance.Accuracy ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Accuracy.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -102,28 +217,32 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? aucRoc)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? value)
 	{
-		AucRocDescriptor = null;
-		AucRocDescriptorAction = null;
-		AucRocValue = aucRoc;
-		return Self;
+		Instance.AucRoc = value;
+		return this;
 	}
 
-	public DataframeEvaluationClassificationMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AucRoc()
 	{
-		AucRocValue = null;
-		AucRocDescriptorAction = null;
-		AucRocDescriptor = descriptor;
-		return Self;
+		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationClassificationMetricsDescriptor AucRoc(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AucRoc(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor>? action)
 	{
-		AucRocValue = null;
-		AucRocDescriptor = null;
-		AucRocDescriptorAction = configure;
-		return Self;
+		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -131,10 +250,39 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	/// Multiclass confusion matrix.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MulticlassConfusionMatrixValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.MulticlassConfusionMatrix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multiclass confusion matrix.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix()
+	{
+		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multiclass confusion matrix.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AddMulticlassConfusionMatrix(string key, object value)
+	{
+		Instance.MulticlassConfusionMatrix ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.MulticlassConfusionMatrix.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -142,10 +290,39 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	/// Precision of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsDescriptor Precision(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		PrecisionValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Precision = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision()
+	{
+		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AddPrecision(string key, object value)
+	{
+		Instance.Precision ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Precision.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -153,55 +330,51 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	/// Recall of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsDescriptor Recall(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		RecallValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Recall = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall()
 	{
-		writer.WriteStartObject();
-		if (AccuracyValue is not null)
+		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AddRecall(string key, object value)
+	{
+		Instance.Recall ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Recall.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("accuracy");
-			JsonSerializer.Serialize(writer, AccuracyValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AucRocDescriptor is not null)
-		{
-			writer.WritePropertyName("auc_roc");
-			JsonSerializer.Serialize(writer, AucRocDescriptor, options);
-		}
-		else if (AucRocDescriptorAction is not null)
-		{
-			writer.WritePropertyName("auc_roc");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(AucRocDescriptorAction), options);
-		}
-		else if (AucRocValue is not null)
-		{
-			writer.WritePropertyName("auc_roc");
-			JsonSerializer.Serialize(writer, AucRocValue, options);
-		}
-
-		if (MulticlassConfusionMatrixValue is not null)
-		{
-			writer.WritePropertyName("multiclass_confusion_matrix");
-			JsonSerializer.Serialize(writer, MulticlassConfusionMatrixValue, options);
-		}
-
-		if (PrecisionValue is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionValue, options);
-		}
-
-		if (RecallValue is not null)
-		{
-			writer.WritePropertyName("recall");
-			JsonSerializer.Serialize(writer, RecallValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

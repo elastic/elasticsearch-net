@@ -17,71 +17,190 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class FieldTypesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorCount = System.Text.Json.JsonEncodedText.Encode("indexed_vector_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMax = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_max");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMin = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_min");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptCount = System.Text.Json.JsonEncodedText.Encode("script_count");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.FieldTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<int> propIndexCount = default;
+		LocalJsonValue<long?> propIndexedVectorCount = default;
+		LocalJsonValue<long?> propIndexedVectorDimMax = default;
+		LocalJsonValue<long?> propIndexedVectorDimMin = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<int?> propScriptCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propIndexCount.TryReadProperty(ref reader, options, PropIndexCount, null))
+			{
+				continue;
+			}
+
+			if (propIndexedVectorCount.TryReadProperty(ref reader, options, PropIndexedVectorCount, null))
+			{
+				continue;
+			}
+
+			if (propIndexedVectorDimMax.TryReadProperty(ref reader, options, PropIndexedVectorDimMax, null))
+			{
+				continue;
+			}
+
+			if (propIndexedVectorDimMin.TryReadProperty(ref reader, options, PropIndexedVectorDimMin, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propScriptCount.TryReadProperty(ref reader, options, PropScriptCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.FieldTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			IndexCount = propIndexCount.Value,
+			IndexedVectorCount = propIndexedVectorCount.Value,
+			IndexedVectorDimMax = propIndexedVectorDimMax.Value,
+			IndexedVectorDimMin = propIndexedVectorDimMin.Value,
+			Name = propName.Value,
+			ScriptCount = propScriptCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.FieldTypes value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
+		writer.WriteProperty(options, PropIndexedVectorCount, value.IndexedVectorCount, null, null);
+		writer.WriteProperty(options, PropIndexedVectorDimMax, value.IndexedVectorDimMax, null, null);
+		writer.WriteProperty(options, PropIndexedVectorDimMin, value.IndexedVectorDimMin, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropScriptCount, value.ScriptCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.FieldTypesConverter))]
 public sealed partial class FieldTypes
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldTypes(int count, int indexCount, string name)
+	{
+		Count = count;
+		IndexCount = indexCount;
+		Name = name;
+	}
+#if NET7_0_OR_GREATER
+	public FieldTypes()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldTypes()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of occurrences of the field type in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of indices containing the field type in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_count")]
-	public int IndexCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int IndexCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For dense_vector field types, number of indexed vector types in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexed_vector_count")]
-	public long? IndexedVectorCount { get; init; }
+	public long? IndexedVectorCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For dense_vector field types, the maximum dimension of all indexed vector types in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexed_vector_dim_max")]
-	public long? IndexedVectorDimMax { get; init; }
+	public long? IndexedVectorDimMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For dense_vector field types, the minimum dimension of all indexed vector types in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexed_vector_dim_min")]
-	public long? IndexedVectorDimMin { get; init; }
+	public long? IndexedVectorDimMin { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name for the field type in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of fields that declare a script.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script_count")]
-	public int? ScriptCount { get; init; }
+	public int? ScriptCount { get; set; }
 }

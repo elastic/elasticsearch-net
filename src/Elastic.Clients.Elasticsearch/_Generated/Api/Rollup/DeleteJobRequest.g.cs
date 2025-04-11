@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-public sealed partial class DeleteJobRequestParameters : RequestParameters
+public sealed partial class DeleteJobRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -63,19 +85,42 @@ public sealed partial class DeleteJobRequestParameters : RequestParameters
 /// }
 /// </code>
 /// </summary>
-public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestConverter))]
+public sealed partial class DeleteJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteJobRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupDeleteJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.RollupDeleteJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "rollup.delete_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>
@@ -107,85 +152,88 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 /// }
 /// </code>
 /// </summary>
-public sealed partial class DeleteJobRequestDescriptor<TDocument> : RequestDescriptor<DeleteJobRequestDescriptor<TDocument>, DeleteJobRequestParameters>
+public readonly partial struct DeleteJobRequestDescriptor
 {
-	internal DeleteJobRequestDescriptor(Action<DeleteJobRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest Instance { get; init; }
 
-	public DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupDeleteJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "rollup.delete_job";
-
-	public DeleteJobRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteJobRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Delete a rollup job.
-/// </para>
-/// <para>
-/// A job must be stopped before it can be deleted.
-/// If you attempt to delete a started job, an error occurs.
-/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-/// </para>
-/// <para>
-/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-/// The API does not delete any previously rolled up data.
-/// This is by design; a user may wish to roll up a static data set.
-/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-/// </para>
-/// <code>
-/// POST my_rollup_index/_delete_by_query
-/// {
-///   "query": {
-///     "term": {
-///       "_rollup.id": "the_rollup_job_id"
-///     }
-///   }
-/// }
-/// </code>
-/// </summary>
-public sealed partial class DeleteJobRequestDescriptor : RequestDescriptor<DeleteJobRequestDescriptor, DeleteJobRequestParameters>
-{
-	internal DeleteJobRequestDescriptor(Action<DeleteJobRequestDescriptor> configure) => configure.Invoke(this);
-
-	public DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupDeleteJob;
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "rollup.delete_job";
-
-	public DeleteJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor> action)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class Weights
+internal sealed partial class WeightsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Weights>
 {
-	[JsonInclude, JsonPropertyName("weights")]
-	public double WeightsValue { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropWeightsValue = System.Text.Json.JsonEncodedText.Encode("weights");
 
-public sealed partial class WeightsDescriptor : SerializableDescriptor<WeightsDescriptor>
-{
-	internal WeightsDescriptor(Action<WeightsDescriptor> configure) => configure.Invoke(this);
-
-	public WeightsDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Weights Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propWeightsValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propWeightsValue.TryReadProperty(ref reader, options, PropWeightsValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Weights(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			WeightsValue = propWeightsValue.Value
+		};
 	}
 
-	private double WeightsValueValue { get; set; }
-
-	public WeightsDescriptor WeightsValue(double weightsValue)
-	{
-		WeightsValueValue = weightsValue;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Weights value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("weights");
-		writer.WriteNumberValue(WeightsValueValue);
+		writer.WriteProperty(options, PropWeightsValue, value.WeightsValue, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.WeightsConverter))]
+public sealed partial class Weights
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Weights(double weightsValue)
+	{
+		WeightsValue = weightsValue;
+	}
+#if NET7_0_OR_GREATER
+	public Weights()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Weights()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Weights(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double WeightsValue { get; set; }
+}
+
+public readonly partial struct WeightsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Weights Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WeightsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Weights instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WeightsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Weights(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Weights instance) => new Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Weights(Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor WeightsValue(double value)
+	{
+		Instance.WeightsValue = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Weights Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Weights(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlInvalidateRequestParameters : RequestParameters
+public sealed partial class SamlInvalidateRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SamlInvalidateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+
+	public override Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAcs = default;
+		LocalJsonValue<string> propQueryString = default;
+		LocalJsonValue<string?> propRealm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcs.TryReadProperty(ref reader, options, PropAcs, null))
+			{
+				continue;
+			}
+
+			if (propQueryString.TryReadProperty(ref reader, options, PropQueryString, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Acs = propAcs.Value,
+			QueryString = propQueryString.Value,
+			Realm = propRealm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcs, value.Acs, null, null);
+		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -52,11 +102,34 @@ public sealed partial class SamlInvalidateRequestParameters : RequestParameters
 /// Thus the user can be redirected back to their IdP.
 /// </para>
 /// </summary>
-public sealed partial class SamlInvalidateRequest : PlainRequest<SamlInvalidateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestConverter))]
+public sealed partial class SamlInvalidateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlInvalidate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlInvalidateRequest(string queryString)
+	{
+		QueryString = queryString;
+	}
+#if NET7_0_OR_GREATER
+	public SamlInvalidateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SamlInvalidateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecuritySamlInvalidate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -67,7 +140,6 @@ public sealed partial class SamlInvalidateRequest : PlainRequest<SamlInvalidateR
 	/// The Assertion Consumer Service URL that matches the one of the SAML realm in Elasticsearch that should be used. You must specify either this parameter or the <c>realm</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("acs")]
 	public string? Acs { get; set; }
 
 	/// <summary>
@@ -79,15 +151,17 @@ public sealed partial class SamlInvalidateRequest : PlainRequest<SamlInvalidateR
 	/// The client application must not attempt to parse or process the string in any way.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_string")]
-	public string QueryString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string QueryString { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the SAML realm in Elasticsearch the configuration. You must specify either this parameter or the <c>acs</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
 	public string? Realm { get; set; }
 }
 
@@ -109,35 +183,33 @@ public sealed partial class SamlInvalidateRequest : PlainRequest<SamlInvalidateR
 /// Thus the user can be redirected back to their IdP.
 /// </para>
 /// </summary>
-public sealed partial class SamlInvalidateRequestDescriptor : RequestDescriptor<SamlInvalidateRequestDescriptor, SamlInvalidateRequestParameters>
+public readonly partial struct SamlInvalidateRequestDescriptor
 {
-	internal SamlInvalidateRequestDescriptor(Action<SamlInvalidateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlInvalidateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public SamlInvalidateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlInvalidate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.saml_invalidate";
-
-	private string? AcsValue { get; set; }
-	private string QueryStringValue { get; set; }
-	private string? RealmValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The Assertion Consumer Service URL that matches the one of the SAML realm in Elasticsearch that should be used. You must specify either this parameter or the <c>realm</c> parameter.
 	/// </para>
 	/// </summary>
-	public SamlInvalidateRequestDescriptor Acs(string? acs)
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor Acs(string? value)
 	{
-		AcsValue = acs;
-		return Self;
+		Instance.Acs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -149,10 +221,10 @@ public sealed partial class SamlInvalidateRequestDescriptor : RequestDescriptor<
 	/// The client application must not attempt to parse or process the string in any way.
 	/// </para>
 	/// </summary>
-	public SamlInvalidateRequestDescriptor QueryString(string queryString)
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor QueryString(string value)
 	{
-		QueryStringValue = queryString;
-		return Self;
+		Instance.QueryString = value;
+		return this;
 	}
 
 	/// <summary>
@@ -160,29 +232,59 @@ public sealed partial class SamlInvalidateRequestDescriptor : RequestDescriptor<
 	/// The name of the SAML realm in Elasticsearch the configuration. You must specify either this parameter or the <c>acs</c> parameter.
 	/// </para>
 	/// </summary>
-	public SamlInvalidateRequestDescriptor Realm(string? realm)
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor Realm(string? value)
 	{
-		RealmValue = realm;
-		return Self;
+		Instance.Realm = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AcsValue))
-		{
-			writer.WritePropertyName("acs");
-			writer.WriteStringValue(AcsValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("query_string");
-		writer.WriteStringValue(QueryStringValue);
-		if (!string.IsNullOrEmpty(RealmValue))
-		{
-			writer.WritePropertyName("realm");
-			writer.WriteStringValue(RealmValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

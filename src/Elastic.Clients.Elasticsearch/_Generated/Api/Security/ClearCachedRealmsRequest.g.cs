@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ClearCachedRealmsRequestParameters : RequestParameters
+public sealed partial class ClearCachedRealmsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,7 +31,36 @@ public sealed partial class ClearCachedRealmsRequestParameters : RequestParamete
 	/// If you do not specify this parameter, the API evicts all users from the user cache.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Usernames { get => Q<ICollection<string>?>("usernames"); set => Q("usernames", value); }
+	public System.Collections.Generic.ICollection<string>? Usernames { get => Q<System.Collections.Generic.ICollection<string>?>("usernames"); set => Q("usernames", value); }
+}
+
+internal sealed partial class ClearCachedRealmsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -55,15 +77,27 @@ public sealed partial class ClearCachedRealmsRequestParameters : RequestParamete
 /// For more information, refer to the documentation about controlling the user cache.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedRealmsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestConverter))]
+public sealed partial class ClearCachedRealmsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Names realms) : base(r => r.Required("realms", realms))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClearCachedRealmsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedRealms;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityClearCachedRealms;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -71,12 +105,24 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of realms.
+	/// To clear all realms, use an asterisk (<c>*</c>).
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names Realms { get => P<Elastic.Clients.Elasticsearch.Names>("realms"); set => PR("realms", value); }
+
+	/// <summary>
+	/// <para>
 	/// A comma-separated list of the users to clear from the cache.
 	/// If you do not specify this parameter, the API evicts all users from the user cache.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Usernames { get => Q<ICollection<string>?>("usernames"); set => Q("usernames", value); }
+	public System.Collections.Generic.ICollection<string>? Usernames { get => Q<System.Collections.Generic.ICollection<string>?>("usernames"); set => Q("usernames", value); }
 }
 
 /// <summary>
@@ -93,31 +139,114 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 /// For more information, refer to the documentation about controlling the user cache.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedRealmsRequestDescriptor : RequestDescriptor<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsRequestParameters>
+public readonly partial struct ClearCachedRealmsRequestDescriptor
 {
-	internal ClearCachedRealmsRequestDescriptor(Action<ClearCachedRealmsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest Instance { get; init; }
 
-	public ClearCachedRealmsRequestDescriptor(Elastic.Clients.Elasticsearch.Names realms) : base(r => r.Required("realms", realms))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCachedRealmsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedRealms;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.clear_cached_realms";
-
-	public ClearCachedRealmsRequestDescriptor Usernames(ICollection<string>? usernames) => Qs("usernames", usernames);
-
-	public ClearCachedRealmsRequestDescriptor Realms(Elastic.Clients.Elasticsearch.Names realms)
+	public ClearCachedRealmsRequestDescriptor(Elastic.Clients.Elasticsearch.Names realms)
 	{
-		RouteValues.Required("realms", realms);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(realms);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ClearCachedRealmsRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of realms.
+	/// To clear all realms, use an asterisk (<c>*</c>).
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Realms(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.Realms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the users to clear from the cache.
+	/// If you do not specify this parameter, the API evicts all users from the user cache.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Usernames = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the users to clear from the cache.
+	/// If you do not specify this parameter, the API evicts all users from the user cache.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames(params string[] values)
+	{
+		Instance.Usernames = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

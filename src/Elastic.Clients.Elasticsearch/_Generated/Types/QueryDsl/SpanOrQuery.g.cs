@@ -17,18 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SpanOrQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropClauses = System.Text.Json.JsonEncodedText.Encode("clauses");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>> propClauses = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propClauses.TryReadProperty(ref reader, options, PropClauses, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Clauses = propClauses.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropClauses, value.Clauses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>(o, v, null));
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryConverter))]
 public sealed partial class SpanOrQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanOrQuery(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	{
+		Clauses = clauses;
+	}
+#if NET7_0_OR_GREATER
+	public SpanOrQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SpanOrQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanOrQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +113,6 @@ public sealed partial class SpanOrQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,29 +120,32 @@ public sealed partial class SpanOrQuery
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("clauses")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanOrQuery spanOrQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanOr(spanOrQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanOrQuery spanOrQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanOr(spanOrQuery);
 }
 
-public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescriptor<SpanOrQueryDescriptor<TDocument>>
+public readonly partial struct SpanOrQueryDescriptor<TDocument>
 {
-	internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Instance { get; init; }
 
-	public SpanOrQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanOrQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanOrQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -77,10 +155,10 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanOrQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -88,112 +166,73 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	public SpanOrQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesValue = clauses;
-		return Self;
+		Instance.Clauses = value;
+		return this;
 	}
 
-	public SpanOrQueryDescriptor<TDocument> Clauses(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
-		ClausesValue = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptor = descriptor;
-		return Self;
+		Instance.Clauses = [.. values];
+		return this;
 	}
 
-	public SpanOrQueryDescriptor<TDocument> Clauses(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] actions)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Clauses = items;
+		return this;
 	}
 
-	public SpanOrQueryDescriptor<TDocument> Clauses(params Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = configure;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public SpanOrQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (ClausesDescriptor is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ClausesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(ClausesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			foreach (var action in ClausesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, ClausesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanOrQueryDescriptor>
+public readonly partial struct SpanOrQueryDescriptor
 {
-	internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Instance { get; init; }
 
-	public SpanOrQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanOrQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor ClausesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanOrQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -203,10 +242,10 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanOrQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -214,94 +253,68 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	public SpanOrQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesValue = clauses;
-		return Self;
+		Instance.Clauses = value;
+		return this;
 	}
 
-	public SpanOrQueryDescriptor Clauses(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
-		ClausesValue = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptor = descriptor;
-		return Self;
+		Instance.Clauses = [.. values];
+		return this;
 	}
 
-	public SpanOrQueryDescriptor Clauses(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] actions)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action));
+		}
+
+		Instance.Clauses = items;
+		return this;
 	}
 
-	public SpanOrQueryDescriptor Clauses(params Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>>[] actions)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Clauses = items;
+		return this;
 	}
 
-	public SpanOrQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (ClausesDescriptor is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ClausesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(ClausesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			foreach (var action in ClausesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, ClausesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

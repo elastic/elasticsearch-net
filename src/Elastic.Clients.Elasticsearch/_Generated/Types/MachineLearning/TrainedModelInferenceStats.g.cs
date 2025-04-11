@@ -17,18 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelInferenceStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCacheMissCount = System.Text.Json.JsonEncodedText.Encode("cache_miss_count");
+	private static readonly System.Text.Json.JsonEncodedText PropFailureCount = System.Text.Json.JsonEncodedText.Encode("failure_count");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceCount = System.Text.Json.JsonEncodedText.Encode("inference_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingAllFieldsCount = System.Text.Json.JsonEncodedText.Encode("missing_all_fields_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCacheMissCount = default;
+		LocalJsonValue<int> propFailureCount = default;
+		LocalJsonValue<int> propInferenceCount = default;
+		LocalJsonValue<int> propMissingAllFieldsCount = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCacheMissCount.TryReadProperty(ref reader, options, PropCacheMissCount, null))
+			{
+				continue;
+			}
+
+			if (propFailureCount.TryReadProperty(ref reader, options, PropFailureCount, null))
+			{
+				continue;
+			}
+
+			if (propInferenceCount.TryReadProperty(ref reader, options, PropInferenceCount, null))
+			{
+				continue;
+			}
+
+			if (propMissingAllFieldsCount.TryReadProperty(ref reader, options, PropMissingAllFieldsCount, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CacheMissCount = propCacheMissCount.Value,
+			FailureCount = propFailureCount.Value,
+			InferenceCount = propInferenceCount.Value,
+			MissingAllFieldsCount = propMissingAllFieldsCount.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheMissCount, value.CacheMissCount, null, null);
+		writer.WriteProperty(options, PropFailureCount, value.FailureCount, null, null);
+		writer.WriteProperty(options, PropInferenceCount, value.InferenceCount, null, null);
+		writer.WriteProperty(options, PropMissingAllFieldsCount, value.MissingAllFieldsCount, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStatsConverter))]
 public sealed partial class TrainedModelInferenceStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelInferenceStats(int cacheMissCount, int failureCount, int inferenceCount, int missingAllFieldsCount, System.DateTimeOffset timestamp)
+	{
+		CacheMissCount = cacheMissCount;
+		FailureCount = failureCount;
+		InferenceCount = inferenceCount;
+		MissingAllFieldsCount = missingAllFieldsCount;
+		Timestamp = timestamp;
+	}
+#if NET7_0_OR_GREATER
+	public TrainedModelInferenceStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TrainedModelInferenceStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModelInferenceStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of times the model was loaded for inference and was not retrieved from the cache.
@@ -37,16 +135,22 @@ public sealed partial class TrainedModelInferenceStats
 	/// Refer to general machine learning settings for the appropriate settings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cache_miss_count")]
-	public int CacheMissCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int CacheMissCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of failures when using the model for inference.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("failure_count")]
-	public int FailureCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int FailureCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -54,22 +158,31 @@ public sealed partial class TrainedModelInferenceStats
 	/// This is across all inference contexts, including all pipelines.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_count")]
-	public int InferenceCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int InferenceCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of inference calls where all the training features for the model were missing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing_all_fields_count")]
-	public int MissingAllFieldsCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MissingAllFieldsCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time when the statistics were last updated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long Timestamp { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset Timestamp { get; set; }
 }

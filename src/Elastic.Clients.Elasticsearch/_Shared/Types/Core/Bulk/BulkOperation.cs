@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
@@ -17,9 +18,12 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// <remarks>
 /// This is an abstract class.
 /// </remarks>
-public abstract class BulkOperation : IBulkOperation, IStreamSerializable
+public abstract class BulkOperation :
+	IBulkOperation,
+	IStreamSerializable
 {
-	internal BulkOperation() { }
+	internal BulkOperation()
+	{ }
 
 	/// <summary>
 	/// The document ID.
@@ -98,11 +102,11 @@ public abstract class BulkOperation : IBulkOperation, IStreamSerializable
 	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> for the current client instance.</param>
 	protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings);
 
-	void IBulkOperation.PrepareIndex(IndexName bulkRequestIndex)
+	void IBulkOperation.PrepareIndex(IndexName? bulkRequestIndex)
 	{
 		Index ??= bulkRequestIndex ?? ClrType;
 
-		if (bulkRequestIndex is not null && Index.Equals(bulkRequestIndex))
+		if (bulkRequestIndex is not null && (Index?.Equals(bulkRequestIndex) ?? false))
 			Index = null;
 	}
 

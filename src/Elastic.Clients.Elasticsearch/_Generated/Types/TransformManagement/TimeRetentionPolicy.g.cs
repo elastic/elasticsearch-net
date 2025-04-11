@@ -17,25 +17,96 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class TimeRetentionPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAge = System.Text.Json.JsonEncodedText.Encode("max_age");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propMaxAge = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMaxAge.TryReadProperty(ref reader, options, PropMaxAge, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			MaxAge = propMaxAge.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMaxAge, value.MaxAge, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyConverter))]
 public sealed partial class TimeRetentionPolicy
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.Duration maxAge)
+	{
+		Field = field;
+		MaxAge = maxAge;
+	}
+#if NET7_0_OR_GREATER
+	public TimeRetentionPolicy()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TimeRetentionPolicy()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The date field that is used to calculate the age of the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,43 +114,41 @@ public sealed partial class TimeRetentionPolicy
 	/// value are removed from the destination index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_age")]
-	public Elastic.Clients.Elasticsearch.Duration MaxAge { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy(TimeRetentionPolicy timeRetentionPolicy) => Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy.Time(timeRetentionPolicy);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration MaxAge { get; set; }
 }
 
-public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : SerializableDescriptor<TimeRetentionPolicyDescriptor<TDocument>>
+public readonly partial struct TimeRetentionPolicyDescriptor<TDocument>
 {
-	internal TimeRetentionPolicyDescriptor(Action<TimeRetentionPolicyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Instance { get; init; }
 
-	public TimeRetentionPolicyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeRetentionPolicyDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration MaxAgeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeRetentionPolicyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The date field that is used to calculate the age of the document.
 	/// </para>
 	/// </summary>
-	public TimeRetentionPolicyDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
-	public TimeRetentionPolicyDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -87,10 +156,10 @@ public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : Serializa
 	/// The date field that is used to calculate the age of the document.
 	/// </para>
 	/// </summary>
-	public TimeRetentionPolicyDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -99,54 +168,49 @@ public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : Serializa
 	/// value are removed from the destination index.
 	/// </para>
 	/// </summary>
-	public TimeRetentionPolicyDescriptor<TDocument> MaxAge(Elastic.Clients.Elasticsearch.Duration maxAge)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> MaxAge(Elastic.Clients.Elasticsearch.Duration value)
 	{
-		MaxAgeValue = maxAge;
-		return Self;
+		Instance.MaxAge = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("max_age");
-		JsonSerializer.Serialize(writer, MaxAgeValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescriptor<TimeRetentionPolicyDescriptor>
+public readonly partial struct TimeRetentionPolicyDescriptor
 {
-	internal TimeRetentionPolicyDescriptor(Action<TimeRetentionPolicyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Instance { get; init; }
 
-	public TimeRetentionPolicyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeRetentionPolicyDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration MaxAgeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeRetentionPolicyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The date field that is used to calculate the age of the document.
 	/// </para>
 	/// </summary>
-	public TimeRetentionPolicyDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
-	public TimeRetentionPolicyDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -154,10 +218,10 @@ public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescript
 	/// The date field that is used to calculate the age of the document.
 	/// </para>
 	/// </summary>
-	public TimeRetentionPolicyDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -166,19 +230,17 @@ public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescript
 	/// value are removed from the destination index.
 	/// </para>
 	/// </summary>
-	public TimeRetentionPolicyDescriptor MaxAge(Elastic.Clients.Elasticsearch.Duration maxAge)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor MaxAge(Elastic.Clients.Elasticsearch.Duration value)
 	{
-		MaxAgeValue = maxAge;
-		return Self;
+		Instance.MaxAge = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("max_age");
-		JsonSerializer.Serialize(writer, MaxAgeValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

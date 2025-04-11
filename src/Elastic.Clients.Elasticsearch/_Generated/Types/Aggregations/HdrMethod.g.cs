@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class HdrMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.HdrMethod>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfSignificantValueDigits = System.Text.Json.JsonEncodedText.Encode("number_of_significant_value_digits");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.HdrMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propNumberOfSignificantValueDigits = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumberOfSignificantValueDigits.TryReadProperty(ref reader, options, PropNumberOfSignificantValueDigits, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.HdrMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumberOfSignificantValueDigits = propNumberOfSignificantValueDigits.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.HdrMethod value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumberOfSignificantValueDigits, value.NumberOfSignificantValueDigits, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodConverter))]
 public sealed partial class HdrMethod
 {
+#if NET7_0_OR_GREATER
+	public HdrMethod()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public HdrMethod()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HdrMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies the resolution of values for the histogram in number of significant digits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_significant_value_digits")]
 	public int? NumberOfSignificantValueDigits { get; set; }
 }
 
-public sealed partial class HdrMethodDescriptor : SerializableDescriptor<HdrMethodDescriptor>
+public readonly partial struct HdrMethodDescriptor
 {
-	internal HdrMethodDescriptor(Action<HdrMethodDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod Instance { get; init; }
 
-	public HdrMethodDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HdrMethodDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumberOfSignificantValueDigitsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HdrMethodDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.HdrMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod instance) => new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.HdrMethod(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the resolution of values for the histogram in number of significant digits.
 	/// </para>
 	/// </summary>
-	public HdrMethodDescriptor NumberOfSignificantValueDigits(int? numberOfSignificantValueDigits)
+	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor NumberOfSignificantValueDigits(int? value)
 	{
-		NumberOfSignificantValueDigitsValue = numberOfSignificantValueDigits;
-		return Self;
+		Instance.NumberOfSignificantValueDigits = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.HdrMethod Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (NumberOfSignificantValueDigitsValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("number_of_significant_value_digits");
-			writer.WriteNumberValue(NumberOfSignificantValueDigitsValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.HdrMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.HdrMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,257 +17,232 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class PhasesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCold = System.Text.Json.JsonEncodedText.Encode("cold");
+	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen");
+	private static readonly System.Text.Json.JsonEncodedText PropHot = System.Text.Json.JsonEncodedText.Encode("hot");
+	private static readonly System.Text.Json.JsonEncodedText PropWarm = System.Text.Json.JsonEncodedText.Encode("warm");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase?> propCold = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase?> propDelete = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase?> propFrozen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase?> propHot = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase?> propWarm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCold.TryReadProperty(ref reader, options, PropCold, null))
+			{
+				continue;
+			}
+
+			if (propDelete.TryReadProperty(ref reader, options, PropDelete, null))
+			{
+				continue;
+			}
+
+			if (propFrozen.TryReadProperty(ref reader, options, PropFrozen, null))
+			{
+				continue;
+			}
+
+			if (propHot.TryReadProperty(ref reader, options, PropHot, null))
+			{
+				continue;
+			}
+
+			if (propWarm.TryReadProperty(ref reader, options, PropWarm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cold = propCold.Value,
+			Delete = propDelete.Value,
+			Frozen = propFrozen.Value,
+			Hot = propHot.Value,
+			Warm = propWarm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCold, value.Cold, null, null);
+		writer.WriteProperty(options, PropDelete, value.Delete, null, null);
+		writer.WriteProperty(options, PropFrozen, value.Frozen, null, null);
+		writer.WriteProperty(options, PropHot, value.Hot, null, null);
+		writer.WriteProperty(options, PropWarm, value.Warm, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesConverter))]
 public sealed partial class Phases
 {
-	[JsonInclude, JsonPropertyName("cold")]
+#if NET7_0_OR_GREATER
+	public Phases()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Phases()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? Cold { get; set; }
-	[JsonInclude, JsonPropertyName("delete")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? Delete { get; set; }
-	[JsonInclude, JsonPropertyName("frozen")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? Frozen { get; set; }
-	[JsonInclude, JsonPropertyName("hot")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? Hot { get; set; }
-	[JsonInclude, JsonPropertyName("warm")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? Warm { get; set; }
 }
 
-public sealed partial class PhasesDescriptor : SerializableDescriptor<PhasesDescriptor>
+public readonly partial struct PhasesDescriptor
 {
-	internal PhasesDescriptor(Action<PhasesDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Instance { get; init; }
 
-	public PhasesDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhasesDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? ColdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor ColdDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> ColdDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? DeleteValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor DeleteDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> DeleteDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? FrozenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor FrozenDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> FrozenDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? HotValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor HotDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> HotDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? WarmValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor WarmDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> WarmDescriptorAction { get; set; }
-
-	public PhasesDescriptor Cold(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? cold)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhasesDescriptor()
 	{
-		ColdDescriptor = null;
-		ColdDescriptorAction = null;
-		ColdValue = cold;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PhasesDescriptor Cold(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Cold(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? value)
 	{
-		ColdValue = null;
-		ColdDescriptorAction = null;
-		ColdDescriptor = descriptor;
-		return Self;
+		Instance.Cold = value;
+		return this;
 	}
 
-	public PhasesDescriptor Cold(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Cold()
 	{
-		ColdValue = null;
-		ColdDescriptor = null;
-		ColdDescriptorAction = configure;
-		return Self;
+		Instance.Cold = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(null);
+		return this;
 	}
 
-	public PhasesDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? delete)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Cold(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor>? action)
 	{
-		DeleteDescriptor = null;
-		DeleteDescriptorAction = null;
-		DeleteValue = delete;
-		return Self;
+		Instance.Cold = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(action);
+		return this;
 	}
 
-	public PhasesDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? value)
 	{
-		DeleteValue = null;
-		DeleteDescriptorAction = null;
-		DeleteDescriptor = descriptor;
-		return Self;
+		Instance.Delete = value;
+		return this;
 	}
 
-	public PhasesDescriptor Delete(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Delete()
 	{
-		DeleteValue = null;
-		DeleteDescriptor = null;
-		DeleteDescriptorAction = configure;
-		return Self;
+		Instance.Delete = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(null);
+		return this;
 	}
 
-	public PhasesDescriptor Frozen(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? frozen)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Delete(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor>? action)
 	{
-		FrozenDescriptor = null;
-		FrozenDescriptorAction = null;
-		FrozenValue = frozen;
-		return Self;
+		Instance.Delete = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(action);
+		return this;
 	}
 
-	public PhasesDescriptor Frozen(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Frozen(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? value)
 	{
-		FrozenValue = null;
-		FrozenDescriptorAction = null;
-		FrozenDescriptor = descriptor;
-		return Self;
+		Instance.Frozen = value;
+		return this;
 	}
 
-	public PhasesDescriptor Frozen(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Frozen()
 	{
-		FrozenValue = null;
-		FrozenDescriptor = null;
-		FrozenDescriptorAction = configure;
-		return Self;
+		Instance.Frozen = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(null);
+		return this;
 	}
 
-	public PhasesDescriptor Hot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? hot)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Frozen(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor>? action)
 	{
-		HotDescriptor = null;
-		HotDescriptorAction = null;
-		HotValue = hot;
-		return Self;
+		Instance.Frozen = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(action);
+		return this;
 	}
 
-	public PhasesDescriptor Hot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Hot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? value)
 	{
-		HotValue = null;
-		HotDescriptorAction = null;
-		HotDescriptor = descriptor;
-		return Self;
+		Instance.Hot = value;
+		return this;
 	}
 
-	public PhasesDescriptor Hot(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Hot()
 	{
-		HotValue = null;
-		HotDescriptor = null;
-		HotDescriptorAction = configure;
-		return Self;
+		Instance.Hot = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(null);
+		return this;
 	}
 
-	public PhasesDescriptor Warm(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? warm)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Hot(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor>? action)
 	{
-		WarmDescriptor = null;
-		WarmDescriptorAction = null;
-		WarmValue = warm;
-		return Self;
+		Instance.Hot = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(action);
+		return this;
 	}
 
-	public PhasesDescriptor Warm(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Warm(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? value)
 	{
-		WarmValue = null;
-		WarmDescriptorAction = null;
-		WarmDescriptor = descriptor;
-		return Self;
+		Instance.Warm = value;
+		return this;
 	}
 
-	public PhasesDescriptor Warm(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Warm()
 	{
-		WarmValue = null;
-		WarmDescriptor = null;
-		WarmDescriptorAction = configure;
-		return Self;
+		Instance.Warm = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor Warm(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ColdDescriptor is not null)
+		Instance.Warm = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("cold");
-			JsonSerializer.Serialize(writer, ColdDescriptor, options);
-		}
-		else if (ColdDescriptorAction is not null)
-		{
-			writer.WritePropertyName("cold");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(ColdDescriptorAction), options);
-		}
-		else if (ColdValue is not null)
-		{
-			writer.WritePropertyName("cold");
-			JsonSerializer.Serialize(writer, ColdValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DeleteDescriptor is not null)
-		{
-			writer.WritePropertyName("delete");
-			JsonSerializer.Serialize(writer, DeleteDescriptor, options);
-		}
-		else if (DeleteDescriptorAction is not null)
-		{
-			writer.WritePropertyName("delete");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(DeleteDescriptorAction), options);
-		}
-		else if (DeleteValue is not null)
-		{
-			writer.WritePropertyName("delete");
-			JsonSerializer.Serialize(writer, DeleteValue, options);
-		}
-
-		if (FrozenDescriptor is not null)
-		{
-			writer.WritePropertyName("frozen");
-			JsonSerializer.Serialize(writer, FrozenDescriptor, options);
-		}
-		else if (FrozenDescriptorAction is not null)
-		{
-			writer.WritePropertyName("frozen");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(FrozenDescriptorAction), options);
-		}
-		else if (FrozenValue is not null)
-		{
-			writer.WritePropertyName("frozen");
-			JsonSerializer.Serialize(writer, FrozenValue, options);
-		}
-
-		if (HotDescriptor is not null)
-		{
-			writer.WritePropertyName("hot");
-			JsonSerializer.Serialize(writer, HotDescriptor, options);
-		}
-		else if (HotDescriptorAction is not null)
-		{
-			writer.WritePropertyName("hot");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(HotDescriptorAction), options);
-		}
-		else if (HotValue is not null)
-		{
-			writer.WritePropertyName("hot");
-			JsonSerializer.Serialize(writer, HotValue, options);
-		}
-
-		if (WarmDescriptor is not null)
-		{
-			writer.WritePropertyName("warm");
-			JsonSerializer.Serialize(writer, WarmDescriptor, options);
-		}
-		else if (WarmDescriptorAction is not null)
-		{
-			writer.WritePropertyName("warm");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor(WarmDescriptorAction), options);
-		}
-		else if (WarmValue is not null)
-		{
-			writer.WritePropertyName("warm");
-			JsonSerializer.Serialize(writer, WarmValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

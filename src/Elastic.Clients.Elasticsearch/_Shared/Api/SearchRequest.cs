@@ -4,7 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -20,7 +24,7 @@ public partial class SearchRequest
 
 	protected override (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
 	{
-		if (Pit is not null && !string.IsNullOrEmpty(Pit.Id ?? string.Empty) && routeValues.ContainsKey("index"))
+		if (!string.IsNullOrEmpty(Pit?.Id) && routeValues.ContainsKey("index"))
 		{
 			routeValues.Remove("index");
 		}
@@ -29,6 +33,7 @@ public partial class SearchRequest
 	}
 }
 
+[JsonConverter(typeof(SearchRequestOfTConverterFactory))]
 public partial class SearchRequest<TInferDocument> : SearchRequest
 {
 	public SearchRequest(Indices? indices) : base(indices)
@@ -40,39 +45,38 @@ public partial class SearchRequest<TInferDocument> : SearchRequest
 	}
 }
 
-public sealed partial class SearchRequestDescriptor<TDocument>
+public readonly partial struct SearchRequestDescriptor<TDocument>
 {
-	public SearchRequestDescriptor<TDocument> Index(Indices indices)
-	{
-		Self.RouteValues.Optional("index", indices);
-		return Self;
-	}
+	[Obsolete("Use 'Indices()' instead.")]
+	public SearchRequestDescriptor<TDocument> Index(Indices indices) => Indices(indices);
 
 	public SearchRequestDescriptor<TDocument> Pit(string id, Action<Core.Search.PointInTimeReferenceDescriptor> configure)
 	{
-		PitValue = null;
-		PitDescriptorAction = null;
 		configure += a => a.Id(id);
-		PitDescriptorAction = configure;
-		return Self;
+		return Pit(configure);
 	}
+}
 
-	internal override void BeforeRequest()
+internal sealed class SearchRequestOfTConverterFactory :
+	JsonConverterFactory
+{
+	public override bool CanConvert(Type typeToConvert) =>
+		typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(SearchRequest<>);
+
+	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (AggregationsValue is not null || /*AggregationsDescriptor is not null || AggregationsDescriptorAction is not null ||*/
-		    SuggestValue is not null || SuggestDescriptor is not null || SuggestDescriptorAction is not null)
-		{
-			TypedKeys(true);
-		}
-	}
+		var args = typeToConvert.GetGenericArguments();
 
-	protected override (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
-	{
-		if ((Self.PitValue is not null || Self.PitDescriptor is not null || Self.PitDescriptorAction is not null) && routeValues.ContainsKey("index"))
-		{
-			routeValues.Remove("index");
-		}
-
-		return base.ResolveUrl(routeValues, settings);
+		return (JsonConverter)Activator.CreateInstance(typeof(SearchRequestOfTConverter<>).MakeGenericType(args[0]));
 	}
+}
+
+internal sealed class SearchRequestOfTConverter<T> :
+	JsonConverter<SearchRequest<T>>
+{
+	public override SearchRequest<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+		throw new NotSupportedException();
+
+	public override void Write(Utf8JsonWriter writer, SearchRequest<T> value, JsonSerializerOptions options) =>
+		writer.WriteValue(options, (SearchRequest)value);
 }

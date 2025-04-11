@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ModelSnapshotUpgradeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotId = System.Text.Json.JsonEncodedText.Encode("snapshot_id");
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAssignmentExplanation = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>> propNode = default;
+		LocalJsonValue<string> propSnapshotId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState> propState = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAssignmentExplanation.TryReadProperty(ref reader, options, PropAssignmentExplanation, null))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, static System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSnapshotId.TryReadProperty(ref reader, options, PropSnapshotId, null))
+			{
+				continue;
+			}
+
+			if (propState.TryReadProperty(ref reader, options, PropState, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AssignmentExplanation = propAssignmentExplanation.Value,
+			JobId = propJobId.Value,
+			Node = propNode.Value,
+			SnapshotId = propSnapshotId.Value,
+			State = propState.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAssignmentExplanation, value.AssignmentExplanation, null, null);
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> v) => w.WriteKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, v, null, null));
+		writer.WriteProperty(options, PropSnapshotId, value.SnapshotId, null, null);
+		writer.WriteProperty(options, PropState, value.State, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgradeConverter))]
 public sealed partial class ModelSnapshotUpgrade
 {
-	[JsonInclude, JsonPropertyName("assignment_explanation")]
-	public string AssignmentExplanation { get; init; }
-	[JsonInclude, JsonPropertyName("job_id")]
-	public string JobId { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> Node { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot_id")]
-	public string SnapshotId { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState State { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelSnapshotUpgrade(string assignmentExplanation, string jobId, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> node, string snapshotId, Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState state)
+	{
+		AssignmentExplanation = assignmentExplanation;
+		JobId = jobId;
+		Node = node;
+		SnapshotId = snapshotId;
+		State = state;
+	}
+#if NET7_0_OR_GREATER
+	public ModelSnapshotUpgrade()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ModelSnapshotUpgrade()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ModelSnapshotUpgrade(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string AssignmentExplanation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string JobId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> Node { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string SnapshotId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState State { get; set; }
 }

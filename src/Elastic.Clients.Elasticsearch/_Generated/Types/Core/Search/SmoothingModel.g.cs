@@ -17,241 +17,245 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-[JsonConverter(typeof(SmoothingModelConverter))]
+internal sealed partial class SmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantLaplace = System.Text.Json.JsonEncodedText.Encode("laplace");
+	private static readonly System.Text.Json.JsonEncodedText VariantLinearInterpolation = System.Text.Json.JsonEncodedText.Encode("linear_interpolation");
+	private static readonly System.Text.Json.JsonEncodedText VariantStupidBackoff = System.Text.Json.JsonEncodedText.Encode("stupid_backoff");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantLaplace))
+			{
+				variantType = VariantLaplace.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLinearInterpolation))
+			{
+				variantType = VariantLinearInterpolation.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantStupidBackoff))
+			{
+				variantType = VariantStupidBackoff.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "laplace":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel)value.Variant, null, null);
+				break;
+			case "linear_interpolation":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel)value.Variant, null, null);
+				break;
+			case "stupid_backoff":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelConverter))]
 public sealed partial class SmoothingModel
 {
-	internal SmoothingModel(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public SmoothingModel()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SmoothingModel()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// A smoothing model that uses an additive smoothing where a constant (typically <c>1.0</c> or smaller) is added to all counts to balance weights.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel? Laplace { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>("laplace"); set => SetVariant("laplace", value); }
 
-	public static SmoothingModel Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => new SmoothingModel("laplace", laplaceSmoothingModel);
-	public static SmoothingModel LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => new SmoothingModel("linear_interpolation", linearInterpolationSmoothingModel);
-	public static SmoothingModel StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => new SmoothingModel("stupid_backoff", stupidBackoffSmoothingModel);
+	/// <summary>
+	/// <para>
+	/// A smoothing model that takes the weighted mean of the unigrams, bigrams, and trigrams based on user supplied weights (lambdas).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel? LinearInterpolation { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>("linear_interpolation"); set => SetVariant("linear_interpolation", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// A simple backoff model that backs off to lower order n-gram models if the higher order count is <c>0</c> and discounts the lower order n-gram model by a constant factor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel? StupidBackoff { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>("stupid_backoff"); set => SetVariant("stupid_backoff", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel value) => new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel { Laplace = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel value) => new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel { LinearInterpolation = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel value) => new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel { StupidBackoff = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingModel>
+public readonly partial struct SmoothingModelDescriptor
 {
-	public override SmoothingModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "laplace")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "linear_interpolation")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "stupid_backoff")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SmoothingModel' from the response.");
-		}
-
-		var result = new SmoothingModel(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, SmoothingModel value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SmoothingModelDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "laplace":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel)value.Variant, options);
-					break;
-				case "linear_interpolation":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel)value.Variant, options);
-					break;
-				case "stupid_backoff":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class SmoothingModelDescriptor<TDocument> : SerializableDescriptor<SmoothingModelDescriptor<TDocument>>
-{
-	internal SmoothingModelDescriptor(Action<SmoothingModelDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public SmoothingModelDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel instance) => new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor descriptor) => descriptor.Instance;
 
-	private SmoothingModelDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// A smoothing model that uses an additive smoothing where a constant (typically <c>1.0</c> or smaller) is added to all counts to balance weights.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Laplace = value;
+		return this;
 	}
 
-	private SmoothingModelDescriptor<TDocument> Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// A smoothing model that uses an additive smoothing where a constant (typically <c>1.0</c> or smaller) is added to all counts to balance weights.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor Laplace(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Laplace = Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor.Build(action);
+		return this;
 	}
 
-	public SmoothingModelDescriptor<TDocument> Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
-	public SmoothingModelDescriptor<TDocument> Laplace(Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
-	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Action<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelDescriptor<TDocument> StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
-	public SmoothingModelDescriptor<TDocument> StupidBackoff(Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A smoothing model that takes the weighted mean of the unigrams, bigrams, and trigrams based on user supplied weights (lambdas).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class SmoothingModelDescriptor : SerializableDescriptor<SmoothingModelDescriptor>
-{
-	internal SmoothingModelDescriptor(Action<SmoothingModelDescriptor> configure) => configure.Invoke(this);
-
-	public SmoothingModelDescriptor() : base()
-	{
+		Instance.LinearInterpolation = value;
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private SmoothingModelDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// A smoothing model that takes the weighted mean of the unigrams, bigrams, and trigrams based on user supplied weights (lambdas).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor LinearInterpolation(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.LinearInterpolation = Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor.Build(action);
+		return this;
 	}
 
-	private SmoothingModelDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// A simple backoff model that backs off to lower order n-gram models if the higher order count is <c>0</c> and discounts the lower order n-gram model by a constant factor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.StupidBackoff = value;
+		return this;
 	}
 
-	public SmoothingModelDescriptor Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
-	public SmoothingModelDescriptor Laplace(Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelDescriptor LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
-	public SmoothingModelDescriptor LinearInterpolation(Action<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelDescriptor StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
-	public SmoothingModelDescriptor StupidBackoff(Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A simple backoff model that backs off to lower order n-gram models if the higher order count is <c>0</c> and discounts the lower order n-gram model by a constant factor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor StupidBackoff(System.Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.StupidBackoff = Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

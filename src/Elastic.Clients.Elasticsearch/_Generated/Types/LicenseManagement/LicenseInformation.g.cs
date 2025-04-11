@@ -17,40 +17,229 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+internal sealed partial class LicenseInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExpiryDate = System.Text.Json.JsonEncodedText.Encode("expiry_date");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiryDateInMillis = System.Text.Json.JsonEncodedText.Encode("expiry_date_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropIssueDate = System.Text.Json.JsonEncodedText.Encode("issue_date");
+	private static readonly System.Text.Json.JsonEncodedText PropIssueDateInMillis = System.Text.Json.JsonEncodedText.Encode("issue_date_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropIssuedTo = System.Text.Json.JsonEncodedText.Encode("issued_to");
+	private static readonly System.Text.Json.JsonEncodedText PropIssuer = System.Text.Json.JsonEncodedText.Encode("issuer");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNodes = System.Text.Json.JsonEncodedText.Encode("max_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxResourceUnits = System.Text.Json.JsonEncodedText.Encode("max_resource_units");
+	private static readonly System.Text.Json.JsonEncodedText PropStartDateInMillis = System.Text.Json.JsonEncodedText.Encode("start_date_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid");
+
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propExpiryDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propExpiryDateInMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propIssueDate = default;
+		LocalJsonValue<System.DateTimeOffset> propIssueDateInMillis = default;
+		LocalJsonValue<string> propIssuedTo = default;
+		LocalJsonValue<string> propIssuer = default;
+		LocalJsonValue<long?> propMaxNodes = default;
+		LocalJsonValue<int?> propMaxResourceUnits = default;
+		LocalJsonValue<System.DateTimeOffset> propStartDateInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType> propType = default;
+		LocalJsonValue<string> propUid = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExpiryDate.TryReadProperty(ref reader, options, PropExpiryDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propExpiryDateInMillis.TryReadProperty(ref reader, options, PropExpiryDateInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propIssueDate.TryReadProperty(ref reader, options, PropIssueDate, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propIssueDateInMillis.TryReadProperty(ref reader, options, PropIssueDateInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propIssuedTo.TryReadProperty(ref reader, options, PropIssuedTo, null))
+			{
+				continue;
+			}
+
+			if (propIssuer.TryReadProperty(ref reader, options, PropIssuer, null))
+			{
+				continue;
+			}
+
+			if (propMaxNodes.TryReadProperty(ref reader, options, PropMaxNodes, null))
+			{
+				continue;
+			}
+
+			if (propMaxResourceUnits.TryReadProperty(ref reader, options, PropMaxResourceUnits, null))
+			{
+				continue;
+			}
+
+			if (propStartDateInMillis.TryReadProperty(ref reader, options, PropStartDateInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (propUid.TryReadProperty(ref reader, options, PropUid, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ExpiryDate = propExpiryDate.Value,
+			ExpiryDateInMillis = propExpiryDateInMillis.Value,
+			IssueDate = propIssueDate.Value,
+			IssueDateInMillis = propIssueDateInMillis.Value,
+			IssuedTo = propIssuedTo.Value,
+			Issuer = propIssuer.Value,
+			MaxNodes = propMaxNodes.Value,
+			MaxResourceUnits = propMaxResourceUnits.Value,
+			StartDateInMillis = propStartDateInMillis.Value,
+			Status = propStatus.Value,
+			Type = propType.Value,
+			Uid = propUid.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExpiryDate, value.ExpiryDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropExpiryDateInMillis, value.ExpiryDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropIssueDate, value.IssueDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropIssueDateInMillis, value.IssueDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropIssuedTo, value.IssuedTo, null, null);
+		writer.WriteProperty(options, PropIssuer, value.Issuer, null, null);
+		writer.WriteProperty(options, PropMaxNodes, value.MaxNodes, null, null);
+		writer.WriteProperty(options, PropMaxResourceUnits, value.MaxResourceUnits, null, null);
+		writer.WriteProperty(options, PropStartDateInMillis, value.StartDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUid, value.Uid, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformationConverter))]
 public sealed partial class LicenseInformation
 {
-	[JsonInclude, JsonPropertyName("expiry_date")]
-	public DateTimeOffset? ExpiryDate { get; init; }
-	[JsonInclude, JsonPropertyName("expiry_date_in_millis")]
-	public long? ExpiryDateInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("issue_date")]
-	public DateTimeOffset IssueDate { get; init; }
-	[JsonInclude, JsonPropertyName("issue_date_in_millis")]
-	public long IssueDateInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("issued_to")]
-	public string IssuedTo { get; init; }
-	[JsonInclude, JsonPropertyName("issuer")]
-	public string Issuer { get; init; }
-	[JsonInclude, JsonPropertyName("max_nodes")]
-	public long? MaxNodes { get; init; }
-	[JsonInclude, JsonPropertyName("max_resource_units")]
-	public int? MaxResourceUnits { get; init; }
-	[JsonInclude, JsonPropertyName("start_date_in_millis")]
-	public long StartDateInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; init; }
-	[JsonInclude, JsonPropertyName("uid")]
-	public string Uid { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LicenseInformation(System.DateTimeOffset issueDate, System.DateTimeOffset issueDateInMillis, string issuedTo, string issuer, long? maxNodes, System.DateTimeOffset startDateInMillis, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus status, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType type, string uid)
+	{
+		IssueDate = issueDate;
+		IssueDateInMillis = issueDateInMillis;
+		IssuedTo = issuedTo;
+		Issuer = issuer;
+		MaxNodes = maxNodes;
+		StartDateInMillis = startDateInMillis;
+		Status = status;
+		Type = type;
+		Uid = uid;
+	}
+#if NET7_0_OR_GREATER
+	public LicenseInformation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public LicenseInformation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LicenseInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.DateTimeOffset? ExpiryDate { get; set; }
+	public System.DateTimeOffset? ExpiryDateInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset IssueDate { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset IssueDateInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IssuedTo { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Issuer { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long? MaxNodes { get; set; }
+	public int? MaxResourceUnits { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset StartDateInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Uid { get; set; }
 }

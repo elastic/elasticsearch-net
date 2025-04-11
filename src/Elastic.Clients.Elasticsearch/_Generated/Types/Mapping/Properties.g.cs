@@ -17,586 +17,4342 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public partial class Properties : IsADictionary<Elastic.Clients.Elasticsearch.PropertyName, IProperty>
+public partial class Properties : Elastic.Clients.Elasticsearch.IsADictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.IProperty>
 {
 	public Properties()
 	{
 	}
 
-	public Properties(IDictionary<Elastic.Clients.Elasticsearch.PropertyName, IProperty> container) : base(container)
+	public Properties(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.IProperty> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(Elastic.Clients.Elasticsearch.PropertyName name, IProperty property) => BackingDictionary.Add(Sanitize(name), property);
-	public bool TryGetProperty(Elastic.Clients.Elasticsearch.PropertyName name, [NotNullWhen(returnValue: true)] out IProperty property) => BackingDictionary.TryGetValue(Sanitize(name), out property);
+	public void Add(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IProperty value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetProperty(Elastic.Clients.Elasticsearch.PropertyName key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.Mapping.IProperty value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetProperty<T>(Elastic.Clients.Elasticsearch.PropertyName name, [NotNullWhen(returnValue: true)] out T? property) where T : class, IProperty
+	public bool TryGetProperty<T>(Elastic.Clients.Elasticsearch.PropertyName key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, IProperty
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			property = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		property = null;
+		value = null;
 		return false;
 	}
 }
 
-public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, Elastic.Clients.Elasticsearch.PropertyName, IProperty>
+public readonly partial struct PropertiesDescriptor<TDocument>
 {
-	public PropertiesDescriptor() : base(new Properties())
+	private readonly Elastic.Clients.Elasticsearch.Mapping.Properties _items = new();
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties Value => _items;
+
+	public PropertiesDescriptor()
 	{
 	}
 
-	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties())
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value)
 	{
+		_items.Add(key, value);
+		return this;
 	}
 
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName propertyName, AggregateMetricDoubleProperty aggregateMetricDoubleProperty) => AssignVariant(propertyName, aggregateMetricDoubleProperty);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName propertyName, BinaryProperty binaryProperty) => AssignVariant(propertyName, binaryProperty);
-	public PropertiesDescriptor<TDocument> Binary(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Binary(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName propertyName, BooleanProperty booleanProperty) => AssignVariant(propertyName, booleanProperty);
-	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, ByteNumberProperty byteNumberProperty) => AssignVariant(propertyName, byteNumberProperty);
-	public PropertiesDescriptor<TDocument> ByteNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ByteNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName propertyName, CompletionProperty completionProperty) => AssignVariant(propertyName, completionProperty);
-	public PropertiesDescriptor<TDocument> Completion(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Completion(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, ConstantKeywordProperty constantKeywordProperty) => AssignVariant(propertyName, constantKeywordProperty);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateNanosProperty dateNanosProperty) => AssignVariant(propertyName, dateNanosProperty);
-	public PropertiesDescriptor<TDocument> DateNanos(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateNanos(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateProperty dateProperty) => AssignVariant(propertyName, dateProperty);
-	public PropertiesDescriptor<TDocument> Date(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Date(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateRangeProperty dateRangeProperty) => AssignVariant(propertyName, dateRangeProperty);
-	public PropertiesDescriptor<TDocument> DateRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, DenseVectorProperty denseVectorProperty) => AssignVariant(propertyName, denseVectorProperty);
-	public PropertiesDescriptor<TDocument> DenseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DenseVector(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, DoubleNumberProperty doubleNumberProperty) => AssignVariant(propertyName, doubleNumberProperty);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, DoubleRangeProperty doubleRangeProperty) => AssignVariant(propertyName, doubleRangeProperty);
-	public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName propertyName, DynamicProperty dynamicProperty) => AssignVariant(propertyName, dynamicProperty);
-	public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName propertyName, FieldAliasProperty fieldAliasProperty) => AssignVariant(propertyName, fieldAliasProperty);
-	public PropertiesDescriptor<TDocument> FieldAlias(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FieldAlias(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName propertyName, FlattenedProperty flattenedProperty) => AssignVariant(propertyName, flattenedProperty);
-	public PropertiesDescriptor<TDocument> Flattened(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Flattened(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, FloatNumberProperty floatNumberProperty) => AssignVariant(propertyName, floatNumberProperty);
-	public PropertiesDescriptor<TDocument> FloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, FloatRangeProperty floatRangeProperty) => AssignVariant(propertyName, floatRangeProperty);
-	public PropertiesDescriptor<TDocument> FloatRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName propertyName, GeoPointProperty geoPointProperty) => AssignVariant(propertyName, geoPointProperty);
-	public PropertiesDescriptor<TDocument> GeoPoint(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoPoint(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName propertyName, GeoShapeProperty geoShapeProperty) => AssignVariant(propertyName, geoShapeProperty);
-	public PropertiesDescriptor<TDocument> GeoShape(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoShape(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, HalfFloatNumberProperty halfFloatNumberProperty) => AssignVariant(propertyName, halfFloatNumberProperty);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName propertyName, HistogramProperty histogramProperty) => AssignVariant(propertyName, histogramProperty);
-	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.PropertyName propertyName, IcuCollationProperty icuCollationProperty) => AssignVariant(propertyName, icuCollationProperty);
-	public PropertiesDescriptor<TDocument> IcuCollation(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IcuCollation(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, IntegerNumberProperty integerNumberProperty) => AssignVariant(propertyName, integerNumberProperty);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, IntegerRangeProperty integerRangeProperty) => AssignVariant(propertyName, integerRangeProperty);
-	public PropertiesDescriptor<TDocument> IntegerRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName propertyName, IpProperty ipProperty) => AssignVariant(propertyName, ipProperty);
-	public PropertiesDescriptor<TDocument> Ip(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Ip(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, IpRangeProperty ipRangeProperty) => AssignVariant(propertyName, ipRangeProperty);
-	public PropertiesDescriptor<TDocument> IpRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IpRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName propertyName, JoinProperty joinProperty) => AssignVariant(propertyName, joinProperty);
-	public PropertiesDescriptor<TDocument> Join(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Join(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, KeywordProperty keywordProperty) => AssignVariant(propertyName, keywordProperty);
-	public PropertiesDescriptor<TDocument> Keyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Keyword(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, LongNumberProperty longNumberProperty) => AssignVariant(propertyName, longNumberProperty);
-	public PropertiesDescriptor<TDocument> LongNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, LongRangeProperty longRangeProperty) => AssignVariant(propertyName, longRangeProperty);
-	public PropertiesDescriptor<TDocument> LongRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName propertyName, MatchOnlyTextProperty matchOnlyTextProperty) => AssignVariant(propertyName, matchOnlyTextProperty);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName propertyName, Murmur3HashProperty murmur3HashProperty) => AssignVariant(propertyName, murmur3HashProperty);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName propertyName, NestedProperty nestedProperty) => AssignVariant(propertyName, nestedProperty);
-	public PropertiesDescriptor<TDocument> Nested(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Nested(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName, ObjectProperty objectProperty) => AssignVariant(propertyName, objectProperty);
-	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName, PercolatorProperty percolatorProperty) => AssignVariant(propertyName, percolatorProperty);
-	public PropertiesDescriptor<TDocument> Percolator(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Percolator(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName propertyName, PointProperty pointProperty) => AssignVariant(propertyName, pointProperty);
-	public PropertiesDescriptor<TDocument> Point(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Point(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName propertyName, RankFeatureProperty rankFeatureProperty) => AssignVariant(propertyName, rankFeatureProperty);
-	public PropertiesDescriptor<TDocument> RankFeature(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeature(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName propertyName, RankFeaturesProperty rankFeaturesProperty) => AssignVariant(propertyName, rankFeaturesProperty);
-	public PropertiesDescriptor<TDocument> RankFeatures(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeatures(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, ScaledFloatNumberProperty scaledFloatNumberProperty) => AssignVariant(propertyName, scaledFloatNumberProperty);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName, SearchAsYouTypeProperty searchAsYouTypeProperty) => AssignVariant(propertyName, searchAsYouTypeProperty);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName propertyName, SemanticTextProperty semanticTextProperty) => AssignVariant(propertyName, semanticTextProperty);
-	public PropertiesDescriptor<TDocument> SemanticText(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SemanticText(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName, ShapeProperty shapeProperty) => AssignVariant(propertyName, shapeProperty);
-	public PropertiesDescriptor<TDocument> Shape(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Shape(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, ShortNumberProperty shortNumberProperty) => AssignVariant(propertyName, shortNumberProperty);
-	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, SparseVectorProperty sparseVectorProperty) => AssignVariant(propertyName, sparseVectorProperty);
-	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName propertyName, TextProperty textProperty) => AssignVariant(propertyName, textProperty);
-	public PropertiesDescriptor<TDocument> Text(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Text(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName propertyName, TokenCountProperty tokenCountProperty) => AssignVariant(propertyName, tokenCountProperty);
-	public PropertiesDescriptor<TDocument> TokenCount(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> TokenCount(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, UnsignedLongNumberProperty unsignedLongNumberProperty) => AssignVariant(propertyName, unsignedLongNumberProperty);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName propertyName, VersionProperty versionProperty) => AssignVariant(propertyName, versionProperty);
-	public PropertiesDescriptor<TDocument> Version(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Version(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName propertyName, WildcardProperty wildcardProperty) => AssignVariant(propertyName, wildcardProperty);
-	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Dynamic(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Dynamic(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Dynamic(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> AggregateMetricDouble(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> AggregateMetricDouble(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FieldAlias(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FieldAlias(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FieldAlias(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.BinaryProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Binary(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.BinaryProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Binary(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Binary(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.BooleanProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Boolean(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.BooleanProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Boolean(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Boolean(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ByteNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ByteNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ByteNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.CompletionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Completion(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.CompletionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Completion(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Completion(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ConstantKeyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ConstantKeyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ConstantKeyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> CountedKeyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> CountedKeyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> CountedKeyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DateProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Date(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DateProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Date(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Date(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateNanos(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateNanos(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateNanos(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DateRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DenseVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DenseVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DenseVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> DoubleRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> FloatRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoPoint(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoPoint(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoPoint(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoShape(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoShape(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> GeoShape(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> HalfFloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> HalfFloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> HalfFloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.HistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Histogram(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.HistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Histogram(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Histogram(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IcuCollation(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IcuCollation(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IcuCollation(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IntegerRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IpProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Ip(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IpProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Ip(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Ip(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IpRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IpRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> IpRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.JoinProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Join(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.JoinProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Join(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Join(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.KeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Keyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.KeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Keyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Keyword(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> LongRange(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> MatchOnlyText(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> MatchOnlyText(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> MatchOnlyText(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Murmur3Hash(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Murmur3Hash(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Murmur3Hash(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.NestedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Nested(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.NestedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Nested(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Nested(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Object(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Object(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Object(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> PassthroughObject(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> PassthroughObject(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> PassthroughObject(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Percolator(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Percolator(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Percolator(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.PointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Point(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.PointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Point(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Point(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeature(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeature(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeature(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeatures(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeatures(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankFeatures(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SearchAsYouType(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SearchAsYouType(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SearchAsYouType(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SemanticText(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SemanticText(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SemanticText(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Shape(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Shape(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Shape(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ShortNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ShortNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ShortNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SparseVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SparseVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> SparseVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.TextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Text(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.TextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Text(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Text(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> TokenCount(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> TokenCount(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> TokenCount(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> UnsignedLongNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> UnsignedLongNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> UnsignedLongNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.VersionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Version(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.VersionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Version(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Version(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.WildcardProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Wildcard(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.WildcardProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Wildcard(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Wildcard(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.Properties Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.Properties();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }
 
-internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProperty>
+public readonly partial struct PropertiesDescriptor
 {
-	public override IProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
+	private readonly Elastic.Clients.Elasticsearch.Mapping.Properties _items = new();
 
-		switch (type)
-		{
-			case "aggregate_metric_double":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty>(ref reader, options);
-			case "binary":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.BinaryProperty>(ref reader, options);
-			case "boolean":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.BooleanProperty>(ref reader, options);
-			case "byte":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty>(ref reader, options);
-			case "completion":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(ref reader, options);
-			case "constant_keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(ref reader, options);
-			case "date_nanos":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(ref reader, options);
-			case "date":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateProperty>(ref reader, options);
-			case "date_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty>(ref reader, options);
-			case "dense_vector":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(ref reader, options);
-			case "double":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(ref reader, options);
-			case "double_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(ref reader, options);
-			case "{dynamic_type}":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(ref reader, options);
-			case "alias":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(ref reader, options);
-			case "flattened":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(ref reader, options);
-			case "float":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(ref reader, options);
-			case "float_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(ref reader, options);
-			case "geo_point":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty>(ref reader, options);
-			case "geo_shape":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>(ref reader, options);
-			case "half_float":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty>(ref reader, options);
-			case "histogram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.HistogramProperty>(ref reader, options);
-			case "icu_collation_keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>(ref reader, options);
-			case "integer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>(ref reader, options);
-			case "integer_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty>(ref reader, options);
-			case "ip":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IpProperty>(ref reader, options);
-			case "ip_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty>(ref reader, options);
-			case "join":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.JoinProperty>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.KeywordProperty>(ref reader, options);
-			case "long":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty>(ref reader, options);
-			case "long_range":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty>(ref reader, options);
-			case "match_only_text":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>(ref reader, options);
-			case "murmur3":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty>(ref reader, options);
-			case "nested":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(ref reader, options);
-			case "object":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
-			case "percolator":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(ref reader, options);
-			case "point":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(ref reader, options);
-			case "rank_feature":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(ref reader, options);
-			case "rank_features":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(ref reader, options);
-			case "scaled_float":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(ref reader, options);
-			case "search_as_you_type":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(ref reader, options);
-			case "semantic_text":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(ref reader, options);
-			case "shape":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(ref reader, options);
-			case "short":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty>(ref reader, options);
-			case "sparse_vector":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty>(ref reader, options);
-			case "text":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.TextProperty>(ref reader, options);
-			case "token_count":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty>(ref reader, options);
-			case "unsigned_long":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty>(ref reader, options);
-			case "version":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.VersionProperty>(ref reader, options);
-			case "wildcard":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.WildcardProperty>(ref reader, options);
-			default:
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
-		}
+	private Elastic.Clients.Elasticsearch.Mapping.Properties Value => _items;
+
+	public PropertiesDescriptor()
+	{
 	}
 
-	public override void Write(Utf8JsonWriter writer, IProperty value, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "aggregate_metric_double":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty), options);
-				return;
-			case "binary":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.BinaryProperty), options);
-				return;
-			case "boolean":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.BooleanProperty), options);
-				return;
-			case "byte":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty), options);
-				return;
-			case "completion":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.CompletionProperty), options);
-				return;
-			case "constant_keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty), options);
-				return;
-			case "date_nanos":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty), options);
-				return;
-			case "date":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateProperty), options);
-				return;
-			case "date_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty), options);
-				return;
-			case "dense_vector":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty), options);
-				return;
-			case "double":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty), options);
-				return;
-			case "double_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty), options);
-				return;
-			case "{dynamic_type}":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty), options);
-				return;
-			case "alias":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty), options);
-				return;
-			case "flattened":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty), options);
-				return;
-			case "float":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty), options);
-				return;
-			case "float_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty), options);
-				return;
-			case "geo_point":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty), options);
-				return;
-			case "geo_shape":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty), options);
-				return;
-			case "half_float":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty), options);
-				return;
-			case "histogram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.HistogramProperty), options);
-				return;
-			case "icu_collation_keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty), options);
-				return;
-			case "integer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty), options);
-				return;
-			case "integer_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty), options);
-				return;
-			case "ip":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IpProperty), options);
-				return;
-			case "ip_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty), options);
-				return;
-			case "join":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.JoinProperty), options);
-				return;
-			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.KeywordProperty), options);
-				return;
-			case "long":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty), options);
-				return;
-			case "long_range":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty), options);
-				return;
-			case "match_only_text":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty), options);
-				return;
-			case "murmur3":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty), options);
-				return;
-			case "nested":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.NestedProperty), options);
-				return;
-			case "object":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ObjectProperty), options);
-				return;
-			case "percolator":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty), options);
-				return;
-			case "point":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PointProperty), options);
-				return;
-			case "rank_feature":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty), options);
-				return;
-			case "rank_features":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty), options);
-				return;
-			case "scaled_float":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty), options);
-				return;
-			case "search_as_you_type":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty), options);
-				return;
-			case "semantic_text":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty), options);
-				return;
-			case "shape":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShapeProperty), options);
-				return;
-			case "short":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty), options);
-				return;
-			case "sparse_vector":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty), options);
-				return;
-			case "text":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.TextProperty), options);
-				return;
-			case "token_count":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty), options);
-				return;
-			case "unsigned_long":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty), options);
-				return;
-			case "version":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.VersionProperty), options);
-				return;
-			case "wildcard":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.WildcardProperty), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
+		_items.Add(key, value);
+		return this;
 	}
-}
 
-[JsonConverter(typeof(PropertyInterfaceConverter))]
-public partial interface IProperty
-{
-	public string? Type { get; }
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Dynamic<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor AggregateMetricDouble<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor AggregateMetricDouble<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor AggregateMetricDouble<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<T>> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor AggregateMetricDouble<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<T>> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FieldAlias<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.BinaryProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.BinaryProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Binary<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.BooleanProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.BooleanProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Boolean<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ByteNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.CompletionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.CompletionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Completion<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ConstantKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor CountedKeyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DateProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DateProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Date<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateNanos<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DateRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DenseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Flattened<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor FloatRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoPoint<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor GeoShape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor HalfFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.HistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.HistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Histogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IcuCollation<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IntegerRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IpProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IpProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Ip<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor IpRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.JoinProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.JoinProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Join<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.KeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.KeywordProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Keyword<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor LongRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor MatchOnlyText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Murmur3Hash<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.NestedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.NestedProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Nested<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Object<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor PassthroughObject<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Percolator<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.PointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.PointProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Point<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeature<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ScaledFloatNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SearchAsYouType<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SemanticText<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ShapeProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Shape<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ShortNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor SparseVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.TextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.TextProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Text<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor TokenCount<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor UnsignedLongNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.VersionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.VersionProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Version<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.WildcardProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.WildcardProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor Wildcard<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.Properties Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.Properties();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }

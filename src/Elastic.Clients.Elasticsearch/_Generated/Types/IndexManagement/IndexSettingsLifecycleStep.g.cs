@@ -17,37 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexSettingsLifecycleStepConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropWaitTimeThreshold = System.Text.Json.JsonEncodedText.Encode("wait_time_threshold");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitTimeThreshold = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propWaitTimeThreshold.TryReadProperty(ref reader, options, PropWaitTimeThreshold, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			WaitTimeThreshold = propWaitTimeThreshold.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropWaitTimeThreshold, value.WaitTimeThreshold, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepConverter))]
 public sealed partial class IndexSettingsLifecycleStep
 {
+#if NET7_0_OR_GREATER
+	public IndexSettingsLifecycleStep()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexSettingsLifecycleStep()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Time to wait for the cluster to resolve allocation issues during an ILM shrink action. Must be greater than 1h (1 hour).
 	/// See Shard allocation for shrink.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("wait_time_threshold")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitTimeThreshold { get; set; }
 }
 
-public sealed partial class IndexSettingsLifecycleStepDescriptor : SerializableDescriptor<IndexSettingsLifecycleStepDescriptor>
+public readonly partial struct IndexSettingsLifecycleStepDescriptor
 {
-	internal IndexSettingsLifecycleStepDescriptor(Action<IndexSettingsLifecycleStepDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep Instance { get; init; }
 
-	public IndexSettingsLifecycleStepDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsLifecycleStepDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? WaitTimeThresholdValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsLifecycleStepDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -55,21 +115,22 @@ public sealed partial class IndexSettingsLifecycleStepDescriptor : SerializableD
 	/// See Shard allocation for shrink.
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleStepDescriptor WaitTimeThreshold(Elastic.Clients.Elasticsearch.Duration? waitTimeThreshold)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor WaitTimeThreshold(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		WaitTimeThresholdValue = waitTimeThreshold;
-		return Self;
+		Instance.WaitTimeThreshold = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (WaitTimeThresholdValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("wait_time_threshold");
-			JsonSerializer.Serialize(writer, WaitTimeThresholdValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

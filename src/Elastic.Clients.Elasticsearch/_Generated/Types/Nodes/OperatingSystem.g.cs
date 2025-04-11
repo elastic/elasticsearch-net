@@ -17,26 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class OperatingSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.OperatingSystem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCgroup = System.Text.Json.JsonEncodedText.Encode("cgroup");
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
+	private static readonly System.Text.Json.JsonEncodedText PropSwap = System.Text.Json.JsonEncodedText.Encode("swap");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.OperatingSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Cgroup?> propCgroup = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Cpu?> propCpu = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats?> propMem = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.MemoryStats?> propSwap = default;
+		LocalJsonValue<long?> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCgroup.TryReadProperty(ref reader, options, PropCgroup, null))
+			{
+				continue;
+			}
+
+			if (propCpu.TryReadProperty(ref reader, options, PropCpu, null))
+			{
+				continue;
+			}
+
+			if (propMem.TryReadProperty(ref reader, options, PropMem, null))
+			{
+				continue;
+			}
+
+			if (propSwap.TryReadProperty(ref reader, options, PropSwap, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.OperatingSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cgroup = propCgroup.Value,
+			Cpu = propCpu.Value,
+			Mem = propMem.Value,
+			Swap = propSwap.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.OperatingSystem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCgroup, value.Cgroup, null, null);
+		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
+		writer.WriteProperty(options, PropMem, value.Mem, null, null);
+		writer.WriteProperty(options, PropSwap, value.Swap, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.OperatingSystemConverter))]
 public sealed partial class OperatingSystem
 {
-	[JsonInclude, JsonPropertyName("cgroup")]
-	public Elastic.Clients.Elasticsearch.Nodes.Cgroup? Cgroup { get; init; }
-	[JsonInclude, JsonPropertyName("cpu")]
-	public Elastic.Clients.Elasticsearch.Nodes.Cpu? Cpu { get; init; }
-	[JsonInclude, JsonPropertyName("mem")]
-	public Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats? Mem { get; init; }
-	[JsonInclude, JsonPropertyName("swap")]
-	public Elastic.Clients.Elasticsearch.Nodes.MemoryStats? Swap { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long? Timestamp { get; init; }
+#if NET7_0_OR_GREATER
+	public OperatingSystem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public OperatingSystem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal OperatingSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.Cgroup? Cgroup { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.Cpu? Cpu { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats? Mem { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.MemoryStats? Swap { get; set; }
+	public long? Timestamp { get; set; }
 }

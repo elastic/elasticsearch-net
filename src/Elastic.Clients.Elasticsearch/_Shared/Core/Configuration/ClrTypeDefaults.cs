@@ -4,7 +4,6 @@
 
 using System;
 using System.Linq.Expressions;
-using Elastic.Clients.Elasticsearch.Fluent;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -45,7 +44,9 @@ public class ClrTypeMapping
 
 public sealed class ClrTypeMapping<TDocument> : ClrTypeMapping
 {
-	public ClrTypeMapping() : base(typeof(TDocument)) { }
+	public ClrTypeMapping() : base(typeof(TDocument))
+	{
+	}
 
 	/// <summary>
 	/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
@@ -58,7 +59,7 @@ public sealed class ClrTypeMapping<TDocument> : ClrTypeMapping
 	public Expression<Func<TDocument, object>> RoutingProperty { get; set; }
 }
 
-public sealed class ClrTypeMappingDescriptor : Descriptor<ClrTypeMappingDescriptor>
+public sealed class ClrTypeMappingDescriptor
 {
 	internal Type _clrType;
 	internal string _indexName;
@@ -83,9 +84,15 @@ public sealed class ClrTypeMappingDescriptor : Descriptor<ClrTypeMappingDescript
 
 	/// <inheritdoc cref="ClrTypeMapping.DisableIdInference"/>
 	public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._disableIdInference = v);
+
+	private ClrTypeMappingDescriptor Assign<T>(T value, Action<ClrTypeMappingDescriptor, T> action)
+	{
+		action.Invoke(this, value);
+		return this;
+	}
 }
 
-public sealed class ClrTypeMappingDescriptor<TDocument> : Descriptor<ClrTypeMappingDescriptor<TDocument>>
+public sealed class ClrTypeMappingDescriptor<TDocument>
 {
 	internal Type _clrType = typeof(TDocument);
 	internal string _indexName;
@@ -114,4 +121,10 @@ public sealed class ClrTypeMappingDescriptor<TDocument> : Descriptor<ClrTypeMapp
 
 	/// <inheritdoc cref="ClrTypeMapping.DisableIdInference"/>
 	public ClrTypeMappingDescriptor<TDocument> DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._disableIdInference = v);
+
+	private ClrTypeMappingDescriptor<TDocument> Assign<T>(T value, Action<ClrTypeMappingDescriptor<TDocument>, T> action)
+	{
+		action.Invoke(this, value);
+		return this;
+	}
 }

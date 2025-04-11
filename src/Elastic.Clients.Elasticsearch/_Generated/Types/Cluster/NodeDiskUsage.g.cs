@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class NodeDiskUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLeastAvailable = System.Text.Json.JsonEncodedText.Encode("least_available");
+	private static readonly System.Text.Json.JsonEncodedText PropMostAvailable = System.Text.Json.JsonEncodedText.Encode("most_available");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeName = System.Text.Json.JsonEncodedText.Encode("node_name");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.DiskUsage> propLeastAvailable = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.DiskUsage> propMostAvailable = default;
+		LocalJsonValue<string> propNodeName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLeastAvailable.TryReadProperty(ref reader, options, PropLeastAvailable, null))
+			{
+				continue;
+			}
+
+			if (propMostAvailable.TryReadProperty(ref reader, options, PropMostAvailable, null))
+			{
+				continue;
+			}
+
+			if (propNodeName.TryReadProperty(ref reader, options, PropNodeName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			LeastAvailable = propLeastAvailable.Value,
+			MostAvailable = propMostAvailable.Value,
+			NodeName = propNodeName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLeastAvailable, value.LeastAvailable, null, null);
+		writer.WriteProperty(options, PropMostAvailable, value.MostAvailable, null, null);
+		writer.WriteProperty(options, PropNodeName, value.NodeName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsageConverter))]
 public sealed partial class NodeDiskUsage
 {
-	[JsonInclude, JsonPropertyName("least_available")]
-	public Elastic.Clients.Elasticsearch.Cluster.DiskUsage LeastAvailable { get; init; }
-	[JsonInclude, JsonPropertyName("most_available")]
-	public Elastic.Clients.Elasticsearch.Cluster.DiskUsage MostAvailable { get; init; }
-	[JsonInclude, JsonPropertyName("node_name")]
-	public string NodeName { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeDiskUsage(Elastic.Clients.Elasticsearch.Cluster.DiskUsage leastAvailable, Elastic.Clients.Elasticsearch.Cluster.DiskUsage mostAvailable, string nodeName)
+	{
+		LeastAvailable = leastAvailable;
+		MostAvailable = mostAvailable;
+		NodeName = nodeName;
+	}
+#if NET7_0_OR_GREATER
+	public NodeDiskUsage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeDiskUsage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeDiskUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.DiskUsage LeastAvailable { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.DiskUsage MostAvailable { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string NodeName { get; set; }
 }

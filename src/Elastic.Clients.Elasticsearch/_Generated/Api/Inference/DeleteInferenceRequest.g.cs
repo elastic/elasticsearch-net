@@ -17,34 +17,56 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class DeleteInferenceRequestParameters : RequestParameters
+public sealed partial class DeleteInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
+	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
 	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
 	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
 	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+}
+
+internal sealed partial class DeleteInferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -52,19 +74,32 @@ public sealed partial class DeleteInferenceRequestParameters : RequestParameters
 /// Delete an inference endpoint
 /// </para>
 /// </summary>
-public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenceRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestConverter))]
+public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteInferenceRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceDelete;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.InferenceDelete;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
@@ -72,18 +107,34 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
+	/// The inference identifier.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
+
+	/// <summary>
+	/// <para>
+	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
+	/// </para>
+	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
 	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
@@ -92,42 +143,126 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 /// Delete an inference endpoint
 /// </para>
 /// </summary>
-public sealed partial class DeleteInferenceRequestDescriptor : RequestDescriptor<DeleteInferenceRequestDescriptor, DeleteInferenceRequestParameters>
+public readonly partial struct DeleteInferenceRequestDescriptor
 {
-	internal DeleteInferenceRequestDescriptor(Action<DeleteInferenceRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest Instance { get; init; }
 
-	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
+	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(inferenceId);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceDelete;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "inference.delete";
-
-	public DeleteInferenceRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
-	public DeleteInferenceRequestDescriptor Force(bool? force = true) => Qs("force", force);
-
-	public DeleteInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		RouteValues.Required("inference_id", inferenceId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(taskType, inferenceId);
 	}
 
-	public DeleteInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteInferenceRequestDescriptor()
 	{
-		RouteValues.Optional("task_type", taskType);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The inference identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.InferenceId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
+	{
+		Instance.TaskType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor DryRun(bool? value = true)
+	{
+		Instance.DryRun = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest Build(System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

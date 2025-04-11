@@ -12,26 +12,28 @@ internal static class BoolQueryAndExtensions
 {
 	internal static Query CombineAsMust(this Query leftContainer, Query rightContainer)
 	{
-		var hasLeftBool = leftContainer.TryGet<BoolQuery>(out var leftBool);
-		var hasRightBool = rightContainer.TryGet<BoolQuery>(out var rightBool);
+		var leftBool = leftContainer.Bool;
+		var hasLeftBool = (leftBool is not null);
+		var rightBool = rightContainer.Bool;
+		var hasRightBool = (rightBool is not null);
 
-		// neither side is a bool, no special handling needed wrap in a bool must
+		// Neither side is a `bool` Wrap in a `must`.
 		if (!hasLeftBool && !hasRightBool)
 		{
-			return CreateMustContainer(new List<Query> { leftContainer, rightContainer });
+			return CreateMustContainer([leftContainer, rightContainer]);
 		}
 
-		else if (TryHandleBoolsWithOnlyShouldClauses(leftContainer, rightContainer, leftBool, rightBool, out var query))
+		if (TryHandleBoolsWithOnlyShouldClauses(leftContainer, rightContainer, leftBool, rightBool, out var query))
 		{
 			return query;
 		}
 
-		else if (TryHandleUnmergableBools(leftContainer, rightContainer, leftBool, rightBool, out query))
+		if (TryHandleUnmergableBools(leftContainer, rightContainer, leftBool, rightBool, out query))
 		{
 			return query;
 		}
 
-		// neither side is unmergable so neither is a bool with should clauses
+		// Neither side is unmergable so neither is a bool with should clauses.
 
 		var mustNotClauses = OrphanMustNots(leftContainer).EagerConcat(OrphanMustNots(rightContainer));
 		var filterClauses = OrphanFilters(leftContainer).EagerConcat(OrphanFilters(rightContainer));
@@ -88,7 +90,7 @@ internal static class BoolQueryAndExtensions
 					Filter = leftBool.Filter
 				};
 
-				query = leftBoolCopy;
+				query = new Query { Bool = leftBoolCopy };
 			}
 		}
 
@@ -118,7 +120,7 @@ internal static class BoolQueryAndExtensions
 					Filter = rightBool.Filter
 				};
 
-				query = rightBoolCopy;
+				query = new Query { Bool = rightBoolCopy };
 			}
 		}
 
@@ -161,7 +163,7 @@ internal static class BoolQueryAndExtensions
 		}
 		else
 		{
-			query = CreateMustContainer(new List<Query> { leftContainer, rightContainer });
+			query = CreateMustContainer([leftContainer, rightContainer]);
 			query.HoldsOnlyShouldMusts = rightHasOnlyShoulds && leftHasOnlyShoulds;
 		}
 
@@ -169,36 +171,42 @@ internal static class BoolQueryAndExtensions
 	}
 
 	private static Query CreateMustContainer(Query left, Query right) =>
-		CreateMustContainer(new List<Query> { left, right });
+		CreateMustContainer([left, right]);
 
 	private static Query CreateMustContainer(List<Query> mustClauses) =>
-		Query.Bool(new BoolQuery() { Must = mustClauses.ToListOrNullIfEmpty() });
+		new() { Bool = new() { Must = mustClauses.ToListOrNullIfEmpty() } };
 
 	private static Query CreateMustContainer(
 		List<Query> mustClauses,
 		List<Query> mustNotClauses,
 		List<Query> filters
-		) => Query.Bool(new BoolQuery
+		) => new()
 		{
-			Must = mustClauses.ToListOrNullIfEmpty(),
-			MustNot = mustNotClauses.ToListOrNullIfEmpty(),
-			Filter = filters.ToListOrNullIfEmpty()
-		});
+			Bool = new()
+			{
+				Must = mustClauses.ToListOrNullIfEmpty(),
+				MustNot = mustNotClauses.ToListOrNullIfEmpty(),
+				Filter = filters.ToListOrNullIfEmpty()
+			}
+		};
 
-	private static bool CanMergeAnd(this BoolQuery boolQuery) =>
-		boolQuery != null && !boolQuery.Locked && !boolQuery.Should.HasAny();
+	private static bool CanMergeAnd(this BoolQuery? boolQuery) =>
+		boolQuery is { Locked: false } && !boolQuery.Should.HasAny();
 
-	private static IEnumerable<Query> OrphanMusts(Query container)
+	private static IEnumerable<Query>? OrphanMusts(Query container)
 	{
-		if (!container.TryGet<BoolQuery>(out var lBoolQuery))
-			return new[] { container };
+		var lBoolQuery = container.Bool;
+		if (lBoolQuery is null)
+		{
+			return [container];
+		}
 
 		return lBoolQuery.Must?.AsInstanceOrToListOrNull();
 	}
 
-	private static IEnumerable<Query> OrphanMustNots(Query container) =>
-		!container.TryGet<BoolQuery>(out var boolQuery) ? null : (IEnumerable<Query>)(boolQuery.MustNot?.AsInstanceOrToListOrNull());
+	private static IEnumerable<Query>? OrphanMustNots(Query container) =>
+		container.Bool?.MustNot?.AsInstanceOrToListOrNull();
 
-	private static IEnumerable<Query> OrphanFilters(Query container) =>
-		!container.TryGet<BoolQuery>(out var boolQuery) ? null : (IEnumerable<Query>)(boolQuery.Filter?.AsInstanceOrToListOrNull());
+	private static IEnumerable<Query>? OrphanFilters(Query container) =>
+		container.Bool?.Filter?.AsInstanceOrToListOrNull();
 }

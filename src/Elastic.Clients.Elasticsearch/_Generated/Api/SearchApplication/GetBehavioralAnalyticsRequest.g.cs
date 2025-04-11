@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class GetBehavioralAnalyticsRequestParameters : RequestParameters
+public sealed partial class GetBehavioralAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetBehavioralAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -39,23 +61,42 @@ public sealed partial class GetBehavioralAnalyticsRequestParameters : RequestPar
 /// Get behavioral analytics collections.
 /// </para>
 /// </summary>
-public sealed partial class GetBehavioralAnalyticsRequest : PlainRequest<GetBehavioralAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestConverter))]
+public sealed partial class GetBehavioralAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>
 {
+	public GetBehavioralAnalyticsRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name) : base(r => r.Optional("name", name))
+	{
+	}
+#if NET7_0_OR_GREATER
 	public GetBehavioralAnalyticsRequest()
 	{
 	}
-
-	public GetBehavioralAnalyticsRequest(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name) : base(r => r.Optional("name", name))
+#endif
+#if !NET7_0_OR_GREATER
+	public GetBehavioralAnalyticsRequest()
 	{
 	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationGetBehavioralAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchApplicationGetBehavioralAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_application.get_behavioral_analytics";
+
+	/// <summary>
+	/// <para>
+	/// A list of analytics collections to limit the returned information
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? Name { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>?>("name"); set => PO("name", value); }
 }
 
 /// <summary>
@@ -63,33 +104,103 @@ public sealed partial class GetBehavioralAnalyticsRequest : PlainRequest<GetBeha
 /// Get behavioral analytics collections.
 /// </para>
 /// </summary>
-public sealed partial class GetBehavioralAnalyticsRequestDescriptor : RequestDescriptor<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsRequestParameters>
+public readonly partial struct GetBehavioralAnalyticsRequestDescriptor
 {
-	internal GetBehavioralAnalyticsRequestDescriptor(Action<GetBehavioralAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest Instance { get; init; }
 
-	public GetBehavioralAnalyticsRequestDescriptor(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name) : base(r => r.Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetBehavioralAnalyticsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(name);
 	}
 
 	public GetBehavioralAnalyticsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationGetBehavioralAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "search_application.get_behavioral_analytics";
-
-	public GetBehavioralAnalyticsRequestDescriptor Name(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name)
+	/// <summary>
+	/// <para>
+	/// A list of analytics collections to limit the returned information
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A list of analytics collections to limit the returned information
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
+		Instance.Name = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,25 +17,112 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class RemoveActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("alias");
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMustExist = System.Text.Json.JsonEncodedText.Encode("must_exist");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexAlias?> propAlias = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
+		LocalJsonValue<bool?> propMustExist = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlias.TryReadProperty(ref reader, options, PropAlias, null))
+			{
+				continue;
+			}
+
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Alias = propAlias.Value,
+			Aliases = propAliases.Value,
+			Index = propIndex.Value,
+			Indices = propIndices.Value,
+			MustExist = propMustExist.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAlias, value.Alias, null, null);
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, v, null));
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionConverter))]
 public sealed partial class RemoveAction
 {
+#if NET7_0_OR_GREATER
+	public RemoveAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RemoveAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RemoveAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Alias for the action.
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
 
 	/// <summary>
@@ -44,9 +131,7 @@ public sealed partial class RemoveAction
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
-	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -54,7 +139,6 @@ public sealed partial class RemoveAction
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -63,7 +147,6 @@ public sealed partial class RemoveAction
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
@@ -71,25 +154,27 @@ public sealed partial class RemoveAction
 	/// If <c>true</c>, the alias must exist to perform the action.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(RemoveAction removeAction) => Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction.Remove(removeAction);
 }
 
-public sealed partial class RemoveActionDescriptor : SerializableDescriptor<RemoveActionDescriptor>
+public readonly partial struct RemoveActionDescriptor
 {
-	internal RemoveActionDescriptor(Action<RemoveActionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction Instance { get; init; }
 
-	public RemoveActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemoveActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private bool? MustExistValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemoveActionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction(Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -97,10 +182,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public RemoveActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? value)
 	{
-		AliasValue = alias;
-		return Self;
+		Instance.Alias = value;
+		return this;
 	}
 
 	/// <summary>
@@ -109,10 +194,22 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public RemoveActionDescriptor Aliases(ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? aliases)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
-		AliasesValue = aliases;
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
+	{
+		Instance.Aliases = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -121,10 +218,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public RemoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -133,10 +230,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public RemoveActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -144,45 +241,22 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	/// If <c>true</c>, the alias must exist to perform the action.
 	/// </para>
 	/// </summary>
-	public RemoveActionDescriptor MustExist(bool? mustExist = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor MustExist(bool? value = true)
 	{
-		MustExistValue = mustExist;
-		return Self;
+		Instance.MustExist = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AliasValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("alias");
-			JsonSerializer.Serialize(writer, AliasValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexAlias>(AliasesValue, writer, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
-
-		if (MustExistValue.HasValue)
-		{
-			writer.WritePropertyName("must_exist");
-			writer.WriteBooleanValue(MustExistValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

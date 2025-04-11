@@ -17,26 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class SearchableSnapshotsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFullCopyIndicesCount = System.Text.Json.JsonEncodedText.Encode("full_copy_indices_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSharedCacheIndicesCount = System.Text.Json.JsonEncodedText.Encode("shared_cache_indices_count");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<int?> propFullCopyIndicesCount = default;
+		LocalJsonValue<int> propIndicesCount = default;
+		LocalJsonValue<int?> propSharedCacheIndicesCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propFullCopyIndicesCount.TryReadProperty(ref reader, options, PropFullCopyIndicesCount, null))
+			{
+				continue;
+			}
+
+			if (propIndicesCount.TryReadProperty(ref reader, options, PropIndicesCount, null))
+			{
+				continue;
+			}
+
+			if (propSharedCacheIndicesCount.TryReadProperty(ref reader, options, PropSharedCacheIndicesCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			Enabled = propEnabled.Value,
+			FullCopyIndicesCount = propFullCopyIndicesCount.Value,
+			IndicesCount = propIndicesCount.Value,
+			SharedCacheIndicesCount = propSharedCacheIndicesCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFullCopyIndicesCount, value.FullCopyIndicesCount, null, null);
+		writer.WriteProperty(options, PropIndicesCount, value.IndicesCount, null, null);
+		writer.WriteProperty(options, PropSharedCacheIndicesCount, value.SharedCacheIndicesCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshotsConverter))]
 public sealed partial class SearchableSnapshots
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("full_copy_indices_count")]
-	public int? FullCopyIndicesCount { get; init; }
-	[JsonInclude, JsonPropertyName("indices_count")]
-	public int IndicesCount { get; init; }
-	[JsonInclude, JsonPropertyName("shared_cache_indices_count")]
-	public int? SharedCacheIndicesCount { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchableSnapshots(bool available, bool enabled, int indicesCount)
+	{
+		Available = available;
+		Enabled = enabled;
+		IndicesCount = indicesCount;
+	}
+#if NET7_0_OR_GREATER
+	public SearchableSnapshots()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SearchableSnapshots()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchableSnapshots(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public int? FullCopyIndicesCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int IndicesCount { get; set; }
+	public int? SharedCacheIndicesCount { get; set; }
 }

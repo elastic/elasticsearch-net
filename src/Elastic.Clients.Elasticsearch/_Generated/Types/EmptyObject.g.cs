@@ -17,23 +17,39 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// For empty Class assignments
-/// </para>
-/// </summary>
-public sealed partial class EmptyObject
+internal sealed partial class EmptyObjectConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.EmptyObject>
 {
+	public override Elastic.Clients.Elasticsearch.EmptyObject Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.EmptyObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.EmptyObject value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,17 +57,60 @@ public sealed partial class EmptyObject
 /// For empty Class assignments
 /// </para>
 /// </summary>
-public sealed partial class EmptyObjectDescriptor : SerializableDescriptor<EmptyObjectDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.EmptyObjectConverter))]
+public sealed partial class EmptyObject
 {
-	internal EmptyObjectDescriptor(Action<EmptyObjectDescriptor> configure) => configure.Invoke(this);
-
-	public EmptyObjectDescriptor() : base()
+#if NET7_0_OR_GREATER
+	public EmptyObject()
 	{
 	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+#endif
+#if !NET7_0_OR_GREATER
+	public EmptyObject()
 	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EmptyObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+}
+
+/// <summary>
+/// <para>
+/// For empty Class assignments
+/// </para>
+/// </summary>
+public readonly partial struct EmptyObjectDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.EmptyObject Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EmptyObjectDescriptor(Elastic.Clients.Elasticsearch.EmptyObject instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EmptyObjectDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.EmptyObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(Elastic.Clients.Elasticsearch.EmptyObject instance) => new Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.EmptyObject(Elastic.Clients.Elasticsearch.EmptyObjectDescriptor descriptor) => descriptor.Instance;
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.EmptyObject Build(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.EmptyObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(new Elastic.Clients.Elasticsearch.EmptyObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

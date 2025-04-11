@@ -17,36 +17,214 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class DataTierPhaseStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeCount = System.Text.Json.JsonEncodedText.Encode("node_count");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeAvgBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_avg_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeMadBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_mad_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeMedianBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_median_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimarySizeBytes = System.Text.Json.JsonEncodedText.Encode("primary_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalShardCount = System.Text.Json.JsonEncodedText.Encode("total_shard_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<long> propIndexCount = default;
+		LocalJsonValue<long> propNodeCount = default;
+		LocalJsonValue<long> propPrimaryShardCount = default;
+		LocalJsonValue<long> propPrimaryShardSizeAvgBytes = default;
+		LocalJsonValue<long> propPrimaryShardSizeMadBytes = default;
+		LocalJsonValue<long> propPrimaryShardSizeMedianBytes = default;
+		LocalJsonValue<long> propPrimarySizeBytes = default;
+		LocalJsonValue<long> propTotalShardCount = default;
+		LocalJsonValue<long> propTotalSizeBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
+
+			if (propIndexCount.TryReadProperty(ref reader, options, PropIndexCount, null))
+			{
+				continue;
+			}
+
+			if (propNodeCount.TryReadProperty(ref reader, options, PropNodeCount, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryShardCount.TryReadProperty(ref reader, options, PropPrimaryShardCount, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryShardSizeAvgBytes.TryReadProperty(ref reader, options, PropPrimaryShardSizeAvgBytes, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryShardSizeMadBytes.TryReadProperty(ref reader, options, PropPrimaryShardSizeMadBytes, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryShardSizeMedianBytes.TryReadProperty(ref reader, options, PropPrimaryShardSizeMedianBytes, null))
+			{
+				continue;
+			}
+
+			if (propPrimarySizeBytes.TryReadProperty(ref reader, options, PropPrimarySizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalShardCount.TryReadProperty(ref reader, options, PropTotalShardCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalSizeBytes.TryReadProperty(ref reader, options, PropTotalSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DocCount = propDocCount.Value,
+			IndexCount = propIndexCount.Value,
+			NodeCount = propNodeCount.Value,
+			PrimaryShardCount = propPrimaryShardCount.Value,
+			PrimaryShardSizeAvgBytes = propPrimaryShardSizeAvgBytes.Value,
+			PrimaryShardSizeMadBytes = propPrimaryShardSizeMadBytes.Value,
+			PrimaryShardSizeMedianBytes = propPrimaryShardSizeMedianBytes.Value,
+			PrimarySizeBytes = propPrimarySizeBytes.Value,
+			TotalShardCount = propTotalShardCount.Value,
+			TotalSizeBytes = propTotalSizeBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
+		writer.WriteProperty(options, PropNodeCount, value.NodeCount, null, null);
+		writer.WriteProperty(options, PropPrimaryShardCount, value.PrimaryShardCount, null, null);
+		writer.WriteProperty(options, PropPrimaryShardSizeAvgBytes, value.PrimaryShardSizeAvgBytes, null, null);
+		writer.WriteProperty(options, PropPrimaryShardSizeMadBytes, value.PrimaryShardSizeMadBytes, null, null);
+		writer.WriteProperty(options, PropPrimaryShardSizeMedianBytes, value.PrimaryShardSizeMedianBytes, null, null);
+		writer.WriteProperty(options, PropPrimarySizeBytes, value.PrimarySizeBytes, null, null);
+		writer.WriteProperty(options, PropTotalShardCount, value.TotalShardCount, null, null);
+		writer.WriteProperty(options, PropTotalSizeBytes, value.TotalSizeBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatisticsConverter))]
 public sealed partial class DataTierPhaseStatistics
 {
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("index_count")]
-	public long IndexCount { get; init; }
-	[JsonInclude, JsonPropertyName("node_count")]
-	public long NodeCount { get; init; }
-	[JsonInclude, JsonPropertyName("primary_shard_count")]
-	public long PrimaryShardCount { get; init; }
-	[JsonInclude, JsonPropertyName("primary_shard_size_avg_bytes")]
-	public long PrimaryShardSizeAvgBytes { get; init; }
-	[JsonInclude, JsonPropertyName("primary_shard_size_mad_bytes")]
-	public long PrimaryShardSizeMadBytes { get; init; }
-	[JsonInclude, JsonPropertyName("primary_shard_size_median_bytes")]
-	public long PrimaryShardSizeMedianBytes { get; init; }
-	[JsonInclude, JsonPropertyName("primary_size_bytes")]
-	public long PrimarySizeBytes { get; init; }
-	[JsonInclude, JsonPropertyName("total_shard_count")]
-	public long TotalShardCount { get; init; }
-	[JsonInclude, JsonPropertyName("total_size_bytes")]
-	public long TotalSizeBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataTierPhaseStatistics(long docCount, long indexCount, long nodeCount, long primaryShardCount, long primaryShardSizeAvgBytes, long primaryShardSizeMadBytes, long primaryShardSizeMedianBytes, long primarySizeBytes, long totalShardCount, long totalSizeBytes)
+	{
+		DocCount = docCount;
+		IndexCount = indexCount;
+		NodeCount = nodeCount;
+		PrimaryShardCount = primaryShardCount;
+		PrimaryShardSizeAvgBytes = primaryShardSizeAvgBytes;
+		PrimaryShardSizeMadBytes = primaryShardSizeMadBytes;
+		PrimaryShardSizeMedianBytes = primaryShardSizeMedianBytes;
+		PrimarySizeBytes = primarySizeBytes;
+		TotalShardCount = totalShardCount;
+		TotalSizeBytes = totalSizeBytes;
+	}
+#if NET7_0_OR_GREATER
+	public DataTierPhaseStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataTierPhaseStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataTierPhaseStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NodeCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimaryShardCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimaryShardSizeAvgBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimaryShardSizeMadBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimaryShardSizeMedianBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimarySizeBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalShardCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalSizeBytes { get; set; }
 }

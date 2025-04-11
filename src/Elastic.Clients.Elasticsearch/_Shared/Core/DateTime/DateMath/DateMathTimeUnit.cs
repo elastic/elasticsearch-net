@@ -6,11 +6,9 @@ using System;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[StringEnum]
 [JsonConverter(typeof(DateMathTimeUnitConverter))]
 public enum DateMathTimeUnit
 {

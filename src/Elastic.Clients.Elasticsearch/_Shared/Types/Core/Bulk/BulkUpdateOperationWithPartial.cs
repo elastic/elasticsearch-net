@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
@@ -23,7 +21,6 @@ public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdat
 		PartialDocument = partialDocument;
 	}
 
-	[JsonIgnore]
 	public TPartialDocument PartialDocument { get; set; }
 
 	protected override Type ClrType => null;
@@ -32,12 +29,10 @@ public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdat
 
 	protected override void BeforeSerialize(IElasticsearchClientSettings settings)
 	{
-		if (Index is null)
-			Index = settings.Inferrer.IndexName<TPartialDocument>();
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) =>
-		JsonSerializer.Serialize<BulkUpdateOperationWithPartial<TPartialDocument>>(writer, this, options);
-
-	protected override object GetBody() => new PartialBulkUpdateBody<TPartialDocument> { PartialUpdate = PartialDocument };
+	private protected override BulkUpdateBody GetBody() => new PartialBulkUpdateBody<TPartialDocument>
+	{
+		PartialUpdate = PartialDocument
+	};
 }

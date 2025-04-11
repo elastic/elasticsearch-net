@@ -17,21 +17,27 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class UpdateInferenceRequestParameters : RequestParameters
+public sealed partial class UpdateInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class UpdateInferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { InferenceConfig = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.InferenceConfig, null);
+	}
 }
 
 /// <summary>
@@ -47,31 +53,73 @@ public sealed partial class UpdateInferenceRequestParameters : RequestParameters
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
 /// </summary>
-public sealed partial class UpdateInferenceRequest : PlainRequest<UpdateInferenceRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestConverter))]
+public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
 	{
 	}
 
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceUpdate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Id inferenceId, Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig) : base(r => r.Required("inference_id", inferenceId))
+	{
+		InferenceConfig = inferenceConfig;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	{
+		InferenceConfig = inferenceConfig;
+	}
+#if NET7_0_OR_GREATER
+	public UpdateInferenceRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.InferenceUpdate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "inference.update";
 
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the inference endpoint.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, InferenceConfig, options);
-	}
+	/// <summary>
+	/// <para>
+	/// The type of inference task that the model performs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
 }
 
 /// <summary>
@@ -87,62 +135,120 @@ public sealed partial class UpdateInferenceRequest : PlainRequest<UpdateInferenc
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
 /// </summary>
-public sealed partial class UpdateInferenceRequestDescriptor : RequestDescriptor<UpdateInferenceRequestDescriptor, UpdateInferenceRequestParameters>
+public readonly partial struct UpdateInferenceRequestDescriptor
 {
-	internal UpdateInferenceRequestDescriptor(Action<UpdateInferenceRequestDescriptor> configure) => configure.Invoke(this);
-	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId)) => InferenceConfigValue = inferenceConfig;
-	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId)) => InferenceConfigValue = inferenceConfig;
+	internal Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceUpdate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "inference.update";
-
-	public UpdateInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest instance)
 	{
-		RouteValues.Required("inference_id", inferenceId);
-		return Self;
+		Instance = instance;
 	}
 
-	public UpdateInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
+	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		RouteValues.Optional("task_type", taskType);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(inferenceId);
+#pragma warning restore CS0618
 	}
 
-	private Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor> InferenceConfigDescriptorAction { get; set; }
-
-	public UpdateInferenceRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig)
+	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(taskType, inferenceId);
+#pragma warning restore CS0618
 	}
 
-	public UpdateInferenceRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor descriptor)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public UpdateInferenceRequestDescriptor()
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public UpdateInferenceRequestDescriptor InferenceConfig(Action<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the inference endpoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
+		Instance.InferenceId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The type of inference task that the model performs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
-		JsonSerializer.Serialize(writer, InferenceConfigValue, options);
+		Instance.TaskType = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint value)
+	{
+		Instance.InferenceConfig = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor> action)
+	{
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest Build(System.Action<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

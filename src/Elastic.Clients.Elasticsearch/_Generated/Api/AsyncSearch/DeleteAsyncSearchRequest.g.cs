@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public sealed partial class DeleteAsyncSearchRequestParameters : RequestParameters
+public sealed partial class DeleteAsyncSearchRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteAsyncSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest>
+{
+	public override Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -44,19 +66,42 @@ public sealed partial class DeleteAsyncSearchRequestParameters : RequestParamete
 /// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
 /// </para>
 /// </summary>
-public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncSearchRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestConverter))]
+public sealed partial class DeleteAsyncSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteAsyncSearchRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.AsyncSearchDelete;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "async_search.delete";
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the async search.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>
@@ -69,66 +114,88 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 /// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
 /// </para>
 /// </summary>
-public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchRequestParameters>
+public readonly partial struct DeleteAsyncSearchRequestDescriptor
 {
-	internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest Instance { get; init; }
 
-	public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "async_search.delete";
-
-	public DeleteAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteAsyncSearchRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Delete an async search.
-/// </para>
-/// <para>
-/// If the asynchronous search is still running, it is cancelled.
-/// Otherwise, the saved search results are deleted.
-/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-/// </para>
-/// </summary>
-public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescriptor<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequestParameters>
-{
-	internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
-
-	public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
+	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "async_search.delete";
-
-	public DeleteAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the async search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor> action)
 	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

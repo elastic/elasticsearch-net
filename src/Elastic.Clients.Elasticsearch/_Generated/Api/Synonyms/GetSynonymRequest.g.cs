@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
-public sealed partial class GetSynonymRequestParameters : RequestParameters
+public sealed partial class GetSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -47,20 +40,61 @@ public sealed partial class GetSynonymRequestParameters : RequestParameters
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
+internal sealed partial class GetSynonymRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get a synonym set.
 /// </para>
 /// </summary>
-public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestConverter))]
+public sealed partial class GetSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetSynonymRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetSynonymRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsGetSynonym;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SynonymsGetSynonym;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -68,10 +102,20 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 
 	/// <summary>
 	/// <para>
+	/// The synonyms set identifier to retrieve.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The starting offset for query rules to retrieve.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -79,7 +123,6 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 	/// The max number of query rules to retrieve.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
@@ -88,67 +131,110 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 /// Get a synonym set.
 /// </para>
 /// </summary>
-public sealed partial class GetSynonymRequestDescriptor<TDocument> : RequestDescriptor<GetSynonymRequestDescriptor<TDocument>, GetSynonymRequestParameters>
+public readonly partial struct GetSynonymRequestDescriptor
 {
-	internal GetSynonymRequestDescriptor(Action<GetSynonymRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest Instance { get; init; }
 
-	public GetSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsGetSynonym;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "synonyms.get_synonym";
-
-	public GetSynonymRequestDescriptor<TDocument> From(int? from) => Qs("from", from);
-	public GetSynonymRequestDescriptor<TDocument> Size(int? size) => Qs("size", size);
-
-	public GetSynonymRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public GetSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetSynonymRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Get a synonym set.
-/// </para>
-/// </summary>
-public sealed partial class GetSynonymRequestDescriptor : RequestDescriptor<GetSynonymRequestDescriptor, GetSynonymRequestParameters>
-{
-	internal GetSynonymRequestDescriptor(Action<GetSynonymRequestDescriptor> configure) => configure.Invoke(this);
-
-	public GetSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsGetSynonym;
+	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "synonyms.get_synonym";
-
-	public GetSynonymRequestDescriptor From(int? from) => Qs("from", from);
-	public GetSynonymRequestDescriptor Size(int? size) => Qs("size", size);
-
-	public GetSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// The synonyms set identifier to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The starting offset for query rules to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor From(int? value)
 	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The max number of query rules to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest Build(System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

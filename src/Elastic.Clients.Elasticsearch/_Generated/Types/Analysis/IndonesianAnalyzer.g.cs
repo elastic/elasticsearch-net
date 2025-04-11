@@ -17,90 +17,162 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class IndonesianAnalyzer : IAnalyzer
+internal sealed partial class IndonesianAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("stem_exclusion")]
-	public ICollection<string>? StemExclusion { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
+	private static readonly System.Text.Json.JsonEncodedText PropStemExclusion = System.Text.Json.JsonEncodedText.Encode("stem_exclusion");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStemExclusion = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStemExclusion.TryReadProperty(ref reader, options, PropStemExclusion, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			StemExclusion = propStemExclusion.Value,
+			Stopwords = propStopwords.Value,
+			StopwordsPath = propStopwordsPath.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStemExclusion, value.StemExclusion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerConverter))]
+public sealed partial class IndonesianAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+#if NET7_0_OR_GREATER
+	public IndonesianAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndonesianAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndonesianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? StemExclusion { get; set; }
+	public System.Collections.Generic.ICollection<string>? Stopwords { get; set; }
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "indonesian";
 }
 
-public sealed partial class IndonesianAnalyzerDescriptor : SerializableDescriptor<IndonesianAnalyzerDescriptor>, IBuildableDescriptor<IndonesianAnalyzer>
+public readonly partial struct IndonesianAnalyzerDescriptor
 {
-	internal IndonesianAnalyzerDescriptor(Action<IndonesianAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer Instance { get; init; }
 
-	public IndonesianAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndonesianAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? StemExclusionValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
-	private string? StopwordsPathValue { get; set; }
-
-	public IndonesianAnalyzerDescriptor StemExclusion(ICollection<string>? stemExclusion)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndonesianAnalyzerDescriptor()
 	{
-		StemExclusionValue = stemExclusion;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IndonesianAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer(Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor StemExclusion(System.Collections.Generic.ICollection<string>? value)
 	{
-		StopwordsValue = stopwords;
-		return Self;
+		Instance.StemExclusion = value;
+		return this;
 	}
 
-	public IndonesianAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+	public Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor StemExclusion(params string[] values)
 	{
-		StopwordsPathValue = stopwordsPath;
-		return Self;
+		Instance.StemExclusion = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
 	{
-		writer.WriteStartObject();
-		if (StemExclusionValue is not null)
+		Instance.Stopwords = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor Stopwords(params string[] values)
+	{
+		Instance.Stopwords = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor StopwordsPath(string? value)
+	{
+		Instance.StopwordsPath = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("stem_exclusion");
-			JsonSerializer.Serialize(writer, StemExclusionValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (StopwordsValue is not null)
-		{
-			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(StopwordsPathValue))
-		{
-			writer.WritePropertyName("stopwords_path");
-			writer.WriteStringValue(StopwordsPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("indonesian");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	IndonesianAnalyzer IBuildableDescriptor<IndonesianAnalyzer>.Build() => new()
-	{
-		StemExclusion = StemExclusionValue,
-		Stopwords = StopwordsValue,
-		StopwordsPath = StopwordsPathValue
-	};
 }

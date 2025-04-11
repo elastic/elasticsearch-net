@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
-public sealed partial class FindMessageStructureRequestParameters : RequestParameters
+public sealed partial class FindMessageStructureRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -257,6 +250,45 @@ public sealed partial class FindMessageStructureRequestParameters : RequestParam
 	public string? TimestampFormat { get => Q<string?>("timestamp_format"); set => Q("timestamp_format", value); }
 }
 
+internal sealed partial class FindMessageStructureRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages");
+
+	public override Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propMessages = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMessages.TryReadProperty(ref reader, options, PropMessages, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Messages = propMessages.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMessages, value.Messages, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
@@ -297,11 +329,34 @@ public sealed partial class FindMessageStructureRequestParameters : RequestParam
 /// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
-public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessageStructureRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestConverter))]
+public sealed partial class FindMessageStructureRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TextStructureFindMessageStructure;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FindMessageStructureRequest(System.Collections.Generic.ICollection<string> messages)
+	{
+		Messages = messages;
+	}
+#if NET7_0_OR_GREATER
+	public FindMessageStructureRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FindMessageStructureRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TextStructureFindMessageStructure;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -314,7 +369,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? ColumnNames { get => Q<string?>("column_names"); set => Q("column_names", value); }
 
 	/// <summary>
@@ -326,7 +380,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If you specify a delimiter, up to 10% of the rows can have a different number of columns than the first row.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
@@ -337,7 +390,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If the structure finder identifies a common structure but has no idea of meaning then generic field names such as <c>path</c>, <c>ipaddress</c>, <c>field1</c>, and <c>field2</c> are used in the <c>grok_pattern</c> output, with the intention that a user who knows the meanings rename these fields before using it.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? EcsCompatibility { get => Q<Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
 
 	/// <summary>
@@ -345,7 +397,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If this parameter is set to true, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 	/// <summary>
@@ -356,7 +407,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If the format is <c>delimited</c> and the delimiter is not set, however, the API tolerates up to 5% of rows that have a different number of columns than the first row.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.TextStructure.FormatType? Format { get => Q<Elastic.Clients.Elasticsearch.TextStructure.FormatType?>("format"); set => Q("format", value); }
 
 	/// <summary>
@@ -367,7 +417,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If <c>grok_pattern</c> is not specified, the structure finder creates a Grok pattern.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? GrokPattern { get => Q<string?>("grok_pattern"); set => Q("grok_pattern", value); }
 
 	/// <summary>
@@ -378,7 +427,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If your delimited text format does not use quoting, a workaround is to set this argument to a character that does not appear anywhere in the sample.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Quote { get => Q<string?>("quote"); set => Q("quote", value); }
 
 	/// <summary>
@@ -388,7 +436,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// Otherwise, the default value is <c>false</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? ShouldTrimFields { get => Q<bool?>("should_trim_fields"); set => Q("should_trim_fields", value); }
 
 	/// <summary>
@@ -397,7 +444,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// If the analysis is still running when the timeout expires, it will be stopped.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -417,7 +463,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// For structured text, it is not compulsory to have a timestamp in the text.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get => Q<Elastic.Clients.Elasticsearch.Field?>("timestamp_field"); set => Q("timestamp_field", value); }
 
 	/// <summary>
@@ -539,7 +584,6 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// When the format is semi-structured text, this will result in the structure finder treating the text as single-line messages.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? TimestampFormat { get => Q<string?>("timestamp_format"); set => Q("timestamp_format", value); }
 
 	/// <summary>
@@ -547,8 +591,11 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 	/// The list of messages you want to analyze.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("messages")]
-	public ICollection<string> Messages { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Messages { get; set; }
 }
 
 /// <summary>
@@ -591,53 +638,385 @@ public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessa
 /// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
-public sealed partial class FindMessageStructureRequestDescriptor<TDocument> : RequestDescriptor<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureRequestParameters>
+public readonly partial struct FindMessageStructureRequestDescriptor
 {
-	internal FindMessageStructureRequestDescriptor(Action<FindMessageStructureRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FindMessageStructureRequestDescriptor(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public FindMessageStructureRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TextStructureFindMessageStructure;
+	public static explicit operator Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest instance) => new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify the column names in a comma-separated list.
+	/// If this parameter is not specified, the structure finder uses the column names from the header row of the text.
+	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ColumnNames(string? value)
+	{
+		Instance.ColumnNames = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// If you the format is <c>delimited</c>, you can specify the character used to delimit the values in each row.
+	/// Only a single character is supported; the delimiter cannot have multiple characters.
+	/// By default, the API considers the following possibilities: comma, tab, semi-colon, and pipe (<c>|</c>).
+	/// In this default scenario, all rows must have the same number of fields for the delimited format to be detected.
+	/// If you specify a delimiter, up to 10% of the rows can have a different number of columns than the first row.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
 
-	internal override string OperationName => "text_structure.find_message_structure";
+	/// <summary>
+	/// <para>
+	/// The mode of compatibility with ECS compliant Grok patterns.
+	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
+	/// This setting primarily has an impact when a whole message Grok pattern such as <c>%{CATALINALOG}</c> matches the input.
+	/// If the structure finder identifies a common structure but has no idea of meaning then generic field names such as <c>path</c>, <c>ipaddress</c>, <c>field1</c>, and <c>field2</c> are used in the <c>grok_pattern</c> output, with the intention that a user who knows the meanings rename these fields before using it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor EcsCompatibility(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? value)
+	{
+		Instance.EcsCompatibility = value;
+		return this;
+	}
 
-	public FindMessageStructureRequestDescriptor<TDocument> ColumnNames(string? columnNames) => Qs("column_names", columnNames);
-	public FindMessageStructureRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public FindMessageStructureRequestDescriptor<TDocument> EcsCompatibility(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? ecsCompatibility) => Qs("ecs_compatibility", ecsCompatibility);
-	public FindMessageStructureRequestDescriptor<TDocument> Explain(bool? explain = true) => Qs("explain", explain);
-	public FindMessageStructureRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.TextStructure.FormatType? format) => Qs("format", format);
-	public FindMessageStructureRequestDescriptor<TDocument> GrokPattern(string? grokPattern) => Qs("grok_pattern", grokPattern);
-	public FindMessageStructureRequestDescriptor<TDocument> Quote(string? quote) => Qs("quote", quote);
-	public FindMessageStructureRequestDescriptor<TDocument> ShouldTrimFields(bool? shouldTrimFields = true) => Qs("should_trim_fields", shouldTrimFields);
-	public FindMessageStructureRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public FindMessageStructureRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? timestampField) => Qs("timestamp_field", timestampField);
-	public FindMessageStructureRequestDescriptor<TDocument> TimestampFormat(string? timestampFormat) => Qs("timestamp_format", timestampFormat);
+	/// <summary>
+	/// <para>
+	/// If this parameter is set to true, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Explain(bool? value = true)
+	{
+		Instance.Explain = value;
+		return this;
+	}
 
-	private ICollection<string> MessagesValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// The high level structure of the text.
+	/// By default, the API chooses the format.
+	/// In this default scenario, all rows must have the same number of fields for a delimited format to be detected.
+	/// If the format is <c>delimited</c> and the delimiter is not set, however, the API tolerates up to 5% of rows that have a different number of columns than the first row.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Format(Elastic.Clients.Elasticsearch.TextStructure.FormatType? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>semi_structured_text</c>, you can specify a Grok pattern that is used to extract fields from every message in the text.
+	/// The name of the timestamp field in the Grok pattern must match what is specified in the <c>timestamp_field</c> parameter.
+	/// If that parameter is not specified, the name of the timestamp field in the Grok pattern must match "timestamp".
+	/// If <c>grok_pattern</c> is not specified, the structure finder creates a Grok pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor GrokPattern(string? value)
+	{
+		Instance.GrokPattern = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify the character used to quote the values in each row if they contain newlines or the delimiter character.
+	/// Only a single character is supported.
+	/// If this parameter is not specified, the default value is a double quote (<c>"</c>).
+	/// If your delimited text format does not use quoting, a workaround is to set this argument to a character that does not appear anywhere in the sample.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Quote(string? value)
+	{
+		Instance.Quote = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
+	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
+	/// Otherwise, the default value is <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ShouldTrimFields(bool? value = true)
+	{
+		Instance.ShouldTrimFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum amount of time that the structure analysis can take.
+	/// If the analysis is still running when the timeout expires, it will be stopped.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the field that contains the primary timestamp of each record in the text.
+	/// In particular, if the text was ingested into an index, this is the field that would be used to populate the <c>@timestamp</c> field.
+	/// </para>
+	/// <para>
+	/// If the format is <c>semi_structured_text</c>, this field must match the name of the appropriate extraction in the <c>grok_pattern</c>.
+	/// Therefore, for semi-structured text, it is best not to specify this parameter unless <c>grok_pattern</c> is also specified.
+	/// </para>
+	/// <para>
+	/// For structured text, if you specify this parameter, the field must exist within the text.
+	/// </para>
+	/// <para>
+	/// If this parameter is not specified, the structure finder makes a decision about which field (if any) is the primary timestamp field.
+	/// For structured text, it is not compulsory to have a timestamp in the text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TimestampField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the field that contains the primary timestamp of each record in the text.
+	/// In particular, if the text was ingested into an index, this is the field that would be used to populate the <c>@timestamp</c> field.
+	/// </para>
+	/// <para>
+	/// If the format is <c>semi_structured_text</c>, this field must match the name of the appropriate extraction in the <c>grok_pattern</c>.
+	/// Therefore, for semi-structured text, it is best not to specify this parameter unless <c>grok_pattern</c> is also specified.
+	/// </para>
+	/// <para>
+	/// For structured text, if you specify this parameter, the field must exist within the text.
+	/// </para>
+	/// <para>
+	/// If this parameter is not specified, the structure finder makes a decision about which field (if any) is the primary timestamp field.
+	/// For structured text, it is not compulsory to have a timestamp in the text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor TimestampField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.TimestampField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The Java time format of the timestamp field in the text.
+	/// Only a subset of Java time format letter groups are supported:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>a</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>d</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>dd</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>EEE</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>EEEE</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>H</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>HH</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>h</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>M</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>MM</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>MMM</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>MMMM</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>mm</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>ss</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>XX</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>XXX</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>yy</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>yyyy</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>zzz</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Additionally <c>S</c> letter groups (fractional seconds) of length one to nine are supported providing they occur after <c>ss</c> and are separated from the <c>ss</c> by a period (<c>.</c>), comma (<c>,</c>), or colon (<c>:</c>).
+	/// Spacing and punctuation is also permitted with the exception a question mark (<c>?</c>), newline, and carriage return, together with literal text enclosed in single quotes.
+	/// For example, <c>MM/dd HH.mm.ss,SSSSSS 'in' yyyy</c> is a valid override format.
+	/// </para>
+	/// <para>
+	/// One valuable use case for this parameter is when the format is semi-structured text, there are multiple timestamp formats in the text, and you know which format corresponds to the primary timestamp, but you do not want to specify the full <c>grok_pattern</c>.
+	/// Another is when the timestamp format is one that the structure finder does not consider by default.
+	/// </para>
+	/// <para>
+	/// If this parameter is not specified, the structure finder chooses the best format from a built-in set.
+	/// </para>
+	/// <para>
+	/// If the special value <c>null</c> is specified, the structure finder will not look for a primary timestamp in the text.
+	/// When the format is semi-structured text, this will result in the structure finder treating the text as single-line messages.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor TimestampFormat(string? value)
+	{
+		Instance.TimestampFormat = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The list of messages you want to analyze.
 	/// </para>
 	/// </summary>
-	public FindMessageStructureRequestDescriptor<TDocument> Messages(ICollection<string> messages)
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Messages(System.Collections.Generic.ICollection<string> value)
 	{
-		MessagesValue = messages;
-		return Self;
+		Instance.Messages = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The list of messages you want to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Messages(params string[] values)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("messages");
-		JsonSerializer.Serialize(writer, MessagesValue, options);
-		writer.WriteEndObject();
+		Instance.Messages = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Build(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor(new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -681,52 +1060,384 @@ public sealed partial class FindMessageStructureRequestDescriptor<TDocument> : R
 /// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
-public sealed partial class FindMessageStructureRequestDescriptor : RequestDescriptor<FindMessageStructureRequestDescriptor, FindMessageStructureRequestParameters>
+public readonly partial struct FindMessageStructureRequestDescriptor<TDocument>
 {
-	internal FindMessageStructureRequestDescriptor(Action<FindMessageStructureRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FindMessageStructureRequestDescriptor(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public FindMessageStructureRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TextStructureFindMessageStructure;
+	public static explicit operator Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest instance) => new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify the column names in a comma-separated list.
+	/// If this parameter is not specified, the structure finder uses the column names from the header row of the text.
+	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ColumnNames(string? value)
+	{
+		Instance.ColumnNames = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// If you the format is <c>delimited</c>, you can specify the character used to delimit the values in each row.
+	/// Only a single character is supported; the delimiter cannot have multiple characters.
+	/// By default, the API considers the following possibilities: comma, tab, semi-colon, and pipe (<c>|</c>).
+	/// In this default scenario, all rows must have the same number of fields for the delimited format to be detected.
+	/// If you specify a delimiter, up to 10% of the rows can have a different number of columns than the first row.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
 
-	internal override string OperationName => "text_structure.find_message_structure";
+	/// <summary>
+	/// <para>
+	/// The mode of compatibility with ECS compliant Grok patterns.
+	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
+	/// This setting primarily has an impact when a whole message Grok pattern such as <c>%{CATALINALOG}</c> matches the input.
+	/// If the structure finder identifies a common structure but has no idea of meaning then generic field names such as <c>path</c>, <c>ipaddress</c>, <c>field1</c>, and <c>field2</c> are used in the <c>grok_pattern</c> output, with the intention that a user who knows the meanings rename these fields before using it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> EcsCompatibility(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? value)
+	{
+		Instance.EcsCompatibility = value;
+		return this;
+	}
 
-	public FindMessageStructureRequestDescriptor ColumnNames(string? columnNames) => Qs("column_names", columnNames);
-	public FindMessageStructureRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public FindMessageStructureRequestDescriptor EcsCompatibility(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? ecsCompatibility) => Qs("ecs_compatibility", ecsCompatibility);
-	public FindMessageStructureRequestDescriptor Explain(bool? explain = true) => Qs("explain", explain);
-	public FindMessageStructureRequestDescriptor Format(Elastic.Clients.Elasticsearch.TextStructure.FormatType? format) => Qs("format", format);
-	public FindMessageStructureRequestDescriptor GrokPattern(string? grokPattern) => Qs("grok_pattern", grokPattern);
-	public FindMessageStructureRequestDescriptor Quote(string? quote) => Qs("quote", quote);
-	public FindMessageStructureRequestDescriptor ShouldTrimFields(bool? shouldTrimFields = true) => Qs("should_trim_fields", shouldTrimFields);
-	public FindMessageStructureRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public FindMessageStructureRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? timestampField) => Qs("timestamp_field", timestampField);
-	public FindMessageStructureRequestDescriptor TimestampFormat(string? timestampFormat) => Qs("timestamp_format", timestampFormat);
+	/// <summary>
+	/// <para>
+	/// If this parameter is set to true, the response includes a field named <c>explanation</c>, which is an array of strings that indicate how the structure finder produced its result.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Explain(bool? value = true)
+	{
+		Instance.Explain = value;
+		return this;
+	}
 
-	private ICollection<string> MessagesValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// The high level structure of the text.
+	/// By default, the API chooses the format.
+	/// In this default scenario, all rows must have the same number of fields for a delimited format to be detected.
+	/// If the format is <c>delimited</c> and the delimiter is not set, however, the API tolerates up to 5% of rows that have a different number of columns than the first row.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.TextStructure.FormatType? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>semi_structured_text</c>, you can specify a Grok pattern that is used to extract fields from every message in the text.
+	/// The name of the timestamp field in the Grok pattern must match what is specified in the <c>timestamp_field</c> parameter.
+	/// If that parameter is not specified, the name of the timestamp field in the Grok pattern must match "timestamp".
+	/// If <c>grok_pattern</c> is not specified, the structure finder creates a Grok pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> GrokPattern(string? value)
+	{
+		Instance.GrokPattern = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify the character used to quote the values in each row if they contain newlines or the delimiter character.
+	/// Only a single character is supported.
+	/// If this parameter is not specified, the default value is a double quote (<c>"</c>).
+	/// If your delimited text format does not use quoting, a workaround is to set this argument to a character that does not appear anywhere in the sample.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Quote(string? value)
+	{
+		Instance.Quote = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
+	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
+	/// Otherwise, the default value is <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ShouldTrimFields(bool? value = true)
+	{
+		Instance.ShouldTrimFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum amount of time that the structure analysis can take.
+	/// If the analysis is still running when the timeout expires, it will be stopped.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the field that contains the primary timestamp of each record in the text.
+	/// In particular, if the text was ingested into an index, this is the field that would be used to populate the <c>@timestamp</c> field.
+	/// </para>
+	/// <para>
+	/// If the format is <c>semi_structured_text</c>, this field must match the name of the appropriate extraction in the <c>grok_pattern</c>.
+	/// Therefore, for semi-structured text, it is best not to specify this parameter unless <c>grok_pattern</c> is also specified.
+	/// </para>
+	/// <para>
+	/// For structured text, if you specify this parameter, the field must exist within the text.
+	/// </para>
+	/// <para>
+	/// If this parameter is not specified, the structure finder makes a decision about which field (if any) is the primary timestamp field.
+	/// For structured text, it is not compulsory to have a timestamp in the text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TimestampField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the field that contains the primary timestamp of each record in the text.
+	/// In particular, if the text was ingested into an index, this is the field that would be used to populate the <c>@timestamp</c> field.
+	/// </para>
+	/// <para>
+	/// If the format is <c>semi_structured_text</c>, this field must match the name of the appropriate extraction in the <c>grok_pattern</c>.
+	/// Therefore, for semi-structured text, it is best not to specify this parameter unless <c>grok_pattern</c> is also specified.
+	/// </para>
+	/// <para>
+	/// For structured text, if you specify this parameter, the field must exist within the text.
+	/// </para>
+	/// <para>
+	/// If this parameter is not specified, the structure finder makes a decision about which field (if any) is the primary timestamp field.
+	/// For structured text, it is not compulsory to have a timestamp in the text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> TimestampField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
+	{
+		Instance.TimestampField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The Java time format of the timestamp field in the text.
+	/// Only a subset of Java time format letter groups are supported:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>a</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>d</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>dd</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>EEE</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>EEEE</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>H</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>HH</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>h</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>M</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>MM</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>MMM</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>MMMM</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>mm</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>ss</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>XX</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>XXX</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>yy</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>yyyy</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>zzz</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Additionally <c>S</c> letter groups (fractional seconds) of length one to nine are supported providing they occur after <c>ss</c> and are separated from the <c>ss</c> by a period (<c>.</c>), comma (<c>,</c>), or colon (<c>:</c>).
+	/// Spacing and punctuation is also permitted with the exception a question mark (<c>?</c>), newline, and carriage return, together with literal text enclosed in single quotes.
+	/// For example, <c>MM/dd HH.mm.ss,SSSSSS 'in' yyyy</c> is a valid override format.
+	/// </para>
+	/// <para>
+	/// One valuable use case for this parameter is when the format is semi-structured text, there are multiple timestamp formats in the text, and you know which format corresponds to the primary timestamp, but you do not want to specify the full <c>grok_pattern</c>.
+	/// Another is when the timestamp format is one that the structure finder does not consider by default.
+	/// </para>
+	/// <para>
+	/// If this parameter is not specified, the structure finder chooses the best format from a built-in set.
+	/// </para>
+	/// <para>
+	/// If the special value <c>null</c> is specified, the structure finder will not look for a primary timestamp in the text.
+	/// When the format is semi-structured text, this will result in the structure finder treating the text as single-line messages.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> TimestampFormat(string? value)
+	{
+		Instance.TimestampFormat = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The list of messages you want to analyze.
 	/// </para>
 	/// </summary>
-	public FindMessageStructureRequestDescriptor Messages(ICollection<string> messages)
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Messages(System.Collections.Generic.ICollection<string> value)
 	{
-		MessagesValue = messages;
-		return Self;
+		Instance.Messages = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The list of messages you want to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Messages(params string[] values)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("messages");
-		JsonSerializer.Serialize(writer, MessagesValue, options);
-		writer.WriteEndObject();
+		Instance.Messages = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Build(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

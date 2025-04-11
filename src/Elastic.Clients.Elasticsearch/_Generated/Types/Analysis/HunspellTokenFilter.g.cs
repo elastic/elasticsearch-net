@@ -17,118 +17,188 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class HunspellTokenFilter : ITokenFilter
+internal sealed partial class HunspellTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("dedup")]
+	private static readonly System.Text.Json.JsonEncodedText PropDedup = System.Text.Json.JsonEncodedText.Encode("dedup");
+	private static readonly System.Text.Json.JsonEncodedText PropDictionary = System.Text.Json.JsonEncodedText.Encode("dictionary");
+	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
+	private static readonly System.Text.Json.JsonEncodedText PropLongestOnly = System.Text.Json.JsonEncodedText.Encode("longest_only");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDedup = default;
+		LocalJsonValue<string?> propDictionary = default;
+		LocalJsonValue<string> propLocale = default;
+		LocalJsonValue<bool?> propLongestOnly = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDedup.TryReadProperty(ref reader, options, PropDedup, null))
+			{
+				continue;
+			}
+
+			if (propDictionary.TryReadProperty(ref reader, options, PropDictionary, null))
+			{
+				continue;
+			}
+
+			if (propLocale.TryReadProperty(ref reader, options, PropLocale, null))
+			{
+				continue;
+			}
+
+			if (propLongestOnly.TryReadProperty(ref reader, options, PropLongestOnly, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dedup = propDedup.Value,
+			Dictionary = propDictionary.Value,
+			Locale = propLocale.Value,
+			LongestOnly = propLongestOnly.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDedup, value.Dedup, null, null);
+		writer.WriteProperty(options, PropDictionary, value.Dictionary, null, null);
+		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
+		writer.WriteProperty(options, PropLongestOnly, value.LongestOnly, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterConverter))]
+public sealed partial class HunspellTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HunspellTokenFilter(string locale)
+	{
+		Locale = locale;
+	}
+#if NET7_0_OR_GREATER
+	public HunspellTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public HunspellTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HunspellTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Dedup { get; set; }
-	[JsonInclude, JsonPropertyName("dictionary")]
 	public string? Dictionary { get; set; }
-	[JsonInclude, JsonPropertyName("locale")]
-	public string Locale { get; set; }
-	[JsonInclude, JsonPropertyName("longest_only")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Locale { get; set; }
 	public bool? LongestOnly { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "hunspell";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class HunspellTokenFilterDescriptor : SerializableDescriptor<HunspellTokenFilterDescriptor>, IBuildableDescriptor<HunspellTokenFilter>
+public readonly partial struct HunspellTokenFilterDescriptor
 {
-	internal HunspellTokenFilterDescriptor(Action<HunspellTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter Instance { get; init; }
 
-	public HunspellTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HunspellTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? DedupValue { get; set; }
-	private string? DictionaryValue { get; set; }
-	private string LocaleValue { get; set; }
-	private bool? LongestOnlyValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public HunspellTokenFilterDescriptor Dedup(bool? dedup = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HunspellTokenFilterDescriptor()
 	{
-		DedupValue = dedup;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public HunspellTokenFilterDescriptor Dictionary(string? dictionary)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Dedup(bool? value = true)
 	{
-		DictionaryValue = dictionary;
-		return Self;
+		Instance.Dedup = value;
+		return this;
 	}
 
-	public HunspellTokenFilterDescriptor Locale(string locale)
+	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Dictionary(string? value)
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.Dictionary = value;
+		return this;
 	}
 
-	public HunspellTokenFilterDescriptor LongestOnly(bool? longestOnly = true)
+	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Locale(string value)
 	{
-		LongestOnlyValue = longestOnly;
-		return Self;
+		Instance.Locale = value;
+		return this;
 	}
 
-	public HunspellTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor LongestOnly(bool? value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.LongestOnly = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (DedupValue.HasValue)
-		{
-			writer.WritePropertyName("dedup");
-			writer.WriteBooleanValue(DedupValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(DictionaryValue))
-		{
-			writer.WritePropertyName("dictionary");
-			writer.WriteStringValue(DictionaryValue);
-		}
-
-		writer.WritePropertyName("locale");
-		writer.WriteStringValue(LocaleValue);
-		if (LongestOnlyValue.HasValue)
-		{
-			writer.WritePropertyName("longest_only");
-			writer.WriteBooleanValue(LongestOnlyValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("hunspell");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	HunspellTokenFilter IBuildableDescriptor<HunspellTokenFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor> action)
 	{
-		Dedup = DedupValue,
-		Dictionary = DictionaryValue,
-		Locale = LocaleValue,
-		LongestOnly = LongestOnlyValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

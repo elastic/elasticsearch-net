@@ -17,26 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropReservedSizes = System.Text.Json.JsonEncodedText.Encode("reserved_sizes");
+	private static readonly System.Text.Json.JsonEncodedText PropShardDataSetSizes = System.Text.Json.JsonEncodedText.Encode("shard_data_set_sizes");
+	private static readonly System.Text.Json.JsonEncodedText PropShardPaths = System.Text.Json.JsonEncodedText.Encode("shard_paths");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSizes = System.Text.Json.JsonEncodedText.Encode("shard_sizes");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage>> propNodes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize>> propReservedSizes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propShardDataSetSizes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propShardPaths = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>> propShardSizes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propReservedSizes.TryReadProperty(ref reader, options, PropReservedSizes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.ReservedSize>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propShardDataSetSizes.TryReadProperty(ref reader, options, PropShardDataSetSizes, static System.Collections.Generic.IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propShardPaths.TryReadProperty(ref reader, options, PropShardPaths, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propShardSizes.TryReadProperty(ref reader, options, PropShardSizes, static System.Collections.Generic.IReadOnlyDictionary<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Nodes = propNodes.Value,
+			ReservedSizes = propReservedSizes.Value,
+			ShardDataSetSizes = propShardDataSetSizes.Value,
+			ShardPaths = propShardPaths.Value,
+			ShardSizes = propShardSizes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage>(o, v, null, null));
+		writer.WriteProperty(options, PropReservedSizes, value.ReservedSizes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.ReservedSize>(o, v, null));
+		writer.WriteProperty(options, PropShardDataSetSizes, value.ShardDataSetSizes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropShardPaths, value.ShardPaths, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropShardSizes, value.ShardSizes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoConverter))]
 public sealed partial class ClusterInfo
 {
-	[JsonInclude, JsonPropertyName("nodes")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> Nodes { get; init; }
-	[JsonInclude, JsonPropertyName("reserved_sizes")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> ReservedSizes { get; init; }
-	[JsonInclude, JsonPropertyName("shard_data_set_sizes")]
-	public IReadOnlyDictionary<string, string>? ShardDataSetSizes { get; init; }
-	[JsonInclude, JsonPropertyName("shard_paths")]
-	public IReadOnlyDictionary<string, string> ShardPaths { get; init; }
-	[JsonInclude, JsonPropertyName("shard_sizes")]
-	public IReadOnlyDictionary<string, long> ShardSizes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterInfo(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> nodes, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> reservedSizes, System.Collections.Generic.IReadOnlyDictionary<string, string> shardPaths, System.Collections.Generic.IReadOnlyDictionary<string, long> shardSizes)
+	{
+		Nodes = nodes;
+		ReservedSizes = reservedSizes;
+		ShardPaths = shardPaths;
+		ShardSizes = shardSizes;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> Nodes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> ReservedSizes { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? ShardDataSetSizes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, string> ShardPaths { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, long> ShardSizes { get; set; }
 }

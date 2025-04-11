@@ -17,21 +17,77 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-public sealed partial class PutPolicyRequestParameters : RequestParameters
+public sealed partial class PutPolicyRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class PutPolicyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropGeoMatch = System.Text.Json.JsonEncodedText.Encode("geo_match");
+	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText PropRange = System.Text.Json.JsonEncodedText.Encode("range");
+
+	public override Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy?> propGeoMatch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy?> propMatch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy?> propRange = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propGeoMatch.TryReadProperty(ref reader, options, PropGeoMatch, null))
+			{
+				continue;
+			}
+
+			if (propMatch.TryReadProperty(ref reader, options, PropMatch, null))
+			{
+				continue;
+			}
+
+			if (propRange.TryReadProperty(ref reader, options, PropRange, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			GeoMatch = propGeoMatch.Value,
+			Match = propMatch.Value,
+			Range = propRange.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropGeoMatch, value.GeoMatch, null, null);
+		writer.WriteProperty(options, PropMatch, value.Match, null, null);
+		writer.WriteProperty(options, PropRange, value.Range, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,15 +96,27 @@ public sealed partial class PutPolicyRequestParameters : RequestParameters
 /// Creates an enrich policy.
 /// </para>
 /// </summary>
-public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestConverter))]
+public sealed partial class PutPolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutPolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutPolicyRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutPolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichPutPolicy;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EnrichPutPolicy;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -56,10 +124,27 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 
 	/// <summary>
 	/// <para>
+	/// Name of the enrich policy to create or update.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("geo_match")]
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? GeoMatch { get; set; }
 
 	/// <summary>
@@ -67,7 +152,6 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 	/// Matches enrich data to incoming documents based on a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? Match { get; set; }
 
 	/// <summary>
@@ -75,7 +159,6 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("range")]
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? Range { get; set; }
 }
 
@@ -85,65 +168,83 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 /// Creates an enrich policy.
 /// </para>
 /// </summary>
-public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescriptor<PutPolicyRequestDescriptor<TDocument>, PutPolicyRequestParameters>
+public readonly partial struct PutPolicyRequestDescriptor
 {
-	internal PutPolicyRequestDescriptor(Action<PutPolicyRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Instance { get; init; }
 
-	public PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichPutPolicy;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "enrich.put_policy";
-
-	public PutPolicyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(name);
 	}
 
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? GeoMatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> GeoMatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> GeoMatchDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? MatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> MatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> MatchDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? RangeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> RangeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> RangeDescriptorAction { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutPolicyRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the enrich policy to create or update.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
 	/// </para>
 	/// </summary>
-	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? geoMatch)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
-		GeoMatchDescriptor = null;
-		GeoMatchDescriptorAction = null;
-		GeoMatchValue = geoMatch;
-		return Self;
+		Instance.GeoMatch = value;
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor GeoMatch(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
 	{
-		GeoMatchValue = null;
-		GeoMatchDescriptorAction = null;
-		GeoMatchDescriptor = descriptor;
-		return Self;
+		Instance.GeoMatch = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.Build(action);
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor GeoMatch<T>(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>> action)
 	{
-		GeoMatchValue = null;
-		GeoMatchDescriptor = null;
-		GeoMatchDescriptorAction = configure;
-		return Self;
+		Instance.GeoMatch = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -151,28 +252,32 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	/// Matches enrich data to incoming documents based on a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	public PutPolicyRequestDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? match)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
-		MatchDescriptor = null;
-		MatchDescriptorAction = null;
-		MatchValue = match;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
 	{
-		MatchValue = null;
-		MatchDescriptorAction = null;
-		MatchDescriptor = descriptor;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.Build(action);
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>> action)
 	{
-		MatchValue = null;
-		MatchDescriptor = null;
-		MatchDescriptorAction = configure;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -180,82 +285,82 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	public PutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? range)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
-		RangeDescriptor = null;
-		RangeDescriptorAction = null;
-		RangeValue = range;
-		return Self;
+		Instance.Range = value;
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
 	{
-		RangeValue = null;
-		RangeDescriptorAction = null;
-		RangeDescriptor = descriptor;
-		return Self;
+		Instance.Range = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.Build(action);
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Range(Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>> action)
 	{
-		RangeValue = null;
-		RangeDescriptor = null;
-		RangeDescriptorAction = configure;
-		return Self;
+		Instance.Range = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (GeoMatchDescriptor is not null)
-		{
-			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, GeoMatchDescriptor, options);
-		}
-		else if (GeoMatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>(GeoMatchDescriptorAction), options);
-		}
-		else if (GeoMatchValue is not null)
-		{
-			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, GeoMatchValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (MatchDescriptor is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchDescriptor, options);
-		}
-		else if (MatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>(MatchDescriptorAction), options);
-		}
-		else if (MatchValue is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (RangeDescriptor is not null)
-		{
-			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, RangeDescriptor, options);
-		}
-		else if (RangeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>(RangeDescriptorAction), options);
-		}
-		else if (RangeValue is not null)
-		{
-			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, RangeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -265,65 +370,72 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 /// Creates an enrich policy.
 /// </para>
 /// </summary>
-public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPolicyRequestDescriptor, PutPolicyRequestParameters>
+public readonly partial struct PutPolicyRequestDescriptor<TDocument>
 {
-	internal PutPolicyRequestDescriptor(Action<PutPolicyRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Instance { get; init; }
 
-	public PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichPutPolicy;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "enrich.put_policy";
-
-	public PutPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(name);
 	}
 
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? GeoMatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor GeoMatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> GeoMatchDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? MatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor MatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> MatchDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? RangeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor RangeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> RangeDescriptorAction { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutPolicyRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the enrich policy to create or update.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
 	/// </para>
 	/// </summary>
-	public PutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? geoMatch)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
-		GeoMatchDescriptor = null;
-		GeoMatchDescriptorAction = null;
-		GeoMatchValue = geoMatch;
-		return Self;
+		Instance.GeoMatch = value;
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> GeoMatch(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
-		GeoMatchValue = null;
-		GeoMatchDescriptorAction = null;
-		GeoMatchDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutPolicyRequestDescriptor GeoMatch(Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> configure)
-	{
-		GeoMatchValue = null;
-		GeoMatchDescriptor = null;
-		GeoMatchDescriptorAction = configure;
-		return Self;
+		Instance.GeoMatch = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -331,28 +443,21 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	/// Matches enrich data to incoming documents based on a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	public PutPolicyRequestDescriptor Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? match)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
-		MatchDescriptor = null;
-		MatchDescriptorAction = null;
-		MatchValue = match;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
-		MatchValue = null;
-		MatchDescriptorAction = null;
-		MatchDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutPolicyRequestDescriptor Match(Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> configure)
-	{
-		MatchValue = null;
-		MatchDescriptor = null;
-		MatchDescriptorAction = configure;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -360,81 +465,70 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	public PutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? range)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
-		RangeDescriptor = null;
-		RangeDescriptorAction = null;
-		RangeValue = range;
-		return Self;
+		Instance.Range = value;
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
-		RangeValue = null;
-		RangeDescriptorAction = null;
-		RangeDescriptor = descriptor;
-		return Self;
+		Instance.Range = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PutPolicyRequestDescriptor Range(Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>> action)
 	{
-		RangeValue = null;
-		RangeDescriptor = null;
-		RangeDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (GeoMatchDescriptor is not null)
-		{
-			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, GeoMatchDescriptor, options);
-		}
-		else if (GeoMatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor(GeoMatchDescriptorAction), options);
-		}
-		else if (GeoMatchValue is not null)
-		{
-			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, GeoMatchValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (MatchDescriptor is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchDescriptor, options);
-		}
-		else if (MatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor(MatchDescriptorAction), options);
-		}
-		else if (MatchValue is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (RangeDescriptor is not null)
-		{
-			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, RangeDescriptor, options);
-		}
-		else if (RangeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor(RangeDescriptorAction), options);
-		}
-		else if (RangeValue is not null)
-		{
-			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, RangeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

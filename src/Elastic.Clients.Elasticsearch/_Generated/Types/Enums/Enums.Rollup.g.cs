@@ -17,139 +17,236 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-[JsonConverter(typeof(IndexingJobStateConverter))]
+internal sealed partial class IndexingJobStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.IndexingJobState>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAborting = System.Text.Json.JsonEncodedText.Encode("aborting");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.IndexingJobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAborting))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexing))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberStopped))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped;
+		}
+
+		if (reader.ValueTextEquals(MemberStopping))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAborting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting;
+		}
+
+		if (string.Equals(value, MemberIndexing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started;
+		}
+
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped;
+		}
+
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.IndexingJobState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting:
+				writer.WriteStringValue(MemberAborting);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing:
+				writer.WriteStringValue(MemberIndexing);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started:
+				writer.WriteStringValue(MemberStarted);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped:
+				writer.WriteStringValue(MemberStopped);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping:
+				writer.WriteStringValue(MemberStopping);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Rollup.IndexingJobState ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.IndexingJobState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class MetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.Metric>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.Metric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAvg))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Avg;
+		}
+
+		if (reader.ValueTextEquals(MemberMax))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Min;
+		}
+
+		if (reader.ValueTextEquals(MemberSum))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Sum;
+		}
+
+		if (reader.ValueTextEquals(MemberValueCount))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.ValueCount;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Avg;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Max;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Min;
+		}
+
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Sum;
+		}
+
+		if (string.Equals(value, MemberValueCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.ValueCount;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Rollup.Metric)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.Metric value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.Avg:
+				writer.WriteStringValue(MemberAvg);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.Max:
+				writer.WriteStringValue(MemberMax);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.Min:
+				writer.WriteStringValue(MemberMin);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.Sum:
+				writer.WriteStringValue(MemberSum);
+				break;
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.ValueCount:
+				writer.WriteStringValue(MemberValueCount);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Rollup.Metric)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Rollup.Metric ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.Metric value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.IndexingJobStateConverter))]
 public enum IndexingJobState
 {
-	[EnumMember(Value = "stopping")]
-	Stopping,
-	[EnumMember(Value = "stopped")]
-	Stopped,
-	[EnumMember(Value = "started")]
-	Started,
-	[EnumMember(Value = "indexing")]
+	[System.Runtime.Serialization.EnumMember(Value = "aborting")]
+	Aborting,
+	[System.Runtime.Serialization.EnumMember(Value = "indexing")]
 	Indexing,
-	[EnumMember(Value = "aborting")]
-	Aborting
+	[System.Runtime.Serialization.EnumMember(Value = "started")]
+	Started,
+	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
+	Stopped,
+	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
+	Stopping
 }
 
-internal sealed class IndexingJobStateConverter : JsonConverter<IndexingJobState>
-{
-	public override IndexingJobState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "stopping":
-				return IndexingJobState.Stopping;
-			case "stopped":
-				return IndexingJobState.Stopped;
-			case "started":
-				return IndexingJobState.Started;
-			case "indexing":
-				return IndexingJobState.Indexing;
-			case "aborting":
-				return IndexingJobState.Aborting;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IndexingJobState value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case IndexingJobState.Stopping:
-				writer.WriteStringValue("stopping");
-				return;
-			case IndexingJobState.Stopped:
-				writer.WriteStringValue("stopped");
-				return;
-			case IndexingJobState.Started:
-				writer.WriteStringValue("started");
-				return;
-			case IndexingJobState.Indexing:
-				writer.WriteStringValue("indexing");
-				return;
-			case IndexingJobState.Aborting:
-				writer.WriteStringValue("aborting");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(MetricConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.MetricConverter))]
 public enum Metric
 {
-	[EnumMember(Value = "value_count")]
-	ValueCount,
-	[EnumMember(Value = "sum")]
-	Sum,
-	[EnumMember(Value = "min")]
-	Min,
-	[EnumMember(Value = "max")]
+	[System.Runtime.Serialization.EnumMember(Value = "avg")]
+	Avg,
+	[System.Runtime.Serialization.EnumMember(Value = "max")]
 	Max,
-	[EnumMember(Value = "avg")]
-	Avg
-}
-
-internal sealed class MetricConverter : JsonConverter<Metric>
-{
-	public override Metric Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "value_count":
-				return Metric.ValueCount;
-			case "sum":
-				return Metric.Sum;
-			case "min":
-				return Metric.Min;
-			case "max":
-				return Metric.Max;
-			case "avg":
-				return Metric.Avg;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, Metric value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Metric.ValueCount:
-				writer.WriteStringValue("value_count");
-				return;
-			case Metric.Sum:
-				writer.WriteStringValue("sum");
-				return;
-			case Metric.Min:
-				writer.WriteStringValue("min");
-				return;
-			case Metric.Max:
-				writer.WriteStringValue("max");
-				return;
-			case Metric.Avg:
-				writer.WriteStringValue("avg");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min,
+	[System.Runtime.Serialization.EnumMember(Value = "sum")]
+	Sum,
+	[System.Runtime.Serialization.EnumMember(Value = "value_count")]
+	ValueCount
 }

@@ -17,30 +17,85 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class CreateSnapshotResponse : ElasticsearchResponse
+internal sealed partial class CreateSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAccepted = System.Text.Json.JsonEncodedText.Encode("accepted");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAccepted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo?> propSnapshot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccepted.TryReadProperty(ref reader, options, PropAccepted, null))
+			{
+				continue;
+			}
+
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Accepted = propAccepted.Value,
+			Snapshot = propSnapshot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccepted, value.Accepted, null, null);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponseConverter))]
+public sealed partial class CreateSnapshotResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateSnapshotResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateSnapshotResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Equals <c>true</c> if the snapshot was accepted. Present when the request had <c>wait_for_completion</c> set to <c>false</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("accepted")]
-	public bool? Accepted { get; init; }
+	public bool? Accepted { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Snapshot information. Present when the request had <c>wait_for_completion</c> set to <c>true</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("snapshot")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo? Snapshot { get; init; }
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo? Snapshot { get; set; }
 }

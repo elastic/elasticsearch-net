@@ -17,34 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ScriptsPainlessExecuteRequestParameters : RequestParameters
+public sealed partial class ScriptsPainlessExecuteRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ScriptsPainlessExecuteRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context");
+	private static readonly System.Text.Json.JsonEncodedText PropContextSetup = System.Text.Json.JsonEncodedText.Encode("context_setup");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext?> propContext = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup?> propContextSetup = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propContext.TryReadProperty(ref reader, options, PropContext, null))
+			{
+				continue;
+			}
+
+			if (propContextSetup.TryReadProperty(ref reader, options, PropContextSetup, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Context = propContext.Value,
+			ContextSetup = propContextSetup.Value,
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropContext, value.Context, null, null);
+		writer.WriteProperty(options, PropContextSetup, value.ContextSetup, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Run a script.
+/// </para>
+/// <para>
 /// Runs a script and returns a result.
+/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+/// </para>
+/// <para>
+/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+/// </para>
+/// <para>
+/// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
-public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<ScriptsPainlessExecuteRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestConverter))]
+public sealed partial class ScriptsPainlessExecuteRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScriptsPainlessExecute;
+#if NET7_0_OR_GREATER
+	public ScriptsPainlessExecuteRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ScriptsPainlessExecuteRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceScriptsPainlessExecute;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -53,312 +130,353 @@ public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<Scripts
 	/// <summary>
 	/// <para>
 	/// The context that the script should run in.
+	/// NOTE: Result ordering in the field contexts is not guaranteed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("context")]
-	public string? Context { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? Context { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("context_setup")]
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The Painless script to execute.
+	/// The Painless script to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Run a script.
+/// </para>
+/// <para>
 /// Runs a script and returns a result.
+/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+/// </para>
+/// <para>
+/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+/// </para>
+/// <para>
+/// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
-public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor<TDocument>, ScriptsPainlessExecuteRequestParameters>
+public readonly partial struct ScriptsPainlessExecuteRequestDescriptor
 {
-	internal ScriptsPainlessExecuteRequestDescriptor(Action<ScriptsPainlessExecuteRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptsPainlessExecuteRequestDescriptor(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ScriptsPainlessExecuteRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScriptsPainlessExecute;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "scripts_painless_execute";
-
-	private string? ContextValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetupValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> ContextSetupDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> ContextSetupDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest instance) => new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The context that the script should run in.
+	/// NOTE: Result ordering in the field contexts is not guaranteed.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Context(string? context)
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Context(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? value)
 	{
-		ContextValue = context;
-		return Self;
+		Instance.Context = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? contextSetup)
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? value)
 	{
-		ContextSetupDescriptor = null;
-		ContextSetupDescriptorAction = null;
-		ContextSetupValue = contextSetup;
-		return Self;
-	}
-
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> descriptor)
-	{
-		ContextSetupValue = null;
-		ContextSetupDescriptorAction = null;
-		ContextSetupDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> configure)
-	{
-		ContextSetupValue = null;
-		ContextSetupDescriptor = null;
-		ContextSetupDescriptorAction = configure;
-		return Self;
+		Instance.ContextSetup = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The Painless script to execute.
+	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ContextSetup(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> action)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.ContextSetup = Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor.Build(action);
+		return this;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ContextSetup<T>(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<T>> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.ContextSetup = Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The Painless script to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The Painless script to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Script()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContextValue))
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The Painless script to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Build(System.Action<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("context");
-			writer.WriteStringValue(ContextValue);
+			return new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ContextSetupDescriptor is not null)
-		{
-			writer.WritePropertyName("context_setup");
-			JsonSerializer.Serialize(writer, ContextSetupDescriptor, options);
-		}
-		else if (ContextSetupDescriptorAction is not null)
-		{
-			writer.WritePropertyName("context_setup");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>(ContextSetupDescriptorAction), options);
-		}
-		else if (ContextSetupValue is not null)
-		{
-			writer.WritePropertyName("context_setup");
-			JsonSerializer.Serialize(writer, ContextSetupValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor(new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Run a script.
+/// </para>
+/// <para>
 /// Runs a script and returns a result.
+/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+/// </para>
+/// <para>
+/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+/// </para>
+/// <para>
+/// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
-public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteRequestParameters>
+public readonly partial struct ScriptsPainlessExecuteRequestDescriptor<TDocument>
 {
-	internal ScriptsPainlessExecuteRequestDescriptor(Action<ScriptsPainlessExecuteRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptsPainlessExecuteRequestDescriptor(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ScriptsPainlessExecuteRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScriptsPainlessExecute;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "scripts_painless_execute";
-
-	private string? ContextValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetupValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor ContextSetupDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> ContextSetupDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest instance) => new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The context that the script should run in.
+	/// NOTE: Result ordering in the field contexts is not guaranteed.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor Context(string? context)
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Context(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? value)
 	{
-		ContextValue = context;
-		return Self;
+		Instance.Context = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? contextSetup)
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? value)
 	{
-		ContextSetupDescriptor = null;
-		ContextSetupDescriptorAction = null;
-		ContextSetupValue = contextSetup;
-		return Self;
-	}
-
-	public ScriptsPainlessExecuteRequestDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor descriptor)
-	{
-		ContextSetupValue = null;
-		ContextSetupDescriptorAction = null;
-		ContextSetupDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptsPainlessExecuteRequestDescriptor ContextSetup(Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> configure)
-	{
-		ContextSetupValue = null;
-		ContextSetupDescriptor = null;
-		ContextSetupDescriptorAction = configure;
-		return Self;
+		Instance.ContextSetup = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The Painless script to execute.
+	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> action)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.ContextSetup = Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The Painless script to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The Painless script to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The Painless script to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContextValue))
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Build(System.Action<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("context");
-			writer.WriteStringValue(ContextValue);
+			return new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ContextSetupDescriptor is not null)
-		{
-			writer.WritePropertyName("context_setup");
-			JsonSerializer.Serialize(writer, ContextSetupDescriptor, options);
-		}
-		else if (ContextSetupDescriptorAction is not null)
-		{
-			writer.WritePropertyName("context_setup");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor(ContextSetupDescriptorAction), options);
-		}
-		else if (ContextSetupValue is not null)
-		{
-			writer.WritePropertyName("context_setup");
-			JsonSerializer.Serialize(writer, ContextSetupValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,24 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
+	private static readonly System.Text.Json.JsonEncodedText PropRanges = System.Text.Json.JsonEncodedText.Encode("ranges");
+	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoDistanceType?> propDistanceType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation?> propOrigin = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?> propRanges = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propOrigin.TryReadProperty(ref reader, options, PropOrigin, null))
+			{
+				continue;
+			}
+
+			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, null)))
+			{
+				continue;
+			}
+
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DistanceType = propDistanceType.Value,
+			Field = propField.Value,
+			Origin = propOrigin.Value,
+			Ranges = propRanges.Value,
+			Unit = propUnit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
+		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, v, null));
+		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationConverter))]
 public sealed partial class GeoDistanceAggregation
 {
+#if NET7_0_OR_GREATER
+	public GeoDistanceAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GeoDistanceAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The distance calculation type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("distance_type")]
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
 	/// <summary>
@@ -42,7 +129,6 @@ public sealed partial class GeoDistanceAggregation
 	/// A field of type <c>geo_point</c> used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -50,7 +136,6 @@ public sealed partial class GeoDistanceAggregation
 	/// The origin  used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("origin")]
 	public Elastic.Clients.Elasticsearch.GeoLocation? Origin { get; set; }
 
 	/// <summary>
@@ -58,46 +143,44 @@ public sealed partial class GeoDistanceAggregation
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ranges")]
-	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The distance unit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unit")]
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(GeoDistanceAggregation geoDistanceAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoDistance(geoDistanceAggregation);
 }
 
-public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : SerializableDescriptor<GeoDistanceAggregationDescriptor<TDocument>>
+public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 {
-	internal GeoDistanceAggregationDescriptor(Action<GeoDistanceAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Instance { get; init; }
 
-	public GeoDistanceAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The distance calculation type.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
-		DistanceTypeValue = distanceType;
-		return Self;
+		Instance.DistanceType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -105,10 +188,10 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	/// A field of type <c>geo_point</c> used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,21 +199,10 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	/// A field of type <c>geo_point</c> used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -138,185 +210,10 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	/// The origin  used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> Origin(Elastic.Clients.Elasticsearch.GeoLocation? origin)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Origin(Elastic.Clients.Elasticsearch.GeoLocation? value)
 	{
-		OriginValue = origin;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
-	{
-		RangesDescriptor = null;
-		RangesDescriptorAction = null;
-		RangesDescriptorActions = null;
-		RangesValue = ranges;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor descriptor)
-	{
-		RangesValue = null;
-		RangesDescriptorAction = null;
-		RangesDescriptorActions = null;
-		RangesDescriptor = descriptor;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> configure)
-	{
-		RangesValue = null;
-		RangesDescriptor = null;
-		RangesDescriptorActions = null;
-		RangesDescriptorAction = configure;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(params Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] configure)
-	{
-		RangesValue = null;
-		RangesDescriptor = null;
-		RangesDescriptorAction = null;
-		RangesDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The distance unit.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
-	{
-		UnitValue = unit;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DistanceTypeValue is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, DistanceTypeValue, options);
-		}
-
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (OriginValue is not null)
-		{
-			writer.WritePropertyName("origin");
-			JsonSerializer.Serialize(writer, OriginValue, options);
-		}
-
-		if (RangesDescriptor is not null)
-		{
-			writer.WritePropertyName("ranges");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RangesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RangesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("ranges");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(RangesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RangesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("ranges");
-			writer.WriteStartArray();
-			foreach (var action in RangesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (RangesValue is not null)
-		{
-			writer.WritePropertyName("ranges");
-			JsonSerializer.Serialize(writer, RangesValue, options);
-		}
-
-		if (UnitValue is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, UnitValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescriptor<GeoDistanceAggregationDescriptor>
-{
-	internal GeoDistanceAggregationDescriptor(Action<GeoDistanceAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public GeoDistanceAggregationDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The distance calculation type.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
-	{
-		DistanceTypeValue = distanceType;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
-	public GeoDistanceAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Origin = value;
+		return this;
 	}
 
 	/// <summary>
@@ -324,10 +221,10 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	/// The origin  used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation? origin)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		OriginValue = origin;
-		return Self;
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -335,40 +232,38 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
-		RangesDescriptor = null;
-		RangesDescriptorAction = null;
-		RangesDescriptorActions = null;
-		RangesValue = ranges;
-		return Self;
+		Instance.Ranges = value;
+		return this;
 	}
 
-	public GeoDistanceAggregationDescriptor Ranges(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
-		RangesValue = null;
-		RangesDescriptorAction = null;
-		RangesDescriptorActions = null;
-		RangesDescriptor = descriptor;
-		return Self;
+		Instance.Ranges = [.. values];
+		return this;
 	}
 
-	public GeoDistanceAggregationDescriptor Ranges(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
-		RangesValue = null;
-		RangesDescriptor = null;
-		RangesDescriptorActions = null;
-		RangesDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.Build(action));
+		}
 
-	public GeoDistanceAggregationDescriptor Ranges(params Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] configure)
-	{
-		RangesValue = null;
-		RangesDescriptor = null;
-		RangesDescriptorAction = null;
-		RangesDescriptorActions = configure;
-		return Self;
+		Instance.Ranges = items;
+		return this;
 	}
 
 	/// <summary>
@@ -376,70 +271,160 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	/// The distance unit.
 	/// </para>
 	/// </summary>
-	public GeoDistanceAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? value)
 	{
-		UnitValue = unit;
-		return Self;
+		Instance.Unit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DistanceTypeValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, DistanceTypeValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct GeoDistanceAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The distance calculation type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
+	{
+		Instance.DistanceType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The origin  used to evaluate the distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation? value)
+	{
+		Instance.Origin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The origin  used to evaluate the distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
+	{
+		Instance.Ranges = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
+	{
+		Instance.Ranges = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.Build(action));
 		}
 
-		if (OriginValue is not null)
+		Instance.Ranges = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The distance unit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? value)
+	{
+		Instance.Unit = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("origin");
-			JsonSerializer.Serialize(writer, OriginValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (RangesDescriptor is not null)
-		{
-			writer.WritePropertyName("ranges");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RangesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RangesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("ranges");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(RangesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RangesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("ranges");
-			writer.WriteStartArray();
-			foreach (var action in RangesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (RangesValue is not null)
-		{
-			writer.WritePropertyName("ranges");
-			JsonSerializer.Serialize(writer, RangesValue, options);
-		}
-
-		if (UnitValue is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, UnitValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

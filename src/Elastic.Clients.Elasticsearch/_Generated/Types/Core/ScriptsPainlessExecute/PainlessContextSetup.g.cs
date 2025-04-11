@@ -17,79 +17,178 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 
+internal sealed partial class PainlessContextSetupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object> propDocument = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocument.TryReadProperty(ref reader, options, PropDocument, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Document = propDocument.Value,
+			Index = propIndex.Value,
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocument, value.Document, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupConverter))]
 public sealed partial class PainlessContextSetup
 {
-	/// <summary>
-	/// <para>
-	/// Document that’s temporarily indexed in-memory and accessible from the script.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("document")]
-	public object Document { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PainlessContextSetup(object document, Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Document = document;
+		Index = index;
+	}
+#if NET7_0_OR_GREATER
+	public PainlessContextSetup()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PainlessContextSetup()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
-	/// Index containing a mapping that’s compatible with the indexed document.
-	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object Document { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Index containing a mapping that's compatible with the indexed document.
+	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
+	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
+	/// </para>
+	/// <para>
+	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
+	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Use this parameter to specify a query for computing a score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
-public sealed partial class PainlessContextSetupDescriptor<TDocument> : SerializableDescriptor<PainlessContextSetupDescriptor<TDocument>>
+public readonly partial struct PainlessContextSetupDescriptor<TDocument>
 {
-	internal PainlessContextSetupDescriptor(Action<PainlessContextSetupDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Instance { get; init; }
 
-	public PainlessContextSetupDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PainlessContextSetupDescriptor(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup instance)
 	{
+		Instance = instance;
 	}
 
-	private object DocumentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PainlessContextSetupDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup instance) => new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor<TDocument> Document(object document)
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Document(object value)
 	{
-		DocumentValue = document;
-		return Self;
+		Instance.Document = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Index containing a mapping that’s compatible with the indexed document.
+	/// Index containing a mapping that's compatible with the indexed document.
 	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
+	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
+	/// </para>
+	/// <para>
+	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
+	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,92 +196,78 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 	/// Use this parameter to specify a query for computing a score.
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Use this parameter to specify a query for computing a score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PainlessContextSetupDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Build(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("document");
-		JsonSerializer.Serialize(writer, DocumentValue, options);
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PainlessContextSetupDescriptor : SerializableDescriptor<PainlessContextSetupDescriptor>
+public readonly partial struct PainlessContextSetupDescriptor
 {
-	internal PainlessContextSetupDescriptor(Action<PainlessContextSetupDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Instance { get; init; }
 
-	public PainlessContextSetupDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PainlessContextSetupDescriptor(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup instance)
 	{
+		Instance = instance;
 	}
 
-	private object DocumentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PainlessContextSetupDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup instance) => new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor Document(object document)
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Document(object value)
 	{
-		DocumentValue = document;
-		return Self;
+		Instance.Document = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Index containing a mapping that’s compatible with the indexed document.
+	/// Index containing a mapping that's compatible with the indexed document.
 	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
+	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
+	/// </para>
+	/// <para>
+	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
+	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -190,53 +275,39 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 	/// Use this parameter to specify a query for computing a score.
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Use this parameter to specify a query for computing a score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public PainlessContextSetupDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Use this parameter to specify a query for computing a score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Build(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("document");
-		JsonSerializer.Serialize(writer, DocumentValue, options);
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor(new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

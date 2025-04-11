@@ -17,53 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class DownsampleConfig
+internal sealed partial class DownsampleConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>
 {
-	/// <summary>
-	/// <para>
-	/// The interval at which to aggregate the original time series index.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("fixed_interval")]
-	public string FixedInterval { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
 
-public sealed partial class DownsampleConfigDescriptor : SerializableDescriptor<DownsampleConfigDescriptor>
-{
-	internal DownsampleConfigDescriptor(Action<DownsampleConfigDescriptor> configure) => configure.Invoke(this);
-
-	public DownsampleConfigDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propFixedInterval = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFixedInterval.TryReadProperty(ref reader, options, PropFixedInterval, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FixedInterval = propFixedInterval.Value
+		};
 	}
 
-	private string FixedIntervalValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The interval at which to aggregate the original time series index.
-	/// </para>
-	/// </summary>
-	public DownsampleConfigDescriptor FixedInterval(string fixedInterval)
-	{
-		FixedIntervalValue = fixedInterval;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("fixed_interval");
-		writer.WriteStringValue(FixedIntervalValue);
+		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigConverter))]
+public sealed partial class DownsampleConfig
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsampleConfig(string fixedInterval)
+	{
+		FixedInterval = fixedInterval;
+	}
+#if NET7_0_OR_GREATER
+	public DownsampleConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DownsampleConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DownsampleConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The interval at which to aggregate the original time series index.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string FixedInterval { get; set; }
+}
+
+public readonly partial struct DownsampleConfigDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsampleConfigDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsampleConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The interval at which to aggregate the original time series index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor FixedInterval(string value)
+	{
+		Instance.FixedInterval = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

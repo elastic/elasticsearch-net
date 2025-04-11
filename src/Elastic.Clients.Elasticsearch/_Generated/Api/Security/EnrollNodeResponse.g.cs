@@ -17,62 +17,173 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class EnrollNodeResponse : ElasticsearchResponse
+internal sealed partial class EnrollNodeResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCaCert = System.Text.Json.JsonEncodedText.Encode("http_ca_cert");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCaKey = System.Text.Json.JsonEncodedText.Encode("http_ca_key");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesAddresses = System.Text.Json.JsonEncodedText.Encode("nodes_addresses");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCaCert = System.Text.Json.JsonEncodedText.Encode("transport_ca_cert");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCert = System.Text.Json.JsonEncodedText.Encode("transport_cert");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportKey = System.Text.Json.JsonEncodedText.Encode("transport_key");
+
+	public override Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propHttpCaCert = default;
+		LocalJsonValue<string> propHttpCaKey = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propNodesAddresses = default;
+		LocalJsonValue<string> propTransportCaCert = default;
+		LocalJsonValue<string> propTransportCert = default;
+		LocalJsonValue<string> propTransportKey = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHttpCaCert.TryReadProperty(ref reader, options, PropHttpCaCert, null))
+			{
+				continue;
+			}
+
+			if (propHttpCaKey.TryReadProperty(ref reader, options, PropHttpCaKey, null))
+			{
+				continue;
+			}
+
+			if (propNodesAddresses.TryReadProperty(ref reader, options, PropNodesAddresses, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTransportCaCert.TryReadProperty(ref reader, options, PropTransportCaCert, null))
+			{
+				continue;
+			}
+
+			if (propTransportCert.TryReadProperty(ref reader, options, PropTransportCert, null))
+			{
+				continue;
+			}
+
+			if (propTransportKey.TryReadProperty(ref reader, options, PropTransportKey, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			HttpCaCert = propHttpCaCert.Value,
+			HttpCaKey = propHttpCaKey.Value,
+			NodesAddresses = propNodesAddresses.Value,
+			TransportCaCert = propTransportCaCert.Value,
+			TransportCert = propTransportCert.Value,
+			TransportKey = propTransportKey.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHttpCaCert, value.HttpCaCert, null, null);
+		writer.WriteProperty(options, PropHttpCaKey, value.HttpCaKey, null, null);
+		writer.WriteProperty(options, PropNodesAddresses, value.NodesAddresses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTransportCaCert, value.TransportCaCert, null, null);
+		writer.WriteProperty(options, PropTransportCert, value.TransportCert, null, null);
+		writer.WriteProperty(options, PropTransportKey, value.TransportKey, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.EnrollNodeResponseConverter))]
+public sealed partial class EnrollNodeResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrollNodeResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnrollNodeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The CA certificate that can be used by the new node in order to sign its certificate for the HTTP layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("http_ca_cert")]
-	public string HttpCaCert { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string HttpCaCert { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The CA private key that can be used by the new node in order to sign its certificate for the HTTP layer, as a Base64 encoded string of the ASN.1 DER encoding of the key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("http_ca_key")]
-	public string HttpCaKey { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string HttpCaKey { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of transport addresses in the form of <c>host:port</c> for the nodes that are already members of the cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nodes_addresses")]
-	public IReadOnlyCollection<string> NodesAddresses { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> NodesAddresses { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The CA certificate that is used to sign the TLS certificate for the transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transport_ca_cert")]
-	public string TransportCaCert { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string TransportCaCert { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The certificate that the node can use for TLS for its transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transport_cert")]
-	public string TransportCert { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string TransportCert { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The private key that the node can use for TLS for its transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transport_key")]
-	public string TransportKey { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string TransportKey { get; set; }
 }

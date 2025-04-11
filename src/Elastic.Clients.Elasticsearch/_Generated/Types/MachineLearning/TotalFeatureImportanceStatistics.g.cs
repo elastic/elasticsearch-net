@@ -17,39 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TotalFeatureImportanceStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMeanMagnitude = System.Text.Json.JsonEncodedText.Encode("mean_magnitude");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propMax = default;
+		LocalJsonValue<double> propMeanMagnitude = default;
+		LocalJsonValue<int> propMin = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMeanMagnitude.TryReadProperty(ref reader, options, PropMeanMagnitude, null))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Max = propMax.Value,
+			MeanMagnitude = propMeanMagnitude.Value,
+			Min = propMin.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMeanMagnitude, value.MeanMagnitude, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatisticsConverter))]
 public sealed partial class TotalFeatureImportanceStatistics
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TotalFeatureImportanceStatistics(int max, double meanMagnitude, int min)
+	{
+		Max = max;
+		MeanMagnitude = meanMagnitude;
+		Min = min;
+	}
+#if NET7_0_OR_GREATER
+	public TotalFeatureImportanceStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TotalFeatureImportanceStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TotalFeatureImportanceStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The maximum importance value across all the training data for this feature.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max")]
-	public int Max { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Max { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The average magnitude of this feature across all the training data. This value is the average of the absolute values of the importance for this feature.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mean_magnitude")]
-	public double MeanMagnitude { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double MeanMagnitude { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The minimum importance value across all the training data for this feature.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min")]
-	public int Min { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Min { get; set; }
 }

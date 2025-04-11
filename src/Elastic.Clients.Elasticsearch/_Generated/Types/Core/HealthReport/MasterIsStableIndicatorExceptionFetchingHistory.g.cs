@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class MasterIsStableIndicatorExceptionFetchingHistoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMessage = System.Text.Json.JsonEncodedText.Encode("message");
+	private static readonly System.Text.Json.JsonEncodedText PropStackTrace = System.Text.Json.JsonEncodedText.Encode("stack_trace");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propMessage = default;
+		LocalJsonValue<string> propStackTrace = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMessage.TryReadProperty(ref reader, options, PropMessage, null))
+			{
+				continue;
+			}
+
+			if (propStackTrace.TryReadProperty(ref reader, options, PropStackTrace, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Message = propMessage.Value,
+			StackTrace = propStackTrace.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMessage, value.Message, null, null);
+		writer.WriteProperty(options, PropStackTrace, value.StackTrace, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistoryConverter))]
 public sealed partial class MasterIsStableIndicatorExceptionFetchingHistory
 {
-	[JsonInclude, JsonPropertyName("message")]
-	public string Message { get; init; }
-	[JsonInclude, JsonPropertyName("stack_trace")]
-	public string StackTrace { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MasterIsStableIndicatorExceptionFetchingHistory(string message, string stackTrace)
+	{
+		Message = message;
+		StackTrace = stackTrace;
+	}
+#if NET7_0_OR_GREATER
+	public MasterIsStableIndicatorExceptionFetchingHistory()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MasterIsStableIndicatorExceptionFetchingHistory()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MasterIsStableIndicatorExceptionFetchingHistory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Message { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string StackTrace { get; set; }
 }

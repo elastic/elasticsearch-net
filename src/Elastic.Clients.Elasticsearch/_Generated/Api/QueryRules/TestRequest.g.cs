@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-public sealed partial class TestRequestParameters : RequestParameters
+public sealed partial class TestRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class TestRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.TestRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria");
+
+	public override Elastic.Clients.Elasticsearch.QueryRules.TestRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>> propMatchCriteria = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, static System.Collections.Generic.IDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.TestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MatchCriteria = propMatchCriteria.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.TestRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,15 +72,34 @@ public sealed partial class TestRequestParameters : RequestParameters
 /// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 /// </para>
 /// </summary>
-public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.TestRequestConverter))]
+public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public TestRequest(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesTest;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TestRequest(Elastic.Clients.Elasticsearch.Id rulesetId, System.Collections.Generic.IDictionary<string, object> matchCriteria) : base(r => r.Required("ruleset_id", rulesetId))
+	{
+		MatchCriteria = matchCriteria;
+	}
+#if NET7_0_OR_GREATER
+	public TestRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.QueryRulesTest;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -56,12 +107,26 @@ public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
 
 	/// <summary>
 	/// <para>
+	/// The unique identifier of the query ruleset to be created or updated
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The match criteria to apply to rules in the given query ruleset.
 	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("match_criteria")]
-	public IDictionary<string, object> MatchCriteria { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IDictionary<string, object> MatchCriteria { get; set; }
 }
 
 /// <summary>
@@ -70,29 +135,42 @@ public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
 /// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 /// </para>
 /// </summary>
-public sealed partial class TestRequestDescriptor : RequestDescriptor<TestRequestDescriptor, TestRequestParameters>
+public readonly partial struct TestRequestDescriptor
 {
-	internal TestRequestDescriptor(Action<TestRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryRules.TestRequest Instance { get; init; }
 
-	public TestRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TestRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.TestRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesTest;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "query_rules.test";
-
-	public TestRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id rulesetId)
+	public TestRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
-		RouteValues.Required("ruleset_id", rulesetId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.QueryRules.TestRequest(rulesetId);
+#pragma warning restore CS0618
 	}
 
-	private IDictionary<string, object> MatchCriteriaValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public TestRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.TestRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.TestRequest(Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset to be created or updated
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.RulesetId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -100,17 +178,90 @@ public sealed partial class TestRequestDescriptor : RequestDescriptor<TestReques
 	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
 	/// </para>
 	/// </summary>
-	public TestRequestDescriptor MatchCriteria(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria(System.Collections.Generic.IDictionary<string, object> value)
 	{
-		MatchCriteriaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.MatchCriteria = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The match criteria to apply to rules in the given query ruleset.
+	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("match_criteria");
-		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
-		writer.WriteEndObject();
+		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The match criteria to apply to rules in the given query ruleset.
+	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor AddMatchCriterion(string key, object value)
+	{
+		Instance.MatchCriteria ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.MatchCriteria.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryRules.TestRequest Build(System.Action<Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(new Elastic.Clients.Elasticsearch.QueryRules.TestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -2,10 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-// TODO: Move away from shared project
-
-#if !ELASTICSEARCH_SERVERLESS
-
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -15,7 +11,6 @@ public partial class EqlGetResponse<TEvent>
 {
 	private IReadOnlyCollection<HitsEvent<TEvent>> _events;
 	private IReadOnlyCollection<HitsSequence<TEvent>> _sequences;
-
 
 	[JsonIgnore]
 	public IReadOnlyCollection<HitsEvent<TEvent>> Events =>
@@ -28,5 +23,3 @@ public partial class EqlGetResponse<TEvent>
 	[JsonIgnore]
 	public long Total => Hits?.Total.Value ?? -1;
 }
-
-#endif

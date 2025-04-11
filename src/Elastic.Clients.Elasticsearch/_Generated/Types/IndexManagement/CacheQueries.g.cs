@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class CacheQueries
+internal sealed partial class CacheQueriesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries>
 {
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
 
-public sealed partial class CacheQueriesDescriptor : SerializableDescriptor<CacheQueriesDescriptor>
-{
-	internal CacheQueriesDescriptor(Action<CacheQueriesDescriptor> configure) => configure.Invoke(this);
-
-	public CacheQueriesDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Enabled = propEnabled.Value
+		};
 	}
 
-	private bool EnabledValue { get; set; }
-
-	public CacheQueriesDescriptor Enabled(bool enabled = true)
-	{
-		EnabledValue = enabled;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("enabled");
-		writer.WriteBooleanValue(EnabledValue);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesConverter))]
+public sealed partial class CacheQueries
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CacheQueries(bool enabled)
+	{
+		Enabled = enabled;
+	}
+#if NET7_0_OR_GREATER
+	public CacheQueries()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CacheQueries()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CacheQueries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+}
+
+public readonly partial struct CacheQueriesDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CacheQueriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CacheQueriesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor Enabled(bool value = true)
+	{
+		Instance.Enabled = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

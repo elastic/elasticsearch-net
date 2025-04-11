@@ -17,70 +17,140 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KuromojiStemmerTokenFilter : ITokenFilter
+internal sealed partial class KuromojiStemmerTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("minimum_length")]
-	public int MinimumLength { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumLength = System.Text.Json.JsonEncodedText.Encode("minimum_length");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propMinimumLength = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMinimumLength.TryReadProperty(ref reader, options, PropMinimumLength, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MinimumLength = propMinimumLength.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMinimumLength, value.MinimumLength, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterConverter))]
+public sealed partial class KuromojiStemmerTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiStemmerTokenFilter(int minimumLength)
+	{
+		MinimumLength = minimumLength;
+	}
+#if NET7_0_OR_GREATER
+	public KuromojiStemmerTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KuromojiStemmerTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KuromojiStemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MinimumLength { get; set; }
+
 	public string Type => "kuromoji_stemmer";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KuromojiStemmerTokenFilterDescriptor : SerializableDescriptor<KuromojiStemmerTokenFilterDescriptor>, IBuildableDescriptor<KuromojiStemmerTokenFilter>
+public readonly partial struct KuromojiStemmerTokenFilterDescriptor
 {
-	internal KuromojiStemmerTokenFilterDescriptor(Action<KuromojiStemmerTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter Instance { get; init; }
 
-	public KuromojiStemmerTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiStemmerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private int MinimumLengthValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KuromojiStemmerTokenFilterDescriptor MinimumLength(int minimumLength)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiStemmerTokenFilterDescriptor()
 	{
-		MinimumLengthValue = minimumLength;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KuromojiStemmerTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor MinimumLength(int value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.MinimumLength = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("minimum_length");
-		writer.WriteNumberValue(MinimumLengthValue);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("kuromoji_stemmer");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	KuromojiStemmerTokenFilter IBuildableDescriptor<KuromojiStemmerTokenFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor> action)
 	{
-		MinimumLength = MinimumLengthValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

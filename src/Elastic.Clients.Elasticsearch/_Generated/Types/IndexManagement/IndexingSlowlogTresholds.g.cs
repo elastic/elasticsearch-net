@@ -17,39 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexingSlowlogTresholdsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels?> propIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsConverter))]
 public sealed partial class IndexingSlowlogTresholds
 {
+#if NET7_0_OR_GREATER
+	public IndexingSlowlogTresholds()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexingSlowlogTresholds()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
 	/// Log and the thresholds are configured in the same way as the search slowlog.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Index { get; set; }
 }
 
-public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDescriptor<IndexingSlowlogTresholdsDescriptor>
+public readonly partial struct IndexingSlowlogTresholdsDescriptor
 {
-	internal IndexingSlowlogTresholdsDescriptor(Action<IndexingSlowlogTresholdsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds Instance { get; init; }
 
-	public IndexingSlowlogTresholdsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingSlowlogTresholdsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor IndexDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor> IndexDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingSlowlogTresholdsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -57,49 +115,46 @@ public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDes
 	/// Log and the thresholds are configured in the same way as the search slowlog.
 	/// </para>
 	/// </summary>
-	public IndexingSlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? index)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? value)
 	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public IndexingSlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
+	/// Log and the thresholds are configured in the same way as the search slowlog.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor Index()
 	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptor = descriptor;
-		return Self;
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor.Build(null);
+		return this;
 	}
 
-	public IndexingSlowlogTresholdsDescriptor Index(Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
+	/// Log and the thresholds are configured in the same way as the search slowlog.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor Index(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor>? action)
 	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = configure;
-		return Self;
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IndexDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor(IndexDescriptorAction), options);
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

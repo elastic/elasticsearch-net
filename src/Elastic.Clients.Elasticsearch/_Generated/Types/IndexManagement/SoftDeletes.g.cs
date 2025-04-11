@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SoftDeletesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionLease = System.Text.Json.JsonEncodedText.Encode("retention_lease");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease?> propRetentionLease = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propRetentionLease.TryReadProperty(ref reader, options, PropRetentionLease, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Enabled = propEnabled.Value,
+			RetentionLease = propRetentionLease.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropRetentionLease, value.RetentionLease, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesConverter))]
 public sealed partial class SoftDeletes
 {
+#if NET7_0_OR_GREATER
+	public SoftDeletes()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SoftDeletes()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SoftDeletes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Indicates whether soft deletes are enabled on the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
 	/// <summary>
@@ -45,32 +105,37 @@ public sealed partial class SoftDeletes
 	/// process will fail due to incomplete history on the leader.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retention_lease")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLease { get; set; }
 }
 
-public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftDeletesDescriptor>
+public readonly partial struct SoftDeletesDescriptor
 {
-	internal SoftDeletesDescriptor(Action<SoftDeletesDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes Instance { get; init; }
 
-	public SoftDeletesDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SoftDeletesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLeaseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor RetentionLeaseDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SoftDeletesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Indicates whether soft deletes are enabled on the index.
 	/// </para>
 	/// </summary>
-	public SoftDeletesDescriptor Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor Enabled(bool? value = true)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -81,55 +146,36 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 	/// process will fail due to incomplete history on the leader.
 	/// </para>
 	/// </summary>
-	public SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? retentionLease)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? value)
 	{
-		RetentionLeaseDescriptor = null;
-		RetentionLeaseDescriptorAction = null;
-		RetentionLeaseValue = retentionLease;
-		return Self;
+		Instance.RetentionLease = value;
+		return this;
 	}
 
-	public SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The maximum period to retain a shard history retention lease before it is considered expired.
+	/// Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
+	/// index. If a soft delete is merged away before it can be replicated to a follower the following
+	/// process will fail due to incomplete history on the leader.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor RetentionLease(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> action)
 	{
-		RetentionLeaseValue = null;
-		RetentionLeaseDescriptorAction = null;
-		RetentionLeaseDescriptor = descriptor;
-		return Self;
+		Instance.RetentionLease = Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor.Build(action);
+		return this;
 	}
 
-	public SoftDeletesDescriptor RetentionLease(Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor>? action)
 	{
-		RetentionLeaseValue = null;
-		RetentionLeaseDescriptor = null;
-		RetentionLeaseDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (EnabledValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (RetentionLeaseDescriptor is not null)
-		{
-			writer.WritePropertyName("retention_lease");
-			JsonSerializer.Serialize(writer, RetentionLeaseDescriptor, options);
-		}
-		else if (RetentionLeaseDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retention_lease");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor(RetentionLeaseDescriptorAction), options);
-		}
-		else if (RetentionLeaseValue is not null)
-		{
-			writer.WritePropertyName("retention_lease");
-			JsonSerializer.Serialize(writer, RetentionLeaseValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

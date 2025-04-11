@@ -17,122 +17,148 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SettingsSearchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIdle = System.Text.Json.JsonEncodedText.Encode("idle");
+	private static readonly System.Text.Json.JsonEncodedText PropSlowlog = System.Text.Json.JsonEncodedText.Encode("slowlog");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle?> propIdle = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings?> propSlowlog = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIdle.TryReadProperty(ref reader, options, PropIdle, null))
+			{
+				continue;
+			}
+
+			if (propSlowlog.TryReadProperty(ref reader, options, PropSlowlog, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Idle = propIdle.Value,
+			Slowlog = propSlowlog.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIdle, value.Idle, null, null);
+		writer.WriteProperty(options, PropSlowlog, value.Slowlog, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchConverter))]
 public sealed partial class SettingsSearch
 {
-	[JsonInclude, JsonPropertyName("idle")]
+#if NET7_0_OR_GREATER
+	public SettingsSearch()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SettingsSearch()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? Idle { get; set; }
-	[JsonInclude, JsonPropertyName("slowlog")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? Slowlog { get; set; }
 }
 
-public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<SettingsSearchDescriptor>
+public readonly partial struct SettingsSearchDescriptor
 {
-	internal SettingsSearchDescriptor(Action<SettingsSearchDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch Instance { get; init; }
 
-	public SettingsSearchDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSearchDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? IdleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor IdleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor> IdleDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? SlowlogValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor SlowlogDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor> SlowlogDescriptorAction { get; set; }
-
-	public SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? idle)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSearchDescriptor()
 	{
-		IdleDescriptor = null;
-		IdleDescriptorAction = null;
-		IdleValue = idle;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? value)
 	{
-		IdleValue = null;
-		IdleDescriptorAction = null;
-		IdleDescriptor = descriptor;
-		return Self;
+		Instance.Idle = value;
+		return this;
 	}
 
-	public SettingsSearchDescriptor Idle(Action<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor Idle()
 	{
-		IdleValue = null;
-		IdleDescriptor = null;
-		IdleDescriptorAction = configure;
-		return Self;
+		Instance.Idle = Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor.Build(null);
+		return this;
 	}
 
-	public SettingsSearchDescriptor Slowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? slowlog)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor Idle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor>? action)
 	{
-		SlowlogDescriptor = null;
-		SlowlogDescriptorAction = null;
-		SlowlogValue = slowlog;
-		return Self;
+		Instance.Idle = Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor.Build(action);
+		return this;
 	}
 
-	public SettingsSearchDescriptor Slowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor Slowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? value)
 	{
-		SlowlogValue = null;
-		SlowlogDescriptorAction = null;
-		SlowlogDescriptor = descriptor;
-		return Self;
+		Instance.Slowlog = value;
+		return this;
 	}
 
-	public SettingsSearchDescriptor Slowlog(Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor Slowlog()
 	{
-		SlowlogValue = null;
-		SlowlogDescriptor = null;
-		SlowlogDescriptorAction = configure;
-		return Self;
+		Instance.Slowlog = Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor Slowlog(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IdleDescriptor is not null)
+		Instance.Slowlog = Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("idle");
-			JsonSerializer.Serialize(writer, IdleDescriptor, options);
-		}
-		else if (IdleDescriptorAction is not null)
-		{
-			writer.WritePropertyName("idle");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor(IdleDescriptorAction), options);
-		}
-		else if (IdleValue is not null)
-		{
-			writer.WritePropertyName("idle");
-			JsonSerializer.Serialize(writer, IdleValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SlowlogDescriptor is not null)
-		{
-			writer.WritePropertyName("slowlog");
-			JsonSerializer.Serialize(writer, SlowlogDescriptor, options);
-		}
-		else if (SlowlogDescriptorAction is not null)
-		{
-			writer.WritePropertyName("slowlog");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor(SlowlogDescriptorAction), options);
-		}
-		else if (SlowlogValue is not null)
-		{
-			writer.WritePropertyName("slowlog");
-			JsonSerializer.Serialize(writer, SlowlogValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

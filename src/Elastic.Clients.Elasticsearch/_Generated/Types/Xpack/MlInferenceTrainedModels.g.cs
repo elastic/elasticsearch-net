@@ -17,26 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class MlInferenceTrainedModelsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropEstimatedHeapMemoryUsageBytes = System.Text.Json.JsonEncodedText.Encode("estimated_heap_memory_usage_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropEstimatedOperations = System.Text.Json.JsonEncodedText.Encode("estimated_operations");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlCounter> propAll = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount?> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics?> propEstimatedHeapMemoryUsageBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics?> propEstimatedOperations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics?> propModelSizeBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propEstimatedHeapMemoryUsageBytes.TryReadProperty(ref reader, options, PropEstimatedHeapMemoryUsageBytes, null))
+			{
+				continue;
+			}
+
+			if (propEstimatedOperations.TryReadProperty(ref reader, options, PropEstimatedOperations, null))
+			{
+				continue;
+			}
+
+			if (propModelSizeBytes.TryReadProperty(ref reader, options, PropModelSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			All = propAll.Value,
+			Count = propCount.Value,
+			EstimatedHeapMemoryUsageBytes = propEstimatedHeapMemoryUsageBytes.Value,
+			EstimatedOperations = propEstimatedOperations.Value,
+			ModelSizeBytes = propModelSizeBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAll, value.All, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropEstimatedHeapMemoryUsageBytes, value.EstimatedHeapMemoryUsageBytes, null, null);
+		writer.WriteProperty(options, PropEstimatedOperations, value.EstimatedOperations, null, null);
+		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsConverter))]
 public sealed partial class MlInferenceTrainedModels
 {
-	[JsonInclude, JsonPropertyName("_all")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlCounter All { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount? Count { get; init; }
-	[JsonInclude, JsonPropertyName("estimated_heap_memory_usage_bytes")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? EstimatedHeapMemoryUsageBytes { get; init; }
-	[JsonInclude, JsonPropertyName("estimated_operations")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? EstimatedOperations { get; init; }
-	[JsonInclude, JsonPropertyName("model_size_bytes")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? ModelSizeBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MlInferenceTrainedModels(Elastic.Clients.Elasticsearch.Xpack.MlCounter all)
+	{
+		All = all;
+	}
+#if NET7_0_OR_GREATER
+	public MlInferenceTrainedModels()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MlInferenceTrainedModels()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MlInferenceTrainedModels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.MlCounter All { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount? Count { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? EstimatedHeapMemoryUsageBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? EstimatedOperations { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? ModelSizeBytes { get; set; }
 }

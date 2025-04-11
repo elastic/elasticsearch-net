@@ -17,52 +17,127 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
+
+internal sealed partial class ClusterIndicesShardsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
+	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsIndex?> propIndex = default;
+		LocalJsonValue<double?> propPrimaries = default;
+		LocalJsonValue<double?> propReplication = default;
+		LocalJsonValue<double?> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPrimaries.TryReadProperty(ref reader, options, PropPrimaries, null))
+			{
+				continue;
+			}
+
+			if (propReplication.TryReadProperty(ref reader, options, PropReplication, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			Primaries = propPrimaries.Value,
+			Replication = propReplication.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPrimaries, value.Primaries, null, null);
+		writer.WriteProperty(options, PropReplication, value.Replication, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Contains statistics about shards assigned to selected nodes.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsConverter))]
 public sealed partial class ClusterIndicesShards
 {
+#if NET7_0_OR_GREATER
+	public ClusterIndicesShards()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ClusterIndicesShards()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterIndicesShards(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains statistics about shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsIndex? Index { get; init; }
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsIndex? Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of primary shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("primaries")]
-	public double? Primaries { get; init; }
+	public double? Primaries { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ratio of replica shards to primary shards across all selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("replication")]
-	public double? Replication { get; init; }
+	public double? Replication { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public double? Total { get; init; }
+	public double? Total { get; set; }
 }

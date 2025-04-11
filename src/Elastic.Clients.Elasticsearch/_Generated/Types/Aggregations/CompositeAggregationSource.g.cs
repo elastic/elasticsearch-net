@@ -17,24 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class CompositeAggregationSourceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram");
+	private static readonly System.Text.Json.JsonEncodedText PropGeotileGrid = System.Text.Json.JsonEncodedText.Encode("geotile_grid");
+	private static readonly System.Text.Json.JsonEncodedText PropHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation?> propDateHistogram = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation?> propGeotileGrid = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation?> propHistogram = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation?> propTerms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDateHistogram.TryReadProperty(ref reader, options, PropDateHistogram, null))
+			{
+				continue;
+			}
+
+			if (propGeotileGrid.TryReadProperty(ref reader, options, PropGeotileGrid, null))
+			{
+				continue;
+			}
+
+			if (propHistogram.TryReadProperty(ref reader, options, PropHistogram, null))
+			{
+				continue;
+			}
+
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DateHistogram = propDateHistogram.Value,
+			GeotileGrid = propGeotileGrid.Value,
+			Histogram = propHistogram.Value,
+			Terms = propTerms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDateHistogram, value.DateHistogram, null, null);
+		writer.WriteProperty(options, PropGeotileGrid, value.GeotileGrid, null, null);
+		writer.WriteProperty(options, PropHistogram, value.Histogram, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceConverter))]
 public sealed partial class CompositeAggregationSource
 {
+#if NET7_0_OR_GREATER
+	public CompositeAggregationSource()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CompositeAggregationSource()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A date histogram aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? DateHistogram { get; set; }
 
 	/// <summary>
@@ -42,7 +120,6 @@ public sealed partial class CompositeAggregationSource
 	/// A geotile grid aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("geotile_grid")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? GeotileGrid { get; set; }
 
 	/// <summary>
@@ -50,7 +127,6 @@ public sealed partial class CompositeAggregationSource
 	/// A histogram aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? Histogram { get; set; }
 
 	/// <summary>
@@ -58,58 +134,59 @@ public sealed partial class CompositeAggregationSource
 	/// A terms aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? Terms { get; set; }
 }
 
-public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : SerializableDescriptor<CompositeAggregationSourceDescriptor<TDocument>>
+public readonly partial struct CompositeAggregationSourceDescriptor<TDocument>
 {
-	internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Instance { get; init; }
 
-	public CompositeAggregationSourceDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationSourceDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? DateHistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> DateHistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>> DateHistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? GeotileGridValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> GeotileGridDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>> GeotileGridDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? HistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> HistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>> HistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? TermsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> TermsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>> TermsDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationSourceDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? dateHistogram)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? value)
 	{
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramValue = dateHistogram;
-		return Self;
+		Instance.DateHistogram = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> DateHistogram()
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramDescriptor = descriptor;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>>? action)
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = configure;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -117,28 +194,32 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	/// A geotile grid aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? geotileGrid)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? value)
 	{
-		GeotileGridDescriptor = null;
-		GeotileGridDescriptorAction = null;
-		GeotileGridValue = geotileGrid;
-		return Self;
+		Instance.GeotileGrid = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> GeotileGrid()
 	{
-		GeotileGridValue = null;
-		GeotileGridDescriptorAction = null;
-		GeotileGridDescriptor = descriptor;
-		return Self;
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>>? action)
 	{
-		GeotileGridValue = null;
-		GeotileGridDescriptor = null;
-		GeotileGridDescriptorAction = configure;
-		return Self;
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -146,28 +227,21 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	/// A histogram aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? histogram)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? value)
 	{
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = null;
-		HistogramValue = histogram;
-		return Self;
+		Instance.Histogram = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> Histogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>> action)
 	{
-		HistogramValue = null;
-		HistogramDescriptorAction = null;
-		HistogramDescriptor = descriptor;
-		return Self;
-	}
-
-	public CompositeAggregationSourceDescriptor<TDocument> Histogram(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>> configure)
-	{
-		HistogramValue = null;
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = configure;
-		return Self;
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -175,149 +249,109 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	/// A terms aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? terms)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? value)
 	{
-		TermsDescriptor = null;
-		TermsDescriptorAction = null;
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> Terms()
 	{
-		TermsValue = null;
-		TermsDescriptorAction = null;
-		TermsDescriptor = descriptor;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>>? action)
 	{
-		TermsValue = null;
-		TermsDescriptor = null;
-		TermsDescriptorAction = configure;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DateHistogramDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
-		}
-		else if (DateHistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>(DateHistogramDescriptorAction), options);
-		}
-		else if (DateHistogramValue is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (GeotileGridDescriptor is not null)
-		{
-			writer.WritePropertyName("geotile_grid");
-			JsonSerializer.Serialize(writer, GeotileGridDescriptor, options);
-		}
-		else if (GeotileGridDescriptorAction is not null)
-		{
-			writer.WritePropertyName("geotile_grid");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument>(GeotileGridDescriptorAction), options);
-		}
-		else if (GeotileGridValue is not null)
-		{
-			writer.WritePropertyName("geotile_grid");
-			JsonSerializer.Serialize(writer, GeotileGridValue, options);
-		}
-
-		if (HistogramDescriptor is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramDescriptor, options);
-		}
-		else if (HistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>(HistogramDescriptorAction), options);
-		}
-		else if (HistogramValue is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramValue, options);
-		}
-
-		if (TermsDescriptor is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsDescriptor, options);
-		}
-		else if (TermsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>(TermsDescriptorAction), options);
-		}
-		else if (TermsValue is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CompositeAggregationSourceDescriptor : SerializableDescriptor<CompositeAggregationSourceDescriptor>
+public readonly partial struct CompositeAggregationSourceDescriptor
 {
-	internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Instance { get; init; }
 
-	public CompositeAggregationSourceDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationSourceDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? DateHistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor DateHistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor> DateHistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? GeotileGridValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor GeotileGridDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor> GeotileGridDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? HistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor HistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor> HistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? TermsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor TermsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor> TermsDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationSourceDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? dateHistogram)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? value)
 	{
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramValue = dateHistogram;
-		return Self;
+		Instance.DateHistogram = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor DateHistogram()
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramDescriptor = descriptor;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor DateHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor>? action)
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = configure;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor DateHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<T>>? action)
+	{
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -325,28 +359,43 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	/// A geotile grid aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? geotileGrid)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? value)
 	{
-		GeotileGridDescriptor = null;
-		GeotileGridDescriptorAction = null;
-		GeotileGridValue = geotileGrid;
-		return Self;
+		Instance.GeotileGrid = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor GeotileGrid()
 	{
-		GeotileGridValue = null;
-		GeotileGridDescriptorAction = null;
-		GeotileGridDescriptor = descriptor;
-		return Self;
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor GeotileGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor GeotileGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor>? action)
 	{
-		GeotileGridValue = null;
-		GeotileGridDescriptor = null;
-		GeotileGridDescriptorAction = configure;
-		return Self;
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor GeotileGrid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<T>>? action)
+	{
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -354,28 +403,32 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	/// A histogram aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? histogram)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? value)
 	{
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = null;
-		HistogramValue = histogram;
-		return Self;
+		Instance.Histogram = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Histogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor> action)
 	{
-		HistogramValue = null;
-		HistogramDescriptorAction = null;
-		HistogramDescriptor = descriptor;
-		return Self;
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor.Build(action);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor Histogram(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A histogram aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Histogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<T>> action)
 	{
-		HistogramValue = null;
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = configure;
-		return Self;
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -383,97 +436,55 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	/// A terms aggregation.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? terms)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? value)
 	{
-		TermsDescriptor = null;
-		TermsDescriptorAction = null;
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Terms()
 	{
-		TermsValue = null;
-		TermsDescriptorAction = null;
-		TermsDescriptor = descriptor;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeAggregationSourceDescriptor Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor>? action)
 	{
-		TermsValue = null;
-		TermsDescriptor = null;
-		TermsDescriptorAction = configure;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (DateHistogramDescriptor is not null)
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
-		}
-		else if (DateHistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor(DateHistogramDescriptorAction), options);
-		}
-		else if (DateHistogramValue is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (GeotileGridDescriptor is not null)
-		{
-			writer.WritePropertyName("geotile_grid");
-			JsonSerializer.Serialize(writer, GeotileGridDescriptor, options);
-		}
-		else if (GeotileGridDescriptorAction is not null)
-		{
-			writer.WritePropertyName("geotile_grid");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor(GeotileGridDescriptorAction), options);
-		}
-		else if (GeotileGridValue is not null)
-		{
-			writer.WritePropertyName("geotile_grid");
-			JsonSerializer.Serialize(writer, GeotileGridValue, options);
-		}
-
-		if (HistogramDescriptor is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramDescriptor, options);
-		}
-		else if (HistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor(HistogramDescriptorAction), options);
-		}
-		else if (HistogramValue is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramValue, options);
-		}
-
-		if (TermsDescriptor is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsDescriptor, options);
-		}
-		else if (TermsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor(TermsDescriptorAction), options);
-		}
-		else if (TermsValue is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

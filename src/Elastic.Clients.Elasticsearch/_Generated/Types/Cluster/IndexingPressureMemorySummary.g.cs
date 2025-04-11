@@ -17,32 +17,169 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class IndexingPressureMemorySummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemorySummary>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllInBytes = System.Text.Json.JsonEncodedText.Encode("all_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCombinedCoordinatingAndPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("combined_coordinating_and_primary_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingInBytes = System.Text.Json.JsonEncodedText.Encode("coordinating_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingRejections = System.Text.Json.JsonEncodedText.Encode("coordinating_rejections");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("primary_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryRejections = System.Text.Json.JsonEncodedText.Encode("primary_rejections");
+	private static readonly System.Text.Json.JsonEncodedText PropReplicaInBytes = System.Text.Json.JsonEncodedText.Encode("replica_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropReplicaRejections = System.Text.Json.JsonEncodedText.Encode("replica_rejections");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemorySummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propAllInBytes = default;
+		LocalJsonValue<long> propCombinedCoordinatingAndPrimaryInBytes = default;
+		LocalJsonValue<long> propCoordinatingInBytes = default;
+		LocalJsonValue<long?> propCoordinatingRejections = default;
+		LocalJsonValue<long> propPrimaryInBytes = default;
+		LocalJsonValue<long?> propPrimaryRejections = default;
+		LocalJsonValue<long> propReplicaInBytes = default;
+		LocalJsonValue<long?> propReplicaRejections = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllInBytes.TryReadProperty(ref reader, options, PropAllInBytes, null))
+			{
+				continue;
+			}
+
+			if (propCombinedCoordinatingAndPrimaryInBytes.TryReadProperty(ref reader, options, PropCombinedCoordinatingAndPrimaryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propCoordinatingInBytes.TryReadProperty(ref reader, options, PropCoordinatingInBytes, null))
+			{
+				continue;
+			}
+
+			if (propCoordinatingRejections.TryReadProperty(ref reader, options, PropCoordinatingRejections, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryInBytes.TryReadProperty(ref reader, options, PropPrimaryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryRejections.TryReadProperty(ref reader, options, PropPrimaryRejections, null))
+			{
+				continue;
+			}
+
+			if (propReplicaInBytes.TryReadProperty(ref reader, options, PropReplicaInBytes, null))
+			{
+				continue;
+			}
+
+			if (propReplicaRejections.TryReadProperty(ref reader, options, PropReplicaRejections, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemorySummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllInBytes = propAllInBytes.Value,
+			CombinedCoordinatingAndPrimaryInBytes = propCombinedCoordinatingAndPrimaryInBytes.Value,
+			CoordinatingInBytes = propCoordinatingInBytes.Value,
+			CoordinatingRejections = propCoordinatingRejections.Value,
+			PrimaryInBytes = propPrimaryInBytes.Value,
+			PrimaryRejections = propPrimaryRejections.Value,
+			ReplicaInBytes = propReplicaInBytes.Value,
+			ReplicaRejections = propReplicaRejections.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemorySummary value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllInBytes, value.AllInBytes, null, null);
+		writer.WriteProperty(options, PropCombinedCoordinatingAndPrimaryInBytes, value.CombinedCoordinatingAndPrimaryInBytes, null, null);
+		writer.WriteProperty(options, PropCoordinatingInBytes, value.CoordinatingInBytes, null, null);
+		writer.WriteProperty(options, PropCoordinatingRejections, value.CoordinatingRejections, null, null);
+		writer.WriteProperty(options, PropPrimaryInBytes, value.PrimaryInBytes, null, null);
+		writer.WriteProperty(options, PropPrimaryRejections, value.PrimaryRejections, null, null);
+		writer.WriteProperty(options, PropReplicaInBytes, value.ReplicaInBytes, null, null);
+		writer.WriteProperty(options, PropReplicaRejections, value.ReplicaRejections, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemorySummaryConverter))]
 public sealed partial class IndexingPressureMemorySummary
 {
-	[JsonInclude, JsonPropertyName("all_in_bytes")]
-	public long AllInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("combined_coordinating_and_primary_in_bytes")]
-	public long CombinedCoordinatingAndPrimaryInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("coordinating_in_bytes")]
-	public long CoordinatingInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("coordinating_rejections")]
-	public long? CoordinatingRejections { get; init; }
-	[JsonInclude, JsonPropertyName("primary_in_bytes")]
-	public long PrimaryInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("primary_rejections")]
-	public long? PrimaryRejections { get; init; }
-	[JsonInclude, JsonPropertyName("replica_in_bytes")]
-	public long ReplicaInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("replica_rejections")]
-	public long? ReplicaRejections { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingPressureMemorySummary(long allInBytes, long combinedCoordinatingAndPrimaryInBytes, long coordinatingInBytes, long primaryInBytes, long replicaInBytes)
+	{
+		AllInBytes = allInBytes;
+		CombinedCoordinatingAndPrimaryInBytes = combinedCoordinatingAndPrimaryInBytes;
+		CoordinatingInBytes = coordinatingInBytes;
+		PrimaryInBytes = primaryInBytes;
+		ReplicaInBytes = replicaInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public IndexingPressureMemorySummary()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndexingPressureMemorySummary()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingPressureMemorySummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long AllInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CombinedCoordinatingAndPrimaryInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CoordinatingInBytes { get; set; }
+	public long? CoordinatingRejections { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimaryInBytes { get; set; }
+	public long? PrimaryRejections { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ReplicaInBytes { get; set; }
+	public long? ReplicaRejections { get; set; }
 }

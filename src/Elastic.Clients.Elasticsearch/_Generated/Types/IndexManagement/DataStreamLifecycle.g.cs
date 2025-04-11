@@ -17,27 +17,67 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
-/// </para>
-/// </summary>
-public sealed partial class DataStreamLifecycle
+internal sealed partial class DataStreamLifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle>
 {
-	[JsonInclude, JsonPropertyName("data_retention")]
-	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
-	[JsonInclude, JsonPropertyName("downsampling")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention");
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDataRetention = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling?> propDownsampling = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataRetention.TryReadProperty(ref reader, options, PropDataRetention, null))
+			{
+				continue;
+			}
+
+			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DataRetention = propDataRetention.Value,
+			Downsampling = propDownsampling.Value,
+			Enabled = propEnabled.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
+		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -45,74 +85,131 @@ public sealed partial class DataStreamLifecycle
 /// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
 /// </para>
 /// </summary>
-public sealed partial class DataStreamLifecycleDescriptor : SerializableDescriptor<DataStreamLifecycleDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleConverter))]
+public sealed partial class DataStreamLifecycle
 {
-	internal DataStreamLifecycleDescriptor(Action<DataStreamLifecycleDescriptor> configure) => configure.Invoke(this);
-
-	public DataStreamLifecycleDescriptor() : base()
+#if NET7_0_OR_GREATER
+	public DataStreamLifecycle()
 	{
 	}
-
-	private Elastic.Clients.Elasticsearch.Duration? DataRetentionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
-
-	public DataStreamLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? dataRetention)
+#endif
+#if !NET7_0_OR_GREATER
+	public DataStreamLifecycle()
 	{
-		DataRetentionValue = dataRetention;
-		return Self;
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataStreamLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	public DataStreamLifecycleDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? downsampling)
+	/// <summary>
+	/// <para>
+	/// If defined, every document added to this data stream will be stored at least for this time frame.
+	/// Any time after this duration the document could be deleted.
+	/// When empty, every document in this data stream will be stored indefinitely.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public bool? Enabled { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
+/// </para>
+/// </summary>
+public readonly partial struct DataStreamLifecycleDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle instance)
 	{
-		DownsamplingDescriptor = null;
-		DownsamplingDescriptorAction = null;
-		DownsamplingValue = downsampling;
-		return Self;
+		Instance = instance;
 	}
 
-	public DataStreamLifecycleDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor descriptor)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleDescriptor()
 	{
-		DownsamplingValue = null;
-		DownsamplingDescriptorAction = null;
-		DownsamplingDescriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public DataStreamLifecycleDescriptor Downsampling(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If defined, every document added to this data stream will be stored at least for this time frame.
+	/// Any time after this duration the document could be deleted.
+	/// When empty, every document in this data stream will be stored indefinitely.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		DownsamplingValue = null;
-		DownsamplingDescriptor = null;
-		DownsamplingDescriptorAction = configure;
-		return Self;
+		Instance.DataRetention = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? value)
 	{
-		writer.WriteStartObject();
-		if (DataRetentionValue is not null)
+		Instance.Downsampling = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Downsampling(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> action)
+	{
+		Instance.Downsampling = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Enabled(bool? value = true)
+	{
+		Instance.Enabled = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("data_retention");
-			JsonSerializer.Serialize(writer, DataRetentionValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DownsamplingDescriptor is not null)
-		{
-			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, DownsamplingDescriptor, options);
-		}
-		else if (DownsamplingDescriptorAction is not null)
-		{
-			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(DownsamplingDescriptorAction), options);
-		}
-		else if (DownsamplingValue is not null)
-		{
-			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, DownsamplingValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

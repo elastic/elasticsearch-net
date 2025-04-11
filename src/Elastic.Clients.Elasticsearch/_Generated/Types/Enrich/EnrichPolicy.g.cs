@@ -17,277 +17,309 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+internal sealed partial class EnrichPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropElasticsearchVersion = System.Text.Json.JsonEncodedText.Encode("elasticsearch_version");
+	private static readonly System.Text.Json.JsonEncodedText PropEnrichFields = System.Text.Json.JsonEncodedText.Encode("enrich_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchField = System.Text.Json.JsonEncodedText.Encode("match_field");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propElasticsearchVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propEnrichFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propMatchField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propElasticsearchVersion.TryReadProperty(ref reader, options, PropElasticsearchVersion, null))
+			{
+				continue;
+			}
+
+			if (propEnrichFields.TryReadProperty(ref reader, options, PropEnrichFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propMatchField.TryReadProperty(ref reader, options, PropMatchField, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ElasticsearchVersion = propElasticsearchVersion.Value,
+			EnrichFields = propEnrichFields.Value,
+			Indices = propIndices.Value,
+			MatchField = propMatchField.Value,
+			Name = propName.Value,
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropElasticsearchVersion, value.ElasticsearchVersion, null, null);
+		writer.WriteProperty(options, PropEnrichFields, value.EnrichFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropMatchField, value.MatchField, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyConverter))]
 public sealed partial class EnrichPolicy
 {
-	[JsonInclude, JsonPropertyName("elasticsearch_version")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichPolicy(Elastic.Clients.Elasticsearch.Fields enrichFields, Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field matchField)
+	{
+		EnrichFields = enrichFields;
+		Indices = indices;
+		MatchField = matchField;
+	}
+#if NET7_0_OR_GREATER
+	public EnrichPolicy()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EnrichPolicy()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? ElasticsearchVersion { get; set; }
-	[JsonInclude, JsonPropertyName("enrich_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
-	[JsonInclude, JsonPropertyName("indices")]
-	public Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
-	[JsonInclude, JsonPropertyName("match_field")]
-	public Elastic.Clients.Elasticsearch.Field MatchField { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field MatchField { get; set; }
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
-public sealed partial class EnrichPolicyDescriptor<TDocument> : SerializableDescriptor<EnrichPolicyDescriptor<TDocument>>
+public readonly partial struct EnrichPolicyDescriptor<TDocument>
 {
-	internal EnrichPolicyDescriptor(Action<EnrichPolicyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Instance { get; init; }
 
-	public EnrichPolicyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichPolicyDescriptor(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy instance)
 	{
+		Instance = instance;
 	}
 
-	private string? ElasticsearchVersionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields EnrichFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field MatchFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
-	public EnrichPolicyDescriptor<TDocument> ElasticsearchVersion(string? elasticsearchVersion)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichPolicyDescriptor()
 	{
-		ElasticsearchVersionValue = elasticsearchVersion;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public EnrichPolicyDescriptor<TDocument> EnrichFields(Elastic.Clients.Elasticsearch.Fields enrichFields)
+	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy instance) => new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> ElasticsearchVersion(string? value)
 	{
-		EnrichFieldsValue = enrichFields;
-		return Self;
+		Instance.ElasticsearchVersion = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> EnrichFields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.EnrichFields = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> MatchField(Elastic.Clients.Elasticsearch.Field matchField)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> EnrichFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		MatchFieldValue = matchField;
-		return Self;
+		Instance.EnrichFields = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> MatchField<TValue>(Expression<Func<TDocument, TValue>> matchField)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		MatchFieldValue = matchField;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> MatchField(Expression<Func<TDocument, object>> matchField)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> MatchField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		MatchFieldValue = matchField;
-		return Self;
+		Instance.MatchField = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> MatchField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.MatchField = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Build(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ElasticsearchVersionValue))
-		{
-			writer.WritePropertyName("elasticsearch_version");
-			writer.WriteStringValue(ElasticsearchVersionValue);
-		}
-
-		writer.WritePropertyName("enrich_fields");
-		JsonSerializer.Serialize(writer, EnrichFieldsValue, options);
-		writer.WritePropertyName("indices");
-		JsonSerializer.Serialize(writer, IndicesValue, options);
-		writer.WritePropertyName("match_field");
-		JsonSerializer.Serialize(writer, MatchFieldValue, options);
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class EnrichPolicyDescriptor : SerializableDescriptor<EnrichPolicyDescriptor>
+public readonly partial struct EnrichPolicyDescriptor
 {
-	internal EnrichPolicyDescriptor(Action<EnrichPolicyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Instance { get; init; }
 
-	public EnrichPolicyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichPolicyDescriptor(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy instance)
 	{
+		Instance = instance;
 	}
 
-	private string? ElasticsearchVersionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields EnrichFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field MatchFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-
-	public EnrichPolicyDescriptor ElasticsearchVersion(string? elasticsearchVersion)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichPolicyDescriptor()
 	{
-		ElasticsearchVersionValue = elasticsearchVersion;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public EnrichPolicyDescriptor EnrichFields(Elastic.Clients.Elasticsearch.Fields enrichFields)
+	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy instance) => new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor ElasticsearchVersion(string? value)
 	{
-		EnrichFieldsValue = enrichFields;
-		return Self;
+		Instance.ElasticsearchVersion = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor EnrichFields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.EnrichFields = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor MatchField(Elastic.Clients.Elasticsearch.Field matchField)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor EnrichFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		MatchFieldValue = matchField;
-		return Self;
+		Instance.EnrichFields = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor MatchField<TDocument, TValue>(Expression<Func<TDocument, TValue>> matchField)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		MatchFieldValue = matchField;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor MatchField<TDocument>(Expression<Func<TDocument, object>> matchField)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor MatchField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		MatchFieldValue = matchField;
-		return Self;
+		Instance.MatchField = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor MatchField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.MatchField = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public EnrichPolicyDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ElasticsearchVersionValue))
-		{
-			writer.WritePropertyName("elasticsearch_version");
-			writer.WriteStringValue(ElasticsearchVersionValue);
-		}
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
 
-		writer.WritePropertyName("enrich_fields");
-		JsonSerializer.Serialize(writer, EnrichFieldsValue, options);
-		writer.WritePropertyName("indices");
-		JsonSerializer.Serialize(writer, IndicesValue, options);
-		writer.WritePropertyName("match_field");
-		JsonSerializer.Serialize(writer, MatchFieldValue, options);
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Build(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor(new Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

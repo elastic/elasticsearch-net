@@ -17,20 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowedTypes = System.Text.Json.JsonEncodedText.Encode("allowed_types");
+	private static readonly System.Text.Json.JsonEncodedText PropDisableMaxCompilationsRate = System.Text.Json.JsonEncodedText.Encode("disable_max_compilations_rate");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAllowedTypes = default;
+		LocalJsonValue<string?> propDisableMaxCompilationsRate = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowedTypes.TryReadProperty(ref reader, options, PropAllowedTypes, null))
+			{
+				continue;
+			}
+
+			if (propDisableMaxCompilationsRate.TryReadProperty(ref reader, options, PropDisableMaxCompilationsRate, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowedTypes = propAllowedTypes.Value,
+			DisableMaxCompilationsRate = propDisableMaxCompilationsRate.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowedTypes, value.AllowedTypes, null, null);
+		writer.WriteProperty(options, PropDisableMaxCompilationsRate, value.DisableMaxCompilationsRate, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoScriptConverter))]
 public sealed partial class NodeInfoScript
 {
-	[JsonInclude, JsonPropertyName("allowed_types")]
-	public string AllowedTypes { get; init; }
-	[JsonInclude, JsonPropertyName("disable_max_compilations_rate")]
-	public string? DisableMaxCompilationsRate { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoScript(string allowedTypes)
+	{
+		AllowedTypes = allowedTypes;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoScript()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoScript()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoScript(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string AllowedTypes { get; set; }
+	public string? DisableMaxCompilationsRate { get; set; }
 }

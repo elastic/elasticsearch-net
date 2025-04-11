@@ -17,21 +17,98 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetTokenRequestParameters : RequestParameters
+public sealed partial class GetTokenRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetTokenRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetTokenRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
+	private static readonly System.Text.Json.JsonEncodedText PropKerberosTicket = System.Text.Json.JsonEncodedText.Encode("kerberos_ticket");
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText PropScope = System.Text.Json.JsonEncodedText.Encode("scope");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.GetTokenRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType?> propGrantType = default;
+		LocalJsonValue<string?> propKerberosTicket = default;
+		LocalJsonValue<string?> propPassword = default;
+		LocalJsonValue<string?> propRefreshToken = default;
+		LocalJsonValue<string?> propScope = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, null))
+			{
+				continue;
+			}
+
+			if (propKerberosTicket.TryReadProperty(ref reader, options, PropKerberosTicket, null))
+			{
+				continue;
+			}
+
+			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
+			{
+				continue;
+			}
+
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
+			{
+				continue;
+			}
+
+			if (propScope.TryReadProperty(ref reader, options, PropScope, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			GrantType = propGrantType.Value,
+			KerberosTicket = propKerberosTicket.Value,
+			Password = propPassword.Value,
+			RefreshToken = propRefreshToken.Value,
+			Scope = propScope.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetTokenRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
+		writer.WriteProperty(options, PropKerberosTicket, value.KerberosTicket, null, null);
+		writer.WriteProperty(options, PropPassword, value.Password, null, null);
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropScope, value.Scope, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -56,11 +133,28 @@ public sealed partial class GetTokenRequestParameters : RequestParameters
 /// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 /// </para>
 /// </summary>
-public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetTokenRequestConverter))]
+public sealed partial class GetTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetToken;
+#if NET7_0_OR_GREATER
+	public GetTokenRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetTokenRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityGetToken;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -72,7 +166,6 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 	/// Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grant_type")]
 	public Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? GrantType { get; set; }
 
 	/// <summary>
@@ -82,7 +175,6 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("kerberos_ticket")]
 	public string? KerberosTicket { get; set; }
 
 	/// <summary>
@@ -92,7 +184,6 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
 
 	/// <summary>
@@ -102,7 +193,6 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string? RefreshToken { get; set; }
 
 	/// <summary>
@@ -111,7 +201,6 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 	/// Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scope")]
 	public string? Scope { get; set; }
 
 	/// <summary>
@@ -121,7 +210,6 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
@@ -147,28 +235,23 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 /// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 /// </para>
 /// </summary>
-public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTokenRequestDescriptor, GetTokenRequestParameters>
+public readonly partial struct GetTokenRequestDescriptor
 {
-	internal GetTokenRequestDescriptor(Action<GetTokenRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GetTokenRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetTokenRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GetTokenRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetToken;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.get_token";
-
-	private Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? GrantTypeValue { get; set; }
-	private string? KerberosTicketValue { get; set; }
-	private string? PasswordValue { get; set; }
-	private string? RefreshTokenValue { get; set; }
-	private string? ScopeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetTokenRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -176,10 +259,10 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	/// Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
-	public GetTokenRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? grantType)
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? value)
 	{
-		GrantTypeValue = grantType;
-		return Self;
+		Instance.GrantType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -189,10 +272,10 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	public GetTokenRequestDescriptor KerberosTicket(string? kerberosTicket)
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor KerberosTicket(string? value)
 	{
-		KerberosTicketValue = kerberosTicket;
-		return Self;
+		Instance.KerberosTicket = value;
+		return this;
 	}
 
 	/// <summary>
@@ -202,10 +285,10 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	public GetTokenRequestDescriptor Password(string? password)
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Password(string? value)
 	{
-		PasswordValue = password;
-		return Self;
+		Instance.Password = value;
+		return this;
 	}
 
 	/// <summary>
@@ -215,10 +298,10 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	public GetTokenRequestDescriptor RefreshToken(string? refreshToken)
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor RefreshToken(string? value)
 	{
-		RefreshTokenValue = refreshToken;
-		return Self;
+		Instance.RefreshToken = value;
+		return this;
 	}
 
 	/// <summary>
@@ -227,10 +310,10 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	/// Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
 	/// </para>
 	/// </summary>
-	public GetTokenRequestDescriptor Scope(string? scope)
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Scope(string? value)
 	{
-		ScopeValue = scope;
-		return Self;
+		Instance.Scope = value;
+		return this;
 	}
 
 	/// <summary>
@@ -240,51 +323,64 @@ public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTok
 	/// This parameter is not valid with any other supported grant type.
 	/// </para>
 	/// </summary>
-	public GetTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GetTokenRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (GrantTypeValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("grant_type");
-			JsonSerializer.Serialize(writer, GrantTypeValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(KerberosTicketValue))
-		{
-			writer.WritePropertyName("kerberos_ticket");
-			writer.WriteStringValue(KerberosTicketValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(PasswordValue))
-		{
-			writer.WritePropertyName("password");
-			writer.WriteStringValue(PasswordValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RefreshTokenValue))
-		{
-			writer.WritePropertyName("refresh_token");
-			writer.WriteStringValue(RefreshTokenValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ScopeValue))
-		{
-			writer.WritePropertyName("scope");
-			writer.WriteStringValue(ScopeValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (UsernameValue is not null)
-		{
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

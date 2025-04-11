@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetJobsRequestParameters : RequestParameters
+public sealed partial class GetJobsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -72,6 +65,35 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 }
 
+internal sealed partial class GetJobsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get anomaly detection jobs configuration info.
@@ -81,19 +103,31 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 /// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
-public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestConverter))]
+public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>
 {
-	public GetJobsRequest()
-	{
-	}
-
 	public GetJobsRequest(Elastic.Clients.Elasticsearch.Ids? jobId) : base(r => r.Optional("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetJobsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetJobsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetJobsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetJobs;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetJobs;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -101,6 +135,15 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job. It can be a job identifier, a
+	/// group name, or a wildcard expression. If you do not specify one of these
+	/// options, the API returns information for all anomaly detection jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ids? JobId { get => P<Elastic.Clients.Elasticsearch.Ids?>("job_id"); set => PO("job_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies what to do when the request:
 	/// </para>
 	/// <list type="number">
@@ -127,7 +170,6 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 	/// code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -137,7 +179,6 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 	/// be retrieved and then added to another cluster.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 }
 
@@ -150,36 +191,141 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 /// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
-public sealed partial class GetJobsRequestDescriptor : RequestDescriptor<GetJobsRequestDescriptor, GetJobsRequestParameters>
+public readonly partial struct GetJobsRequestDescriptor
 {
-	internal GetJobsRequestDescriptor(Action<GetJobsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest Instance { get; init; }
 
-	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? jobId) : base(r => r.Optional("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? jobId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(jobId);
 	}
 
 	public GetJobsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetJobs;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_jobs";
-
-	public GetJobsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public GetJobsRequestDescriptor ExcludeGenerated(bool? excludeGenerated = true) => Qs("exclude_generated", excludeGenerated);
-
-	public GetJobsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids? jobId)
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job. It can be a job identifier, a
+	/// group name, or a wildcard expression. If you do not specify one of these
+	/// options, the API returns information for all anomaly detection jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
-		RouteValues.Optional("job_id", jobId);
-		return Self;
+		Instance.JobId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is <c>true</c>, which returns an empty <c>jobs</c> array when
+	/// there are no matches and the subset of results when there are partial
+	/// matches. If this parameter is <c>false</c>, the request returns a <c>404</c> status
+	/// code when there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor ExcludeGenerated(bool? value = true)
+	{
+		Instance.ExcludeGenerated = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

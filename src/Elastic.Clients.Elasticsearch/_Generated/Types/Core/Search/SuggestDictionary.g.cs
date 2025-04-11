@@ -17,92 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-public partial interface ISuggest
+internal sealed partial class SuggestDictionaryConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>>
 {
-}
-
-[GenericConverter(typeof(SuggestDictionaryConverter<>), unwrap: true)]
-public partial class SuggestDictionary<TDocument> : IsAReadOnlyDictionary<string, IReadOnlyCollection<ISuggest>>
-{
-	public SuggestDictionary(IReadOnlyDictionary<string, IReadOnlyCollection<ISuggest>> backingDictionary) : base(backingDictionary)
+	public override Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>? GetCompletion(string key) => TryGet<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>(key);
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>? GetPhrase(string key) => TryGet<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>(key);
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>? GetTerm(string key) => TryGet<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>(key);
-	private IReadOnlyCollection<T>? TryGet<T>(string key) where T : class, ISuggest => BackingDictionary.TryGetValue(key, out var value) ? value.Cast<T>().ToArray() : null;
-}
-
-internal sealed partial class SuggestDictionaryConverter<TDocument> : JsonConverter<SuggestDictionary<TDocument>>
-{
-	public override SuggestDictionary<TDocument> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var dictionary = new Dictionary<string, IReadOnlyCollection<ISuggest>>();
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var dictionary = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>>();
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();
-			reader.Read();
-			ReadItem(ref reader, options, dictionary, name);
+			ReadItem(ref reader, options, out string name, out System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest> value);
+			dictionary[name] = value;
 		}
 
-		return new SuggestDictionary<TDocument>(dictionary);
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>(dictionary);
 	}
 
-	public override void Write(Utf8JsonWriter writer, SuggestDictionary<TDocument> value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
-		throw new NotImplementedException("'SuggestDictionary' is a readonly type, used only on responses and does not support being written to JSON.");
-	}
-
-	public static void ReadItem(ref Utf8JsonReader reader, JsonSerializerOptions options, Dictionary<string, IReadOnlyCollection<ISuggest>> dictionary, string name)
-	{
-		var nameParts = name.Split('#');
-		if (nameParts.Length != 2)
-			throw new JsonException($"Unable to parse typed-key '{name}'.");
-		var type = nameParts[0];
-		switch (type)
+		writer.WriteStartObject();
+		foreach (var pair in value)
 		{
-			case "completion":
-				{
-					var item = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
+			WriteItem(writer, options, pair.Key, pair.Value);
+		}
 
-			case "phrase":
-				{
-					var item = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
+		writer.WriteEndObject();
+	}
 
-			case "term":
-				{
-					var item = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>>(ref reader, options);
-					dictionary.Add(nameParts[1], item);
-					break;
-				}
+	internal static void ReadItem(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, out string name, out System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest> value)
+	{
+		var key = reader.ReadPropertyName<string>(options, null);
+		reader.Read();
+		var parts = key.Split('#');
+		if (parts.Length != 2)
+		{
+			throw new System.Text.Json.JsonException($"Unable to parse typed-key '{key}' for variant '{nameof(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>)}'.");
+		}
 
+		var discriminator = parts[0];
+		name = parts[1];
+		value = discriminator switch
+		{
+			"completion" => reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>(o, null)!),
+			"phrase" => reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>(o, null)!),
+			"term" => reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>(o, null)!),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>)}'.")
+		};
+	}
+
+	internal static void WriteItem(System.Text.Json.Utf8JsonWriter writer, System.Text.Json.JsonSerializerOptions options, string name, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest> value)
+	{
+		var key = System.Linq.Enumerable.First(value).Type + '#' + name;
+		switch (value)
+		{
+			case System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
+			case System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> v:
+				writer.WriteProperty(options, key, v, null, null);
+				break;
 			default:
-				throw new NotSupportedException($"The tagged variant '{type}' is currently not supported.");
+				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>)}'.");
 		}
 	}
+}
+
+internal sealed partial class SuggestDictionaryConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(SuggestDictionary<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(SuggestDictionaryConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionaryConverterFactory))]
+public sealed partial class SuggestDictionary<TDocument> : Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>>
+{
+	public SuggestDictionary(System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>> backingDictionary) : base(backingDictionary)
+	{
+	}
+
+	public bool TryGetSuggest(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest> value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
+
+	public bool TryGetSuggest<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, ISuggest
+	{
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
+		{
+			value = finalValue;
+			return true;
+		}
+
+		value = null;
+		return false;
+	}
+
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>? GetCompletion(string key) => TryGet<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>(key);
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>? GetPhrase(string key) => TryGet<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>(key);
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>? GetTerm(string key) => TryGet<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>(key);
+	private System.Collections.Generic.IReadOnlyCollection<T>? TryGet<T>(string key) where T : class, ISuggest => BackingDictionary.TryGetValue(Sanitize(key), out var value) ? System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Cast<T>(value)) : null;
 }

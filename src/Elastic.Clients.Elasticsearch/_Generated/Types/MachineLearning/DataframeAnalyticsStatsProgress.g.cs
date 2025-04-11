@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalyticsStatsProgressConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase");
+	private static readonly System.Text.Json.JsonEncodedText PropProgressPercent = System.Text.Json.JsonEncodedText.Encode("progress_percent");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propPhase = default;
+		LocalJsonValue<int> propProgressPercent = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPhase.TryReadProperty(ref reader, options, PropPhase, null))
+			{
+				continue;
+			}
+
+			if (propProgressPercent.TryReadProperty(ref reader, options, PropProgressPercent, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Phase = propPhase.Value,
+			ProgressPercent = propProgressPercent.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPhase, value.Phase, null, null);
+		writer.WriteProperty(options, PropProgressPercent, value.ProgressPercent, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgressConverter))]
 public sealed partial class DataframeAnalyticsStatsProgress
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsStatsProgress(string phase, int progressPercent)
+	{
+		Phase = phase;
+		ProgressPercent = progressPercent;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalyticsStatsProgress()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalyticsStatsProgress()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalyticsStatsProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Defines the phase of the data frame analytics job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("phase")]
-	public string Phase { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Phase { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The progress that the data frame analytics job has made expressed in percentage.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("progress_percent")]
-	public int ProgressPercent { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ProgressPercent { get; set; }
 }

@@ -17,18 +17,131 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class HasParentQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropParentType = System.Text.Json.JsonEncodedText.Encode("parent_type");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits?> propInnerHits = default;
+		LocalJsonValue<string> propParentType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<bool?> propScore = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propInnerHits.TryReadProperty(ref reader, options, PropInnerHits, null))
+			{
+				continue;
+			}
+
+			if (propParentType.TryReadProperty(ref reader, options, PropParentType, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			IgnoreUnmapped = propIgnoreUnmapped.Value,
+			InnerHits = propInnerHits.Value,
+			ParentType = propParentType.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value,
+			Score = propScore.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, null);
+		writer.WriteProperty(options, PropParentType, value.ParentType, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryConverter))]
 public sealed partial class HasParentQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasParentQuery(string parentType, Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	{
+		ParentType = parentType;
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public HasParentQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public HasParentQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +150,6 @@ public sealed partial class HasParentQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -46,7 +158,6 @@ public sealed partial class HasParentQuery
 	/// You can use this parameter to query multiple indices that may not contain the <c>parent_type</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
@@ -54,7 +165,6 @@ public sealed partial class HasParentQuery
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
@@ -62,8 +172,11 @@ public sealed partial class HasParentQuery
 	/// Name of the parent relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("parent_type")]
-	public string ParentType { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ParentType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,9 +184,11 @@ public sealed partial class HasParentQuery
 	/// If a parent document matches the search, the query returns its child documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -81,31 +196,27 @@ public sealed partial class HasParentQuery
 	/// Indicates whether the relevance score of a matching parent document is aggregated into its child documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("score")]
 	public bool? Score { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(HasParentQuery hasParentQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.HasParent(hasParentQuery);
 }
 
-public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDescriptor<HasParentQueryDescriptor<TDocument>>
+public readonly partial struct HasParentQueryDescriptor<TDocument>
 {
-	internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery Instance { get; init; }
 
-	public HasParentQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasParentQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-	private string ParentTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private bool? ScoreValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasParentQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -115,10 +226,10 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -127,10 +238,10 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	/// You can use this parameter to query multiple indices that may not contain the <c>parent_type</c>.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
 	/// <summary>
@@ -138,28 +249,32 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsValue = innerHits;
-		return Self;
+		Instance.InnerHits = value;
+		return this;
 	}
 
-	public HasParentQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> InnerHits()
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsDescriptor = descriptor;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public HasParentQueryDescriptor<TDocument> InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>? action)
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = configure;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -167,10 +282,10 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	/// Name of the parent relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor<TDocument> ParentType(string parentType)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> ParentType(string value)
 	{
-		ParentTypeValue = parentType;
-		return Self;
+		Instance.ParentType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -179,34 +294,28 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	/// If a parent document matches the search, the query returns its child documents.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public HasParentQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on parent documents of the <c>parent_type</c> field.
+	/// If a parent document matches the search, the query returns its child documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public HasParentQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	public HasParentQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -214,96 +323,39 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	/// Indicates whether the relevance score of a matching parent document is aggregated into its child documents.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor<TDocument> Score(bool? score = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument> Score(bool? value = true)
 	{
-		ScoreValue = score;
-		return Self;
+		Instance.Score = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (InnerHitsDescriptor is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-		}
-		else if (InnerHitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
-		}
-		else if (InnerHitsValue is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
-		}
-
-		writer.WritePropertyName("parent_type");
-		writer.WriteStringValue(ParentTypeValue);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ScoreValue.HasValue)
-		{
-			writer.WritePropertyName("score");
-			writer.WriteBooleanValue(ScoreValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<HasParentQueryDescriptor>
+public readonly partial struct HasParentQueryDescriptor
 {
-	internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery Instance { get; init; }
 
-	public HasParentQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasParentQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-	private string ParentTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private bool? ScoreValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasParentQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -313,10 +365,10 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -325,10 +377,10 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	/// You can use this parameter to query multiple indices that may not contain the <c>parent_type</c>.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
 	/// <summary>
@@ -336,28 +388,43 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsValue = innerHits;
-		return Self;
+		Instance.InnerHits = value;
+		return this;
 	}
 
-	public HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor InnerHits()
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsDescriptor = descriptor;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(null);
+		return this;
 	}
 
-	public HasParentQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>? action)
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = configure;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>? action)
+	{
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -365,10 +432,10 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	/// Name of the parent relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor ParentType(string parentType)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor ParentType(string value)
 	{
-		ParentTypeValue = parentType;
-		return Self;
+		Instance.ParentType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -377,34 +444,40 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	/// If a parent document matches the search, the query returns its child documents.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public HasParentQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on parent documents of the <c>parent_type</c> field.
+	/// If a parent document matches the search, the query returns its child documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public HasParentQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on parent documents of the <c>parent_type</c> field.
+	/// If a parent document matches the search, the query returns its child documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public HasParentQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -412,73 +485,17 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	/// Indicates whether the relevance score of a matching parent document is aggregated into its child documents.
 	/// </para>
 	/// </summary>
-	public HasParentQueryDescriptor Score(bool? score = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor Score(bool? value = true)
 	{
-		ScoreValue = score;
-		return Self;
+		Instance.Score = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (InnerHitsDescriptor is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-		}
-		else if (InnerHitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
-		}
-		else if (InnerHitsValue is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
-		}
-
-		writer.WritePropertyName("parent_type");
-		writer.WriteStringValue(ParentTypeValue);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ScoreValue.HasValue)
-		{
-			writer.WritePropertyName("score");
-			writer.WriteBooleanValue(ScoreValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

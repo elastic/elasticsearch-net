@@ -17,279 +17,248 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeAnalysisRegressionConverter : JsonConverter<DataframeAnalysisRegression>
+internal sealed partial class DataframeAnalysisRegressionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>
 {
-	public override DataframeAnalysisRegression Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha");
+	private static readonly System.Text.Json.JsonEncodedText PropDependentVariable = System.Text.Json.JsonEncodedText.Encode("dependent_variable");
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampleFactor = System.Text.Json.JsonEncodedText.Encode("downsample_factor");
+	private static readonly System.Text.Json.JsonEncodedText PropEarlyStoppingEnabled = System.Text.Json.JsonEncodedText.Encode("early_stopping_enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropEta = System.Text.Json.JsonEncodedText.Encode("eta");
+	private static readonly System.Text.Json.JsonEncodedText PropEtaGrowthRatePerTree = System.Text.Json.JsonEncodedText.Encode("eta_growth_rate_per_tree");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureBagFraction = System.Text.Json.JsonEncodedText.Encode("feature_bag_fraction");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureProcessors = System.Text.Json.JsonEncodedText.Encode("feature_processors");
+	private static readonly System.Text.Json.JsonEncodedText PropGamma = System.Text.Json.JsonEncodedText.Encode("gamma");
+	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda");
+	private static readonly System.Text.Json.JsonEncodedText PropLossFunction = System.Text.Json.JsonEncodedText.Encode("loss_function");
+	private static readonly System.Text.Json.JsonEncodedText PropLossFunctionParameter = System.Text.Json.JsonEncodedText.Encode("loss_function_parameter");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOptimizationRoundsPerHyperparameter = System.Text.Json.JsonEncodedText.Encode("max_optimization_rounds_per_hyperparameter");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees = System.Text.Json.JsonEncodedText.Encode("max_trees");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees1 = System.Text.Json.JsonEncodedText.Encode("maximum_number_trees");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldName = System.Text.Json.JsonEncodedText.Encode("prediction_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRandomizeSeed = System.Text.Json.JsonEncodedText.Encode("randomize_seed");
+	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthLimit = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthTolerance = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_tolerance");
+	private static readonly System.Text.Json.JsonEncodedText PropTrainingPercent = System.Text.Json.JsonEncodedText.Encode("training_percent");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new DataframeAnalysisRegression();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propAlpha = default;
+		LocalJsonValue<string> propDependentVariable = default;
+		LocalJsonValue<double?> propDownsampleFactor = default;
+		LocalJsonValue<bool?> propEarlyStoppingEnabled = default;
+		LocalJsonValue<double?> propEta = default;
+		LocalJsonValue<double?> propEtaGrowthRatePerTree = default;
+		LocalJsonValue<double?> propFeatureBagFraction = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>?> propFeatureProcessors = default;
+		LocalJsonValue<double?> propGamma = default;
+		LocalJsonValue<double?> propLambda = default;
+		LocalJsonValue<string?> propLossFunction = default;
+		LocalJsonValue<double?> propLossFunctionParameter = default;
+		LocalJsonValue<int?> propMaxOptimizationRoundsPerHyperparameter = default;
+		LocalJsonValue<int?> propMaxTrees = default;
+		LocalJsonValue<int?> propNumTopFeatureImportanceValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPredictionFieldName = default;
+		LocalJsonValue<double?> propRandomizeSeed = default;
+		LocalJsonValue<int?> propSoftTreeDepthLimit = default;
+		LocalJsonValue<double?> propSoftTreeDepthTolerance = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Percentage?> propTrainingPercent = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAlpha.TryReadProperty(ref reader, options, PropAlpha, null))
 			{
-				var property = reader.GetString();
-				if (property == "alpha")
-				{
-					variant.Alpha = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "dependent_variable")
-				{
-					variant.DependentVariable = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "downsample_factor")
-				{
-					variant.DownsampleFactor = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "early_stopping_enabled")
-				{
-					variant.EarlyStoppingEnabled = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "eta")
-				{
-					variant.Eta = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "eta_growth_rate_per_tree")
-				{
-					variant.EtaGrowthRatePerTree = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "feature_bag_fraction")
-				{
-					variant.FeatureBagFraction = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "feature_processors")
-				{
-					variant.FeatureProcessors = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gamma")
-				{
-					variant.Gamma = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lambda")
-				{
-					variant.Lambda = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "loss_function")
-				{
-					variant.LossFunction = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "loss_function_parameter")
-				{
-					variant.LossFunctionParameter = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_optimization_rounds_per_hyperparameter")
-				{
-					variant.MaxOptimizationRoundsPerHyperparameter = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_trees" || property == "maximum_number_trees")
-				{
-					variant.MaxTrees = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "num_top_feature_importance_values")
-				{
-					variant.NumTopFeatureImportanceValues = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "prediction_field_name")
-				{
-					variant.PredictionFieldName = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "randomize_seed")
-				{
-					variant.RandomizeSeed = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "soft_tree_depth_limit")
-				{
-					variant.SoftTreeDepthLimit = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "soft_tree_depth_tolerance")
-				{
-					variant.SoftTreeDepthTolerance = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "training_percent")
-				{
-					variant.TrainingPercent = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propDependentVariable.TryReadProperty(ref reader, options, PropDependentVariable, null))
+			{
+				continue;
+			}
+
+			if (propDownsampleFactor.TryReadProperty(ref reader, options, PropDownsampleFactor, null))
+			{
+				continue;
+			}
+
+			if (propEarlyStoppingEnabled.TryReadProperty(ref reader, options, PropEarlyStoppingEnabled, null))
+			{
+				continue;
+			}
+
+			if (propEta.TryReadProperty(ref reader, options, PropEta, null))
+			{
+				continue;
+			}
+
+			if (propEtaGrowthRatePerTree.TryReadProperty(ref reader, options, PropEtaGrowthRatePerTree, null))
+			{
+				continue;
+			}
+
+			if (propFeatureBagFraction.TryReadProperty(ref reader, options, PropFeatureBagFraction, null))
+			{
+				continue;
+			}
+
+			if (propFeatureProcessors.TryReadProperty(ref reader, options, PropFeatureProcessors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propGamma.TryReadProperty(ref reader, options, PropGamma, null))
+			{
+				continue;
+			}
+
+			if (propLambda.TryReadProperty(ref reader, options, PropLambda, null))
+			{
+				continue;
+			}
+
+			if (propLossFunction.TryReadProperty(ref reader, options, PropLossFunction, null))
+			{
+				continue;
+			}
+
+			if (propLossFunctionParameter.TryReadProperty(ref reader, options, PropLossFunctionParameter, null))
+			{
+				continue;
+			}
+
+			if (propMaxOptimizationRoundsPerHyperparameter.TryReadProperty(ref reader, options, PropMaxOptimizationRoundsPerHyperparameter, null))
+			{
+				continue;
+			}
+
+			if (propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees, null) || propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees1, null))
+			{
+				continue;
+			}
+
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			{
+				continue;
+			}
+
+			if (propPredictionFieldName.TryReadProperty(ref reader, options, PropPredictionFieldName, null))
+			{
+				continue;
+			}
+
+			if (propRandomizeSeed.TryReadProperty(ref reader, options, PropRandomizeSeed, null))
+			{
+				continue;
+			}
+
+			if (propSoftTreeDepthLimit.TryReadProperty(ref reader, options, PropSoftTreeDepthLimit, null))
+			{
+				continue;
+			}
+
+			if (propSoftTreeDepthTolerance.TryReadProperty(ref reader, options, PropSoftTreeDepthTolerance, null))
+			{
+				continue;
+			}
+
+			if (propTrainingPercent.TryReadProperty(ref reader, options, PropTrainingPercent, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Alpha = propAlpha.Value,
+			DependentVariable = propDependentVariable.Value,
+			DownsampleFactor = propDownsampleFactor.Value,
+			EarlyStoppingEnabled = propEarlyStoppingEnabled.Value,
+			Eta = propEta.Value,
+			EtaGrowthRatePerTree = propEtaGrowthRatePerTree.Value,
+			FeatureBagFraction = propFeatureBagFraction.Value,
+			FeatureProcessors = propFeatureProcessors.Value,
+			Gamma = propGamma.Value,
+			Lambda = propLambda.Value,
+			LossFunction = propLossFunction.Value,
+			LossFunctionParameter = propLossFunctionParameter.Value,
+			MaxOptimizationRoundsPerHyperparameter = propMaxOptimizationRoundsPerHyperparameter.Value,
+			MaxTrees = propMaxTrees.Value,
+			NumTopFeatureImportanceValues = propNumTopFeatureImportanceValues.Value,
+			PredictionFieldName = propPredictionFieldName.Value,
+			RandomizeSeed = propRandomizeSeed.Value,
+			SoftTreeDepthLimit = propSoftTreeDepthLimit.Value,
+			SoftTreeDepthTolerance = propSoftTreeDepthTolerance.Value,
+			TrainingPercent = propTrainingPercent.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, DataframeAnalysisRegression value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Alpha.HasValue)
-		{
-			writer.WritePropertyName("alpha");
-			writer.WriteNumberValue(value.Alpha.Value);
-		}
-
-		writer.WritePropertyName("dependent_variable");
-		writer.WriteStringValue(value.DependentVariable);
-		if (value.DownsampleFactor.HasValue)
-		{
-			writer.WritePropertyName("downsample_factor");
-			writer.WriteNumberValue(value.DownsampleFactor.Value);
-		}
-
-		if (value.EarlyStoppingEnabled.HasValue)
-		{
-			writer.WritePropertyName("early_stopping_enabled");
-			writer.WriteBooleanValue(value.EarlyStoppingEnabled.Value);
-		}
-
-		if (value.Eta.HasValue)
-		{
-			writer.WritePropertyName("eta");
-			writer.WriteNumberValue(value.Eta.Value);
-		}
-
-		if (value.EtaGrowthRatePerTree.HasValue)
-		{
-			writer.WritePropertyName("eta_growth_rate_per_tree");
-			writer.WriteNumberValue(value.EtaGrowthRatePerTree.Value);
-		}
-
-		if (value.FeatureBagFraction.HasValue)
-		{
-			writer.WritePropertyName("feature_bag_fraction");
-			writer.WriteNumberValue(value.FeatureBagFraction.Value);
-		}
-
-		if (value.FeatureProcessors is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			JsonSerializer.Serialize(writer, value.FeatureProcessors, options);
-		}
-
-		if (value.Gamma.HasValue)
-		{
-			writer.WritePropertyName("gamma");
-			writer.WriteNumberValue(value.Gamma.Value);
-		}
-
-		if (value.Lambda.HasValue)
-		{
-			writer.WritePropertyName("lambda");
-			writer.WriteNumberValue(value.Lambda.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.LossFunction))
-		{
-			writer.WritePropertyName("loss_function");
-			writer.WriteStringValue(value.LossFunction);
-		}
-
-		if (value.LossFunctionParameter.HasValue)
-		{
-			writer.WritePropertyName("loss_function_parameter");
-			writer.WriteNumberValue(value.LossFunctionParameter.Value);
-		}
-
-		if (value.MaxOptimizationRoundsPerHyperparameter.HasValue)
-		{
-			writer.WritePropertyName("max_optimization_rounds_per_hyperparameter");
-			writer.WriteNumberValue(value.MaxOptimizationRoundsPerHyperparameter.Value);
-		}
-
-		if (value.MaxTrees.HasValue)
-		{
-			writer.WritePropertyName("max_trees");
-			writer.WriteNumberValue(value.MaxTrees.Value);
-		}
-
-		if (value.NumTopFeatureImportanceValues.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(value.NumTopFeatureImportanceValues.Value);
-		}
-
-		if (value.PredictionFieldName is not null)
-		{
-			writer.WritePropertyName("prediction_field_name");
-			JsonSerializer.Serialize(writer, value.PredictionFieldName, options);
-		}
-
-		if (value.RandomizeSeed.HasValue)
-		{
-			writer.WritePropertyName("randomize_seed");
-			writer.WriteNumberValue(value.RandomizeSeed.Value);
-		}
-
-		if (value.SoftTreeDepthLimit.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_limit");
-			writer.WriteNumberValue(value.SoftTreeDepthLimit.Value);
-		}
-
-		if (value.SoftTreeDepthTolerance.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_tolerance");
-			writer.WriteNumberValue(value.SoftTreeDepthTolerance.Value);
-		}
-
-		if (value.TrainingPercent.HasValue)
-		{
-			writer.WritePropertyName("training_percent");
-			writer.WriteNumberValue(value.TrainingPercent.Value);
-		}
-
+		writer.WriteProperty(options, PropAlpha, value.Alpha, null, null);
+		writer.WriteProperty(options, PropDependentVariable, value.DependentVariable, null, null);
+		writer.WriteProperty(options, PropDownsampleFactor, value.DownsampleFactor, null, null);
+		writer.WriteProperty(options, PropEarlyStoppingEnabled, value.EarlyStoppingEnabled, null, null);
+		writer.WriteProperty(options, PropEta, value.Eta, null, null);
+		writer.WriteProperty(options, PropEtaGrowthRatePerTree, value.EtaGrowthRatePerTree, null, null);
+		writer.WriteProperty(options, PropFeatureBagFraction, value.FeatureBagFraction, null, null);
+		writer.WriteProperty(options, PropFeatureProcessors, value.FeatureProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>(o, v, null));
+		writer.WriteProperty(options, PropGamma, value.Gamma, null, null);
+		writer.WriteProperty(options, PropLambda, value.Lambda, null, null);
+		writer.WriteProperty(options, PropLossFunction, value.LossFunction, null, null);
+		writer.WriteProperty(options, PropLossFunctionParameter, value.LossFunctionParameter, null, null);
+		writer.WriteProperty(options, PropMaxOptimizationRoundsPerHyperparameter, value.MaxOptimizationRoundsPerHyperparameter, null, null);
+		writer.WriteProperty(options, PropMaxTrees, value.MaxTrees, null, null);
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropPredictionFieldName, value.PredictionFieldName, null, null);
+		writer.WriteProperty(options, PropRandomizeSeed, value.RandomizeSeed, null, null);
+		writer.WriteProperty(options, PropSoftTreeDepthLimit, value.SoftTreeDepthLimit, null, null);
+		writer.WriteProperty(options, PropSoftTreeDepthTolerance, value.SoftTreeDepthTolerance, null, null);
+		writer.WriteProperty(options, PropTrainingPercent, value.TrainingPercent, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(DataframeAnalysisRegressionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionConverter))]
 public sealed partial class DataframeAnalysisRegression
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisRegression(string dependentVariable)
+	{
+		DependentVariable = dependentVariable;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalysisRegression()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalysisRegression()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
@@ -304,7 +273,11 @@ public sealed partial class DataframeAnalysisRegression
 	/// For regression analysis, the data type of the field must be numeric.
 	/// </para>
 	/// </summary>
-	public string DependentVariable { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string DependentVariable { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -346,7 +319,7 @@ public sealed partial class DataframeAnalysisRegression
 	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -430,52 +403,37 @@ public sealed partial class DataframeAnalysisRegression
 	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
 	/// </para>
 	/// </summary>
-	public double? TrainingPercent { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(DataframeAnalysisRegression dataframeAnalysisRegression) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis.Regression(dataframeAnalysisRegression);
+	public Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
 }
 
-public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : SerializableDescriptor<DataframeAnalysisRegressionDescriptor<TDocument>>
+public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 {
-	internal DataframeAnalysisRegressionDescriptor(Action<DataframeAnalysisRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Instance { get; init; }
 
-	public DataframeAnalysisRegressionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression instance)
 	{
+		Instance = instance;
 	}
 
-	private double? AlphaValue { get; set; }
-	private string DependentVariableValue { get; set; }
-	private double? DownsampleFactorValue { get; set; }
-	private bool? EarlyStoppingEnabledValue { get; set; }
-	private double? EtaValue { get; set; }
-	private double? EtaGrowthRatePerTreeValue { get; set; }
-	private double? FeatureBagFractionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? FeatureProcessorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> FeatureProcessorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>> FeatureProcessorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>>[] FeatureProcessorsDescriptorActions { get; set; }
-	private double? GammaValue { get; set; }
-	private double? LambdaValue { get; set; }
-	private string? LossFunctionValue { get; set; }
-	private double? LossFunctionParameterValue { get; set; }
-	private int? MaxOptimizationRoundsPerHyperparameterValue { get; set; }
-	private int? MaxTreesValue { get; set; }
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PredictionFieldNameValue { get; set; }
-	private double? RandomizeSeedValue { get; set; }
-	private int? SoftTreeDepthLimitValue { get; set; }
-	private double? SoftTreeDepthToleranceValue { get; set; }
-	private double? TrainingPercentValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisRegressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> Alpha(double? alpha)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Alpha(double? value)
 	{
-		AlphaValue = alpha;
-		return Self;
+		Instance.Alpha = value;
+		return this;
 	}
 
 	/// <summary>
@@ -485,10 +443,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// For regression analysis, the data type of the field must be numeric.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> DependentVariable(string dependentVariable)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> DependentVariable(string value)
 	{
-		DependentVariableValue = dependentVariable;
-		return Self;
+		Instance.DependentVariable = value;
+		return this;
 	}
 
 	/// <summary>
@@ -496,10 +454,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Controls the fraction of data that is used to compute the derivatives of the loss function for tree training. A small value results in the use of a small fraction of the data. If this value is set to be less than 1, accuracy typically improves. However, too small a value may result in poor convergence for the ensemble and so require more trees. By default, this value is calculated during hyperparameter optimization. It must be greater than zero and less than or equal to 1.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> DownsampleFactor(double? downsampleFactor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> DownsampleFactor(double? value)
 	{
-		DownsampleFactorValue = downsampleFactor;
-		return Self;
+		Instance.DownsampleFactor = value;
+		return this;
 	}
 
 	/// <summary>
@@ -507,10 +465,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Specifies whether the training process should finish if it is not finding any better performing models. If disabled, the training process can take significantly longer and the chance of finding a better performing model is unremarkable.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> EarlyStoppingEnabled(bool? earlyStoppingEnabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> EarlyStoppingEnabled(bool? value = true)
 	{
-		EarlyStoppingEnabledValue = earlyStoppingEnabled;
-		return Self;
+		Instance.EarlyStoppingEnabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -518,10 +476,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. The shrinkage applied to the weights. Smaller values result in larger forests which have a better generalization error. However, larger forests cause slower training. By default, this value is calculated during hyperparameter optimization. It must be a value between 0.001 and 1.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> Eta(double? eta)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Eta(double? value)
 	{
-		EtaValue = eta;
-		return Self;
+		Instance.Eta = value;
+		return this;
 	}
 
 	/// <summary>
@@ -529,10 +487,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Specifies the rate at which <c>eta</c> increases for each new tree that is added to the forest. For example, a rate of 1.05 increases <c>eta</c> by 5% for each extra tree. By default, this value is calculated during hyperparameter optimization. It must be between 0.5 and 2.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> EtaGrowthRatePerTree(double? etaGrowthRatePerTree)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> EtaGrowthRatePerTree(double? value)
 	{
-		EtaGrowthRatePerTreeValue = etaGrowthRatePerTree;
-		return Self;
+		Instance.EtaGrowthRatePerTree = value;
+		return this;
 	}
 
 	/// <summary>
@@ -540,10 +498,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Defines the fraction of features that will be used when selecting a random bag for each candidate split. By default, this value is calculated during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> FeatureBagFraction(double? featureBagFraction)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureBagFraction(double? value)
 	{
-		FeatureBagFractionValue = featureBagFraction;
-		return Self;
+		Instance.FeatureBagFraction = value;
+		return this;
 	}
 
 	/// <summary>
@@ -551,40 +509,38 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? featureProcessors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? value)
 	{
-		FeatureProcessorsDescriptor = null;
-		FeatureProcessorsDescriptorAction = null;
-		FeatureProcessorsDescriptorActions = null;
-		FeatureProcessorsValue = featureProcessors;
-		return Self;
+		Instance.FeatureProcessors = value;
+		return this;
 	}
 
-	public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor[] values)
 	{
-		FeatureProcessorsValue = null;
-		FeatureProcessorsDescriptorAction = null;
-		FeatureProcessorsDescriptorActions = null;
-		FeatureProcessorsDescriptor = descriptor;
-		return Self;
+		Instance.FeatureProcessors = [.. values];
+		return this;
 	}
 
-	public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>>[] actions)
 	{
-		FeatureProcessorsValue = null;
-		FeatureProcessorsDescriptor = null;
-		FeatureProcessorsDescriptorActions = null;
-		FeatureProcessorsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>.Build(action));
+		}
 
-	public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>>[] configure)
-	{
-		FeatureProcessorsValue = null;
-		FeatureProcessorsDescriptor = null;
-		FeatureProcessorsDescriptorAction = null;
-		FeatureProcessorsDescriptorActions = configure;
-		return Self;
+		Instance.FeatureProcessors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -592,10 +548,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies a linear penalty associated with the size of individual trees in the forest. A high gamma value causes training to prefer small trees. A small gamma value results in larger individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> Gamma(double? gamma)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Gamma(double? value)
 	{
-		GammaValue = gamma;
-		return Self;
+		Instance.Gamma = value;
+		return this;
 	}
 
 	/// <summary>
@@ -603,10 +559,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies an L2 regularization term which applies to leaf weights of the individual trees in the forest. A high lambda value causes training to favor small leaf weights. This behavior makes the prediction function smoother at the expense of potentially not being able to capture relevant relationships between the features and the dependent variable. A small lambda value results in large individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> Lambda(double? lambda)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Lambda(double? value)
 	{
-		LambdaValue = lambda;
-		return Self;
+		Instance.Lambda = value;
+		return this;
 	}
 
 	/// <summary>
@@ -614,10 +570,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// The loss function used during regression. Available options are <c>mse</c> (mean squared error), <c>msle</c> (mean squared logarithmic error), <c>huber</c> (Pseudo-Huber loss).
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> LossFunction(string? lossFunction)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> LossFunction(string? value)
 	{
-		LossFunctionValue = lossFunction;
-		return Self;
+		Instance.LossFunction = value;
+		return this;
 	}
 
 	/// <summary>
@@ -625,10 +581,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// A positive number that is used as a parameter to the <c>loss_function</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> LossFunctionParameter(double? lossFunctionParameter)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> LossFunctionParameter(double? value)
 	{
-		LossFunctionParameterValue = lossFunctionParameter;
-		return Self;
+		Instance.LossFunctionParameter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -636,10 +592,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. A multiplier responsible for determining the maximum number of hyperparameter optimization steps in the Bayesian optimization procedure. The maximum number of steps is determined based on the number of undefined hyperparameters times the maximum optimization rounds per hyperparameter. By default, this value is calculated during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> MaxOptimizationRoundsPerHyperparameter(int? maxOptimizationRoundsPerHyperparameter)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> MaxOptimizationRoundsPerHyperparameter(int? value)
 	{
-		MaxOptimizationRoundsPerHyperparameterValue = maxOptimizationRoundsPerHyperparameter;
-		return Self;
+		Instance.MaxOptimizationRoundsPerHyperparameter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -647,10 +603,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Defines the maximum number of decision trees in the forest. The maximum value is 2000. By default, this value is calculated during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> MaxTrees(int? maxTrees)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> MaxTrees(int? value)
 	{
-		MaxTreesValue = maxTrees;
-		return Self;
+		Instance.MaxTrees = value;
+		return this;
 	}
 
 	/// <summary>
@@ -658,10 +614,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Specifies the maximum number of feature importance values per document to return. By default, no feature importance calculation occurs.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -669,10 +625,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName(Elastic.Clients.Elasticsearch.Field? predictionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PredictionFieldNameValue = predictionFieldName;
-		return Self;
+		Instance.PredictionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -680,21 +636,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName<TValue>(Expression<Func<TDocument, TValue>> predictionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PredictionFieldNameValue = predictionFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName(Expression<Func<TDocument, object>> predictionFieldName)
-	{
-		PredictionFieldNameValue = predictionFieldName;
-		return Self;
+		Instance.PredictionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -702,10 +647,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Defines the seed for the random generator that is used to pick training data. By default, it is randomly generated. Set it to a specific value to use the same training data each time you start a job (assuming other related parameters such as <c>source</c> and <c>analyzed_fields</c> are the same).
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> RandomizeSeed(double? randomizeSeed)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> RandomizeSeed(double? value)
 	{
-		RandomizeSeedValue = randomizeSeed;
-		return Self;
+		Instance.RandomizeSeed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -713,10 +658,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This soft limit combines with the <c>soft_tree_depth_tolerance</c> to penalize trees that exceed the specified depth; the regularized loss increases quickly beyond this depth. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> SoftTreeDepthLimit(int? softTreeDepthLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> SoftTreeDepthLimit(int? value)
 	{
-		SoftTreeDepthLimitValue = softTreeDepthLimit;
-		return Self;
+		Instance.SoftTreeDepthLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -724,10 +669,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Advanced configuration option. This option controls how quickly the regularized loss increases when the tree depth exceeds <c>soft_tree_depth_limit</c>. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.01.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> SoftTreeDepthTolerance(double? softTreeDepthTolerance)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> SoftTreeDepthTolerance(double? value)
 	{
-		SoftTreeDepthToleranceValue = softTreeDepthTolerance;
-		return Self;
+		Instance.SoftTreeDepthTolerance = value;
+		return this;
 	}
 
 	/// <summary>
@@ -735,201 +680,60 @@ public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : S
 	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(double? trainingPercent)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(Elastic.Clients.Elasticsearch.Percentage? value)
 	{
-		TrainingPercentValue = trainingPercent;
-		return Self;
+		Instance.TrainingPercent = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
-		writer.WriteStartObject();
-		if (AlphaValue.HasValue)
-		{
-			writer.WritePropertyName("alpha");
-			writer.WriteNumberValue(AlphaValue.Value);
-		}
+		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageFactory.Build(action);
+		return this;
+	}
 
-		writer.WritePropertyName("dependent_variable");
-		writer.WriteStringValue(DependentVariableValue);
-		if (DownsampleFactorValue.HasValue)
-		{
-			writer.WritePropertyName("downsample_factor");
-			writer.WriteNumberValue(DownsampleFactorValue.Value);
-		}
-
-		if (EarlyStoppingEnabledValue.HasValue)
-		{
-			writer.WritePropertyName("early_stopping_enabled");
-			writer.WriteBooleanValue(EarlyStoppingEnabledValue.Value);
-		}
-
-		if (EtaValue.HasValue)
-		{
-			writer.WritePropertyName("eta");
-			writer.WriteNumberValue(EtaValue.Value);
-		}
-
-		if (EtaGrowthRatePerTreeValue.HasValue)
-		{
-			writer.WritePropertyName("eta_growth_rate_per_tree");
-			writer.WriteNumberValue(EtaGrowthRatePerTreeValue.Value);
-		}
-
-		if (FeatureBagFractionValue.HasValue)
-		{
-			writer.WritePropertyName("feature_bag_fraction");
-			writer.WriteNumberValue(FeatureBagFractionValue.Value);
-		}
-
-		if (FeatureProcessorsDescriptor is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FeatureProcessorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>(FeatureProcessorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FeatureProcessorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			writer.WriteStartArray();
-			foreach (var action in FeatureProcessorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (FeatureProcessorsValue is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			JsonSerializer.Serialize(writer, FeatureProcessorsValue, options);
-		}
-
-		if (GammaValue.HasValue)
-		{
-			writer.WritePropertyName("gamma");
-			writer.WriteNumberValue(GammaValue.Value);
-		}
-
-		if (LambdaValue.HasValue)
-		{
-			writer.WritePropertyName("lambda");
-			writer.WriteNumberValue(LambdaValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(LossFunctionValue))
-		{
-			writer.WritePropertyName("loss_function");
-			writer.WriteStringValue(LossFunctionValue);
-		}
-
-		if (LossFunctionParameterValue.HasValue)
-		{
-			writer.WritePropertyName("loss_function_parameter");
-			writer.WriteNumberValue(LossFunctionParameterValue.Value);
-		}
-
-		if (MaxOptimizationRoundsPerHyperparameterValue.HasValue)
-		{
-			writer.WritePropertyName("max_optimization_rounds_per_hyperparameter");
-			writer.WriteNumberValue(MaxOptimizationRoundsPerHyperparameterValue.Value);
-		}
-
-		if (MaxTreesValue.HasValue)
-		{
-			writer.WritePropertyName("max_trees");
-			writer.WriteNumberValue(MaxTreesValue.Value);
-		}
-
-		if (NumTopFeatureImportanceValuesValue.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
-		}
-
-		if (PredictionFieldNameValue is not null)
-		{
-			writer.WritePropertyName("prediction_field_name");
-			JsonSerializer.Serialize(writer, PredictionFieldNameValue, options);
-		}
-
-		if (RandomizeSeedValue.HasValue)
-		{
-			writer.WritePropertyName("randomize_seed");
-			writer.WriteNumberValue(RandomizeSeedValue.Value);
-		}
-
-		if (SoftTreeDepthLimitValue.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_limit");
-			writer.WriteNumberValue(SoftTreeDepthLimitValue.Value);
-		}
-
-		if (SoftTreeDepthToleranceValue.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_tolerance");
-			writer.WriteNumberValue(SoftTreeDepthToleranceValue.Value);
-		}
-
-		if (TrainingPercentValue.HasValue)
-		{
-			writer.WritePropertyName("training_percent");
-			writer.WriteNumberValue(TrainingPercentValue.Value);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframeAnalysisRegressionDescriptor : SerializableDescriptor<DataframeAnalysisRegressionDescriptor>
+public readonly partial struct DataframeAnalysisRegressionDescriptor
 {
-	internal DataframeAnalysisRegressionDescriptor(Action<DataframeAnalysisRegressionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Instance { get; init; }
 
-	public DataframeAnalysisRegressionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression instance)
 	{
+		Instance = instance;
 	}
 
-	private double? AlphaValue { get; set; }
-	private string DependentVariableValue { get; set; }
-	private double? DownsampleFactorValue { get; set; }
-	private bool? EarlyStoppingEnabledValue { get; set; }
-	private double? EtaValue { get; set; }
-	private double? EtaGrowthRatePerTreeValue { get; set; }
-	private double? FeatureBagFractionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? FeatureProcessorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor FeatureProcessorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor> FeatureProcessorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor>[] FeatureProcessorsDescriptorActions { get; set; }
-	private double? GammaValue { get; set; }
-	private double? LambdaValue { get; set; }
-	private string? LossFunctionValue { get; set; }
-	private double? LossFunctionParameterValue { get; set; }
-	private int? MaxOptimizationRoundsPerHyperparameterValue { get; set; }
-	private int? MaxTreesValue { get; set; }
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PredictionFieldNameValue { get; set; }
-	private double? RandomizeSeedValue { get; set; }
-	private int? SoftTreeDepthLimitValue { get; set; }
-	private double? SoftTreeDepthToleranceValue { get; set; }
-	private double? TrainingPercentValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisRegressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor Alpha(double? alpha)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Alpha(double? value)
 	{
-		AlphaValue = alpha;
-		return Self;
+		Instance.Alpha = value;
+		return this;
 	}
 
 	/// <summary>
@@ -939,10 +743,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// For regression analysis, the data type of the field must be numeric.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor DependentVariable(string dependentVariable)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor DependentVariable(string value)
 	{
-		DependentVariableValue = dependentVariable;
-		return Self;
+		Instance.DependentVariable = value;
+		return this;
 	}
 
 	/// <summary>
@@ -950,10 +754,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Controls the fraction of data that is used to compute the derivatives of the loss function for tree training. A small value results in the use of a small fraction of the data. If this value is set to be less than 1, accuracy typically improves. However, too small a value may result in poor convergence for the ensemble and so require more trees. By default, this value is calculated during hyperparameter optimization. It must be greater than zero and less than or equal to 1.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor DownsampleFactor(double? downsampleFactor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor DownsampleFactor(double? value)
 	{
-		DownsampleFactorValue = downsampleFactor;
-		return Self;
+		Instance.DownsampleFactor = value;
+		return this;
 	}
 
 	/// <summary>
@@ -961,10 +765,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Specifies whether the training process should finish if it is not finding any better performing models. If disabled, the training process can take significantly longer and the chance of finding a better performing model is unremarkable.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor EarlyStoppingEnabled(bool? earlyStoppingEnabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor EarlyStoppingEnabled(bool? value = true)
 	{
-		EarlyStoppingEnabledValue = earlyStoppingEnabled;
-		return Self;
+		Instance.EarlyStoppingEnabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -972,10 +776,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. The shrinkage applied to the weights. Smaller values result in larger forests which have a better generalization error. However, larger forests cause slower training. By default, this value is calculated during hyperparameter optimization. It must be a value between 0.001 and 1.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor Eta(double? eta)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Eta(double? value)
 	{
-		EtaValue = eta;
-		return Self;
+		Instance.Eta = value;
+		return this;
 	}
 
 	/// <summary>
@@ -983,10 +787,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Specifies the rate at which <c>eta</c> increases for each new tree that is added to the forest. For example, a rate of 1.05 increases <c>eta</c> by 5% for each extra tree. By default, this value is calculated during hyperparameter optimization. It must be between 0.5 and 2.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor EtaGrowthRatePerTree(double? etaGrowthRatePerTree)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor EtaGrowthRatePerTree(double? value)
 	{
-		EtaGrowthRatePerTreeValue = etaGrowthRatePerTree;
-		return Self;
+		Instance.EtaGrowthRatePerTree = value;
+		return this;
 	}
 
 	/// <summary>
@@ -994,10 +798,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Defines the fraction of features that will be used when selecting a random bag for each candidate split. By default, this value is calculated during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor FeatureBagFraction(double? featureBagFraction)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureBagFraction(double? value)
 	{
-		FeatureBagFractionValue = featureBagFraction;
-		return Self;
+		Instance.FeatureBagFraction = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1005,40 +809,55 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor FeatureProcessors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? featureProcessors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? value)
 	{
-		FeatureProcessorsDescriptor = null;
-		FeatureProcessorsDescriptorAction = null;
-		FeatureProcessorsDescriptorActions = null;
-		FeatureProcessorsValue = featureProcessors;
-		return Self;
+		Instance.FeatureProcessors = value;
+		return this;
 	}
 
-	public DataframeAnalysisRegressionDescriptor FeatureProcessors(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(params Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor[] values)
 	{
-		FeatureProcessorsValue = null;
-		FeatureProcessorsDescriptorAction = null;
-		FeatureProcessorsDescriptorActions = null;
-		FeatureProcessorsDescriptor = descriptor;
-		return Self;
+		Instance.FeatureProcessors = [.. values];
+		return this;
 	}
 
-	public DataframeAnalysisRegressionDescriptor FeatureProcessors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor>[] actions)
 	{
-		FeatureProcessorsValue = null;
-		FeatureProcessorsDescriptor = null;
-		FeatureProcessorsDescriptorActions = null;
-		FeatureProcessorsDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor.Build(action));
+		}
+
+		Instance.FeatureProcessors = items;
+		return this;
 	}
 
-	public DataframeAnalysisRegressionDescriptor FeatureProcessors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<T>>[] actions)
 	{
-		FeatureProcessorsValue = null;
-		FeatureProcessorsDescriptor = null;
-		FeatureProcessorsDescriptorAction = null;
-		FeatureProcessorsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.FeatureProcessors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1046,10 +865,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies a linear penalty associated with the size of individual trees in the forest. A high gamma value causes training to prefer small trees. A small gamma value results in larger individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor Gamma(double? gamma)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Gamma(double? value)
 	{
-		GammaValue = gamma;
-		return Self;
+		Instance.Gamma = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1057,10 +876,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies an L2 regularization term which applies to leaf weights of the individual trees in the forest. A high lambda value causes training to favor small leaf weights. This behavior makes the prediction function smoother at the expense of potentially not being able to capture relevant relationships between the features and the dependent variable. A small lambda value results in large individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor Lambda(double? lambda)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Lambda(double? value)
 	{
-		LambdaValue = lambda;
-		return Self;
+		Instance.Lambda = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1068,10 +887,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// The loss function used during regression. Available options are <c>mse</c> (mean squared error), <c>msle</c> (mean squared logarithmic error), <c>huber</c> (Pseudo-Huber loss).
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor LossFunction(string? lossFunction)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor LossFunction(string? value)
 	{
-		LossFunctionValue = lossFunction;
-		return Self;
+		Instance.LossFunction = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1079,10 +898,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// A positive number that is used as a parameter to the <c>loss_function</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor LossFunctionParameter(double? lossFunctionParameter)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor LossFunctionParameter(double? value)
 	{
-		LossFunctionParameterValue = lossFunctionParameter;
-		return Self;
+		Instance.LossFunctionParameter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1090,10 +909,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. A multiplier responsible for determining the maximum number of hyperparameter optimization steps in the Bayesian optimization procedure. The maximum number of steps is determined based on the number of undefined hyperparameters times the maximum optimization rounds per hyperparameter. By default, this value is calculated during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor MaxOptimizationRoundsPerHyperparameter(int? maxOptimizationRoundsPerHyperparameter)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor MaxOptimizationRoundsPerHyperparameter(int? value)
 	{
-		MaxOptimizationRoundsPerHyperparameterValue = maxOptimizationRoundsPerHyperparameter;
-		return Self;
+		Instance.MaxOptimizationRoundsPerHyperparameter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1101,10 +920,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Defines the maximum number of decision trees in the forest. The maximum value is 2000. By default, this value is calculated during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor MaxTrees(int? maxTrees)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor MaxTrees(int? value)
 	{
-		MaxTreesValue = maxTrees;
-		return Self;
+		Instance.MaxTrees = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1112,10 +931,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Specifies the maximum number of feature importance values per document to return. By default, no feature importance calculation occurs.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1123,10 +942,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor PredictionFieldName(Elastic.Clients.Elasticsearch.Field? predictionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor PredictionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PredictionFieldNameValue = predictionFieldName;
-		return Self;
+		Instance.PredictionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1134,21 +953,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor PredictionFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor PredictionFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PredictionFieldNameValue = predictionFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
-	public DataframeAnalysisRegressionDescriptor PredictionFieldName<TDocument>(Expression<Func<TDocument, object>> predictionFieldName)
-	{
-		PredictionFieldNameValue = predictionFieldName;
-		return Self;
+		Instance.PredictionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1156,10 +964,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Defines the seed for the random generator that is used to pick training data. By default, it is randomly generated. Set it to a specific value to use the same training data each time you start a job (assuming other related parameters such as <c>source</c> and <c>analyzed_fields</c> are the same).
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor RandomizeSeed(double? randomizeSeed)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor RandomizeSeed(double? value)
 	{
-		RandomizeSeedValue = randomizeSeed;
-		return Self;
+		Instance.RandomizeSeed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1167,10 +975,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This soft limit combines with the <c>soft_tree_depth_tolerance</c> to penalize trees that exceed the specified depth; the regularized loss increases quickly beyond this depth. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor SoftTreeDepthLimit(int? softTreeDepthLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor SoftTreeDepthLimit(int? value)
 	{
-		SoftTreeDepthLimitValue = softTreeDepthLimit;
-		return Self;
+		Instance.SoftTreeDepthLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1178,10 +986,10 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Advanced configuration option. This option controls how quickly the regularized loss increases when the tree depth exceeds <c>soft_tree_depth_limit</c>. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.01.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor SoftTreeDepthTolerance(double? softTreeDepthTolerance)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor SoftTreeDepthTolerance(double? value)
 	{
-		SoftTreeDepthToleranceValue = softTreeDepthTolerance;
-		return Self;
+		Instance.SoftTreeDepthTolerance = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1189,156 +997,28 @@ public sealed partial class DataframeAnalysisRegressionDescriptor : Serializable
 	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisRegressionDescriptor TrainingPercent(double? trainingPercent)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor TrainingPercent(Elastic.Clients.Elasticsearch.Percentage? value)
 	{
-		TrainingPercentValue = trainingPercent;
-		return Self;
+		Instance.TrainingPercent = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
-		writer.WriteStartObject();
-		if (AlphaValue.HasValue)
-		{
-			writer.WritePropertyName("alpha");
-			writer.WriteNumberValue(AlphaValue.Value);
-		}
+		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageFactory.Build(action);
+		return this;
+	}
 
-		writer.WritePropertyName("dependent_variable");
-		writer.WriteStringValue(DependentVariableValue);
-		if (DownsampleFactorValue.HasValue)
-		{
-			writer.WritePropertyName("downsample_factor");
-			writer.WriteNumberValue(DownsampleFactorValue.Value);
-		}
-
-		if (EarlyStoppingEnabledValue.HasValue)
-		{
-			writer.WritePropertyName("early_stopping_enabled");
-			writer.WriteBooleanValue(EarlyStoppingEnabledValue.Value);
-		}
-
-		if (EtaValue.HasValue)
-		{
-			writer.WritePropertyName("eta");
-			writer.WriteNumberValue(EtaValue.Value);
-		}
-
-		if (EtaGrowthRatePerTreeValue.HasValue)
-		{
-			writer.WritePropertyName("eta_growth_rate_per_tree");
-			writer.WriteNumberValue(EtaGrowthRatePerTreeValue.Value);
-		}
-
-		if (FeatureBagFractionValue.HasValue)
-		{
-			writer.WritePropertyName("feature_bag_fraction");
-			writer.WriteNumberValue(FeatureBagFractionValue.Value);
-		}
-
-		if (FeatureProcessorsDescriptor is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FeatureProcessorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor(FeatureProcessorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FeatureProcessorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			writer.WriteStartArray();
-			foreach (var action in FeatureProcessorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (FeatureProcessorsValue is not null)
-		{
-			writer.WritePropertyName("feature_processors");
-			JsonSerializer.Serialize(writer, FeatureProcessorsValue, options);
-		}
-
-		if (GammaValue.HasValue)
-		{
-			writer.WritePropertyName("gamma");
-			writer.WriteNumberValue(GammaValue.Value);
-		}
-
-		if (LambdaValue.HasValue)
-		{
-			writer.WritePropertyName("lambda");
-			writer.WriteNumberValue(LambdaValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(LossFunctionValue))
-		{
-			writer.WritePropertyName("loss_function");
-			writer.WriteStringValue(LossFunctionValue);
-		}
-
-		if (LossFunctionParameterValue.HasValue)
-		{
-			writer.WritePropertyName("loss_function_parameter");
-			writer.WriteNumberValue(LossFunctionParameterValue.Value);
-		}
-
-		if (MaxOptimizationRoundsPerHyperparameterValue.HasValue)
-		{
-			writer.WritePropertyName("max_optimization_rounds_per_hyperparameter");
-			writer.WriteNumberValue(MaxOptimizationRoundsPerHyperparameterValue.Value);
-		}
-
-		if (MaxTreesValue.HasValue)
-		{
-			writer.WritePropertyName("max_trees");
-			writer.WriteNumberValue(MaxTreesValue.Value);
-		}
-
-		if (NumTopFeatureImportanceValuesValue.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
-		}
-
-		if (PredictionFieldNameValue is not null)
-		{
-			writer.WritePropertyName("prediction_field_name");
-			JsonSerializer.Serialize(writer, PredictionFieldNameValue, options);
-		}
-
-		if (RandomizeSeedValue.HasValue)
-		{
-			writer.WritePropertyName("randomize_seed");
-			writer.WriteNumberValue(RandomizeSeedValue.Value);
-		}
-
-		if (SoftTreeDepthLimitValue.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_limit");
-			writer.WriteNumberValue(SoftTreeDepthLimitValue.Value);
-		}
-
-		if (SoftTreeDepthToleranceValue.HasValue)
-		{
-			writer.WritePropertyName("soft_tree_depth_tolerance");
-			writer.WriteNumberValue(SoftTreeDepthToleranceValue.Value);
-		}
-
-		if (TrainingPercentValue.HasValue)
-		{
-			writer.WritePropertyName("training_percent");
-			writer.WriteNumberValue(TrainingPercentValue.Value);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

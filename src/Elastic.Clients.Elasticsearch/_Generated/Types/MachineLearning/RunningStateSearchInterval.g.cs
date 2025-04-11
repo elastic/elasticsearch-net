@@ -17,47 +17,137 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class RunningStateSearchIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
+	private static readonly System.Text.Json.JsonEncodedText PropEndMs = System.Text.Json.JsonEncodedText.Encode("end_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+	private static readonly System.Text.Json.JsonEncodedText PropStartMs = System.Text.Json.JsonEncodedText.Encode("start_ms");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propEnd = default;
+		LocalJsonValue<System.TimeSpan> propEndMs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propStart = default;
+		LocalJsonValue<System.TimeSpan> propStartMs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, null))
+			{
+				continue;
+			}
+
+			if (propEndMs.TryReadProperty(ref reader, options, PropEndMs, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propStart.TryReadProperty(ref reader, options, PropStart, null))
+			{
+				continue;
+			}
+
+			if (propStartMs.TryReadProperty(ref reader, options, PropStartMs, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			End = propEnd.Value,
+			EndMs = propEndMs.Value,
+			Start = propStart.Value,
+			StartMs = propStartMs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnd, value.End, null, null);
+		writer.WriteProperty(options, PropEndMs, value.EndMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropStart, value.Start, null, null);
+		writer.WriteProperty(options, PropStartMs, value.StartMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchIntervalConverter))]
 public sealed partial class RunningStateSearchInterval
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RunningStateSearchInterval(System.TimeSpan endMs, System.TimeSpan startMs)
+	{
+		EndMs = endMs;
+		StartMs = startMs;
+	}
+#if NET7_0_OR_GREATER
+	public RunningStateSearchInterval()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RunningStateSearchInterval()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RunningStateSearchInterval(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The end time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end")]
-	public Elastic.Clients.Elasticsearch.Duration? End { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? End { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The end time as an epoch in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end_ms")]
-	public long EndMs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan EndMs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The start time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start")]
-	public Elastic.Clients.Elasticsearch.Duration? Start { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? Start { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The start time as an epoch in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start_ms")]
-	public long StartMs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan StartMs { get; set; }
 }

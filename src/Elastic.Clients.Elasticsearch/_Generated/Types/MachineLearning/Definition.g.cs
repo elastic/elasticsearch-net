@@ -17,171 +17,200 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class Definition
+internal sealed partial class DefinitionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Definition>
 {
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("preprocessors")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? Preprocessors { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropPreprocessors = System.Text.Json.JsonEncodedText.Encode("preprocessors");
+	private static readonly System.Text.Json.JsonEncodedText PropTrainedModel = System.Text.Json.JsonEncodedText.Encode("trained_model");
 
-	/// <summary>
-	/// <para>
-	/// The definition of the trained model.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("trained_model")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModel { get; set; }
-}
-
-public sealed partial class DefinitionDescriptor : SerializableDescriptor<DefinitionDescriptor>
-{
-	internal DefinitionDescriptor(Action<DefinitionDescriptor> configure) => configure.Invoke(this);
-
-	public DefinitionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Definition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? PreprocessorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor PreprocessorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor> PreprocessorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor>[] PreprocessorsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModelValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor TrainedModelDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor> TrainedModelDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
-	public DefinitionDescriptor Preprocessors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? preprocessors)
-	{
-		PreprocessorsDescriptor = null;
-		PreprocessorsDescriptorAction = null;
-		PreprocessorsDescriptorActions = null;
-		PreprocessorsValue = preprocessors;
-		return Self;
-	}
-
-	public DefinitionDescriptor Preprocessors(Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor descriptor)
-	{
-		PreprocessorsValue = null;
-		PreprocessorsDescriptorAction = null;
-		PreprocessorsDescriptorActions = null;
-		PreprocessorsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DefinitionDescriptor Preprocessors(Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor> configure)
-	{
-		PreprocessorsValue = null;
-		PreprocessorsDescriptor = null;
-		PreprocessorsDescriptorActions = null;
-		PreprocessorsDescriptorAction = configure;
-		return Self;
-	}
-
-	public DefinitionDescriptor Preprocessors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor>[] configure)
-	{
-		PreprocessorsValue = null;
-		PreprocessorsDescriptor = null;
-		PreprocessorsDescriptorAction = null;
-		PreprocessorsDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The definition of the trained model.
-	/// </para>
-	/// </summary>
-	public DefinitionDescriptor TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel trainedModel)
-	{
-		TrainedModelDescriptor = null;
-		TrainedModelDescriptorAction = null;
-		TrainedModelValue = trainedModel;
-		return Self;
-	}
-
-	public DefinitionDescriptor TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor descriptor)
-	{
-		TrainedModelValue = null;
-		TrainedModelDescriptorAction = null;
-		TrainedModelDescriptor = descriptor;
-		return Self;
-	}
-
-	public DefinitionDescriptor TrainedModel(Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor> configure)
-	{
-		TrainedModelValue = null;
-		TrainedModelDescriptor = null;
-		TrainedModelDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (PreprocessorsDescriptor is not null)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>?> propPreprocessors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel> propTrainedModel = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("preprocessors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, PreprocessorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (PreprocessorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("preprocessors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor(PreprocessorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (PreprocessorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("preprocessors");
-			writer.WriteStartArray();
-			foreach (var action in PreprocessorsDescriptorActions)
+			if (propPreprocessors.TryReadProperty(ref reader, options, PropPreprocessors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>(o, null)))
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor(action), options);
+				continue;
 			}
 
-			writer.WriteEndArray();
-		}
-		else if (PreprocessorsValue is not null)
-		{
-			writer.WritePropertyName("preprocessors");
-			JsonSerializer.Serialize(writer, PreprocessorsValue, options);
+			if (propTrainedModel.TryReadProperty(ref reader, options, PropTrainedModel, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		if (TrainedModelDescriptor is not null)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Definition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			writer.WritePropertyName("trained_model");
-			JsonSerializer.Serialize(writer, TrainedModelDescriptor, options);
-		}
-		else if (TrainedModelDescriptorAction is not null)
-		{
-			writer.WritePropertyName("trained_model");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor(TrainedModelDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("trained_model");
-			JsonSerializer.Serialize(writer, TrainedModelValue, options);
-		}
+			Preprocessors = propPreprocessors.Value,
+			TrainedModel = propTrainedModel.Value
+		};
+	}
 
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Definition value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPreprocessors, value.Preprocessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>(o, v, null));
+		writer.WriteProperty(options, PropTrainedModel, value.TrainedModel, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DefinitionConverter))]
+public sealed partial class Definition
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Definition(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel trainedModel)
+	{
+		TrainedModel = trainedModel;
+	}
+#if NET7_0_OR_GREATER
+	public Definition()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Definition()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Definition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of preprocessors
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? Preprocessors { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The definition of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModel { get; set; }
+}
+
+public readonly partial struct DefinitionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Definition Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DefinitionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Definition instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DefinitionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Definition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Definition instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Definition(Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Collection of preprocessors
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? value)
+	{
+		Instance.Preprocessors = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of preprocessors
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(params Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor[] values)
+	{
+		Instance.Preprocessors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of preprocessors
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor.Build(action));
+		}
+
+		Instance.Preprocessors = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The definition of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel value)
+	{
+		Instance.TrainedModel = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The definition of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor TrainedModel()
+	{
+		Instance.TrainedModel = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The definition of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor TrainedModel(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor>? action)
+	{
+		Instance.TrainedModel = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Definition Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Definition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

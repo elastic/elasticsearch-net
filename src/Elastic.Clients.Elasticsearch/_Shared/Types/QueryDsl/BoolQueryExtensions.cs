@@ -8,21 +8,21 @@ internal static class BoolQueryExtensions
 {
 	internal static Query Self(this Query q) => q;
 
-	internal static bool HasOnlyShouldClauses(this BoolQuery boolQuery) =>
+	internal static bool HasOnlyShouldClauses(this BoolQuery? boolQuery) =>
 		boolQuery != null &&
 		boolQuery.Should.HasAny() &&
 		!boolQuery.Must.HasAny() &&
 		!boolQuery.MustNot.HasAny() &&
 		!boolQuery.Filter.HasAny();
 
-	internal static bool HasOnlyFilterClauses(this BoolQuery boolQuery) =>
+	internal static bool HasOnlyFilterClauses(this BoolQuery? boolQuery) =>
 		boolQuery != null &&
 		!boolQuery.Should.HasAny() &&
 		!boolQuery.Must.HasAny() &&
 		!boolQuery.MustNot.HasAny() &&
 		boolQuery.Filter.HasAny();
 
-	internal static bool HasOnlyMustNotClauses(this BoolQuery boolQuery) =>
+	internal static bool HasOnlyMustNotClauses(this BoolQuery? boolQuery) =>
 		boolQuery != null &&
 		!boolQuery.Should.HasAny() &&
 		!boolQuery.Must.HasAny() &&

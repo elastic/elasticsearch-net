@@ -17,296 +17,261 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class NestedSortValueConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.NestedSortValue>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChildren = System.Text.Json.JsonEncodedText.Encode("max_children");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+
+	public override Elastic.Clients.Elasticsearch.NestedSortValue Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<int?> propMaxChildren = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPath = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, null))
+			{
+				continue;
+			}
+
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filter = propFilter.Value,
+			MaxChildren = propMaxChildren.Value,
+			Nested = propNested.Value,
+			Path = propPath.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.NestedSortValue value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.NestedSortValueConverter))]
 public sealed partial class NestedSortValue
 {
-	[JsonInclude, JsonPropertyName("filter")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedSortValue(Elastic.Clients.Elasticsearch.Field path)
+	{
+		Path = path;
+	}
+#if NET7_0_OR_GREATER
+	public NestedSortValue()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NestedSortValue()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
-	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-	[JsonInclude, JsonPropertyName("path")]
-	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Path { get; set; }
 }
 
-public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableDescriptor<NestedSortValueDescriptor<TDocument>>
+public readonly partial struct NestedSortValueDescriptor<TDocument>
 {
-	internal NestedSortValueDescriptor(Action<NestedSortValueDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.NestedSortValue Instance { get; init; }
 
-	public NestedSortValueDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedSortValueDescriptor(Elastic.Clients.Elasticsearch.NestedSortValue instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private int? MaxChildrenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-
-	public NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedSortValueDescriptor()
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(Elastic.Clients.Elasticsearch.NestedSortValue instance) => new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> MaxChildren(int? maxChildren)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> MaxChildren(int? value)
 	{
-		MaxChildrenValue = maxChildren;
-		return Self;
+		Instance.MaxChildren = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
 	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
+		Instance.Nested = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> action)
 	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field value)
 	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field path)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.NestedSortValue Build(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> action)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	public NestedSortValueDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
-	{
-		PathValue = path;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
-		}
-
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		writer.WritePropertyName("path");
-		JsonSerializer.Serialize(writer, PathValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<NestedSortValueDescriptor>
+public readonly partial struct NestedSortValueDescriptor
 {
-	internal NestedSortValueDescriptor(Action<NestedSortValueDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.NestedSortValue Instance { get; init; }
 
-	public NestedSortValueDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedSortValueDescriptor(Elastic.Clients.Elasticsearch.NestedSortValue instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private int? MaxChildrenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-
-	public NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedSortValueDescriptor()
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(Elastic.Clients.Elasticsearch.NestedSortValue instance) => new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public NestedSortValueDescriptor MaxChildren(int? maxChildren)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		MaxChildrenValue = maxChildren;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public NestedSortValueDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor MaxChildren(int? value)
 	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
+		Instance.MaxChildren = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
 	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
+		Instance.Nested = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> action)
 	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor.Build(action);
+		return this;
 	}
 
-	public NestedSortValueDescriptor Path(Elastic.Clients.Elasticsearch.Field path)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Nested<T>(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>> action)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public NestedSortValueDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Path(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public NestedSortValueDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
+	public Elastic.Clients.Elasticsearch.NestedSortValueDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.NestedSortValue Build(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
-		}
-
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		writer.WritePropertyName("path");
-		JsonSerializer.Serialize(writer, PathValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(new Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

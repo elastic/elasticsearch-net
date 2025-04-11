@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
-public sealed partial class PutSynonymRuleRequestParameters : RequestParameters
+public sealed partial class PutSynonymRuleRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutSynonymRuleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
+
+	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propSynonyms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSynonyms.TryReadProperty(ref reader, options, PropSynonyms, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Synonyms = propSynonyms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,15 +78,34 @@ public sealed partial class PutSynonymRuleRequestParameters : RequestParameters
 /// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
 /// </para>
 /// </summary>
-public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestConverter))]
+public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId) : base(r => r.Required("set_id", setId).Required("rule_id", ruleId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsPutSynonymRule;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, string synonyms) : base(r => r.Required("set_id", setId).Required("rule_id", ruleId))
+	{
+		Synonyms = synonyms;
+	}
+#if NET7_0_OR_GREATER
+	public PutSynonymRuleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SynonymsPutSynonymRule;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -62,11 +113,36 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 
 	/// <summary>
 	/// <para>
+	/// The ID of the synonym rule to be updated or created.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The ID of the synonym set.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The synonym rule information definition, which must be in Solr format.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("synonyms")]
-	public string Synonyms { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Synonyms { get; set; }
 }
 
 /// <summary>
@@ -81,52 +157,112 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 /// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
 /// </para>
 /// </summary>
-public sealed partial class PutSynonymRuleRequestDescriptor : RequestDescriptor<PutSynonymRuleRequestDescriptor, PutSynonymRuleRequestParameters>
+public readonly partial struct PutSynonymRuleRequestDescriptor
 {
-	internal PutSynonymRuleRequestDescriptor(Action<PutSynonymRuleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest Instance { get; init; }
 
-	public PutSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId) : base(r => r.Required("set_id", setId).Required("rule_id", ruleId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsPutSynonymRule;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "synonyms.put_synonym_rule";
-
-	public PutSynonymRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id ruleId)
+	public PutSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
-		RouteValues.Required("rule_id", ruleId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest(setId, ruleId);
+#pragma warning restore CS0618
 	}
 
-	public PutSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id setId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutSynonymRuleRequestDescriptor()
 	{
-		RouteValues.Required("set_id", setId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private string SynonymsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The ID of the synonym rule to be updated or created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.RuleId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the synonym set.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.SetId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The synonym rule information definition, which must be in Solr format.
 	/// </para>
 	/// </summary>
-	public PutSynonymRuleRequestDescriptor Synonyms(string synonyms)
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor Synonyms(string value)
 	{
-		SynonymsValue = synonyms;
-		return Self;
+		Instance.Synonyms = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest Build(System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("synonyms");
-		writer.WriteStringValue(SynonymsValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

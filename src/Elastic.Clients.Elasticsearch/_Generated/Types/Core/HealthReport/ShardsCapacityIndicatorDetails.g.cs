@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class ShardsCapacityIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail> propData = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail> propFrozen = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propData.TryReadProperty(ref reader, options, PropData, null))
+			{
+				continue;
+			}
+
+			if (propFrozen.TryReadProperty(ref reader, options, PropFrozen, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Data = propData.Value,
+			Frozen = propFrozen.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropData, value.Data, null, null);
+		writer.WriteProperty(options, PropFrozen, value.Frozen, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetailsConverter))]
 public sealed partial class ShardsCapacityIndicatorDetails
 {
-	[JsonInclude, JsonPropertyName("data")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Data { get; init; }
-	[JsonInclude, JsonPropertyName("frozen")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Frozen { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardsCapacityIndicatorDetails(Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail data, Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail frozen)
+	{
+		Data = data;
+		Frozen = frozen;
+	}
+#if NET7_0_OR_GREATER
+	public ShardsCapacityIndicatorDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardsCapacityIndicatorDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardsCapacityIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Data { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Frozen { get; set; }
 }

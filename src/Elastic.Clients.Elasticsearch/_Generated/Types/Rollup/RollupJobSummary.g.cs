@@ -17,25 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class RollupJobSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummary>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.RollupJobSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>>> propFields = default;
+		LocalJsonValue<string> propIndexPattern = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<string> propRollupIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>>(o, null, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>(o, null)!)!))
+			{
+				continue;
+			}
+
+			if (propIndexPattern.TryReadProperty(ref reader, options, PropIndexPattern, null))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propRollupIndex.TryReadProperty(ref reader, options, PropRollupIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.RollupJobSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Fields = propFields.Value,
+			IndexPattern = propIndexPattern.Value,
+			JobId = propJobId.Value,
+			RollupIndex = propRollupIndex.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.RollupJobSummary value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>(o, v, null)));
+		writer.WriteProperty(options, PropIndexPattern, value.IndexPattern, null, null);
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropRollupIndex, value.RollupIndex, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryConverter))]
 public sealed partial class RollupJobSummary
 {
-	[JsonInclude, JsonPropertyName("fields")]
-	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>> Fields { get; init; }
-	[JsonInclude, JsonPropertyName("index_pattern")]
-	public string IndexPattern { get; init; }
-	[JsonInclude, JsonPropertyName("job_id")]
-	public string JobId { get; init; }
-	[JsonInclude, JsonPropertyName("rollup_index")]
-	public string RollupIndex { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RollupJobSummary(System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>> fields, string indexPattern, string jobId, string rollupIndex)
+	{
+		Fields = fields;
+		IndexPattern = indexPattern;
+		JobId = jobId;
+		RollupIndex = rollupIndex;
+	}
+#if NET7_0_OR_GREATER
+	public RollupJobSummary()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RollupJobSummary()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RollupJobSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>> Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexPattern { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string JobId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RollupIndex { get; set; }
 }

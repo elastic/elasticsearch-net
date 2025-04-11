@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class NodesCredentialsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.NodesCredentials>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFileTokens = System.Text.Json.JsonEncodedText.Encode("file_tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("_nodes");
+
+	public override Elastic.Clients.Elasticsearch.Security.NodesCredentials Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken>> propFileTokens = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics> propNodes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFileTokens.TryReadProperty(ref reader, options, PropFileTokens, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.NodesCredentials(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FileTokens = propFileTokens.Value,
+			Nodes = propNodes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.NodesCredentials value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFileTokens, value.FileTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken>(o, v, null, null));
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.NodesCredentialsConverter))]
 public sealed partial class NodesCredentials
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodesCredentials(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> fileTokens, Elastic.Clients.Elasticsearch.NodeStatistics nodes)
+	{
+		FileTokens = fileTokens;
+		Nodes = nodes;
+	}
+#if NET7_0_OR_GREATER
+	public NodesCredentials()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodesCredentials()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodesCredentials(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// File-backed tokens collected from all nodes
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("file_tokens")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> FileTokens { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> FileTokens { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// General status showing how nodes respond to the above collection request
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_nodes")]
-	public Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; set; }
 }

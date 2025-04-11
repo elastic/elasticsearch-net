@@ -17,30 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class PipelineSimulationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoredError = System.Text.Json.JsonEncodedText.Encode("ignored_error");
+	private static readonly System.Text.Json.JsonEncodedText PropProcessorType = System.Text.Json.JsonEncodedText.Encode("processor_type");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation?> propDoc = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propIgnoredError = default;
+		LocalJsonValue<string?> propProcessorType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions?> propStatus = default;
+		LocalJsonValue<string?> propTag = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
+			{
+				continue;
+			}
+
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
+			{
+				continue;
+			}
+
+			if (propIgnoredError.TryReadProperty(ref reader, options, PropIgnoredError, null))
+			{
+				continue;
+			}
+
+			if (propProcessorType.TryReadProperty(ref reader, options, PropProcessorType, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Doc = propDoc.Value,
+			Error = propError.Value,
+			IgnoredError = propIgnoredError.Value,
+			ProcessorType = propProcessorType.Value,
+			Status = propStatus.Value,
+			Tag = propTag.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropIgnoredError, value.IgnoredError, null, null);
+		writer.WriteProperty(options, PropProcessorType, value.ProcessorType, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationConverter))]
 public sealed partial class PipelineSimulation
 {
-	[JsonInclude, JsonPropertyName("description")]
-	public string? Description { get; init; }
-	[JsonInclude, JsonPropertyName("doc")]
-	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; init; }
-	[JsonInclude, JsonPropertyName("error")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
-	[JsonInclude, JsonPropertyName("ignored_error")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? IgnoredError { get; init; }
-	[JsonInclude, JsonPropertyName("processor_type")]
-	public string? ProcessorType { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions? Status { get; init; }
-	[JsonInclude, JsonPropertyName("tag")]
-	public string? Tag { get; init; }
+#if NET7_0_OR_GREATER
+	public PipelineSimulation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PipelineSimulation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PipelineSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? Description { get; set; }
+	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; set; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? IgnoredError { get; set; }
+	public string? ProcessorType { get; set; }
+	public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions? Status { get; set; }
+	public string? Tag { get; set; }
 }

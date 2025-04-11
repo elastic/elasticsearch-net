@@ -17,41 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class CreateRepositoryRequestParameters : RequestParameters
+public sealed partial class CreateRepositoryRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout
+	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
+	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to verify the repository after creation
+	/// If <c>true</c>, the request verifies the repository is functional on all master and data nodes in the cluster.
+	/// If <c>false</c>, this verification is skipped.
+	/// You can also perform this verification with the verify snapshot repository API.
 	/// </para>
 	/// </summary>
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
+}
+
+internal sealed partial class CreateRepositoryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Repository = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Repository, null);
+	}
 }
 
 /// <summary>
@@ -61,16 +73,39 @@ public sealed partial class CreateRepositoryRequestParameters : RequestParameter
 /// To register a snapshot repository, the cluster's global metadata must be writeable.
 /// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 /// </para>
+/// <para>
+/// Several options for this API can be specified using a query parameter or a request body parameter.
+/// If both parameters are specified, only the query parameter is used.
+/// </para>
 /// </summary>
-public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestConverter))]
+public sealed partial class CreateRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotCreateRepository;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Name name, Elastic.Clients.Elasticsearch.Snapshot.IRepository repository) : base(r => r.Required("repository", name))
+	{
+		Repository = repository;
+	}
+#if NET7_0_OR_GREATER
+	public CreateRepositoryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotCreateRepository;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -78,34 +113,46 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The name of the snapshot repository to register or update.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout
+	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
+	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to verify the repository after creation
+	/// If <c>true</c>, the request verifies the repository is functional on all master and data nodes in the cluster.
+	/// If <c>false</c>, this verification is skipped.
+	/// You can also perform this verification with the verify snapshot repository API.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Repository { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Repository, options);
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.IRepository Repository { get; set; }
 }
 
 /// <summary>
@@ -115,40 +162,146 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 /// To register a snapshot repository, the cluster's global metadata must be writeable.
 /// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 /// </para>
+/// <para>
+/// Several options for this API can be specified using a query parameter or a request body parameter.
+/// If both parameters are specified, only the query parameter is used.
+/// </para>
 /// </summary>
-public sealed partial class CreateRepositoryRequestDescriptor : RequestDescriptor<CreateRepositoryRequestDescriptor, CreateRepositoryRequestParameters>
+public readonly partial struct CreateRepositoryRequestDescriptor
 {
-	internal CreateRepositoryRequestDescriptor(Action<CreateRepositoryRequestDescriptor> configure) => configure.Invoke(this);
-	public CreateRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.IRepository repository, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name)) => RepositoryValue = repository;
+	internal Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotCreateRepository;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "snapshot.create_repository";
-
-	public CreateRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public CreateRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public CreateRepositoryRequestDescriptor Verify(bool? verify = true) => Qs("verify", verify);
-
-	public CreateRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest instance)
 	{
-		RouteValues.Required("repository", name);
-		return Self;
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Snapshot.IRepository RepositoryValue { get; set; }
-
-	public CreateRepositoryRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Snapshot.IRepository repository)
+	public CreateRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RepositoryValue = repository;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest(name);
+#pragma warning restore CS0618
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public CreateRepositoryRequestDescriptor()
 	{
-		JsonSerializer.Serialize(writer, RepositoryValue, options);
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot repository to register or update.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
+	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request verifies the repository is functional on all master and data nodes in the cluster.
+	/// If <c>false</c>, this verification is skipped.
+	/// You can also perform this verification with the verify snapshot repository API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Verify(bool? value = true)
+	{
+		Instance.Verify = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Snapshot.IRepository value)
+	{
+		Instance.Repository = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Repository(System.Func<Elastic.Clients.Elasticsearch.Snapshot.RepositoryFactory, Elastic.Clients.Elasticsearch.Snapshot.IRepository> action)
+	{
+		Instance.Repository = Elastic.Clients.Elasticsearch.Snapshot.RepositoryFactory.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

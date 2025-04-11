@@ -17,83 +17,207 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteTrainedModelAliasRequestParameters : RequestParameters
+public sealed partial class DeleteTrainedModelAliasRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteTrainedModelAliasRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Delete a trained model alias.
+/// </para>
+/// <para>
 /// This API deletes an existing model alias that refers to a trained model. If
 /// the model alias is missing or refers to a model other than the one identified
 /// by the <c>model_id</c>, this API returns an error.
 /// </para>
 /// </summary>
-public sealed partial class DeleteTrainedModelAliasRequest : PlainRequest<DeleteTrainedModelAliasRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestConverter))]
+public sealed partial class DeleteTrainedModelAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias) : base(r => r.Required("model_id", modelId).Required("model_alias", modelAlias))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteTrainedModelAliasRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteTrainedModelAlias;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteTrainedModelAlias;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_trained_model_alias";
+
+	/// <summary>
+	/// <para>
+	/// The model alias to delete.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// The trained model ID to which the model alias refers.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete a trained model alias.
+/// </para>
+/// <para>
 /// This API deletes an existing model alias that refers to a trained model. If
 /// the model alias is missing or refers to a model other than the one identified
 /// by the <c>model_id</c>, this API returns an error.
 /// </para>
 /// </summary>
-public sealed partial class DeleteTrainedModelAliasRequestDescriptor : RequestDescriptor<DeleteTrainedModelAliasRequestDescriptor, DeleteTrainedModelAliasRequestParameters>
+public readonly partial struct DeleteTrainedModelAliasRequestDescriptor
 {
-	internal DeleteTrainedModelAliasRequestDescriptor(Action<DeleteTrainedModelAliasRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest Instance { get; init; }
 
-	public DeleteTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias) : base(r => r.Required("model_id", modelId).Required("model_alias", modelAlias))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteTrainedModelAlias;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.delete_trained_model_alias";
-
-	public DeleteTrainedModelAliasRequestDescriptor ModelAlias(Elastic.Clients.Elasticsearch.Name modelAlias)
+	public DeleteTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias)
 	{
-		RouteValues.Required("model_alias", modelAlias);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest(modelId, modelAlias);
 	}
 
-	public DeleteTrainedModelAliasRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteTrainedModelAliasRequestDescriptor()
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The model alias to delete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor ModelAlias(Elastic.Clients.Elasticsearch.Name value)
 	{
+		Instance.ModelAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The trained model ID to which the model alias refers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

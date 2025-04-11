@@ -18,14 +18,3 @@ var settings = new ElasticsearchClientSettings(new Uri("https://primary.es.europ
 
 var client = new ElasticsearchClient(settings);
 
-var z = await client.SearchAsync<Person>(x => x.Index("person").Query(q => q.GeoShape(gs => gs.Shape(shape => shape.Shape(new {})))));
-
-var r = await client.SearchAsync<Person>(x => x.Index("person").Query(q => q.MatchAll(ma => { })).FilterPath("took"));
-
-foreach (var hit in r.Hits)
-{
-	var highlights = hit.Highlight?["field"];
-	if (highlights is { Count: > 0 })
-	{
-	}
-}

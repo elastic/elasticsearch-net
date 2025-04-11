@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ClearScrollRequestParameters : RequestParameters
+public sealed partial class ClearScrollRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearScrollRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ClearScrollRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("scroll_id");
+
+	public override Elastic.Clients.Elasticsearch.ClearScrollRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScrollIds?> propScrollId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScrollId.TryReadProperty(ref reader, options, PropScrollId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ClearScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ScrollId = propScrollId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ClearScrollRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropScrollId, value.ScrollId, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,11 +72,28 @@ public sealed partial class ClearScrollRequestParameters : RequestParameters
 /// Clear the search context and results for a scrolling search.
 /// </para>
 /// </summary>
-public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ClearScrollRequestConverter))]
+public sealed partial class ClearScrollRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClearScroll;
+#if NET7_0_OR_GREATER
+	public ClearScrollRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ClearScrollRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceClearScroll;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
 
@@ -56,7 +105,6 @@ public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequest
 	/// To clear all scroll IDs, use <c>_all</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scroll_id")]
 	public Elastic.Clients.Elasticsearch.ScrollIds? ScrollId { get; set; }
 }
 
@@ -66,23 +114,23 @@ public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequest
 /// Clear the search context and results for a scrolling search.
 /// </para>
 /// </summary>
-public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<ClearScrollRequestDescriptor, ClearScrollRequestParameters>
+public readonly partial struct ClearScrollRequestDescriptor
 {
-	internal ClearScrollRequestDescriptor(Action<ClearScrollRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ClearScrollRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearScrollRequestDescriptor(Elastic.Clients.Elasticsearch.ClearScrollRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ClearScrollRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ClearScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClearScroll;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "clear_scroll";
-
-	private Elastic.Clients.Elasticsearch.ScrollIds? ScrollIdValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor(Elastic.Clients.Elasticsearch.ClearScrollRequest instance) => new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ClearScrollRequest(Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -90,21 +138,64 @@ public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<Cle
 	/// To clear all scroll IDs, use <c>_all</c>.
 	/// </para>
 	/// </summary>
-	public ClearScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollIds? scrollId)
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollIds? value)
 	{
-		ScrollIdValue = scrollId;
-		return Self;
+		Instance.ScrollId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ClearScrollRequest Build(System.Action<Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ScrollIdValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("scroll_id");
-			JsonSerializer.Serialize(writer, ScrollIdValue, options);
+			return new Elastic.Clients.Elasticsearch.ClearScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor(new Elastic.Clients.Elasticsearch.ClearScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

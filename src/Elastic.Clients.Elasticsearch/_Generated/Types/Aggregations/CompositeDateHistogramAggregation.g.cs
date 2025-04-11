@@ -17,24 +17,165 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class CompositeDateHistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingBucket = System.Text.Json.JsonEncodedText.Encode("missing_bucket");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingOrder = System.Text.Json.JsonEncodedText.Encode("missing_order");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propCalendarInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<string?> propFixedInterval = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<bool?> propMissingBucket = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?> propMissingOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propOffset = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType?> propValueType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCalendarInterval.TryReadProperty(ref reader, options, PropCalendarInterval, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFixedInterval.TryReadProperty(ref reader, options, PropFixedInterval, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, null))
+			{
+				continue;
+			}
+
+			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, null))
+			{
+				continue;
+			}
+
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (propValueType.TryReadProperty(ref reader, options, PropValueType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CalendarInterval = propCalendarInterval.Value,
+			Field = propField.Value,
+			FixedInterval = propFixedInterval.Value,
+			Format = propFormat.Value,
+			MissingBucket = propMissingBucket.Value,
+			MissingOrder = propMissingOrder.Value,
+			Offset = propOffset.Value,
+			Order = propOrder.Value,
+			Script = propScript.Value,
+			TimeZone = propTimeZone.Value,
+			ValueType = propValueType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCalendarInterval, value.CalendarInterval, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, null);
+		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationConverter))]
 public sealed partial class CompositeDateHistogramAggregation
 {
+#if NET7_0_OR_GREATER
+	public CompositeDateHistogramAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CompositeDateHistogramAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("calendar_interval")]
 	public string? CalendarInterval { get; set; }
 
 	/// <summary>
@@ -42,7 +183,6 @@ public sealed partial class CompositeDateHistogramAggregation
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -50,17 +190,11 @@ public sealed partial class CompositeDateHistogramAggregation
 	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public string? FixedInterval { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("missing_bucket")]
 	public bool? MissingBucket { get; set; }
-	[JsonInclude, JsonPropertyName("missing_order")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
-	[JsonInclude, JsonPropertyName("offset")]
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
 	/// <summary>
@@ -68,45 +202,39 @@ public sealed partial class CompositeDateHistogramAggregation
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
-	[JsonInclude, JsonPropertyName("value_type")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 }
 
-public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocument> : SerializableDescriptor<CompositeDateHistogramAggregationDescriptor<TDocument>>
+public readonly partial struct CompositeDateHistogramAggregationDescriptor<TDocument>
 {
-	internal CompositeDateHistogramAggregationDescriptor(Action<CompositeDateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Instance { get; init; }
 
-	public CompositeDateHistogramAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private string? CalendarIntervalValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FixedIntervalValue { get; set; }
-	private string? FormatValue { get; set; }
-	private bool? MissingBucketValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? TimeZoneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeDateHistogramAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor<TDocument> CalendarInterval(string? calendarInterval)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> CalendarInterval(string? value)
 	{
-		CalendarIntervalValue = calendarInterval;
-		return Self;
+		Instance.CalendarInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -114,10 +242,10 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -125,21 +253,10 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -147,40 +264,40 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor<TDocument> FixedInterval(string? fixedInterval)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> FixedInterval(string? value)
 	{
-		FixedIntervalValue = fixedInterval;
-		return Self;
+		Instance.FixedInterval = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> MissingBucket(bool? value = true)
 	{
-		MissingBucketValue = missingBucket;
-		return Self;
+		Instance.MissingBucket = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? value)
 	{
-		MissingOrderValue = missingOrder;
-		return Self;
+		Instance.MissingOrder = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? offset)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		OffsetValue = offset;
-		return Self;
+		Instance.Offset = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
 	/// <summary>
@@ -188,156 +305,88 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? value)
 	{
-		ValueTypeValue = valueType;
-		return Self;
+		Instance.ValueType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CalendarIntervalValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("calendar_interval");
-			writer.WriteStringValue(CalendarIntervalValue);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FixedIntervalValue))
-		{
-			writer.WritePropertyName("fixed_interval");
-			writer.WriteStringValue(FixedIntervalValue);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MissingBucketValue.HasValue)
-		{
-			writer.WritePropertyName("missing_bucket");
-			writer.WriteBooleanValue(MissingBucketValue.Value);
-		}
-
-		if (MissingOrderValue is not null)
-		{
-			writer.WritePropertyName("missing_order");
-			JsonSerializer.Serialize(writer, MissingOrderValue, options);
-		}
-
-		if (OffsetValue is not null)
-		{
-			writer.WritePropertyName("offset");
-			JsonSerializer.Serialize(writer, OffsetValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (ValueTypeValue is not null)
-		{
-			writer.WritePropertyName("value_type");
-			JsonSerializer.Serialize(writer, ValueTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CompositeDateHistogramAggregationDescriptor : SerializableDescriptor<CompositeDateHistogramAggregationDescriptor>
+public readonly partial struct CompositeDateHistogramAggregationDescriptor
 {
-	internal CompositeDateHistogramAggregationDescriptor(Action<CompositeDateHistogramAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Instance { get; init; }
 
-	public CompositeDateHistogramAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private string? CalendarIntervalValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FixedIntervalValue { get; set; }
-	private string? FormatValue { get; set; }
-	private bool? MissingBucketValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? TimeZoneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeDateHistogramAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor CalendarInterval(string? calendarInterval)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor CalendarInterval(string? value)
 	{
-		CalendarIntervalValue = calendarInterval;
-		return Self;
+		Instance.CalendarInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -345,10 +394,10 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -356,21 +405,10 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -378,40 +416,40 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor FixedInterval(string? fixedInterval)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor FixedInterval(string? value)
 	{
-		FixedIntervalValue = fixedInterval;
-		return Self;
+		Instance.FixedInterval = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor MissingBucket(bool? missingBucket = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor MissingBucket(bool? value = true)
 	{
-		MissingBucketValue = missingBucket;
-		return Self;
+		Instance.MissingBucket = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? value)
 	{
-		MissingOrderValue = missingOrder;
-		return Self;
+		Instance.MissingOrder = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? offset)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		OffsetValue = offset;
-		return Self;
+		Instance.Offset = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
 	/// <summary>
@@ -419,121 +457,56 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	/// Either <c>field</c> or <c>script</c> must be present
 	/// </para>
 	/// </summary>
-	public CompositeDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	public CompositeDateHistogramAggregationDescriptor ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? value)
 	{
-		ValueTypeValue = valueType;
-		return Self;
+		Instance.ValueType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CalendarIntervalValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("calendar_interval");
-			writer.WriteStringValue(CalendarIntervalValue);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FixedIntervalValue))
-		{
-			writer.WritePropertyName("fixed_interval");
-			writer.WriteStringValue(FixedIntervalValue);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MissingBucketValue.HasValue)
-		{
-			writer.WritePropertyName("missing_bucket");
-			writer.WriteBooleanValue(MissingBucketValue.Value);
-		}
-
-		if (MissingOrderValue is not null)
-		{
-			writer.WritePropertyName("missing_order");
-			JsonSerializer.Serialize(writer, MissingOrderValue, options);
-		}
-
-		if (OffsetValue is not null)
-		{
-			writer.WritePropertyName("offset");
-			JsonSerializer.Serialize(writer, OffsetValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (ValueTypeValue is not null)
-		{
-			writer.WritePropertyName("value_type");
-			JsonSerializer.Serialize(writer, ValueTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

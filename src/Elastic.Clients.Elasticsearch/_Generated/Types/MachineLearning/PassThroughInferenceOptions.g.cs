@@ -17,42 +17,67 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Pass through configuration options
-/// </para>
-/// </summary>
-public sealed partial class PassThroughInferenceOptions
+internal sealed partial class PassThroughInferenceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions>
 {
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
-	public string? ResultsField { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
+	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
-	[JsonInclude, JsonPropertyName("vocabulary")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary?> propVocabulary = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(PassThroughInferenceOptions passThroughInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.PassThrough(passThroughInferenceOptions);
+			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
+			{
+				continue;
+			}
+
+			if (propVocabulary.TryReadProperty(ref reader, options, PropVocabulary, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ResultsField = propResultsField.Value,
+			Tokenization = propTokenization.Value,
+			Vocabulary = propVocabulary.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
+		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -60,31 +85,74 @@ public sealed partial class PassThroughInferenceOptions
 /// Pass through configuration options
 /// </para>
 /// </summary>
-public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsConverter))]
+public sealed partial class PassThroughInferenceOptions
 {
-	internal PassThroughInferenceOptionsDescriptor(Action<PassThroughInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-
-	public PassThroughInferenceOptionsDescriptor() : base()
+#if NET7_0_OR_GREATER
+	public PassThroughInferenceOptions()
 	{
 	}
-
-	private string? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? TokenizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? VocabularyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor VocabularyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	public PassThroughInferenceOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)
+	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The tokenization options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Pass through configuration options
+/// </para>
+/// </summary>
+public readonly partial struct PassThroughInferenceOptionsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PassThroughInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions instance)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PassThroughInferenceOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor ResultsField(string? value)
+	{
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -92,95 +160,45 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 	/// The tokenization options
 	/// </para>
 	/// </summary>
-	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = null;
-		TokenizationValue = tokenization;
-		return Self;
+		Instance.Tokenization = value;
+		return this;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The tokenization options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptorAction = null;
-		TokenizationDescriptor = descriptor;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Tokenization(Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? value)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = configure;
-		return Self;
+		Instance.Vocabulary = value;
+		return this;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? vocabulary)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor Vocabulary(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> action)
 	{
-		VocabularyDescriptor = null;
-		VocabularyDescriptorAction = null;
-		VocabularyValue = vocabulary;
-		return Self;
+		Instance.Vocabulary = Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor.Build(action);
+		return this;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor descriptor)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor>? action)
 	{
-		VocabularyValue = null;
-		VocabularyDescriptorAction = null;
-		VocabularyDescriptor = descriptor;
-		return Self;
-	}
-
-	public PassThroughInferenceOptionsDescriptor Vocabulary(Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> configure)
-	{
-		VocabularyValue = null;
-		VocabularyDescriptor = null;
-		VocabularyDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TokenizationDescriptor is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-		}
-		else if (TokenizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
-		}
-		else if (TokenizationValue is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationValue, options);
-		}
-
-		if (VocabularyDescriptor is not null)
-		{
-			writer.WritePropertyName("vocabulary");
-			JsonSerializer.Serialize(writer, VocabularyDescriptor, options);
-		}
-		else if (VocabularyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("vocabulary");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor(VocabularyDescriptorAction), options);
-		}
-		else if (VocabularyValue is not null)
-		{
-			writer.WritePropertyName("vocabulary");
-			JsonSerializer.Serialize(writer, VocabularyValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

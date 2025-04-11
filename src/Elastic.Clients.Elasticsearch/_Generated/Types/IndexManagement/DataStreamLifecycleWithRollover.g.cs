@@ -17,15 +17,77 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
+internal sealed partial class DataStreamLifecycleWithRolloverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention");
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDataRetention = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling?> propDownsampling = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions?> propRollover = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataRetention.TryReadProperty(ref reader, options, PropDataRetention, null))
+			{
+				continue;
+			}
+
+			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propRollover.TryReadProperty(ref reader, options, PropRollover, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DataRetention = propDataRetention.Value,
+			Downsampling = propDownsampling.Value,
+			Enabled = propEnabled.Value,
+			Rollover = propRollover.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
+		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropRollover, value.Rollover, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
@@ -33,8 +95,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 /// if asked.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverConverter))]
 public sealed partial class DataStreamLifecycleWithRollover
 {
+#if NET7_0_OR_GREATER
+	public DataStreamLifecycleWithRollover()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataStreamLifecycleWithRollover()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If defined, every document added to this data stream will be stored at least for this time frame.
@@ -42,7 +121,6 @@ public sealed partial class DataStreamLifecycleWithRollover
 	/// When empty, every document in this data stream will be stored indefinitely.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_retention")]
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 
 	/// <summary>
@@ -50,8 +128,15 @@ public sealed partial class DataStreamLifecycleWithRollover
 	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("downsampling")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public bool? Enabled { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -60,7 +145,6 @@ public sealed partial class DataStreamLifecycleWithRollover
 	/// The contents of this field are subject to change.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rollover")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? Rollover { get; set; }
 }
 
@@ -70,21 +154,24 @@ public sealed partial class DataStreamLifecycleWithRollover
 /// if asked.
 /// </para>
 /// </summary>
-public sealed partial class DataStreamLifecycleWithRolloverDescriptor : SerializableDescriptor<DataStreamLifecycleWithRolloverDescriptor>
+public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 {
-	internal DataStreamLifecycleWithRolloverDescriptor(Action<DataStreamLifecycleWithRolloverDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover Instance { get; init; }
 
-	public DataStreamLifecycleWithRolloverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleWithRolloverDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? DataRetentionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? RolloverValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor RolloverDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor> RolloverDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleWithRolloverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -93,10 +180,10 @@ public sealed partial class DataStreamLifecycleWithRolloverDescriptor : Serializ
 	/// When empty, every document in this data stream will be stored indefinitely.
 	/// </para>
 	/// </summary>
-	public DataStreamLifecycleWithRolloverDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? dataRetention)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		DataRetentionValue = dataRetention;
-		return Self;
+		Instance.DataRetention = value;
+		return this;
 	}
 
 	/// <summary>
@@ -104,28 +191,33 @@ public sealed partial class DataStreamLifecycleWithRolloverDescriptor : Serializ
 	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
-	public DataStreamLifecycleWithRolloverDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? downsampling)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? value)
 	{
-		DownsamplingDescriptor = null;
-		DownsamplingDescriptorAction = null;
-		DownsamplingValue = downsampling;
-		return Self;
+		Instance.Downsampling = value;
+		return this;
 	}
 
-	public DataStreamLifecycleWithRolloverDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> action)
 	{
-		DownsamplingValue = null;
-		DownsamplingDescriptorAction = null;
-		DownsamplingDescriptor = descriptor;
-		return Self;
+		Instance.Downsampling = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.Build(action);
+		return this;
 	}
 
-	public DataStreamLifecycleWithRolloverDescriptor Downsampling(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Enabled(bool? value = true)
 	{
-		DownsamplingValue = null;
-		DownsamplingDescriptor = null;
-		DownsamplingDescriptorAction = configure;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -135,71 +227,48 @@ public sealed partial class DataStreamLifecycleWithRolloverDescriptor : Serializ
 	/// The contents of this field are subject to change.
 	/// </para>
 	/// </summary>
-	public DataStreamLifecycleWithRolloverDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? rollover)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? value)
 	{
-		RolloverDescriptor = null;
-		RolloverDescriptorAction = null;
-		RolloverValue = rollover;
-		return Self;
+		Instance.Rollover = value;
+		return this;
 	}
 
-	public DataStreamLifecycleWithRolloverDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
+	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
+	/// The contents of this field are subject to change.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Rollover()
 	{
-		RolloverValue = null;
-		RolloverDescriptorAction = null;
-		RolloverDescriptor = descriptor;
-		return Self;
+		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor.Build(null);
+		return this;
 	}
 
-	public DataStreamLifecycleWithRolloverDescriptor Rollover(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
+	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
+	/// The contents of this field are subject to change.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Rollover(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor>? action)
 	{
-		RolloverValue = null;
-		RolloverDescriptor = null;
-		RolloverDescriptorAction = configure;
-		return Self;
+		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DataRetentionValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("data_retention");
-			JsonSerializer.Serialize(writer, DataRetentionValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DownsamplingDescriptor is not null)
-		{
-			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, DownsamplingDescriptor, options);
-		}
-		else if (DownsamplingDescriptorAction is not null)
-		{
-			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(DownsamplingDescriptorAction), options);
-		}
-		else if (DownsamplingValue is not null)
-		{
-			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, DownsamplingValue, options);
-		}
-
-		if (RolloverDescriptor is not null)
-		{
-			writer.WritePropertyName("rollover");
-			JsonSerializer.Serialize(writer, RolloverDescriptor, options);
-		}
-		else if (RolloverDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rollover");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor(RolloverDescriptorAction), options);
-		}
-		else if (RolloverValue is not null)
-		{
-			writer.WritePropertyName("rollover");
-			JsonSerializer.Serialize(writer, RolloverValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

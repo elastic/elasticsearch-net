@@ -17,24 +17,147 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class AutoDateHistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBuckets = System.Text.Json.JsonEncodedText.Encode("buckets");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumInterval = System.Text.Json.JsonEncodedText.Encode("minimum_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propBuckets = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval?> propMinimumInterval = default;
+		LocalJsonValue<System.DateTimeOffset?> propMissing = default;
+		LocalJsonValue<string?> propOffset = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBuckets.TryReadProperty(ref reader, options, PropBuckets, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propMinimumInterval.TryReadProperty(ref reader, options, PropMinimumInterval, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Buckets = propBuckets.Value,
+			Field = propField.Value,
+			Format = propFormat.Value,
+			MinimumInterval = propMinimumInterval.Value,
+			Missing = propMissing.Value,
+			Offset = propOffset.Value,
+			Params = propParams.Value,
+			Script = propScript.Value,
+			TimeZone = propTimeZone.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBuckets, value.Buckets, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropMinimumInterval, value.MinimumInterval, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationConverter))]
 public sealed partial class AutoDateHistogramAggregation
 {
+#if NET7_0_OR_GREATER
+	public AutoDateHistogramAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AutoDateHistogramAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The target number of buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("buckets")]
 	public int? Buckets { get; set; }
 
 	/// <summary>
@@ -42,7 +165,6 @@ public sealed partial class AutoDateHistogramAggregation
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -51,7 +173,6 @@ public sealed partial class AutoDateHistogramAggregation
 	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -60,7 +181,6 @@ public sealed partial class AutoDateHistogramAggregation
 	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_interval")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
 	/// <summary>
@@ -69,19 +189,15 @@ public sealed partial class AutoDateHistogramAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public DateTimeOffset? Missing { get; set; }
+	public System.DateTimeOffset? Missing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Time zone specified as a ISO 8601 UTC offset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offset")]
 	public string? Offset { get; set; }
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -89,41 +205,37 @@ public sealed partial class AutoDateHistogramAggregation
 	/// Time zone ID.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(AutoDateHistogramAggregation autoDateHistogramAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.AutoDateHistogram(autoDateHistogramAggregation);
 }
 
-public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : SerializableDescriptor<AutoDateHistogramAggregationDescriptor<TDocument>>
+public readonly partial struct AutoDateHistogramAggregationDescriptor<TDocument>
 {
-	internal AutoDateHistogramAggregationDescriptor(Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Instance { get; init; }
 
-	public AutoDateHistogramAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AutoDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private int? BucketsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
-	private DateTimeOffset? MissingValue { get; set; }
-	private string? OffsetValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? TimeZoneValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AutoDateHistogramAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The target number of buckets.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Buckets(int? value)
 	{
-		BucketsValue = buckets;
-		return Self;
+		Instance.Buckets = value;
+		return this;
 	}
 
 	/// <summary>
@@ -131,10 +243,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -142,21 +254,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -165,10 +266,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -177,10 +278,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? minimumInterval)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? value)
 	{
-		MinimumIntervalValue = minimumInterval;
-		return Self;
+		Instance.MinimumInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -189,10 +290,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Missing(System.DateTimeOffset? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -200,40 +301,53 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// Time zone specified as a ISO 8601 UTC offset.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> Offset(string? offset)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Offset(string? value)
 	{
-		OffsetValue = offset;
-		return Self;
+		Instance.Offset = value;
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Params()
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> AddParam(string key, object value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -241,112 +355,54 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	/// Time zone ID.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (BucketsValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("buckets");
-			writer.WriteNumberValue(BucketsValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MinimumIntervalValue is not null)
-		{
-			writer.WritePropertyName("minimum_interval");
-			JsonSerializer.Serialize(writer, MinimumIntervalValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(OffsetValue))
-		{
-			writer.WritePropertyName("offset");
-			writer.WriteStringValue(OffsetValue);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class AutoDateHistogramAggregationDescriptor : SerializableDescriptor<AutoDateHistogramAggregationDescriptor>
+public readonly partial struct AutoDateHistogramAggregationDescriptor
 {
-	internal AutoDateHistogramAggregationDescriptor(Action<AutoDateHistogramAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Instance { get; init; }
 
-	public AutoDateHistogramAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AutoDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private int? BucketsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
-	private DateTimeOffset? MissingValue { get; set; }
-	private string? OffsetValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? TimeZoneValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AutoDateHistogramAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The target number of buckets.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Buckets(int? buckets)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Buckets(int? value)
 	{
-		BucketsValue = buckets;
-		return Self;
+		Instance.Buckets = value;
+		return this;
 	}
 
 	/// <summary>
@@ -354,10 +410,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -365,21 +421,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -388,10 +433,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -400,10 +445,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? minimumInterval)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? value)
 	{
-		MinimumIntervalValue = minimumInterval;
-		return Self;
+		Instance.MinimumInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -412,10 +457,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Missing(System.DateTimeOffset? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -423,40 +468,53 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// Time zone specified as a ISO 8601 UTC offset.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor Offset(string? offset)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Offset(string? value)
 	{
-		OffsetValue = offset;
-		return Self;
+		Instance.Offset = value;
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Params()
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor AddParam(string key, object value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -464,79 +522,22 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	/// Time zone ID.
 	/// </para>
 	/// </summary>
-	public AutoDateHistogramAggregationDescriptor TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BucketsValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("buckets");
-			writer.WriteNumberValue(BucketsValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MinimumIntervalValue is not null)
-		{
-			writer.WritePropertyName("minimum_interval");
-			JsonSerializer.Serialize(writer, MinimumIntervalValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(OffsetValue))
-		{
-			writer.WritePropertyName("offset");
-			writer.WriteStringValue(OffsetValue);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

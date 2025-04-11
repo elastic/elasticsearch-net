@@ -17,26 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class PhasesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Phases>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCold = System.Text.Json.JsonEncodedText.Encode("cold");
+	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen");
+	private static readonly System.Text.Json.JsonEncodedText PropHot = System.Text.Json.JsonEncodedText.Encode("hot");
+	private static readonly System.Text.Json.JsonEncodedText PropWarm = System.Text.Json.JsonEncodedText.Encode("warm");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.Phases Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Phase?> propCold = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Phase?> propDelete = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Phase?> propFrozen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Phase?> propHot = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Phase?> propWarm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCold.TryReadProperty(ref reader, options, PropCold, null))
+			{
+				continue;
+			}
+
+			if (propDelete.TryReadProperty(ref reader, options, PropDelete, null))
+			{
+				continue;
+			}
+
+			if (propFrozen.TryReadProperty(ref reader, options, PropFrozen, null))
+			{
+				continue;
+			}
+
+			if (propHot.TryReadProperty(ref reader, options, PropHot, null))
+			{
+				continue;
+			}
+
+			if (propWarm.TryReadProperty(ref reader, options, PropWarm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cold = propCold.Value,
+			Delete = propDelete.Value,
+			Frozen = propFrozen.Value,
+			Hot = propHot.Value,
+			Warm = propWarm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Phases value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCold, value.Cold, null, null);
+		writer.WriteProperty(options, PropDelete, value.Delete, null, null);
+		writer.WriteProperty(options, PropFrozen, value.Frozen, null, null);
+		writer.WriteProperty(options, PropHot, value.Hot, null, null);
+		writer.WriteProperty(options, PropWarm, value.Warm, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.PhasesConverter))]
 public sealed partial class Phases
 {
-	[JsonInclude, JsonPropertyName("cold")]
-	public Elastic.Clients.Elasticsearch.Xpack.Phase? Cold { get; init; }
-	[JsonInclude, JsonPropertyName("delete")]
-	public Elastic.Clients.Elasticsearch.Xpack.Phase? Delete { get; init; }
-	[JsonInclude, JsonPropertyName("frozen")]
-	public Elastic.Clients.Elasticsearch.Xpack.Phase? Frozen { get; init; }
-	[JsonInclude, JsonPropertyName("hot")]
-	public Elastic.Clients.Elasticsearch.Xpack.Phase? Hot { get; init; }
-	[JsonInclude, JsonPropertyName("warm")]
-	public Elastic.Clients.Elasticsearch.Xpack.Phase? Warm { get; init; }
+#if NET7_0_OR_GREATER
+	public Phases()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Phases()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Phases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.Phase? Cold { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Phase? Delete { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Phase? Frozen { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Phase? Hot { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Phase? Warm { get; set; }
 }

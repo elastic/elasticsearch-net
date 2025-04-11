@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetDatafeedStatsRequestParameters : RequestParameters
+public sealed partial class GetDatafeedStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -63,6 +56,35 @@ public sealed partial class GetDatafeedStatsRequestParameters : RequestParameter
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
+internal sealed partial class GetDatafeedStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get datafeeds usage info.
@@ -74,19 +96,31 @@ public sealed partial class GetDatafeedStatsRequestParameters : RequestParameter
 /// This API returns a maximum of 10,000 datafeeds.
 /// </para>
 /// </summary>
-public sealed partial class GetDatafeedStatsRequest : PlainRequest<GetDatafeedStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestConverter))]
+public sealed partial class GetDatafeedStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>
 {
-	public GetDatafeedStatsRequest()
-	{
-	}
-
 	public GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.Ids? datafeedId) : base(r => r.Optional("datafeed_id", datafeedId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetDatafeedStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetDatafeedStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetDatafeedStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetDatafeedStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -94,6 +128,15 @@ public sealed partial class GetDatafeedStatsRequest : PlainRequest<GetDatafeedSt
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the datafeed. It can be a datafeed identifier or a
+	/// wildcard expression. If you do not specify one of these options, the API
+	/// returns information about all datafeeds.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ids? DatafeedId { get => P<Elastic.Clients.Elasticsearch.Ids?>("datafeed_id"); set => PO("datafeed_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies what to do when the request:
 	/// </para>
 	/// <list type="number">
@@ -120,7 +163,6 @@ public sealed partial class GetDatafeedStatsRequest : PlainRequest<GetDatafeedSt
 	/// <c>404</c> status code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
@@ -135,35 +177,128 @@ public sealed partial class GetDatafeedStatsRequest : PlainRequest<GetDatafeedSt
 /// This API returns a maximum of 10,000 datafeeds.
 /// </para>
 /// </summary>
-public sealed partial class GetDatafeedStatsRequestDescriptor : RequestDescriptor<GetDatafeedStatsRequestDescriptor, GetDatafeedStatsRequestParameters>
+public readonly partial struct GetDatafeedStatsRequestDescriptor
 {
-	internal GetDatafeedStatsRequestDescriptor(Action<GetDatafeedStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest Instance { get; init; }
 
-	public GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? datafeedId) : base(r => r.Optional("datafeed_id", datafeedId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? datafeedId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(datafeedId);
 	}
 
 	public GetDatafeedStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetDatafeedStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_datafeed_stats";
-
-	public GetDatafeedStatsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-
-	public GetDatafeedStatsRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Ids? datafeedId)
+	/// <summary>
+	/// <para>
+	/// Identifier for the datafeed. It can be a datafeed identifier or a
+	/// wildcard expression. If you do not specify one of these options, the API
+	/// returns information about all datafeeds.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
-		RouteValues.Optional("datafeed_id", datafeedId);
-		return Self;
+		Instance.DatafeedId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no datafeeds that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is <c>true</c>, which returns an empty <c>datafeeds</c> array
+	/// when there are no matches and the subset of results when there are
+	/// partial matches. If this parameter is <c>false</c>, the request returns a
+	/// <c>404</c> status code when there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

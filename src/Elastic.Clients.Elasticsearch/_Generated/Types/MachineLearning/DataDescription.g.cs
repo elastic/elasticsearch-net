@@ -17,19 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataDescriptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFieldDelimiter = System.Text.Json.JsonEncodedText.Encode("field_delimiter");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeField = System.Text.Json.JsonEncodedText.Encode("time_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeFormat = System.Text.Json.JsonEncodedText.Encode("time_format");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFieldDelimiter = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTimeField = default;
+		LocalJsonValue<string?> propTimeFormat = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFieldDelimiter.TryReadProperty(ref reader, options, PropFieldDelimiter, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propTimeField.TryReadProperty(ref reader, options, PropTimeField, null))
+			{
+				continue;
+			}
+
+			if (propTimeFormat.TryReadProperty(ref reader, options, PropTimeFormat, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FieldDelimiter = propFieldDelimiter.Value,
+			Format = propFormat.Value,
+			TimeField = propTimeField.Value,
+			TimeFormat = propTimeFormat.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataDescription value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFieldDelimiter, value.FieldDelimiter, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropTimeField, value.TimeField, null, null);
+		writer.WriteProperty(options, PropTimeFormat, value.TimeFormat, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionConverter))]
 public sealed partial class DataDescription
 {
-	[JsonInclude, JsonPropertyName("field_delimiter")]
+#if NET7_0_OR_GREATER
+	public DataDescription()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataDescription()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? FieldDelimiter { get; set; }
 
 	/// <summary>
@@ -37,7 +115,6 @@ public sealed partial class DataDescription
 	/// Only JSON format is supported at this time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -45,7 +122,6 @@ public sealed partial class DataDescription
 	/// The name of the field that contains the timestamp.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_field")]
 	public Elastic.Clients.Elasticsearch.Field? TimeField { get; set; }
 
 	/// <summary>
@@ -53,27 +129,32 @@ public sealed partial class DataDescription
 	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_format")]
 	public string? TimeFormat { get; set; }
 }
 
-public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableDescriptor<DataDescriptionDescriptor<TDocument>>
+public readonly partial struct DataDescriptionDescriptor<TDocument>
 {
-	internal DataDescriptionDescriptor(Action<DataDescriptionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Instance { get; init; }
 
-	public DataDescriptionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataDescriptionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription instance)
 	{
+		Instance = instance;
 	}
 
-	private string? FieldDelimiterValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TimeFieldValue { get; set; }
-	private string? TimeFormatValue { get; set; }
-
-	public DataDescriptionDescriptor<TDocument> FieldDelimiter(string? fieldDelimiter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataDescriptionDescriptor()
 	{
-		FieldDelimiterValue = fieldDelimiter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> FieldDelimiter(string? value)
+	{
+		Instance.FieldDelimiter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -81,10 +162,10 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	/// Only JSON format is supported at this time.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -92,10 +173,10 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	/// The name of the field that contains the timestamp.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor<TDocument> TimeField(Elastic.Clients.Elasticsearch.Field? timeField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> TimeField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TimeFieldValue = timeField;
-		return Self;
+		Instance.TimeField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -103,21 +184,10 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	/// The name of the field that contains the timestamp.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor<TDocument> TimeField<TValue>(Expression<Func<TDocument, TValue>> timeField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> TimeField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TimeFieldValue = timeField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
-	public DataDescriptionDescriptor<TDocument> TimeField(Expression<Func<TDocument, object>> timeField)
-	{
-		TimeFieldValue = timeField;
-		return Self;
+		Instance.TimeField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -125,60 +195,49 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor<TDocument> TimeFormat(string? timeFormat)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> TimeFormat(string? value)
 	{
-		TimeFormatValue = timeFormat;
-		return Self;
+		Instance.TimeFormat = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FieldDelimiterValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("field_delimiter");
-			writer.WriteStringValue(FieldDelimiterValue);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (TimeFieldValue is not null)
-		{
-			writer.WritePropertyName("time_field");
-			JsonSerializer.Serialize(writer, TimeFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeFormatValue))
-		{
-			writer.WritePropertyName("time_format");
-			writer.WriteStringValue(TimeFormatValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<DataDescriptionDescriptor>
+public readonly partial struct DataDescriptionDescriptor
 {
-	internal DataDescriptionDescriptor(Action<DataDescriptionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Instance { get; init; }
 
-	public DataDescriptionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataDescriptionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription instance)
 	{
+		Instance = instance;
 	}
 
-	private string? FieldDelimiterValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TimeFieldValue { get; set; }
-	private string? TimeFormatValue { get; set; }
-
-	public DataDescriptionDescriptor FieldDelimiter(string? fieldDelimiter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataDescriptionDescriptor()
 	{
-		FieldDelimiterValue = fieldDelimiter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor FieldDelimiter(string? value)
+	{
+		Instance.FieldDelimiter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -186,10 +245,10 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	/// Only JSON format is supported at this time.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -197,10 +256,10 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	/// The name of the field that contains the timestamp.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor TimeField(Elastic.Clients.Elasticsearch.Field? timeField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor TimeField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TimeFieldValue = timeField;
-		return Self;
+		Instance.TimeField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -208,21 +267,10 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	/// The name of the field that contains the timestamp.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor TimeField<TDocument, TValue>(Expression<Func<TDocument, TValue>> timeField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor TimeField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TimeFieldValue = timeField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
-	public DataDescriptionDescriptor TimeField<TDocument>(Expression<Func<TDocument, object>> timeField)
-	{
-		TimeFieldValue = timeField;
-		return Self;
+		Instance.TimeField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -230,39 +278,22 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
 	/// </para>
 	/// </summary>
-	public DataDescriptionDescriptor TimeFormat(string? timeFormat)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor TimeFormat(string? value)
 	{
-		TimeFormatValue = timeFormat;
-		return Self;
+		Instance.TimeFormat = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FieldDelimiterValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("field_delimiter");
-			writer.WriteStringValue(FieldDelimiterValue);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (TimeFieldValue is not null)
-		{
-			writer.WritePropertyName("time_field");
-			JsonSerializer.Serialize(writer, TimeFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeFormatValue))
-		{
-			writer.WritePropertyName("time_format");
-			writer.WriteStringValue(TimeFormatValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

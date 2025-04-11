@@ -17,28 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndicesStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHealth = System.Text.Json.JsonEncodedText.Encode("health");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus?> propHealth = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexStats?> propPrimaries = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>?> propShards = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState?> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexStats?> propTotal = default;
+		LocalJsonValue<string?> propUuid = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHealth.TryReadProperty(ref reader, options, PropHealth, null))
+			{
+				continue;
+			}
+
+			if (propPrimaries.TryReadProperty(ref reader, options, PropPrimaries, null))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>(o, null, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Health = propHealth.Value,
+			Primaries = propPrimaries.Value,
+			Shards = propShards.Value,
+			Status = propStatus.Value,
+			Total = propTotal.Value,
+			Uuid = propUuid.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHealth, value.Health, null, null);
+		writer.WriteProperty(options, PropPrimaries, value.Primaries, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>(o, v, null)));
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsConverter))]
 public sealed partial class IndicesStats
 {
-	[JsonInclude, JsonPropertyName("health")]
-	public Elastic.Clients.Elasticsearch.HealthStatus? Health { get; init; }
-	[JsonInclude, JsonPropertyName("primaries")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Primaries { get; init; }
-	[JsonInclude, JsonPropertyName("shards")]
-	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState? Status { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Total { get; init; }
-	[JsonInclude, JsonPropertyName("uuid")]
-	public string? Uuid { get; init; }
+#if NET7_0_OR_GREATER
+	public IndicesStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndicesStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndicesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthStatus? Health { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Primaries { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState? Status { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Total { get; set; }
+	public string? Uuid { get; set; }
 }

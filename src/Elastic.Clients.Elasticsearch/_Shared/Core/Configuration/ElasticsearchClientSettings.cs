@@ -9,13 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Esql;
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 using Elastic.Clients.Elasticsearch.Esql;
-using Elastic.Clients.Elasticsearch.Fluent;
-#endif
 
 using Elastic.Clients.Elasticsearch.Serialization;
 
@@ -25,6 +19,8 @@ using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
+
+public class FluentDictionary<TKey, TValue> : Dictionary<TKey, TValue>;
 
 /// <inheritdoc cref="IElasticsearchClientSettings" />
 public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<ElasticsearchClientSettings>

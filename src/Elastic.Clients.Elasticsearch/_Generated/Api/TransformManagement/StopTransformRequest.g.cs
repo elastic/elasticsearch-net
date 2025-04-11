@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class StopTransformRequestParameters : RequestParameters
+public sealed partial class StopTransformRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -81,25 +74,78 @@ public sealed partial class StopTransformRequestParameters : RequestParameters
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class StopTransformRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest>
+{
+	public override Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Stop transforms.
 /// Stops one or more transforms.
 /// </para>
 /// </summary>
-public sealed partial class StopTransformRequest : PlainRequest<StopTransformRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestConverter))]
+public sealed partial class StopTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StopTransformRequest(Elastic.Clients.Elasticsearch.Name transformId) : base(r => r.Required("transform_id", transformId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public StopTransformRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StopTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementStopTransform;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TransformManagementStopTransform;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "transform.stop_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. To stop multiple transforms, use a comma-separated list or a wildcard expression.
+	/// To stop all transforms, use <c>_all</c> or <c>*</c> as the identifier.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name TransformId { get => P<Elastic.Clients.Elasticsearch.Name>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -115,7 +161,6 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	/// If it is false, the request returns a 404 status code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -123,7 +168,6 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	/// If it is true, the API forcefully stops the transforms.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
@@ -133,7 +177,6 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	/// eventually moves the transform to a STOPPED state.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -142,7 +185,6 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	/// the transform stops as soon as possible.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
 
 	/// <summary>
@@ -151,7 +193,6 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 	/// immediately and the indexer is stopped asynchronously in the background.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
@@ -161,35 +202,157 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 /// Stops one or more transforms.
 /// </para>
 /// </summary>
-public sealed partial class StopTransformRequestDescriptor : RequestDescriptor<StopTransformRequestDescriptor, StopTransformRequestParameters>
+public readonly partial struct StopTransformRequestDescriptor
 {
-	internal StopTransformRequestDescriptor(Action<StopTransformRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest Instance { get; init; }
 
-	public StopTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Name transformId) : base(r => r.Required("transform_id", transformId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StopTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementStopTransform;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "transform.stop_transform";
-
-	public StopTransformRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public StopTransformRequestDescriptor Force(bool? force = true) => Qs("force", force);
-	public StopTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public StopTransformRequestDescriptor WaitForCheckpoint(bool? waitForCheckpoint = true) => Qs("wait_for_checkpoint", waitForCheckpoint);
-	public StopTransformRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public StopTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Name transformId)
+	public StopTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Name transformId)
 	{
-		RouteValues.Required("transform_id", transformId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest(transformId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public StopTransformRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. To stop multiple transforms, use a comma-separated list or a wildcard expression.
+	/// To stop all transforms, use <c>_all</c> or <c>*</c> as the identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request: contains wildcard expressions and there are no transforms that match;
+	/// contains the <c>_all</c> string or no identifiers and there are no matches; contains wildcard expressions and there
+	/// are only partial matches.
+	/// </para>
+	/// <para>
+	/// If it is true, the API returns a successful acknowledgement message when there are no matches. When there are
+	/// only partial matches, the API stops the appropriate transforms.
+	/// </para>
+	/// <para>
+	/// If it is false, the request returns a 404 status code when there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor AllowNoMatch(bool? value = true)
+	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If it is true, the API forcefully stops the transforms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response when <c>wait_for_completion</c> is <c>true</c>. If no response is received before the
+	/// timeout expires, the request returns a timeout exception. However, the request continues processing and
+	/// eventually moves the transform to a STOPPED state.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If it is true, the transform does not completely stop until the current checkpoint is completed. If it is false,
+	/// the transform stops as soon as possible.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor WaitForCheckpoint(bool? value = true)
+	{
+		Instance.WaitForCheckpoint = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If it is true, the API blocks until the indexer state completely stops. If it is false, the API returns
+	/// immediately and the indexer is stopped asynchronously in the background.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

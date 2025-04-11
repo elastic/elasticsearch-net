@@ -17,55 +17,74 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-[JsonConverter(typeof(FollowerIndexStatusConverter))]
-public enum FollowerIndexStatus
+internal sealed partial class FollowerIndexStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus>
 {
-	[EnumMember(Value = "paused")]
-	Paused,
-	[EnumMember(Value = "active")]
-	Active
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active");
+	private static readonly System.Text.Json.JsonEncodedText MemberPaused = System.Text.Json.JsonEncodedText.Encode("paused");
 
-internal sealed class FollowerIndexStatusConverter : JsonConverter<FollowerIndexStatus>
-{
-	public override FollowerIndexStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberActive))
 		{
-			case "paused":
-				return FollowerIndexStatus.Paused;
-			case "active":
-				return FollowerIndexStatus.Active;
+			return Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Active;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberPaused))
+		{
+			return Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Paused;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberActive.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Active;
+		}
+
+		if (string.Equals(value, MemberPaused.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Paused;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FollowerIndexStatus value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case FollowerIndexStatus.Paused:
-				writer.WriteStringValue("paused");
-				return;
-			case FollowerIndexStatus.Active:
-				writer.WriteStringValue("active");
-				return;
+			case Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Active:
+				writer.WriteStringValue(MemberActive);
+				break;
+			case Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Paused:
+				writer.WriteStringValue(MemberPaused);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatusConverter))]
+public enum FollowerIndexStatus
+{
+	[System.Runtime.Serialization.EnumMember(Value = "active")]
+	Active,
+	[System.Runtime.Serialization.EnumMember(Value = "paused")]
+	Paused
 }

@@ -17,31 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class PercentageScoreHeuristic
+internal sealed partial class PercentageScoreHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic>
 {
-}
-
-public sealed partial class PercentageScoreHeuristicDescriptor : SerializableDescriptor<PercentageScoreHeuristicDescriptor>
-{
-	internal PercentageScoreHeuristicDescriptor(Action<PercentageScoreHeuristicDescriptor> configure) => configure.Invoke(this);
-
-	public PercentageScoreHeuristicDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicConverter))]
+public sealed partial class PercentageScoreHeuristic
+{
+#if NET7_0_OR_GREATER
+	public PercentageScoreHeuristic()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PercentageScoreHeuristic()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+}
+
+public readonly partial struct PercentageScoreHeuristicDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentageScoreHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentageScoreHeuristicDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor descriptor) => descriptor.Instance;
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

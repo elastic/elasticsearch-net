@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class NlpTokenizationUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span");
+	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propSpan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate?> propTruncate = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSpan.TryReadProperty(ref reader, options, PropSpan, null))
+			{
+				continue;
+			}
+
+			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Span = propSpan.Value,
+			Truncate = propTruncate.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSpan, value.Span, null, null);
+		writer.WriteProperty(options, PropTruncate, value.Truncate, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsConverter))]
 public sealed partial class NlpTokenizationUpdateOptions
 {
+#if NET7_0_OR_GREATER
+	public NlpTokenizationUpdateOptions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public NlpTokenizationUpdateOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Span options to apply
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class NlpTokenizationUpdateOptions
 	/// Truncate options to apply
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
 }
 
-public sealed partial class NlpTokenizationUpdateOptionsDescriptor : SerializableDescriptor<NlpTokenizationUpdateOptionsDescriptor>
+public readonly partial struct NlpTokenizationUpdateOptionsDescriptor
 {
-	internal NlpTokenizationUpdateOptionsDescriptor(Action<NlpTokenizationUpdateOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions Instance { get; init; }
 
-	public NlpTokenizationUpdateOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NlpTokenizationUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private int? SpanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? TruncateValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NlpTokenizationUpdateOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Span options to apply
 	/// </para>
 	/// </summary>
-	public NlpTokenizationUpdateOptionsDescriptor Span(int? span)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor Span(int? value)
 	{
-		SpanValue = span;
-		return Self;
+		Instance.Span = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class NlpTokenizationUpdateOptionsDescriptor : Serializabl
 	/// Truncate options to apply
 	/// </para>
 	/// </summary>
-	public NlpTokenizationUpdateOptionsDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? truncate)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? value)
 	{
-		TruncateValue = truncate;
-		return Self;
+		Instance.Truncate = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (SpanValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("span");
-			writer.WriteNumberValue(SpanValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TruncateValue is not null)
-		{
-			writer.WritePropertyName("truncate");
-			JsonSerializer.Serialize(writer, TruncateValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

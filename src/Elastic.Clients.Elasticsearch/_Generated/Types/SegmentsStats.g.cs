@@ -17,41 +17,323 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SegmentsStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValuesMemory = System.Text.Json.JsonEncodedText.Encode("doc_values_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValuesMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("doc_values_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFileSizes = System.Text.Json.JsonEncodedText.Encode("file_sizes");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSet = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSetMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMaxMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("index_writer_max_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemory = System.Text.Json.JsonEncodedText.Encode("index_writer_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("index_writer_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUnsafeAutoIdTimestamp = System.Text.Json.JsonEncodedText.Encode("max_unsafe_auto_id_timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropNormsMemory = System.Text.Json.JsonEncodedText.Encode("norms_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropNormsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("norms_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPointsMemory = System.Text.Json.JsonEncodedText.Encode("points_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropPointsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("points_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredMemory = System.Text.Json.JsonEncodedText.Encode("stored_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropTermsMemory = System.Text.Json.JsonEncodedText.Encode("terms_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropTermsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("terms_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectoryMemory = System.Text.Json.JsonEncodedText.Encode("term_vectory_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemory = System.Text.Json.JsonEncodedText.Encode("version_map_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("version_map_memory_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.SegmentsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propDocValuesMemory = default;
+		LocalJsonValue<long> propDocValuesMemoryInBytes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>> propFileSizes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFixedBitSet = default;
+		LocalJsonValue<long> propFixedBitSetMemoryInBytes = default;
+		LocalJsonValue<long?> propIndexWriterMaxMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propIndexWriterMemory = default;
+		LocalJsonValue<long> propIndexWriterMemoryInBytes = default;
+		LocalJsonValue<long> propMaxUnsafeAutoIdTimestamp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMemory = default;
+		LocalJsonValue<long> propMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propNormsMemory = default;
+		LocalJsonValue<long> propNormsMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propPointsMemory = default;
+		LocalJsonValue<long> propPointsMemoryInBytes = default;
+		LocalJsonValue<long> propStoredFieldsMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propStoredMemory = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTermsMemory = default;
+		LocalJsonValue<long> propTermsMemoryInBytes = default;
+		LocalJsonValue<long> propTermVectorsMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTermVectoryMemory = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propVersionMapMemory = default;
+		LocalJsonValue<long> propVersionMapMemoryInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propDocValuesMemory.TryReadProperty(ref reader, options, PropDocValuesMemory, null))
+			{
+				continue;
+			}
+
+			if (propDocValuesMemoryInBytes.TryReadProperty(ref reader, options, PropDocValuesMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propFileSizes.TryReadProperty(ref reader, options, PropFileSizes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propFixedBitSet.TryReadProperty(ref reader, options, PropFixedBitSet, null))
+			{
+				continue;
+			}
+
+			if (propFixedBitSetMemoryInBytes.TryReadProperty(ref reader, options, PropFixedBitSetMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propIndexWriterMaxMemoryInBytes.TryReadProperty(ref reader, options, PropIndexWriterMaxMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propIndexWriterMemory.TryReadProperty(ref reader, options, PropIndexWriterMemory, null))
+			{
+				continue;
+			}
+
+			if (propIndexWriterMemoryInBytes.TryReadProperty(ref reader, options, PropIndexWriterMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propMaxUnsafeAutoIdTimestamp.TryReadProperty(ref reader, options, PropMaxUnsafeAutoIdTimestamp, null))
+			{
+				continue;
+			}
+
+			if (propMemory.TryReadProperty(ref reader, options, PropMemory, null))
+			{
+				continue;
+			}
+
+			if (propMemoryInBytes.TryReadProperty(ref reader, options, PropMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propNormsMemory.TryReadProperty(ref reader, options, PropNormsMemory, null))
+			{
+				continue;
+			}
+
+			if (propNormsMemoryInBytes.TryReadProperty(ref reader, options, PropNormsMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propPointsMemory.TryReadProperty(ref reader, options, PropPointsMemory, null))
+			{
+				continue;
+			}
+
+			if (propPointsMemoryInBytes.TryReadProperty(ref reader, options, PropPointsMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propStoredFieldsMemoryInBytes.TryReadProperty(ref reader, options, PropStoredFieldsMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propStoredMemory.TryReadProperty(ref reader, options, PropStoredMemory, null))
+			{
+				continue;
+			}
+
+			if (propTermsMemory.TryReadProperty(ref reader, options, PropTermsMemory, null))
+			{
+				continue;
+			}
+
+			if (propTermsMemoryInBytes.TryReadProperty(ref reader, options, PropTermsMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTermVectorsMemoryInBytes.TryReadProperty(ref reader, options, PropTermVectorsMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTermVectoryMemory.TryReadProperty(ref reader, options, PropTermVectoryMemory, null))
+			{
+				continue;
+			}
+
+			if (propVersionMapMemory.TryReadProperty(ref reader, options, PropVersionMapMemory, null))
+			{
+				continue;
+			}
+
+			if (propVersionMapMemoryInBytes.TryReadProperty(ref reader, options, PropVersionMapMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SegmentsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			DocValuesMemory = propDocValuesMemory.Value,
+			DocValuesMemoryInBytes = propDocValuesMemoryInBytes.Value,
+			FileSizes = propFileSizes.Value,
+			FixedBitSet = propFixedBitSet.Value,
+			FixedBitSetMemoryInBytes = propFixedBitSetMemoryInBytes.Value,
+			IndexWriterMaxMemoryInBytes = propIndexWriterMaxMemoryInBytes.Value,
+			IndexWriterMemory = propIndexWriterMemory.Value,
+			IndexWriterMemoryInBytes = propIndexWriterMemoryInBytes.Value,
+			MaxUnsafeAutoIdTimestamp = propMaxUnsafeAutoIdTimestamp.Value,
+			Memory = propMemory.Value,
+			MemoryInBytes = propMemoryInBytes.Value,
+			NormsMemory = propNormsMemory.Value,
+			NormsMemoryInBytes = propNormsMemoryInBytes.Value,
+			PointsMemory = propPointsMemory.Value,
+			PointsMemoryInBytes = propPointsMemoryInBytes.Value,
+			StoredFieldsMemoryInBytes = propStoredFieldsMemoryInBytes.Value,
+			StoredMemory = propStoredMemory.Value,
+			TermsMemory = propTermsMemory.Value,
+			TermsMemoryInBytes = propTermsMemoryInBytes.Value,
+			TermVectorsMemoryInBytes = propTermVectorsMemoryInBytes.Value,
+			TermVectoryMemory = propTermVectoryMemory.Value,
+			VersionMapMemory = propVersionMapMemory.Value,
+			VersionMapMemoryInBytes = propVersionMapMemoryInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SegmentsStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDocValuesMemory, value.DocValuesMemory, null, null);
+		writer.WriteProperty(options, PropDocValuesMemoryInBytes, value.DocValuesMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropFileSizes, value.FileSizes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>(o, v, null, null));
+		writer.WriteProperty(options, PropFixedBitSet, value.FixedBitSet, null, null);
+		writer.WriteProperty(options, PropFixedBitSetMemoryInBytes, value.FixedBitSetMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropIndexWriterMaxMemoryInBytes, value.IndexWriterMaxMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropIndexWriterMemory, value.IndexWriterMemory, null, null);
+		writer.WriteProperty(options, PropIndexWriterMemoryInBytes, value.IndexWriterMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropMaxUnsafeAutoIdTimestamp, value.MaxUnsafeAutoIdTimestamp, null, null);
+		writer.WriteProperty(options, PropMemory, value.Memory, null, null);
+		writer.WriteProperty(options, PropMemoryInBytes, value.MemoryInBytes, null, null);
+		writer.WriteProperty(options, PropNormsMemory, value.NormsMemory, null, null);
+		writer.WriteProperty(options, PropNormsMemoryInBytes, value.NormsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropPointsMemory, value.PointsMemory, null, null);
+		writer.WriteProperty(options, PropPointsMemoryInBytes, value.PointsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropStoredFieldsMemoryInBytes, value.StoredFieldsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropStoredMemory, value.StoredMemory, null, null);
+		writer.WriteProperty(options, PropTermsMemory, value.TermsMemory, null, null);
+		writer.WriteProperty(options, PropTermsMemoryInBytes, value.TermsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropTermVectorsMemoryInBytes, value.TermVectorsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropTermVectoryMemory, value.TermVectoryMemory, null, null);
+		writer.WriteProperty(options, PropVersionMapMemory, value.VersionMapMemory, null, null);
+		writer.WriteProperty(options, PropVersionMapMemoryInBytes, value.VersionMapMemoryInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SegmentsStatsConverter))]
 public sealed partial class SegmentsStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SegmentsStats(int count, long docValuesMemoryInBytes, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> fileSizes, long fixedBitSetMemoryInBytes, long indexWriterMemoryInBytes, long maxUnsafeAutoIdTimestamp, long memoryInBytes, long normsMemoryInBytes, long pointsMemoryInBytes, long storedFieldsMemoryInBytes, long termsMemoryInBytes, long termVectorsMemoryInBytes, long versionMapMemoryInBytes)
+	{
+		Count = count;
+		DocValuesMemoryInBytes = docValuesMemoryInBytes;
+		FileSizes = fileSizes;
+		FixedBitSetMemoryInBytes = fixedBitSetMemoryInBytes;
+		IndexWriterMemoryInBytes = indexWriterMemoryInBytes;
+		MaxUnsafeAutoIdTimestamp = maxUnsafeAutoIdTimestamp;
+		MemoryInBytes = memoryInBytes;
+		NormsMemoryInBytes = normsMemoryInBytes;
+		PointsMemoryInBytes = pointsMemoryInBytes;
+		StoredFieldsMemoryInBytes = storedFieldsMemoryInBytes;
+		TermsMemoryInBytes = termsMemoryInBytes;
+		TermVectorsMemoryInBytes = termVectorsMemoryInBytes;
+		VersionMapMemoryInBytes = versionMapMemoryInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public SegmentsStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SegmentsStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SegmentsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total number of segments across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used for doc values across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("doc_values_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? DocValuesMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? DocValuesMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for doc values across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("doc_values_memory_in_bytes")]
-	public long DocValuesMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocValuesMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -59,8 +341,11 @@ public sealed partial class SegmentsStats
 	/// To get information on segment files, use the node stats API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("file_sizes")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,146 +353,166 @@ public sealed partial class SegmentsStats
 	/// Fixed bit sets are used for nested object field types and type filters for join fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fixed_bit_set")]
-	public Elastic.Clients.Elasticsearch.ByteSize? FixedBitSet { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? FixedBitSet { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory, in bytes, used by fixed bit sets across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fixed_bit_set_memory_in_bytes")]
-	public long FixedBitSetMemoryInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("index_writer_max_memory_in_bytes")]
-	public long? IndexWriterMaxMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FixedBitSetMemoryInBytes { get; set; }
+	public long? IndexWriterMaxMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used by all index writers across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_writer_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? IndexWriterMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? IndexWriterMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used by all index writers across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_writer_memory_in_bytes")]
-	public long IndexWriterMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexWriterMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unix timestamp, in milliseconds, of the most recently retried indexing request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_unsafe_auto_id_timestamp")]
-	public long MaxUnsafeAutoIdTimestamp { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxUnsafeAutoIdTimestamp { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used for segments across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for segments across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("memory_in_bytes")]
-	public long MemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used for normalization factors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("norms_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? NormsMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? NormsMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for normalization factors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("norms_memory_in_bytes")]
-	public long NormsMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NormsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used for points across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("points_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? PointsMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? PointsMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for points across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("points_memory_in_bytes")]
-	public long PointsMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PointsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stored_fields_memory_in_bytes")]
-	public long StoredFieldsMemoryInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("stored_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long StoredFieldsMemoryInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used for terms across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? TermsMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TermsMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for terms across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms_memory_in_bytes")]
-	public long TermsMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TermsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("term_vectors_memory_in_bytes")]
-	public long TermVectorsMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TermVectorsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used for term vectors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("term_vectory_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of memory used by all version maps across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version_map_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? VersionMapMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? VersionMapMemory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount, in bytes, of memory used by all version maps across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version_map_memory_in_bytes")]
-	public long VersionMapMemoryInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long VersionMapMemoryInBytes { get; set; }
 }

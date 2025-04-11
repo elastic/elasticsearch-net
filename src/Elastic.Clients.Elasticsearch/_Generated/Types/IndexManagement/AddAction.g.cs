@@ -17,25 +17,166 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class AddActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("alias");
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIsHidden = System.Text.Json.JsonEncodedText.Encode("is_hidden");
+	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index");
+	private static readonly System.Text.Json.JsonEncodedText PropMustExist = System.Text.Json.JsonEncodedText.Encode("must_exist");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.AddAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexAlias?> propAlias = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propIndexRouting = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
+		LocalJsonValue<bool?> propIsHidden = default;
+		LocalJsonValue<bool?> propIsWriteIndex = default;
+		LocalJsonValue<bool?> propMustExist = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propSearchRouting = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlias.TryReadProperty(ref reader, options, PropAlias, null))
+			{
+				continue;
+			}
+
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexRouting.TryReadProperty(ref reader, options, PropIndexRouting, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propIsHidden.TryReadProperty(ref reader, options, PropIsHidden, null))
+			{
+				continue;
+			}
+
+			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, null))
+			{
+				continue;
+			}
+
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propSearchRouting.TryReadProperty(ref reader, options, PropSearchRouting, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Alias = propAlias.Value,
+			Aliases = propAliases.Value,
+			Filter = propFilter.Value,
+			Index = propIndex.Value,
+			IndexRouting = propIndexRouting.Value,
+			Indices = propIndices.Value,
+			IsHidden = propIsHidden.Value,
+			IsWriteIndex = propIsWriteIndex.Value,
+			MustExist = propMustExist.Value,
+			Routing = propRouting.Value,
+			SearchRouting = propSearchRouting.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.AddAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAlias, value.Alias, null, null);
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropIsHidden, value.IsHidden, null, null);
+		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, null);
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.AddActionConverter))]
 public sealed partial class AddAction
 {
+#if NET7_0_OR_GREATER
+	public AddAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AddAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Alias for the action.
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
 
 	/// <summary>
@@ -44,16 +185,13 @@ public sealed partial class AddAction
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
-	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query used to limit documents the alias can access.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
@@ -62,7 +200,6 @@ public sealed partial class AddAction
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -72,7 +209,6 @@ public sealed partial class AddAction
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
 	/// <summary>
@@ -81,7 +217,6 @@ public sealed partial class AddAction
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
@@ -89,7 +224,6 @@ public sealed partial class AddAction
 	/// If <c>true</c>, the alias is hidden.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; set; }
 
 	/// <summary>
@@ -97,7 +231,6 @@ public sealed partial class AddAction
 	/// If <c>true</c>, sets the write index or data stream for the alias.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
 
 	/// <summary>
@@ -105,7 +238,6 @@ public sealed partial class AddAction
 	/// If <c>true</c>, the alias must exist to perform the action.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
 	/// <summary>
@@ -114,7 +246,6 @@ public sealed partial class AddAction
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -124,33 +255,27 @@ public sealed partial class AddAction
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(AddAction addAction) => Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction.Add(addAction);
 }
 
-public sealed partial class AddActionDescriptor<TDocument> : SerializableDescriptor<AddActionDescriptor<TDocument>>
+public readonly partial struct AddActionDescriptor<TDocument>
 {
-	internal AddActionDescriptor(Action<AddActionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.AddAction Instance { get; init; }
 
-	public AddActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AddActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AddAction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private bool? IsHiddenValue { get; set; }
-	private bool? IsWriteIndexValue { get; set; }
-	private bool? MustExistValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AddActionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.AddAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -158,10 +283,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias? value)
 	{
-		AliasValue = alias;
-		return Self;
+		Instance.Alias = value;
+		return this;
 	}
 
 	/// <summary>
@@ -170,10 +295,22 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> Aliases(ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? aliases)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
-		AliasesValue = aliases;
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
+	{
+		Instance.Aliases = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -181,28 +318,21 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Query used to limit documents the alias can access.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public AddActionDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -211,10 +341,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -224,10 +354,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		IndexRoutingValue = indexRouting;
-		return Self;
+		Instance.IndexRouting = value;
+		return this;
 	}
 
 	/// <summary>
@@ -236,10 +366,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -247,10 +377,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// If <c>true</c>, the alias is hidden.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> IsHidden(bool? isHidden = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IsHidden(bool? value = true)
 	{
-		IsHiddenValue = isHidden;
-		return Self;
+		Instance.IsHidden = value;
+		return this;
 	}
 
 	/// <summary>
@@ -258,10 +388,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// If <c>true</c>, sets the write index or data stream for the alias.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IsWriteIndex(bool? value = true)
 	{
-		IsWriteIndexValue = isWriteIndex;
-		return Self;
+		Instance.IsWriteIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -269,10 +399,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// If <c>true</c>, the alias must exist to perform the action.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> MustExist(bool? mustExist = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> MustExist(bool? value = true)
 	{
-		MustExistValue = mustExist;
-		return Self;
+		Instance.MustExist = value;
+		return this;
 	}
 
 	/// <summary>
@@ -281,10 +411,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -294,116 +424,44 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		SearchRoutingValue = searchRouting;
-		return Self;
+		Instance.SearchRouting = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.AddAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (AliasValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("alias");
-			JsonSerializer.Serialize(writer, AliasValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexAlias>(AliasesValue, writer, options);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (IndexRoutingValue is not null)
-		{
-			writer.WritePropertyName("index_routing");
-			JsonSerializer.Serialize(writer, IndexRoutingValue, options);
-		}
-
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
-
-		if (IsHiddenValue.HasValue)
-		{
-			writer.WritePropertyName("is_hidden");
-			writer.WriteBooleanValue(IsHiddenValue.Value);
-		}
-
-		if (IsWriteIndexValue.HasValue)
-		{
-			writer.WritePropertyName("is_write_index");
-			writer.WriteBooleanValue(IsWriteIndexValue.Value);
-		}
-
-		if (MustExistValue.HasValue)
-		{
-			writer.WritePropertyName("must_exist");
-			writer.WriteBooleanValue(MustExistValue.Value);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (SearchRoutingValue is not null)
-		{
-			writer.WritePropertyName("search_routing");
-			JsonSerializer.Serialize(writer, SearchRoutingValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActionDescriptor>
+public readonly partial struct AddActionDescriptor
 {
-	internal AddActionDescriptor(Action<AddActionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.AddAction Instance { get; init; }
 
-	public AddActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AddActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AddAction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private bool? IsHiddenValue { get; set; }
-	private bool? IsWriteIndexValue { get; set; }
-	private bool? MustExistValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AddActionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AddAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -411,10 +469,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? value)
 	{
-		AliasValue = alias;
-		return Self;
+		Instance.Alias = value;
+		return this;
 	}
 
 	/// <summary>
@@ -423,10 +481,22 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor Aliases(ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? aliases)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
-		AliasesValue = aliases;
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
+	{
+		Instance.Aliases = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -434,28 +504,32 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Query used to limit documents the alias can access.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public AddActionDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -464,10 +538,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -477,10 +551,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		IndexRoutingValue = indexRouting;
-		return Self;
+		Instance.IndexRouting = value;
+		return this;
 	}
 
 	/// <summary>
@@ -489,10 +563,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -500,10 +574,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// If <c>true</c>, the alias is hidden.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor IsHidden(bool? isHidden = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IsHidden(bool? value = true)
 	{
-		IsHiddenValue = isHidden;
-		return Self;
+		Instance.IsHidden = value;
+		return this;
 	}
 
 	/// <summary>
@@ -511,10 +585,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// If <c>true</c>, sets the write index or data stream for the alias.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor IsWriteIndex(bool? isWriteIndex = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IsWriteIndex(bool? value = true)
 	{
-		IsWriteIndexValue = isWriteIndex;
-		return Self;
+		Instance.IsWriteIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -522,10 +596,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// If <c>true</c>, the alias must exist to perform the action.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor MustExist(bool? mustExist = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor MustExist(bool? value = true)
 	{
-		MustExistValue = mustExist;
-		return Self;
+		Instance.MustExist = value;
+		return this;
 	}
 
 	/// <summary>
@@ -534,10 +608,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -547,91 +621,22 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public AddActionDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		SearchRoutingValue = searchRouting;
-		return Self;
+		Instance.SearchRouting = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.AddAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AliasValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("alias");
-			JsonSerializer.Serialize(writer, AliasValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexAlias>(AliasesValue, writer, options);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (IndexRoutingValue is not null)
-		{
-			writer.WritePropertyName("index_routing");
-			JsonSerializer.Serialize(writer, IndexRoutingValue, options);
-		}
-
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
-
-		if (IsHiddenValue.HasValue)
-		{
-			writer.WritePropertyName("is_hidden");
-			writer.WriteBooleanValue(IsHiddenValue.Value);
-		}
-
-		if (IsWriteIndexValue.HasValue)
-		{
-			writer.WritePropertyName("is_write_index");
-			writer.WriteBooleanValue(IsWriteIndexValue.Value);
-		}
-
-		if (MustExistValue.HasValue)
-		{
-			writer.WritePropertyName("must_exist");
-			writer.WriteBooleanValue(MustExistValue.Value);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (SearchRoutingValue is not null)
-		{
-			writer.WritePropertyName("search_routing");
-			JsonSerializer.Serialize(writer, SearchRoutingValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

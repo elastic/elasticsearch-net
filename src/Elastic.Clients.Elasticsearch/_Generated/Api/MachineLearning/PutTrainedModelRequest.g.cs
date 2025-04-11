@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutTrainedModelRequestParameters : RequestParameters
+public sealed partial class PutTrainedModelRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -50,25 +43,177 @@ public sealed partial class PutTrainedModelRequestParameters : RequestParameters
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class PutTrainedModelRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompressedDefinition = System.Text.Json.JsonEncodedText.Encode("compressed_definition");
+	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
+	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropModelType = System.Text.Json.JsonEncodedText.Encode("model_type");
+	private static readonly System.Text.Json.JsonEncodedText PropPlatformArchitecture = System.Text.Json.JsonEncodedText.Encode("platform_architecture");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixStrings = System.Text.Json.JsonEncodedText.Encode("prefix_strings");
+	private static readonly System.Text.Json.JsonEncodedText PropTags = System.Text.Json.JsonEncodedText.Encode("tags");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propCompressedDefinition = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Definition?> propDefinition = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate?> propInferenceConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Input?> propInput = default;
+		LocalJsonValue<object?> propMetadata = default;
+		LocalJsonValue<long?> propModelSizeBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType?> propModelType = default;
+		LocalJsonValue<string?> propPlatformArchitecture = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings?> propPrefixStrings = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propTags = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompressedDefinition.TryReadProperty(ref reader, options, PropCompressedDefinition, null))
+			{
+				continue;
+			}
+
+			if (propDefinition.TryReadProperty(ref reader, options, PropDefinition, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propInferenceConfig.TryReadProperty(ref reader, options, PropInferenceConfig, null))
+			{
+				continue;
+			}
+
+			if (propInput.TryReadProperty(ref reader, options, PropInput, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, null))
+			{
+				continue;
+			}
+
+			if (propModelSizeBytes.TryReadProperty(ref reader, options, PropModelSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propModelType.TryReadProperty(ref reader, options, PropModelType, null))
+			{
+				continue;
+			}
+
+			if (propPlatformArchitecture.TryReadProperty(ref reader, options, PropPlatformArchitecture, null))
+			{
+				continue;
+			}
+
+			if (propPrefixStrings.TryReadProperty(ref reader, options, PropPrefixStrings, null))
+			{
+				continue;
+			}
+
+			if (propTags.TryReadProperty(ref reader, options, PropTags, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CompressedDefinition = propCompressedDefinition.Value,
+			Definition = propDefinition.Value,
+			Description = propDescription.Value,
+			InferenceConfig = propInferenceConfig.Value,
+			Input = propInput.Value,
+			Metadata = propMetadata.Value,
+			ModelSizeBytes = propModelSizeBytes.Value,
+			ModelType = propModelType.Value,
+			PlatformArchitecture = propPlatformArchitecture.Value,
+			PrefixStrings = propPrefixStrings.Value,
+			Tags = propTags.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompressedDefinition, value.CompressedDefinition, null, null);
+		writer.WriteProperty(options, PropDefinition, value.Definition, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
+		writer.WriteProperty(options, PropInput, value.Input, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
+		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, null);
+		writer.WriteProperty(options, PropModelType, value.ModelType, null, null);
+		writer.WriteProperty(options, PropPlatformArchitecture, value.PlatformArchitecture, null, null);
+		writer.WriteProperty(options, PropPrefixStrings, value.PrefixStrings, null, null);
+		writer.WriteProperty(options, PropTags, value.Tags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create a trained model.
 /// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedModelRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestConverter))]
+public sealed partial class PutTrainedModelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutTrainedModelRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutTrainedModelRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModel;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutTrainedModel;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_trained_model";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -77,7 +222,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// validations.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }
 
 	/// <summary>
@@ -86,7 +230,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// to complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
@@ -96,7 +239,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("compressed_definition")]
 	public string? CompressedDefinition { get; set; }
 
 	/// <summary>
@@ -105,7 +247,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// compressed_definition cannot be specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("definition")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Definition? Definition { get; set; }
 
 	/// <summary>
@@ -113,7 +254,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// A human-readable description of the inference trained model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -124,7 +264,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// ELSER the config is not required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? InferenceConfig { get; set; }
 
 	/// <summary>
@@ -132,7 +271,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// The input field names for the model definition.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("input")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Input? Input { get; set; }
 
 	/// <summary>
@@ -140,7 +278,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// An object map that contains metadata about the model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metadata")]
 	public object? Metadata { get; set; }
 
 	/// <summary>
@@ -150,7 +287,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// or the model definition is not supplied.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_size_bytes")]
 	public long? ModelSizeBytes { get; set; }
 
 	/// <summary>
@@ -158,7 +294,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// The model type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_type")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? ModelType { get; set; }
 
 	/// <summary>
@@ -172,7 +307,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// architecture or OS features), leave this field unset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("platform_architecture")]
 	public string? PlatformArchitecture { get; set; }
 
 	/// <summary>
@@ -180,7 +314,6 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// Optional prefix strings applied at inference
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix_strings")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; set; }
 
 	/// <summary>
@@ -188,8 +321,7 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	/// An array of tags to organize the model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tags")]
-	public ICollection<string>? Tags { get; set; }
+	public System.Collections.Generic.ICollection<string>? Tags { get; set; }
 }
 
 /// <summary>
@@ -198,50 +330,65 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 /// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : RequestDescriptor<PutTrainedModelRequestDescriptor<TDocument>, PutTrainedModelRequestParameters>
+public readonly partial struct PutTrainedModelRequestDescriptor
 {
-	internal PutTrainedModelRequestDescriptor(Action<PutTrainedModelRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Instance { get; init; }
 
-	public PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModel;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_trained_model";
-
-	public PutTrainedModelRequestDescriptor<TDocument> DeferDefinitionDecompression(bool? deferDefinitionDecompression = true) => Qs("defer_definition_decompression", deferDefinitionDecompression);
-	public PutTrainedModelRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public PutTrainedModelRequestDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(modelId);
 	}
 
-	private string? CompressedDefinitionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Definition? DefinitionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor DefinitionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> DefinitionDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Input? InputValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor InputDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> InputDescriptorAction { get; set; }
-	private object? MetadataValue { get; set; }
-	private long? ModelSizeBytesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? ModelTypeValue { get; set; }
-	private string? PlatformArchitectureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStringsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor PrefixStringsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor> PrefixStringsDescriptorAction { get; set; }
-	private ICollection<string>? TagsValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutTrainedModelRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
+	/// the request defers definition decompression and skips relevant
+	/// validations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor DeferDefinitionDecompression(bool? value = true)
+	{
+		Instance.DeferDefinitionDecompression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to wait for all child operations (e.g. model download)
+	/// to complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -250,10 +397,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// specified.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> CompressedDefinition(string? compressedDefinition)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor CompressedDefinition(string? value)
 	{
-		CompressedDefinitionValue = compressedDefinition;
-		return Self;
+		Instance.CompressedDefinition = value;
+		return this;
 	}
 
 	/// <summary>
@@ -262,28 +409,22 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// compressed_definition cannot be specified.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition? definition)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition? value)
 	{
-		DefinitionDescriptor = null;
-		DefinitionDescriptorAction = null;
-		DefinitionValue = definition;
-		return Self;
+		Instance.Definition = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The inference definition for the model. If definition is specified, then
+	/// compressed_definition cannot be specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Definition(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> action)
 	{
-		DefinitionValue = null;
-		DefinitionDescriptorAction = null;
-		DefinitionDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutTrainedModelRequestDescriptor<TDocument> Definition(Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> configure)
-	{
-		DefinitionValue = null;
-		DefinitionDescriptor = null;
-		DefinitionDescriptorAction = configure;
-		return Self;
+		Instance.Definition = Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -291,10 +432,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// A human-readable description of the inference trained model.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -305,28 +446,38 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// ELSER the config is not required.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? inferenceConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? value)
 	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
+		Instance.InferenceConfig = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The default configuration for inference. This can be either a regression
+	/// or classification configuration. It must match the underlying
+	/// definition.trained_model's target_type. For pre-packaged models such as
+	/// ELSER the config is not required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor.Build(action);
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The default configuration for inference. This can be either a regression
+	/// or classification configuration. It must match the underlying
+	/// definition.trained_model's target_type. For pre-packaged models such as
+	/// ELSER the config is not required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<T>> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -334,28 +485,21 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// The input field names for the model definition.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> Input(Elastic.Clients.Elasticsearch.MachineLearning.Input? input)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Input(Elastic.Clients.Elasticsearch.MachineLearning.Input? value)
 	{
-		InputDescriptor = null;
-		InputDescriptorAction = null;
-		InputValue = input;
-		return Self;
+		Instance.Input = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor<TDocument> Input(Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The input field names for the model definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Input(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> action)
 	{
-		InputValue = null;
-		InputDescriptorAction = null;
-		InputDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutTrainedModelRequestDescriptor<TDocument> Input(Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> configure)
-	{
-		InputValue = null;
-		InputDescriptor = null;
-		InputDescriptorAction = configure;
-		return Self;
+		Instance.Input = Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -363,10 +507,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// An object map that contains metadata about the model.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> Metadata(object? metadata)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Metadata(object? value)
 	{
-		MetadataValue = metadata;
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
 	/// <summary>
@@ -376,10 +520,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// or the model definition is not supplied.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> ModelSizeBytes(long? modelSizeBytes)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ModelSizeBytes(long? value)
 	{
-		ModelSizeBytesValue = modelSizeBytes;
-		return Self;
+		Instance.ModelSizeBytes = value;
+		return this;
 	}
 
 	/// <summary>
@@ -387,10 +531,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// The model type.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> ModelType(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? modelType)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ModelType(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? value)
 	{
-		ModelTypeValue = modelType;
-		return Self;
+		Instance.ModelType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -404,10 +548,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// architecture or OS features), leave this field unset.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> PlatformArchitecture(string? platformArchitecture)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PlatformArchitecture(string? value)
 	{
-		PlatformArchitectureValue = platformArchitecture;
-		return Self;
+		Instance.PlatformArchitecture = value;
+		return this;
 	}
 
 	/// <summary>
@@ -415,28 +559,32 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// Optional prefix strings applied at inference
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? prefixStrings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? value)
 	{
-		PrefixStringsDescriptor = null;
-		PrefixStringsDescriptorAction = null;
-		PrefixStringsValue = prefixStrings;
-		return Self;
+		Instance.PrefixStrings = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PrefixStrings()
 	{
-		PrefixStringsValue = null;
-		PrefixStringsDescriptorAction = null;
-		PrefixStringsDescriptor = descriptor;
-		return Self;
+		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PrefixStrings(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor>? action)
 	{
-		PrefixStringsValue = null;
-		PrefixStringsDescriptor = null;
-		PrefixStringsDescriptorAction = configure;
-		return Self;
+		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -444,122 +592,71 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	/// An array of tags to organize the model.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor<TDocument> Tags(ICollection<string>? tags)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags(System.Collections.Generic.ICollection<string>? value)
 	{
-		TagsValue = tags;
-		return Self;
+		Instance.Tags = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// An array of tags to organize the model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CompressedDefinitionValue))
-		{
-			writer.WritePropertyName("compressed_definition");
-			writer.WriteStringValue(CompressedDefinitionValue);
-		}
+		Instance.Tags = [.. values];
+		return this;
+	}
 
-		if (DefinitionDescriptor is not null)
-		{
-			writer.WritePropertyName("definition");
-			JsonSerializer.Serialize(writer, DefinitionDescriptor, options);
-		}
-		else if (DefinitionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("definition");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(DefinitionDescriptorAction), options);
-		}
-		else if (DefinitionValue is not null)
-		{
-			writer.WritePropertyName("definition");
-			JsonSerializer.Serialize(writer, DefinitionValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (InputDescriptor is not null)
-		{
-			writer.WritePropertyName("input");
-			JsonSerializer.Serialize(writer, InputDescriptor, options);
-		}
-		else if (InputDescriptorAction is not null)
-		{
-			writer.WritePropertyName("input");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor(InputDescriptorAction), options);
-		}
-		else if (InputValue is not null)
-		{
-			writer.WritePropertyName("input");
-			JsonSerializer.Serialize(writer, InputValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (ModelSizeBytesValue.HasValue)
-		{
-			writer.WritePropertyName("model_size_bytes");
-			writer.WriteNumberValue(ModelSizeBytesValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (ModelTypeValue is not null)
-		{
-			writer.WritePropertyName("model_type");
-			JsonSerializer.Serialize(writer, ModelTypeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(PlatformArchitectureValue))
-		{
-			writer.WritePropertyName("platform_architecture");
-			writer.WriteStringValue(PlatformArchitectureValue);
-		}
-
-		if (PrefixStringsDescriptor is not null)
-		{
-			writer.WritePropertyName("prefix_strings");
-			JsonSerializer.Serialize(writer, PrefixStringsDescriptor, options);
-		}
-		else if (PrefixStringsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("prefix_strings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(PrefixStringsDescriptorAction), options);
-		}
-		else if (PrefixStringsValue is not null)
-		{
-			writer.WritePropertyName("prefix_strings");
-			JsonSerializer.Serialize(writer, PrefixStringsValue, options);
-		}
-
-		if (TagsValue is not null)
-		{
-			writer.WritePropertyName("tags");
-			JsonSerializer.Serialize(writer, TagsValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -569,50 +666,65 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 /// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor<PutTrainedModelRequestDescriptor, PutTrainedModelRequestParameters>
+public readonly partial struct PutTrainedModelRequestDescriptor<TDocument>
 {
-	internal PutTrainedModelRequestDescriptor(Action<PutTrainedModelRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Instance { get; init; }
 
-	public PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModel;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_trained_model";
-
-	public PutTrainedModelRequestDescriptor DeferDefinitionDecompression(bool? deferDefinitionDecompression = true) => Qs("defer_definition_decompression", deferDefinitionDecompression);
-	public PutTrainedModelRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public PutTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(modelId);
 	}
 
-	private string? CompressedDefinitionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Definition? DefinitionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor DefinitionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> DefinitionDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor> InferenceConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Input? InputValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor InputDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> InputDescriptorAction { get; set; }
-	private object? MetadataValue { get; set; }
-	private long? ModelSizeBytesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? ModelTypeValue { get; set; }
-	private string? PlatformArchitectureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStringsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor PrefixStringsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor> PrefixStringsDescriptorAction { get; set; }
-	private ICollection<string>? TagsValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutTrainedModelRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
+	/// the request defers definition decompression and skips relevant
+	/// validations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> DeferDefinitionDecompression(bool? value = true)
+	{
+		Instance.DeferDefinitionDecompression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to wait for all child operations (e.g. model download)
+	/// to complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -621,10 +733,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// specified.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor CompressedDefinition(string? compressedDefinition)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> CompressedDefinition(string? value)
 	{
-		CompressedDefinitionValue = compressedDefinition;
-		return Self;
+		Instance.CompressedDefinition = value;
+		return this;
 	}
 
 	/// <summary>
@@ -633,28 +745,22 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// compressed_definition cannot be specified.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition? definition)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition? value)
 	{
-		DefinitionDescriptor = null;
-		DefinitionDescriptorAction = null;
-		DefinitionValue = definition;
-		return Self;
+		Instance.Definition = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor Definition(Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The inference definition for the model. If definition is specified, then
+	/// compressed_definition cannot be specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Definition(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> action)
 	{
-		DefinitionValue = null;
-		DefinitionDescriptorAction = null;
-		DefinitionDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutTrainedModelRequestDescriptor Definition(Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> configure)
-	{
-		DefinitionValue = null;
-		DefinitionDescriptor = null;
-		DefinitionDescriptorAction = configure;
-		return Self;
+		Instance.Definition = Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -662,10 +768,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// A human-readable description of the inference trained model.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -676,28 +782,24 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// ELSER the config is not required.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? inferenceConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? value)
 	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
+		Instance.InferenceConfig = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The default configuration for inference. This can be either a regression
+	/// or classification configuration. It must match the underlying
+	/// definition.trained_model's target_type. For pre-packaged models such as
+	/// ELSER the config is not required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutTrainedModelRequestDescriptor InferenceConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor> configure)
-	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -705,28 +807,21 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// The input field names for the model definition.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor Input(Elastic.Clients.Elasticsearch.MachineLearning.Input? input)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Input(Elastic.Clients.Elasticsearch.MachineLearning.Input? value)
 	{
-		InputDescriptor = null;
-		InputDescriptorAction = null;
-		InputValue = input;
-		return Self;
+		Instance.Input = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor Input(Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The input field names for the model definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Input(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> action)
 	{
-		InputValue = null;
-		InputDescriptorAction = null;
-		InputDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutTrainedModelRequestDescriptor Input(Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> configure)
-	{
-		InputValue = null;
-		InputDescriptor = null;
-		InputDescriptorAction = configure;
-		return Self;
+		Instance.Input = Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -734,10 +829,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// An object map that contains metadata about the model.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor Metadata(object? metadata)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Metadata(object? value)
 	{
-		MetadataValue = metadata;
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
 	/// <summary>
@@ -747,10 +842,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// or the model definition is not supplied.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor ModelSizeBytes(long? modelSizeBytes)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ModelSizeBytes(long? value)
 	{
-		ModelSizeBytesValue = modelSizeBytes;
-		return Self;
+		Instance.ModelSizeBytes = value;
+		return this;
 	}
 
 	/// <summary>
@@ -758,10 +853,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// The model type.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor ModelType(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? modelType)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ModelType(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? value)
 	{
-		ModelTypeValue = modelType;
-		return Self;
+		Instance.ModelType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -775,10 +870,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// architecture or OS features), leave this field unset.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor PlatformArchitecture(string? platformArchitecture)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PlatformArchitecture(string? value)
 	{
-		PlatformArchitectureValue = platformArchitecture;
-		return Self;
+		Instance.PlatformArchitecture = value;
+		return this;
 	}
 
 	/// <summary>
@@ -786,28 +881,32 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// Optional prefix strings applied at inference
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? prefixStrings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? value)
 	{
-		PrefixStringsDescriptor = null;
-		PrefixStringsDescriptorAction = null;
-		PrefixStringsValue = prefixStrings;
-		return Self;
+		Instance.PrefixStrings = value;
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PrefixStrings()
 	{
-		PrefixStringsValue = null;
-		PrefixStringsDescriptorAction = null;
-		PrefixStringsDescriptor = descriptor;
-		return Self;
+		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutTrainedModelRequestDescriptor PrefixStrings(Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor>? action)
 	{
-		PrefixStringsValue = null;
-		PrefixStringsDescriptor = null;
-		PrefixStringsDescriptorAction = configure;
-		return Self;
+		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -815,121 +914,70 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	/// An array of tags to organize the model.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelRequestDescriptor Tags(ICollection<string>? tags)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags(System.Collections.Generic.ICollection<string>? value)
 	{
-		TagsValue = tags;
-		return Self;
+		Instance.Tags = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// An array of tags to organize the model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CompressedDefinitionValue))
-		{
-			writer.WritePropertyName("compressed_definition");
-			writer.WriteStringValue(CompressedDefinitionValue);
-		}
+		Instance.Tags = [.. values];
+		return this;
+	}
 
-		if (DefinitionDescriptor is not null)
-		{
-			writer.WritePropertyName("definition");
-			JsonSerializer.Serialize(writer, DefinitionDescriptor, options);
-		}
-		else if (DefinitionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("definition");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(DefinitionDescriptorAction), options);
-		}
-		else if (DefinitionValue is not null)
-		{
-			writer.WritePropertyName("definition");
-			JsonSerializer.Serialize(writer, DefinitionValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (InputDescriptor is not null)
-		{
-			writer.WritePropertyName("input");
-			JsonSerializer.Serialize(writer, InputDescriptor, options);
-		}
-		else if (InputDescriptorAction is not null)
-		{
-			writer.WritePropertyName("input");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor(InputDescriptorAction), options);
-		}
-		else if (InputValue is not null)
-		{
-			writer.WritePropertyName("input");
-			JsonSerializer.Serialize(writer, InputValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (ModelSizeBytesValue.HasValue)
-		{
-			writer.WritePropertyName("model_size_bytes");
-			writer.WriteNumberValue(ModelSizeBytesValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (ModelTypeValue is not null)
-		{
-			writer.WritePropertyName("model_type");
-			JsonSerializer.Serialize(writer, ModelTypeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(PlatformArchitectureValue))
-		{
-			writer.WritePropertyName("platform_architecture");
-			writer.WriteStringValue(PlatformArchitectureValue);
-		}
-
-		if (PrefixStringsDescriptor is not null)
-		{
-			writer.WritePropertyName("prefix_strings");
-			JsonSerializer.Serialize(writer, PrefixStringsDescriptor, options);
-		}
-		else if (PrefixStringsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("prefix_strings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(PrefixStringsDescriptorAction), options);
-		}
-		else if (PrefixStringsValue is not null)
-		{
-			writer.WritePropertyName("prefix_strings");
-			JsonSerializer.Serialize(writer, PrefixStringsValue, options);
-		}
-
-		if (TagsValue is not null)
-		{
-			writer.WritePropertyName("tags");
-			JsonSerializer.Serialize(writer, TagsValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

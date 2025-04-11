@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetServiceCredentialsRequestParameters : RequestParameters
+public sealed partial class GetServiceCredentialsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetServiceCredentialsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -49,19 +71,53 @@ public sealed partial class GetServiceCredentialsRequestParameters : RequestPara
 /// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 /// </para>
 /// </summary>
-public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServiceCredentialsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestConverter))]
+public sealed partial class GetServiceCredentialsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>
 {
-	public GetServiceCredentialsRequest(string ns, Elastic.Clients.Elasticsearch.Name service) : base(r => r.Required("namespace", ns).Required("service", service))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetServiceCredentialsRequest(string @namespace, Elastic.Clients.Elasticsearch.Name service) : base(r => r.Required("namespace", @namespace).Required("service", service))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetServiceCredentialsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetServiceCredentialsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetServiceCredentials;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityGetServiceCredentials;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_service_credentials";
+
+	/// <summary>
+	/// <para>
+	/// The name of the namespace.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// The service name.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Service { get => P<Elastic.Clients.Elasticsearch.Name>("service"); set => PR("service", value); }
 }
 
 /// <summary>
@@ -79,35 +135,99 @@ public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServi
 /// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 /// </para>
 /// </summary>
-public sealed partial class GetServiceCredentialsRequestDescriptor : RequestDescriptor<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsRequestParameters>
+public readonly partial struct GetServiceCredentialsRequestDescriptor
 {
-	internal GetServiceCredentialsRequestDescriptor(Action<GetServiceCredentialsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest Instance { get; init; }
 
-	public GetServiceCredentialsRequestDescriptor(string ns, Elastic.Clients.Elasticsearch.Name service) : base(r => r.Required("namespace", ns).Required("service", service))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetServiceCredentialsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetServiceCredentials;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.get_service_credentials";
-
-	public GetServiceCredentialsRequestDescriptor Namespace(string ns)
+	public GetServiceCredentialsRequestDescriptor(string @namespace, Elastic.Clients.Elasticsearch.Name service)
 	{
-		RouteValues.Required("namespace", ns);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest(@namespace, service);
 	}
 
-	public GetServiceCredentialsRequestDescriptor Service(Elastic.Clients.Elasticsearch.Name service)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetServiceCredentialsRequestDescriptor()
 	{
-		RouteValues.Required("service", service);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the namespace.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor Namespace(string value)
 	{
+		Instance.Namespace = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The service name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor Service(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Service = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

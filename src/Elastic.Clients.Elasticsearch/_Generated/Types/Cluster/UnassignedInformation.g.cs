@@ -17,30 +17,144 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class UnassignedInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationStatus = System.Text.Json.JsonEncodedText.Encode("allocation_status");
+	private static readonly System.Text.Json.JsonEncodedText PropAt = System.Text.Json.JsonEncodedText.Encode("at");
+	private static readonly System.Text.Json.JsonEncodedText PropDelayed = System.Text.Json.JsonEncodedText.Encode("delayed");
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
+	private static readonly System.Text.Json.JsonEncodedText PropFailedAllocationAttempts = System.Text.Json.JsonEncodedText.Encode("failed_allocation_attempts");
+	private static readonly System.Text.Json.JsonEncodedText PropLastAllocationStatus = System.Text.Json.JsonEncodedText.Encode("last_allocation_status");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAllocationStatus = default;
+		LocalJsonValue<System.DateTimeOffset> propAt = default;
+		LocalJsonValue<bool?> propDelayed = default;
+		LocalJsonValue<string?> propDetails = default;
+		LocalJsonValue<int?> propFailedAllocationAttempts = default;
+		LocalJsonValue<string?> propLastAllocationStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason> propReason = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllocationStatus.TryReadProperty(ref reader, options, PropAllocationStatus, null))
+			{
+				continue;
+			}
+
+			if (propAt.TryReadProperty(ref reader, options, PropAt, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propDelayed.TryReadProperty(ref reader, options, PropDelayed, null))
+			{
+				continue;
+			}
+
+			if (propDetails.TryReadProperty(ref reader, options, PropDetails, null))
+			{
+				continue;
+			}
+
+			if (propFailedAllocationAttempts.TryReadProperty(ref reader, options, PropFailedAllocationAttempts, null))
+			{
+				continue;
+			}
+
+			if (propLastAllocationStatus.TryReadProperty(ref reader, options, PropLastAllocationStatus, null))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllocationStatus = propAllocationStatus.Value,
+			At = propAt.Value,
+			Delayed = propDelayed.Value,
+			Details = propDetails.Value,
+			FailedAllocationAttempts = propFailedAllocationAttempts.Value,
+			LastAllocationStatus = propLastAllocationStatus.Value,
+			Reason = propReason.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocationStatus, value.AllocationStatus, null, null);
+		writer.WriteProperty(options, PropAt, value.At, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropDelayed, value.Delayed, null, null);
+		writer.WriteProperty(options, PropDetails, value.Details, null, null);
+		writer.WriteProperty(options, PropFailedAllocationAttempts, value.FailedAllocationAttempts, null, null);
+		writer.WriteProperty(options, PropLastAllocationStatus, value.LastAllocationStatus, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationConverter))]
 public sealed partial class UnassignedInformation
 {
-	[JsonInclude, JsonPropertyName("allocation_status")]
-	public string? AllocationStatus { get; init; }
-	[JsonInclude, JsonPropertyName("at")]
-	public DateTimeOffset At { get; init; }
-	[JsonInclude, JsonPropertyName("delayed")]
-	public bool? Delayed { get; init; }
-	[JsonInclude, JsonPropertyName("details")]
-	public string? Details { get; init; }
-	[JsonInclude, JsonPropertyName("failed_allocation_attempts")]
-	public int? FailedAllocationAttempts { get; init; }
-	[JsonInclude, JsonPropertyName("last_allocation_status")]
-	public string? LastAllocationStatus { get; init; }
-	[JsonInclude, JsonPropertyName("reason")]
-	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UnassignedInformation(System.DateTimeOffset at, Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason reason)
+	{
+		At = at;
+		Reason = reason;
+	}
+#if NET7_0_OR_GREATER
+	public UnassignedInformation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UnassignedInformation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UnassignedInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? AllocationStatus { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset At { get; set; }
+	public bool? Delayed { get; set; }
+	public string? Details { get; set; }
+	public int? FailedAllocationAttempts { get; set; }
+	public string? LastAllocationStatus { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; set; }
 }

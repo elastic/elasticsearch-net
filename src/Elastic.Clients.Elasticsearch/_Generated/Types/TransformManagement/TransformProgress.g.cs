@@ -17,26 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class TransformProgressConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocsIndexed = System.Text.Json.JsonEncodedText.Encode("docs_indexed");
+	private static readonly System.Text.Json.JsonEncodedText PropDocsProcessed = System.Text.Json.JsonEncodedText.Encode("docs_processed");
+	private static readonly System.Text.Json.JsonEncodedText PropDocsRemaining = System.Text.Json.JsonEncodedText.Encode("docs_remaining");
+	private static readonly System.Text.Json.JsonEncodedText PropPercentComplete = System.Text.Json.JsonEncodedText.Encode("percent_complete");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDocs = System.Text.Json.JsonEncodedText.Encode("total_docs");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propDocsIndexed = default;
+		LocalJsonValue<long> propDocsProcessed = default;
+		LocalJsonValue<long?> propDocsRemaining = default;
+		LocalJsonValue<double?> propPercentComplete = default;
+		LocalJsonValue<long?> propTotalDocs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocsIndexed.TryReadProperty(ref reader, options, PropDocsIndexed, null))
+			{
+				continue;
+			}
+
+			if (propDocsProcessed.TryReadProperty(ref reader, options, PropDocsProcessed, null))
+			{
+				continue;
+			}
+
+			if (propDocsRemaining.TryReadProperty(ref reader, options, PropDocsRemaining, null))
+			{
+				continue;
+			}
+
+			if (propPercentComplete.TryReadProperty(ref reader, options, PropPercentComplete, null))
+			{
+				continue;
+			}
+
+			if (propTotalDocs.TryReadProperty(ref reader, options, PropTotalDocs, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DocsIndexed = propDocsIndexed.Value,
+			DocsProcessed = propDocsProcessed.Value,
+			DocsRemaining = propDocsRemaining.Value,
+			PercentComplete = propPercentComplete.Value,
+			TotalDocs = propTotalDocs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocsIndexed, value.DocsIndexed, null, null);
+		writer.WriteProperty(options, PropDocsProcessed, value.DocsProcessed, null, null);
+		writer.WriteProperty(options, PropDocsRemaining, value.DocsRemaining, null, null);
+		writer.WriteProperty(options, PropPercentComplete, value.PercentComplete, null, null);
+		writer.WriteProperty(options, PropTotalDocs, value.TotalDocs, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.TransformProgressConverter))]
 public sealed partial class TransformProgress
 {
-	[JsonInclude, JsonPropertyName("docs_indexed")]
-	public long DocsIndexed { get; init; }
-	[JsonInclude, JsonPropertyName("docs_processed")]
-	public long DocsProcessed { get; init; }
-	[JsonInclude, JsonPropertyName("docs_remaining")]
-	public long? DocsRemaining { get; init; }
-	[JsonInclude, JsonPropertyName("percent_complete")]
-	public double? PercentComplete { get; init; }
-	[JsonInclude, JsonPropertyName("total_docs")]
-	public long? TotalDocs { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TransformProgress(long docsIndexed, long docsProcessed)
+	{
+		DocsIndexed = docsIndexed;
+		DocsProcessed = docsProcessed;
+	}
+#if NET7_0_OR_GREATER
+	public TransformProgress()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TransformProgress()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TransformProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocsIndexed { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocsProcessed { get; set; }
+	public long? DocsRemaining { get; set; }
+	public double? PercentComplete { get; set; }
+	public long? TotalDocs { get; set; }
 }

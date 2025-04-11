@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <!-- Type Providers are restored using net461, fine for netcoreapp2.2 so we kill the warning -->
     <NoWarn>$(NoWarn);NU1701</NoWarn>

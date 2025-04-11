@@ -17,34 +17,27 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public sealed partial class CancelRequestParameters : RequestParameters
+public sealed partial class CancelRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
 	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
+	public System.Collections.Generic.ICollection<string>? Actions { get => Q<System.Collections.Generic.ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of node IDs or names that is used to limit the request.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
+	public System.Collections.Generic.ICollection<string>? Nodes { get => Q<System.Collections.Generic.ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -59,6 +52,35 @@ public sealed partial class CancelRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+}
+
+internal sealed partial class CancelRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.CancelRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Tasks.CancelRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Tasks.CancelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Tasks.CancelRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -80,19 +102,31 @@ public sealed partial class CancelRequestParameters : RequestParameters
 /// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
 /// </para>
 /// </summary>
-public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.CancelRequestConverter))]
+public sealed partial class CancelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>
 {
-	public CancelRequest()
-	{
-	}
-
 	public CancelRequest(Elastic.Clients.Elasticsearch.TaskId? taskId) : base(r => r.Optional("task_id", taskId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public CancelRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CancelRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CancelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TasksCancel;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TasksCancel;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -100,26 +134,30 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 	/// <summary>
 	/// <para>
+	/// The task identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId?>("task_id"); set => PO("task_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
+	public System.Collections.Generic.ICollection<string>? Actions { get => Q<System.Collections.Generic.ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of node IDs or names that is used to limit the request.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
+	public System.Collections.Generic.ICollection<string>? Nodes { get => Q<System.Collections.Generic.ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
 	/// <para>
 	/// A parent task ID that is used to limit the tasks.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
@@ -127,7 +165,6 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 	/// If true, the request blocks until all found tasks are complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
@@ -150,38 +187,158 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 /// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
 /// </para>
 /// </summary>
-public sealed partial class CancelRequestDescriptor : RequestDescriptor<CancelRequestDescriptor, CancelRequestParameters>
+public readonly partial struct CancelRequestDescriptor
 {
-	internal CancelRequestDescriptor(Action<CancelRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Tasks.CancelRequest Instance { get; init; }
 
-	public CancelRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId? taskId) : base(r => r.Optional("task_id", taskId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CancelRequestDescriptor(Elastic.Clients.Elasticsearch.Tasks.CancelRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public CancelRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId? taskId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Tasks.CancelRequest(taskId);
 	}
 
 	public CancelRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Tasks.CancelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TasksCancel;
+	public static explicit operator Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(Elastic.Clients.Elasticsearch.Tasks.CancelRequest instance) => new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Tasks.CancelRequest(Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "tasks.cancel";
-
-	public CancelRequestDescriptor Actions(ICollection<string>? actions) => Qs("actions", actions);
-	public CancelRequestDescriptor Nodes(ICollection<string>? nodes) => Qs("nodes", nodes);
-	public CancelRequestDescriptor ParentTaskId(string? parentTaskId) => Qs("parent_task_id", parentTaskId);
-	public CancelRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public CancelRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId? taskId)
+	/// <summary>
+	/// <para>
+	/// The task identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId? value)
 	{
-		RouteValues.Optional("task_id", taskId);
-		return Self;
+		Instance.TaskId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions(System.Collections.Generic.ICollection<string>? value)
 	{
+		Instance.Actions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions(params string[] values)
+	{
+		Instance.Actions = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of node IDs or names that is used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Nodes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of node IDs or names that is used to limit the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes(params string[] values)
+	{
+		Instance.Nodes = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A parent task ID that is used to limit the tasks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor ParentTaskId(string? value)
+	{
+		Instance.ParentTaskId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request blocks until all found tasks are complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Tasks.CancelRequest Build(System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Tasks.CancelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(new Elastic.Clients.Elasticsearch.Tasks.CancelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

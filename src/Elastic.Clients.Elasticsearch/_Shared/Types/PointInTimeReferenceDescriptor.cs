@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-public sealed partial class PointInTimeReferenceDescriptor
+public readonly partial struct PointInTimeReferenceDescriptor
 {
-	public PointInTimeReferenceDescriptor(string id) => IdValue = id;
+	public PointInTimeReferenceDescriptor(string id) => Instance.Id = id;
 }

@@ -17,24 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class GrantApiKeyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantApiKey>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors");
+
+	public override Elastic.Clients.Elasticsearch.Security.GrantApiKey Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propExpiration = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propName = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>?> propRoleDescriptors = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, null, null)!)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Expiration = propExpiration.Value,
+			Metadata = propMetadata.Value,
+			Name = propName.Value,
+			RoleDescriptors = propRoleDescriptors.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GrantApiKey value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GrantApiKeyConverter))]
 public sealed partial class GrantApiKey
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKey(Elastic.Clients.Elasticsearch.Name name)
+	{
+		Name = name;
+	}
+#if NET7_0_OR_GREATER
+	public GrantApiKey()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GrantApiKey()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Expiration time for the API key. By default, API keys never expire.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expiration")]
 	public string? Expiration { get; set; }
 
 	/// <summary>
@@ -44,10 +128,12 @@ public sealed partial class GrantApiKey
 	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IDictionary<string, object>? Metadata { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -56,33 +142,37 @@ public sealed partial class GrantApiKey
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("role_descriptors")]
-	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>))]
-	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? RoleDescriptors { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? RoleDescriptors { get; set; }
 }
 
-public sealed partial class GrantApiKeyDescriptor<TDocument> : SerializableDescriptor<GrantApiKeyDescriptor<TDocument>>
+public readonly partial struct GrantApiKeyDescriptor<TDocument>
 {
-	internal GrantApiKeyDescriptor(Action<GrantApiKeyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GrantApiKey Instance { get; init; }
 
-	public GrantApiKeyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKey instance)
 	{
+		Instance = instance;
 	}
 
-	private string? ExpirationValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? RoleDescriptorsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.GrantApiKey instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Expiration time for the API key. By default, API keys never expire.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyDescriptor<TDocument> Expiration(string? expiration)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Expiration(string? value)
 	{
-		ExpirationValue = expiration;
-		return Self;
+		Instance.Expiration = value;
+		return this;
 	}
 
 	/// <summary>
@@ -92,80 +182,10 @@ public sealed partial class GrantApiKeyDescriptor<TDocument> : SerializableDescr
 	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyDescriptor<TDocument> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GrantApiKeyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
-	public GrantApiKeyDescriptor<TDocument> RoleDescriptors(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? roleDescriptors)
-	{
-		RoleDescriptorsValue = roleDescriptors;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ExpirationValue))
-		{
-			writer.WritePropertyName("expiration");
-			writer.WriteStringValue(ExpirationValue);
-		}
-
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
-
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
-		if (RoleDescriptorsValue is not null)
-		{
-			writer.WritePropertyName("role_descriptors");
-			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(RoleDescriptorsValue, writer, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class GrantApiKeyDescriptor : SerializableDescriptor<GrantApiKeyDescriptor>
-{
-	internal GrantApiKeyDescriptor(Action<GrantApiKeyDescriptor> configure) => configure.Invoke(this);
-
-	public GrantApiKeyDescriptor() : base()
-	{
-	}
-
-	private string? ExpirationValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? RoleDescriptorsValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
-	/// </para>
-	/// </summary>
-	public GrantApiKeyDescriptor Expiration(string? expiration)
-	{
-		ExpirationValue = expiration;
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
 	/// <summary>
@@ -175,16 +195,36 @@ public sealed partial class GrantApiKeyDescriptor : SerializableDescriptor<Grant
 	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata()
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
-	public GrantApiKeyDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports nested data structure.
+	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
 	}
 
 	/// <summary>
@@ -194,35 +234,204 @@ public sealed partial class GrantApiKeyDescriptor : SerializableDescriptor<Grant
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyDescriptor RoleDescriptors(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? roleDescriptors)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? value)
 	{
-		RoleDescriptorsValue = roleDescriptors;
-		return Self;
+		Instance.RoleDescriptors = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The role descriptors for this API key.
+	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>[] values)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ExpirationValue))
+		Instance.RoleDescriptors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role descriptors for this API key.
+	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("expiration");
-			writer.WriteStringValue(ExpirationValue);
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action));
 		}
 
-		if (MetadataValue is not null)
+		Instance.RoleDescriptors = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GrantApiKey Build(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct GrantApiKeyDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.GrantApiKey Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKey instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKey instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Expiration time for the API key. By default, API keys never expire.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Expiration(string? value)
+	{
+		Instance.Expiration = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports nested data structure.
+	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Metadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports nested data structure.
+	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata()
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the API key.
+	/// It supports nested data structure.
+	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role descriptors for this API key.
+	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? value)
+	{
+		Instance.RoleDescriptors = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role descriptors for this API key.
+	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>[] values)
+	{
+		Instance.RoleDescriptors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role descriptors for this API key.
+	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action));
 		}
 
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
-		if (RoleDescriptorsValue is not null)
+		Instance.RoleDescriptors = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role descriptors for this API key.
+	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("role_descriptors");
-			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(RoleDescriptorsValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.RoleDescriptors = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GrantApiKey Build(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor(new Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

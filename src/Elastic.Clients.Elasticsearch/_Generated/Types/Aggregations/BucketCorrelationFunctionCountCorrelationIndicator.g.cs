@@ -17,111 +17,217 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
+internal sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator>
 {
-	/// <summary>
-	/// <para>
-	/// The total number of documents that initially created the expectations. It’s required to be greater
-	/// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
-	/// to which the term values are correlated.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public int DocCount { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropExpectations = System.Text.Json.JsonEncodedText.Encode("expectations");
+	private static readonly System.Text.Json.JsonEncodedText PropFractions = System.Text.Json.JsonEncodedText.Encode("fractions");
 
-	/// <summary>
-	/// <para>
-	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
-	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("expectations")]
-	public ICollection<double> Expectations { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// An array of fractions to use when averaging and calculating variance. This should be used if
-	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
-	/// must equal expectations.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("fractions")]
-	public ICollection<double>? Fractions { get; set; }
-}
-
-public sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorDescriptor : SerializableDescriptor<BucketCorrelationFunctionCountCorrelationIndicatorDescriptor>
-{
-	internal BucketCorrelationFunctionCountCorrelationIndicatorDescriptor(Action<BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> configure) => configure.Invoke(this);
-
-	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private int DocCountValue { get; set; }
-	private ICollection<double> ExpectationsValue { get; set; }
-	private ICollection<double>? FractionsValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The total number of documents that initially created the expectations. It’s required to be greater
-	/// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
-	/// to which the term values are correlated.
-	/// </para>
-	/// </summary>
-	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor DocCount(int docCount)
-	{
-		DocCountValue = docCount;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
-	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
-	/// </para>
-	/// </summary>
-	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations(ICollection<double> expectations)
-	{
-		ExpectationsValue = expectations;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of fractions to use when averaging and calculating variance. This should be used if
-	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
-	/// must equal expectations.
-	/// </para>
-	/// </summary>
-	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions(ICollection<double>? fractions)
-	{
-		FractionsValue = fractions;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("doc_count");
-		writer.WriteNumberValue(DocCountValue);
-		writer.WritePropertyName("expectations");
-		JsonSerializer.Serialize(writer, ExpectationsValue, options);
-		if (FractionsValue is not null)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propDocCount = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<double>> propExpectations = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propFractions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("fractions");
-			JsonSerializer.Serialize(writer, FractionsValue, options);
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
+
+			if (propExpectations.TryReadProperty(ref reader, options, PropExpectations, static System.Collections.Generic.ICollection<double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propFractions.TryReadProperty(ref reader, options, PropFractions, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DocCount = propDocCount.Value,
+			Expectations = propExpectations.Value,
+			Fractions = propFractions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropExpectations, value.Expectations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double> v) => w.WriteCollectionValue<double>(o, v, null));
+		writer.WriteProperty(options, PropFractions, value.Fractions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorConverter))]
+public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionCountCorrelationIndicator(int docCount, System.Collections.Generic.ICollection<double> expectations)
+	{
+		DocCount = docCount;
+		Expectations = expectations;
+	}
+#if NET7_0_OR_GREATER
+	public BucketCorrelationFunctionCountCorrelationIndicator()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BucketCorrelationFunctionCountCorrelationIndicator()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The total number of documents that initially created the expectations. It’s required to be greater
+	/// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
+	/// to which the term values are correlated.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DocCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
+	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<double> Expectations { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// An array of fractions to use when averaging and calculating variance. This should be used if
+	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
+	/// must equal expectations.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<double>? Fractions { get; set; }
+}
+
+public readonly partial struct BucketCorrelationFunctionCountCorrelationIndicatorDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The total number of documents that initially created the expectations. It’s required to be greater
+	/// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
+	/// to which the term values are correlated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor DocCount(int value)
+	{
+		Instance.DocCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
+	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations(System.Collections.Generic.ICollection<double> value)
+	{
+		Instance.Expectations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
+	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations(params double[] values)
+	{
+		Instance.Expectations = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of fractions to use when averaging and calculating variance. This should be used if
+	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
+	/// must equal expectations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions(System.Collections.Generic.ICollection<double>? value)
+	{
+		Instance.Fractions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of fractions to use when averaging and calculating variance. This should be used if
+	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
+	/// must equal expectations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions(params double[] values)
+	{
+		Instance.Fractions = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

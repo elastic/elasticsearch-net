@@ -17,27 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class DiagnosisAffectedResourcesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropSlmPolicies = System.Text.Json.JsonEncodedText.Encode("slm_policies");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepositories = System.Text.Json.JsonEncodedText.Encode("snapshot_repositories");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propFeatureStates = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>?> propNodes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propSlmPolicies = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propSnapshotRepositories = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSlmPolicies.TryReadProperty(ref reader, options, PropSlmPolicies, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSnapshotRepositories.TryReadProperty(ref reader, options, PropSnapshotRepositories, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FeatureStates = propFeatureStates.Value,
+			Indices = propIndices.Value,
+			Nodes = propNodes.Value,
+			SlmPolicies = propSlmPolicies.Value,
+			SnapshotRepositories = propSnapshotRepositories.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>(o, v, null));
+		writer.WriteProperty(options, PropSlmPolicies, value.SlmPolicies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSnapshotRepositories, value.SnapshotRepositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResourcesConverter))]
 public sealed partial class DiagnosisAffectedResources
 {
-	[JsonInclude, JsonPropertyName("feature_states")]
-	public IReadOnlyCollection<string>? FeatureStates { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string>? Indices { get; init; }
-	[JsonInclude, JsonPropertyName("nodes")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? Nodes { get; init; }
-	[JsonInclude, JsonPropertyName("slm_policies")]
-	public IReadOnlyCollection<string>? SlmPolicies { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot_repositories")]
-	public IReadOnlyCollection<string>? SnapshotRepositories { get; init; }
+#if NET7_0_OR_GREATER
+	public DiagnosisAffectedResources()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DiagnosisAffectedResources()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DiagnosisAffectedResources(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyCollection<string>? FeatureStates { get; set; }
+	public System.Collections.Generic.ICollection<string>? Indices { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? Nodes { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? SlmPolicies { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? SnapshotRepositories { get; set; }
 }

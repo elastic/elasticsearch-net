@@ -17,25 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
+internal sealed partial class DanglingIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("creation_date_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeIds = System.Text.Json.JsonEncodedText.Encode("node_ids");
+
+	public override Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset> propCreationDateMillis = default;
+		LocalJsonValue<string> propIndexName = default;
+		LocalJsonValue<string> propIndexUuid = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propNodeIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCreationDateMillis.TryReadProperty(ref reader, options, PropCreationDateMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propIndexName.TryReadProperty(ref reader, options, PropIndexName, null))
+			{
+				continue;
+			}
+
+			if (propIndexUuid.TryReadProperty(ref reader, options, PropIndexUuid, null))
+			{
+				continue;
+			}
+
+			if (propNodeIds.TryReadProperty(ref reader, options, PropNodeIds, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CreationDateMillis = propCreationDateMillis.Value,
+			IndexName = propIndexName.Value,
+			IndexUuid = propIndexUuid.Value,
+			NodeIds = propNodeIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreationDateMillis, value.CreationDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropIndexName, value.IndexName, null, null);
+		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid, null, null);
+		writer.WriteProperty(options, PropNodeIds, value.NodeIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndexConverter))]
 public sealed partial class DanglingIndex
 {
-	[JsonInclude, JsonPropertyName("creation_date_millis")]
-	public long CreationDateMillis { get; init; }
-	[JsonInclude, JsonPropertyName("index_name")]
-	public string IndexName { get; init; }
-	[JsonInclude, JsonPropertyName("index_uuid")]
-	public string IndexUuid { get; init; }
-	[JsonInclude, JsonPropertyName("node_ids")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string> NodeIds { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DanglingIndex(System.DateTimeOffset creationDateMillis, string indexName, string indexUuid, System.Collections.Generic.ICollection<string> nodeIds)
+	{
+		CreationDateMillis = creationDateMillis;
+		IndexName = indexName;
+		IndexUuid = indexUuid;
+		NodeIds = nodeIds;
+	}
+#if NET7_0_OR_GREATER
+	public DanglingIndex()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DanglingIndex()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DanglingIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset CreationDateMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexUuid { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> NodeIds { get; set; }
 }

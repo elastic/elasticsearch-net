@@ -17,161 +17,192 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class SettingsSimilarities : IsADictionary<string, ISettingsSimilarity>
+internal sealed partial class SettingsSimilaritiesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>(o, null, null)));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesConverter))]
+public sealed partial class SettingsSimilarities : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>
 {
 	public SettingsSimilarities()
 	{
 	}
 
-	public SettingsSimilarities(IDictionary<string, ISettingsSimilarity> container) : base(container)
+	public SettingsSimilarities(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(string name, ISettingsSimilarity settingsSimilarity) => BackingDictionary.Add(Sanitize(name), settingsSimilarity);
-	public bool TryGetSettingsSimilarity(string name, [NotNullWhen(returnValue: true)] out ISettingsSimilarity settingsSimilarity) => BackingDictionary.TryGetValue(Sanitize(name), out settingsSimilarity);
+	public void Add(string key, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetSettingsSimilarity(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetSettingsSimilarity<T>(string name, [NotNullWhen(returnValue: true)] out T? settingsSimilarity) where T : class, ISettingsSimilarity
+	public bool TryGetSettingsSimilarity<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, ISettingsSimilarity
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			settingsSimilarity = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		settingsSimilarity = null;
+		value = null;
 		return false;
 	}
 }
 
-public sealed partial class SettingsSimilaritiesDescriptor : IsADictionaryDescriptor<SettingsSimilaritiesDescriptor, SettingsSimilarities, string, ISettingsSimilarity>
+public readonly partial struct SettingsSimilaritiesDescriptor
 {
-	public SettingsSimilaritiesDescriptor() : base(new SettingsSimilarities())
+	private readonly Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities _items = new();
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities Value => _items;
+
+	public SettingsSimilaritiesDescriptor()
 	{
 	}
 
-	public SettingsSimilaritiesDescriptor(SettingsSimilarities settingsSimilarities) : base(settingsSimilarities ?? new SettingsSimilarities())
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Bm25(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 value)
 	{
+		_items.Add(key, value);
+		return this;
 	}
 
-	public SettingsSimilaritiesDescriptor Bm25(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor, SettingsSimilarityBm25>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Bm25(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor, SettingsSimilarityBm25>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Bm25(string settingsSimilarityName, SettingsSimilarityBm25 settingsSimilarityBm25) => AssignVariant(settingsSimilarityName, settingsSimilarityBm25);
-	public SettingsSimilaritiesDescriptor Boolean(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor, SettingsSimilarityBoolean>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Boolean(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor, SettingsSimilarityBoolean>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Boolean(string settingsSimilarityName, SettingsSimilarityBoolean settingsSimilarityBoolean) => AssignVariant(settingsSimilarityName, settingsSimilarityBoolean);
-	public SettingsSimilaritiesDescriptor Dfi(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor, SettingsSimilarityDfi>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Dfi(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor, SettingsSimilarityDfi>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Dfi(string settingsSimilarityName, SettingsSimilarityDfi settingsSimilarityDfi) => AssignVariant(settingsSimilarityName, settingsSimilarityDfi);
-	public SettingsSimilaritiesDescriptor Dfr(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor, SettingsSimilarityDfr>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Dfr(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor, SettingsSimilarityDfr>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Dfr(string settingsSimilarityName, SettingsSimilarityDfr settingsSimilarityDfr) => AssignVariant(settingsSimilarityName, settingsSimilarityDfr);
-	public SettingsSimilaritiesDescriptor Ib(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor, SettingsSimilarityIb>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Ib(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor, SettingsSimilarityIb>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Ib(string settingsSimilarityName, SettingsSimilarityIb settingsSimilarityIb) => AssignVariant(settingsSimilarityName, settingsSimilarityIb);
-	public SettingsSimilaritiesDescriptor Lmd(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor, SettingsSimilarityLmd>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Lmd(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor, SettingsSimilarityLmd>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Lmd(string settingsSimilarityName, SettingsSimilarityLmd settingsSimilarityLmd) => AssignVariant(settingsSimilarityName, settingsSimilarityLmd);
-	public SettingsSimilaritiesDescriptor Lmj(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor, SettingsSimilarityLmj>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Lmj(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor, SettingsSimilarityLmj>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Lmj(string settingsSimilarityName, SettingsSimilarityLmj settingsSimilarityLmj) => AssignVariant(settingsSimilarityName, settingsSimilarityLmj);
-	public SettingsSimilaritiesDescriptor Scripted(string settingsSimilarityName) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor, SettingsSimilarityScripted>(settingsSimilarityName, null);
-	public SettingsSimilaritiesDescriptor Scripted(string settingsSimilarityName, Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor, SettingsSimilarityScripted>(settingsSimilarityName, configure);
-	public SettingsSimilaritiesDescriptor Scripted(string settingsSimilarityName, SettingsSimilarityScripted settingsSimilarityScripted) => AssignVariant(settingsSimilarityName, settingsSimilarityScripted);
-}
-
-internal sealed partial class SettingsSimilarityInterfaceConverter : JsonConverter<ISettingsSimilarity>
-{
-	public override ISettingsSimilarity Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Bm25(string key)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
-
-		switch (type)
-		{
-			case "BM25":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>(ref reader, options);
-			case "boolean":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean>(ref reader, options);
-			case "DFI":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi>(ref reader, options);
-			case "DFR":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr>(ref reader, options);
-			case "IB":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>(ref reader, options);
-			case "LMDirichlet":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd>(ref reader, options);
-			case "LMJelinekMercer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj>(ref reader, options);
-			case "scripted":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ISettingsSimilarity));
-				return null;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor.Build(null));
+		return this;
 	}
 
-	public override void Write(Utf8JsonWriter writer, ISettingsSimilarity value, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Bm25(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor>? action)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "BM25":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25), options);
-				return;
-			case "boolean":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean), options);
-				return;
-			case "DFI":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi), options);
-				return;
-			case "DFR":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr), options);
-				return;
-			case "IB":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb), options);
-				return;
-			case "LMDirichlet":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd), options);
-				return;
-			case "LMJelinekMercer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj), options);
-				return;
-			case "scripted":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor.Build(action));
+		return this;
 	}
-}
 
-[JsonConverter(typeof(SettingsSimilarityInterfaceConverter))]
-public partial interface ISettingsSimilarity
-{
-	public string? Type { get; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Boolean(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Boolean(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Boolean(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Dfi(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Dfi(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Dfr(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Dfr(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Ib(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Ib(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Lmd(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Lmd(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Lmd(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Lmj(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Lmj(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Lmj(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Scripted(string key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor Scripted(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }

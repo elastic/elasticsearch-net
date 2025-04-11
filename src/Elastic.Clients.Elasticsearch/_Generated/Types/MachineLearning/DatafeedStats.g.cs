@@ -17,25 +17,128 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DatafeedStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeedId = System.Text.Json.JsonEncodedText.Encode("datafeed_id");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropRunningState = System.Text.Json.JsonEncodedText.Encode("running_state");
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropTimingStats = System.Text.Json.JsonEncodedText.Encode("timing_stats");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAssignmentExplanation = default;
+		LocalJsonValue<string> propDatafeedId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact?> propNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState?> propRunningState = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState> propState = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats?> propTimingStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAssignmentExplanation.TryReadProperty(ref reader, options, PropAssignmentExplanation, null))
+			{
+				continue;
+			}
+
+			if (propDatafeedId.TryReadProperty(ref reader, options, PropDatafeedId, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propRunningState.TryReadProperty(ref reader, options, PropRunningState, null))
+			{
+				continue;
+			}
+
+			if (propState.TryReadProperty(ref reader, options, PropState, null))
+			{
+				continue;
+			}
+
+			if (propTimingStats.TryReadProperty(ref reader, options, PropTimingStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AssignmentExplanation = propAssignmentExplanation.Value,
+			DatafeedId = propDatafeedId.Value,
+			Node = propNode.Value,
+			RunningState = propRunningState.Value,
+			State = propState.Value,
+			TimingStats = propTimingStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAssignmentExplanation, value.AssignmentExplanation, null, null);
+		writer.WriteProperty(options, PropDatafeedId, value.DatafeedId, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropRunningState, value.RunningState, null, null);
+		writer.WriteProperty(options, PropState, value.State, null, null);
+		writer.WriteProperty(options, PropTimingStats, value.TimingStats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStatsConverter))]
 public sealed partial class DatafeedStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DatafeedStats(string datafeedId, Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState state)
+	{
+		DatafeedId = datafeedId;
+		State = state;
+	}
+#if NET7_0_OR_GREATER
+	public DatafeedStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DatafeedStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DatafeedStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For started datafeeds only, contains messages relating to the selection of a node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("assignment_explanation")]
-	public string? AssignmentExplanation { get; init; }
+	public string? AssignmentExplanation { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,16 +147,18 @@ public sealed partial class DatafeedStats
 	/// It must start and end with alphanumeric characters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("datafeed_id")]
-	public string DatafeedId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string DatafeedId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For started datafeeds only, this information pertains to the node upon which the datafeed is started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact? Node { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact? Node { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,22 +166,23 @@ public sealed partial class DatafeedStats
 	/// It is only provided if the datafeed is started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("running_state")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState? RunningState { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState? RunningState { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The status of the datafeed, which can be one of the following values: <c>starting</c>, <c>started</c>, <c>stopping</c>, <c>stopped</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState State { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState State { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object that provides statistical information about timing aspect of this datafeed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timing_stats")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats? TimingStats { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats? TimingStats { get; set; }
 }

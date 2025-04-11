@@ -17,40 +17,58 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
-/// </para>
-/// </summary>
-public sealed partial class BucketCorrelationAggregation
+internal sealed partial class BucketCorrelationAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation>
 {
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("buckets_path")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
+	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function");
 
-	/// <summary>
-	/// <para>
-	/// The correlation function to execute.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("function")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Function { get; set; }
+	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object?> propBucketsPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction> propFunction = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBucketsPath.TryReadProperty(ref reader, options, PropBucketsPath, null))
+			{
+				continue;
+			}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(BucketCorrelationAggregation bucketCorrelationAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketCorrelation(bucketCorrelationAggregation);
+			if (propFunction.TryReadProperty(ref reader, options, PropFunction, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BucketsPath = propBucketsPath.Value,
+			Function = propFunction.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
+		writer.WriteProperty(options, PropFunction, value.Function, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -58,28 +76,83 @@ public sealed partial class BucketCorrelationAggregation
 /// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
 /// </para>
 /// </summary>
-public sealed partial class BucketCorrelationAggregationDescriptor : SerializableDescriptor<BucketCorrelationAggregationDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationConverter))]
+public sealed partial class BucketCorrelationAggregation
 {
-	internal BucketCorrelationAggregationDescriptor(Action<BucketCorrelationAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public BucketCorrelationAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction function)
+	{
+		Function = function;
+	}
+#if NET7_0_OR_GREATER
+	public BucketCorrelationAggregation()
 	{
 	}
-
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction FunctionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor FunctionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> FunctionDescriptorAction { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BucketCorrelationAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public BucketCorrelationAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	public object? BucketsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The correlation function to execute.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Function { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
+/// </para>
+/// </summary>
+public readonly partial struct BucketCorrelationAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation instance)
 	{
-		BucketsPathValue = bucketsPath;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor BucketsPath(object? value)
+	{
+		Instance.BucketsPath = value;
+		return this;
 	}
 
 	/// <summary>
@@ -87,55 +160,28 @@ public sealed partial class BucketCorrelationAggregationDescriptor : Serializabl
 	/// The correlation function to execute.
 	/// </para>
 	/// </summary>
-	public BucketCorrelationAggregationDescriptor Function(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction function)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor Function(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction value)
 	{
-		FunctionDescriptor = null;
-		FunctionDescriptorAction = null;
-		FunctionValue = function;
-		return Self;
+		Instance.Function = value;
+		return this;
 	}
 
-	public BucketCorrelationAggregationDescriptor Function(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The correlation function to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor Function(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> action)
 	{
-		FunctionValue = null;
-		FunctionDescriptorAction = null;
-		FunctionDescriptor = descriptor;
-		return Self;
+		Instance.Function = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor.Build(action);
+		return this;
 	}
 
-	public BucketCorrelationAggregationDescriptor Function(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor> action)
 	{
-		FunctionValue = null;
-		FunctionDescriptor = null;
-		FunctionDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BucketsPathValue is not null)
-		{
-			writer.WritePropertyName("buckets_path");
-			JsonSerializer.Serialize(writer, BucketsPathValue, options);
-		}
-
-		if (FunctionDescriptor is not null)
-		{
-			writer.WritePropertyName("function");
-			JsonSerializer.Serialize(writer, FunctionDescriptor, options);
-		}
-		else if (FunctionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("function");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor(FunctionDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("function");
-			JsonSerializer.Serialize(writer, FunctionValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

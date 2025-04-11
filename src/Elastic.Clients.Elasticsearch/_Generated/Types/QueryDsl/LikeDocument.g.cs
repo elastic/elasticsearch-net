@@ -17,27 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class LikeDocumentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPerFieldAnalyzer = System.Text.Json.JsonEncodedText.Encode("per_field_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object?> propDoc = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>?> propPerFieldAnalyzer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<long?> propVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPerFieldAnalyzer.TryReadProperty(ref reader, options, PropPerFieldAnalyzer, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Doc = propDoc.Value,
+			Fields = propFields.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			PerFieldAnalyzer = propPerFieldAnalyzer.Value,
+			Routing = propRouting.Value,
+			Version = propVersion.Value,
+			VersionType = propVersionType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPerFieldAnalyzer, value.PerFieldAnalyzer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, v, null, null));
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentConverter))]
 public sealed partial class LikeDocument
 {
+#if NET7_0_OR_GREATER
+	public LikeDocument()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public LikeDocument()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A document not present in the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -45,7 +157,6 @@ public sealed partial class LikeDocument
 	/// ID of a document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -53,7 +164,6 @@ public sealed partial class LikeDocument
 	/// Index of a document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -61,48 +171,52 @@ public sealed partial class LikeDocument
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("per_field_analyzer")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("routing")]
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
-public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDescriptor<LikeDocumentDescriptor<TDocument>>
+public readonly partial struct LikeDocumentDescriptor<TDocument>
 {
-	internal LikeDocumentDescriptor(Action<LikeDocumentDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Instance { get; init; }
 
-	public LikeDocumentDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LikeDocumentDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument instance)
 	{
+		Instance = instance;
 	}
 
-	private object? DocValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private long? VersionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LikeDocumentDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument instance) => new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A document not present in the index.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor<TDocument> Doc(object? doc)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Doc(object? value)
 	{
-		DocValue = doc;
-		return Self;
+		Instance.Doc = value;
+		return this;
 	}
 
-	public LikeDocumentDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -110,10 +224,10 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	/// ID of a document.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -121,10 +235,10 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	/// Index of a document.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -132,117 +246,120 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? value)
 	{
-		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
-		return Self;
+		Instance.PerFieldAnalyzer = value;
+		return this;
 	}
 
-	public LikeDocumentDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	/// <summary>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer()
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(null);
+		return this;
 	}
 
-	public LikeDocumentDescriptor<TDocument> Version(long? version)
+	/// <summary>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>>? action)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(action);
+		return this;
 	}
 
-	public LikeDocumentDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> AddPerFieldAnalyzer(Elastic.Clients.Elasticsearch.Field key, string value)
 	{
-		VersionTypeValue = versionType;
-		return Self;
+		Instance.PerFieldAnalyzer ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, string>();
+		Instance.PerFieldAnalyzer.Add(key, value);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> AddPerFieldAnalyzer(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, string value)
 	{
-		writer.WriteStartObject();
-		if (DocValue is not null)
+		Instance.PerFieldAnalyzer ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, string>();
+		Instance.PerFieldAnalyzer.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("doc");
-			JsonSerializer.Serialize(writer, DocValue, options);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (PerFieldAnalyzerValue is not null)
-		{
-			writer.WritePropertyName("per_field_analyzer");
-			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		if (VersionTypeValue is not null)
-		{
-			writer.WritePropertyName("version_type");
-			JsonSerializer.Serialize(writer, VersionTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<LikeDocumentDescriptor>
+public readonly partial struct LikeDocumentDescriptor
 {
-	internal LikeDocumentDescriptor(Action<LikeDocumentDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Instance { get; init; }
 
-	public LikeDocumentDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LikeDocumentDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument instance)
 	{
+		Instance = instance;
 	}
 
-	private object? DocValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private long? VersionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LikeDocumentDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument instance) => new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A document not present in the index.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor Doc(object? doc)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Doc(object? value)
 	{
-		DocValue = doc;
-		return Self;
+		Instance.Doc = value;
+		return this;
 	}
 
-	public LikeDocumentDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -250,10 +367,10 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	/// ID of a document.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,10 +378,10 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	/// Index of a document.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,81 +389,87 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
-	public LikeDocumentDescriptor PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? value)
 	{
-		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
-		return Self;
+		Instance.PerFieldAnalyzer = value;
+		return this;
 	}
 
-	public LikeDocumentDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	/// <summary>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer()
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString.Build(null);
+		return this;
 	}
 
-	public LikeDocumentDescriptor Version(long? version)
+	/// <summary>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString>? action)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString.Build(action);
+		return this;
 	}
 
-	public LikeDocumentDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	/// <summary>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<T>>? action)
 	{
-		VersionTypeValue = versionType;
-		return Self;
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor AddPerFieldAnalyzer(Elastic.Clients.Elasticsearch.Field key, string value)
 	{
-		writer.WriteStartObject();
-		if (DocValue is not null)
+		Instance.PerFieldAnalyzer ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, string>();
+		Instance.PerFieldAnalyzer.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor AddPerFieldAnalyzer<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, string value)
+	{
+		Instance.PerFieldAnalyzer ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, string>();
+		Instance.PerFieldAnalyzer.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("doc");
-			JsonSerializer.Serialize(writer, DocValue, options);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (PerFieldAnalyzerValue is not null)
-		{
-			writer.WritePropertyName("per_field_analyzer");
-			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		if (VersionTypeValue is not null)
-		{
-			writer.WritePropertyName("version_type");
-			JsonSerializer.Serialize(writer, VersionTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,19 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCustom = System.Text.Json.JsonEncodedText.Encode("custom");
+	private static readonly System.Text.Json.JsonEncodedText PropFeaturePrefix = System.Text.Json.JsonEncodedText.Encode("feature_prefix");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length");
+	private static readonly System.Text.Json.JsonEncodedText PropNGrams = System.Text.Json.JsonEncodedText.Encode("n_grams");
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCustom = default;
+		LocalJsonValue<string?> propFeaturePrefix = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<int?> propLength = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<int>> propNGrams = default;
+		LocalJsonValue<int?> propStart = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCustom.TryReadProperty(ref reader, options, PropCustom, null))
+			{
+				continue;
+			}
+
+			if (propFeaturePrefix.TryReadProperty(ref reader, options, PropFeaturePrefix, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propLength.TryReadProperty(ref reader, options, PropLength, null))
+			{
+				continue;
+			}
+
+			if (propNGrams.TryReadProperty(ref reader, options, PropNGrams, static System.Collections.Generic.ICollection<int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<int>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propStart.TryReadProperty(ref reader, options, PropStart, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Custom = propCustom.Value,
+			FeaturePrefix = propFeaturePrefix.Value,
+			Field = propField.Value,
+			Length = propLength.Value,
+			NGrams = propNGrams.Value,
+			Start = propStart.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCustom, value.Custom, null, null);
+		writer.WriteProperty(options, PropFeaturePrefix, value.FeaturePrefix, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropLength, value.Length, null, null);
+		writer.WriteProperty(options, PropNGrams, value.NGrams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<int> v) => w.WriteCollectionValue<int>(o, v, null));
+		writer.WriteProperty(options, PropStart, value.Start, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 {
-	[JsonInclude, JsonPropertyName("custom")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<int> nGrams)
+	{
+		Field = field;
+		NGrams = nGrams;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalysisFeatureProcessorNGramEncoding()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalysisFeatureProcessorNGramEncoding()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Custom { get; set; }
 
 	/// <summary>
@@ -37,7 +140,6 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_prefix")]
 	public string? FeaturePrefix { get; set; }
 
 	/// <summary>
@@ -45,15 +147,17 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	/// The name of the text field to encode.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("length")]
 	public int? Length { get; set; }
 
 	/// <summary>
@@ -61,39 +165,43 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("n_grams")]
-	public ICollection<int> NGrams { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<int> NGrams { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start")]
 	public int? Start { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor(DataframeAnalysisFeatureProcessorNGramEncoding dataframeAnalysisFeatureProcessorNGramEncoding) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor.NGramEncoding(dataframeAnalysisFeatureProcessorNGramEncoding);
 }
 
-public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> : SerializableDescriptor<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>>
+public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>
 {
-	internal DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Instance { get; init; }
 
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CustomValue { get; set; }
-	private string? FeaturePrefixValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? LengthValue { get; set; }
-	private ICollection<int> NGramsValue { get; set; }
-	private int? StartValue { get; set; }
-
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Custom(bool? custom = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor()
 	{
-		CustomValue = custom;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Custom(bool? value = true)
+	{
+		Instance.Custom = value;
+		return this;
 	}
 
 	/// <summary>
@@ -101,10 +209,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> FeaturePrefix(string? featurePrefix)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> FeaturePrefix(string? value)
 	{
-		FeaturePrefixValue = featurePrefix;
-		return Self;
+		Instance.FeaturePrefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -112,10 +220,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// The name of the text field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -123,21 +231,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// The name of the text field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -145,10 +242,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Length(int? length)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Length(int? value)
 	{
-		LengthValue = length;
-		return Self;
+		Instance.Length = value;
+		return this;
 	}
 
 	/// <summary>
@@ -156,10 +253,21 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(ICollection<int> nGrams)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(System.Collections.Generic.ICollection<int> value)
 	{
-		NGramsValue = nGrams;
-		return Self;
+		Instance.NGrams = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(params int[] values)
+	{
+		Instance.NGrams = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -167,66 +275,44 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Start(int? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Start(int? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (CustomValue.HasValue)
-		{
-			writer.WritePropertyName("custom");
-			writer.WriteBooleanValue(CustomValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FeaturePrefixValue))
-		{
-			writer.WritePropertyName("feature_prefix");
-			writer.WriteStringValue(FeaturePrefixValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (LengthValue.HasValue)
-		{
-			writer.WritePropertyName("length");
-			writer.WriteNumberValue(LengthValue.Value);
-		}
-
-		writer.WritePropertyName("n_grams");
-		JsonSerializer.Serialize(writer, NGramsValue, options);
-		if (StartValue.HasValue)
-		{
-			writer.WritePropertyName("start");
-			writer.WriteNumberValue(StartValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor : SerializableDescriptor<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor>
+public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDescriptor
 {
-	internal DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Instance { get; init; }
 
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CustomValue { get; set; }
-	private string? FeaturePrefixValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? LengthValue { get; set; }
-	private ICollection<int> NGramsValue { get; set; }
-	private int? StartValue { get; set; }
-
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Custom(bool? custom = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor()
 	{
-		CustomValue = custom;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Custom(bool? value = true)
+	{
+		Instance.Custom = value;
+		return this;
 	}
 
 	/// <summary>
@@ -234,10 +320,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor FeaturePrefix(string? featurePrefix)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor FeaturePrefix(string? value)
 	{
-		FeaturePrefixValue = featurePrefix;
-		return Self;
+		Instance.FeaturePrefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -245,10 +331,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// The name of the text field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -256,21 +342,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// The name of the text field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -278,10 +353,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Length(int? length)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Length(int? value)
 	{
-		LengthValue = length;
-		return Self;
+		Instance.Length = value;
+		return this;
 	}
 
 	/// <summary>
@@ -289,10 +364,21 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(ICollection<int> nGrams)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(System.Collections.Generic.ICollection<int> value)
 	{
-		NGramsValue = nGrams;
-		return Self;
+		Instance.NGrams = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(params int[] values)
+	{
+		Instance.NGrams = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -300,43 +386,17 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Start(int? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Start(int? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (CustomValue.HasValue)
-		{
-			writer.WritePropertyName("custom");
-			writer.WriteBooleanValue(CustomValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FeaturePrefixValue))
-		{
-			writer.WritePropertyName("feature_prefix");
-			writer.WriteStringValue(FeaturePrefixValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (LengthValue.HasValue)
-		{
-			writer.WritePropertyName("length");
-			writer.WriteNumberValue(LengthValue.Value);
-		}
-
-		writer.WritePropertyName("n_grams");
-		JsonSerializer.Serialize(writer, NGramsValue, options);
-		if (StartValue.HasValue)
-		{
-			writer.WritePropertyName("start");
-			writer.WriteNumberValue(StartValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

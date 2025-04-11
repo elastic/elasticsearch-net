@@ -17,97 +17,209 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ApplicationPrivileges
+internal sealed partial class ApplicationPrivilegesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>
 {
-	/// <summary>
-	/// <para>
-	/// The name of the application to which this entry applies.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("application")]
-	public string Application { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
+	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges");
+	private static readonly System.Text.Json.JsonEncodedText PropResources = System.Text.Json.JsonEncodedText.Encode("resources");
 
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("privileges")]
-	public ICollection<string> Privileges { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("resources")]
-	public ICollection<string> Resources { get; set; }
-}
-
-public sealed partial class ApplicationPrivilegesDescriptor : SerializableDescriptor<ApplicationPrivilegesDescriptor>
-{
-	internal ApplicationPrivilegesDescriptor(Action<ApplicationPrivilegesDescriptor> configure) => configure.Invoke(this);
-
-	public ApplicationPrivilegesDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propApplication = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propPrivileges = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propResources = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApplication.TryReadProperty(ref reader, options, PropApplication, null))
+			{
+				continue;
+			}
+
+			if (propPrivileges.TryReadProperty(ref reader, options, PropPrivileges, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propResources.TryReadProperty(ref reader, options, PropResources, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Application = propApplication.Value,
+			Privileges = propPrivileges.Value,
+			Resources = propResources.Value
+		};
 	}
 
-	private string ApplicationValue { get; set; }
-	private ICollection<string> PrivilegesValue { get; set; }
-	private ICollection<string> ResourcesValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The name of the application to which this entry applies.
-	/// </para>
-	/// </summary>
-	public ApplicationPrivilegesDescriptor Application(string application)
-	{
-		ApplicationValue = application;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
-	public ApplicationPrivilegesDescriptor Privileges(ICollection<string> privileges)
-	{
-		PrivilegesValue = privileges;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
-	public ApplicationPrivilegesDescriptor Resources(ICollection<string> resources)
-	{
-		ResourcesValue = resources;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("application");
-		writer.WriteStringValue(ApplicationValue);
-		writer.WritePropertyName("privileges");
-		JsonSerializer.Serialize(writer, PrivilegesValue, options);
-		writer.WritePropertyName("resources");
-		JsonSerializer.Serialize(writer, ResourcesValue, options);
+		writer.WriteProperty(options, PropApplication, value.Application, null, null);
+		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropResources, value.Resources, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesConverter))]
+public sealed partial class ApplicationPrivileges
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApplicationPrivileges(string application, System.Collections.Generic.ICollection<string> privileges, System.Collections.Generic.ICollection<string> resources)
+	{
+		Application = application;
+		Privileges = privileges;
+		Resources = resources;
+	}
+#if NET7_0_OR_GREATER
+	public ApplicationPrivileges()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ApplicationPrivileges()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ApplicationPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the application to which this entry applies.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Application { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of strings, where each element is the name of an application privilege or action.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Privileges { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list resources to which the privileges are applied.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Resources { get; set; }
+}
+
+public readonly partial struct ApplicationPrivilegesDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApplicationPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApplicationPrivilegesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the application to which this entry applies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Application(string value)
+	{
+		Instance.Application = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of strings, where each element is the name of an application privilege or action.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges(System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Privileges = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of strings, where each element is the name of an application privilege or action.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges(params string[] values)
+	{
+		Instance.Privileges = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list resources to which the privileges are applied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources(System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Resources = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list resources to which the privileges are applied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources(params string[] values)
+	{
+		Instance.Resources = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(new Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class IndicesStatsRequestParameters : RequestParameters
+public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -46,7 +39,7 @@ public sealed partial class IndicesStatsRequestParameters : RequestParameters
 	/// such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -74,7 +67,7 @@ public sealed partial class IndicesStatsRequestParameters : RequestParameters
 	/// Comma-separated list of search groups to include in the search statistics.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
+	public System.Collections.Generic.ICollection<string>? Groups { get => Q<System.Collections.Generic.ICollection<string>?>("groups"); set => Q("groups", value); }
 
 	/// <summary>
 	/// <para>
@@ -98,6 +91,35 @@ public sealed partial class IndicesStatsRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
 
+internal sealed partial class IndicesStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get index statistics.
@@ -116,12 +138,9 @@ public sealed partial class IndicesStatsRequestParameters : RequestParameters
 /// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 /// </para>
 /// </summary>
-public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestConverter))]
+public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>
 {
-	public IndicesStatsRequest()
-	{
-	}
-
 	public IndicesStatsRequest(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
 	{
 	}
@@ -133,10 +152,25 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	public IndicesStatsRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public IndicesStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndicesStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -144,10 +178,23 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned the specific metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+
+	/// <summary>
+	/// <para>
 	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	/// <summary>
@@ -157,15 +204,13 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	/// such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
 	/// <summary>
@@ -173,7 +218,6 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
@@ -181,7 +225,6 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	/// If true, statistics are not collected from closed indices.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 	/// <summary>
@@ -189,15 +232,13 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	/// Comma-separated list of search groups to include in the search statistics.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
+	public System.Collections.Generic.ICollection<string>? Groups { get => Q<System.Collections.Generic.ICollection<string>?>("groups"); set => Q("groups", value); }
 
 	/// <summary>
 	/// <para>
 	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
 	/// <summary>
@@ -205,7 +246,6 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	/// If true, the response includes information from segments that are not loaded into memory.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
 	/// <summary>
@@ -213,7 +253,6 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
 
@@ -235,50 +274,272 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 /// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 /// </para>
 /// </summary>
-public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDescriptor<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsRequestParameters>
+public readonly partial struct IndicesStatsRequestDescriptor
 {
-	internal IndicesStatsRequestDescriptor(Action<IndicesStatsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Instance { get; init; }
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(metric);
+	}
+
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices);
+	}
+
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices, metric);
 	}
 
 	public IndicesStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.stats";
-
-	public IndicesStatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
-	public IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public IndicesStatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
-	public IndicesStatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-	public IndicesStatsRequestDescriptor<TDocument> ForbidClosedIndices(bool? forbidClosedIndices = true) => Qs("forbid_closed_indices", forbidClosedIndices);
-	public IndicesStatsRequestDescriptor<TDocument> Groups(ICollection<string>? groups) => Qs("groups", groups);
-	public IndicesStatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
-	public IndicesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
-	public IndicesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
-
-	public IndicesStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
+	/// <summary>
+	/// <para>
+	/// Limit the information returned the specific metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
 	{
-		RouteValues.Optional("metric", metric);
-		return Self;
+		Instance.Metric = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
+		Instance.CompletionFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor CompletionFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.CompletionFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.FielddataFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor FielddataFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.FielddataFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, statistics are not collected from closed indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ForbidClosedIndices(bool? value = true)
+	{
+		Instance.ForbidClosedIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Groups = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(params string[] values)
+	{
+		Instance.Groups = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor IncludeSegmentFileSizes(bool? value = true)
+	{
+		Instance.IncludeSegmentFileSizes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the response includes information from segments that are not loaded into memory.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor IncludeUnloadedSegments(bool? value = true)
+	{
+		Instance.IncludeUnloadedSegments = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? value)
+	{
+		Instance.Level = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -300,49 +561,271 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 /// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 /// </para>
 /// </summary>
-public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<IndicesStatsRequestDescriptor, IndicesStatsRequestParameters>
+public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 {
-	internal IndicesStatsRequestDescriptor(Action<IndicesStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Instance { get; init; }
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(metric);
+	}
+
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices);
+	}
+
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices, metric);
 	}
 
 	public IndicesStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.stats";
-
-	public IndicesStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
-	public IndicesStatsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public IndicesStatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
-	public IndicesStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-	public IndicesStatsRequestDescriptor ForbidClosedIndices(bool? forbidClosedIndices = true) => Qs("forbid_closed_indices", forbidClosedIndices);
-	public IndicesStatsRequestDescriptor Groups(ICollection<string>? groups) => Qs("groups", groups);
-	public IndicesStatsRequestDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
-	public IndicesStatsRequestDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
-	public IndicesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
-
-	public IndicesStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
+	/// <summary>
+	/// <para>
+	/// Limit the information returned the specific metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? value)
 	{
-		RouteValues.Optional("metric", metric);
-		return Self;
+		Instance.Metric = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
+		Instance.CompletionFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> CompletionFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.CompletionFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.FielddataFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> FielddataFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.FielddataFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, statistics are not collected from closed indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ForbidClosedIndices(bool? value = true)
+	{
+		Instance.ForbidClosedIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Groups = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(params string[] values)
+	{
+		Instance.Groups = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? value = true)
+	{
+		Instance.IncludeSegmentFileSizes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the response includes information from segments that are not loaded into memory.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? value = true)
+	{
+		Instance.IncludeUnloadedSegments = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
+	{
+		Instance.Level = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

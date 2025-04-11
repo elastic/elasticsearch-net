@@ -17,33 +17,128 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+internal sealed partial class SlmConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial");
+
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propFeatureStates = default;
+		LocalJsonValue<bool?> propIgnoreUnavailable = default;
+		LocalJsonValue<bool?> propIncludeGlobalState = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<bool?> propPartial = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
+			{
+				continue;
+			}
+
+			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPartial.TryReadProperty(ref reader, options, PropPartial, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FeatureStates = propFeatureStates.Value,
+			IgnoreUnavailable = propIgnoreUnavailable.Value,
+			IncludeGlobalState = propIncludeGlobalState.Value,
+			Indices = propIndices.Value,
+			Metadata = propMetadata.Value,
+			Partial = propPartial.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
+		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPartial, value.Partial, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationConverter))]
 public sealed partial class SlmConfiguration
 {
+#if NET7_0_OR_GREATER
+	public SlmConfiguration()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SlmConfiguration()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SlmConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
 	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_states")]
-	public ICollection<string>? FeatureStates { get; set; }
+	public System.Collections.Generic.ICollection<string>? FeatureStates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_unavailable")]
 	public bool? IgnoreUnavailable { get; set; }
 
 	/// <summary>
@@ -51,7 +146,6 @@ public sealed partial class SlmConfiguration
 	/// If true, the current global state is included in the snapshot.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include_global_state")]
 	public bool? IncludeGlobalState { get; set; }
 
 	/// <summary>
@@ -60,7 +154,6 @@ public sealed partial class SlmConfiguration
 	/// By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
@@ -68,32 +161,34 @@ public sealed partial class SlmConfiguration
 	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IDictionary<string, object>? Metadata { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("partial")]
 	public bool? Partial { get; set; }
 }
 
-public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<SlmConfigurationDescriptor>
+public readonly partial struct SlmConfigurationDescriptor
 {
-	internal SlmConfigurationDescriptor(Action<SlmConfigurationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration Instance { get; init; }
 
-	public SlmConfigurationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlmConfigurationDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? FeatureStatesValue { get; set; }
-	private bool? IgnoreUnavailableValue { get; set; }
-	private bool? IncludeGlobalStateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private bool? PartialValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlmConfigurationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -101,10 +196,22 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
 	/// </para>
 	/// </summary>
-	public SlmConfigurationDescriptor FeatureStates(ICollection<string>? featureStates)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates(System.Collections.Generic.ICollection<string>? value)
 	{
-		FeatureStatesValue = featureStates;
-		return Self;
+		Instance.FeatureStates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
+	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates(params string[] values)
+	{
+		Instance.FeatureStates = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -112,10 +219,10 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	/// If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
 	/// </para>
 	/// </summary>
-	public SlmConfigurationDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor IgnoreUnavailable(bool? value = true)
 	{
-		IgnoreUnavailableValue = ignoreUnavailable;
-		return Self;
+		Instance.IgnoreUnavailable = value;
+		return this;
 	}
 
 	/// <summary>
@@ -123,10 +230,10 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	/// If true, the current global state is included in the snapshot.
 	/// </para>
 	/// </summary>
-	public SlmConfigurationDescriptor IncludeGlobalState(bool? includeGlobalState = true)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor IncludeGlobalState(bool? value = true)
 	{
-		IncludeGlobalStateValue = includeGlobalState;
-		return Self;
+		Instance.IncludeGlobalState = value;
+		return this;
 	}
 
 	/// <summary>
@@ -135,10 +242,10 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	/// By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.
 	/// </para>
 	/// </summary>
-	public SlmConfigurationDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -146,10 +253,39 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
 	/// </para>
 	/// </summary>
-	public SlmConfigurationDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Metadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata()
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -157,51 +293,22 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	/// If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.
 	/// </para>
 	/// </summary>
-	public SlmConfigurationDescriptor Partial(bool? partial = true)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Partial(bool? value = true)
 	{
-		PartialValue = partial;
-		return Self;
+		Instance.Partial = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration Build(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FeatureStatesValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("feature_states");
-			JsonSerializer.Serialize(writer, FeatureStatesValue, options);
+			return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IgnoreUnavailableValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unavailable");
-			writer.WriteBooleanValue(IgnoreUnavailableValue.Value);
-		}
-
-		if (IncludeGlobalStateValue.HasValue)
-		{
-			writer.WritePropertyName("include_global_state");
-			writer.WriteBooleanValue(IncludeGlobalStateValue.Value);
-		}
-
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
-
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
-
-		if (PartialValue.HasValue)
-		{
-			writer.WritePropertyName("partial");
-			writer.WriteBooleanValue(PartialValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor(new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

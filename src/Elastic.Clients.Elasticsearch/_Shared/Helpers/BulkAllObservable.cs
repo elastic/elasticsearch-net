@@ -2,8 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if !ELASTICSEARCH_SERVERLESS
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +12,6 @@ using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 using Elastic.Transport.Products.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Core.Bulk;
-using Elastic.Clients.Elasticsearch.Requests;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -149,11 +146,11 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 				case IHelperCallable helperCallable when helperCallable.ParentMetaData is not null:
 					s.RequestConfiguration(rc => rc.RequestMetaData(helperCallable.ParentMetaData));
 					break;
+
 				default:
 					s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData()));
 					break;
 			}
-
 		}, _compositeCancelToken).ConfigureAwait(false);
 
 		_compositeCancelToken.ThrowIfCancellationRequested();
@@ -233,6 +230,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 
 				ThrowOnExhaustedRetries();
 				return await RetryDocumentsAsync(page, ++backOffRetries, buffer).ConfigureAwait(false);
+
 			case PipelineFailure.CouldNotStartSniffOnStartup:
 			case PipelineFailure.BadAuthentication:
 			case PipelineFailure.NoNodesAttempted:
@@ -274,7 +272,8 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 
 	private static bool RetryBulkActionPredicate(ResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
 
-	private static void DroppedDocumentCallbackDefault(ResponseItem bulkResponseItem, T d) { }
+	private static void DroppedDocumentCallbackDefault(ResponseItem bulkResponseItem, T d)
+	{ }
 
 	public void Dispose()
 	{
@@ -297,5 +296,3 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 	private static TransportException Throw(string message, ElasticsearchResponse details) =>
 		new(PipelineFailure.BadResponse, message, details);
 }
-
-#endif

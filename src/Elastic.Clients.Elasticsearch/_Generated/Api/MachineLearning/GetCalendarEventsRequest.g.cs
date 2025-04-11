@@ -17,27 +17,20 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetCalendarEventsRequestParameters : RequestParameters
+public sealed partial class GetCalendarEventsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
 	/// Specifies to get events with timestamps earlier than this time.
 	/// </para>
 	/// </summary>
-	public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
 	/// <para>
@@ -65,7 +58,36 @@ public sealed partial class GetCalendarEventsRequestParameters : RequestParamete
 	/// Specifies to get events with timestamps after this time.
 	/// </para>
 	/// </summary>
-	public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
+	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
+}
+
+internal sealed partial class GetCalendarEventsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -73,15 +95,27 @@ public sealed partial class GetCalendarEventsRequestParameters : RequestParamete
 /// Get info about events in calendars.
 /// </para>
 /// </summary>
-public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarEventsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestConverter))]
+public sealed partial class GetCalendarEventsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetCalendarEventsRequest(Elastic.Clients.Elasticsearch.Id calendarId) : base(r => r.Required("calendar_id", calendarId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetCalendarEventsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetCalendarEventsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCalendarEvents;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetCalendarEvents;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -89,18 +123,27 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 
 	/// <summary>
 	/// <para>
+	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies to get events with timestamps earlier than this time.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
 	/// <para>
 	/// Skips the specified number of events.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -108,7 +151,6 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Id? JobId { get => Q<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => Q("job_id", value); }
 
 	/// <summary>
@@ -116,7 +158,6 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 	/// Specifies the maximum number of events to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -124,8 +165,7 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 	/// Specifies to get events with timestamps after this time.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
+	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 /// <summary>
@@ -133,35 +173,143 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 /// Get info about events in calendars.
 /// </para>
 /// </summary>
-public sealed partial class GetCalendarEventsRequestDescriptor : RequestDescriptor<GetCalendarEventsRequestDescriptor, GetCalendarEventsRequestParameters>
+public readonly partial struct GetCalendarEventsRequestDescriptor
 {
-	internal GetCalendarEventsRequestDescriptor(Action<GetCalendarEventsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest Instance { get; init; }
 
-	public GetCalendarEventsRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId) : base(r => r.Required("calendar_id", calendarId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetCalendarEventsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCalendarEvents;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_calendar_events";
-
-	public GetCalendarEventsRequestDescriptor End(DateTimeOffset? end) => Qs("end", end);
-	public GetCalendarEventsRequestDescriptor From(int? from) => Qs("from", from);
-	public GetCalendarEventsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId) => Qs("job_id", jobId);
-	public GetCalendarEventsRequestDescriptor Size(int? size) => Qs("size", size);
-	public GetCalendarEventsRequestDescriptor Start(DateTimeOffset? start) => Qs("start", start);
-
-	public GetCalendarEventsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id calendarId)
+	public GetCalendarEventsRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
-		RouteValues.Required("calendar_id", calendarId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest(calendarId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetCalendarEventsRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.CalendarId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies to get events with timestamps earlier than this time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor End(System.DateTimeOffset? value)
+	{
+		Instance.End = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of events.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of events to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies to get events with timestamps after this time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Start(System.DateTimeOffset? value)
+	{
+		Instance.Start = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

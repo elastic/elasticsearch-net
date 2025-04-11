@@ -17,24 +17,135 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextSimilarityReranker>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceText = System.Text.Json.JsonEncodedText.Encode("inference_text");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
+
+	public override Elastic.Clients.Elasticsearch.TextSimilarityReranker Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<string?> propInferenceId = default;
+		LocalJsonValue<string?> propInferenceText = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propInferenceId.TryReadProperty(ref reader, options, PropInferenceId, null))
+			{
+				continue;
+			}
+
+			if (propInferenceText.TryReadProperty(ref reader, options, PropInferenceText, null))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			{
+				continue;
+			}
+
+			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Filter = propFilter.Value,
+			InferenceId = propInferenceId.Value,
+			InferenceText = propInferenceText.Value,
+			MinScore = propMinScore.Value,
+			RankWindowSize = propRankWindowSize.Value,
+			Retriever = propRetriever.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextSimilarityReranker value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
+		writer.WriteProperty(options, PropInferenceText, value.InferenceText, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextSimilarityRerankerConverter))]
 public sealed partial class TextSimilarityReranker
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextSimilarityReranker(Elastic.Clients.Elasticsearch.Retriever retriever)
+	{
+		Retriever = retriever;
+	}
+#if NET7_0_OR_GREATER
+	public TextSimilarityReranker()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TextSimilarityReranker()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public string? Field { get; set; }
 
 	/// <summary>
@@ -42,16 +153,13 @@ public sealed partial class TextSimilarityReranker
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unique identifier of the inference endpoint created using the inference API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_id")]
 	public string? InferenceId { get; set; }
 
 	/// <summary>
@@ -59,7 +167,6 @@ public sealed partial class TextSimilarityReranker
 	/// The text snippet used as the basis for similarity comparison
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_text")]
 	public string? InferenceText { get; set; }
 
 	/// <summary>
@@ -67,7 +174,6 @@ public sealed partial class TextSimilarityReranker
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -75,7 +181,6 @@ public sealed partial class TextSimilarityReranker
 	/// This value determines how many documents we will consider from the nested retriever.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
@@ -83,42 +188,41 @@ public sealed partial class TextSimilarityReranker
 	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retriever")]
-	public Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(TextSimilarityReranker textSimilarityReranker) => Elastic.Clients.Elasticsearch.Retriever.TextSimilarityReranker(textSimilarityReranker);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 }
 
-public sealed partial class TextSimilarityRerankerDescriptor<TDocument> : SerializableDescriptor<TextSimilarityRerankerDescriptor<TDocument>>
+public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 {
-	internal TextSimilarityRerankerDescriptor(Action<TextSimilarityRerankerDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TextSimilarityReranker Instance { get; init; }
 
-	public TextSimilarityRerankerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextSimilarityRerankerDescriptor(Elastic.Clients.Elasticsearch.TextSimilarityReranker instance)
 	{
+		Instance = instance;
 	}
 
-	private string? FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private string? InferenceIdValue { get; set; }
-	private string? InferenceTextValue { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int? RankWindowSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Retriever RetrieverValue { get; set; }
-	private Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> RetrieverDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> RetrieverDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextSimilarityRerankerDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TextSimilarityReranker instance) => new Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> Field(string? field)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Field(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -126,227 +230,10 @@ public sealed partial class TextSimilarityRerankerDescriptor<TDocument> : Serial
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public TextSimilarityRerankerDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TextSimilarityRerankerDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
-	public TextSimilarityRerankerDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Unique identifier of the inference endpoint created using the inference API.
-	/// </para>
-	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> InferenceId(string? inferenceId)
-	{
-		InferenceIdValue = inferenceId;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text snippet used as the basis for similarity comparison
-	/// </para>
-	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> InferenceText(string? inferenceText)
-	{
-		InferenceTextValue = inferenceText;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> MinScore(float? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// This value determines how many documents we will consider from the nested retriever.
-	/// </para>
-	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> RankWindowSize(int? rankWindowSize)
-	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
-	public TextSimilarityRerankerDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever retriever)
-	{
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = null;
-		RetrieverValue = retriever;
-		return Self;
-	}
-
-	public TextSimilarityRerankerDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor)
-	{
-		RetrieverValue = null;
-		RetrieverDescriptorAction = null;
-		RetrieverDescriptor = descriptor;
-		return Self;
-	}
-
-	public TextSimilarityRerankerDescriptor<TDocument> Retriever(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> configure)
-	{
-		RetrieverValue = null;
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FieldValue))
-		{
-			writer.WritePropertyName("field");
-			writer.WriteStringValue(FieldValue);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(InferenceIdValue))
-		{
-			writer.WritePropertyName("inference_id");
-			writer.WriteStringValue(InferenceIdValue);
-		}
-
-		if (!string.IsNullOrEmpty(InferenceTextValue))
-		{
-			writer.WritePropertyName("inference_text");
-			writer.WriteStringValue(InferenceTextValue);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
-
-		if (RetrieverDescriptor is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverDescriptor, options);
-		}
-		else if (RetrieverDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(RetrieverDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescriptor<TextSimilarityRerankerDescriptor>
-{
-	internal TextSimilarityRerankerDescriptor(Action<TextSimilarityRerankerDescriptor> configure) => configure.Invoke(this);
-
-	public TextSimilarityRerankerDescriptor() : base()
-	{
-	}
-
-	private string? FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private string? InferenceIdValue { get; set; }
-	private string? InferenceTextValue { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int? RankWindowSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Retriever RetrieverValue { get; set; }
-	private Elastic.Clients.Elasticsearch.RetrieverDescriptor RetrieverDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> RetrieverDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
-	/// </para>
-	/// </summary>
-	public TextSimilarityRerankerDescriptor Field(string? field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -354,40 +241,27 @@ public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescr
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public TextSimilarityRerankerDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
 
-	public TextSimilarityRerankerDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
-	public TextSimilarityRerankerDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -395,10 +269,10 @@ public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescr
 	/// Unique identifier of the inference endpoint created using the inference API.
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor InferenceId(string? inferenceId)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceId(string? value)
 	{
-		InferenceIdValue = inferenceId;
-		return Self;
+		Instance.InferenceId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -406,10 +280,10 @@ public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescr
 	/// The text snippet used as the basis for similarity comparison
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor InferenceText(string? inferenceText)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceText(string? value)
 	{
-		InferenceTextValue = inferenceText;
-		return Self;
+		Instance.InferenceText = value;
+		return this;
 	}
 
 	/// <summary>
@@ -417,10 +291,10 @@ public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescr
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -428,10 +302,10 @@ public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescr
 	/// This value determines how many documents we will consider from the nested retriever.
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor RankWindowSize(int? rankWindowSize)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> RankWindowSize(int? value)
 	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
+		Instance.RankWindowSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -439,108 +313,200 @@ public sealed partial class TextSimilarityRerankerDescriptor : SerializableDescr
 	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
 	/// </para>
 	/// </summary>
-	public TextSimilarityRerankerDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever retriever)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = null;
-		RetrieverValue = retriever;
-		return Self;
+		Instance.Retriever = value;
+		return this;
 	}
 
-	public TextSimilarityRerankerDescriptor Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
-		RetrieverValue = null;
-		RetrieverDescriptorAction = null;
-		RetrieverDescriptor = descriptor;
-		return Self;
+		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public TextSimilarityRerankerDescriptor Retriever(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TextSimilarityReranker Build(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>> action)
 	{
-		RetrieverValue = null;
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct TextSimilarityRerankerDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.TextSimilarityReranker Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextSimilarityRerankerDescriptor(Elastic.Clients.Elasticsearch.TextSimilarityReranker instance)
+	{
+		Instance = instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextSimilarityRerankerDescriptor()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FieldValue))
+		Instance = new Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor(Elastic.Clients.Elasticsearch.TextSimilarityReranker instance) => new Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Field(string? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("field");
-			writer.WriteStringValue(FieldValue);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
 		}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
+		Instance.Filter = items;
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
 		}
 
-		if (!string.IsNullOrEmpty(InferenceIdValue))
-		{
-			writer.WritePropertyName("inference_id");
-			writer.WriteStringValue(InferenceIdValue);
-		}
+		Instance.Filter = items;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(InferenceTextValue))
-		{
-			writer.WritePropertyName("inference_text");
-			writer.WriteStringValue(InferenceTextValue);
-		}
+	/// <summary>
+	/// <para>
+	/// Unique identifier of the inference endpoint created using the inference API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceId(string? value)
+	{
+		Instance.InferenceId = value;
+		return this;
+	}
 
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The text snippet used as the basis for similarity comparison
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceText(string? value)
+	{
+		Instance.InferenceText = value;
+		return this;
+	}
 
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor MinScore(float? value)
+	{
+		Instance.MinScore = value;
+		return this;
+	}
 
-		if (RetrieverDescriptor is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverDescriptor, options);
-		}
-		else if (RetrieverDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor(RetrieverDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// This value determines how many documents we will consider from the nested retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor RankWindowSize(int? value)
+	{
+		Instance.RankWindowSize = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
+	{
+		Instance.Retriever = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
+	{
+		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
+	{
+		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TextSimilarityReranker Build(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor(new Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

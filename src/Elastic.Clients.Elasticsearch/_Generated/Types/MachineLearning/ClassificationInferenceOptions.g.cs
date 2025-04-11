@@ -17,24 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ClassificationInferenceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldType = System.Text.Json.JsonEncodedText.Encode("prediction_field_type");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTopClassesResultsField = System.Text.Json.JsonEncodedText.Encode("top_classes_results_field");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propNumTopClasses = default;
+		LocalJsonValue<int?> propNumTopFeatureImportanceValues = default;
+		LocalJsonValue<string?> propPredictionFieldType = default;
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<string?> propTopClassesResultsField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			{
+				continue;
+			}
+
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			{
+				continue;
+			}
+
+			if (propPredictionFieldType.TryReadProperty(ref reader, options, PropPredictionFieldType, null))
+			{
+				continue;
+			}
+
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
+
+			if (propTopClassesResultsField.TryReadProperty(ref reader, options, PropTopClassesResultsField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumTopClasses = propNumTopClasses.Value,
+			NumTopFeatureImportanceValues = propNumTopFeatureImportanceValues.Value,
+			PredictionFieldType = propPredictionFieldType.Value,
+			ResultsField = propResultsField.Value,
+			TopClassesResultsField = propTopClassesResultsField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropPredictionFieldType, value.PredictionFieldType, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTopClassesResultsField, value.TopClassesResultsField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsConverter))]
 public sealed partial class ClassificationInferenceOptions
 {
+#if NET7_0_OR_GREATER
+	public ClassificationInferenceOptions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ClassificationInferenceOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return. Defaults to 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
@@ -42,7 +129,6 @@ public sealed partial class ClassificationInferenceOptions
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
 	/// <summary>
@@ -50,7 +136,6 @@ public sealed partial class ClassificationInferenceOptions
 	/// Specifies the type of the predicted field to write. Acceptable values are: string, number, boolean. When boolean is provided 1.0 is transformed to true and 0.0 to false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
 
 	/// <summary>
@@ -58,7 +143,6 @@ public sealed partial class ClassificationInferenceOptions
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
@@ -66,37 +150,37 @@ public sealed partial class ClassificationInferenceOptions
 	/// Specifies the field to which the top classes are written. Defaults to top_classes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public string? TopClassesResultsField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(ClassificationInferenceOptions classificationInferenceOptions) => Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig.Classification(classificationInferenceOptions);
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(ClassificationInferenceOptions classificationInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.Classification(classificationInferenceOptions);
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate(ClassificationInferenceOptions classificationInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate.Classification(classificationInferenceOptions);
 }
 
-public sealed partial class ClassificationInferenceOptionsDescriptor : SerializableDescriptor<ClassificationInferenceOptionsDescriptor>
+public readonly partial struct ClassificationInferenceOptionsDescriptor
 {
-	internal ClassificationInferenceOptionsDescriptor(Action<ClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions Instance { get; init; }
 
-	public ClassificationInferenceOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumTopClassesValue { get; set; }
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private string? PredictionFieldTypeValue { get; set; }
-	private string? ResultsFieldValue { get; set; }
-	private string? TopClassesResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClassificationInferenceOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return. Defaults to 0.
 	/// </para>
 	/// </summary>
-	public ClassificationInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor NumTopClasses(int? value)
 	{
-		NumTopClassesValue = numTopClasses;
-		return Self;
+		Instance.NumTopClasses = value;
+		return this;
 	}
 
 	/// <summary>
@@ -104,10 +188,10 @@ public sealed partial class ClassificationInferenceOptionsDescriptor : Serializa
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	public ClassificationInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -115,10 +199,10 @@ public sealed partial class ClassificationInferenceOptionsDescriptor : Serializa
 	/// Specifies the type of the predicted field to write. Acceptable values are: string, number, boolean. When boolean is provided 1.0 is transformed to true and 0.0 to false.
 	/// </para>
 	/// </summary>
-	public ClassificationInferenceOptionsDescriptor PredictionFieldType(string? predictionFieldType)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor PredictionFieldType(string? value)
 	{
-		PredictionFieldTypeValue = predictionFieldType;
-		return Self;
+		Instance.PredictionFieldType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -126,10 +210,10 @@ public sealed partial class ClassificationInferenceOptionsDescriptor : Serializa
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public ClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor ResultsField(string? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,45 +221,22 @@ public sealed partial class ClassificationInferenceOptionsDescriptor : Serializa
 	/// Specifies the field to which the top classes are written. Defaults to top_classes.
 	/// </para>
 	/// </summary>
-	public ClassificationInferenceOptionsDescriptor TopClassesResultsField(string? topClassesResultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor TopClassesResultsField(string? value)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
+		Instance.TopClassesResultsField = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (NumTopClassesValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("num_top_classes");
-			writer.WriteNumberValue(NumTopClassesValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NumTopFeatureImportanceValuesValue.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(PredictionFieldTypeValue))
-		{
-			writer.WritePropertyName("prediction_field_type");
-			writer.WriteStringValue(PredictionFieldTypeValue);
-		}
-
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
-		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
-		}
-
-		if (!string.IsNullOrEmpty(TopClassesResultsFieldValue))
-		{
-			writer.WritePropertyName("top_classes_results_field");
-			writer.WriteStringValue(TopClassesResultsFieldValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

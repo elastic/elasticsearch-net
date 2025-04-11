@@ -17,47 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeRegressionSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHuber = System.Text.Json.JsonEncodedText.Encode("huber");
+	private static readonly System.Text.Json.JsonEncodedText PropMse = System.Text.Json.JsonEncodedText.Encode("mse");
+	private static readonly System.Text.Json.JsonEncodedText PropMsle = System.Text.Json.JsonEncodedText.Encode("msle");
+	private static readonly System.Text.Json.JsonEncodedText PropRSquared = System.Text.Json.JsonEncodedText.Encode("r_squared");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue?> propHuber = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue?> propMse = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue?> propMsle = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue?> propRSquared = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHuber.TryReadProperty(ref reader, options, PropHuber, null))
+			{
+				continue;
+			}
+
+			if (propMse.TryReadProperty(ref reader, options, PropMse, null))
+			{
+				continue;
+			}
+
+			if (propMsle.TryReadProperty(ref reader, options, PropMsle, null))
+			{
+				continue;
+			}
+
+			if (propRSquared.TryReadProperty(ref reader, options, PropRSquared, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Huber = propHuber.Value,
+			Mse = propMse.Value,
+			Msle = propMsle.Value,
+			RSquared = propRSquared.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHuber, value.Huber, null, null);
+		writer.WriteProperty(options, PropMse, value.Mse, null, null);
+		writer.WriteProperty(options, PropMsle, value.Msle, null, null);
+		writer.WriteProperty(options, PropRSquared, value.RSquared, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummaryConverter))]
 public sealed partial class DataframeRegressionSummary
 {
+#if NET7_0_OR_GREATER
+	public DataframeRegressionSummary()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeRegressionSummary()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeRegressionSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Pseudo Huber loss function.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("huber")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Huber { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Huber { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Average squared difference between the predicted values and the actual (<c>ground truth</c>) value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mse")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Mse { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Mse { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (<c>ground truth</c>) value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("msle")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Msle { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Msle { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("r_squared")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? RSquared { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? RSquared { get; set; }
 }

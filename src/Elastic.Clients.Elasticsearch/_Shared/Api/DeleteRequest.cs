@@ -2,15 +2,31 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class DeleteRequest<TDocument> : DeleteRequest
-{
-	public DeleteRequest(IndexName index, Id id) : base(index, id) { }
+// Allows the generator to correctly detect that this type is used as base type, even when no code
+// has been generated yet.
+public partial class DeleteRequest;
 
-	public DeleteRequest(Id id) : this(typeof(TDocument), id)
+public sealed class DeleteRequest<TDocument> : DeleteRequest
+{
+	[SetsRequiredMembers]
+	public DeleteRequest(IndexName index, Id id) :
+		base(index, id)
 	{
 	}
 
-	public DeleteRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
+	[SetsRequiredMembers]
+	public DeleteRequest(Id id) :
+		this(typeof(TDocument), id)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public DeleteRequest(TDocument documentWithId) :
+		this(typeof(TDocument), Id.From(documentWithId))
+	{
+	}
 }

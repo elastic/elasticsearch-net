@@ -17,25 +17,190 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class AttachmentProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedChars = System.Text.Json.JsonEncodedText.Encode("indexed_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedCharsField = System.Text.Json.JsonEncodedText.Encode("indexed_chars_field");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoveBinary = System.Text.Json.JsonEncodedText.Encode("remove_binary");
+	private static readonly System.Text.Json.JsonEncodedText PropResourceName = System.Text.Json.JsonEncodedText.Encode("resource_name");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<long?> propIndexedChars = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propIndexedCharsField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propProperties = default;
+		LocalJsonValue<bool?> propRemoveBinary = default;
+		LocalJsonValue<string?> propResourceName = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propIndexedChars.TryReadProperty(ref reader, options, PropIndexedChars, null))
+			{
+				continue;
+			}
+
+			if (propIndexedCharsField.TryReadProperty(ref reader, options, PropIndexedCharsField, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRemoveBinary.TryReadProperty(ref reader, options, PropRemoveBinary, null))
+			{
+				continue;
+			}
+
+			if (propResourceName.TryReadProperty(ref reader, options, PropResourceName, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			IndexedChars = propIndexedChars.Value,
+			IndexedCharsField = propIndexedCharsField.Value,
+			OnFailure = propOnFailure.Value,
+			Properties = propProperties.Value,
+			RemoveBinary = propRemoveBinary.Value,
+			ResourceName = propResourceName.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropIndexedChars, value.IndexedChars, null, null);
+		writer.WriteProperty(options, PropIndexedCharsField, value.IndexedCharsField, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRemoveBinary, value.RemoveBinary, null, null);
+		writer.WriteProperty(options, PropResourceName, value.ResourceName, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorConverter))]
 public sealed partial class AttachmentProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AttachmentProcessor(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public AttachmentProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AttachmentProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AttachmentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,23 +208,24 @@ public sealed partial class AttachmentProcessor
 	/// The field to get the base64 encoded field from.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -67,7 +233,6 @@ public sealed partial class AttachmentProcessor
 	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -76,7 +241,6 @@ public sealed partial class AttachmentProcessor
 	/// Use <c>-1</c> for no limit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexed_chars")]
 	public long? IndexedChars { get; set; }
 
 	/// <summary>
@@ -84,7 +248,6 @@ public sealed partial class AttachmentProcessor
 	/// Field name from which you can overwrite the number of chars being used for extraction.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexed_chars_field")]
 	public Elastic.Clients.Elasticsearch.Field? IndexedCharsField { get; set; }
 
 	/// <summary>
@@ -92,8 +255,7 @@ public sealed partial class AttachmentProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -101,15 +263,13 @@ public sealed partial class AttachmentProcessor
 	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("properties")]
-	public ICollection<string>? Properties { get; set; }
+	public System.Collections.Generic.ICollection<string>? Properties { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, the binary field will be removed from the document
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("remove_binary")]
 	public bool? RemoveBinary { get; set; }
 
 	/// <summary>
@@ -118,7 +278,6 @@ public sealed partial class AttachmentProcessor
 	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("resource_name")]
 	public string? ResourceName { get; set; }
 
 	/// <summary>
@@ -127,7 +286,6 @@ public sealed partial class AttachmentProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -135,36 +293,27 @@ public sealed partial class AttachmentProcessor
 	/// The field that will hold the attachment information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(AttachmentProcessor attachmentProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Attachment(attachmentProcessor);
 }
 
-public sealed partial class AttachmentProcessorDescriptor<TDocument> : SerializableDescriptor<AttachmentProcessorDescriptor<TDocument>>
+public readonly partial struct AttachmentProcessorDescriptor<TDocument>
 {
-	internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Instance { get; init; }
 
-	public AttachmentProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AttachmentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private long? IndexedCharsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IndexedCharsFieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<string>? PropertiesValue { get; set; }
-	private bool? RemoveBinaryValue { get; set; }
-	private string? ResourceNameValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AttachmentProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -172,10 +321,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -183,10 +332,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// The field to get the base64 encoded field from.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -194,21 +343,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// The field to get the base64 encoded field from.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -216,10 +354,32 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -227,10 +387,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -238,10 +398,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -250,10 +410,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Use <c>-1</c> for no limit.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> IndexedChars(long? indexedChars)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedChars(long? value)
 	{
-		IndexedCharsValue = indexedChars;
-		return Self;
+		Instance.IndexedChars = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,10 +421,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Field name from which you can overwrite the number of chars being used for extraction.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Elastic.Clients.Elasticsearch.Field? indexedCharsField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IndexedCharsFieldValue = indexedCharsField;
-		return Self;
+		Instance.IndexedCharsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,21 +432,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Field name from which you can overwrite the number of chars being used for extraction.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField<TValue>(Expression<Func<TDocument, TValue>> indexedCharsField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedCharsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		IndexedCharsFieldValue = indexedCharsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Expression<Func<TDocument, object>> indexedCharsField)
-	{
-		IndexedCharsFieldValue = indexedCharsField;
-		return Self;
+		Instance.IndexedCharsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -294,40 +443,38 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
 
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -336,10 +483,22 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of properties to select to be stored.
+	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Properties(params string[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -347,10 +506,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// If true, the binary field will be removed from the document
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> RemoveBinary(bool? removeBinary = true)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> RemoveBinary(bool? value = true)
 	{
-		RemoveBinaryValue = removeBinary;
-		return Self;
+		Instance.RemoveBinary = value;
+		return this;
 	}
 
 	/// <summary>
@@ -359,10 +518,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> ResourceName(string? resourceName)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> ResourceName(string? value)
 	{
-		ResourceNameValue = resourceName;
-		return Self;
+		Instance.ResourceName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -371,10 +530,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -382,10 +541,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// The field that will hold the attachment information.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -393,153 +552,39 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// The field that will hold the attachment information.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
-	public AttachmentProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (IndexedCharsValue.HasValue)
-		{
-			writer.WritePropertyName("indexed_chars");
-			writer.WriteNumberValue(IndexedCharsValue.Value);
-		}
-
-		if (IndexedCharsFieldValue is not null)
-		{
-			writer.WritePropertyName("indexed_chars_field");
-			JsonSerializer.Serialize(writer, IndexedCharsFieldValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (RemoveBinaryValue.HasValue)
-		{
-			writer.WritePropertyName("remove_binary");
-			writer.WriteBooleanValue(RemoveBinaryValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ResourceNameValue))
-		{
-			writer.WritePropertyName("resource_name");
-			writer.WriteStringValue(ResourceNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class AttachmentProcessorDescriptor : SerializableDescriptor<AttachmentProcessorDescriptor>
+public readonly partial struct AttachmentProcessorDescriptor
 {
-	internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Instance { get; init; }
 
-	public AttachmentProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AttachmentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private long? IndexedCharsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IndexedCharsFieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<string>? PropertiesValue { get; set; }
-	private bool? RemoveBinaryValue { get; set; }
-	private string? ResourceNameValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AttachmentProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -547,10 +592,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -558,10 +603,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// The field to get the base64 encoded field from.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -569,21 +614,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// The field to get the base64 encoded field from.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
-	public AttachmentProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -591,10 +625,32 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -602,10 +658,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -613,10 +669,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -625,10 +681,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Use <c>-1</c> for no limit.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor IndexedChars(long? indexedChars)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedChars(long? value)
 	{
-		IndexedCharsValue = indexedChars;
-		return Self;
+		Instance.IndexedChars = value;
+		return this;
 	}
 
 	/// <summary>
@@ -636,10 +692,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Field name from which you can overwrite the number of chars being used for extraction.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor IndexedCharsField(Elastic.Clients.Elasticsearch.Field? indexedCharsField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedCharsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IndexedCharsFieldValue = indexedCharsField;
-		return Self;
+		Instance.IndexedCharsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -647,21 +703,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Field name from which you can overwrite the number of chars being used for extraction.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor IndexedCharsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> indexedCharsField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedCharsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		IndexedCharsFieldValue = indexedCharsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
-	public AttachmentProcessorDescriptor IndexedCharsField<TDocument>(Expression<Func<TDocument, object>> indexedCharsField)
-	{
-		IndexedCharsFieldValue = indexedCharsField;
-		return Self;
+		Instance.IndexedCharsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -669,40 +714,55 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public AttachmentProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public AttachmentProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
-	public AttachmentProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -711,10 +771,22 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor Properties(ICollection<string>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of properties to select to be stored.
+	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Properties(params string[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -722,10 +794,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// If true, the binary field will be removed from the document
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor RemoveBinary(bool? removeBinary = true)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor RemoveBinary(bool? value = true)
 	{
-		RemoveBinaryValue = removeBinary;
-		return Self;
+		Instance.RemoveBinary = value;
+		return this;
 	}
 
 	/// <summary>
@@ -734,10 +806,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor ResourceName(string? resourceName)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor ResourceName(string? value)
 	{
-		ResourceNameValue = resourceName;
-		return Self;
+		Instance.ResourceName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -746,10 +818,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -757,10 +829,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// The field that will hold the attachment information.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -768,125 +840,17 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	/// The field that will hold the attachment information.
 	/// </para>
 	/// </summary>
-	public AttachmentProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
-	public AttachmentProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (IndexedCharsValue.HasValue)
-		{
-			writer.WritePropertyName("indexed_chars");
-			writer.WriteNumberValue(IndexedCharsValue.Value);
-		}
-
-		if (IndexedCharsFieldValue is not null)
-		{
-			writer.WritePropertyName("indexed_chars_field");
-			JsonSerializer.Serialize(writer, IndexedCharsFieldValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (RemoveBinaryValue.HasValue)
-		{
-			writer.WritePropertyName("remove_binary");
-			writer.WriteBooleanValue(RemoveBinaryValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ResourceNameValue))
-		{
-			writer.WritePropertyName("resource_name");
-			writer.WriteStringValue(ResourceNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

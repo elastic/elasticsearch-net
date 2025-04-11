@@ -17,80 +17,379 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class AggregationProfileDebugConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBruteForceUsed = System.Text.Json.JsonEncodedText.Encode("brute_force_used");
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltBuckets = System.Text.Json.JsonEncodedText.Encode("built_buckets");
+	private static readonly System.Text.Json.JsonEncodedText PropCharsFetched = System.Text.Json.JsonEncodedText.Encode("chars_fetched");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectAnalyzedCount = System.Text.Json.JsonEncodedText.Encode("collect_analyzed_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectAnalyzedNs = System.Text.Json.JsonEncodedText.Encode("collect_analyzed_ns");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionStrategy = System.Text.Json.JsonEncodedText.Encode("collection_strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropDeferredAggregators = System.Text.Json.JsonEncodedText.Encode("deferred_aggregators");
+	private static readonly System.Text.Json.JsonEncodedText PropDelegate = System.Text.Json.JsonEncodedText.Encode("delegate");
+	private static readonly System.Text.Json.JsonEncodedText PropDelegateDebug = System.Text.Json.JsonEncodedText.Encode("delegate_debug");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicPruningAttempted = System.Text.Json.JsonEncodedText.Encode("dynamic_pruning_attempted");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicPruningUsed = System.Text.Json.JsonEncodedText.Encode("dynamic_pruning_used");
+	private static readonly System.Text.Json.JsonEncodedText PropEmptyCollectorsUsed = System.Text.Json.JsonEncodedText.Encode("empty_collectors_used");
+	private static readonly System.Text.Json.JsonEncodedText PropExtractCount = System.Text.Json.JsonEncodedText.Encode("extract_count");
+	private static readonly System.Text.Json.JsonEncodedText PropExtractNs = System.Text.Json.JsonEncodedText.Encode("extract_ns");
+	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters");
+	private static readonly System.Text.Json.JsonEncodedText PropHasFilter = System.Text.Json.JsonEncodedText.Encode("has_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMapReducer = System.Text.Json.JsonEncodedText.Encode("map_reducer");
+	private static readonly System.Text.Json.JsonEncodedText PropNumericCollectorsUsed = System.Text.Json.JsonEncodedText.Encode("numeric_collectors_used");
+	private static readonly System.Text.Json.JsonEncodedText PropOrdinalsCollectorsOverheadTooHigh = System.Text.Json.JsonEncodedText.Encode("ordinals_collectors_overhead_too_high");
+	private static readonly System.Text.Json.JsonEncodedText PropOrdinalsCollectorsUsed = System.Text.Json.JsonEncodedText.Encode("ordinals_collectors_used");
+	private static readonly System.Text.Json.JsonEncodedText PropResultStrategy = System.Text.Json.JsonEncodedText.Encode("result_strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsCollected = System.Text.Json.JsonEncodedText.Encode("segments_collected");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsCounted = System.Text.Json.JsonEncodedText.Encode("segments_counted");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsWithDeletedDocs = System.Text.Json.JsonEncodedText.Encode("segments_with_deleted_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsWithDocCountField = System.Text.Json.JsonEncodedText.Encode("segments_with_doc_count_field");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsWithMultiValuedOrds = System.Text.Json.JsonEncodedText.Encode("segments_with_multi_valued_ords");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsWithSingleValuedOrds = System.Text.Json.JsonEncodedText.Encode("segments_with_single_valued_ords");
+	private static readonly System.Text.Json.JsonEncodedText PropSkippedDueToNoData = System.Text.Json.JsonEncodedText.Encode("skipped_due_to_no_data");
+	private static readonly System.Text.Json.JsonEncodedText PropStringHashingCollectorsUsed = System.Text.Json.JsonEncodedText.Encode("string_hashing_collectors_used");
+	private static readonly System.Text.Json.JsonEncodedText PropSurvivingBuckets = System.Text.Json.JsonEncodedText.Encode("surviving_buckets");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalBuckets = System.Text.Json.JsonEncodedText.Encode("total_buckets");
+	private static readonly System.Text.Json.JsonEncodedText PropValuesFetched = System.Text.Json.JsonEncodedText.Encode("values_fetched");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propBruteForceUsed = default;
+		LocalJsonValue<int?> propBuiltBuckets = default;
+		LocalJsonValue<int?> propCharsFetched = default;
+		LocalJsonValue<int?> propCollectAnalyzedCount = default;
+		LocalJsonValue<int?> propCollectAnalyzedNs = default;
+		LocalJsonValue<string?> propCollectionStrategy = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propDeferredAggregators = default;
+		LocalJsonValue<string?> propDelegate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug?> propDelegateDebug = default;
+		LocalJsonValue<int?> propDynamicPruningAttempted = default;
+		LocalJsonValue<int?> propDynamicPruningUsed = default;
+		LocalJsonValue<int?> propEmptyCollectorsUsed = default;
+		LocalJsonValue<int?> propExtractCount = default;
+		LocalJsonValue<int?> propExtractNs = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>?> propFilters = default;
+		LocalJsonValue<bool?> propHasFilter = default;
+		LocalJsonValue<string?> propMapReducer = default;
+		LocalJsonValue<int?> propNumericCollectorsUsed = default;
+		LocalJsonValue<int?> propOrdinalsCollectorsOverheadTooHigh = default;
+		LocalJsonValue<int?> propOrdinalsCollectorsUsed = default;
+		LocalJsonValue<string?> propResultStrategy = default;
+		LocalJsonValue<int?> propSegmentsCollected = default;
+		LocalJsonValue<int?> propSegmentsCounted = default;
+		LocalJsonValue<int?> propSegmentsWithDeletedDocs = default;
+		LocalJsonValue<int?> propSegmentsWithDocCountField = default;
+		LocalJsonValue<int?> propSegmentsWithMultiValuedOrds = default;
+		LocalJsonValue<int?> propSegmentsWithSingleValuedOrds = default;
+		LocalJsonValue<int?> propSkippedDueToNoData = default;
+		LocalJsonValue<int?> propStringHashingCollectorsUsed = default;
+		LocalJsonValue<int?> propSurvivingBuckets = default;
+		LocalJsonValue<int?> propTotalBuckets = default;
+		LocalJsonValue<int?> propValuesFetched = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBruteForceUsed.TryReadProperty(ref reader, options, PropBruteForceUsed, null))
+			{
+				continue;
+			}
+
+			if (propBuiltBuckets.TryReadProperty(ref reader, options, PropBuiltBuckets, null))
+			{
+				continue;
+			}
+
+			if (propCharsFetched.TryReadProperty(ref reader, options, PropCharsFetched, null))
+			{
+				continue;
+			}
+
+			if (propCollectAnalyzedCount.TryReadProperty(ref reader, options, PropCollectAnalyzedCount, null))
+			{
+				continue;
+			}
+
+			if (propCollectAnalyzedNs.TryReadProperty(ref reader, options, PropCollectAnalyzedNs, null))
+			{
+				continue;
+			}
+
+			if (propCollectionStrategy.TryReadProperty(ref reader, options, PropCollectionStrategy, null))
+			{
+				continue;
+			}
+
+			if (propDeferredAggregators.TryReadProperty(ref reader, options, PropDeferredAggregators, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDelegate.TryReadProperty(ref reader, options, PropDelegate, null))
+			{
+				continue;
+			}
+
+			if (propDelegateDebug.TryReadProperty(ref reader, options, PropDelegateDebug, null))
+			{
+				continue;
+			}
+
+			if (propDynamicPruningAttempted.TryReadProperty(ref reader, options, PropDynamicPruningAttempted, null))
+			{
+				continue;
+			}
+
+			if (propDynamicPruningUsed.TryReadProperty(ref reader, options, PropDynamicPruningUsed, null))
+			{
+				continue;
+			}
+
+			if (propEmptyCollectorsUsed.TryReadProperty(ref reader, options, PropEmptyCollectorsUsed, null))
+			{
+				continue;
+			}
+
+			if (propExtractCount.TryReadProperty(ref reader, options, PropExtractCount, null))
+			{
+				continue;
+			}
+
+			if (propExtractNs.TryReadProperty(ref reader, options, PropExtractNs, null))
+			{
+				continue;
+			}
+
+			if (propFilters.TryReadProperty(ref reader, options, PropFilters, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>(o, null)))
+			{
+				continue;
+			}
+
+			if (propHasFilter.TryReadProperty(ref reader, options, PropHasFilter, null))
+			{
+				continue;
+			}
+
+			if (propMapReducer.TryReadProperty(ref reader, options, PropMapReducer, null))
+			{
+				continue;
+			}
+
+			if (propNumericCollectorsUsed.TryReadProperty(ref reader, options, PropNumericCollectorsUsed, null))
+			{
+				continue;
+			}
+
+			if (propOrdinalsCollectorsOverheadTooHigh.TryReadProperty(ref reader, options, PropOrdinalsCollectorsOverheadTooHigh, null))
+			{
+				continue;
+			}
+
+			if (propOrdinalsCollectorsUsed.TryReadProperty(ref reader, options, PropOrdinalsCollectorsUsed, null))
+			{
+				continue;
+			}
+
+			if (propResultStrategy.TryReadProperty(ref reader, options, PropResultStrategy, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsCollected.TryReadProperty(ref reader, options, PropSegmentsCollected, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsCounted.TryReadProperty(ref reader, options, PropSegmentsCounted, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsWithDeletedDocs.TryReadProperty(ref reader, options, PropSegmentsWithDeletedDocs, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsWithDocCountField.TryReadProperty(ref reader, options, PropSegmentsWithDocCountField, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsWithMultiValuedOrds.TryReadProperty(ref reader, options, PropSegmentsWithMultiValuedOrds, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsWithSingleValuedOrds.TryReadProperty(ref reader, options, PropSegmentsWithSingleValuedOrds, null))
+			{
+				continue;
+			}
+
+			if (propSkippedDueToNoData.TryReadProperty(ref reader, options, PropSkippedDueToNoData, null))
+			{
+				continue;
+			}
+
+			if (propStringHashingCollectorsUsed.TryReadProperty(ref reader, options, PropStringHashingCollectorsUsed, null))
+			{
+				continue;
+			}
+
+			if (propSurvivingBuckets.TryReadProperty(ref reader, options, PropSurvivingBuckets, null))
+			{
+				continue;
+			}
+
+			if (propTotalBuckets.TryReadProperty(ref reader, options, PropTotalBuckets, null))
+			{
+				continue;
+			}
+
+			if (propValuesFetched.TryReadProperty(ref reader, options, PropValuesFetched, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BruteForceUsed = propBruteForceUsed.Value,
+			BuiltBuckets = propBuiltBuckets.Value,
+			CharsFetched = propCharsFetched.Value,
+			CollectAnalyzedCount = propCollectAnalyzedCount.Value,
+			CollectAnalyzedNs = propCollectAnalyzedNs.Value,
+			CollectionStrategy = propCollectionStrategy.Value,
+			DeferredAggregators = propDeferredAggregators.Value,
+			Delegate = propDelegate.Value,
+			DelegateDebug = propDelegateDebug.Value,
+			DynamicPruningAttempted = propDynamicPruningAttempted.Value,
+			DynamicPruningUsed = propDynamicPruningUsed.Value,
+			EmptyCollectorsUsed = propEmptyCollectorsUsed.Value,
+			ExtractCount = propExtractCount.Value,
+			ExtractNs = propExtractNs.Value,
+			Filters = propFilters.Value,
+			HasFilter = propHasFilter.Value,
+			MapReducer = propMapReducer.Value,
+			NumericCollectorsUsed = propNumericCollectorsUsed.Value,
+			OrdinalsCollectorsOverheadTooHigh = propOrdinalsCollectorsOverheadTooHigh.Value,
+			OrdinalsCollectorsUsed = propOrdinalsCollectorsUsed.Value,
+			ResultStrategy = propResultStrategy.Value,
+			SegmentsCollected = propSegmentsCollected.Value,
+			SegmentsCounted = propSegmentsCounted.Value,
+			SegmentsWithDeletedDocs = propSegmentsWithDeletedDocs.Value,
+			SegmentsWithDocCountField = propSegmentsWithDocCountField.Value,
+			SegmentsWithMultiValuedOrds = propSegmentsWithMultiValuedOrds.Value,
+			SegmentsWithSingleValuedOrds = propSegmentsWithSingleValuedOrds.Value,
+			SkippedDueToNoData = propSkippedDueToNoData.Value,
+			StringHashingCollectorsUsed = propStringHashingCollectorsUsed.Value,
+			SurvivingBuckets = propSurvivingBuckets.Value,
+			TotalBuckets = propTotalBuckets.Value,
+			ValuesFetched = propValuesFetched.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBruteForceUsed, value.BruteForceUsed, null, null);
+		writer.WriteProperty(options, PropBuiltBuckets, value.BuiltBuckets, null, null);
+		writer.WriteProperty(options, PropCharsFetched, value.CharsFetched, null, null);
+		writer.WriteProperty(options, PropCollectAnalyzedCount, value.CollectAnalyzedCount, null, null);
+		writer.WriteProperty(options, PropCollectAnalyzedNs, value.CollectAnalyzedNs, null, null);
+		writer.WriteProperty(options, PropCollectionStrategy, value.CollectionStrategy, null, null);
+		writer.WriteProperty(options, PropDeferredAggregators, value.DeferredAggregators, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDelegate, value.Delegate, null, null);
+		writer.WriteProperty(options, PropDelegateDebug, value.DelegateDebug, null, null);
+		writer.WriteProperty(options, PropDynamicPruningAttempted, value.DynamicPruningAttempted, null, null);
+		writer.WriteProperty(options, PropDynamicPruningUsed, value.DynamicPruningUsed, null, null);
+		writer.WriteProperty(options, PropEmptyCollectorsUsed, value.EmptyCollectorsUsed, null, null);
+		writer.WriteProperty(options, PropExtractCount, value.ExtractCount, null, null);
+		writer.WriteProperty(options, PropExtractNs, value.ExtractNs, null, null);
+		writer.WriteProperty(options, PropFilters, value.Filters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>(o, v, null));
+		writer.WriteProperty(options, PropHasFilter, value.HasFilter, null, null);
+		writer.WriteProperty(options, PropMapReducer, value.MapReducer, null, null);
+		writer.WriteProperty(options, PropNumericCollectorsUsed, value.NumericCollectorsUsed, null, null);
+		writer.WriteProperty(options, PropOrdinalsCollectorsOverheadTooHigh, value.OrdinalsCollectorsOverheadTooHigh, null, null);
+		writer.WriteProperty(options, PropOrdinalsCollectorsUsed, value.OrdinalsCollectorsUsed, null, null);
+		writer.WriteProperty(options, PropResultStrategy, value.ResultStrategy, null, null);
+		writer.WriteProperty(options, PropSegmentsCollected, value.SegmentsCollected, null, null);
+		writer.WriteProperty(options, PropSegmentsCounted, value.SegmentsCounted, null, null);
+		writer.WriteProperty(options, PropSegmentsWithDeletedDocs, value.SegmentsWithDeletedDocs, null, null);
+		writer.WriteProperty(options, PropSegmentsWithDocCountField, value.SegmentsWithDocCountField, null, null);
+		writer.WriteProperty(options, PropSegmentsWithMultiValuedOrds, value.SegmentsWithMultiValuedOrds, null, null);
+		writer.WriteProperty(options, PropSegmentsWithSingleValuedOrds, value.SegmentsWithSingleValuedOrds, null, null);
+		writer.WriteProperty(options, PropSkippedDueToNoData, value.SkippedDueToNoData, null, null);
+		writer.WriteProperty(options, PropStringHashingCollectorsUsed, value.StringHashingCollectorsUsed, null, null);
+		writer.WriteProperty(options, PropSurvivingBuckets, value.SurvivingBuckets, null, null);
+		writer.WriteProperty(options, PropTotalBuckets, value.TotalBuckets, null, null);
+		writer.WriteProperty(options, PropValuesFetched, value.ValuesFetched, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebugConverter))]
 public sealed partial class AggregationProfileDebug
 {
-	[JsonInclude, JsonPropertyName("brute_force_used")]
-	public int? BruteForceUsed { get; init; }
-	[JsonInclude, JsonPropertyName("built_buckets")]
-	public int? BuiltBuckets { get; init; }
-	[JsonInclude, JsonPropertyName("chars_fetched")]
-	public int? CharsFetched { get; init; }
-	[JsonInclude, JsonPropertyName("collect_analyzed_count")]
-	public int? CollectAnalyzedCount { get; init; }
-	[JsonInclude, JsonPropertyName("collect_analyzed_ns")]
-	public int? CollectAnalyzedNs { get; init; }
-	[JsonInclude, JsonPropertyName("collection_strategy")]
-	public string? CollectionStrategy { get; init; }
-	[JsonInclude, JsonPropertyName("deferred_aggregators")]
-	public IReadOnlyCollection<string>? DeferredAggregators { get; init; }
-	[JsonInclude, JsonPropertyName("delegate")]
-	public string? Delegate { get; init; }
-	[JsonInclude, JsonPropertyName("delegate_debug")]
-	public Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug? DelegateDebug { get; init; }
-	[JsonInclude, JsonPropertyName("dynamic_pruning_attempted")]
-	public int? DynamicPruningAttempted { get; init; }
-	[JsonInclude, JsonPropertyName("dynamic_pruning_used")]
-	public int? DynamicPruningUsed { get; init; }
-	[JsonInclude, JsonPropertyName("empty_collectors_used")]
-	public int? EmptyCollectorsUsed { get; init; }
-	[JsonInclude, JsonPropertyName("extract_count")]
-	public int? ExtractCount { get; init; }
-	[JsonInclude, JsonPropertyName("extract_ns")]
-	public int? ExtractNs { get; init; }
-	[JsonInclude, JsonPropertyName("filters")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>? Filters { get; init; }
-	[JsonInclude, JsonPropertyName("has_filter")]
-	public bool? HasFilter { get; init; }
-	[JsonInclude, JsonPropertyName("map_reducer")]
-	public string? MapReducer { get; init; }
-	[JsonInclude, JsonPropertyName("numeric_collectors_used")]
-	public int? NumericCollectorsUsed { get; init; }
-	[JsonInclude, JsonPropertyName("ordinals_collectors_overhead_too_high")]
-	public int? OrdinalsCollectorsOverheadTooHigh { get; init; }
-	[JsonInclude, JsonPropertyName("ordinals_collectors_used")]
-	public int? OrdinalsCollectorsUsed { get; init; }
-	[JsonInclude, JsonPropertyName("result_strategy")]
-	public string? ResultStrategy { get; init; }
-	[JsonInclude, JsonPropertyName("segments_collected")]
-	public int? SegmentsCollected { get; init; }
-	[JsonInclude, JsonPropertyName("segments_counted")]
-	public int? SegmentsCounted { get; init; }
-	[JsonInclude, JsonPropertyName("segments_with_deleted_docs")]
-	public int? SegmentsWithDeletedDocs { get; init; }
-	[JsonInclude, JsonPropertyName("segments_with_doc_count_field")]
-	public int? SegmentsWithDocCountField { get; init; }
-	[JsonInclude, JsonPropertyName("segments_with_multi_valued_ords")]
-	public int? SegmentsWithMultiValuedOrds { get; init; }
-	[JsonInclude, JsonPropertyName("segments_with_single_valued_ords")]
-	public int? SegmentsWithSingleValuedOrds { get; init; }
-	[JsonInclude, JsonPropertyName("skipped_due_to_no_data")]
-	public int? SkippedDueToNoData { get; init; }
-	[JsonInclude, JsonPropertyName("string_hashing_collectors_used")]
-	public int? StringHashingCollectorsUsed { get; init; }
-	[JsonInclude, JsonPropertyName("surviving_buckets")]
-	public int? SurvivingBuckets { get; init; }
-	[JsonInclude, JsonPropertyName("total_buckets")]
-	public int? TotalBuckets { get; init; }
-	[JsonInclude, JsonPropertyName("values_fetched")]
-	public int? ValuesFetched { get; init; }
+#if NET7_0_OR_GREATER
+	public AggregationProfileDebug()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AggregationProfileDebug()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AggregationProfileDebug(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public int? BruteForceUsed { get; set; }
+	public int? BuiltBuckets { get; set; }
+	public int? CharsFetched { get; set; }
+	public int? CollectAnalyzedCount { get; set; }
+	public int? CollectAnalyzedNs { get; set; }
+	public string? CollectionStrategy { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? DeferredAggregators { get; set; }
+	public string? Delegate { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug? DelegateDebug { get; set; }
+	public int? DynamicPruningAttempted { get; set; }
+	public int? DynamicPruningUsed { get; set; }
+	public int? EmptyCollectorsUsed { get; set; }
+	public int? ExtractCount { get; set; }
+	public int? ExtractNs { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>? Filters { get; set; }
+	public bool? HasFilter { get; set; }
+	public string? MapReducer { get; set; }
+	public int? NumericCollectorsUsed { get; set; }
+	public int? OrdinalsCollectorsOverheadTooHigh { get; set; }
+	public int? OrdinalsCollectorsUsed { get; set; }
+	public string? ResultStrategy { get; set; }
+	public int? SegmentsCollected { get; set; }
+	public int? SegmentsCounted { get; set; }
+	public int? SegmentsWithDeletedDocs { get; set; }
+	public int? SegmentsWithDocCountField { get; set; }
+	public int? SegmentsWithMultiValuedOrds { get; set; }
+	public int? SegmentsWithSingleValuedOrds { get; set; }
+	public int? SkippedDueToNoData { get; set; }
+	public int? StringHashingCollectorsUsed { get; set; }
+	public int? SurvivingBuckets { get; set; }
+	public int? TotalBuckets { get; set; }
+	public int? ValuesFetched { get; set; }
 }

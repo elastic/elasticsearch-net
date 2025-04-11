@@ -17,368 +17,1044 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-[JsonConverter(typeof(RoleQueryConverter))]
+internal sealed partial class RoleQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantBool = System.Text.Json.JsonEncodedText.Encode("bool");
+	private static readonly System.Text.Json.JsonEncodedText VariantExists = System.Text.Json.JsonEncodedText.Encode("exists");
+	private static readonly System.Text.Json.JsonEncodedText VariantIds = System.Text.Json.JsonEncodedText.Encode("ids");
+	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText VariantMatchAll = System.Text.Json.JsonEncodedText.Encode("match_all");
+	private static readonly System.Text.Json.JsonEncodedText VariantPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText VariantRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText VariantSimpleQueryString = System.Text.Json.JsonEncodedText.Encode("simple_query_string");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerm = System.Text.Json.JsonEncodedText.Encode("term");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
+
+	public override Elastic.Clients.Elasticsearch.Security.RoleQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantBool))
+			{
+				variantType = VariantBool.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantExists))
+			{
+				variantType = VariantExists.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIds))
+			{
+				variantType = VariantIds.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMatch))
+			{
+				variantType = VariantMatch.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMatchAll))
+			{
+				variantType = VariantMatchAll.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPrefix))
+			{
+				variantType = VariantPrefix.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRange))
+			{
+				variantType = VariantRange.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSimpleQueryString))
+			{
+				variantType = VariantSimpleQueryString.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerm))
+			{
+				variantType = VariantTerm.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerms))
+			{
+				variantType = VariantTerms.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantWildcard))
+			{
+				variantType = VariantWildcard.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "bool":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)value.Variant, null, null);
+				break;
+			case "exists":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)value.Variant, null, null);
+				break;
+			case "ids":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)value.Variant, null, null);
+				break;
+			case "match":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, null, null);
+				break;
+			case "match_all":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)value.Variant, null, null);
+				break;
+			case "prefix":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)value.Variant, null, null);
+				break;
+			case "range":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery)value.Variant, null, null);
+				break;
+			case "simple_query_string":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)value.Variant, null, null);
+				break;
+			case "term":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)value.Variant, null, null);
+				break;
+			case "terms":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)value.Variant, null, null);
+				break;
+			case "wildcard":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Security.RoleQuery)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleQueryConverter))]
 public sealed partial class RoleQuery
 {
-	internal RoleQuery(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public RoleQuery()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RoleQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? Bool { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>("bool"); set => SetVariant("bool", value); }
 
-	public static RoleQuery Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => new RoleQuery("bool", boolQuery);
-	public static RoleQuery Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery existsQuery) => new RoleQuery("exists", existsQuery);
-	public static RoleQuery Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new RoleQuery("ids", idsQuery);
-	public static RoleQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => new RoleQuery("match", matchQuery);
-	public static RoleQuery MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => new RoleQuery("match_all", matchAllQuery);
-	public static RoleQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => new RoleQuery("prefix", prefixQuery);
-	public static RoleQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery rangeQuery) => new RoleQuery("range", rangeQuery);
-	public static RoleQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery rangeQuery) => new RoleQuery("range", rangeQuery);
-	public static RoleQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery rangeQuery) => new RoleQuery("range", rangeQuery);
-	public static RoleQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery rangeQuery) => new RoleQuery("range", rangeQuery);
-	public static RoleQuery SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new RoleQuery("simple_query_string", simpleQueryStringQuery);
-	public static RoleQuery Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => new RoleQuery("term", termQuery);
-	public static RoleQuery Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => new RoleQuery("terms", termsQuery);
-	public static RoleQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => new RoleQuery("wildcard", wildcardQuery);
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? Exists { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>("exists"); set => SetVariant("exists", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? Ids { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>("ids"); set => SetVariant("ids", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>("match"); set => SetVariant("match", value); }
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? MatchAll { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>("match_all"); set => SetVariant("match_all", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>("prefix"); set => SetVariant("prefix", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>("range"); set => SetVariant("range", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? SimpleQueryString { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>("simple_query_string"); set => SetVariant("simple_query_string", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? Term { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>("term"); set => SetVariant("term", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>("terms"); set => SetVariant("terms", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? Wildcard { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>("wildcard"); set => SetVariant("wildcard", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Bool = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Exists = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Ids = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Match = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { MatchAll = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Prefix = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { SimpleQueryString = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Term = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Terms = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery value) => new Elastic.Clients.Elasticsearch.Security.RoleQuery { Wildcard = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class RoleQueryConverter : JsonConverter<RoleQuery>
+public readonly partial struct RoleQueryDescriptor<TDocument>
 {
-	public override RoleQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Security.RoleQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleQueryDescriptor(Elastic.Clients.Elasticsearch.Security.RoleQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "bool")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "exists")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ids")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "match")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "match_all")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "prefix")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "range")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "simple_query_string")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "term")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "terms")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "wildcard")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'RoleQuery' from the response.");
-		}
-
-		var result = new RoleQuery(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, RoleQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleQueryDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "bool":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)value.Variant, options);
-					break;
-				case "exists":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)value.Variant, options);
-					break;
-				case "ids":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)value.Variant, options);
-					break;
-				case "match":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, options);
-					break;
-				case "match_all":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)value.Variant, options);
-					break;
-				case "prefix":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)value.Variant, options);
-					break;
-				case "range":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "simple_query_string":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)value.Variant, options);
-					break;
-				case "term":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)value.Variant, options);
-					break;
-				case "terms":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)value.Variant, options);
-					break;
-				case "wildcard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.RoleQuery instance) => new Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
+	{
+		Instance.Bool = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Bool()
+	{
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>>? action)
+	{
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
+	{
+		Instance.Exists = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> action)
+	{
+		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
+	{
+		Instance.MatchAll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> MatchAll()
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
+	{
+		Instance.SimpleQueryString = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> action)
+	{
+		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>> action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
+	{
+		Instance.Wildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.RoleQuery Build(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RoleQueryDescriptor<TDocument> : SerializableDescriptor<RoleQueryDescriptor<TDocument>>
+public readonly partial struct RoleQueryDescriptor
 {
-	internal RoleQueryDescriptor(Action<RoleQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.RoleQuery Instance { get; init; }
 
-	public RoleQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleQueryDescriptor(Elastic.Clients.Elasticsearch.Security.RoleQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RoleQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleQueryDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private RoleQueryDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor(Elastic.Clients.Elasticsearch.Security.RoleQuery instance) => new Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Bool = value;
+		return this;
 	}
 
-	public RoleQueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => Set(boolQuery, "bool");
-	public RoleQueryDescriptor<TDocument> Bool(Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
-	public RoleQueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
-	public RoleQueryDescriptor<TDocument> Exists(Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
-	public RoleQueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => Set(idsQuery, "ids");
-	public RoleQueryDescriptor<TDocument> Ids(Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor> configure) => Set(configure, "ids");
-	public RoleQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => Set(matchQuery, "match");
-	public RoleQueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
-	public RoleQueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
-	public RoleQueryDescriptor<TDocument> MatchAll(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
-	public RoleQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
-	public RoleQueryDescriptor<TDocument> Prefix(Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public RoleQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
-	public RoleQueryDescriptor<TDocument> SimpleQueryString(Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
-	public RoleQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
-	public RoleQueryDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
-	public RoleQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
-	public RoleQueryDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
-	public RoleQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
-	public RoleQueryDescriptor<TDocument> Wildcard(Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Bool()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RoleQueryDescriptor : SerializableDescriptor<RoleQueryDescriptor>
-{
-	internal RoleQueryDescriptor(Action<RoleQueryDescriptor> configure) => configure.Invoke(this);
-
-	public RoleQueryDescriptor() : base()
-	{
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(null);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RoleQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor>? action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(action);
+		return this;
 	}
 
-	private RoleQueryDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// matches roles matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Bool<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>>? action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public RoleQueryDescriptor Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => Set(boolQuery, "bool");
-	public RoleQueryDescriptor Bool<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor> configure) => Set(configure, "bool");
-	public RoleQueryDescriptor Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
-	public RoleQueryDescriptor Exists<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> configure) => Set(configure, "exists");
-	public RoleQueryDescriptor Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => Set(idsQuery, "ids");
-	public RoleQueryDescriptor Ids(Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor> configure) => Set(configure, "ids");
-	public RoleQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => Set(matchQuery, "match");
-	public RoleQueryDescriptor Match<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor> configure) => Set(configure, "match");
-	public RoleQueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
-	public RoleQueryDescriptor MatchAll(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
-	public RoleQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
-	public RoleQueryDescriptor Prefix<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> configure) => Set(configure, "prefix");
-	public RoleQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public RoleQueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
-	public RoleQueryDescriptor SimpleQueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
-	public RoleQueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
-	public RoleQueryDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> configure) => Set(configure, "term");
-	public RoleQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
-	public RoleQueryDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor> configure) => Set(configure, "terms");
-	public RoleQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
-	public RoleQueryDescriptor Wildcard<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor> configure) => Set(configure, "wildcard");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Exists = value;
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> action)
+	{
+		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Exists<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>> action)
+	{
+		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on their IDs.
+	/// This query uses role document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
+	{
+		Instance.MatchAll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor MatchAll()
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all roles, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
+	{
+		Instance.SimpleQueryString = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> action)
+	{
+		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor SimpleQueryString<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>> action)
+	{
+		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Term<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor> action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>> action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
+	{
+		Instance.Wildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns roles that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor Wildcard<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.RoleQuery Build(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor(new Elastic.Clients.Elasticsearch.Security.RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

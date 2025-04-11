@@ -17,107 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexSettingBlocksConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read");
+	private static readonly System.Text.Json.JsonEncodedText PropReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only");
+	private static readonly System.Text.Json.JsonEncodedText PropReadOnlyAllowDelete = System.Text.Json.JsonEncodedText.Encode("read_only_allow_delete");
+	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propMetadata = default;
+		LocalJsonValue<bool?> propRead = default;
+		LocalJsonValue<bool?> propReadOnly = default;
+		LocalJsonValue<bool?> propReadOnlyAllowDelete = default;
+		LocalJsonValue<bool?> propWrite = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, null))
+			{
+				continue;
+			}
+
+			if (propRead.TryReadProperty(ref reader, options, PropRead, null))
+			{
+				continue;
+			}
+
+			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, null))
+			{
+				continue;
+			}
+
+			if (propReadOnlyAllowDelete.TryReadProperty(ref reader, options, PropReadOnlyAllowDelete, null))
+			{
+				continue;
+			}
+
+			if (propWrite.TryReadProperty(ref reader, options, PropWrite, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Metadata = propMetadata.Value,
+			Read = propRead.Value,
+			ReadOnly = propReadOnly.Value,
+			ReadOnlyAllowDelete = propReadOnlyAllowDelete.Value,
+			Write = propWrite.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
+		writer.WriteProperty(options, PropRead, value.Read, null, null);
+		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, null);
+		writer.WriteProperty(options, PropReadOnlyAllowDelete, value.ReadOnlyAllowDelete, null, null);
+		writer.WriteProperty(options, PropWrite, value.Write, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksConverter))]
 public sealed partial class IndexSettingBlocks
 {
-	[JsonInclude, JsonPropertyName("metadata")]
+#if NET7_0_OR_GREATER
+	public IndexSettingBlocks()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexSettingBlocks()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexSettingBlocks(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Metadata { get; set; }
-	[JsonInclude, JsonPropertyName("read")]
 	public bool? Read { get; set; }
-	[JsonInclude, JsonPropertyName("read_only")]
 	public bool? ReadOnly { get; set; }
-	[JsonInclude, JsonPropertyName("read_only_allow_delete")]
 	public bool? ReadOnlyAllowDelete { get; set; }
-	[JsonInclude, JsonPropertyName("write")]
 	public bool? Write { get; set; }
 }
 
-public sealed partial class IndexSettingBlocksDescriptor : SerializableDescriptor<IndexSettingBlocksDescriptor>
+public readonly partial struct IndexSettingBlocksDescriptor
 {
-	internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks Instance { get; init; }
 
-	public IndexSettingBlocksDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingBlocksDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? MetadataValue { get; set; }
-	private bool? ReadValue { get; set; }
-	private bool? ReadOnlyValue { get; set; }
-	private bool? ReadOnlyAllowDeleteValue { get; set; }
-	private bool? WriteValue { get; set; }
-
-	public IndexSettingBlocksDescriptor Metadata(bool? metadata = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingBlocksDescriptor()
 	{
-		MetadataValue = metadata;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IndexSettingBlocksDescriptor Read(bool? read = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor Metadata(bool? value = true)
 	{
-		ReadValue = read;
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
-	public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor Read(bool? value = true)
 	{
-		ReadOnlyValue = readOnly;
-		return Self;
+		Instance.Read = value;
+		return this;
 	}
 
-	public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor ReadOnly(bool? value = true)
 	{
-		ReadOnlyAllowDeleteValue = readOnlyAllowDelete;
-		return Self;
+		Instance.ReadOnly = value;
+		return this;
 	}
 
-	public IndexSettingBlocksDescriptor Write(bool? write = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? value = true)
 	{
-		WriteValue = write;
-		return Self;
+		Instance.ReadOnlyAllowDelete = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor Write(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (MetadataValue.HasValue)
+		Instance.Write = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("metadata");
-			writer.WriteBooleanValue(MetadataValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ReadValue.HasValue)
-		{
-			writer.WritePropertyName("read");
-			writer.WriteBooleanValue(ReadValue.Value);
-		}
-
-		if (ReadOnlyValue.HasValue)
-		{
-			writer.WritePropertyName("read_only");
-			writer.WriteBooleanValue(ReadOnlyValue.Value);
-		}
-
-		if (ReadOnlyAllowDeleteValue.HasValue)
-		{
-			writer.WritePropertyName("read_only_allow_delete");
-			writer.WriteBooleanValue(ReadOnlyAllowDeleteValue.Value);
-		}
-
-		if (WriteValue.HasValue)
-		{
-			writer.WritePropertyName("write");
-			writer.WriteBooleanValue(WriteValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

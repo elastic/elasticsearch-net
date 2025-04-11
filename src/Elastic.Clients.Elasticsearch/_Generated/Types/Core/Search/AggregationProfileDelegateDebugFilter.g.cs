@@ -17,24 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class AggregationProfileDelegateDebugFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsFromMetadata = System.Text.Json.JsonEncodedText.Encode("results_from_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsCountedInConstantTime = System.Text.Json.JsonEncodedText.Encode("segments_counted_in_constant_time");
+	private static readonly System.Text.Json.JsonEncodedText PropSpecializedFor = System.Text.Json.JsonEncodedText.Encode("specialized_for");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propQuery = default;
+		LocalJsonValue<int?> propResultsFromMetadata = default;
+		LocalJsonValue<int?> propSegmentsCountedInConstantTime = default;
+		LocalJsonValue<string?> propSpecializedFor = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propResultsFromMetadata.TryReadProperty(ref reader, options, PropResultsFromMetadata, null))
+			{
+				continue;
+			}
+
+			if (propSegmentsCountedInConstantTime.TryReadProperty(ref reader, options, PropSegmentsCountedInConstantTime, null))
+			{
+				continue;
+			}
+
+			if (propSpecializedFor.TryReadProperty(ref reader, options, PropSpecializedFor, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Query = propQuery.Value,
+			ResultsFromMetadata = propResultsFromMetadata.Value,
+			SegmentsCountedInConstantTime = propSegmentsCountedInConstantTime.Value,
+			SpecializedFor = propSpecializedFor.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropResultsFromMetadata, value.ResultsFromMetadata, null, null);
+		writer.WriteProperty(options, PropSegmentsCountedInConstantTime, value.SegmentsCountedInConstantTime, null, null);
+		writer.WriteProperty(options, PropSpecializedFor, value.SpecializedFor, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilterConverter))]
 public sealed partial class AggregationProfileDelegateDebugFilter
 {
-	[JsonInclude, JsonPropertyName("query")]
-	public string? Query { get; init; }
-	[JsonInclude, JsonPropertyName("results_from_metadata")]
-	public int? ResultsFromMetadata { get; init; }
-	[JsonInclude, JsonPropertyName("segments_counted_in_constant_time")]
-	public int? SegmentsCountedInConstantTime { get; init; }
-	[JsonInclude, JsonPropertyName("specialized_for")]
-	public string? SpecializedFor { get; init; }
+#if NET7_0_OR_GREATER
+	public AggregationProfileDelegateDebugFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AggregationProfileDelegateDebugFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AggregationProfileDelegateDebugFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? Query { get; set; }
+	public int? ResultsFromMetadata { get; set; }
+	public int? SegmentsCountedInConstantTime { get; set; }
+	public string? SpecializedFor { get; set; }
 }

@@ -17,24 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class InferenceConfigClassificationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldType = System.Text.Json.JsonEncodedText.Encode("prediction_field_type");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTopClassesResultsField = System.Text.Json.JsonEncodedText.Encode("top_classes_results_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propNumTopClasses = default;
+		LocalJsonValue<int?> propNumTopFeatureImportanceValues = default;
+		LocalJsonValue<string?> propPredictionFieldType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTopClassesResultsField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			{
+				continue;
+			}
+
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			{
+				continue;
+			}
+
+			if (propPredictionFieldType.TryReadProperty(ref reader, options, PropPredictionFieldType, null))
+			{
+				continue;
+			}
+
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
+
+			if (propTopClassesResultsField.TryReadProperty(ref reader, options, PropTopClassesResultsField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumTopClasses = propNumTopClasses.Value,
+			NumTopFeatureImportanceValues = propNumTopFeatureImportanceValues.Value,
+			PredictionFieldType = propPredictionFieldType.Value,
+			ResultsField = propResultsField.Value,
+			TopClassesResultsField = propTopClassesResultsField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropPredictionFieldType, value.PredictionFieldType, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTopClassesResultsField, value.TopClassesResultsField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationConverter))]
 public sealed partial class InferenceConfigClassification
 {
+#if NET7_0_OR_GREATER
+	public InferenceConfigClassification()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public InferenceConfigClassification()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
@@ -42,7 +129,6 @@ public sealed partial class InferenceConfigClassification
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
 	/// <summary>
@@ -51,7 +137,6 @@ public sealed partial class InferenceConfigClassification
 	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
 
 	/// <summary>
@@ -59,7 +144,6 @@ public sealed partial class InferenceConfigClassification
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 
 	/// <summary>
@@ -67,35 +151,37 @@ public sealed partial class InferenceConfigClassification
 	/// Specifies the field to which the top classes are written.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesResultsField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfig(InferenceConfigClassification inferenceConfigClassification) => Elastic.Clients.Elasticsearch.Ingest.InferenceConfig.Classification(inferenceConfigClassification);
 }
 
-public sealed partial class InferenceConfigClassificationDescriptor<TDocument> : SerializableDescriptor<InferenceConfigClassificationDescriptor<TDocument>>
+public readonly partial struct InferenceConfigClassificationDescriptor<TDocument>
 {
-	internal InferenceConfigClassificationDescriptor(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Instance { get; init; }
 
-	public InferenceConfigClassificationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigClassificationDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumTopClassesValue { get; set; }
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private string? PredictionFieldTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigClassificationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> NumTopClasses(int? numTopClasses)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> NumTopClasses(int? value)
 	{
-		NumTopClassesValue = numTopClasses;
-		return Self;
+		Instance.NumTopClasses = value;
+		return this;
 	}
 
 	/// <summary>
@@ -103,10 +189,10 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -115,10 +201,10 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> PredictionFieldType(string? predictionFieldType)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> PredictionFieldType(string? value)
 	{
-		PredictionFieldTypeValue = predictionFieldType;
-		return Self;
+		Instance.PredictionFieldType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -126,10 +212,10 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,21 +223,10 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> ResultsField(Expression<Func<TDocument, object>> resultsField)
-	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -159,10 +234,10 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	/// Specifies the field to which the top classes are written.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
+		Instance.TopClassesResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -170,83 +245,54 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	/// Specifies the field to which the top classes are written.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField<TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
+		Instance.TopClassesResultsField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Expression<Func<TDocument, object>> topClassesResultsField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>>? action)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (NumTopClassesValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("num_top_classes");
-			writer.WriteNumberValue(NumTopClassesValue.Value);
+			return new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NumTopFeatureImportanceValuesValue.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(PredictionFieldTypeValue))
-		{
-			writer.WritePropertyName("prediction_field_type");
-			writer.WriteStringValue(PredictionFieldTypeValue);
-		}
-
-		if (ResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("results_field");
-			JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-		}
-
-		if (TopClassesResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("top_classes_results_field");
-			JsonSerializer.Serialize(writer, TopClassesResultsFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class InferenceConfigClassificationDescriptor : SerializableDescriptor<InferenceConfigClassificationDescriptor>
+public readonly partial struct InferenceConfigClassificationDescriptor
 {
-	internal InferenceConfigClassificationDescriptor(Action<InferenceConfigClassificationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Instance { get; init; }
 
-	public InferenceConfigClassificationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigClassificationDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumTopClassesValue { get; set; }
-	private int? NumTopFeatureImportanceValuesValue { get; set; }
-	private string? PredictionFieldTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigClassificationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor NumTopClasses(int? numTopClasses)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor NumTopClasses(int? value)
 	{
-		NumTopClassesValue = numTopClasses;
-		return Self;
+		Instance.NumTopClasses = value;
+		return this;
 	}
 
 	/// <summary>
@@ -254,10 +300,10 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	/// Specifies the maximum number of feature importance values per document.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor NumTopFeatureImportanceValues(int? value)
 	{
-		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
-		return Self;
+		Instance.NumTopFeatureImportanceValues = value;
+		return this;
 	}
 
 	/// <summary>
@@ -266,10 +312,10 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor PredictionFieldType(string? predictionFieldType)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor PredictionFieldType(string? value)
 	{
-		PredictionFieldTypeValue = predictionFieldType;
-		return Self;
+		Instance.PredictionFieldType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,10 +323,10 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,21 +334,10 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	/// The field that is added to incoming documents to contain the inference prediction.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
-	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -310,10 +345,10 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	/// Specifies the field to which the top classes are written.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
+		Instance.TopClassesResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -321,56 +356,22 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	/// Specifies the field to which the top classes are written.
 	/// </para>
 	/// </summary>
-	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor TopClassesResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
+		Instance.TopClassesResultsField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument>(Expression<Func<TDocument, object>> topClassesResultsField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor>? action)
 	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (NumTopClassesValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("num_top_classes");
-			writer.WriteNumberValue(NumTopClassesValue.Value);
+			return new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NumTopFeatureImportanceValuesValue.HasValue)
-		{
-			writer.WritePropertyName("num_top_feature_importance_values");
-			writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(PredictionFieldTypeValue))
-		{
-			writer.WritePropertyName("prediction_field_type");
-			writer.WriteStringValue(PredictionFieldTypeValue);
-		}
-
-		if (ResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("results_field");
-			JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-		}
-
-		if (TopClassesResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("top_classes_results_field");
-			JsonSerializer.Serialize(writer, TopClassesResultsFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor(new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

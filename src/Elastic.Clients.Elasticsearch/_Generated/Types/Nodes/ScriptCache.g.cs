@@ -17,41 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ScriptCacheConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions");
+	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered");
+	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations");
+	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.ScriptCache Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCacheEvictions = default;
+		LocalJsonValue<long?> propCompilationLimitTriggered = default;
+		LocalJsonValue<long?> propCompilations = default;
+		LocalJsonValue<string?> propContext = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCacheEvictions.TryReadProperty(ref reader, options, PropCacheEvictions, null))
+			{
+				continue;
+			}
+
+			if (propCompilationLimitTriggered.TryReadProperty(ref reader, options, PropCompilationLimitTriggered, null))
+			{
+				continue;
+			}
+
+			if (propCompilations.TryReadProperty(ref reader, options, PropCompilations, null))
+			{
+				continue;
+			}
+
+			if (propContext.TryReadProperty(ref reader, options, PropContext, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.ScriptCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CacheEvictions = propCacheEvictions.Value,
+			CompilationLimitTriggered = propCompilationLimitTriggered.Value,
+			Compilations = propCompilations.Value,
+			Context = propContext.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ScriptCache value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheEvictions, value.CacheEvictions, null, null);
+		writer.WriteProperty(options, PropCompilationLimitTriggered, value.CompilationLimitTriggered, null, null);
+		writer.WriteProperty(options, PropCompilations, value.Compilations, null, null);
+		writer.WriteProperty(options, PropContext, value.Context, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ScriptCacheConverter))]
 public sealed partial class ScriptCache
 {
+#if NET7_0_OR_GREATER
+	public ScriptCache()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ScriptCache()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScriptCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total number of times the script cache has evicted old data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cache_evictions")]
-	public long? CacheEvictions { get; init; }
+	public long? CacheEvictions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of times the script compilation circuit breaker has limited inline script compilations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("compilation_limit_triggered")]
-	public long? CompilationLimitTriggered { get; init; }
+	public long? CompilationLimitTriggered { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of inline script compilations performed by the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("compilations")]
-	public long? Compilations { get; init; }
-	[JsonInclude, JsonPropertyName("context")]
-	public string? Context { get; init; }
+	public long? Compilations { get; set; }
+	public string? Context { get; set; }
 }

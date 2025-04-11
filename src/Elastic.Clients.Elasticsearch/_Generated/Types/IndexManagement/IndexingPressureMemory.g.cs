@@ -17,18 +17,70 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexingPressureMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Limit = propLimit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryConverter))]
 public sealed partial class IndexingPressureMemory
 {
+#if NET7_0_OR_GREATER
+	public IndexingPressureMemory()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexingPressureMemory()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of outstanding bytes that may be consumed by indexing requests. When this limit is reached or exceeded,
@@ -36,19 +88,27 @@ public sealed partial class IndexingPressureMemory
 	/// the node will reject new replica operations. Defaults to 10% of the heap.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
 
-public sealed partial class IndexingPressureMemoryDescriptor : SerializableDescriptor<IndexingPressureMemoryDescriptor>
+public readonly partial struct IndexingPressureMemoryDescriptor
 {
-	internal IndexingPressureMemoryDescriptor(Action<IndexingPressureMemoryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Instance { get; init; }
 
-	public IndexingPressureMemoryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingPressureMemoryDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory instance)
 	{
+		Instance = instance;
 	}
 
-	private int? LimitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingPressureMemoryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -57,21 +117,22 @@ public sealed partial class IndexingPressureMemoryDescriptor : SerializableDescr
 	/// the node will reject new replica operations. Defaults to 10% of the heap.
 	/// </para>
 	/// </summary>
-	public IndexingPressureMemoryDescriptor Limit(int? limit)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor Limit(int? value)
 	{
-		LimitValue = limit;
-		return Self;
+		Instance.Limit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (LimitValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("limit");
-			writer.WriteNumberValue(LimitValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

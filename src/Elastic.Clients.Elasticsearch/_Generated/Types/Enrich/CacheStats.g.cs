@@ -17,32 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+internal sealed partial class CacheStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.CacheStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
+	private static readonly System.Text.Json.JsonEncodedText PropHitsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("hits_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropMisses = System.Text.Json.JsonEncodedText.Encode("misses");
+	private static readonly System.Text.Json.JsonEncodedText PropMissesTimeInMillis = System.Text.Json.JsonEncodedText.Encode("misses_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Enrich.CacheStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<int> propEvictions = default;
+		LocalJsonValue<int> propHits = default;
+		LocalJsonValue<System.TimeSpan> propHitsTimeInMillis = default;
+		LocalJsonValue<int> propMisses = default;
+		LocalJsonValue<System.TimeSpan> propMissesTimeInMillis = default;
+		LocalJsonValue<string> propNodeId = default;
+		LocalJsonValue<long> propSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propEvictions.TryReadProperty(ref reader, options, PropEvictions, null))
+			{
+				continue;
+			}
+
+			if (propHits.TryReadProperty(ref reader, options, PropHits, null))
+			{
+				continue;
+			}
+
+			if (propHitsTimeInMillis.TryReadProperty(ref reader, options, PropHitsTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propMisses.TryReadProperty(ref reader, options, PropMisses, null))
+			{
+				continue;
+			}
+
+			if (propMissesTimeInMillis.TryReadProperty(ref reader, options, PropMissesTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propNodeId.TryReadProperty(ref reader, options, PropNodeId, null))
+			{
+				continue;
+			}
+
+			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Enrich.CacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			Evictions = propEvictions.Value,
+			Hits = propHits.Value,
+			HitsTimeInMillis = propHitsTimeInMillis.Value,
+			Misses = propMisses.Value,
+			MissesTimeInMillis = propMissesTimeInMillis.Value,
+			NodeId = propNodeId.Value,
+			SizeInBytes = propSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.CacheStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropEvictions, value.Evictions, null, null);
+		writer.WriteProperty(options, PropHits, value.Hits, null, null);
+		writer.WriteProperty(options, PropHitsTimeInMillis, value.HitsTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropMisses, value.Misses, null, null);
+		writer.WriteProperty(options, PropMissesTimeInMillis, value.MissesTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropNodeId, value.NodeId, null, null);
+		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.CacheStatsConverter))]
 public sealed partial class CacheStats
 {
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
-	[JsonInclude, JsonPropertyName("evictions")]
-	public int Evictions { get; init; }
-	[JsonInclude, JsonPropertyName("hits")]
-	public int Hits { get; init; }
-	[JsonInclude, JsonPropertyName("hits_time_in_millis")]
-	public long HitsTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("misses")]
-	public int Misses { get; init; }
-	[JsonInclude, JsonPropertyName("misses_time_in_millis")]
-	public long MissesTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("node_id")]
-	public string NodeId { get; init; }
-	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public long SizeInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CacheStats(int count, int evictions, int hits, System.TimeSpan hitsTimeInMillis, int misses, System.TimeSpan missesTimeInMillis, string nodeId, long sizeInBytes)
+	{
+		Count = count;
+		Evictions = evictions;
+		Hits = hits;
+		HitsTimeInMillis = hitsTimeInMillis;
+		Misses = misses;
+		MissesTimeInMillis = missesTimeInMillis;
+		NodeId = nodeId;
+		SizeInBytes = sizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public CacheStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CacheStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Evictions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Hits { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan HitsTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Misses { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan MissesTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string NodeId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SizeInBytes { get; set; }
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetMemoryStatsRequestParameters : RequestParameters
+public sealed partial class GetMemoryStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,6 +42,35 @@ public sealed partial class GetMemoryStatsRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class GetMemoryStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get machine learning memory usage info.
@@ -56,19 +78,31 @@ public sealed partial class GetMemoryStatsRequestParameters : RequestParameters
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
 /// </para>
 /// </summary>
-public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestConverter))]
+public sealed partial class GetMemoryStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>
 {
-	public GetMemoryStatsRequest()
-	{
-	}
-
 	public GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.Id? nodeId) : base(r => r.Optional("node_id", nodeId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetMemoryStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetMemoryStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetMemoryStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetMemoryStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -76,11 +110,18 @@ public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsR
 
 	/// <summary>
 	/// <para>
+	/// The names of particular nodes in the cluster to target. For example, <c>nodeId1,nodeId2</c> or
+	/// <c>ml:true</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? NodeId { get => P<Elastic.Clients.Elasticsearch.Id?>("node_id"); set => PO("node_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node. If no response is received before the timeout
 	/// expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -89,7 +130,6 @@ public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsR
 	/// fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -100,36 +140,117 @@ public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsR
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
 /// </para>
 /// </summary>
-public sealed partial class GetMemoryStatsRequestDescriptor : RequestDescriptor<GetMemoryStatsRequestDescriptor, GetMemoryStatsRequestParameters>
+public readonly partial struct GetMemoryStatsRequestDescriptor
 {
-	internal GetMemoryStatsRequestDescriptor(Action<GetMemoryStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest Instance { get; init; }
 
-	public GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? nodeId) : base(r => r.Optional("node_id", nodeId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? nodeId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(nodeId);
 	}
 
 	public GetMemoryStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetMemoryStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_memory_stats";
-
-	public GetMemoryStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public GetMemoryStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public GetMemoryStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.Id? nodeId)
+	/// <summary>
+	/// <para>
+	/// The names of particular nodes in the cluster to target. For example, <c>nodeId1,nodeId2</c> or
+	/// <c>ml:true</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("node_id", nodeId);
-		return Self;
+		Instance.NodeId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout
+	/// expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request
+	/// fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

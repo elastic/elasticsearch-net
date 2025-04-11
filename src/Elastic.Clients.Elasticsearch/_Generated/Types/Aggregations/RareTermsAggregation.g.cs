@@ -17,24 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class RareTermsAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocCount = System.Text.Json.JsonEncodedText.Encode("max_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?> propExclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?> propInclude = default;
+		LocalJsonValue<long?> propMaxDocCount = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<double?> propPrecision = default;
+		LocalJsonValue<string?> propValueType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExclude.TryReadProperty(ref reader, options, PropExclude, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocCount.TryReadProperty(ref reader, options, PropMaxDocCount, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propValueType.TryReadProperty(ref reader, options, PropValueType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Exclude = propExclude.Value,
+			Field = propField.Value,
+			Include = propInclude.Value,
+			MaxDocCount = propMaxDocCount.Value,
+			Missing = propMissing.Value,
+			Precision = propPrecision.Value,
+			ValueType = propValueType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropMaxDocCount, value.MaxDocCount, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationConverter))]
 public sealed partial class RareTermsAggregation
 {
+#if NET7_0_OR_GREATER
+	public RareTermsAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RareTermsAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Terms that should be excluded from the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	/// <summary>
@@ -42,7 +147,6 @@ public sealed partial class RareTermsAggregation
 	/// The field from which to return rare terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -50,7 +154,6 @@ public sealed partial class RareTermsAggregation
 	/// Terms that should be included in the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
 	/// <summary>
@@ -58,7 +161,6 @@ public sealed partial class RareTermsAggregation
 	/// The maximum number of documents a term should appear in.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_doc_count")]
 	public long? MaxDocCount { get; set; }
 
 	/// <summary>
@@ -67,8 +169,7 @@ public sealed partial class RareTermsAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
+	public object? Missing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,39 +177,38 @@ public sealed partial class RareTermsAggregation
 	/// Smaller precision leads to better approximation, but higher memory usage.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
 	public double? Precision { get; set; }
-	[JsonInclude, JsonPropertyName("value_type")]
 	public string? ValueType { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(RareTermsAggregation rareTermsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.RareTerms(rareTermsAggregation);
 }
 
-public sealed partial class RareTermsAggregationDescriptor<TDocument> : SerializableDescriptor<RareTermsAggregationDescriptor<TDocument>>
+public readonly partial struct RareTermsAggregationDescriptor<TDocument>
 {
-	internal RareTermsAggregationDescriptor(Action<RareTermsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Instance { get; init; }
 
-	public RareTermsAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RareTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
-	private long? MaxDocCountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private double? PrecisionValue { get; set; }
-	private string? ValueTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RareTermsAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Terms that should be excluded from the aggregation.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,10 +216,10 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	/// The field from which to return rare terms.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -127,21 +227,10 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	/// The field from which to return rare terms.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -149,10 +238,10 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	/// Terms that should be included in the aggregation.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
 	/// <summary>
@@ -160,10 +249,10 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	/// The maximum number of documents a term should appear in.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> MaxDocCount(long? maxDocCount)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> MaxDocCount(long? value)
 	{
-		MaxDocCountValue = maxDocCount;
-		return Self;
+		Instance.MaxDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -172,10 +261,10 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,92 +273,60 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	/// Smaller precision leads to better approximation, but higher memory usage.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor<TDocument> Precision(double? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Precision(double? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
-	public RareTermsAggregationDescriptor<TDocument> ValueType(string? valueType)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> ValueType(string? value)
 	{
-		ValueTypeValue = valueType;
-		return Self;
+		Instance.ValueType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (ExcludeValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (IncludeValue is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		if (MaxDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_doc_count");
-			writer.WriteNumberValue(MaxDocCountValue.Value);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ValueTypeValue))
-		{
-			writer.WritePropertyName("value_type");
-			writer.WriteStringValue(ValueTypeValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RareTermsAggregationDescriptor : SerializableDescriptor<RareTermsAggregationDescriptor>
+public readonly partial struct RareTermsAggregationDescriptor
 {
-	internal RareTermsAggregationDescriptor(Action<RareTermsAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Instance { get; init; }
 
-	public RareTermsAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RareTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
-	private long? MaxDocCountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private double? PrecisionValue { get; set; }
-	private string? ValueTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RareTermsAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Terms that should be excluded from the aggregation.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,10 +334,10 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	/// The field from which to return rare terms.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,21 +345,10 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	/// The field from which to return rare terms.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
-	public RareTermsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -310,10 +356,10 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	/// Terms that should be included in the aggregation.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
 	/// <summary>
@@ -321,10 +367,10 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	/// The maximum number of documents a term should appear in.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor MaxDocCount(long? maxDocCount)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor MaxDocCount(long? value)
 	{
-		MaxDocCountValue = maxDocCount;
-		return Self;
+		Instance.MaxDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -333,10 +379,10 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -345,63 +391,28 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	/// Smaller precision leads to better approximation, but higher memory usage.
 	/// </para>
 	/// </summary>
-	public RareTermsAggregationDescriptor Precision(double? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Precision(double? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
-	public RareTermsAggregationDescriptor ValueType(string? valueType)
+	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor ValueType(string? value)
 	{
-		ValueTypeValue = valueType;
-		return Self;
+		Instance.ValueType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ExcludeValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (IncludeValue is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		if (MaxDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_doc_count");
-			writer.WriteNumberValue(MaxDocCountValue.Value);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ValueTypeValue))
-		{
-			writer.WritePropertyName("value_type");
-			writer.WriteStringValue(ValueTypeValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

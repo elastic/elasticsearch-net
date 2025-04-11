@@ -17,43 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ManageUserPrivileges
+internal sealed partial class ManageUserPrivilegesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges>
 {
-	[JsonInclude, JsonPropertyName("applications")]
-	public ICollection<string> Applications { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
 
-public sealed partial class ManageUserPrivilegesDescriptor : SerializableDescriptor<ManageUserPrivilegesDescriptor>
-{
-	internal ManageUserPrivilegesDescriptor(Action<ManageUserPrivilegesDescriptor> configure) => configure.Invoke(this);
-
-	public ManageUserPrivilegesDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propApplications = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApplications.TryReadProperty(ref reader, options, PropApplications, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Applications = propApplications.Value
+		};
 	}
 
-	private ICollection<string> ApplicationsValue { get; set; }
-
-	public ManageUserPrivilegesDescriptor Applications(ICollection<string> applications)
-	{
-		ApplicationsValue = applications;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("applications");
-		JsonSerializer.Serialize(writer, ApplicationsValue, options);
+		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesConverter))]
+public sealed partial class ManageUserPrivileges
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ManageUserPrivileges(System.Collections.Generic.ICollection<string> applications)
+	{
+		Applications = applications;
+	}
+#if NET7_0_OR_GREATER
+	public ManageUserPrivileges()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ManageUserPrivileges()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ManageUserPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Applications { get; set; }
+}
+
+public readonly partial struct ManageUserPrivilegesDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ManageUserPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ManageUserPrivilegesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges(Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor Applications(System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Applications = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor Applications(params string[] values)
+	{
+		Instance.Applications = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor(new Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

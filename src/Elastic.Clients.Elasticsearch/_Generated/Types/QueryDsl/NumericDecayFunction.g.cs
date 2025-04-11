@@ -17,72 +17,82 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class NumericDecayFunctionConverter : JsonConverter<NumericDecayFunction>
+internal sealed partial class NumericDecayFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction>
 {
-	public override NumericDecayFunction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new NumericDecayFunction();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "multi_value_mode")
-				{
-					variant.MultiValueMode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropMultiValueMode = System.Text.Json.JsonEncodedText.Encode("multi_value_mode");
 
-				variant.Field = property;
-				reader.Read();
-				variant.Placement = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double, double>>(ref reader, options);
+	public override Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?> propMultiValueMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>> propPlacement = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, null))
+			{
+				continue;
 			}
+
+			propField.Initialized = propPlacement.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, null, null);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			MultiValueMode = propMultiValueMode.Value,
+			Placement = propPlacement.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, NumericDecayFunction value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Placement is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Placement, options);
-		}
-
-		if (value.MultiValueMode is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, value.MultiValueMode, options);
-		}
-
+		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, null);
+		writer.WriteProperty(options, value.Field, value.Placement, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(NumericDecayFunctionConverter))]
-public sealed partial class NumericDecayFunction
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionConverter))]
+public sealed partial class NumericDecayFunction : Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction
 {
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumericDecayFunction(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> placement)
+	{
+		Field = field;
+		Placement = placement;
+	}
+#if NET7_0_OR_GREATER
+	public NumericDecayFunction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NumericDecayFunction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -90,37 +100,44 @@ public sealed partial class NumericDecayFunction
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double, double> Placement { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> Placement { get; set; }
+
+	string Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.Type => "numeric";
 }
 
-public sealed partial class NumericDecayFunctionDescriptor<TDocument> : SerializableDescriptor<NumericDecayFunctionDescriptor<TDocument>>
+public readonly partial struct NumericDecayFunctionDescriptor<TDocument>
 {
-	internal NumericDecayFunctionDescriptor(Action<NumericDecayFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Instance { get; init; }
 
-	public NumericDecayFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumericDecayFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double, double> PlacementValue { get; set; }
-
-	public NumericDecayFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumericDecayFunctionDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public NumericDecayFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public NumericDecayFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -128,66 +145,68 @@ public sealed partial class NumericDecayFunctionDescriptor<TDocument> : Serializ
 	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
 	/// </para>
 	/// </summary>
-	public NumericDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? multiValueMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
-		MultiValueModeValue = multiValueMode;
-		return Self;
+		Instance.MultiValueMode = value;
+		return this;
 	}
 
-	public NumericDecayFunctionDescriptor<TDocument> Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double, double> placement)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> value)
 	{
-		PlacementValue = placement;
-		return Self;
+		Instance.Placement = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> Placement()
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && PlacementValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, PlacementValue, options);
-		}
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor.Build(null);
+		return this;
+	}
 
-		if (MultiValueModeValue is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, MultiValueModeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> Placement(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor>? action)
+	{
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class NumericDecayFunctionDescriptor : SerializableDescriptor<NumericDecayFunctionDescriptor>
+public readonly partial struct NumericDecayFunctionDescriptor
 {
-	internal NumericDecayFunctionDescriptor(Action<NumericDecayFunctionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Instance { get; init; }
 
-	public NumericDecayFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumericDecayFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double, double> PlacementValue { get; set; }
-
-	public NumericDecayFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumericDecayFunctionDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public NumericDecayFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public NumericDecayFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -195,34 +214,35 @@ public sealed partial class NumericDecayFunctionDescriptor : SerializableDescrip
 	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
 	/// </para>
 	/// </summary>
-	public NumericDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? multiValueMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
-		MultiValueModeValue = multiValueMode;
-		return Self;
+		Instance.MultiValueMode = value;
+		return this;
 	}
 
-	public NumericDecayFunctionDescriptor Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double, double> placement)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> value)
 	{
-		PlacementValue = placement;
-		return Self;
+		Instance.Placement = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor Placement()
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && PlacementValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, PlacementValue, options);
-		}
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor.Build(null);
+		return this;
+	}
 
-		if (MultiValueModeValue is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, MultiValueModeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor Placement(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor>? action)
+	{
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,95 +17,95 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class ShapeQueryConverter : JsonConverter<ShapeQuery>
+internal sealed partial class ShapeQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery>
 {
-	public override ShapeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new ShapeQuery();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery> propShape = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ignore_unmapped")
-				{
-					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				variant.Field = property;
-				reader.Read();
-				variant.Shape = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery>(ref reader, options);
+				continue;
 			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			propField.Initialized = propShape.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propShape.Value, null, null);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			IgnoreUnmapped = propIgnoreUnmapped.Value,
+			QueryName = propQueryName.Value,
+			Shape = propShape.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, ShapeQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Shape is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Shape, options);
-		}
-
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.IgnoreUnmapped.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, value.Field, value.Shape, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(ShapeQueryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryConverter))]
 public sealed partial class ShapeQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShapeQuery(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery shape)
+	{
+		Field = field;
+		Shape = shape;
+	}
+#if NET7_0_OR_GREATER
+	public ShapeQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShapeQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -115,7 +115,11 @@ public sealed partial class ShapeQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -124,26 +128,31 @@ public sealed partial class ShapeQuery
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ShapeQuery shapeQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Shape(shapeQuery);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
 }
 
-public sealed partial class ShapeQueryDescriptor<TDocument> : SerializableDescriptor<ShapeQueryDescriptor<TDocument>>
+public readonly partial struct ShapeQueryDescriptor<TDocument>
 {
-	internal ShapeQueryDescriptor(Action<ShapeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Instance { get; init; }
 
-	public ShapeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery ShapeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> ShapeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>> ShapeDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShapeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -153,28 +162,22 @@ public sealed partial class ShapeQueryDescriptor<TDocument> : SerializableDescri
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public ShapeQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public ShapeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -182,89 +185,63 @@ public sealed partial class ShapeQueryDescriptor<TDocument> : SerializableDescri
 	/// When set to <c>true</c> the query ignores an unmapped field and will not match any documents.
 	/// </para>
 	/// </summary>
-	public ShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery shape)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery value)
 	{
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = null;
-		ShapeValue = shape;
-		return Self;
+		Instance.Shape = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Shape()
 	{
-		ShapeValue = null;
-		ShapeDescriptorAction = null;
-		ShapeDescriptor = descriptor;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public ShapeQueryDescriptor<TDocument> Shape(Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Shape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>>? action)
 	{
-		ShapeValue = null;
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = configure;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && ShapeValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, ShapeValue, options);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class ShapeQueryDescriptor : SerializableDescriptor<ShapeQueryDescriptor>
+public readonly partial struct ShapeQueryDescriptor
 {
-	internal ShapeQueryDescriptor(Action<ShapeQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Instance { get; init; }
 
-	public ShapeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery ShapeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor ShapeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor> ShapeDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShapeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -274,28 +251,22 @@ public sealed partial class ShapeQueryDescriptor : SerializableDescriptor<ShapeQ
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public ShapeQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public ShapeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -303,70 +274,47 @@ public sealed partial class ShapeQueryDescriptor : SerializableDescriptor<ShapeQ
 	/// When set to <c>true</c> the query ignores an unmapped field and will not match any documents.
 	/// </para>
 	/// </summary>
-	public ShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery shape)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery value)
 	{
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = null;
-		ShapeValue = shape;
-		return Self;
+		Instance.Shape = value;
+		return this;
 	}
 
-	public ShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Shape()
 	{
-		ShapeValue = null;
-		ShapeDescriptorAction = null;
-		ShapeDescriptor = descriptor;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor.Build(null);
+		return this;
 	}
 
-	public ShapeQueryDescriptor Shape(Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Shape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor>? action)
 	{
-		ShapeValue = null;
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = configure;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Shape<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && ShapeValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, ShapeValue, options);
-		}
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

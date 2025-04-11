@@ -53,8 +53,6 @@ public class Project
 
 	public int NumberOfContributors { get; set; }
 
-	public Ranges Ranges { get; set; }
-
 	public int? Rank { get; set; }
 
 	public int? RequiredBranches => Branches?.Count();
@@ -93,7 +91,6 @@ public class Project
 			//.RuleFor(p => p.ArbitraryShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
 			.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 			.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 50))
-			.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
 			.RuleFor(p => p.Rank, f => Gimme.Random.Number(1, 100))
 			.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }))
 			//.RuleFor(p => p.SourceOnly, f =>

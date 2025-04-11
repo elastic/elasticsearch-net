@@ -17,122 +17,189 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class EdgeNGramTokenizer : ITokenizer
+internal sealed partial class EdgeNGramTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer>
 {
-	[JsonInclude, JsonPropertyName("custom_token_chars")]
-	public string? CustomTokenChars { get; set; }
-	[JsonInclude, JsonPropertyName("max_gram")]
-	public int? MaxGram { get; set; }
-	[JsonInclude, JsonPropertyName("min_gram")]
-	public int? MinGram { get; set; }
-	[JsonInclude, JsonPropertyName("token_chars")]
-	public ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? TokenChars { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropCustomTokenChars = System.Text.Json.JsonEncodedText.Encode("custom_token_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxGram = System.Text.Json.JsonEncodedText.Encode("max_gram");
+	private static readonly System.Text.Json.JsonEncodedText PropMinGram = System.Text.Json.JsonEncodedText.Encode("min_gram");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenChars = System.Text.Json.JsonEncodedText.Encode("token_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propCustomTokenChars = default;
+		LocalJsonValue<int?> propMaxGram = default;
+		LocalJsonValue<int?> propMinGram = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>?> propTokenChars = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCustomTokenChars.TryReadProperty(ref reader, options, PropCustomTokenChars, null))
+			{
+				continue;
+			}
+
+			if (propMaxGram.TryReadProperty(ref reader, options, PropMaxGram, null))
+			{
+				continue;
+			}
+
+			if (propMinGram.TryReadProperty(ref reader, options, PropMinGram, null))
+			{
+				continue;
+			}
+
+			if (propTokenChars.TryReadProperty(ref reader, options, PropTokenChars, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CustomTokenChars = propCustomTokenChars.Value,
+			MaxGram = propMaxGram.Value,
+			MinGram = propMinGram.Value,
+			TokenChars = propTokenChars.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCustomTokenChars, value.CustomTokenChars, null, null);
+		writer.WriteProperty(options, PropMaxGram, value.MaxGram, null, null);
+		writer.WriteProperty(options, PropMinGram, value.MinGram, null, null);
+		writer.WriteProperty(options, PropTokenChars, value.TokenChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerConverter))]
+public sealed partial class EdgeNGramTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public EdgeNGramTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public EdgeNGramTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? CustomTokenChars { get; set; }
+	public int? MaxGram { get; set; }
+	public int? MinGram { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? TokenChars { get; set; }
+
 	public string Type => "edge_ngram";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescriptor<EdgeNGramTokenizerDescriptor>, IBuildableDescriptor<EdgeNGramTokenizer>
+public readonly partial struct EdgeNGramTokenizerDescriptor
 {
-	internal EdgeNGramTokenizerDescriptor(Action<EdgeNGramTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer Instance { get; init; }
 
-	public EdgeNGramTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EdgeNGramTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private string? CustomTokenCharsValue { get; set; }
-	private int? MaxGramValue { get; set; }
-	private int? MinGramValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? TokenCharsValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public EdgeNGramTokenizerDescriptor CustomTokenChars(string? customTokenChars)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EdgeNGramTokenizerDescriptor()
 	{
-		CustomTokenCharsValue = customTokenChars;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public EdgeNGramTokenizerDescriptor MaxGram(int? maxGram)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor CustomTokenChars(string? value)
 	{
-		MaxGramValue = maxGram;
-		return Self;
+		Instance.CustomTokenChars = value;
+		return this;
 	}
 
-	public EdgeNGramTokenizerDescriptor MinGram(int? minGram)
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor MaxGram(int? value)
 	{
-		MinGramValue = minGram;
-		return Self;
+		Instance.MaxGram = value;
+		return this;
 	}
 
-	public EdgeNGramTokenizerDescriptor TokenChars(ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? tokenChars)
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor MinGram(int? value)
 	{
-		TokenCharsValue = tokenChars;
-		return Self;
+		Instance.MinGram = value;
+		return this;
 	}
 
-	public EdgeNGramTokenizerDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.TokenChars = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(params Elastic.Clients.Elasticsearch.Analysis.TokenChar[] values)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CustomTokenCharsValue))
+		Instance.TokenChars = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("custom_token_chars");
-			writer.WriteStringValue(CustomTokenCharsValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxGramValue.HasValue)
-		{
-			writer.WritePropertyName("max_gram");
-			writer.WriteNumberValue(MaxGramValue.Value);
-		}
-
-		if (MinGramValue.HasValue)
-		{
-			writer.WritePropertyName("min_gram");
-			writer.WriteNumberValue(MinGramValue.Value);
-		}
-
-		if (TokenCharsValue is not null)
-		{
-			writer.WritePropertyName("token_chars");
-			JsonSerializer.Serialize(writer, TokenCharsValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("edge_ngram");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	EdgeNGramTokenizer IBuildableDescriptor<EdgeNGramTokenizer>.Build() => new()
-	{
-		CustomTokenChars = CustomTokenCharsValue,
-		MaxGram = MaxGramValue,
-		MinGram = MinGramValue,
-		TokenChars = TokenCharsValue,
-		Version = VersionValue
-	};
 }

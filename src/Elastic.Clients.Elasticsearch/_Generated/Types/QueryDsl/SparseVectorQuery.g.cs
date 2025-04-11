@@ -17,36 +17,158 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(SparseVectorQueryConverter))]
-public sealed partial class SparseVectorQuery
+internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery>
 {
-	internal SparseVectorQuery(string variantName, object variant)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropPrune = System.Text.Json.JsonEncodedText.Encode("prune");
+	private static readonly System.Text.Json.JsonEncodedText PropPruningConfig = System.Text.Json.JsonEncodedText.Encode("pruning_config");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propPrune = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?> propPruningConfig = default;
+		LocalJsonValue<string?> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propPrune.TryReadProperty(ref reader, options, PropPrune, null))
+			{
+				continue;
+			}
+
+			if (propPruningConfig.TryReadProperty(ref reader, options, PropPruningConfig, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantInferenceId))
+			{
+				variantType = VariantInferenceId.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Id>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			Prune = propPrune.Value,
+			PruningConfig = propPruningConfig.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value
+		};
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "inference_id":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Id)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery)}'.");
+		}
 
-	public static SparseVectorQuery InferenceId(Elastic.Clients.Elasticsearch.Id id) => new SparseVectorQuery("inference_id", id);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropPrune, value.Prune, null, null);
+		writer.WriteProperty(options, PropPruningConfig, value.PruningConfig, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryConverter))]
+public sealed partial class SparseVectorQuery
+{
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SparseVectorQuery(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public SparseVectorQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SparseVectorQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SparseVectorQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The inference ID to use to convert the query text into token-weight pairs.
+	/// It must be the same inference ID that was used to create the tokens from the input text.
+	/// Only one of inference_id and query_vector is allowed.
+	/// If inference_id is specified, query must also be specified.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? InferenceId { get => GetVariant<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => SetVariant("inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -56,7 +178,6 @@ public sealed partial class SparseVectorQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -65,8 +186,11 @@ public sealed partial class SparseVectorQuery
 	/// This field must be a mapped sparse_vector field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -75,7 +199,6 @@ public sealed partial class SparseVectorQuery
 	/// Default: false
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prune")]
 	public bool? Prune { get; set; }
 
 	/// <summary>
@@ -86,7 +209,6 @@ public sealed partial class SparseVectorQuery
 	/// If prune is set to true but pruning_config is not specified, default values will be used.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pruning_config")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? PruningConfig { get; set; }
 
 	/// <summary>
@@ -95,202 +217,61 @@ public sealed partial class SparseVectorQuery
 	/// If inference_id is specified, query must also be specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class SparseVectorQueryConverter : JsonConverter<SparseVectorQuery>
+public readonly partial struct SparseVectorQueryDescriptor<TDocument>
 {
-	public override SparseVectorQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SparseVectorQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		float? boostValue = default;
-		Elastic.Clients.Elasticsearch.Field fieldValue = default;
-		bool? pruneValue = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? pruningConfigValue = default;
-		string? queryValue = default;
-		string? queryNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "boost")
-			{
-				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "field")
-			{
-				fieldValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "prune")
-			{
-				pruneValue = JsonSerializer.Deserialize<bool?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "pruning_config")
-			{
-				pruningConfigValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "query")
-			{
-				queryValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "_name")
-			{
-				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "inference_id")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SparseVectorQuery' from the response.");
-		}
-
-		var result = new SparseVectorQuery(variantNameValue, variantValue);
-		result.Boost = boostValue;
-		result.Field = fieldValue;
-		result.Prune = pruneValue;
-		result.PruningConfig = pruningConfigValue;
-		result.Query = queryValue;
-		result.QueryName = queryNameValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, SparseVectorQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SparseVectorQueryDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (value.Prune.HasValue)
-		{
-			writer.WritePropertyName("prune");
-			writer.WriteBooleanValue(value.Prune.Value);
-		}
-
-		if (value.PruningConfig is not null)
-		{
-			writer.WritePropertyName("pruning_config");
-			JsonSerializer.Serialize(writer, value.PruningConfig, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Query))
-		{
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(value.Query);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "inference_id":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Id>(writer, (Elastic.Clients.Elasticsearch.Id)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class SparseVectorQueryDescriptor<TDocument> : SerializableDescriptor<SparseVectorQueryDescriptor<TDocument>>
-{
-	internal SparseVectorQueryDescriptor(Action<SparseVectorQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public SparseVectorQueryDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	private SparseVectorQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// The inference ID to use to convert the query text into token-weight pairs.
+	/// It must be the same inference ID that was used to create the tokens from the input text.
+	/// Only one of inference_id and query_vector is allowed.
+	/// If inference_id is specified, query must also be specified.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.InferenceId = value;
+		return this;
 	}
-
-	private SparseVectorQueryDescriptor<TDocument> Set(object variant, string variantName)
-	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
-
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? PruneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? PruningConfigValue { get; set; }
-	private string? QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -300,10 +281,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -312,10 +293,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	/// This field must be a mapped sparse_vector field.
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -324,22 +305,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	/// This field must be a mapped sparse_vector field.
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -349,10 +318,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	/// Default: false
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> Prune(bool? prune = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Prune(bool? value = true)
 	{
-		PruneValue = prune;
-		return Self;
+		Instance.Prune = value;
+		return this;
 	}
 
 	/// <summary>
@@ -363,187 +332,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	/// If prune is set to true but pruning_config is not specified, default values will be used.
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? pruningConfig)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? value)
 	{
-		PruningConfigValue = pruningConfig;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The query text you want to use for search.
-	/// If inference_id is specified, query must also be specified.
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor<TDocument> Query(string? query)
-	{
-		QueryValue = query;
-		return Self;
-	}
-
-	public SparseVectorQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public SparseVectorQueryDescriptor<TDocument> InferenceId(Elastic.Clients.Elasticsearch.Id id) => Set(id, "inference_id");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (PruneValue.HasValue)
-		{
-			writer.WritePropertyName("prune");
-			writer.WriteBooleanValue(PruneValue.Value);
-		}
-
-		if (PruningConfigValue is not null)
-		{
-			writer.WritePropertyName("pruning_config");
-			JsonSerializer.Serialize(writer, PruningConfigValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryValue))
-		{
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor<SparseVectorQueryDescriptor>
-{
-	internal SparseVectorQueryDescriptor(Action<SparseVectorQueryDescriptor> configure) => configure.Invoke(this);
-
-	public SparseVectorQueryDescriptor() : base()
-	{
-	}
-
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private SparseVectorQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
-	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
-	}
-
-	private SparseVectorQueryDescriptor Set(object variant, string variantName)
-	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
-
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? PruneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? PruningConfigValue { get; set; }
-	private string? QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
-	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
-	/// Default: false
-	/// </para>
-	/// </summary>
-	public SparseVectorQueryDescriptor Prune(bool? prune = true)
-	{
-		PruneValue = prune;
-		return Self;
+		Instance.PruningConfig = value;
+		return this;
 	}
 
 	/// <summary>
@@ -554,10 +346,24 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	/// If prune is set to true but pruning_config is not specified, default values will be used.
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? pruningConfig)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> PruningConfig()
 	{
-		PruningConfigValue = pruningConfig;
-		return Self;
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional pruning configuration.
+	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
+	/// This is only used if prune is set to true.
+	/// If prune is set to true but pruning_config is not specified, default values will be used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> PruningConfig(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor>? action)
+	{
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -566,72 +372,177 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	/// If inference_id is specified, query must also be specified.
 	/// </para>
 	/// </summary>
-	public SparseVectorQueryDescriptor Query(string? query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Query(string? value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SparseVectorQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public SparseVectorQueryDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id id) => Set(id, "inference_id");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
+public readonly partial struct SparseVectorQueryDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery Instance { get; init; }
 
-		if (PruneValue.HasValue)
-		{
-			writer.WritePropertyName("prune");
-			writer.WriteBooleanValue(PruneValue.Value);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SparseVectorQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery instance)
+	{
+		Instance = instance;
+	}
 
-		if (PruningConfigValue is not null)
-		{
-			writer.WritePropertyName("pruning_config");
-			JsonSerializer.Serialize(writer, PruningConfigValue, options);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SparseVectorQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		if (!string.IsNullOrEmpty(QueryValue))
-		{
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-		}
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor descriptor) => descriptor.Instance;
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
+	/// <summary>
+	/// <para>
+	/// The inference ID to use to convert the query text into token-weight pairs.
+	/// It must be the same inference ID that was used to create the tokens from the input text.
+	/// Only one of inference_id and query_vector is allowed.
+	/// If inference_id is specified, query must also be specified.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.InferenceId = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+	/// <summary>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Boost(float? value)
+	{
+		Instance.Boost = value;
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.Field = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
+	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
+	/// Default: false
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Prune(bool? value = true)
+	{
+		Instance.Prune = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional pruning configuration.
+	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
+	/// This is only used if prune is set to true.
+	/// If prune is set to true but pruning_config is not specified, default values will be used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? value)
+	{
+		Instance.PruningConfig = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional pruning configuration.
+	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
+	/// This is only used if prune is set to true.
+	/// If prune is set to true but pruning_config is not specified, default values will be used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor PruningConfig()
+	{
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional pruning configuration.
+	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
+	/// This is only used if prune is set to true.
+	/// If prune is set to true but pruning_config is not specified, default values will be used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor>? action)
+	{
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The query text you want to use for search.
+	/// If inference_id is specified, query must also be specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Query(string? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryName(string? value)
+	{
+		Instance.QueryName = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

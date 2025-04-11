@@ -17,95 +17,218 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class AnomalyExplanationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyCharacteristicsImpact = System.Text.Json.JsonEncodedText.Encode("anomaly_characteristics_impact");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyLength = System.Text.Json.JsonEncodedText.Encode("anomaly_length");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyType = System.Text.Json.JsonEncodedText.Encode("anomaly_type");
+	private static readonly System.Text.Json.JsonEncodedText PropHighVariancePenalty = System.Text.Json.JsonEncodedText.Encode("high_variance_penalty");
+	private static readonly System.Text.Json.JsonEncodedText PropIncompleteBucketPenalty = System.Text.Json.JsonEncodedText.Encode("incomplete_bucket_penalty");
+	private static readonly System.Text.Json.JsonEncodedText PropLowerConfidenceBound = System.Text.Json.JsonEncodedText.Encode("lower_confidence_bound");
+	private static readonly System.Text.Json.JsonEncodedText PropMultiBucketImpact = System.Text.Json.JsonEncodedText.Encode("multi_bucket_impact");
+	private static readonly System.Text.Json.JsonEncodedText PropSingleBucketImpact = System.Text.Json.JsonEncodedText.Encode("single_bucket_impact");
+	private static readonly System.Text.Json.JsonEncodedText PropTypicalValue = System.Text.Json.JsonEncodedText.Encode("typical_value");
+	private static readonly System.Text.Json.JsonEncodedText PropUpperConfidenceBound = System.Text.Json.JsonEncodedText.Encode("upper_confidence_bound");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propAnomalyCharacteristicsImpact = default;
+		LocalJsonValue<int?> propAnomalyLength = default;
+		LocalJsonValue<string?> propAnomalyType = default;
+		LocalJsonValue<bool?> propHighVariancePenalty = default;
+		LocalJsonValue<bool?> propIncompleteBucketPenalty = default;
+		LocalJsonValue<double?> propLowerConfidenceBound = default;
+		LocalJsonValue<int?> propMultiBucketImpact = default;
+		LocalJsonValue<int?> propSingleBucketImpact = default;
+		LocalJsonValue<double?> propTypicalValue = default;
+		LocalJsonValue<double?> propUpperConfidenceBound = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnomalyCharacteristicsImpact.TryReadProperty(ref reader, options, PropAnomalyCharacteristicsImpact, null))
+			{
+				continue;
+			}
+
+			if (propAnomalyLength.TryReadProperty(ref reader, options, PropAnomalyLength, null))
+			{
+				continue;
+			}
+
+			if (propAnomalyType.TryReadProperty(ref reader, options, PropAnomalyType, null))
+			{
+				continue;
+			}
+
+			if (propHighVariancePenalty.TryReadProperty(ref reader, options, PropHighVariancePenalty, null))
+			{
+				continue;
+			}
+
+			if (propIncompleteBucketPenalty.TryReadProperty(ref reader, options, PropIncompleteBucketPenalty, null))
+			{
+				continue;
+			}
+
+			if (propLowerConfidenceBound.TryReadProperty(ref reader, options, PropLowerConfidenceBound, null))
+			{
+				continue;
+			}
+
+			if (propMultiBucketImpact.TryReadProperty(ref reader, options, PropMultiBucketImpact, null))
+			{
+				continue;
+			}
+
+			if (propSingleBucketImpact.TryReadProperty(ref reader, options, PropSingleBucketImpact, null))
+			{
+				continue;
+			}
+
+			if (propTypicalValue.TryReadProperty(ref reader, options, PropTypicalValue, null))
+			{
+				continue;
+			}
+
+			if (propUpperConfidenceBound.TryReadProperty(ref reader, options, PropUpperConfidenceBound, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AnomalyCharacteristicsImpact = propAnomalyCharacteristicsImpact.Value,
+			AnomalyLength = propAnomalyLength.Value,
+			AnomalyType = propAnomalyType.Value,
+			HighVariancePenalty = propHighVariancePenalty.Value,
+			IncompleteBucketPenalty = propIncompleteBucketPenalty.Value,
+			LowerConfidenceBound = propLowerConfidenceBound.Value,
+			MultiBucketImpact = propMultiBucketImpact.Value,
+			SingleBucketImpact = propSingleBucketImpact.Value,
+			TypicalValue = propTypicalValue.Value,
+			UpperConfidenceBound = propUpperConfidenceBound.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnomalyCharacteristicsImpact, value.AnomalyCharacteristicsImpact, null, null);
+		writer.WriteProperty(options, PropAnomalyLength, value.AnomalyLength, null, null);
+		writer.WriteProperty(options, PropAnomalyType, value.AnomalyType, null, null);
+		writer.WriteProperty(options, PropHighVariancePenalty, value.HighVariancePenalty, null, null);
+		writer.WriteProperty(options, PropIncompleteBucketPenalty, value.IncompleteBucketPenalty, null, null);
+		writer.WriteProperty(options, PropLowerConfidenceBound, value.LowerConfidenceBound, null, null);
+		writer.WriteProperty(options, PropMultiBucketImpact, value.MultiBucketImpact, null, null);
+		writer.WriteProperty(options, PropSingleBucketImpact, value.SingleBucketImpact, null, null);
+		writer.WriteProperty(options, PropTypicalValue, value.TypicalValue, null, null);
+		writer.WriteProperty(options, PropUpperConfidenceBound, value.UpperConfidenceBound, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanationConverter))]
 public sealed partial class AnomalyExplanation
 {
+#if NET7_0_OR_GREATER
+	public AnomalyExplanation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AnomalyExplanation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnomalyExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Impact from the duration and magnitude of the detected anomaly relative to the historical average.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("anomaly_characteristics_impact")]
-	public int? AnomalyCharacteristicsImpact { get; init; }
+	public int? AnomalyCharacteristicsImpact { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Length of the detected anomaly in the number of buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("anomaly_length")]
-	public int? AnomalyLength { get; init; }
+	public int? AnomalyLength { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Type of the detected anomaly: <c>spike</c> or <c>dip</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("anomaly_type")]
-	public string? AnomalyType { get; init; }
+	public string? AnomalyType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates reduction of anomaly score for the bucket with large confidence intervals. If a bucket has large confidence intervals, the score is reduced.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("high_variance_penalty")]
-	public bool? HighVariancePenalty { get; init; }
+	public bool? HighVariancePenalty { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If the bucket contains fewer samples than expected, the score is reduced.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("incomplete_bucket_penalty")]
-	public bool? IncompleteBucketPenalty { get; init; }
+	public bool? IncompleteBucketPenalty { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Lower bound of the 95% confidence interval.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("lower_confidence_bound")]
-	public double? LowerConfidenceBound { get; init; }
+	public double? LowerConfidenceBound { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Impact of the deviation between actual and typical values in the past 12 buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("multi_bucket_impact")]
-	public int? MultiBucketImpact { get; init; }
+	public int? MultiBucketImpact { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Impact of the deviation between actual and typical values in the current bucket.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("single_bucket_impact")]
-	public int? SingleBucketImpact { get; init; }
+	public int? SingleBucketImpact { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Typical (expected) value for this bucket.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("typical_value")]
-	public double? TypicalValue { get; init; }
+	public double? TypicalValue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Upper bound of the 95% confidence interval.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("upper_confidence_bound")]
-	public double? UpperConfidenceBound { get; init; }
+	public double? UpperConfidenceBound { get; set; }
 }

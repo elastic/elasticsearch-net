@@ -17,53 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityDfi : ISettingsSimilarity
+internal sealed partial class SettingsSimilarityDfiConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi>
 {
-	[JsonInclude, JsonPropertyName("independence_measure")]
-	public Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropIndependenceMeasure = System.Text.Json.JsonEncodedText.Encode("independence_measure");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.DFIIndependenceMeasure> propIndependenceMeasure = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndependenceMeasure.TryReadProperty(ref reader, options, PropIndependenceMeasure, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IndependenceMeasure = propIndependenceMeasure.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndependenceMeasure, value.IndependenceMeasure, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiConverter))]
+public sealed partial class SettingsSimilarityDfi : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityDfi(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure independenceMeasure)
+	{
+		IndependenceMeasure = independenceMeasure;
+	}
+#if NET7_0_OR_GREATER
+	public SettingsSimilarityDfi()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SettingsSimilarityDfi()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsSimilarityDfi(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
+
 	public string Type => "DFI";
 }
 
-public sealed partial class SettingsSimilarityDfiDescriptor : SerializableDescriptor<SettingsSimilarityDfiDescriptor>, IBuildableDescriptor<SettingsSimilarityDfi>
+public readonly partial struct SettingsSimilarityDfiDescriptor
 {
-	internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi Instance { get; init; }
 
-	public SettingsSimilarityDfiDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityDfiDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasureValue { get; set; }
-
-	public SettingsSimilarityDfiDescriptor IndependenceMeasure(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure independenceMeasure)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityDfiDescriptor()
 	{
-		IndependenceMeasureValue = independenceMeasure;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor IndependenceMeasure(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("independence_measure");
-		JsonSerializer.Serialize(writer, IndependenceMeasureValue, options);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("DFI");
-		writer.WriteEndObject();
+		Instance.IndependenceMeasure = value;
+		return this;
 	}
 
-	SettingsSimilarityDfi IBuildableDescriptor<SettingsSimilarityDfi>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor> action)
 	{
-		IndependenceMeasure = IndependenceMeasureValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

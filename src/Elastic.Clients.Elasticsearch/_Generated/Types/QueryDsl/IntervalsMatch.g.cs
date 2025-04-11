@@ -17,24 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class IntervalsMatchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxGaps = System.Text.Json.JsonEncodedText.Encode("max_gaps");
+	private static readonly System.Text.Json.JsonEncodedText PropOrdered = System.Text.Json.JsonEncodedText.Encode("ordered");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter?> propFilter = default;
+		LocalJsonValue<int?> propMaxGaps = default;
+		LocalJsonValue<bool?> propOrdered = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propUseField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propMaxGaps.TryReadProperty(ref reader, options, PropMaxGaps, null))
+			{
+				continue;
+			}
+
+			if (propOrdered.TryReadProperty(ref reader, options, PropOrdered, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propUseField.TryReadProperty(ref reader, options, PropUseField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Filter = propFilter.Value,
+			MaxGaps = propMaxGaps.Value,
+			Ordered = propOrdered.Value,
+			Query = propQuery.Value,
+			UseField = propUseField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropMaxGaps, value.MaxGaps, null, null);
+		writer.WriteProperty(options, PropOrdered, value.Ordered, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropUseField, value.UseField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchConverter))]
 public sealed partial class IntervalsMatch
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsMatch(string query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public IntervalsMatch()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IntervalsMatch()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntervalsMatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Analyzer used to analyze terms in the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -42,7 +144,6 @@ public sealed partial class IntervalsMatch
 	/// An optional interval filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
 	/// <summary>
@@ -51,7 +152,6 @@ public sealed partial class IntervalsMatch
 	/// Terms further apart than this are not considered matches.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_gaps")]
 	public int? MaxGaps { get; set; }
 
 	/// <summary>
@@ -59,7 +159,6 @@ public sealed partial class IntervalsMatch
 	/// If <c>true</c>, matching terms must appear in their specified order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ordered")]
 	public bool? Ordered { get; set; }
 
 	/// <summary>
@@ -67,8 +166,11 @@ public sealed partial class IntervalsMatch
 	/// Text you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,39 +178,37 @@ public sealed partial class IntervalsMatch
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(IntervalsMatch intervalsMatch) => Elastic.Clients.Elasticsearch.QueryDsl.Intervals.Match(intervalsMatch);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(IntervalsMatch intervalsMatch) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.Match(intervalsMatch);
 }
 
-public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDescriptor<IntervalsMatchDescriptor<TDocument>>
+public readonly partial struct IntervalsMatchDescriptor<TDocument>
 {
-	internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Instance { get; init; }
 
-	public IntervalsMatchDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsMatchDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private int? MaxGapsValue { get; set; }
-	private bool? OrderedValue { get; set; }
-	private string QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsMatchDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to analyze terms in the query.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,28 +216,21 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	/// An optional interval filter.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// An optional interval filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public IntervalsMatchDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -146,10 +239,10 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	/// Terms further apart than this are not considered matches.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> MaxGaps(int? maxGaps)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> MaxGaps(int? value)
 	{
-		MaxGapsValue = maxGaps;
-		return Self;
+		Instance.MaxGaps = value;
+		return this;
 	}
 
 	/// <summary>
@@ -157,10 +250,10 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	/// If <c>true</c>, matching terms must appear in their specified order.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> Ordered(bool? ordered = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Ordered(bool? value = true)
 	{
-		OrderedValue = ordered;
-		return Self;
+		Instance.Ordered = value;
+		return this;
 	}
 
 	/// <summary>
@@ -168,10 +261,10 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	/// Text you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
 	/// <summary>
@@ -180,10 +273,10 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -192,99 +285,49 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsMatchDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>> action)
 	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (MaxGapsValue.HasValue)
-		{
-			writer.WritePropertyName("max_gaps");
-			writer.WriteNumberValue(MaxGapsValue.Value);
-		}
-
-		if (OrderedValue.HasValue)
-		{
-			writer.WritePropertyName("ordered");
-			writer.WriteBooleanValue(OrderedValue.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (UseFieldValue is not null)
-		{
-			writer.WritePropertyName("use_field");
-			JsonSerializer.Serialize(writer, UseFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<IntervalsMatchDescriptor>
+public readonly partial struct IntervalsMatchDescriptor
 {
-	internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Instance { get; init; }
 
-	public IntervalsMatchDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsMatchDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-	private int? MaxGapsValue { get; set; }
-	private bool? OrderedValue { get; set; }
-	private string QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsMatchDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to analyze terms in the query.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -292,28 +335,32 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	/// An optional interval filter.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An optional interval filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.Build(action);
+		return this;
 	}
 
-	public IntervalsMatchDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An optional interval filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -322,10 +369,10 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	/// Terms further apart than this are not considered matches.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor MaxGaps(int? maxGaps)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor MaxGaps(int? value)
 	{
-		MaxGapsValue = maxGaps;
-		return Self;
+		Instance.MaxGaps = value;
+		return this;
 	}
 
 	/// <summary>
@@ -333,10 +380,10 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	/// If <c>true</c>, matching terms must appear in their specified order.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor Ordered(bool? ordered = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Ordered(bool? value = true)
 	{
-		OrderedValue = ordered;
-		return Self;
+		Instance.Ordered = value;
+		return this;
 	}
 
 	/// <summary>
@@ -344,10 +391,10 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	/// Text you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
 	/// <summary>
@@ -356,10 +403,10 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -368,69 +415,17 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsMatchDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsMatchDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor> action)
 	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (MaxGapsValue.HasValue)
-		{
-			writer.WritePropertyName("max_gaps");
-			writer.WriteNumberValue(MaxGapsValue.Value);
-		}
-
-		if (OrderedValue.HasValue)
-		{
-			writer.WritePropertyName("ordered");
-			writer.WriteBooleanValue(OrderedValue.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (UseFieldValue is not null)
-		{
-			writer.WritePropertyName("use_field");
-			JsonSerializer.Serialize(writer, UseFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

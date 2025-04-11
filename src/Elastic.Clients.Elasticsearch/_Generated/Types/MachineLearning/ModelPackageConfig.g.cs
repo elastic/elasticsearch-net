@@ -17,44 +17,209 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ModelPackageConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCreateTime = System.Text.Json.JsonEncodedText.Encode("create_time");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumVersion = System.Text.Json.JsonEncodedText.Encode("minimum_version");
+	private static readonly System.Text.Json.JsonEncodedText PropModelRepository = System.Text.Json.JsonEncodedText.Encode("model_repository");
+	private static readonly System.Text.Json.JsonEncodedText PropModelType = System.Text.Json.JsonEncodedText.Encode("model_type");
+	private static readonly System.Text.Json.JsonEncodedText PropPackagedModelId = System.Text.Json.JsonEncodedText.Encode("packaged_model_id");
+	private static readonly System.Text.Json.JsonEncodedText PropPlatformArchitecture = System.Text.Json.JsonEncodedText.Encode("platform_architecture");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixStrings = System.Text.Json.JsonEncodedText.Encode("prefix_strings");
+	private static readonly System.Text.Json.JsonEncodedText PropSha256 = System.Text.Json.JsonEncodedText.Encode("sha256");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropTags = System.Text.Json.JsonEncodedText.Encode("tags");
+	private static readonly System.Text.Json.JsonEncodedText PropVocabularyFile = System.Text.Json.JsonEncodedText.Encode("vocabulary_file");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propCreateTime = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propInferenceConfig = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<string?> propMinimumVersion = default;
+		LocalJsonValue<string?> propModelRepository = default;
+		LocalJsonValue<string?> propModelType = default;
+		LocalJsonValue<string> propPackagedModelId = default;
+		LocalJsonValue<string?> propPlatformArchitecture = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings?> propPrefixStrings = default;
+		LocalJsonValue<string?> propSha256 = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propTags = default;
+		LocalJsonValue<string?> propVocabularyFile = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propInferenceConfig.TryReadProperty(ref reader, options, PropInferenceConfig, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMinimumVersion.TryReadProperty(ref reader, options, PropMinimumVersion, null))
+			{
+				continue;
+			}
+
+			if (propModelRepository.TryReadProperty(ref reader, options, PropModelRepository, null))
+			{
+				continue;
+			}
+
+			if (propModelType.TryReadProperty(ref reader, options, PropModelType, null))
+			{
+				continue;
+			}
+
+			if (propPackagedModelId.TryReadProperty(ref reader, options, PropPackagedModelId, null))
+			{
+				continue;
+			}
+
+			if (propPlatformArchitecture.TryReadProperty(ref reader, options, PropPlatformArchitecture, null))
+			{
+				continue;
+			}
+
+			if (propPrefixStrings.TryReadProperty(ref reader, options, PropPrefixStrings, null))
+			{
+				continue;
+			}
+
+			if (propSha256.TryReadProperty(ref reader, options, PropSha256, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propTags.TryReadProperty(ref reader, options, PropTags, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propVocabularyFile.TryReadProperty(ref reader, options, PropVocabularyFile, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CreateTime = propCreateTime.Value,
+			Description = propDescription.Value,
+			InferenceConfig = propInferenceConfig.Value,
+			Metadata = propMetadata.Value,
+			MinimumVersion = propMinimumVersion.Value,
+			ModelRepository = propModelRepository.Value,
+			ModelType = propModelType.Value,
+			PackagedModelId = propPackagedModelId.Value,
+			PlatformArchitecture = propPlatformArchitecture.Value,
+			PrefixStrings = propPrefixStrings.Value,
+			Sha256 = propSha256.Value,
+			Size = propSize.Value,
+			Tags = propTags.Value,
+			VocabularyFile = propVocabularyFile.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMinimumVersion, value.MinimumVersion, null, null);
+		writer.WriteProperty(options, PropModelRepository, value.ModelRepository, null, null);
+		writer.WriteProperty(options, PropModelType, value.ModelType, null, null);
+		writer.WriteProperty(options, PropPackagedModelId, value.PackagedModelId, null, null);
+		writer.WriteProperty(options, PropPlatformArchitecture, value.PlatformArchitecture, null, null);
+		writer.WriteProperty(options, PropPrefixStrings, value.PrefixStrings, null, null);
+		writer.WriteProperty(options, PropSha256, value.Sha256, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropTags, value.Tags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropVocabularyFile, value.VocabularyFile, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfigConverter))]
 public sealed partial class ModelPackageConfig
 {
-	[JsonInclude, JsonPropertyName("create_time")]
-	public long? CreateTime { get; init; }
-	[JsonInclude, JsonPropertyName("description")]
-	public string? Description { get; init; }
-	[JsonInclude, JsonPropertyName("inference_config")]
-	public IReadOnlyDictionary<string, object>? InferenceConfig { get; init; }
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IReadOnlyDictionary<string, object>? Metadata { get; init; }
-	[JsonInclude, JsonPropertyName("minimum_version")]
-	public string? MinimumVersion { get; init; }
-	[JsonInclude, JsonPropertyName("model_repository")]
-	public string? ModelRepository { get; init; }
-	[JsonInclude, JsonPropertyName("model_type")]
-	public string? ModelType { get; init; }
-	[JsonInclude, JsonPropertyName("packaged_model_id")]
-	public string PackagedModelId { get; init; }
-	[JsonInclude, JsonPropertyName("platform_architecture")]
-	public string? PlatformArchitecture { get; init; }
-	[JsonInclude, JsonPropertyName("prefix_strings")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; init; }
-	[JsonInclude, JsonPropertyName("sha256")]
-	public string? Sha256 { get; init; }
-	[JsonInclude, JsonPropertyName("size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
-	[JsonInclude, JsonPropertyName("tags")]
-	public IReadOnlyCollection<string>? Tags { get; init; }
-	[JsonInclude, JsonPropertyName("vocabulary_file")]
-	public string? VocabularyFile { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelPackageConfig(string packagedModelId)
+	{
+		PackagedModelId = packagedModelId;
+	}
+#if NET7_0_OR_GREATER
+	public ModelPackageConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ModelPackageConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ModelPackageConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.DateTimeOffset? CreateTime { get; set; }
+	public string? Description { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? InferenceConfig { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
+	public string? MinimumVersion { get; set; }
+	public string? ModelRepository { get; set; }
+	public string? ModelType { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string PackagedModelId { get; set; }
+	public string? PlatformArchitecture { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; set; }
+	public string? Sha256 { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? Tags { get; set; }
+	public string? VocabularyFile { get; set; }
 }

@@ -17,22 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class RollupFieldSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAgg = System.Text.Json.JsonEncodedText.Encode("agg");
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAgg = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCalendarInterval = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAgg.TryReadProperty(ref reader, options, PropAgg, null))
+			{
+				continue;
+			}
+
+			if (propCalendarInterval.TryReadProperty(ref reader, options, PropCalendarInterval, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Agg = propAgg.Value,
+			CalendarInterval = propCalendarInterval.Value,
+			TimeZone = propTimeZone.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAgg, value.Agg, null, null);
+		writer.WriteProperty(options, PropCalendarInterval, value.CalendarInterval, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummaryConverter))]
 public sealed partial class RollupFieldSummary
 {
-	[JsonInclude, JsonPropertyName("agg")]
-	public string Agg { get; init; }
-	[JsonInclude, JsonPropertyName("calendar_interval")]
-	public Elastic.Clients.Elasticsearch.Duration? CalendarInterval { get; init; }
-	[JsonInclude, JsonPropertyName("time_zone")]
-	public string? TimeZone { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RollupFieldSummary(string agg)
+	{
+		Agg = agg;
+	}
+#if NET7_0_OR_GREATER
+	public RollupFieldSummary()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RollupFieldSummary()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RollupFieldSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Agg { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? CalendarInterval { get; set; }
+	public string? TimeZone { get; set; }
 }

@@ -17,101 +17,272 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class DataPathStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskQueue = System.Text.Json.JsonEncodedText.Encode("disk_queue");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskReads = System.Text.Json.JsonEncodedText.Encode("disk_reads");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskReadSize = System.Text.Json.JsonEncodedText.Encode("disk_read_size");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskReadSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_read_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskWrites = System.Text.Json.JsonEncodedText.Encode("disk_writes");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSize = System.Text.Json.JsonEncodedText.Encode("disk_write_size");
+	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_write_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.DataPathStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAvailable = default;
+		LocalJsonValue<long?> propAvailableInBytes = default;
+		LocalJsonValue<string?> propDiskQueue = default;
+		LocalJsonValue<long?> propDiskReads = default;
+		LocalJsonValue<string?> propDiskReadSize = default;
+		LocalJsonValue<long?> propDiskReadSizeInBytes = default;
+		LocalJsonValue<long?> propDiskWrites = default;
+		LocalJsonValue<string?> propDiskWriteSize = default;
+		LocalJsonValue<long?> propDiskWriteSizeInBytes = default;
+		LocalJsonValue<string?> propFree = default;
+		LocalJsonValue<long?> propFreeInBytes = default;
+		LocalJsonValue<string?> propMount = default;
+		LocalJsonValue<string?> propPath = default;
+		LocalJsonValue<string?> propTotal = default;
+		LocalJsonValue<long?> propTotalInBytes = default;
+		LocalJsonValue<string?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, null))
+			{
+				continue;
+			}
+
+			if (propDiskQueue.TryReadProperty(ref reader, options, PropDiskQueue, null))
+			{
+				continue;
+			}
+
+			if (propDiskReads.TryReadProperty(ref reader, options, PropDiskReads, null))
+			{
+				continue;
+			}
+
+			if (propDiskReadSize.TryReadProperty(ref reader, options, PropDiskReadSize, null))
+			{
+				continue;
+			}
+
+			if (propDiskReadSizeInBytes.TryReadProperty(ref reader, options, PropDiskReadSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propDiskWrites.TryReadProperty(ref reader, options, PropDiskWrites, null))
+			{
+				continue;
+			}
+
+			if (propDiskWriteSize.TryReadProperty(ref reader, options, PropDiskWriteSize, null))
+			{
+				continue;
+			}
+
+			if (propDiskWriteSizeInBytes.TryReadProperty(ref reader, options, PropDiskWriteSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propFree.TryReadProperty(ref reader, options, PropFree, null))
+			{
+				continue;
+			}
+
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propMount.TryReadProperty(ref reader, options, PropMount, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.DataPathStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			AvailableInBytes = propAvailableInBytes.Value,
+			DiskQueue = propDiskQueue.Value,
+			DiskReads = propDiskReads.Value,
+			DiskReadSize = propDiskReadSize.Value,
+			DiskReadSizeInBytes = propDiskReadSizeInBytes.Value,
+			DiskWrites = propDiskWrites.Value,
+			DiskWriteSize = propDiskWriteSize.Value,
+			DiskWriteSizeInBytes = propDiskWriteSizeInBytes.Value,
+			Free = propFree.Value,
+			FreeInBytes = propFreeInBytes.Value,
+			Mount = propMount.Value,
+			Path = propPath.Value,
+			Total = propTotal.Value,
+			TotalInBytes = propTotalInBytes.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.DataPathStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, null);
+		writer.WriteProperty(options, PropDiskQueue, value.DiskQueue, null, null);
+		writer.WriteProperty(options, PropDiskReads, value.DiskReads, null, null);
+		writer.WriteProperty(options, PropDiskReadSize, value.DiskReadSize, null, null);
+		writer.WriteProperty(options, PropDiskReadSizeInBytes, value.DiskReadSizeInBytes, null, null);
+		writer.WriteProperty(options, PropDiskWrites, value.DiskWrites, null, null);
+		writer.WriteProperty(options, PropDiskWriteSize, value.DiskWriteSize, null, null);
+		writer.WriteProperty(options, PropDiskWriteSizeInBytes, value.DiskWriteSizeInBytes, null, null);
+		writer.WriteProperty(options, PropFree, value.Free, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
+		writer.WriteProperty(options, PropMount, value.Mount, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.DataPathStatsConverter))]
 public sealed partial class DataPathStats
 {
+#if NET7_0_OR_GREATER
+	public DataPathStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataPathStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataPathStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total amount of disk space available to this Java virtual machine on this file store.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("available")]
-	public string? Available { get; init; }
+	public string? Available { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of bytes available to this Java virtual machine on this file store.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("available_in_bytes")]
-	public long? AvailableInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("disk_queue")]
-	public string? DiskQueue { get; init; }
-	[JsonInclude, JsonPropertyName("disk_reads")]
-	public long? DiskReads { get; init; }
-	[JsonInclude, JsonPropertyName("disk_read_size")]
-	public string? DiskReadSize { get; init; }
-	[JsonInclude, JsonPropertyName("disk_read_size_in_bytes")]
-	public long? DiskReadSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("disk_writes")]
-	public long? DiskWrites { get; init; }
-	[JsonInclude, JsonPropertyName("disk_write_size")]
-	public string? DiskWriteSize { get; init; }
-	[JsonInclude, JsonPropertyName("disk_write_size_in_bytes")]
-	public long? DiskWriteSizeInBytes { get; init; }
+	public long? AvailableInBytes { get; set; }
+	public string? DiskQueue { get; set; }
+	public long? DiskReads { get; set; }
+	public string? DiskReadSize { get; set; }
+	public long? DiskReadSizeInBytes { get; set; }
+	public long? DiskWrites { get; set; }
+	public string? DiskWriteSize { get; set; }
+	public long? DiskWriteSizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of unallocated disk space in the file store.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("free")]
-	public string? Free { get; init; }
+	public string? Free { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of unallocated bytes in the file store.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("free_in_bytes")]
-	public long? FreeInBytes { get; init; }
+	public long? FreeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Mount point of the file store (for example: <c>/dev/sda2</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mount")]
-	public string? Mount { get; init; }
+	public string? Mount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Path to the file store.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("path")]
-	public string? Path { get; init; }
+	public string? Path { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of the file store.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public string? Total { get; init; }
+	public string? Total { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of the file store in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_in_bytes")]
-	public long? TotalInBytes { get; init; }
+	public long? TotalInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Type of the file store (ex: ext4).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public string? Type { get; init; }
+	public string? Type { get; set; }
 }

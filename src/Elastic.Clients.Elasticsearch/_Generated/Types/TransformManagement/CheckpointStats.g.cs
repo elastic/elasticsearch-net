@@ -17,28 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class CheckpointStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCheckpoint = System.Text.Json.JsonEncodedText.Encode("checkpoint");
+	private static readonly System.Text.Json.JsonEncodedText PropCheckpointProgress = System.Text.Json.JsonEncodedText.Encode("checkpoint_progress");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampMillis = System.Text.Json.JsonEncodedText.Encode("timestamp_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeUpperBound = System.Text.Json.JsonEncodedText.Encode("time_upper_bound");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeUpperBoundMillis = System.Text.Json.JsonEncodedText.Encode("time_upper_bound_millis");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCheckpoint = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress?> propCheckpointProgress = default;
+		LocalJsonValue<System.DateTimeOffset?> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset?> propTimestampMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propTimeUpperBound = default;
+		LocalJsonValue<System.DateTimeOffset?> propTimeUpperBoundMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCheckpoint.TryReadProperty(ref reader, options, PropCheckpoint, null))
+			{
+				continue;
+			}
+
+			if (propCheckpointProgress.TryReadProperty(ref reader, options, PropCheckpointProgress, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propTimestampMillis.TryReadProperty(ref reader, options, PropTimestampMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTimeUpperBound.TryReadProperty(ref reader, options, PropTimeUpperBound, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propTimeUpperBoundMillis.TryReadProperty(ref reader, options, PropTimeUpperBoundMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Checkpoint = propCheckpoint.Value,
+			CheckpointProgress = propCheckpointProgress.Value,
+			Timestamp = propTimestamp.Value,
+			TimestampMillis = propTimestampMillis.Value,
+			TimeUpperBound = propTimeUpperBound.Value,
+			TimeUpperBoundMillis = propTimeUpperBoundMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCheckpoint, value.Checkpoint, null, null);
+		writer.WriteProperty(options, PropCheckpointProgress, value.CheckpointProgress, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTimestampMillis, value.TimestampMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimeUpperBound, value.TimeUpperBound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTimeUpperBoundMillis, value.TimeUpperBoundMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStatsConverter))]
 public sealed partial class CheckpointStats
 {
-	[JsonInclude, JsonPropertyName("checkpoint")]
-	public long Checkpoint { get; init; }
-	[JsonInclude, JsonPropertyName("checkpoint_progress")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress? CheckpointProgress { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public DateTimeOffset? Timestamp { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp_millis")]
-	public long? TimestampMillis { get; init; }
-	[JsonInclude, JsonPropertyName("time_upper_bound")]
-	public DateTimeOffset? TimeUpperBound { get; init; }
-	[JsonInclude, JsonPropertyName("time_upper_bound_millis")]
-	public long? TimeUpperBoundMillis { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CheckpointStats(long checkpoint)
+	{
+		Checkpoint = checkpoint;
+	}
+#if NET7_0_OR_GREATER
+	public CheckpointStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CheckpointStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CheckpointStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Checkpoint { get; set; }
+	public Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress? CheckpointProgress { get; set; }
+	public System.DateTimeOffset? Timestamp { get; set; }
+	public System.DateTimeOffset? TimestampMillis { get; set; }
+	public System.DateTimeOffset? TimeUpperBound { get; set; }
+	public System.DateTimeOffset? TimeUpperBoundMillis { get; set; }
 }

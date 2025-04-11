@@ -17,496 +17,930 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public partial class Analyzers : IsADictionary<string, IAnalyzer>
+internal sealed partial class AnalyzersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.Analyzers>
+{
+	public override Elastic.Clients.Elasticsearch.Analysis.Analyzers Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Analysis.Analyzers(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>(o, null, null)));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.Analyzers value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.AnalyzersConverter))]
+public sealed partial class Analyzers : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>
 {
 	public Analyzers()
 	{
 	}
 
-	public Analyzers(IDictionary<string, IAnalyzer> container) : base(container)
+	public Analyzers(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(Sanitize(name), analyzer);
-	public bool TryGetAnalyzer(string name, [NotNullWhen(returnValue: true)] out IAnalyzer analyzer) => BackingDictionary.TryGetValue(Sanitize(name), out analyzer);
+	public void Add(string key, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetAnalyzer(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.Analysis.IAnalyzer value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetAnalyzer<T>(string name, [NotNullWhen(returnValue: true)] out T? analyzer) where T : class, IAnalyzer
+	public bool TryGetAnalyzer<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, IAnalyzer
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			analyzer = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		analyzer = null;
+		value = null;
 		return false;
 	}
 }
 
-public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, Analyzers, string, IAnalyzer>
+public readonly partial struct AnalyzersDescriptor
 {
-	public AnalyzersDescriptor() : base(new Analyzers())
+	private readonly Elastic.Clients.Elasticsearch.Analysis.Analyzers _items = new();
+
+	private Elastic.Clients.Elasticsearch.Analysis.Analyzers Value => _items;
+
+	public AnalyzersDescriptor()
 	{
 	}
 
-	public AnalyzersDescriptor(Analyzers analyzers) : base(analyzers ?? new Analyzers())
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Arabic(string key, Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer value)
 	{
+		_items.Add(key, value);
+		return this;
 	}
 
-	public AnalyzersDescriptor Arabic(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor, ArabicAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Arabic(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor, ArabicAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Arabic(string analyzerName, ArabicAnalyzer arabicAnalyzer) => AssignVariant(analyzerName, arabicAnalyzer);
-	public AnalyzersDescriptor Armenian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor, ArmenianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Armenian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor, ArmenianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Armenian(string analyzerName, ArmenianAnalyzer armenianAnalyzer) => AssignVariant(analyzerName, armenianAnalyzer);
-	public AnalyzersDescriptor Basque(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor, BasqueAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Basque(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor, BasqueAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Basque(string analyzerName, BasqueAnalyzer basqueAnalyzer) => AssignVariant(analyzerName, basqueAnalyzer);
-	public AnalyzersDescriptor Bengali(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor, BengaliAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Bengali(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor, BengaliAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Bengali(string analyzerName, BengaliAnalyzer bengaliAnalyzer) => AssignVariant(analyzerName, bengaliAnalyzer);
-	public AnalyzersDescriptor Brazilian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor, BrazilianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Brazilian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor, BrazilianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Brazilian(string analyzerName, BrazilianAnalyzer brazilianAnalyzer) => AssignVariant(analyzerName, brazilianAnalyzer);
-	public AnalyzersDescriptor Bulgarian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor, BulgarianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Bulgarian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor, BulgarianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Bulgarian(string analyzerName, BulgarianAnalyzer bulgarianAnalyzer) => AssignVariant(analyzerName, bulgarianAnalyzer);
-	public AnalyzersDescriptor Catalan(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor, CatalanAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Catalan(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor, CatalanAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Catalan(string analyzerName, CatalanAnalyzer catalanAnalyzer) => AssignVariant(analyzerName, catalanAnalyzer);
-	public AnalyzersDescriptor Chinese(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor, ChineseAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Chinese(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor, ChineseAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Chinese(string analyzerName, ChineseAnalyzer chineseAnalyzer) => AssignVariant(analyzerName, chineseAnalyzer);
-	public AnalyzersDescriptor Cjk(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor, CjkAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Cjk(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor, CjkAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Cjk(string analyzerName, CjkAnalyzer cjkAnalyzer) => AssignVariant(analyzerName, cjkAnalyzer);
-	public AnalyzersDescriptor Custom(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Custom(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Custom(string analyzerName, CustomAnalyzer customAnalyzer) => AssignVariant(analyzerName, customAnalyzer);
-	public AnalyzersDescriptor Czech(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor, CzechAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Czech(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor, CzechAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Czech(string analyzerName, CzechAnalyzer czechAnalyzer) => AssignVariant(analyzerName, czechAnalyzer);
-	public AnalyzersDescriptor Danish(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor, DanishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Danish(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor, DanishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Danish(string analyzerName, DanishAnalyzer danishAnalyzer) => AssignVariant(analyzerName, danishAnalyzer);
-	public AnalyzersDescriptor Dutch(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Dutch(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Dutch(string analyzerName, DutchAnalyzer dutchAnalyzer) => AssignVariant(analyzerName, dutchAnalyzer);
-	public AnalyzersDescriptor English(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor, EnglishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor English(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor, EnglishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor English(string analyzerName, EnglishAnalyzer englishAnalyzer) => AssignVariant(analyzerName, englishAnalyzer);
-	public AnalyzersDescriptor Estonian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor, EstonianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Estonian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor, EstonianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Estonian(string analyzerName, EstonianAnalyzer estonianAnalyzer) => AssignVariant(analyzerName, estonianAnalyzer);
-	public AnalyzersDescriptor Fingerprint(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Fingerprint(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Fingerprint(string analyzerName, FingerprintAnalyzer fingerprintAnalyzer) => AssignVariant(analyzerName, fingerprintAnalyzer);
-	public AnalyzersDescriptor Finnish(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor, FinnishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Finnish(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor, FinnishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Finnish(string analyzerName, FinnishAnalyzer finnishAnalyzer) => AssignVariant(analyzerName, finnishAnalyzer);
-	public AnalyzersDescriptor French(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor, FrenchAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor French(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor, FrenchAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor French(string analyzerName, FrenchAnalyzer frenchAnalyzer) => AssignVariant(analyzerName, frenchAnalyzer);
-	public AnalyzersDescriptor Galician(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor, GalicianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Galician(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor, GalicianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Galician(string analyzerName, GalicianAnalyzer galicianAnalyzer) => AssignVariant(analyzerName, galicianAnalyzer);
-	public AnalyzersDescriptor German(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor, GermanAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor German(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor, GermanAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor German(string analyzerName, GermanAnalyzer germanAnalyzer) => AssignVariant(analyzerName, germanAnalyzer);
-	public AnalyzersDescriptor Greek(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor, GreekAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Greek(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor, GreekAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Greek(string analyzerName, GreekAnalyzer greekAnalyzer) => AssignVariant(analyzerName, greekAnalyzer);
-	public AnalyzersDescriptor Hindi(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor, HindiAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Hindi(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor, HindiAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Hindi(string analyzerName, HindiAnalyzer hindiAnalyzer) => AssignVariant(analyzerName, hindiAnalyzer);
-	public AnalyzersDescriptor Hungarian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor, HungarianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Hungarian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor, HungarianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Hungarian(string analyzerName, HungarianAnalyzer hungarianAnalyzer) => AssignVariant(analyzerName, hungarianAnalyzer);
-	public AnalyzersDescriptor Icu(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Icu(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Icu(string analyzerName, IcuAnalyzer icuAnalyzer) => AssignVariant(analyzerName, icuAnalyzer);
-	public AnalyzersDescriptor Indonesian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor, IndonesianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Indonesian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor, IndonesianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Indonesian(string analyzerName, IndonesianAnalyzer indonesianAnalyzer) => AssignVariant(analyzerName, indonesianAnalyzer);
-	public AnalyzersDescriptor Irish(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor, IrishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Irish(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor, IrishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Irish(string analyzerName, IrishAnalyzer irishAnalyzer) => AssignVariant(analyzerName, irishAnalyzer);
-	public AnalyzersDescriptor Italian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor, ItalianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Italian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor, ItalianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Italian(string analyzerName, ItalianAnalyzer italianAnalyzer) => AssignVariant(analyzerName, italianAnalyzer);
-	public AnalyzersDescriptor Keyword(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Keyword(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Keyword(string analyzerName, KeywordAnalyzer keywordAnalyzer) => AssignVariant(analyzerName, keywordAnalyzer);
-	public AnalyzersDescriptor Kuromoji(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Kuromoji(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Kuromoji(string analyzerName, KuromojiAnalyzer kuromojiAnalyzer) => AssignVariant(analyzerName, kuromojiAnalyzer);
-	public AnalyzersDescriptor Language(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Language(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Language(string analyzerName, LanguageAnalyzer languageAnalyzer) => AssignVariant(analyzerName, languageAnalyzer);
-	public AnalyzersDescriptor Latvian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor, LatvianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Latvian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor, LatvianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Latvian(string analyzerName, LatvianAnalyzer latvianAnalyzer) => AssignVariant(analyzerName, latvianAnalyzer);
-	public AnalyzersDescriptor Lithuanian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor, LithuanianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Lithuanian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor, LithuanianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Lithuanian(string analyzerName, LithuanianAnalyzer lithuanianAnalyzer) => AssignVariant(analyzerName, lithuanianAnalyzer);
-	public AnalyzersDescriptor Nori(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Nori(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Nori(string analyzerName, NoriAnalyzer noriAnalyzer) => AssignVariant(analyzerName, noriAnalyzer);
-	public AnalyzersDescriptor Norwegian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor, NorwegianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Norwegian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor, NorwegianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Norwegian(string analyzerName, NorwegianAnalyzer norwegianAnalyzer) => AssignVariant(analyzerName, norwegianAnalyzer);
-	public AnalyzersDescriptor Pattern(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Pattern(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Pattern(string analyzerName, PatternAnalyzer patternAnalyzer) => AssignVariant(analyzerName, patternAnalyzer);
-	public AnalyzersDescriptor Persian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor, PersianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Persian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor, PersianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Persian(string analyzerName, PersianAnalyzer persianAnalyzer) => AssignVariant(analyzerName, persianAnalyzer);
-	public AnalyzersDescriptor Portuguese(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor, PortugueseAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Portuguese(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor, PortugueseAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Portuguese(string analyzerName, PortugueseAnalyzer portugueseAnalyzer) => AssignVariant(analyzerName, portugueseAnalyzer);
-	public AnalyzersDescriptor Romanian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor, RomanianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Romanian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor, RomanianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Romanian(string analyzerName, RomanianAnalyzer romanianAnalyzer) => AssignVariant(analyzerName, romanianAnalyzer);
-	public AnalyzersDescriptor Russian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor, RussianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Russian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor, RussianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Russian(string analyzerName, RussianAnalyzer russianAnalyzer) => AssignVariant(analyzerName, russianAnalyzer);
-	public AnalyzersDescriptor Serbian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor, SerbianAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Serbian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor, SerbianAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Serbian(string analyzerName, SerbianAnalyzer serbianAnalyzer) => AssignVariant(analyzerName, serbianAnalyzer);
-	public AnalyzersDescriptor Simple(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Simple(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Simple(string analyzerName, SimpleAnalyzer simpleAnalyzer) => AssignVariant(analyzerName, simpleAnalyzer);
-	public AnalyzersDescriptor Snowball(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Snowball(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Snowball(string analyzerName, SnowballAnalyzer snowballAnalyzer) => AssignVariant(analyzerName, snowballAnalyzer);
-	public AnalyzersDescriptor Sorani(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor, SoraniAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Sorani(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor, SoraniAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Sorani(string analyzerName, SoraniAnalyzer soraniAnalyzer) => AssignVariant(analyzerName, soraniAnalyzer);
-	public AnalyzersDescriptor Spanish(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor, SpanishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Spanish(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor, SpanishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Spanish(string analyzerName, SpanishAnalyzer spanishAnalyzer) => AssignVariant(analyzerName, spanishAnalyzer);
-	public AnalyzersDescriptor Standard(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Standard(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Standard(string analyzerName, StandardAnalyzer standardAnalyzer) => AssignVariant(analyzerName, standardAnalyzer);
-	public AnalyzersDescriptor Stop(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Stop(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Stop(string analyzerName, StopAnalyzer stopAnalyzer) => AssignVariant(analyzerName, stopAnalyzer);
-	public AnalyzersDescriptor Swedish(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor, SwedishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Swedish(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor, SwedishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Swedish(string analyzerName, SwedishAnalyzer swedishAnalyzer) => AssignVariant(analyzerName, swedishAnalyzer);
-	public AnalyzersDescriptor Thai(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor, ThaiAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Thai(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor, ThaiAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Thai(string analyzerName, ThaiAnalyzer thaiAnalyzer) => AssignVariant(analyzerName, thaiAnalyzer);
-	public AnalyzersDescriptor Turkish(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor, TurkishAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Turkish(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor, TurkishAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Turkish(string analyzerName, TurkishAnalyzer turkishAnalyzer) => AssignVariant(analyzerName, turkishAnalyzer);
-	public AnalyzersDescriptor Whitespace(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Whitespace(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Whitespace(string analyzerName, WhitespaceAnalyzer whitespaceAnalyzer) => AssignVariant(analyzerName, whitespaceAnalyzer);
-}
-
-internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyzer>
-{
-	public override IAnalyzer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Arabic(string key)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
-
-		switch (type)
-		{
-			case "arabic":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer>(ref reader, options);
-			case "armenian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer>(ref reader, options);
-			case "basque":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer>(ref reader, options);
-			case "bengali":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer>(ref reader, options);
-			case "brazilian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer>(ref reader, options);
-			case "bulgarian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer>(ref reader, options);
-			case "catalan":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer>(ref reader, options);
-			case "chinese":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer>(ref reader, options);
-			case "cjk":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer>(ref reader, options);
-			case "custom":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(ref reader, options);
-			case "czech":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer>(ref reader, options);
-			case "danish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer>(ref reader, options);
-			case "dutch":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer>(ref reader, options);
-			case "english":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer>(ref reader, options);
-			case "estonian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer>(ref reader, options);
-			case "fingerprint":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>(ref reader, options);
-			case "finnish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer>(ref reader, options);
-			case "french":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer>(ref reader, options);
-			case "galician":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer>(ref reader, options);
-			case "german":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer>(ref reader, options);
-			case "greek":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer>(ref reader, options);
-			case "hindi":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer>(ref reader, options);
-			case "hungarian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer>(ref reader, options);
-			case "icu_analyzer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer>(ref reader, options);
-			case "indonesian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer>(ref reader, options);
-			case "irish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer>(ref reader, options);
-			case "italian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>(ref reader, options);
-			case "kuromoji":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>(ref reader, options);
-			case "language":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer>(ref reader, options);
-			case "latvian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer>(ref reader, options);
-			case "lithuanian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer>(ref reader, options);
-			case "nori":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer>(ref reader, options);
-			case "norwegian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer>(ref reader, options);
-			case "pattern":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer>(ref reader, options);
-			case "persian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer>(ref reader, options);
-			case "portuguese":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer>(ref reader, options);
-			case "romanian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer>(ref reader, options);
-			case "russian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer>(ref reader, options);
-			case "serbian":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer>(ref reader, options);
-			case "simple":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer>(ref reader, options);
-			case "snowball":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer>(ref reader, options);
-			case "sorani":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer>(ref reader, options);
-			case "spanish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer>(ref reader, options);
-			case "standard":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer>(ref reader, options);
-			case "stop":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer>(ref reader, options);
-			case "swedish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer>(ref reader, options);
-			case "thai":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer>(ref reader, options);
-			case "turkish":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer>(ref reader, options);
-			case "whitespace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer>(ref reader, options);
-			default:
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>(ref reader, options);
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor.Build(null));
+		return this;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IAnalyzer value, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Arabic(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor>? action)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "arabic":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer), options);
-				return;
-			case "armenian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer), options);
-				return;
-			case "basque":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer), options);
-				return;
-			case "bengali":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer), options);
-				return;
-			case "brazilian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer), options);
-				return;
-			case "bulgarian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer), options);
-				return;
-			case "catalan":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer), options);
-				return;
-			case "chinese":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer), options);
-				return;
-			case "cjk":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer), options);
-				return;
-			case "custom":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer), options);
-				return;
-			case "czech":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer), options);
-				return;
-			case "danish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer), options);
-				return;
-			case "dutch":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer), options);
-				return;
-			case "english":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer), options);
-				return;
-			case "estonian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer), options);
-				return;
-			case "fingerprint":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer), options);
-				return;
-			case "finnish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer), options);
-				return;
-			case "french":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer), options);
-				return;
-			case "galician":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer), options);
-				return;
-			case "german":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer), options);
-				return;
-			case "greek":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer), options);
-				return;
-			case "hindi":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer), options);
-				return;
-			case "hungarian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer), options);
-				return;
-			case "icu_analyzer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer), options);
-				return;
-			case "indonesian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer), options);
-				return;
-			case "irish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer), options);
-				return;
-			case "italian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer), options);
-				return;
-			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer), options);
-				return;
-			case "kuromoji":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer), options);
-				return;
-			case "language":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer), options);
-				return;
-			case "latvian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer), options);
-				return;
-			case "lithuanian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer), options);
-				return;
-			case "nori":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer), options);
-				return;
-			case "norwegian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer), options);
-				return;
-			case "pattern":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer), options);
-				return;
-			case "persian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer), options);
-				return;
-			case "portuguese":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer), options);
-				return;
-			case "romanian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer), options);
-				return;
-			case "russian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer), options);
-				return;
-			case "serbian":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer), options);
-				return;
-			case "simple":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer), options);
-				return;
-			case "snowball":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer), options);
-				return;
-			case "sorani":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer), options);
-				return;
-			case "spanish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer), options);
-				return;
-			case "standard":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer), options);
-				return;
-			case "stop":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer), options);
-				return;
-			case "swedish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer), options);
-				return;
-			case "thai":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer), options);
-				return;
-			case "turkish":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer), options);
-				return;
-			case "whitespace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzerDescriptor.Build(action));
+		return this;
 	}
-}
 
-[JsonConverter(typeof(AnalyzerInterfaceConverter))]
-public partial interface IAnalyzer
-{
-	public string? Type { get; }
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Armenian(string key, Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Armenian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Armenian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Basque(string key, Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Basque(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Basque(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Bengali(string key, Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Bengali(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Bengali(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Brazilian(string key, Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Brazilian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Brazilian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Bulgarian(string key, Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Bulgarian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Bulgarian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Catalan(string key, Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Catalan(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Catalan(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Chinese(string key, Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Chinese(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Chinese(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Cjk(string key, Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Cjk(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Cjk(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Custom(string key, Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Custom(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Czech(string key, Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Czech(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Czech(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Danish(string key, Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Danish(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Danish(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Dutch(string key, Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Dutch(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Dutch(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor English(string key, Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor English(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor English(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Estonian(string key, Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Estonian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Estonian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Fingerprint(string key, Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Fingerprint(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Fingerprint(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Finnish(string key, Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Finnish(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Finnish(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor French(string key, Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor French(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor French(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Galician(string key, Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Galician(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Galician(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor German(string key, Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor German(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor German(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Greek(string key, Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Greek(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Greek(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Hindi(string key, Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Hindi(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Hindi(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Hungarian(string key, Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Hungarian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Hungarian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Icu(string key, Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Icu(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Indonesian(string key, Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Indonesian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Indonesian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Irish(string key, Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Irish(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Irish(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Italian(string key, Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Italian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Italian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Keyword(string key, Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Keyword(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Keyword(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Kuromoji(string key, Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Kuromoji(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Latvian(string key, Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Latvian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Latvian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Lithuanian(string key, Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Lithuanian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Lithuanian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Nori(string key, Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Nori(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Nori(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Norwegian(string key, Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Norwegian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Norwegian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Pattern(string key, Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Pattern(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Pattern(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Persian(string key, Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Persian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Persian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Portuguese(string key, Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Portuguese(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Portuguese(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Romanian(string key, Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Romanian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Romanian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Russian(string key, Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Russian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Russian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Serbian(string key, Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Serbian(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Serbian(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Simple(string key, Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Simple(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Simple(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Snowball(string key, Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Snowball(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Sorani(string key, Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Sorani(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Sorani(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Spanish(string key, Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Spanish(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Spanish(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Standard(string key, Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Standard(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Standard(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Stop(string key, Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Stop(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Stop(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Swedish(string key, Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Swedish(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Swedish(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Thai(string key, Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Thai(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Thai(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Turkish(string key, Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Turkish(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Turkish(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Whitespace(string key, Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Whitespace(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Whitespace(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzerDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.Analyzers Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.Analyzers();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }

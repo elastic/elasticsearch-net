@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GoogleNormalizedDistanceHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propBackgroundIsSuperset = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackgroundIsSuperset.TryReadProperty(ref reader, options, PropBackgroundIsSuperset, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BackgroundIsSuperset = propBackgroundIsSuperset.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBackgroundIsSuperset, value.BackgroundIsSuperset, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicConverter))]
 public sealed partial class GoogleNormalizedDistanceHeuristic
 {
+#if NET7_0_OR_GREATER
+	public GoogleNormalizedDistanceHeuristic()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GoogleNormalizedDistanceHeuristic()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("background_is_superset")]
 	public bool? BackgroundIsSuperset { get; set; }
 }
 
-public sealed partial class GoogleNormalizedDistanceHeuristicDescriptor : SerializableDescriptor<GoogleNormalizedDistanceHeuristicDescriptor>
+public readonly partial struct GoogleNormalizedDistanceHeuristicDescriptor
 {
-	internal GoogleNormalizedDistanceHeuristicDescriptor(Action<GoogleNormalizedDistanceHeuristicDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic Instance { get; init; }
 
-	public GoogleNormalizedDistanceHeuristicDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GoogleNormalizedDistanceHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? BackgroundIsSupersetValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GoogleNormalizedDistanceHeuristicDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
 	/// </para>
 	/// </summary>
-	public GoogleNormalizedDistanceHeuristicDescriptor BackgroundIsSuperset(bool? backgroundIsSuperset = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor BackgroundIsSuperset(bool? value = true)
 	{
-		BackgroundIsSupersetValue = backgroundIsSuperset;
-		return Self;
+		Instance.BackgroundIsSuperset = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BackgroundIsSupersetValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("background_is_superset");
-			writer.WriteBooleanValue(BackgroundIsSupersetValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,15 +17,76 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
+internal sealed partial class MatchOnlyTextPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CopyTo = propCopyTo.Value,
+			Fields = propFields.Value,
+			Meta = propMeta.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
@@ -36,16 +97,31 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 /// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
 /// </para>
 /// </summary>
-public sealed partial class MatchOnlyTextProperty : IProperty
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyConverter))]
+public sealed partial class MatchOnlyTextProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
+#if NET7_0_OR_GREATER
+	public MatchOnlyTextProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MatchOnlyTextProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Allows you to copy the values of multiple fields into a group
 	/// field, which can then be queried as a single field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
 	/// <summary>
@@ -54,7 +130,6 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
 	/// <summary>
@@ -62,10 +137,8 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "match_only_text";
 }
 
@@ -78,17 +151,24 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 /// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
 /// </para>
 /// </summary>
-public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : SerializableDescriptor<MatchOnlyTextPropertyDescriptor<TDocument>>, IBuildableDescriptor<MatchOnlyTextProperty>
+public readonly partial struct MatchOnlyTextPropertyDescriptor<TDocument>
 {
-	internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Instance { get; init; }
 
-	public MatchOnlyTextPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchOnlyTextPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchOnlyTextPropertyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -96,10 +176,22 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	/// field, which can then be queried as a single field.
 	/// </para>
 	/// </summary>
-	public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Allows you to copy the values of multiple fields into a group
+	/// field, which can then be queried as a single field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.CopyTo = value;
+		return this;
 	}
 
 	/// <summary>
@@ -108,24 +200,22 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
 	/// </para>
 	/// </summary>
-	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
-	}
-
-	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
-	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -133,44 +223,53 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public MatchOnlyTextPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Meta()
 	{
-		writer.WriteStartObject();
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("match_only_text");
-		writer.WriteEndObject();
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		CopyTo = CopyToValue,
-		Fields = FieldsValue,
-		Meta = MetaValue
-	};
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> AddMeta(string key, string value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
 /// <summary>
@@ -182,17 +281,24 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 /// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
 /// </para>
 /// </summary>
-public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptor<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
+public readonly partial struct MatchOnlyTextPropertyDescriptor
 {
-	internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Instance { get; init; }
 
-	public MatchOnlyTextPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchOnlyTextPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatchOnlyTextPropertyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -200,10 +306,22 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	/// field, which can then be queried as a single field.
 	/// </para>
 	/// </summary>
-	public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Allows you to copy the values of multiple fields into a group
+	/// field, which can then be queried as a single field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.CopyTo = value;
+		return this;
 	}
 
 	/// <summary>
@@ -212,24 +330,34 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
 	/// </para>
 	/// </summary>
-	public MatchOnlyTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -237,42 +365,51 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public MatchOnlyTextPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Meta()
 	{
-		writer.WriteStartObject();
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("match_only_text");
-		writer.WriteEndObject();
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		CopyTo = CopyToValue,
-		Fields = FieldsValue,
-		Meta = MetaValue
-	};
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor AddMeta(string key, string value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

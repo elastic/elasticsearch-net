@@ -17,23 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public sealed partial class PostStartTrialResponse : ElasticsearchResponse
+internal sealed partial class PostStartTrialResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse>
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
-	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("error_message")]
-	public string? ErrorMessage { get; init; }
-	[JsonInclude, JsonPropertyName("trial_was_started")]
-	public bool TrialWasStarted { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? Type { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message");
+	private static readonly System.Text.Json.JsonEncodedText PropTrialWasStarted = System.Text.Json.JsonEncodedText.Encode("trial_was_started");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<string?> propErrorMessage = default;
+		LocalJsonValue<bool> propTrialWasStarted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propErrorMessage.TryReadProperty(ref reader, options, PropErrorMessage, null))
+			{
+				continue;
+			}
+
+			if (propTrialWasStarted.TryReadProperty(ref reader, options, PropTrialWasStarted, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Acknowledged = propAcknowledged.Value,
+			ErrorMessage = propErrorMessage.Value,
+			TrialWasStarted = propTrialWasStarted.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage, null, null);
+		writer.WriteProperty(options, PropTrialWasStarted, value.TrialWasStarted, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponseConverter))]
+public sealed partial class PostStartTrialResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PostStartTrialResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PostStartTrialResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool Acknowledged { get; set; }
+	public string? ErrorMessage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool TrialWasStarted { get; set; }
+	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? Type { get; set; }
 }

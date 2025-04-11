@@ -17,22 +17,104 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class DataStreamLifecycleDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStagnatingBackingIndices = System.Text.Json.JsonEncodedText.Encode("stagnating_backing_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropStagnatingBackingIndicesCount = System.Text.Json.JsonEncodedText.Encode("stagnating_backing_indices_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalBackingIndicesInError = System.Text.Json.JsonEncodedText.Encode("total_backing_indices_in_error");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>?> propStagnatingBackingIndices = default;
+		LocalJsonValue<int> propStagnatingBackingIndicesCount = default;
+		LocalJsonValue<int> propTotalBackingIndicesInError = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStagnatingBackingIndices.TryReadProperty(ref reader, options, PropStagnatingBackingIndices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStagnatingBackingIndicesCount.TryReadProperty(ref reader, options, PropStagnatingBackingIndicesCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalBackingIndicesInError.TryReadProperty(ref reader, options, PropTotalBackingIndicesInError, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			StagnatingBackingIndices = propStagnatingBackingIndices.Value,
+			StagnatingBackingIndicesCount = propStagnatingBackingIndicesCount.Value,
+			TotalBackingIndicesInError = propTotalBackingIndicesInError.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStagnatingBackingIndices, value.StagnatingBackingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>(o, v, null));
+		writer.WriteProperty(options, PropStagnatingBackingIndicesCount, value.StagnatingBackingIndicesCount, null, null);
+		writer.WriteProperty(options, PropTotalBackingIndicesInError, value.TotalBackingIndicesInError, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetailsConverter))]
 public sealed partial class DataStreamLifecycleDetails
 {
-	[JsonInclude, JsonPropertyName("stagnating_backing_indices")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>? StagnatingBackingIndices { get; init; }
-	[JsonInclude, JsonPropertyName("stagnating_backing_indices_count")]
-	public int StagnatingBackingIndicesCount { get; init; }
-	[JsonInclude, JsonPropertyName("total_backing_indices_in_error")]
-	public int TotalBackingIndicesInError { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleDetails(int stagnatingBackingIndicesCount, int totalBackingIndicesInError)
+	{
+		StagnatingBackingIndicesCount = stagnatingBackingIndicesCount;
+		TotalBackingIndicesInError = totalBackingIndicesInError;
+	}
+#if NET7_0_OR_GREATER
+	public DataStreamLifecycleDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataStreamLifecycleDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataStreamLifecycleDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>? StagnatingBackingIndices { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int StagnatingBackingIndicesCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int TotalBackingIndicesInError { get; set; }
 }

@@ -18,3745 +18,633 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-public partial class RollupNamespacedClient : NamespacedClientProxy
+public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="RollupNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected RollupNamespacedClient() : base()
 	{
 	}
 
-	internal RollupNamespacedClient(ElasticsearchClient client) : base(client)
+	internal RollupNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteJobRequest, DeleteJobResponse, DeleteJobRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequest, DeleteJobResponse, DeleteJobRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob<TDocument>(DeleteJobRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteJobRequestDescriptor<TDocument>, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteJobRequestDescriptor<TDocument>, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new DeleteJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteJobRequestDescriptor<TDocument>, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob(DeleteJobRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new DeleteJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(DeleteJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequestDescriptor<TDocument>, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequestDescriptor<TDocument>, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequestDescriptor<TDocument>, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a rollup job.
-	/// </para>
-	/// <para>
-	/// A job must be stopped before it can be deleted.
-	/// If you attempt to delete a started job, an error occurs.
-	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-	/// The API does not delete any previously rolled up data.
-	/// This is by design; a user may wish to roll up a static data set.
-	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-	/// </para>
-	/// <code>
-	/// POST my_rollup_index/_delete_by_query
-	/// {
-	///   "query": {
-	///     "term": {
-	///       "_rollup.id": "the_rollup_job_id"
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs(GetJobsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetJobsRequest, GetJobsResponse, GetJobsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetJobsRequest, GetJobsResponse, GetJobsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs<TDocument>(GetJobsRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor<TDocument>> configureRequest)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs<TDocument>()
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs<TDocument>(Action<GetJobsRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs(GetJobsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		var descriptor = new GetJobsRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetJobsRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs()
-	{
-		var descriptor = new GetJobsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs(Action<GetJobsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetJobsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(GetJobsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Action<GetJobsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor<TDocument>, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get rollup job information.
-	/// Get the configuration, stats, and status of rollup jobs.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetJobsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetRollupCapsRequest, GetRollupCapsResponse, GetRollupCapsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequest, GetRollupCapsResponse, GetRollupCapsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(GetRollupCapsRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>()
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps()
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps(Action<GetRollupCapsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(GetRollupCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup job capabilities.
-	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-	/// </para>
-	/// <para>
-	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-	/// This API enables you to inspect an index and determine:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Does this index have associated rollup data somewhere in the cluster?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupCapsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequest, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequest, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(GetRollupIndexCapsRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(GetRollupIndexCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the rollup index capabilities.
-	/// Get the rollup capabilities of all jobs inside of a rollup index.
-	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// What jobs are stored in an index (or indices specified via a pattern)?
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(PutJobRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutJobRequest, PutJobResponse, PutJobRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutJobRequest, PutJobResponse, PutJobRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob<TDocument>(PutJobRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(PutJobRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new PutJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(PutJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a rollup job.
-	/// </para>
-	/// <para>
-	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
-	/// </para>
-	/// <para>
-	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
-	/// </para>
-	/// <para>
-	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
-	/// </para>
-	/// <para>
-	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<RollupSearchRequest, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<RollupSearchRequest, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RollupSearchRequestDescriptor<TDocument>> configureRequest)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>()
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Action<RollupSearchRequestDescriptor<TDocument>> configureRequest)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RollupSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Search rolled-up data.
-	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-	/// </para>
-	/// <para>
-	/// The request body supports a subset of features from the regular search API.
-	/// The following functionality is not available:
-	/// </para>
-	/// <para>
-	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-	/// </para>
-	/// <para>
-	/// <strong>Searching both historical rollup and non-rollup data</strong>
-	/// </para>
-	/// <para>
-	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-	/// This is done by simply adding the live indices to the URI. For example:
-	/// </para>
-	/// <code>
-	/// GET sensor-1,sensor_rollup/_rollup_search
-	/// {
-	///   "size": 0,
-	///   "aggregations": {
-	///      "max_temperature": {
-	///       "max": {
-	///         "field": "temperature"
-	///       }
-	///     }
-	///   }
-	/// }
-	/// </code>
-	/// <para>
-	/// The rollup search endpoint does two things when the search runs:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The original request is sent to the non-rollup index unaltered.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// A rewritten version of the original request is sent to the rollup index.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Action<RollupSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob(StartJobRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StartJobRequest, StartJobResponse, StartJobRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StartJobRequest, StartJobResponse, StartJobRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob<TDocument>(StartJobRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StartJobRequestDescriptor<TDocument>, StartJobResponse, StartJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<StartJobRequestDescriptor<TDocument>, StartJobResponse, StartJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new StartJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StartJobRequestDescriptor<TDocument>, StartJobResponse, StartJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob(StartJobRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new StartJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StartJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(StartJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartJobRequestDescriptor<TDocument>, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartJobRequestDescriptor<TDocument>, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartJobRequestDescriptor<TDocument>, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start rollup jobs.
-	/// If you try to start a job that does not exist, an exception occurs.
-	/// If you try to start a job that is already started, nothing happens.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob(StopJobRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StopJobRequest, StopJobResponse, StopJobRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StopJobRequest, StopJobResponse, StopJobRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob<TDocument>(StopJobRequestDescriptor<TDocument> descriptor)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StopJobRequestDescriptor<TDocument>, StopJobResponse, StopJobRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<StopJobRequestDescriptor<TDocument>, StopJobResponse, StopJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new StopJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StopJobRequestDescriptor<TDocument>, StopJobResponse, StopJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob(StopJobRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new StopJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StopJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(StopJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopJobRequestDescriptor<TDocument>, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopJobRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopJobRequestDescriptor<TDocument>, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopJobRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopJobRequestDescriptor<TDocument>, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopJobRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Stop rollup jobs.
-	/// If you try to stop a job that does not exist, an exception occurs.
-	/// If you try to stop a job that is already stopped, nothing happens.
-	/// </para>
-	/// <para>
-	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-	/// </para>
-	/// <code>
-	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-	/// </code>
-	/// <para>
-	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request, cancellationToken);
 	}
 }

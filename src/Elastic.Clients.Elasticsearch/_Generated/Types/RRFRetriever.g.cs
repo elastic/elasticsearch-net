@@ -17,33 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RRFRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropRankConstant = System.Text.Json.JsonEncodedText.Encode("rank_constant");
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
+
+	public override Elastic.Clients.Elasticsearch.RRFRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<int?> propRankConstant = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever>> propRetrievers = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propRankConstant.TryReadProperty(ref reader, options, PropRankConstant, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			{
+				continue;
+			}
+
+			if (propRetrievers.TryReadProperty(ref reader, options, PropRetrievers, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filter = propFilter.Value,
+			MinScore = propMinScore.Value,
+			RankConstant = propRankConstant.Value,
+			RankWindowSize = propRankWindowSize.Value,
+			Retrievers = propRetrievers.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RRFRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RRFRetrieverConverter))]
 public sealed partial class RRFRetriever
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RRFRetriever(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> retrievers)
+	{
+		Retrievers = retrievers;
+	}
+#if NET7_0_OR_GREATER
+	public RRFRetriever()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RRFRetriever()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -51,7 +142,6 @@ public sealed partial class RRFRetriever
 	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_constant")]
 	public int? RankConstant { get; set; }
 
 	/// <summary>
@@ -59,7 +149,6 @@ public sealed partial class RRFRetriever
 	/// This value determines the size of the individual result sets per query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
@@ -67,71 +156,69 @@ public sealed partial class RRFRetriever
 	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retrievers")]
-	public ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(RRFRetriever rRFRetriever) => Elastic.Clients.Elasticsearch.Retriever.Rrf(rRFRetriever);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
 }
 
-public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDescriptor<RRFRetrieverDescriptor<TDocument>>
+public readonly partial struct RrfRetrieverDescriptor<TDocument>
 {
-	internal RRFRetrieverDescriptor(Action<RRFRetrieverDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RRFRetriever Instance { get; init; }
 
-	public RRFRetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RrfRetrieverDescriptor(Elastic.Clients.Elasticsearch.RRFRetriever instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int? RankConstantValue { get; set; }
-	private int? RankWindowSizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Retriever> RetrieversValue { get; set; }
-	private Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> RetrieversDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> RetrieversDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>>[] RetrieversDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RrfRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.RRFRetriever instance) => new Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public RRFRetrieverDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
 
-	public RRFRetrieverDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -139,10 +226,10 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor<TDocument> MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -150,10 +237,10 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor<TDocument> RankConstant(int? rankConstant)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> RankConstant(int? value)
 	{
-		RankConstantValue = rankConstant;
-		return Self;
+		Instance.RankConstant = value;
+		return this;
 	}
 
 	/// <summary>
@@ -161,10 +248,10 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	/// This value determines the size of the individual result sets per query.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor<TDocument> RankWindowSize(int? rankWindowSize)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
+		Instance.RankWindowSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -172,186 +259,122 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor<TDocument> Retrievers(ICollection<Elastic.Clients.Elasticsearch.Retriever> retrievers)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> value)
 	{
-		RetrieversDescriptor = null;
-		RetrieversDescriptorAction = null;
-		RetrieversDescriptorActions = null;
-		RetrieversValue = retrievers;
-		return Self;
+		Instance.Retrievers = value;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor<TDocument> Retrievers(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params Elastic.Clients.Elasticsearch.Retriever[] values)
 	{
-		RetrieversValue = null;
-		RetrieversDescriptorAction = null;
-		RetrieversDescriptorActions = null;
-		RetrieversDescriptor = descriptor;
-		return Self;
+		Instance.Retrievers = [.. values];
+		return this;
 	}
 
-	public RRFRetrieverDescriptor<TDocument> Retrievers(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>>[] actions)
 	{
-		RetrieversValue = null;
-		RetrieversDescriptor = null;
-		RetrieversDescriptorActions = null;
-		RetrieversDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Retriever>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Retrievers = items;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor<TDocument> Retrievers(params Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>>[] configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RRFRetriever Build(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>> action)
 	{
-		RetrieversValue = null;
-		RetrieversDescriptor = null;
-		RetrieversDescriptorAction = null;
-		RetrieversDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (RankConstantValue.HasValue)
-		{
-			writer.WritePropertyName("rank_constant");
-			writer.WriteNumberValue(RankConstantValue.Value);
-		}
-
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
-
-		if (RetrieversDescriptor is not null)
-		{
-			writer.WritePropertyName("retrievers");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RetrieversDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RetrieversDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retrievers");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(RetrieversDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RetrieversDescriptorActions is not null)
-		{
-			writer.WritePropertyName("retrievers");
-			writer.WriteStartArray();
-			foreach (var action in RetrieversDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("retrievers");
-			JsonSerializer.Serialize(writer, RetrieversValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFRetrieverDescriptor>
+public readonly partial struct RrfRetrieverDescriptor
 {
-	internal RRFRetrieverDescriptor(Action<RRFRetrieverDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RRFRetriever Instance { get; init; }
 
-	public RRFRetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RrfRetrieverDescriptor(Elastic.Clients.Elasticsearch.RRFRetriever instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int? RankConstantValue { get; set; }
-	private int? RankWindowSizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Retriever> RetrieversValue { get; set; }
-	private Elastic.Clients.Elasticsearch.RetrieverDescriptor RetrieversDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> RetrieversDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor>[] RetrieversDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RrfRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor(Elastic.Clients.Elasticsearch.RRFRetriever instance) => new Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public RRFRetrieverDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -359,10 +382,10 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -370,10 +393,10 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor RankConstant(int? rankConstant)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor RankConstant(int? value)
 	{
-		RankConstantValue = rankConstant;
-		return Self;
+		Instance.RankConstant = value;
+		return this;
 	}
 
 	/// <summary>
@@ -381,10 +404,10 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	/// This value determines the size of the individual result sets per query.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor RankWindowSize(int? rankWindowSize)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor RankWindowSize(int? value)
 	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
+		Instance.RankWindowSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -392,123 +415,62 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
 	/// </para>
 	/// </summary>
-	public RRFRetrieverDescriptor Retrievers(ICollection<Elastic.Clients.Elasticsearch.Retriever> retrievers)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> value)
 	{
-		RetrieversDescriptor = null;
-		RetrieversDescriptorAction = null;
-		RetrieversDescriptorActions = null;
-		RetrieversValue = retrievers;
-		return Self;
+		Instance.Retrievers = value;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor Retrievers(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(params Elastic.Clients.Elasticsearch.Retriever[] values)
 	{
-		RetrieversValue = null;
-		RetrieversDescriptorAction = null;
-		RetrieversDescriptorActions = null;
-		RetrieversDescriptor = descriptor;
-		return Self;
+		Instance.Retrievers = [.. values];
+		return this;
 	}
 
-	public RRFRetrieverDescriptor Retrievers(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(params System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor>[] actions)
 	{
-		RetrieversValue = null;
-		RetrieversDescriptor = null;
-		RetrieversDescriptorActions = null;
-		RetrieversDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Retriever>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action));
+		}
+
+		Instance.Retrievers = items;
+		return this;
 	}
 
-	public RRFRetrieverDescriptor Retrievers(params Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers<T>(params System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>>[] actions)
 	{
-		RetrieversValue = null;
-		RetrieversDescriptor = null;
-		RetrieversDescriptorAction = null;
-		RetrieversDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Retriever>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action));
+		}
+
+		Instance.Retrievers = items;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RRFRetriever Build(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
-
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (RankConstantValue.HasValue)
-		{
-			writer.WritePropertyName("rank_constant");
-			writer.WriteNumberValue(RankConstantValue.Value);
-		}
-
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
-
-		if (RetrieversDescriptor is not null)
-		{
-			writer.WritePropertyName("retrievers");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RetrieversDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RetrieversDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retrievers");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor(RetrieversDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RetrieversDescriptorActions is not null)
-		{
-			writer.WritePropertyName("retrievers");
-			writer.WriteStartArray();
-			foreach (var action in RetrieversDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("retrievers");
-			JsonSerializer.Serialize(writer, RetrieversValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor(new Elastic.Clients.Elasticsearch.RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

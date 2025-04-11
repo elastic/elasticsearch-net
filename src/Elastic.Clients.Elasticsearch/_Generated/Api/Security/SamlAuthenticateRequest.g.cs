@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlAuthenticateRequestParameters : RequestParameters
+public sealed partial class SamlAuthenticateRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SamlAuthenticateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content");
+	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+
+	public override Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propContent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ids> propIds = default;
+		LocalJsonValue<string?> propRealm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propContent.TryReadProperty(ref reader, options, PropContent, null))
+			{
+				continue;
+			}
+
+			if (propIds.TryReadProperty(ref reader, options, PropIds, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Content = propContent.Value,
+			Ids = propIds.Value,
+			Realm = propRealm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropContent, value.Content, null, null);
+		writer.WriteProperty(options, PropIds, value.Ids, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -68,11 +118,35 @@ public sealed partial class SamlAuthenticateRequestParameters : RequestParameter
 /// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 /// </para>
 /// </summary>
-public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthenticateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestConverter))]
+public sealed partial class SamlAuthenticateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlAuthenticate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlAuthenticateRequest(string content, Elastic.Clients.Elasticsearch.Ids ids)
+	{
+		Content = content;
+		Ids = ids;
+	}
+#if NET7_0_OR_GREATER
+	public SamlAuthenticateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SamlAuthenticateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecuritySamlAuthenticate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -83,23 +157,28 @@ public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthentic
 	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("content")]
-	public string Content { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Content { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ids")]
-	public Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the realm that should authenticate the SAML response. Useful in cases where many SAML realms are defined.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
 	public string? Realm { get; set; }
 }
 
@@ -137,35 +216,33 @@ public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthentic
 /// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 /// </para>
 /// </summary>
-public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescriptor<SamlAuthenticateRequestDescriptor, SamlAuthenticateRequestParameters>
+public readonly partial struct SamlAuthenticateRequestDescriptor
 {
-	internal SamlAuthenticateRequestDescriptor(Action<SamlAuthenticateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlAuthenticateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public SamlAuthenticateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlAuthenticate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.saml_authenticate";
-
-	private string ContentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ids IdsValue { get; set; }
-	private string? RealmValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
 	/// </para>
 	/// </summary>
-	public SamlAuthenticateRequestDescriptor Content(string content)
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Content(string value)
 	{
-		ContentValue = content;
-		return Self;
+		Instance.Content = value;
+		return this;
 	}
 
 	/// <summary>
@@ -173,10 +250,10 @@ public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescripto
 	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
-	public SamlAuthenticateRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids ids)
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids value)
 	{
-		IdsValue = ids;
-		return Self;
+		Instance.Ids = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,25 +261,59 @@ public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescripto
 	/// The name of the realm that should authenticate the SAML response. Useful in cases where many SAML realms are defined.
 	/// </para>
 	/// </summary>
-	public SamlAuthenticateRequestDescriptor Realm(string? realm)
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Realm(string? value)
 	{
-		RealmValue = realm;
-		return Self;
+		Instance.Realm = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("content");
-		writer.WriteStringValue(ContentValue);
-		writer.WritePropertyName("ids");
-		JsonSerializer.Serialize(writer, IdsValue, options);
-		if (!string.IsNullOrEmpty(RealmValue))
-		{
-			writer.WritePropertyName("realm");
-			writer.WriteStringValue(RealmValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

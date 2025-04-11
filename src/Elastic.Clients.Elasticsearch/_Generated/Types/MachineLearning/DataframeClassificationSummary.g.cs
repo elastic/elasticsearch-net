@@ -17,25 +17,112 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeClassificationSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccuracy = System.Text.Json.JsonEncodedText.Encode("accuracy");
+	private static readonly System.Text.Json.JsonEncodedText PropAucRoc = System.Text.Json.JsonEncodedText.Encode("auc_roc");
+	private static readonly System.Text.Json.JsonEncodedText PropMulticlassConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("multiclass_confusion_matrix");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryAccuracy?> propAccuracy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRoc?> propAucRoc = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix?> propMulticlassConfusionMatrix = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision?> propPrecision = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall?> propRecall = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccuracy.TryReadProperty(ref reader, options, PropAccuracy, null))
+			{
+				continue;
+			}
+
+			if (propAucRoc.TryReadProperty(ref reader, options, PropAucRoc, null))
+			{
+				continue;
+			}
+
+			if (propMulticlassConfusionMatrix.TryReadProperty(ref reader, options, PropMulticlassConfusionMatrix, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propRecall.TryReadProperty(ref reader, options, PropRecall, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Accuracy = propAccuracy.Value,
+			AucRoc = propAucRoc.Value,
+			MulticlassConfusionMatrix = propMulticlassConfusionMatrix.Value,
+			Precision = propPrecision.Value,
+			Recall = propRecall.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccuracy, value.Accuracy, null, null);
+		writer.WriteProperty(options, PropAucRoc, value.AucRoc, null, null);
+		writer.WriteProperty(options, PropMulticlassConfusionMatrix, value.MulticlassConfusionMatrix, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropRecall, value.Recall, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryConverter))]
 public sealed partial class DataframeClassificationSummary
 {
+#if NET7_0_OR_GREATER
+	public DataframeClassificationSummary()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeClassificationSummary()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeClassificationSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Accuracy of predictions (per-class and overall).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("accuracy")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryAccuracy? Accuracy { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryAccuracy? Accuracy { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,30 +130,26 @@ public sealed partial class DataframeClassificationSummary
 	/// It is calculated for a specific class (provided as "class_name") treated as positive.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("auc_roc")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRoc? AucRoc { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRoc? AucRoc { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Multiclass confusion matrix.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("multiclass_confusion_matrix")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix? MulticlassConfusionMatrix { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix? MulticlassConfusionMatrix { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Precision of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision? Precision { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision? Precision { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Recall of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("recall")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall? Recall { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall? Recall { get; set; }
 }

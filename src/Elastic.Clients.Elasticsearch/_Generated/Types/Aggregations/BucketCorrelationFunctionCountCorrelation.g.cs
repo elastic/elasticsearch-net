@@ -17,87 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class BucketCorrelationFunctionCountCorrelation
+internal sealed partial class BucketCorrelationFunctionCountCorrelationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation>
 {
-	/// <summary>
-	/// <para>
-	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("indicator")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Indicator { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropIndicator = System.Text.Json.JsonEncodedText.Encode("indicator");
 
-public sealed partial class BucketCorrelationFunctionCountCorrelationDescriptor : SerializableDescriptor<BucketCorrelationFunctionCountCorrelationDescriptor>
-{
-	internal BucketCorrelationFunctionCountCorrelationDescriptor(Action<BucketCorrelationFunctionCountCorrelationDescriptor> configure) => configure.Invoke(this);
-
-	public BucketCorrelationFunctionCountCorrelationDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator> propIndicator = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndicator.TryReadProperty(ref reader, options, PropIndicator, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Indicator = propIndicator.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator IndicatorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor IndicatorDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> IndicatorDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
-	/// </para>
-	/// </summary>
-	public BucketCorrelationFunctionCountCorrelationDescriptor Indicator(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator indicator)
-	{
-		IndicatorDescriptor = null;
-		IndicatorDescriptorAction = null;
-		IndicatorValue = indicator;
-		return Self;
-	}
-
-	public BucketCorrelationFunctionCountCorrelationDescriptor Indicator(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor descriptor)
-	{
-		IndicatorValue = null;
-		IndicatorDescriptorAction = null;
-		IndicatorDescriptor = descriptor;
-		return Self;
-	}
-
-	public BucketCorrelationFunctionCountCorrelationDescriptor Indicator(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> configure)
-	{
-		IndicatorValue = null;
-		IndicatorDescriptor = null;
-		IndicatorDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (IndicatorDescriptor is not null)
-		{
-			writer.WritePropertyName("indicator");
-			JsonSerializer.Serialize(writer, IndicatorDescriptor, options);
-		}
-		else if (IndicatorDescriptorAction is not null)
-		{
-			writer.WritePropertyName("indicator");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor(IndicatorDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("indicator");
-			JsonSerializer.Serialize(writer, IndicatorValue, options);
-		}
-
+		writer.WriteProperty(options, PropIndicator, value.Indicator, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationConverter))]
+public sealed partial class BucketCorrelationFunctionCountCorrelation
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator indicator)
+	{
+		Indicator = indicator;
+	}
+#if NET7_0_OR_GREATER
+	public BucketCorrelationFunctionCountCorrelation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BucketCorrelationFunctionCountCorrelation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Indicator { get; set; }
+}
+
+public readonly partial struct BucketCorrelationFunctionCountCorrelationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionCountCorrelationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionCountCorrelationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor Indicator(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator value)
+	{
+		Instance.Indicator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor Indicator(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> action)
+	{
+		Instance.Indicator = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

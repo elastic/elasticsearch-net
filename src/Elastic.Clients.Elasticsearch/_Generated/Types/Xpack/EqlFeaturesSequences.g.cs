@@ -17,28 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class EqlFeaturesSequencesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSequenceMaxspan = System.Text.Json.JsonEncodedText.Encode("sequence_maxspan");
+	private static readonly System.Text.Json.JsonEncodedText PropSequenceQueriesFiveOrMore = System.Text.Json.JsonEncodedText.Encode("sequence_queries_five_or_more");
+	private static readonly System.Text.Json.JsonEncodedText PropSequenceQueriesFour = System.Text.Json.JsonEncodedText.Encode("sequence_queries_four");
+	private static readonly System.Text.Json.JsonEncodedText PropSequenceQueriesThree = System.Text.Json.JsonEncodedText.Encode("sequence_queries_three");
+	private static readonly System.Text.Json.JsonEncodedText PropSequenceQueriesTwo = System.Text.Json.JsonEncodedText.Encode("sequence_queries_two");
+	private static readonly System.Text.Json.JsonEncodedText PropSequenceUntil = System.Text.Json.JsonEncodedText.Encode("sequence_until");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propSequenceMaxspan = default;
+		LocalJsonValue<int> propSequenceQueriesFiveOrMore = default;
+		LocalJsonValue<int> propSequenceQueriesFour = default;
+		LocalJsonValue<int> propSequenceQueriesThree = default;
+		LocalJsonValue<int> propSequenceQueriesTwo = default;
+		LocalJsonValue<int> propSequenceUntil = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSequenceMaxspan.TryReadProperty(ref reader, options, PropSequenceMaxspan, null))
+			{
+				continue;
+			}
+
+			if (propSequenceQueriesFiveOrMore.TryReadProperty(ref reader, options, PropSequenceQueriesFiveOrMore, null))
+			{
+				continue;
+			}
+
+			if (propSequenceQueriesFour.TryReadProperty(ref reader, options, PropSequenceQueriesFour, null))
+			{
+				continue;
+			}
+
+			if (propSequenceQueriesThree.TryReadProperty(ref reader, options, PropSequenceQueriesThree, null))
+			{
+				continue;
+			}
+
+			if (propSequenceQueriesTwo.TryReadProperty(ref reader, options, PropSequenceQueriesTwo, null))
+			{
+				continue;
+			}
+
+			if (propSequenceUntil.TryReadProperty(ref reader, options, PropSequenceUntil, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			SequenceMaxspan = propSequenceMaxspan.Value,
+			SequenceQueriesFiveOrMore = propSequenceQueriesFiveOrMore.Value,
+			SequenceQueriesFour = propSequenceQueriesFour.Value,
+			SequenceQueriesThree = propSequenceQueriesThree.Value,
+			SequenceQueriesTwo = propSequenceQueriesTwo.Value,
+			SequenceUntil = propSequenceUntil.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSequenceMaxspan, value.SequenceMaxspan, null, null);
+		writer.WriteProperty(options, PropSequenceQueriesFiveOrMore, value.SequenceQueriesFiveOrMore, null, null);
+		writer.WriteProperty(options, PropSequenceQueriesFour, value.SequenceQueriesFour, null, null);
+		writer.WriteProperty(options, PropSequenceQueriesThree, value.SequenceQueriesThree, null, null);
+		writer.WriteProperty(options, PropSequenceQueriesTwo, value.SequenceQueriesTwo, null, null);
+		writer.WriteProperty(options, PropSequenceUntil, value.SequenceUntil, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequencesConverter))]
 public sealed partial class EqlFeaturesSequences
 {
-	[JsonInclude, JsonPropertyName("sequence_maxspan")]
-	public int SequenceMaxspan { get; init; }
-	[JsonInclude, JsonPropertyName("sequence_queries_five_or_more")]
-	public int SequenceQueriesFiveOrMore { get; init; }
-	[JsonInclude, JsonPropertyName("sequence_queries_four")]
-	public int SequenceQueriesFour { get; init; }
-	[JsonInclude, JsonPropertyName("sequence_queries_three")]
-	public int SequenceQueriesThree { get; init; }
-	[JsonInclude, JsonPropertyName("sequence_queries_two")]
-	public int SequenceQueriesTwo { get; init; }
-	[JsonInclude, JsonPropertyName("sequence_until")]
-	public int SequenceUntil { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EqlFeaturesSequences(int sequenceMaxspan, int sequenceQueriesFiveOrMore, int sequenceQueriesFour, int sequenceQueriesThree, int sequenceQueriesTwo, int sequenceUntil)
+	{
+		SequenceMaxspan = sequenceMaxspan;
+		SequenceQueriesFiveOrMore = sequenceQueriesFiveOrMore;
+		SequenceQueriesFour = sequenceQueriesFour;
+		SequenceQueriesThree = sequenceQueriesThree;
+		SequenceQueriesTwo = sequenceQueriesTwo;
+		SequenceUntil = sequenceUntil;
+	}
+#if NET7_0_OR_GREATER
+	public EqlFeaturesSequences()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EqlFeaturesSequences()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EqlFeaturesSequences(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int SequenceMaxspan { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int SequenceQueriesFiveOrMore { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int SequenceQueriesFour { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int SequenceQueriesThree { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int SequenceQueriesTwo { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int SequenceUntil { get; set; }
 }

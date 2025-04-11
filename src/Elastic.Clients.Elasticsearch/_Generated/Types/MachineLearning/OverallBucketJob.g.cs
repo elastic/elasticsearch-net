@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class OverallBucketJobConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnomalyScore = System.Text.Json.JsonEncodedText.Encode("max_anomaly_score");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<double> propMaxAnomalyScore = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propMaxAnomalyScore.TryReadProperty(ref reader, options, PropMaxAnomalyScore, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			JobId = propJobId.Value,
+			MaxAnomalyScore = propMaxAnomalyScore.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropMaxAnomalyScore, value.MaxAnomalyScore, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJobConverter))]
 public sealed partial class OverallBucketJob
 {
-	[JsonInclude, JsonPropertyName("job_id")]
-	public string JobId { get; init; }
-	[JsonInclude, JsonPropertyName("max_anomaly_score")]
-	public double MaxAnomalyScore { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OverallBucketJob(string jobId, double maxAnomalyScore)
+	{
+		JobId = jobId;
+		MaxAnomalyScore = maxAnomalyScore;
+	}
+#if NET7_0_OR_GREATER
+	public OverallBucketJob()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public OverallBucketJob()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal OverallBucketJob(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string JobId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double MaxAnomalyScore { get; set; }
 }

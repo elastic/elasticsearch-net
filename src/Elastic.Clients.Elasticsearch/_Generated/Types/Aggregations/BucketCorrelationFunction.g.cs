@@ -17,87 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class BucketCorrelationFunction
+internal sealed partial class BucketCorrelationFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction>
 {
-	/// <summary>
-	/// <para>
-	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("count_correlation")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelation { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropCountCorrelation = System.Text.Json.JsonEncodedText.Encode("count_correlation");
 
-public sealed partial class BucketCorrelationFunctionDescriptor : SerializableDescriptor<BucketCorrelationFunctionDescriptor>
-{
-	internal BucketCorrelationFunctionDescriptor(Action<BucketCorrelationFunctionDescriptor> configure) => configure.Invoke(this);
-
-	public BucketCorrelationFunctionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation> propCountCorrelation = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCountCorrelation.TryReadProperty(ref reader, options, PropCountCorrelation, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CountCorrelation = propCountCorrelation.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor CountCorrelationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor> CountCorrelationDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
-	/// </para>
-	/// </summary>
-	public BucketCorrelationFunctionDescriptor CountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation countCorrelation)
-	{
-		CountCorrelationDescriptor = null;
-		CountCorrelationDescriptorAction = null;
-		CountCorrelationValue = countCorrelation;
-		return Self;
-	}
-
-	public BucketCorrelationFunctionDescriptor CountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor descriptor)
-	{
-		CountCorrelationValue = null;
-		CountCorrelationDescriptorAction = null;
-		CountCorrelationDescriptor = descriptor;
-		return Self;
-	}
-
-	public BucketCorrelationFunctionDescriptor CountCorrelation(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor> configure)
-	{
-		CountCorrelationValue = null;
-		CountCorrelationDescriptor = null;
-		CountCorrelationDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (CountCorrelationDescriptor is not null)
-		{
-			writer.WritePropertyName("count_correlation");
-			JsonSerializer.Serialize(writer, CountCorrelationDescriptor, options);
-		}
-		else if (CountCorrelationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("count_correlation");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor(CountCorrelationDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("count_correlation");
-			JsonSerializer.Serialize(writer, CountCorrelationValue, options);
-		}
-
+		writer.WriteProperty(options, PropCountCorrelation, value.CountCorrelation, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionConverter))]
+public sealed partial class BucketCorrelationFunction
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation countCorrelation)
+	{
+		CountCorrelation = countCorrelation;
+	}
+#if NET7_0_OR_GREATER
+	public BucketCorrelationFunction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BucketCorrelationFunction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelation { get; set; }
+}
+
+public readonly partial struct BucketCorrelationFunctionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketCorrelationFunctionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor CountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation value)
+	{
+		Instance.CountCorrelation = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor CountCorrelation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor> action)
+	{
+		Instance.CountCorrelation = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

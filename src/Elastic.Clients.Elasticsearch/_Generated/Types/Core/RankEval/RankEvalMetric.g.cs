@@ -17,257 +17,226 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+internal sealed partial class RankEvalMetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDcg = System.Text.Json.JsonEncodedText.Encode("dcg");
+	private static readonly System.Text.Json.JsonEncodedText PropExpectedReciprocalRank = System.Text.Json.JsonEncodedText.Encode("expected_reciprocal_rank");
+	private static readonly System.Text.Json.JsonEncodedText PropMeanReciprocalRank = System.Text.Json.JsonEncodedText.Encode("mean_reciprocal_rank");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain?> propDcg = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank?> propExpectedReciprocalRank = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank?> propMeanReciprocalRank = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision?> propPrecision = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall?> propRecall = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDcg.TryReadProperty(ref reader, options, PropDcg, null))
+			{
+				continue;
+			}
+
+			if (propExpectedReciprocalRank.TryReadProperty(ref reader, options, PropExpectedReciprocalRank, null))
+			{
+				continue;
+			}
+
+			if (propMeanReciprocalRank.TryReadProperty(ref reader, options, PropMeanReciprocalRank, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propRecall.TryReadProperty(ref reader, options, PropRecall, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dcg = propDcg.Value,
+			ExpectedReciprocalRank = propExpectedReciprocalRank.Value,
+			MeanReciprocalRank = propMeanReciprocalRank.Value,
+			Precision = propPrecision.Value,
+			Recall = propRecall.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDcg, value.Dcg, null, null);
+		writer.WriteProperty(options, PropExpectedReciprocalRank, value.ExpectedReciprocalRank, null, null);
+		writer.WriteProperty(options, PropMeanReciprocalRank, value.MeanReciprocalRank, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropRecall, value.Recall, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricConverter))]
 public sealed partial class RankEvalMetric
 {
-	[JsonInclude, JsonPropertyName("dcg")]
+#if NET7_0_OR_GREATER
+	public RankEvalMetric()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RankEvalMetric()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
-	[JsonInclude, JsonPropertyName("expected_reciprocal_rank")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
-	[JsonInclude, JsonPropertyName("mean_reciprocal_rank")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
-	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? Precision { get; set; }
-	[JsonInclude, JsonPropertyName("recall")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? Recall { get; set; }
 }
 
-public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<RankEvalMetricDescriptor>
+public readonly partial struct RankEvalMetricDescriptor
 {
-	internal RankEvalMetricDescriptor(Action<RankEvalMetricDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric Instance { get; init; }
 
-	public RankEvalMetricDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? DcgValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor DcgDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor> DcgDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRankValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor ExpectedReciprocalRankDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor> ExpectedReciprocalRankDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRankValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor MeanReciprocalRankDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor> MeanReciprocalRankDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? PrecisionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor PrecisionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor> PrecisionDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? RecallValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor RecallDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor> RecallDescriptorAction { get; set; }
-
-	public RankEvalMetricDescriptor Dcg(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? dcg)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricDescriptor()
 	{
-		DcgDescriptor = null;
-		DcgDescriptorAction = null;
-		DcgValue = dcg;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RankEvalMetricDescriptor Dcg(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Dcg(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? value)
 	{
-		DcgValue = null;
-		DcgDescriptorAction = null;
-		DcgDescriptor = descriptor;
-		return Self;
+		Instance.Dcg = value;
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Dcg(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Dcg()
 	{
-		DcgValue = null;
-		DcgDescriptor = null;
-		DcgDescriptorAction = configure;
-		return Self;
+		Instance.Dcg = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor.Build(null);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor ExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? expectedReciprocalRank)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Dcg(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor>? action)
 	{
-		ExpectedReciprocalRankDescriptor = null;
-		ExpectedReciprocalRankDescriptorAction = null;
-		ExpectedReciprocalRankValue = expectedReciprocalRank;
-		return Self;
+		Instance.Dcg = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor.Build(action);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor ExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor ExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? value)
 	{
-		ExpectedReciprocalRankValue = null;
-		ExpectedReciprocalRankDescriptorAction = null;
-		ExpectedReciprocalRankDescriptor = descriptor;
-		return Self;
+		Instance.ExpectedReciprocalRank = value;
+		return this;
 	}
 
-	public RankEvalMetricDescriptor ExpectedReciprocalRank(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor ExpectedReciprocalRank(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor> action)
 	{
-		ExpectedReciprocalRankValue = null;
-		ExpectedReciprocalRankDescriptor = null;
-		ExpectedReciprocalRankDescriptorAction = configure;
-		return Self;
+		Instance.ExpectedReciprocalRank = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor.Build(action);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor MeanReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? meanReciprocalRank)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor MeanReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? value)
 	{
-		MeanReciprocalRankDescriptor = null;
-		MeanReciprocalRankDescriptorAction = null;
-		MeanReciprocalRankValue = meanReciprocalRank;
-		return Self;
+		Instance.MeanReciprocalRank = value;
+		return this;
 	}
 
-	public RankEvalMetricDescriptor MeanReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor MeanReciprocalRank()
 	{
-		MeanReciprocalRankValue = null;
-		MeanReciprocalRankDescriptorAction = null;
-		MeanReciprocalRankDescriptor = descriptor;
-		return Self;
+		Instance.MeanReciprocalRank = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor.Build(null);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor MeanReciprocalRank(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor MeanReciprocalRank(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor>? action)
 	{
-		MeanReciprocalRankValue = null;
-		MeanReciprocalRankDescriptor = null;
-		MeanReciprocalRankDescriptorAction = configure;
-		return Self;
+		Instance.MeanReciprocalRank = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor.Build(action);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Precision(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? precision)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Precision(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? value)
 	{
-		PrecisionDescriptor = null;
-		PrecisionDescriptorAction = null;
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Precision(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Precision()
 	{
-		PrecisionValue = null;
-		PrecisionDescriptorAction = null;
-		PrecisionDescriptor = descriptor;
-		return Self;
+		Instance.Precision = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor.Build(null);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Precision(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor>? action)
 	{
-		PrecisionValue = null;
-		PrecisionDescriptor = null;
-		PrecisionDescriptorAction = configure;
-		return Self;
+		Instance.Precision = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor.Build(action);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Recall(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? recall)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Recall(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? value)
 	{
-		RecallDescriptor = null;
-		RecallDescriptorAction = null;
-		RecallValue = recall;
-		return Self;
+		Instance.Recall = value;
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Recall(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Recall()
 	{
-		RecallValue = null;
-		RecallDescriptorAction = null;
-		RecallDescriptor = descriptor;
-		return Self;
+		Instance.Recall = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor.Build(null);
+		return this;
 	}
 
-	public RankEvalMetricDescriptor Recall(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor>? action)
 	{
-		RecallValue = null;
-		RecallDescriptor = null;
-		RecallDescriptorAction = configure;
-		return Self;
+		Instance.Recall = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DcgDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("dcg");
-			JsonSerializer.Serialize(writer, DcgDescriptor, options);
-		}
-		else if (DcgDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dcg");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(DcgDescriptorAction), options);
-		}
-		else if (DcgValue is not null)
-		{
-			writer.WritePropertyName("dcg");
-			JsonSerializer.Serialize(writer, DcgValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ExpectedReciprocalRankDescriptor is not null)
-		{
-			writer.WritePropertyName("expected_reciprocal_rank");
-			JsonSerializer.Serialize(writer, ExpectedReciprocalRankDescriptor, options);
-		}
-		else if (ExpectedReciprocalRankDescriptorAction is not null)
-		{
-			writer.WritePropertyName("expected_reciprocal_rank");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(ExpectedReciprocalRankDescriptorAction), options);
-		}
-		else if (ExpectedReciprocalRankValue is not null)
-		{
-			writer.WritePropertyName("expected_reciprocal_rank");
-			JsonSerializer.Serialize(writer, ExpectedReciprocalRankValue, options);
-		}
-
-		if (MeanReciprocalRankDescriptor is not null)
-		{
-			writer.WritePropertyName("mean_reciprocal_rank");
-			JsonSerializer.Serialize(writer, MeanReciprocalRankDescriptor, options);
-		}
-		else if (MeanReciprocalRankDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mean_reciprocal_rank");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor(MeanReciprocalRankDescriptorAction), options);
-		}
-		else if (MeanReciprocalRankValue is not null)
-		{
-			writer.WritePropertyName("mean_reciprocal_rank");
-			JsonSerializer.Serialize(writer, MeanReciprocalRankValue, options);
-		}
-
-		if (PrecisionDescriptor is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionDescriptor, options);
-		}
-		else if (PrecisionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor(PrecisionDescriptorAction), options);
-		}
-		else if (PrecisionValue is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionValue, options);
-		}
-
-		if (RecallDescriptor is not null)
-		{
-			writer.WritePropertyName("recall");
-			JsonSerializer.Serialize(writer, RecallDescriptor, options);
-		}
-		else if (RecallDescriptorAction is not null)
-		{
-			writer.WritePropertyName("recall");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(RecallDescriptorAction), options);
-		}
-		else if (RecallValue is not null)
-		{
-			writer.WritePropertyName("recall");
-			JsonSerializer.Serialize(writer, RecallValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

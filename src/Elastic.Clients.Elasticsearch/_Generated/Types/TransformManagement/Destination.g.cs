@@ -17,18 +17,79 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class DestinationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Destination>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.Destination Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<string?> propPipeline = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPipeline.TryReadProperty(ref reader, options, PropPipeline, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			Pipeline = propPipeline.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Destination value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.DestinationConverter))]
 public sealed partial class Destination
 {
+#if NET7_0_OR_GREATER
+	public Destination()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Destination()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The destination index for the transform. The mappings of the destination index are deduced based on the source
@@ -36,7 +97,6 @@ public sealed partial class Destination
 	/// transform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -44,20 +104,27 @@ public sealed partial class Destination
 	/// The unique identifier for an ingest pipeline.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
 }
 
-public sealed partial class DestinationDescriptor : SerializableDescriptor<DestinationDescriptor>
+public readonly partial struct DestinationDescriptor
 {
-	internal DestinationDescriptor(Action<DestinationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Destination Instance { get; init; }
 
-	public DestinationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DestinationDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Destination instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private string? PipelineValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DestinationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Destination instance) => new Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -66,10 +133,10 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	/// transform.
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -77,27 +144,22 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	/// The unique identifier for an ingest pipeline.
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor Pipeline(string? pipeline)
+	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Pipeline(string? value)
 	{
-		PipelineValue = pipeline;
-		return Self;
+		Instance.Pipeline = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Destination Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IndexValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
+			return new Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(PipelineValue))
-		{
-			writer.WritePropertyName("pipeline");
-			writer.WriteStringValue(PipelineValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

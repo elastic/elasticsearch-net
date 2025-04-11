@@ -17,37 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class EvaluateDataFrameRequestParameters : RequestParameters
+public sealed partial class EvaluateDataFrameRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class EvaluateDataFrameRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEvaluation = System.Text.Json.JsonEncodedText.Encode("evaluation");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation> propEvaluation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEvaluation.TryReadProperty(ref reader, options, PropEvaluation, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Evaluation = propEvaluation.Value,
+			Index = propIndex.Value,
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEvaluation, value.Evaluation, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
+/// </para>
+/// <para>
 /// The API packages together commonly used evaluation metrics for various types
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth
 /// field and an analytics result field to be present.
 /// </para>
 /// </summary>
-public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateDataFrameRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestConverter))]
+public sealed partial class EvaluateDataFrameRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEvaluateDataFrame;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation evaluation, Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Evaluation = evaluation;
+		Index = index;
+	}
+#if NET7_0_OR_GREATER
+	public EvaluateDataFrameRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EvaluateDataFrameRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningEvaluateDataFrame;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -58,86 +134,91 @@ public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateData
 	/// Defines the type of evaluation you want to perform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("evaluation")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation Evaluation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation Evaluation { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines the <c>index</c> in which the evaluation will be performed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
+/// </para>
+/// <para>
 /// The API packages together commonly used evaluation metrics for various types
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth
 /// field and an analytics result field to be present.
 /// </para>
 /// </summary>
-public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : RequestDescriptor<EvaluateDataFrameRequestDescriptor<TDocument>, EvaluateDataFrameRequestParameters>
+public readonly partial struct EvaluateDataFrameRequestDescriptor
 {
-	internal EvaluateDataFrameRequestDescriptor(Action<EvaluateDataFrameRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EvaluateDataFrameRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EvaluateDataFrameRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEvaluateDataFrame;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.evaluate_data_frame";
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation EvaluationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> EvaluationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>> EvaluationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Defines the type of evaluation you want to perform.
 	/// </para>
 	/// </summary>
-	public EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation evaluation)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation value)
 	{
-		EvaluationDescriptor = null;
-		EvaluationDescriptorAction = null;
-		EvaluationValue = evaluation;
-		return Self;
+		Instance.Evaluation = value;
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the type of evaluation you want to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Evaluation(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor> action)
 	{
-		EvaluationValue = null;
-		EvaluationDescriptorAction = null;
-		EvaluationDescriptor = descriptor;
-		return Self;
+		Instance.Evaluation = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor.Build(action);
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the type of evaluation you want to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Evaluation<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<T>> action)
 	{
-		EvaluationValue = null;
-		EvaluationDescriptor = null;
-		EvaluationDescriptorAction = configure;
-		return Self;
+		Instance.Evaluation = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -145,10 +226,10 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 	/// Defines the <c>index</c> in which the evaluation will be performed.
 	/// </para>
 	/// </summary>
-	public EvaluateDataFrameRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -156,131 +237,134 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
-	public EvaluateDataFrameRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (EvaluationDescriptor is not null)
-		{
-			writer.WritePropertyName("evaluation");
-			JsonSerializer.Serialize(writer, EvaluationDescriptor, options);
-		}
-		else if (EvaluationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("evaluation");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>(EvaluationDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("evaluation");
-			JsonSerializer.Serialize(writer, EvaluationValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
+/// </para>
+/// <para>
 /// The API packages together commonly used evaluation metrics for various types
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth
 /// field and an analytics result field to be present.
 /// </para>
 /// </summary>
-public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescriptor<EvaluateDataFrameRequestDescriptor, EvaluateDataFrameRequestParameters>
+public readonly partial struct EvaluateDataFrameRequestDescriptor<TDocument>
 {
-	internal EvaluateDataFrameRequestDescriptor(Action<EvaluateDataFrameRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EvaluateDataFrameRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EvaluateDataFrameRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEvaluateDataFrame;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.evaluate_data_frame";
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation EvaluationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor EvaluationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor> EvaluationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Defines the type of evaluation you want to perform.
 	/// </para>
 	/// </summary>
-	public EvaluateDataFrameRequestDescriptor Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation evaluation)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation value)
 	{
-		EvaluationDescriptor = null;
-		EvaluationDescriptorAction = null;
-		EvaluationValue = evaluation;
-		return Self;
+		Instance.Evaluation = value;
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the type of evaluation you want to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>> action)
 	{
-		EvaluationValue = null;
-		EvaluationDescriptorAction = null;
-		EvaluationDescriptor = descriptor;
-		return Self;
-	}
-
-	public EvaluateDataFrameRequestDescriptor Evaluation(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor> configure)
-	{
-		EvaluationValue = null;
-		EvaluationDescriptor = null;
-		EvaluationDescriptorAction = configure;
-		return Self;
+		Instance.Evaluation = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -288,10 +372,10 @@ public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescript
 	/// Defines the <c>index</c> in which the evaluation will be performed.
 	/// </para>
 	/// </summary>
-	public EvaluateDataFrameRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -299,67 +383,70 @@ public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescript
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
-	public EvaluateDataFrameRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public EvaluateDataFrameRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (EvaluationDescriptor is not null)
-		{
-			writer.WritePropertyName("evaluation");
-			JsonSerializer.Serialize(writer, EvaluationDescriptor, options);
-		}
-		else if (EvaluationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("evaluation");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor(EvaluationDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("evaluation");
-			JsonSerializer.Serialize(writer, EvaluationValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

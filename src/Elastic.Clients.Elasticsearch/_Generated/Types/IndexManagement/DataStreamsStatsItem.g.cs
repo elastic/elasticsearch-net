@@ -17,33 +17,136 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class DataStreamsStatsItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream");
+	private static readonly System.Text.Json.JsonEncodedText PropMaximumTimestamp = System.Text.Json.JsonEncodedText.Encode("maximum_timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropStoreSize = System.Text.Json.JsonEncodedText.Encode("store_size");
+	private static readonly System.Text.Json.JsonEncodedText PropStoreSizeBytes = System.Text.Json.JsonEncodedText.Encode("store_size_bytes");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propBackingIndices = default;
+		LocalJsonValue<string> propDataStream = default;
+		LocalJsonValue<System.DateTimeOffset> propMaximumTimestamp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propStoreSize = default;
+		LocalJsonValue<long> propStoreSizeBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackingIndices.TryReadProperty(ref reader, options, PropBackingIndices, null))
+			{
+				continue;
+			}
+
+			if (propDataStream.TryReadProperty(ref reader, options, PropDataStream, null))
+			{
+				continue;
+			}
+
+			if (propMaximumTimestamp.TryReadProperty(ref reader, options, PropMaximumTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propStoreSize.TryReadProperty(ref reader, options, PropStoreSize, null))
+			{
+				continue;
+			}
+
+			if (propStoreSizeBytes.TryReadProperty(ref reader, options, PropStoreSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BackingIndices = propBackingIndices.Value,
+			DataStream = propDataStream.Value,
+			MaximumTimestamp = propMaximumTimestamp.Value,
+			StoreSize = propStoreSize.Value,
+			StoreSizeBytes = propStoreSizeBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, null);
+		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
+		writer.WriteProperty(options, PropMaximumTimestamp, value.MaximumTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStoreSize, value.StoreSize, null, null);
+		writer.WriteProperty(options, PropStoreSizeBytes, value.StoreSizeBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItemConverter))]
 public sealed partial class DataStreamsStatsItem
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamsStatsItem(int backingIndices, string dataStream, System.DateTimeOffset maximumTimestamp, long storeSizeBytes)
+	{
+		BackingIndices = backingIndices;
+		DataStream = dataStream;
+		MaximumTimestamp = maximumTimestamp;
+		StoreSizeBytes = storeSizeBytes;
+	}
+#if NET7_0_OR_GREATER
+	public DataStreamsStatsItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataStreamsStatsItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataStreamsStatsItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Current number of backing indices for the data stream.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("backing_indices")]
-	public int BackingIndices { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int BackingIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the data stream.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_stream")]
-	public string DataStream { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string DataStream { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -54,8 +157,11 @@ public sealed partial class DataStreamsStatsItem
 	/// Backing indices with a lower generation contain higher <c>@timestamp</c> values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("maximum_timestamp")]
-	public long MaximumTimestamp { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset MaximumTimestamp { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -63,14 +169,16 @@ public sealed partial class DataStreamsStatsItem
 	/// This parameter is only returned if the <c>human</c> query parameter is <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("store_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? StoreSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? StoreSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size, in bytes, of all shards for the data stream’s backing indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("store_size_bytes")]
-	public long StoreSizeBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long StoreSizeBytes { get; set; }
 }

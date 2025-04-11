@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public sealed partial class PostStartTrialRequestParameters : RequestParameters
+public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,7 +31,43 @@ public sealed partial class PostStartTrialRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
+}
+
+internal sealed partial class PostStartTrialRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest>
+{
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -54,11 +83,28 @@ public sealed partial class PostStartTrialRequestParameters : RequestParameters
 /// To check the status of your trial, use the get trial status API.
 /// </para>
 /// </summary>
-public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestConverter))]
+public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPostStartTrial;
+#if NET7_0_OR_GREATER
+	public PostStartTrialRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PostStartTrialRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PostStartTrialRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.LicenseManagementPostStartTrial;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -69,9 +115,14 @@ public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialR
 	/// whether the user has acknowledged acknowledge messages (default: false)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
 }
 
@@ -88,26 +139,104 @@ public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialR
 /// To check the status of your trial, use the get trial status API.
 /// </para>
 /// </summary>
-public sealed partial class PostStartTrialRequestDescriptor : RequestDescriptor<PostStartTrialRequestDescriptor, PostStartTrialRequestParameters>
+public readonly partial struct PostStartTrialRequestDescriptor
 {
-	internal PostStartTrialRequestDescriptor(Action<PostStartTrialRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PostStartTrialRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public PostStartTrialRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPostStartTrial;
+	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "license.post_start_trial";
-
-	public PostStartTrialRequestDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
-	public PostStartTrialRequestDescriptor TypeQueryString(string? typeQueryString) => Qs("type_query_string", typeQueryString);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Acknowledge(bool? value = true)
 	{
+		Instance.Acknowledge = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor TypeQueryString(string? value)
+	{
+		Instance.TypeQueryString = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest Build(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor(new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

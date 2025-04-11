@@ -17,65 +17,201 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterJvmVersionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBundledJdk = System.Text.Json.JsonEncodedText.Encode("bundled_jdk");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name");
+	private static readonly System.Text.Json.JsonEncodedText PropVmVendor = System.Text.Json.JsonEncodedText.Encode("vm_vendor");
+	private static readonly System.Text.Json.JsonEncodedText PropVmVersion = System.Text.Json.JsonEncodedText.Encode("vm_version");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propBundledJdk = default;
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<bool> propUsingBundledJdk = default;
+		LocalJsonValue<string> propVersion = default;
+		LocalJsonValue<string> propVmName = default;
+		LocalJsonValue<string> propVmVendor = default;
+		LocalJsonValue<string> propVmVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBundledJdk.TryReadProperty(ref reader, options, PropBundledJdk, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (propVmName.TryReadProperty(ref reader, options, PropVmName, null))
+			{
+				continue;
+			}
+
+			if (propVmVendor.TryReadProperty(ref reader, options, PropVmVendor, null))
+			{
+				continue;
+			}
+
+			if (propVmVersion.TryReadProperty(ref reader, options, PropVmVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BundledJdk = propBundledJdk.Value,
+			Count = propCount.Value,
+			UsingBundledJdk = propUsingBundledJdk.Value,
+			Version = propVersion.Value,
+			VmName = propVmName.Value,
+			VmVendor = propVmVendor.Value,
+			VmVersion = propVmVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBundledJdk, value.BundledJdk, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropUsingBundledJdk, value.UsingBundledJdk, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVmName, value.VmName, null, null);
+		writer.WriteProperty(options, PropVmVendor, value.VmVendor, null, null);
+		writer.WriteProperty(options, PropVmVersion, value.VmVersion, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersionConverter))]
 public sealed partial class ClusterJvmVersion
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterJvmVersion(bool bundledJdk, int count, bool usingBundledJdk, string version, string vmName, string vmVendor, string vmVersion)
+	{
+		BundledJdk = bundledJdk;
+		Count = count;
+		UsingBundledJdk = usingBundledJdk;
+		Version = version;
+		VmName = vmName;
+		VmVendor = vmVendor;
+		VmVersion = vmVersion;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterJvmVersion()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterJvmVersion()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterJvmVersion(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Always <c>true</c>. All distributions come with a bundled Java Development Kit (JDK).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("bundled_jdk")]
-	public bool BundledJdk { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool BundledJdk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of selected nodes using JVM.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, a bundled JDK is in use by JVM.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("using_bundled_jdk")]
-	public bool UsingBundledJdk { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool UsingBundledJdk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Version of JVM used by one or more selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
-	public string Version { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Version { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the JVM.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("vm_name")]
-	public string VmName { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string VmName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Vendor of the JVM.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("vm_vendor")]
-	public string VmVendor { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string VmVendor { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,6 +219,9 @@ public sealed partial class ClusterJvmVersion
 	/// The full version number includes a plus sign (+) followed by the build number.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("vm_version")]
-	public string VmVersion { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string VmVersion { get; set; }
 }

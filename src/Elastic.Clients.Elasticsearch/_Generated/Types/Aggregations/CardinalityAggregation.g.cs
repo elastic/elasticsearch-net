@@ -17,24 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class CardinalityAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecisionThreshold = System.Text.Json.JsonEncodedText.Encode("precision_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropRehash = System.Text.Json.JsonEncodedText.Encode("rehash");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode?> propExecutionHint = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<int?> propPrecisionThreshold = default;
+		LocalJsonValue<bool?> propRehash = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propPrecisionThreshold.TryReadProperty(ref reader, options, PropPrecisionThreshold, null))
+			{
+				continue;
+			}
+
+			if (propRehash.TryReadProperty(ref reader, options, PropRehash, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ExecutionHint = propExecutionHint.Value,
+			Field = propField.Value,
+			Missing = propMissing.Value,
+			PrecisionThreshold = propPrecisionThreshold.Value,
+			Rehash = propRehash.Value,
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropPrecisionThreshold, value.PrecisionThreshold, null, null);
+		writer.WriteProperty(options, PropRehash, value.Rehash, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationConverter))]
 public sealed partial class CardinalityAggregation
 {
+#if NET7_0_OR_GREATER
+	public CardinalityAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CardinalityAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Mechanism by which cardinality aggregations is run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHint { get; set; }
 
 	/// <summary>
@@ -42,7 +138,6 @@ public sealed partial class CardinalityAggregation
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -51,8 +146,7 @@ public sealed partial class CardinalityAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
+	public object? Missing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -60,43 +154,39 @@ public sealed partial class CardinalityAggregation
 	/// This allows to trade memory for accuracy.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision_threshold")]
 	public int? PrecisionThreshold { get; set; }
-	[JsonInclude, JsonPropertyName("rehash")]
 	public bool? Rehash { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(CardinalityAggregation cardinalityAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Cardinality(cardinalityAggregation);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(CardinalityAggregation cardinalityAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Cardinality(cardinalityAggregation);
 }
 
-public sealed partial class CardinalityAggregationDescriptor<TDocument> : SerializableDescriptor<CardinalityAggregationDescriptor<TDocument>>
+public readonly partial struct CardinalityAggregationDescriptor<TDocument>
 {
-	internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Instance { get; init; }
 
-	public CardinalityAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CardinalityAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHintValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private int? PrecisionThresholdValue { get; set; }
-	private bool? RehashValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CardinalityAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Mechanism by which cardinality aggregations is run.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? value)
 	{
-		ExecutionHintValue = executionHint;
-		return Self;
+		Instance.ExecutionHint = value;
+		return this;
 	}
 
 	/// <summary>
@@ -104,10 +194,10 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -115,21 +205,10 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public CardinalityAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -138,10 +217,10 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -150,121 +229,78 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	/// This allows to trade memory for accuracy.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? precisionThreshold)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? value)
 	{
-		PrecisionThresholdValue = precisionThreshold;
-		return Self;
+		Instance.PrecisionThreshold = value;
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor<TDocument> Rehash(bool? rehash = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Rehash(bool? value = true)
 	{
-		RehashValue = rehash;
-		return Self;
+		Instance.Rehash = value;
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (ExecutionHintValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("execution_hint");
-			JsonSerializer.Serialize(writer, ExecutionHintValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (PrecisionThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("precision_threshold");
-			writer.WriteNumberValue(PrecisionThresholdValue.Value);
-		}
-
-		if (RehashValue.HasValue)
-		{
-			writer.WritePropertyName("rehash");
-			writer.WriteBooleanValue(RehashValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CardinalityAggregationDescriptor : SerializableDescriptor<CardinalityAggregationDescriptor>
+public readonly partial struct CardinalityAggregationDescriptor
 {
-	internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Instance { get; init; }
 
-	public CardinalityAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CardinalityAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHintValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private int? PrecisionThresholdValue { get; set; }
-	private bool? RehashValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CardinalityAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Mechanism by which cardinality aggregations is run.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? value)
 	{
-		ExecutionHintValue = executionHint;
-		return Self;
+		Instance.ExecutionHint = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,10 +308,10 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -283,21 +319,10 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public CardinalityAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -306,10 +331,10 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -318,91 +343,46 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	/// This allows to trade memory for accuracy.
 	/// </para>
 	/// </summary>
-	public CardinalityAggregationDescriptor PrecisionThreshold(int? precisionThreshold)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor PrecisionThreshold(int? value)
 	{
-		PrecisionThresholdValue = precisionThreshold;
-		return Self;
+		Instance.PrecisionThreshold = value;
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor Rehash(bool? rehash = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Rehash(bool? value = true)
 	{
-		RehashValue = rehash;
-		return Self;
+		Instance.Rehash = value;
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public CardinalityAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ExecutionHintValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("execution_hint");
-			JsonSerializer.Serialize(writer, ExecutionHintValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (PrecisionThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("precision_threshold");
-			writer.WriteNumberValue(PrecisionThresholdValue.Value);
-		}
-
-		if (RehashValue.HasValue)
-		{
-			writer.WritePropertyName("rehash");
-			writer.WriteBooleanValue(RehashValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

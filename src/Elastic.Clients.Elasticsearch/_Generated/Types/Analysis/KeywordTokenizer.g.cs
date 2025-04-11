@@ -17,74 +17,135 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KeywordTokenizer : ITokenizer
+internal sealed partial class KeywordTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer>
 {
-	[JsonInclude, JsonPropertyName("buffer_size")]
+	private static readonly System.Text.Json.JsonEncodedText PropBufferSize = System.Text.Json.JsonEncodedText.Encode("buffer_size");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propBufferSize = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBufferSize.TryReadProperty(ref reader, options, PropBufferSize, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BufferSize = propBufferSize.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBufferSize, value.BufferSize, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerConverter))]
+public sealed partial class KeywordTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public KeywordTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public KeywordTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KeywordTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? BufferSize { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptor<KeywordTokenizerDescriptor>, IBuildableDescriptor<KeywordTokenizer>
+public readonly partial struct KeywordTokenizerDescriptor
 {
-	internal KeywordTokenizerDescriptor(Action<KeywordTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer Instance { get; init; }
 
-	public KeywordTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeywordTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private int? BufferSizeValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KeywordTokenizerDescriptor BufferSize(int? bufferSize)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeywordTokenizerDescriptor()
 	{
-		BufferSizeValue = bufferSize;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KeywordTokenizerDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor BufferSize(int? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.BufferSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (BufferSizeValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("buffer_size");
-			writer.WriteNumberValue(BufferSizeValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("keyword");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	KeywordTokenizer IBuildableDescriptor<KeywordTokenizer>.Build() => new()
-	{
-		BufferSize = BufferSizeValue,
-		Version = VersionValue
-	};
 }

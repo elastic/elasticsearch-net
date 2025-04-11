@@ -17,18 +17,70 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class MappingLimitSettingsFieldNameLengthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Limit = propLimit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthConverter))]
 public sealed partial class MappingLimitSettingsFieldNameLength
 {
+#if NET7_0_OR_GREATER
+	public MappingLimitSettingsFieldNameLength()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MappingLimitSettingsFieldNameLength()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Setting for the maximum length of a field name. This setting isn’t really something that addresses mappings explosion but
@@ -36,19 +88,27 @@ public sealed partial class MappingLimitSettingsFieldNameLength
 	/// default is okay unless a user starts to add a huge number of fields with really long names. Default is <c>Long.MAX_VALUE</c> (no limit).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
 }
 
-public sealed partial class MappingLimitSettingsFieldNameLengthDescriptor : SerializableDescriptor<MappingLimitSettingsFieldNameLengthDescriptor>
+public readonly partial struct MappingLimitSettingsFieldNameLengthDescriptor
 {
-	internal MappingLimitSettingsFieldNameLengthDescriptor(Action<MappingLimitSettingsFieldNameLengthDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength Instance { get; init; }
 
-	public MappingLimitSettingsFieldNameLengthDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsFieldNameLengthDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength instance)
 	{
+		Instance = instance;
 	}
 
-	private long? LimitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsFieldNameLengthDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -57,21 +117,22 @@ public sealed partial class MappingLimitSettingsFieldNameLengthDescriptor : Seri
 	/// default is okay unless a user starts to add a huge number of fields with really long names. Default is <c>Long.MAX_VALUE</c> (no limit).
 	/// </para>
 	/// </summary>
-	public MappingLimitSettingsFieldNameLengthDescriptor Limit(long? limit)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor Limit(long? value)
 	{
-		LimitValue = limit;
-		return Self;
+		Instance.Limit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (LimitValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("limit");
-			writer.WriteNumberValue(LimitValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

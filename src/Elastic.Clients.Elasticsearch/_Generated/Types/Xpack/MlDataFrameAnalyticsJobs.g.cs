@@ -17,24 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class MlDataFrameAnalyticsJobsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisCounts = System.Text.Json.JsonEncodedText.Encode("analysis_counts");
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryUsage = System.Text.Json.JsonEncodedText.Encode("memory_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount> propAll = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis?> propAnalysisCounts = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory?> propMemoryUsage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount?> propStopped = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
+			{
+				continue;
+			}
+
+			if (propAnalysisCounts.TryReadProperty(ref reader, options, PropAnalysisCounts, null))
+			{
+				continue;
+			}
+
+			if (propMemoryUsage.TryReadProperty(ref reader, options, PropMemoryUsage, null))
+			{
+				continue;
+			}
+
+			if (propStopped.TryReadProperty(ref reader, options, PropStopped, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			All = propAll.Value,
+			AnalysisCounts = propAnalysisCounts.Value,
+			MemoryUsage = propMemoryUsage.Value,
+			Stopped = propStopped.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAll, value.All, null, null);
+		writer.WriteProperty(options, PropAnalysisCounts, value.AnalysisCounts, null, null);
+		writer.WriteProperty(options, PropMemoryUsage, value.MemoryUsage, null, null);
+		writer.WriteProperty(options, PropStopped, value.Stopped, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsConverter))]
 public sealed partial class MlDataFrameAnalyticsJobs
 {
-	[JsonInclude, JsonPropertyName("_all")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount All { get; init; }
-	[JsonInclude, JsonPropertyName("analysis_counts")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis? AnalysisCounts { get; init; }
-	[JsonInclude, JsonPropertyName("memory_usage")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory? MemoryUsage { get; init; }
-	[JsonInclude, JsonPropertyName("stopped")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount? Stopped { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MlDataFrameAnalyticsJobs(Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount all)
+	{
+		All = all;
+	}
+#if NET7_0_OR_GREATER
+	public MlDataFrameAnalyticsJobs()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MlDataFrameAnalyticsJobs()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MlDataFrameAnalyticsJobs(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount All { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis? AnalysisCounts { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory? MemoryUsage { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount? Stopped { get; set; }
 }

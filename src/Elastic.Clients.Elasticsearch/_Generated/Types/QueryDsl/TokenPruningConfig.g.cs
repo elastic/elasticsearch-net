@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class TokenPruningConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropOnlyScorePrunedTokens = System.Text.Json.JsonEncodedText.Encode("only_score_pruned_tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropTokensFreqRatioThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_freq_ratio_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropTokensWeightThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_weight_threshold");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propOnlyScorePrunedTokens = default;
+		LocalJsonValue<int?> propTokensFreqRatioThreshold = default;
+		LocalJsonValue<float?> propTokensWeightThreshold = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propOnlyScorePrunedTokens.TryReadProperty(ref reader, options, PropOnlyScorePrunedTokens, null))
+			{
+				continue;
+			}
+
+			if (propTokensFreqRatioThreshold.TryReadProperty(ref reader, options, PropTokensFreqRatioThreshold, null))
+			{
+				continue;
+			}
+
+			if (propTokensWeightThreshold.TryReadProperty(ref reader, options, PropTokensWeightThreshold, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			OnlyScorePrunedTokens = propOnlyScorePrunedTokens.Value,
+			TokensFreqRatioThreshold = propTokensFreqRatioThreshold.Value,
+			TokensWeightThreshold = propTokensWeightThreshold.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropOnlyScorePrunedTokens, value.OnlyScorePrunedTokens, null, null);
+		writer.WriteProperty(options, PropTokensFreqRatioThreshold, value.TokensFreqRatioThreshold, null, null);
+		writer.WriteProperty(options, PropTokensWeightThreshold, value.TokensWeightThreshold, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigConverter))]
 public sealed partial class TokenPruningConfig
 {
+#if NET7_0_OR_GREATER
+	public TokenPruningConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TokenPruningConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Whether to only score pruned tokens, vs only scoring kept tokens.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("only_score_pruned_tokens")]
 	public bool? OnlyScorePrunedTokens { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class TokenPruningConfig
 	/// Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tokens_freq_ratio_threshold")]
 	public int? TokensFreqRatioThreshold { get; set; }
 
 	/// <summary>
@@ -50,31 +118,37 @@ public sealed partial class TokenPruningConfig
 	/// Tokens whose weight is less than this threshold are considered nonsignificant and pruned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tokens_weight_threshold")]
 	public float? TokensWeightThreshold { get; set; }
 }
 
-public sealed partial class TokenPruningConfigDescriptor : SerializableDescriptor<TokenPruningConfigDescriptor>
+public readonly partial struct TokenPruningConfigDescriptor
 {
-	internal TokenPruningConfigDescriptor(Action<TokenPruningConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig Instance { get; init; }
 
-	public TokenPruningConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TokenPruningConfigDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? OnlyScorePrunedTokensValue { get; set; }
-	private int? TokensFreqRatioThresholdValue { get; set; }
-	private float? TokensWeightThresholdValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TokenPruningConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Whether to only score pruned tokens, vs only scoring kept tokens.
 	/// </para>
 	/// </summary>
-	public TokenPruningConfigDescriptor OnlyScorePrunedTokens(bool? onlyScorePrunedTokens = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor OnlyScorePrunedTokens(bool? value = true)
 	{
-		OnlyScorePrunedTokensValue = onlyScorePrunedTokens;
-		return Self;
+		Instance.OnlyScorePrunedTokens = value;
+		return this;
 	}
 
 	/// <summary>
@@ -82,10 +156,10 @@ public sealed partial class TokenPruningConfigDescriptor : SerializableDescripto
 	/// Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.
 	/// </para>
 	/// </summary>
-	public TokenPruningConfigDescriptor TokensFreqRatioThreshold(int? tokensFreqRatioThreshold)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor TokensFreqRatioThreshold(int? value)
 	{
-		TokensFreqRatioThresholdValue = tokensFreqRatioThreshold;
-		return Self;
+		Instance.TokensFreqRatioThreshold = value;
+		return this;
 	}
 
 	/// <summary>
@@ -93,33 +167,22 @@ public sealed partial class TokenPruningConfigDescriptor : SerializableDescripto
 	/// Tokens whose weight is less than this threshold are considered nonsignificant and pruned.
 	/// </para>
 	/// </summary>
-	public TokenPruningConfigDescriptor TokensWeightThreshold(float? tokensWeightThreshold)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor TokensWeightThreshold(float? value)
 	{
-		TokensWeightThresholdValue = tokensWeightThreshold;
-		return Self;
+		Instance.TokensWeightThreshold = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (OnlyScorePrunedTokensValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("only_score_pruned_tokens");
-			writer.WriteBooleanValue(OnlyScorePrunedTokensValue.Value);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TokensFreqRatioThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("tokens_freq_ratio_threshold");
-			writer.WriteNumberValue(TokensFreqRatioThresholdValue.Value);
-		}
-
-		if (TokensWeightThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("tokens_weight_threshold");
-			writer.WriteNumberValue(TokensWeightThresholdValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

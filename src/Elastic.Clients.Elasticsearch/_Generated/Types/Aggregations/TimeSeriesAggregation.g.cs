@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class TimeSeriesAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propKeyed = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propKeyed.TryReadProperty(ref reader, options, PropKeyed, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Keyed = propKeyed.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropKeyed, value.Keyed, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationConverter))]
 public sealed partial class TimeSeriesAggregation
 {
+#if NET7_0_OR_GREATER
+	public TimeSeriesAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TimeSeriesAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("keyed")]
 	public bool? Keyed { get; set; }
 
 	/// <summary>
@@ -42,32 +102,37 @@ public sealed partial class TimeSeriesAggregation
 	/// The maximum number of results to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TimeSeriesAggregation timeSeriesAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TimeSeries(timeSeriesAggregation);
 }
 
-public sealed partial class TimeSeriesAggregationDescriptor : SerializableDescriptor<TimeSeriesAggregationDescriptor>
+public readonly partial struct TimeSeriesAggregationDescriptor
 {
-	internal TimeSeriesAggregationDescriptor(Action<TimeSeriesAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation Instance { get; init; }
 
-	public TimeSeriesAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSeriesAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? KeyedValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSeriesAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
 	/// </para>
 	/// </summary>
-	public TimeSeriesAggregationDescriptor Keyed(bool? keyed = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor Keyed(bool? value = true)
 	{
-		KeyedValue = keyed;
-		return Self;
+		Instance.Keyed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -75,27 +140,22 @@ public sealed partial class TimeSeriesAggregationDescriptor : SerializableDescri
 	/// The maximum number of results to return.
 	/// </para>
 	/// </summary>
-	public TimeSeriesAggregationDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (KeyedValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("keyed");
-			writer.WriteBooleanValue(KeyedValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

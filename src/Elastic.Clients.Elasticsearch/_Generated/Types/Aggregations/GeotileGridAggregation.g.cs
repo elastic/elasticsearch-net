@@ -17,24 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GeotileGridAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoBounds?> propBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<long?> propPrecision = default;
+		LocalJsonValue<int?> propShardSize = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBounds.TryReadProperty(ref reader, options, PropBounds, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Bounds = propBounds.Value,
+			Field = propField.Value,
+			Precision = propPrecision.Value,
+			ShardSize = propShardSize.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBounds, value.Bounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationConverter))]
 public sealed partial class GeotileGridAggregation
 {
+#if NET7_0_OR_GREATER
+	public GeotileGridAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GeotileGridAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("bounds")]
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
 	/// <summary>
@@ -43,7 +130,6 @@ public sealed partial class GeotileGridAggregation
 	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -52,8 +138,7 @@ public sealed partial class GeotileGridAggregation
 	/// Values outside of the range [0,29] will be rejected.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
-	public double? Precision { get; set; }
+	public long? Precision { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,7 +146,6 @@ public sealed partial class GeotileGridAggregation
 	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
@@ -69,36 +153,48 @@ public sealed partial class GeotileGridAggregation
 	/// The maximum number of buckets to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(GeotileGridAggregation geotileGridAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeotileGrid(geotileGridAggregation);
-	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(GeotileGridAggregation geotileGridAggregation) => Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy.GeotileGrid(geotileGridAggregation);
 }
 
-public sealed partial class GeotileGridAggregationDescriptor<TDocument> : SerializableDescriptor<GeotileGridAggregationDescriptor<TDocument>>
+public readonly partial struct GeotileGridAggregationDescriptor<TDocument>
 {
-	internal GeotileGridAggregationDescriptor(Action<GeotileGridAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Instance { get; init; }
 
-	public GeotileGridAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeotileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private double? PrecisionValue { get; set; }
-	private int? ShardSizeValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeotileGridAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
-		BoundsValue = bounds;
-		return Self;
+		Instance.Bounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -107,10 +203,10 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -119,22 +215,10 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -143,10 +227,10 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 	/// Values outside of the range [0,29] will be rejected.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> Precision(double? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Precision(long? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
 	/// <summary>
@@ -155,10 +239,10 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -166,72 +250,65 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 	/// The maximum number of buckets to return.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (BoundsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("bounds");
-			JsonSerializer.Serialize(writer, BoundsValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeotileGridAggregationDescriptor : SerializableDescriptor<GeotileGridAggregationDescriptor>
+public readonly partial struct GeotileGridAggregationDescriptor
 {
-	internal GeotileGridAggregationDescriptor(Action<GeotileGridAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Instance { get; init; }
 
-	public GeotileGridAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeotileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private double? PrecisionValue { get; set; }
-	private int? ShardSizeValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeotileGridAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
-		BoundsValue = bounds;
-		return Self;
+		Instance.Bounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -240,10 +317,10 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -252,22 +329,10 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
-	public GeotileGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -276,10 +341,10 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 	/// Values outside of the range [0,29] will be rejected.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor Precision(double? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Precision(long? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,10 +353,10 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -299,45 +364,22 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 	/// The maximum number of buckets to return.
 	/// </para>
 	/// </summary>
-	public GeotileGridAggregationDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BoundsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("bounds");
-			JsonSerializer.Serialize(writer, BoundsValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

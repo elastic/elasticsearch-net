@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterJvmMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propHeapMaxInBytes = default;
+		LocalJsonValue<long> propHeapUsedInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHeapMaxInBytes.TryReadProperty(ref reader, options, PropHeapMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (propHeapUsedInBytes.TryReadProperty(ref reader, options, PropHeapUsedInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			HeapMaxInBytes = propHeapMaxInBytes.Value,
+			HeapUsedInBytes = propHeapUsedInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHeapMaxInBytes, value.HeapMaxInBytes, null, null);
+		writer.WriteProperty(options, PropHeapUsedInBytes, value.HeapUsedInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemoryConverter))]
 public sealed partial class ClusterJvmMemory
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterJvmMemory(long heapMaxInBytes, long heapUsedInBytes)
+	{
+		HeapMaxInBytes = heapMaxInBytes;
+		HeapUsedInBytes = heapUsedInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterJvmMemory()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterJvmMemory()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Maximum amount of memory, in bytes, available for use by the heap across all selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("heap_max_in_bytes")]
-	public long HeapMaxInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long HeapMaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Memory, in bytes, currently in use by the heap across all selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("heap_used_in_bytes")]
-	public long HeapUsedInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long HeapUsedInBytes { get; set; }
 }

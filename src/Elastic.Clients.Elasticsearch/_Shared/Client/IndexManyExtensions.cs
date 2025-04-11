@@ -27,7 +27,6 @@ public static class IndexManyExtensions
 	/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="type">Override the inferred typename for T</param>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects)
 		where T : class
 	{
@@ -45,7 +44,6 @@ public static class IndexManyExtensions
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="index">Override the inferred indexname for T</param>
 	/// <param name="type">Override the inferred typename for T</param>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects, IndexName index)
 		where T : class
 	{

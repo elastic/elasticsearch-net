@@ -17,77 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-[JsonConverter(typeof(GroupByConverter))]
+internal sealed partial class GroupByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.GroupBy>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberParents = System.Text.Json.JsonEncodedText.Encode("parents");
+
+	public override Elastic.Clients.Elasticsearch.Tasks.GroupBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberNodes))
+		{
+			return Elastic.Clients.Elasticsearch.Tasks.GroupBy.Nodes;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.Tasks.GroupBy.None;
+		}
+
+		if (reader.ValueTextEquals(MemberParents))
+		{
+			return Elastic.Clients.Elasticsearch.Tasks.GroupBy.Parents;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNodes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Tasks.GroupBy.Nodes;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Tasks.GroupBy.None;
+		}
+
+		if (string.Equals(value, MemberParents.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Tasks.GroupBy.Parents;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Tasks.GroupBy)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Tasks.GroupBy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.Nodes:
+				writer.WriteStringValue(MemberNodes);
+				break;
+			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.Parents:
+				writer.WriteStringValue(MemberParents);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Tasks.GroupBy)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Tasks.GroupBy ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Tasks.GroupBy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.GroupByConverter))]
 public enum GroupBy
 {
-	/// <summary>
-	/// <para>
-	/// Group tasks by parent task ID.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "parents")]
-	Parents,
-	/// <summary>
-	/// <para>
-	/// Do not group tasks.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "none")]
-	None,
 	/// <summary>
 	/// <para>
 	/// Group tasks by node ID.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "nodes")]
-	Nodes
-}
-
-internal sealed class GroupByConverter : JsonConverter<GroupBy>
-{
-	public override GroupBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "parents":
-				return GroupBy.Parents;
-			case "none":
-				return GroupBy.None;
-			case "nodes":
-				return GroupBy.Nodes;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, GroupBy value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case GroupBy.Parents:
-				writer.WriteStringValue("parents");
-				return;
-			case GroupBy.None:
-				writer.WriteStringValue("none");
-				return;
-			case GroupBy.Nodes:
-				writer.WriteStringValue("nodes");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "nodes")]
+	Nodes,
+	/// <summary>
+	/// <para>
+	/// Do not group tasks.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
+	/// <summary>
+	/// <para>
+	/// Group tasks by parent task ID.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "parents")]
+	Parents
 }

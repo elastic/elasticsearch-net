@@ -17,65 +17,192 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class TransportConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Transport>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropInboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("inbound_handling_time_histogram");
+	private static readonly System.Text.Json.JsonEncodedText PropOutboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("outbound_handling_time_histogram");
+	private static readonly System.Text.Json.JsonEncodedText PropRxCount = System.Text.Json.JsonEncodedText.Encode("rx_count");
+	private static readonly System.Text.Json.JsonEncodedText PropRxSize = System.Text.Json.JsonEncodedText.Encode("rx_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("rx_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropServerOpen = System.Text.Json.JsonEncodedText.Encode("server_open");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOutboundConnections = System.Text.Json.JsonEncodedText.Encode("total_outbound_connections");
+	private static readonly System.Text.Json.JsonEncodedText PropTxCount = System.Text.Json.JsonEncodedText.Encode("tx_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTxSize = System.Text.Json.JsonEncodedText.Encode("tx_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("tx_size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Transport Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>?> propInboundHandlingTimeHistogram = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>?> propOutboundHandlingTimeHistogram = default;
+		LocalJsonValue<long?> propRxCount = default;
+		LocalJsonValue<string?> propRxSize = default;
+		LocalJsonValue<long?> propRxSizeInBytes = default;
+		LocalJsonValue<int?> propServerOpen = default;
+		LocalJsonValue<long?> propTotalOutboundConnections = default;
+		LocalJsonValue<long?> propTxCount = default;
+		LocalJsonValue<string?> propTxSize = default;
+		LocalJsonValue<long?> propTxSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propInboundHandlingTimeHistogram.TryReadProperty(ref reader, options, PropInboundHandlingTimeHistogram, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, null)))
+			{
+				continue;
+			}
+
+			if (propOutboundHandlingTimeHistogram.TryReadProperty(ref reader, options, PropOutboundHandlingTimeHistogram, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRxCount.TryReadProperty(ref reader, options, PropRxCount, null))
+			{
+				continue;
+			}
+
+			if (propRxSize.TryReadProperty(ref reader, options, PropRxSize, null))
+			{
+				continue;
+			}
+
+			if (propRxSizeInBytes.TryReadProperty(ref reader, options, PropRxSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propServerOpen.TryReadProperty(ref reader, options, PropServerOpen, null))
+			{
+				continue;
+			}
+
+			if (propTotalOutboundConnections.TryReadProperty(ref reader, options, PropTotalOutboundConnections, null))
+			{
+				continue;
+			}
+
+			if (propTxCount.TryReadProperty(ref reader, options, PropTxCount, null))
+			{
+				continue;
+			}
+
+			if (propTxSize.TryReadProperty(ref reader, options, PropTxSize, null))
+			{
+				continue;
+			}
+
+			if (propTxSizeInBytes.TryReadProperty(ref reader, options, PropTxSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Transport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			InboundHandlingTimeHistogram = propInboundHandlingTimeHistogram.Value,
+			OutboundHandlingTimeHistogram = propOutboundHandlingTimeHistogram.Value,
+			RxCount = propRxCount.Value,
+			RxSize = propRxSize.Value,
+			RxSizeInBytes = propRxSizeInBytes.Value,
+			ServerOpen = propServerOpen.Value,
+			TotalOutboundConnections = propTotalOutboundConnections.Value,
+			TxCount = propTxCount.Value,
+			TxSize = propTxSize.Value,
+			TxSizeInBytes = propTxSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Transport value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropInboundHandlingTimeHistogram, value.InboundHandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, v, null));
+		writer.WriteProperty(options, PropOutboundHandlingTimeHistogram, value.OutboundHandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, v, null));
+		writer.WriteProperty(options, PropRxCount, value.RxCount, null, null);
+		writer.WriteProperty(options, PropRxSize, value.RxSize, null, null);
+		writer.WriteProperty(options, PropRxSizeInBytes, value.RxSizeInBytes, null, null);
+		writer.WriteProperty(options, PropServerOpen, value.ServerOpen, null, null);
+		writer.WriteProperty(options, PropTotalOutboundConnections, value.TotalOutboundConnections, null, null);
+		writer.WriteProperty(options, PropTxCount, value.TxCount, null, null);
+		writer.WriteProperty(options, PropTxSize, value.TxSize, null, null);
+		writer.WriteProperty(options, PropTxSizeInBytes, value.TxSizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.TransportConverter))]
 public sealed partial class Transport
 {
+#if NET7_0_OR_GREATER
+	public Transport()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Transport()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Transport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The distribution of the time spent handling each inbound message on a transport thread, represented as a histogram.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inbound_handling_time_histogram")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? InboundHandlingTimeHistogram { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? InboundHandlingTimeHistogram { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The distribution of the time spent sending each outbound transport message on a transport thread, represented as a histogram.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("outbound_handling_time_histogram")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? OutboundHandlingTimeHistogram { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? OutboundHandlingTimeHistogram { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of RX (receive) packets received by the node during internal cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rx_count")]
-	public long? RxCount { get; init; }
+	public long? RxCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Size of RX packets received by the node during internal cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rx_size")]
-	public string? RxSize { get; init; }
+	public string? RxSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Size, in bytes, of RX packets received by the node during internal cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rx_size_in_bytes")]
-	public long? RxSizeInBytes { get; init; }
+	public long? RxSizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Current number of inbound TCP connections used for internal communication between nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("server_open")]
-	public int? ServerOpen { get; init; }
+	public int? ServerOpen { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -84,30 +211,26 @@ public sealed partial class Transport
 	/// Transport connections are typically long-lived so this statistic should remain constant in a stable cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_outbound_connections")]
-	public long? TotalOutboundConnections { get; init; }
+	public long? TotalOutboundConnections { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of TX (transmit) packets sent by the node during internal cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tx_count")]
-	public long? TxCount { get; init; }
+	public long? TxCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Size of TX packets sent by the node during internal cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tx_size")]
-	public string? TxSize { get; init; }
+	public string? TxSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Size, in bytes, of TX packets sent by the node during internal cluster communication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tx_size_in_bytes")]
-	public long? TxSizeInBytes { get; init; }
+	public long? TxSizeInBytes { get; set; }
 }

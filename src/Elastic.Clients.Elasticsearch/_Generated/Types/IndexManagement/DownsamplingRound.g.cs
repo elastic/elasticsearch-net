@@ -17,109 +17,166 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class DownsamplingRound
+internal sealed partial class DownsamplingRoundConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>
 {
-	/// <summary>
-	/// <para>
-	/// The duration since rollover when this downsampling round should execute
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("after")]
-	public Elastic.Clients.Elasticsearch.Duration After { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
+	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
 
-	/// <summary>
-	/// <para>
-	/// The downsample configuration to execute.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("config")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
-}
-
-public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor<DownsamplingRoundDescriptor>
-{
-	internal DownsamplingRoundDescriptor(Action<DownsamplingRoundDescriptor> configure) => configure.Invoke(this);
-
-	public DownsamplingRoundDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propAfter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig> propConfig = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAfter.TryReadProperty(ref reader, options, PropAfter, null))
+			{
+				continue;
+			}
+
+			if (propConfig.TryReadProperty(ref reader, options, PropConfig, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			After = propAfter.Value,
+			Config = propConfig.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration AfterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig ConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor ConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> ConfigDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The duration since rollover when this downsampling round should execute
-	/// </para>
-	/// </summary>
-	public DownsamplingRoundDescriptor After(Elastic.Clients.Elasticsearch.Duration after)
-	{
-		AfterValue = after;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The downsample configuration to execute.
-	/// </para>
-	/// </summary>
-	public DownsamplingRoundDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config)
-	{
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = null;
-		ConfigValue = config;
-		return Self;
-	}
-
-	public DownsamplingRoundDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor descriptor)
-	{
-		ConfigValue = null;
-		ConfigDescriptorAction = null;
-		ConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public DownsamplingRoundDescriptor Config(Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> configure)
-	{
-		ConfigValue = null;
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("after");
-		JsonSerializer.Serialize(writer, AfterValue, options);
-		if (ConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigDescriptor, options);
-		}
-		else if (ConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(ConfigDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigValue, options);
-		}
-
+		writer.WriteProperty(options, PropAfter, value.After, null, null);
+		writer.WriteProperty(options, PropConfig, value.Config, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundConverter))]
+public sealed partial class DownsamplingRound
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsamplingRound(Elastic.Clients.Elasticsearch.Duration after, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config)
+	{
+		After = after;
+		Config = config;
+	}
+#if NET7_0_OR_GREATER
+	public DownsamplingRound()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DownsamplingRound()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DownsamplingRound(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The duration since rollover when this downsampling round should execute
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration After { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The downsample configuration to execute.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
+}
+
+public readonly partial struct DownsamplingRoundDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsamplingRoundDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsamplingRoundDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The duration since rollover when this downsampling round should execute
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor After(Elastic.Clients.Elasticsearch.Duration value)
+	{
+		Instance.After = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The downsample configuration to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig value)
+	{
+		Instance.Config = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The downsample configuration to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> action)
+	{
+		Instance.Config = Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

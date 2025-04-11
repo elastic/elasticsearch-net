@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnsemble = System.Text.Json.JsonEncodedText.Encode("ensemble");
+	private static readonly System.Text.Json.JsonEncodedText PropTree = System.Text.Json.JsonEncodedText.Encode("tree");
+	private static readonly System.Text.Json.JsonEncodedText PropTreeNode = System.Text.Json.JsonEncodedText.Encode("tree_node");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Ensemble?> propEnsemble = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree?> propTree = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode?> propTreeNode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnsemble.TryReadProperty(ref reader, options, PropEnsemble, null))
+			{
+				continue;
+			}
+
+			if (propTree.TryReadProperty(ref reader, options, PropTree, null))
+			{
+				continue;
+			}
+
+			if (propTreeNode.TryReadProperty(ref reader, options, PropTreeNode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Ensemble = propEnsemble.Value,
+			Tree = propTree.Value,
+			TreeNode = propTreeNode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnsemble, value.Ensemble, null, null);
+		writer.WriteProperty(options, PropTree, value.Tree, null, null);
+		writer.WriteProperty(options, PropTreeNode, value.TreeNode, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConverter))]
 public sealed partial class TrainedModel
 {
+#if NET7_0_OR_GREATER
+	public TrainedModel()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TrainedModel()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The definition for an ensemble model
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ensemble")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? Ensemble { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class TrainedModel
 	/// The definition for a binary decision tree.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tree")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? Tree { get; set; }
 
 	/// <summary>
@@ -63,55 +131,48 @@ public sealed partial class TrainedModel
 	/// </item>
 	/// </list>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tree_node")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? TreeNode { get; set; }
 }
 
-public sealed partial class TrainedModelDescriptor : SerializableDescriptor<TrainedModelDescriptor>
+public readonly partial struct TrainedModelDescriptor
 {
-	internal TrainedModelDescriptor(Action<TrainedModelDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel Instance { get; init; }
 
-	public TrainedModelDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? EnsembleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor EnsembleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor> EnsembleDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? TreeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor TreeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor> TreeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? TreeNodeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor TreeNodeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor> TreeNodeDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The definition for an ensemble model
 	/// </para>
 	/// </summary>
-	public TrainedModelDescriptor Ensemble(Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? ensemble)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Ensemble(Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? value)
 	{
-		EnsembleDescriptor = null;
-		EnsembleDescriptorAction = null;
-		EnsembleValue = ensemble;
-		return Self;
+		Instance.Ensemble = value;
+		return this;
 	}
 
-	public TrainedModelDescriptor Ensemble(Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The definition for an ensemble model
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Ensemble(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor> action)
 	{
-		EnsembleValue = null;
-		EnsembleDescriptorAction = null;
-		EnsembleDescriptor = descriptor;
-		return Self;
-	}
-
-	public TrainedModelDescriptor Ensemble(Action<Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor> configure)
-	{
-		EnsembleValue = null;
-		EnsembleDescriptor = null;
-		EnsembleDescriptorAction = configure;
-		return Self;
+		Instance.Ensemble = Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -119,28 +180,21 @@ public sealed partial class TrainedModelDescriptor : SerializableDescriptor<Trai
 	/// The definition for a binary decision tree.
 	/// </para>
 	/// </summary>
-	public TrainedModelDescriptor Tree(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? tree)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Tree(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? value)
 	{
-		TreeDescriptor = null;
-		TreeDescriptorAction = null;
-		TreeValue = tree;
-		return Self;
+		Instance.Tree = value;
+		return this;
 	}
 
-	public TrainedModelDescriptor Tree(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The definition for a binary decision tree.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Tree(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor> action)
 	{
-		TreeValue = null;
-		TreeDescriptorAction = null;
-		TreeDescriptor = descriptor;
-		return Self;
-	}
-
-	public TrainedModelDescriptor Tree(Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor> configure)
-	{
-		TreeValue = null;
-		TreeDescriptor = null;
-		TreeDescriptorAction = configure;
-		return Self;
+		Instance.Tree = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -161,81 +215,46 @@ public sealed partial class TrainedModelDescriptor : SerializableDescriptor<Trai
 	/// </item>
 	/// </list>
 	/// </summary>
-	public TrainedModelDescriptor TreeNode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? treeNode)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor TreeNode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? value)
 	{
-		TreeNodeDescriptor = null;
-		TreeNodeDescriptorAction = null;
-		TreeNodeValue = treeNode;
-		return Self;
+		Instance.TreeNode = value;
+		return this;
 	}
 
-	public TrainedModelDescriptor TreeNode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The definition of a node in a tree.
+	/// There are two major types of nodes: leaf nodes and not-leaf nodes.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Leaf nodes only need node_index and leaf_value defined.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor TreeNode(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor> action)
 	{
-		TreeNodeValue = null;
-		TreeNodeDescriptorAction = null;
-		TreeNodeDescriptor = descriptor;
-		return Self;
+		Instance.TreeNode = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor.Build(action);
+		return this;
 	}
 
-	public TrainedModelDescriptor TreeNode(Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor>? action)
 	{
-		TreeNodeValue = null;
-		TreeNodeDescriptor = null;
-		TreeNodeDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (EnsembleDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("ensemble");
-			JsonSerializer.Serialize(writer, EnsembleDescriptor, options);
-		}
-		else if (EnsembleDescriptorAction is not null)
-		{
-			writer.WritePropertyName("ensemble");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor(EnsembleDescriptorAction), options);
-		}
-		else if (EnsembleValue is not null)
-		{
-			writer.WritePropertyName("ensemble");
-			JsonSerializer.Serialize(writer, EnsembleValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TreeDescriptor is not null)
-		{
-			writer.WritePropertyName("tree");
-			JsonSerializer.Serialize(writer, TreeDescriptor, options);
-		}
-		else if (TreeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tree");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor(TreeDescriptorAction), options);
-		}
-		else if (TreeValue is not null)
-		{
-			writer.WritePropertyName("tree");
-			JsonSerializer.Serialize(writer, TreeValue, options);
-		}
-
-		if (TreeNodeDescriptor is not null)
-		{
-			writer.WritePropertyName("tree_node");
-			JsonSerializer.Serialize(writer, TreeNodeDescriptor, options);
-		}
-		else if (TreeNodeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tree_node");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor(TreeNodeDescriptorAction), options);
-		}
-		else if (TreeNodeValue is not null)
-		{
-			writer.WritePropertyName("tree_node");
-			JsonSerializer.Serialize(writer, TreeNodeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

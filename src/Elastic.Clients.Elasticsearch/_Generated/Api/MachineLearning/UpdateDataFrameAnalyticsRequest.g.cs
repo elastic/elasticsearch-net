@@ -17,21 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class UpdateDataFrameAnalyticsRequestParameters : RequestParameters
+public sealed partial class UpdateDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class UpdateDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowLazyStart = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<int?> propMaxNumThreads = default;
+		LocalJsonValue<string?> propModelMemoryLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowLazyStart = propAllowLazyStart.Value,
+			Description = propDescription.Value,
+			MaxNumThreads = propMaxNumThreads.Value,
+			ModelMemoryLimit = propModelMemoryLimit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -39,15 +98,27 @@ public sealed partial class UpdateDataFrameAnalyticsRequestParameters : RequestP
 /// Update a data frame analytics job.
 /// </para>
 /// </summary>
-public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<UpdateDataFrameAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestConverter))]
+public sealed partial class UpdateDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateDataFrameAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningUpdateDataFrameAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -55,11 +126,23 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies whether this job can start when there is insufficient machine
 	/// learning node capacity for it to be immediately assigned to a node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_lazy_start")]
 	public bool? AllowLazyStart { get; set; }
 
 	/// <summary>
@@ -67,7 +150,6 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -78,7 +160,6 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
 
 	/// <summary>
@@ -90,7 +171,6 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string? ModelMemoryLimit { get; set; }
 }
 
@@ -99,32 +179,42 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 /// Update a data frame analytics job.
 /// </para>
 /// </summary>
-public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>, UpdateDataFrameAnalyticsRequestParameters>
+public readonly partial struct UpdateDataFrameAnalyticsRequestDescriptor
 {
-	internal UpdateDataFrameAnalyticsRequestDescriptor(Action<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest Instance { get; init; }
 
-	public UpdateDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateDataFrameAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.update_data_frame_analytics";
-
-	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public UpdateDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest(id);
 	}
 
-	private bool? AllowLazyStartValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public UpdateDataFrameAnalyticsRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -132,10 +222,10 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	/// learning node capacity for it to be immediately assigned to a node.
 	/// </para>
 	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? allowLazyStart = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? value = true)
 	{
-		AllowLazyStartValue = allowLazyStart;
-		return Self;
+		Instance.AllowLazyStart = value;
+		return this;
 	}
 
 	/// <summary>
@@ -143,10 +233,10 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -157,10 +247,10 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
 	/// <summary>
@@ -172,154 +262,59 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyStartValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_start");
-			writer.WriteBooleanValue(AllowLazyStartValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Update a data frame analytics job.
-/// </para>
-/// </summary>
-public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestDescriptor<UpdateDataFrameAnalyticsRequestDescriptor, UpdateDataFrameAnalyticsRequestParameters>
-{
-	internal UpdateDataFrameAnalyticsRequestDescriptor(Action<UpdateDataFrameAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
-
-	public UpdateDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateDataFrameAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.update_data_frame_analytics";
-
-	public UpdateDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor ErrorTrace(bool? value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.ErrorTrace = value;
+		return this;
 	}
 
-	private bool? AllowLazyStartValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Specifies whether this job can start when there is insufficient machine
-	/// learning node capacity for it to be immediately assigned to a node.
-	/// </para>
-	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? allowLazyStart = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
 	{
-		AllowLazyStartValue = allowLazyStart;
-		return Self;
+		Instance.FilterPath = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor Human(bool? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Human = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of threads to be used by the analysis. Using more
-	/// threads may decrease the time necessary to complete the analysis at the
-	/// cost of using more CPU. Note that the process may use additional threads
-	/// for operational functionality other than the analysis itself.
-	/// </para>
-	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor Pretty(bool? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.Pretty = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate maximum amount of memory resources that are permitted for
-	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
-	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
-	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
-	/// greater than that setting.
-	/// </para>
-	/// </summary>
-	public UpdateDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor SourceQueryString(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.SourceQueryString = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyStartValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_start");
-			writer.WriteBooleanValue(AllowLazyStartValue.Value);
-		}
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

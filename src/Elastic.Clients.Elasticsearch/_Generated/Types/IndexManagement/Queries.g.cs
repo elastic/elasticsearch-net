@@ -17,77 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class QueriesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Queries>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCache = System.Text.Json.JsonEncodedText.Encode("cache");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Queries Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries?> propCache = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCache.TryReadProperty(ref reader, options, PropCache, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.Queries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cache = propCache.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Queries value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCache, value.Cache, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.QueriesConverter))]
 public sealed partial class Queries
 {
-	[JsonInclude, JsonPropertyName("cache")]
+#if NET7_0_OR_GREATER
+	public Queries()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Queries()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Queries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? Cache { get; set; }
 }
 
-public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDescriptor>
+public readonly partial struct QueriesDescriptor
 {
-	internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.Queries Instance { get; init; }
 
-	public QueriesDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Queries instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor CacheDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
-
-	public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? cache)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueriesDescriptor()
 	{
-		CacheDescriptor = null;
-		CacheDescriptorAction = null;
-		CacheValue = cache;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.Queries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Queries instance) => new Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.Queries(Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? value)
 	{
-		CacheValue = null;
-		CacheDescriptorAction = null;
-		CacheDescriptor = descriptor;
-		return Self;
+		Instance.Cache = value;
+		return this;
 	}
 
-	public QueriesDescriptor Cache(Action<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor Cache(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor> action)
 	{
-		CacheValue = null;
-		CacheDescriptor = null;
-		CacheDescriptorAction = configure;
-		return Self;
+		Instance.Cache = Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.Queries Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (CacheDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("cache");
-			JsonSerializer.Serialize(writer, CacheDescriptor, options);
-		}
-		else if (CacheDescriptorAction is not null)
-		{
-			writer.WritePropertyName("cache");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor(CacheDescriptorAction), options);
-		}
-		else if (CacheValue is not null)
-		{
-			writer.WritePropertyName("cache");
-			JsonSerializer.Serialize(writer, CacheValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.Queries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.Queries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

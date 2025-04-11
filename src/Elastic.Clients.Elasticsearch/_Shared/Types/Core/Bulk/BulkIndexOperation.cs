@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Elastic.Transport.Extensions;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -15,6 +14,17 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 public sealed class BulkIndexOperation<T> : BulkOperation
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIfPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("if_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropIfSeqNo = System.Text.Json.JsonEncodedText.Encode("if_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+	private static readonly System.Text.Json.JsonEncodedText PropRequireAlias = System.Text.Json.JsonEncodedText.Encode("require_alias");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
 	/// <summary>
 	/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
 	/// as source data.
@@ -34,18 +44,64 @@ public sealed class BulkIndexOperation<T> : BulkOperation
 	/// <param name="index">The <see cref="IndexName"/> which can represent an index, alias or data stream.</param>
 	public BulkIndexOperation(T document, IndexName index) : this(document) => Index = index;
 
-	[JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
 
-	[JsonPropertyName("dynamic_templates")]
-	public Dictionary<string, string>? DynamicTemplates { get; set; }
+	public IDictionary<string, string>? DynamicTemplates { get; set; }
 
-	[JsonIgnore]
 	public T Document { get; set; }
 
 	protected override string Operation => "index";
 
 	protected override Type ClrType => typeof(T);
+
+	/// <inheritdoc />
+	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
+	{
+		SetValues(settings);
+		using var writer = new Utf8JsonWriter(stream);
+		SerializeOperationAction(settings, writer);
+		writer.Flush();
+		stream.WriteByte(SerializationConstants.Newline);
+		settings.SourceSerializer.Serialize(Document, stream);
+	}
+
+	/// <inheritdoc />
+	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
+	{
+		SetValues(settings);
+		var writer = new Utf8JsonWriter(stream);
+		await using (writer.ConfigureAwait(false))
+		{
+			SerializeOperationAction(settings, writer);
+			await writer.FlushAsync().ConfigureAwait(false);
+			stream.WriteByte(SerializationConstants.Newline);
+			await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
+		}
+	}
+
+	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	{
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
+
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDynamicTemplates, DynamicTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropId, Id, null, null);
+		writer.WriteProperty(options, PropIfPrimaryTerm, IfPrimaryTerm, null, null);
+		writer.WriteProperty(options, PropIfSeqNo, IfSequenceNumber, null, null);
+		writer.WriteProperty(options, PropIndex, Index, null, null);
+		writer.WriteProperty(options, PropPipeline, Pipeline, null, null);
+		writer.WriteProperty(options, PropRequireAlias, RequireAlias, null, null);
+		writer.WriteProperty(options, PropRouting, Routing, null, null);
+		writer.WriteProperty(options, PropVersion, Version, null, null);
+		writer.WriteProperty(options, PropVersionType, VersionType, null, null);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
 
 	private void SetValues(IElasticsearchClientSettings settings)
 	{
@@ -75,37 +131,9 @@ public sealed class BulkIndexOperation<T> : BulkOperation
 				Id = id;
 		}
 	}
+}
 
-	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
-	{
-		SetValues(settings);
-		var writer = new Utf8JsonWriter(stream);
-		SerializeOperationAction(writer, settings);
-		writer.Flush();
-		stream.WriteByte(SerializationConstants.Newline);
-		settings.SourceSerializer.Serialize(Document, stream);
-	}
-
-	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
-	{
-		SetValues(settings);
-		var writer = new Utf8JsonWriter(stream);
-		await using (writer.ConfigureAwait(false))
-		{
-			SerializeOperationAction(writer, settings);
-			await writer.FlushAsync().ConfigureAwait(false);
-			stream.WriteByte(SerializationConstants.Newline);
-			await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
-		}
-	}
-
-	private void SerializeOperationAction(Utf8JsonWriter writer, IElasticsearchClientSettings settings)
-	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-
-		writer.WriteStartObject();
-		writer.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, writer);
-		writer.WriteEndObject();
-	}
+public class TestA
+{
+	public string X { get; set; }
 }

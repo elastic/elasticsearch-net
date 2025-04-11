@@ -17,118 +17,204 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-[JsonConverter(typeof(EnrichPolicyPhaseConverter))]
+internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCancelled = System.Text.Json.JsonEncodedText.Encode("CANCELLED");
+	private static readonly System.Text.Json.JsonEncodedText MemberComplete = System.Text.Json.JsonEncodedText.Encode("COMPLETE");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
+	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("RUNNING");
+	private static readonly System.Text.Json.JsonEncodedText MemberScheduled = System.Text.Json.JsonEncodedText.Encode("SCHEDULED");
+
+	public override Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCancelled))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled;
+		}
+
+		if (reader.ValueTextEquals(MemberComplete))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Complete;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed;
+		}
+
+		if (reader.ValueTextEquals(MemberRunning))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running;
+		}
+
+		if (reader.ValueTextEquals(MemberScheduled))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCancelled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled;
+		}
+
+		if (string.Equals(value, MemberComplete.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Complete;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed;
+		}
+
+		if (string.Equals(value, MemberRunning.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running;
+		}
+
+		if (string.Equals(value, MemberScheduled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled:
+				writer.WriteStringValue(MemberCancelled);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Complete:
+				writer.WriteStringValue(MemberComplete);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running:
+				writer.WriteStringValue(MemberRunning);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled:
+				writer.WriteStringValue(MemberScheduled);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class PolicyTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.PolicyType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoMatch = System.Text.Json.JsonEncodedText.Encode("geo_match");
+	private static readonly System.Text.Json.JsonEncodedText MemberMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText MemberRange = System.Text.Json.JsonEncodedText.Encode("range");
+
+	public override Elastic.Clients.Elasticsearch.Enrich.PolicyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberGeoMatch))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.PolicyType.GeoMatch;
+		}
+
+		if (reader.ValueTextEquals(MemberMatch))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.PolicyType.Match;
+		}
+
+		if (reader.ValueTextEquals(MemberRange))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.PolicyType.Range;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGeoMatch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.PolicyType.GeoMatch;
+		}
+
+		if (string.Equals(value, MemberMatch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.PolicyType.Match;
+		}
+
+		if (string.Equals(value, MemberRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.PolicyType.Range;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Enrich.PolicyType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.PolicyType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.GeoMatch:
+				writer.WriteStringValue(MemberGeoMatch);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.Match:
+				writer.WriteStringValue(MemberMatch);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.Range:
+				writer.WriteStringValue(MemberRange);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Enrich.PolicyType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Enrich.PolicyType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.PolicyType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhaseConverter))]
 public enum EnrichPolicyPhase
 {
-	[EnumMember(Value = "SCHEDULED")]
-	Scheduled,
-	[EnumMember(Value = "RUNNING")]
-	Running,
-	[EnumMember(Value = "FAILED")]
+	[System.Runtime.Serialization.EnumMember(Value = "CANCELLED")]
+	Cancelled,
+	[System.Runtime.Serialization.EnumMember(Value = "COMPLETE")]
+	Complete,
+	[System.Runtime.Serialization.EnumMember(Value = "FAILED")]
 	Failed,
-	[EnumMember(Value = "COMPLETE")]
-	Complete
+	[System.Runtime.Serialization.EnumMember(Value = "RUNNING")]
+	Running,
+	[System.Runtime.Serialization.EnumMember(Value = "SCHEDULED")]
+	Scheduled
 }
 
-internal sealed class EnrichPolicyPhaseConverter : JsonConverter<EnrichPolicyPhase>
-{
-	public override EnrichPolicyPhase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "SCHEDULED":
-				return EnrichPolicyPhase.Scheduled;
-			case "RUNNING":
-				return EnrichPolicyPhase.Running;
-			case "FAILED":
-				return EnrichPolicyPhase.Failed;
-			case "COMPLETE":
-				return EnrichPolicyPhase.Complete;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, EnrichPolicyPhase value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case EnrichPolicyPhase.Scheduled:
-				writer.WriteStringValue("SCHEDULED");
-				return;
-			case EnrichPolicyPhase.Running:
-				writer.WriteStringValue("RUNNING");
-				return;
-			case EnrichPolicyPhase.Failed:
-				writer.WriteStringValue("FAILED");
-				return;
-			case EnrichPolicyPhase.Complete:
-				writer.WriteStringValue("COMPLETE");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(PolicyTypeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.PolicyTypeConverter))]
 public enum PolicyType
 {
-	[EnumMember(Value = "range")]
-	Range,
-	[EnumMember(Value = "match")]
+	[System.Runtime.Serialization.EnumMember(Value = "geo_match")]
+	GeoMatch,
+	[System.Runtime.Serialization.EnumMember(Value = "match")]
 	Match,
-	[EnumMember(Value = "geo_match")]
-	GeoMatch
-}
-
-internal sealed class PolicyTypeConverter : JsonConverter<PolicyType>
-{
-	public override PolicyType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "range":
-				return PolicyType.Range;
-			case "match":
-				return PolicyType.Match;
-			case "geo_match":
-				return PolicyType.GeoMatch;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, PolicyType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case PolicyType.Range:
-				writer.WriteStringValue("range");
-				return;
-			case PolicyType.Match:
-				writer.WriteStringValue("match");
-				return;
-			case PolicyType.GeoMatch:
-				writer.WriteStringValue("geo_match");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "range")]
+	Range
 }

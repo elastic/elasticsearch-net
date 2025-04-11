@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetCategoriesRequestParameters : RequestParameters
+public sealed partial class GetCategoriesRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -54,24 +47,76 @@ public sealed partial class GetCategoriesRequestParameters : RequestParameters
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
+internal sealed partial class GetCategoriesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPage.TryReadProperty(ref reader, options, PropPage, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Page = propPage.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPage, value.Page, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for categories.
 /// </para>
 /// </summary>
-public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestConverter))]
+public sealed partial class GetCategoriesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetCategoriesRequest(Elastic.Clients.Elasticsearch.Id jobId, string? categoryId) : base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetCategoriesRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetCategoriesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetCategoriesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCategories;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetCategories;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -79,10 +124,31 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the category, which is unique in the job. If you specify
+	/// neither the category ID nor the partition_field_value, the API returns
+	/// information about all categories. If you specify only the
+	/// partition_field_value, it returns information about all categories for
+	/// the specified partition.
+	/// </para>
+	/// </summary>
+	public string? CategoryId { get => P<string?>("category_id"); set => PO("category_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Skips the specified number of categories.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -90,7 +156,6 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 	/// Only return categories for the specified partition.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
 	/// <summary>
@@ -98,7 +163,6 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 	/// Specifies the maximum number of categories to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -107,7 +171,6 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 	/// This parameter has the <c>from</c> and <c>size</c> properties.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("page")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
@@ -116,45 +179,93 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 /// Get anomaly detection job results for categories.
 /// </para>
 /// </summary>
-public sealed partial class GetCategoriesRequestDescriptor : RequestDescriptor<GetCategoriesRequestDescriptor, GetCategoriesRequestParameters>
+public readonly partial struct GetCategoriesRequestDescriptor
 {
-	internal GetCategoriesRequestDescriptor(Action<GetCategoriesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest Instance { get; init; }
 
-	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, string? categoryId) : base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, string? categoryId)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(jobId, categoryId);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCategories;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.get_categories";
-
-	public GetCategoriesRequestDescriptor From(int? from) => Qs("from", from);
-	public GetCategoriesRequestDescriptor PartitionFieldValue(string? partitionFieldValue) => Qs("partition_field_value", partitionFieldValue);
-	public GetCategoriesRequestDescriptor Size(int? size) => Qs("size", size);
-
-	public GetCategoriesRequestDescriptor CategoryId(string? categoryId)
+	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Optional("category_id", categoryId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(jobId);
 	}
 
-	public GetCategoriesRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetCategoriesRequestDescriptor()
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.Page? PageValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor PageDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the category, which is unique in the job. If you specify
+	/// neither the category ID nor the partition_field_value, the API returns
+	/// information about all categories. If you specify only the
+	/// partition_field_value, it returns information about all categories for
+	/// the specified partition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor CategoryId(string? value)
+	{
+		Instance.CategoryId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of categories.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only return categories for the specified partition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor PartitionFieldValue(string? value)
+	{
+		Instance.PartitionFieldValue = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of categories to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -162,49 +273,83 @@ public sealed partial class GetCategoriesRequestDescriptor : RequestDescriptor<G
 	/// This parameter has the <c>from</c> and <c>size</c> properties.
 	/// </para>
 	/// </summary>
-	public GetCategoriesRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
-		PageDescriptor = null;
-		PageDescriptorAction = null;
-		PageValue = page;
-		return Self;
+		Instance.Page = value;
+		return this;
 	}
 
-	public GetCategoriesRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Page()
 	{
-		PageValue = null;
-		PageDescriptorAction = null;
-		PageDescriptor = descriptor;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
+		return this;
 	}
 
-	public GetCategoriesRequestDescriptor Page(Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		PageValue = null;
-		PageDescriptor = null;
-		PageDescriptorAction = configure;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (PageDescriptor is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageDescriptor, options);
-		}
-		else if (PageDescriptorAction is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(PageDescriptorAction), options);
-		}
-		else if (PageValue is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

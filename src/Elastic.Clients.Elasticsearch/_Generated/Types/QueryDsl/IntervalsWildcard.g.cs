@@ -17,25 +17,100 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class IntervalsWildcardConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<string> propPattern = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propUseField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propPattern.TryReadProperty(ref reader, options, PropPattern, null))
+			{
+				continue;
+			}
+
+			if (propUseField.TryReadProperty(ref reader, options, PropUseField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Pattern = propPattern.Value,
+			UseField = propUseField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
+		writer.WriteProperty(options, PropUseField, value.UseField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardConverter))]
 public sealed partial class IntervalsWildcard
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsWildcard(string pattern)
+	{
+		Pattern = pattern;
+	}
+#if NET7_0_OR_GREATER
+	public IntervalsWildcard()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IntervalsWildcard()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntervalsWildcard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Analyzer used to analyze the <c>pattern</c>.
 	/// Defaults to the top-level field's analyzer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -43,8 +118,11 @@ public sealed partial class IntervalsWildcard
 	/// Wildcard pattern used to find matching terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pattern")]
-	public string Pattern { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Pattern { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,24 +130,27 @@ public sealed partial class IntervalsWildcard
 	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(IntervalsWildcard intervalsWildcard) => Elastic.Clients.Elasticsearch.QueryDsl.Intervals.Wildcard(intervalsWildcard);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(IntervalsWildcard intervalsWildcard) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.Wildcard(intervalsWildcard);
 }
 
-public sealed partial class IntervalsWildcardDescriptor<TDocument> : SerializableDescriptor<IntervalsWildcardDescriptor<TDocument>>
+public readonly partial struct IntervalsWildcardDescriptor<TDocument>
 {
-	internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Instance { get; init; }
 
-	public IntervalsWildcardDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsWildcardDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private string PatternValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsWildcardDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -77,10 +158,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	/// Defaults to the top-level field's analyzer.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -88,10 +169,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	/// Wildcard pattern used to find matching terms.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor<TDocument> Pattern(string pattern)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> Pattern(string value)
 	{
-		PatternValue = pattern;
-		return Self;
+		Instance.Pattern = value;
+		return this;
 	}
 
 	/// <summary>
@@ -100,10 +181,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -112,56 +193,39 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsWildcardDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>> action)
 	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		writer.WritePropertyName("pattern");
-		writer.WriteStringValue(PatternValue);
-		if (UseFieldValue is not null)
-		{
-			writer.WritePropertyName("use_field");
-			JsonSerializer.Serialize(writer, UseFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor<IntervalsWildcardDescriptor>
+public readonly partial struct IntervalsWildcardDescriptor
 {
-	internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Instance { get; init; }
 
-	public IntervalsWildcardDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsWildcardDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private string PatternValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsWildcardDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -169,10 +233,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	/// Defaults to the top-level field's analyzer.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -180,10 +244,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	/// Wildcard pattern used to find matching terms.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor Pattern(string pattern)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor Pattern(string value)
 	{
-		PatternValue = pattern;
-		return Self;
+		Instance.Pattern = value;
+		return this;
 	}
 
 	/// <summary>
@@ -192,10 +256,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -204,41 +268,17 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsWildcardDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsWildcardDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor> action)
 	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		writer.WritePropertyName("pattern");
-		writer.WriteStringValue(PatternValue);
-		if (UseFieldValue is not null)
-		{
-			writer.WritePropertyName("use_field");
-			JsonSerializer.Serialize(writer, UseFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

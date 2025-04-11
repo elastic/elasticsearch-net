@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class RepositoryAnalyzeRequestParameters : RequestParameters
+public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -124,6 +117,35 @@ public sealed partial class RepositoryAnalyzeRequestParameters : RequestParamete
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class RepositoryAnalyzeRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -256,15 +278,27 @@ public sealed partial class RepositoryAnalyzeRequestParameters : RequestParamete
 /// Some operations also verify the behavior on small blobs with sizes other than 8 bytes.
 /// </para>
 /// </summary>
-public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAnalyzeRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestConverter))]
+public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public RepositoryAnalyzeRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRepositoryAnalyze;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotRepositoryAnalyze;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -272,11 +306,21 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 
 	/// <summary>
 	/// <para>
+	/// The name of the repository.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
 	/// The total number of blobs to write to the repository during the test.
 	/// For realistic experiments, you should set it to at least <c>2000</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? BlobCount { get => Q<int?>("blob_count"); set => Q("blob_count", value); }
 
 	/// <summary>
@@ -284,7 +328,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// The number of operations to run concurrently during the test.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Concurrency { get => Q<int?>("concurrency"); set => Q("concurrency", value); }
 
 	/// <summary>
@@ -293,7 +336,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// If false, it returns only a summary of the analysis.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
 	/// <summary>
@@ -302,7 +344,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// Early read operations are only rarely performed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? EarlyReadNodeCount { get => Q<int?>("early_read_node_count"); set => Q("early_read_node_count", value); }
 
 	/// <summary>
@@ -311,7 +352,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// For realistic experiments, you should set it to at least <c>2gb</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxBlobSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("max_blob_size"); set => Q("max_blob_size", value); }
 
 	/// <summary>
@@ -320,7 +360,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// For realistic experiments, you should set it to at least <c>1tb</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxTotalDataSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("max_total_data_size"); set => Q("max_total_data_size", value); }
 
 	/// <summary>
@@ -328,7 +367,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// The probability of performing a rare action such as an early read, an overwrite, or an aborted write on each blob.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public double? RareActionProbability { get => Q<double?>("rare_action_probability"); set => Q("rare_action_probability", value); }
 
 	/// <summary>
@@ -336,7 +374,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// Indicates whether to rarely cancel writes before they complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RarelyAbortWrites { get => Q<bool?>("rarely_abort_writes"); set => Q("rarely_abort_writes", value); }
 
 	/// <summary>
@@ -344,7 +381,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// The number of nodes on which to read a blob after writing.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? ReadNodeCount { get => Q<int?>("read_node_count"); set => Q("read_node_count", value); }
 
 	/// <summary>
@@ -353,7 +389,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// For realistic experiments, you should set it to at least <c>100</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? RegisterOperationCount { get => Q<int?>("register_operation_count"); set => Q("register_operation_count", value); }
 
 	/// <summary>
@@ -363,7 +398,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// Note that the operations are performed concurrently so might not always happen in the same order on each run.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Seed { get => Q<int?>("seed"); set => Q("seed", value); }
 
 	/// <summary>
@@ -372,7 +406,6 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 	/// If no response is received before the timeout expires, the test is cancelled and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -506,42 +539,253 @@ public sealed partial class RepositoryAnalyzeRequest : PlainRequest<RepositoryAn
 /// Some operations also verify the behavior on small blobs with sizes other than 8 bytes.
 /// </para>
 /// </summary>
-public sealed partial class RepositoryAnalyzeRequestDescriptor : RequestDescriptor<RepositoryAnalyzeRequestDescriptor, RepositoryAnalyzeRequestParameters>
+public readonly partial struct RepositoryAnalyzeRequestDescriptor
 {
-	internal RepositoryAnalyzeRequestDescriptor(Action<RepositoryAnalyzeRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest Instance { get; init; }
 
-	public RepositoryAnalyzeRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RepositoryAnalyzeRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRepositoryAnalyze;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "snapshot.repository_analyze";
-
-	public RepositoryAnalyzeRequestDescriptor BlobCount(int? blobCount) => Qs("blob_count", blobCount);
-	public RepositoryAnalyzeRequestDescriptor Concurrency(int? concurrency) => Qs("concurrency", concurrency);
-	public RepositoryAnalyzeRequestDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
-	public RepositoryAnalyzeRequestDescriptor EarlyReadNodeCount(int? earlyReadNodeCount) => Qs("early_read_node_count", earlyReadNodeCount);
-	public RepositoryAnalyzeRequestDescriptor MaxBlobSize(Elastic.Clients.Elasticsearch.ByteSize? maxBlobSize) => Qs("max_blob_size", maxBlobSize);
-	public RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(Elastic.Clients.Elasticsearch.ByteSize? maxTotalDataSize) => Qs("max_total_data_size", maxTotalDataSize);
-	public RepositoryAnalyzeRequestDescriptor RareActionProbability(double? rareActionProbability) => Qs("rare_action_probability", rareActionProbability);
-	public RepositoryAnalyzeRequestDescriptor RarelyAbortWrites(bool? rarelyAbortWrites = true) => Qs("rarely_abort_writes", rarelyAbortWrites);
-	public RepositoryAnalyzeRequestDescriptor ReadNodeCount(int? readNodeCount) => Qs("read_node_count", readNodeCount);
-	public RepositoryAnalyzeRequestDescriptor RegisterOperationCount(int? registerOperationCount) => Qs("register_operation_count", registerOperationCount);
-	public RepositoryAnalyzeRequestDescriptor Seed(int? seed) => Qs("seed", seed);
-	public RepositoryAnalyzeRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public RepositoryAnalyzeRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public RepositoryAnalyzeRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("repository", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest(name);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public RepositoryAnalyzeRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the repository.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The total number of blobs to write to the repository during the test.
+	/// For realistic experiments, you should set it to at least <c>2000</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor BlobCount(int? value)
+	{
+		Instance.BlobCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of operations to run concurrently during the test.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Concurrency(int? value)
+	{
+		Instance.Concurrency = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return detailed results, including timing information for every operation performed during the analysis.
+	/// If false, it returns only a summary of the analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Detailed(bool? value = true)
+	{
+		Instance.Detailed = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of nodes on which to perform an early read operation while writing each blob.
+	/// Early read operations are only rarely performed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor EarlyReadNodeCount(int? value)
+	{
+		Instance.EarlyReadNodeCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum size of a blob to be written during the test.
+	/// For realistic experiments, you should set it to at least <c>2gb</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxBlobSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxBlobSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum size of a blob to be written during the test.
+	/// For realistic experiments, you should set it to at least <c>2gb</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxBlobSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxBlobSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An upper limit on the total size of all the blobs written during the test.
+	/// For realistic experiments, you should set it to at least <c>1tb</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxTotalDataSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An upper limit on the total size of all the blobs written during the test.
+	/// For realistic experiments, you should set it to at least <c>1tb</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxTotalDataSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The probability of performing a rare action such as an early read, an overwrite, or an aborted write on each blob.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RareActionProbability(double? value)
+	{
+		Instance.RareActionProbability = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to rarely cancel writes before they complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RarelyAbortWrites(bool? value = true)
+	{
+		Instance.RarelyAbortWrites = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of nodes on which to read a blob after writing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor ReadNodeCount(int? value)
+	{
+		Instance.ReadNodeCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum number of linearizable register operations to perform in total.
+	/// For realistic experiments, you should set it to at least <c>100</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RegisterOperationCount(int? value)
+	{
+		Instance.RegisterOperationCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The seed for the pseudo-random number generator used to generate the list of operations performed during the test.
+	/// To repeat the same set of operations in multiple experiments, use the same seed in each experiment.
+	/// Note that the operations are performed concurrently so might not always happen in the same order on each run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Seed(int? value)
+	{
+		Instance.Seed = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period of time to wait for the test to complete.
+	/// If no response is received before the timeout expires, the test is cancelled and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

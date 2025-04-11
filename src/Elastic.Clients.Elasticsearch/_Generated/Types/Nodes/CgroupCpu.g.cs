@@ -17,47 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class CgroupCpuConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CgroupCpu>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCfsPeriodMicros = System.Text.Json.JsonEncodedText.Encode("cfs_period_micros");
+	private static readonly System.Text.Json.JsonEncodedText PropCfsQuotaMicros = System.Text.Json.JsonEncodedText.Encode("cfs_quota_micros");
+	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group");
+	private static readonly System.Text.Json.JsonEncodedText PropStat = System.Text.Json.JsonEncodedText.Encode("stat");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.CgroupCpu Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propCfsPeriodMicros = default;
+		LocalJsonValue<int?> propCfsQuotaMicros = default;
+		LocalJsonValue<string?> propControlGroup = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat?> propStat = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCfsPeriodMicros.TryReadProperty(ref reader, options, PropCfsPeriodMicros, null))
+			{
+				continue;
+			}
+
+			if (propCfsQuotaMicros.TryReadProperty(ref reader, options, PropCfsQuotaMicros, null))
+			{
+				continue;
+			}
+
+			if (propControlGroup.TryReadProperty(ref reader, options, PropControlGroup, null))
+			{
+				continue;
+			}
+
+			if (propStat.TryReadProperty(ref reader, options, PropStat, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.CgroupCpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CfsPeriodMicros = propCfsPeriodMicros.Value,
+			CfsQuotaMicros = propCfsQuotaMicros.Value,
+			ControlGroup = propControlGroup.Value,
+			Stat = propStat.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.CgroupCpu value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCfsPeriodMicros, value.CfsPeriodMicros, null, null);
+		writer.WriteProperty(options, PropCfsQuotaMicros, value.CfsQuotaMicros, null, null);
+		writer.WriteProperty(options, PropControlGroup, value.ControlGroup, null, null);
+		writer.WriteProperty(options, PropStat, value.Stat, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.CgroupCpuConverter))]
 public sealed partial class CgroupCpu
 {
+#if NET7_0_OR_GREATER
+	public CgroupCpu()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CgroupCpu()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CgroupCpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The period of time, in microseconds, for how regularly all tasks in the same cgroup as the Elasticsearch process should have their access to CPU resources reallocated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cfs_period_micros")]
-	public int? CfsPeriodMicros { get; init; }
+	public int? CfsPeriodMicros { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total amount of time, in microseconds, for which all tasks in the same cgroup as the Elasticsearch process can run during one period <c>cfs_period_micros</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cfs_quota_micros")]
-	public int? CfsQuotaMicros { get; init; }
+	public int? CfsQuotaMicros { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The <c>cpu</c> control group to which the Elasticsearch process belongs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("control_group")]
-	public string? ControlGroup { get; init; }
+	public string? ControlGroup { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains CPU statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stat")]
-	public Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat? Stat { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat? Stat { get; set; }
 }

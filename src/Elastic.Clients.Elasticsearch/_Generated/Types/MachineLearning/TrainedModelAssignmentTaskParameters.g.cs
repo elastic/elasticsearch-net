@@ -17,77 +17,250 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelAssignmentTaskParametersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size");
+	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id");
+	private static readonly System.Text.Json.JsonEncodedText PropModelBytes = System.Text.Json.JsonEncodedText.Encode("model_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropPerAllocationMemoryBytes = System.Text.Json.JsonEncodedText.Encode("per_allocation_memory_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPerDeploymentMemoryBytes = System.Text.Json.JsonEncodedText.Encode("per_deployment_memory_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropQueueCapacity = System.Text.Json.JsonEncodedText.Encode("queue_capacity");
+	private static readonly System.Text.Json.JsonEncodedText PropThreadsPerAllocation = System.Text.Json.JsonEncodedText.Encode("threads_per_allocation");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propCacheSize = default;
+		LocalJsonValue<string> propDeploymentId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propModelBytes = default;
+		LocalJsonValue<string> propModelId = default;
+		LocalJsonValue<int> propNumberOfAllocations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propPerAllocationMemoryBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propPerDeploymentMemoryBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority> propPriority = default;
+		LocalJsonValue<int> propQueueCapacity = default;
+		LocalJsonValue<int> propThreadsPerAllocation = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCacheSize.TryReadProperty(ref reader, options, PropCacheSize, null))
+			{
+				continue;
+			}
+
+			if (propDeploymentId.TryReadProperty(ref reader, options, PropDeploymentId, null))
+			{
+				continue;
+			}
+
+			if (propModelBytes.TryReadProperty(ref reader, options, PropModelBytes, null))
+			{
+				continue;
+			}
+
+			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfAllocations.TryReadProperty(ref reader, options, PropNumberOfAllocations, null))
+			{
+				continue;
+			}
+
+			if (propPerAllocationMemoryBytes.TryReadProperty(ref reader, options, PropPerAllocationMemoryBytes, null))
+			{
+				continue;
+			}
+
+			if (propPerDeploymentMemoryBytes.TryReadProperty(ref reader, options, PropPerDeploymentMemoryBytes, null))
+			{
+				continue;
+			}
+
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			{
+				continue;
+			}
+
+			if (propQueueCapacity.TryReadProperty(ref reader, options, PropQueueCapacity, null))
+			{
+				continue;
+			}
+
+			if (propThreadsPerAllocation.TryReadProperty(ref reader, options, PropThreadsPerAllocation, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CacheSize = propCacheSize.Value,
+			DeploymentId = propDeploymentId.Value,
+			ModelBytes = propModelBytes.Value,
+			ModelId = propModelId.Value,
+			NumberOfAllocations = propNumberOfAllocations.Value,
+			PerAllocationMemoryBytes = propPerAllocationMemoryBytes.Value,
+			PerDeploymentMemoryBytes = propPerDeploymentMemoryBytes.Value,
+			Priority = propPriority.Value,
+			QueueCapacity = propQueueCapacity.Value,
+			ThreadsPerAllocation = propThreadsPerAllocation.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheSize, value.CacheSize, null, null);
+		writer.WriteProperty(options, PropDeploymentId, value.DeploymentId, null, null);
+		writer.WriteProperty(options, PropModelBytes, value.ModelBytes, null, null);
+		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
+		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, null);
+		writer.WriteProperty(options, PropPerAllocationMemoryBytes, value.PerAllocationMemoryBytes, null, null);
+		writer.WriteProperty(options, PropPerDeploymentMemoryBytes, value.PerDeploymentMemoryBytes, null, null);
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropQueueCapacity, value.QueueCapacity, null, null);
+		writer.WriteProperty(options, PropThreadsPerAllocation, value.ThreadsPerAllocation, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParametersConverter))]
 public sealed partial class TrainedModelAssignmentTaskParameters
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelAssignmentTaskParameters(string deploymentId, Elastic.Clients.Elasticsearch.ByteSize modelBytes, string modelId, int numberOfAllocations, Elastic.Clients.Elasticsearch.ByteSize perAllocationMemoryBytes, Elastic.Clients.Elasticsearch.ByteSize perDeploymentMemoryBytes, Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority priority, int queueCapacity, int threadsPerAllocation)
+	{
+		DeploymentId = deploymentId;
+		ModelBytes = modelBytes;
+		ModelId = modelId;
+		NumberOfAllocations = numberOfAllocations;
+		PerAllocationMemoryBytes = perAllocationMemoryBytes;
+		PerDeploymentMemoryBytes = perDeploymentMemoryBytes;
+		Priority = priority;
+		QueueCapacity = queueCapacity;
+		ThreadsPerAllocation = threadsPerAllocation;
+	}
+#if NET7_0_OR_GREATER
+	public TrainedModelAssignmentTaskParameters()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TrainedModelAssignmentTaskParameters()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModelAssignmentTaskParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The size of the trained model cache.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cache_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the trained model deployment.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deployment_id")]
-	public string DeploymentId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string DeploymentId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The size of the trained model in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the trained model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_id")]
-	public string ModelId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of allocations this model is assigned across ML nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_allocations")]
-	public int NumberOfAllocations { get; init; }
-	[JsonInclude, JsonPropertyName("per_allocation_memory_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize PerAllocationMemoryBytes { get; init; }
-	[JsonInclude, JsonPropertyName("per_deployment_memory_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize PerDeploymentMemoryBytes { get; init; }
-	[JsonInclude, JsonPropertyName("priority")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NumberOfAllocations { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize PerAllocationMemoryBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize PerDeploymentMemoryBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of inference requests are allowed in the queue at a time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("queue_capacity")]
-	public int QueueCapacity { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int QueueCapacity { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of threads per allocation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("threads_per_allocation")]
-	public int ThreadsPerAllocation { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ThreadsPerAllocation { get; set; }
 }

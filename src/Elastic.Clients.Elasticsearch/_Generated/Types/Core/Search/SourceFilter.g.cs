@@ -17,153 +17,204 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class SourceFilterConverter : JsonConverter<SourceFilter>
+internal sealed partial class SourceFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>
 {
-	public override SourceFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new SourceFilter();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "excludes" || property == "exclude")
-				{
-					reader.Read();
-					variant.Excludes = new FieldsConverter().Read(ref reader, typeToConvert, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes1 = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes1 = System.Text.Json.JsonEncodedText.Encode("include");
 
-				if (property == "includes" || property == "include")
-				{
-					reader.Read();
-					variant.Includes = new FieldsConverter().Read(ref reader, typeToConvert, options);
-					continue;
-				}
-			}
+	public override Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Fields?>(options, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+			return new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				Includes = value
+			};
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propExcludes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propIncludes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExcludes.TryReadProperty(ref reader, options, PropExcludes, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))) || propExcludes.TryReadProperty(ref reader, options, PropExcludes1, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propIncludes.TryReadProperty(ref reader, options, PropIncludes, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))) || propIncludes.TryReadProperty(ref reader, options, PropIncludes1, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Excludes = propExcludes.Value,
+			Includes = propIncludes.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, SourceFilter value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SourceFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Excludes is not null)
-		{
-			writer.WritePropertyName("excludes");
-			new FieldsConverter().Write(writer, value.Excludes, options);
-		}
-
-		if (value.Includes is not null)
-		{
-			writer.WritePropertyName("includes");
-			new FieldsConverter().Write(writer, value.Includes, options);
-		}
-
+		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(SourceFilterConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterConverter))]
 public sealed partial class SourceFilter
 {
+#if NET7_0_OR_GREATER
+	public SourceFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SourceFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 }
 
-public sealed partial class SourceFilterDescriptor<TDocument> : SerializableDescriptor<SourceFilterDescriptor<TDocument>>
+public readonly partial struct SourceFilterDescriptor<TDocument>
 {
-	internal SourceFilterDescriptor(Action<SourceFilterDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Instance { get; init; }
 
-	public SourceFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceFilterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? ExcludesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? IncludesValue { get; set; }
-
-	public SourceFilterDescriptor<TDocument> Excludes(Elastic.Clients.Elasticsearch.Fields? excludes)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceFilterDescriptor()
 	{
-		ExcludesValue = excludes;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SourceFilterDescriptor<TDocument> Includes(Elastic.Clients.Elasticsearch.Fields? includes)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance) => new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Excludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		IncludesValue = includes;
-		return Self;
+		Instance.Excludes = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Excludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		if (ExcludesValue is not null)
+		Instance.Excludes = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Includes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Includes = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Includes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Includes = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("excludes");
-			JsonSerializer.Serialize(writer, ExcludesValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IncludesValue is not null)
-		{
-			writer.WritePropertyName("includes");
-			JsonSerializer.Serialize(writer, IncludesValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SourceFilterDescriptor : SerializableDescriptor<SourceFilterDescriptor>
+public readonly partial struct SourceFilterDescriptor
 {
-	internal SourceFilterDescriptor(Action<SourceFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Instance { get; init; }
 
-	public SourceFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceFilterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? ExcludesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? IncludesValue { get; set; }
-
-	public SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? excludes)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceFilterDescriptor()
 	{
-		ExcludesValue = excludes;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? includes)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance) => new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		IncludesValue = includes;
-		return Self;
+		Instance.Excludes = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Excludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		if (ExcludesValue is not null)
+		Instance.Excludes = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Includes = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Includes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Includes = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("excludes");
-			JsonSerializer.Serialize(writer, ExcludesValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IncludesValue is not null)
-		{
-			writer.WritePropertyName("includes");
-			JsonSerializer.Serialize(writer, IncludesValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

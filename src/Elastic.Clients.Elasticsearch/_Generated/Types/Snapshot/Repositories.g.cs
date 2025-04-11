@@ -17,145 +17,48 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public partial class Repositories : IsADictionary<string, IRepository>
+internal sealed partial class RepositoriesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.Repositories>
+{
+	public override Elastic.Clients.Elasticsearch.Snapshot.Repositories Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Snapshot.Repositories(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>(o, null, null)));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.Repositories value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RepositoriesConverter))]
+public sealed partial class Repositories : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>
 {
 	public Repositories()
 	{
 	}
 
-	public Repositories(IDictionary<string, IRepository> container) : base(container)
+	public Repositories(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(string name, IRepository repository) => BackingDictionary.Add(Sanitize(name), repository);
-	public bool TryGetRepository(string name, [NotNullWhen(returnValue: true)] out IRepository repository) => BackingDictionary.TryGetValue(Sanitize(name), out repository);
+	public void Add(string key, Elastic.Clients.Elasticsearch.Snapshot.IRepository value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetRepository(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.Snapshot.IRepository value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetRepository<T>(string name, [NotNullWhen(returnValue: true)] out T? repository) where T : class, IRepository
+	public bool TryGetRepository<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, IRepository
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			repository = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		repository = null;
+		value = null;
 		return false;
 	}
-}
-
-public sealed partial class RepositoriesDescriptor : IsADictionaryDescriptor<RepositoriesDescriptor, Repositories, string, IRepository>
-{
-	public RepositoriesDescriptor() : base(new Repositories())
-	{
-	}
-
-	public RepositoriesDescriptor(Repositories repositories) : base(repositories ?? new Repositories())
-	{
-	}
-
-	public RepositoriesDescriptor Azure(string repositoryName) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor, AzureRepository>(repositoryName, null);
-	public RepositoriesDescriptor Azure(string repositoryName, Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor, AzureRepository>(repositoryName, configure);
-	public RepositoriesDescriptor Azure(string repositoryName, AzureRepository azureRepository) => AssignVariant(repositoryName, azureRepository);
-	public RepositoriesDescriptor Gcs(string repositoryName) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor, GcsRepository>(repositoryName, null);
-	public RepositoriesDescriptor Gcs(string repositoryName, Action<Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor, GcsRepository>(repositoryName, configure);
-	public RepositoriesDescriptor Gcs(string repositoryName, GcsRepository gcsRepository) => AssignVariant(repositoryName, gcsRepository);
-	public RepositoriesDescriptor ReadOnlyUrl(string repositoryName) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor, ReadOnlyUrlRepository>(repositoryName, null);
-	public RepositoriesDescriptor ReadOnlyUrl(string repositoryName, Action<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor, ReadOnlyUrlRepository>(repositoryName, configure);
-	public RepositoriesDescriptor ReadOnlyUrl(string repositoryName, ReadOnlyUrlRepository readOnlyUrlRepository) => AssignVariant(repositoryName, readOnlyUrlRepository);
-	public RepositoriesDescriptor S3(string repositoryName) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor, S3Repository>(repositoryName, null);
-	public RepositoriesDescriptor S3(string repositoryName, Action<Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor, S3Repository>(repositoryName, configure);
-	public RepositoriesDescriptor S3(string repositoryName, S3Repository s3Repository) => AssignVariant(repositoryName, s3Repository);
-	public RepositoriesDescriptor SharedFileSystem(string repositoryName) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor, SharedFileSystemRepository>(repositoryName, null);
-	public RepositoriesDescriptor SharedFileSystem(string repositoryName, Action<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor, SharedFileSystemRepository>(repositoryName, configure);
-	public RepositoriesDescriptor SharedFileSystem(string repositoryName, SharedFileSystemRepository sharedFileSystemRepository) => AssignVariant(repositoryName, sharedFileSystemRepository);
-	public RepositoriesDescriptor SourceOnly(string repositoryName) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor, SourceOnlyRepository>(repositoryName, null);
-	public RepositoriesDescriptor SourceOnly(string repositoryName, Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor, SourceOnlyRepository>(repositoryName, configure);
-	public RepositoriesDescriptor SourceOnly(string repositoryName, SourceOnlyRepository sourceOnlyRepository) => AssignVariant(repositoryName, sourceOnlyRepository);
-}
-
-internal sealed partial class RepositoryInterfaceConverter : JsonConverter<IRepository>
-{
-	public override IRepository Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
-
-		switch (type)
-		{
-			case "azure":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.AzureRepository>(ref reader, options);
-			case "gcs":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.GcsRepository>(ref reader, options);
-			case "url":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository>(ref reader, options);
-			case "s3":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.S3Repository>(ref reader, options);
-			case "fs":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository>(ref reader, options);
-			case "source":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(IRepository));
-				return null;
-		}
-	}
-
-	public override void Write(Utf8JsonWriter writer, IRepository value, JsonSerializerOptions options)
-	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "azure":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository), options);
-				return;
-			case "gcs":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.GcsRepository), options);
-				return;
-			case "url":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository), options);
-				return;
-			case "s3":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.S3Repository), options);
-				return;
-			case "fs":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository), options);
-				return;
-			case "source":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
-	}
-}
-
-[JsonConverter(typeof(RepositoryInterfaceConverter))]
-public partial interface IRepository
-{
-	public string? Type { get; }
 }

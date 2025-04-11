@@ -17,39 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TotalFeatureImportanceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
+	private static readonly System.Text.Json.JsonEncodedText PropImportance = System.Text.Json.JsonEncodedText.Encode("importance");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass>> propClasses = default;
+		LocalJsonValue<string> propFeatureName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics>> propImportance = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClasses.TryReadProperty(ref reader, options, PropClasses, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propFeatureName.TryReadProperty(ref reader, options, PropFeatureName, null))
+			{
+				continue;
+			}
+
+			if (propImportance.TryReadProperty(ref reader, options, PropImportance, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Classes = propClasses.Value,
+			FeatureName = propFeatureName.Value,
+			Importance = propImportance.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClasses, value.Classes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass>(o, v, null));
+		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
+		writer.WriteProperty(options, PropImportance, value.Importance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceConverter))]
 public sealed partial class TotalFeatureImportance
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TotalFeatureImportance(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass> classes, string featureName, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> importance)
+	{
+		Classes = classes;
+		FeatureName = featureName;
+		Importance = importance;
+	}
+#if NET7_0_OR_GREATER
+	public TotalFeatureImportance()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TotalFeatureImportance()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TotalFeatureImportance(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If the trained model is a classification model, feature importance statistics are gathered per target class value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("classes")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass> Classes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass> Classes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The feature for which this importance was calculated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_name")]
-	public string FeatureName { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string FeatureName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of feature importance statistics related to the training data set for this particular feature.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("importance")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; set; }
 }

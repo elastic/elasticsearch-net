@@ -17,39 +17,101 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class LowercaseNormalizer : INormalizer
+internal sealed partial class LowercaseNormalizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerConverter))]
+public sealed partial class LowercaseNormalizer : Elastic.Clients.Elasticsearch.Analysis.INormalizer
+{
+#if NET7_0_OR_GREATER
+	public LowercaseNormalizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public LowercaseNormalizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LowercaseNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "lowercase";
 }
 
-public sealed partial class LowercaseNormalizerDescriptor : SerializableDescriptor<LowercaseNormalizerDescriptor>, IBuildableDescriptor<LowercaseNormalizer>
+public readonly partial struct LowercaseNormalizerDescriptor
 {
-	internal LowercaseNormalizerDescriptor(Action<LowercaseNormalizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer Instance { get; init; }
 
-	public LowercaseNormalizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LowercaseNormalizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer instance)
 	{
+		Instance = instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LowercaseNormalizerDescriptor()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("lowercase");
-		writer.WriteEndObject();
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	LowercaseNormalizer IBuildableDescriptor<LowercaseNormalizer>.Build() => new()
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer instance) => new Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer(Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor descriptor) => descriptor.Instance;
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor>? action)
 	{
-	};
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

@@ -17,24 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters");
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
+	private static readonly System.Text.Json.JsonEncodedText PropOtherBucket = System.Text.Json.JsonEncodedText.Encode("other_bucket");
+	private static readonly System.Text.Json.JsonEncodedText PropOtherBucketKey = System.Text.Json.JsonEncodedText.Encode("other_bucket_key");
+
+	public override Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>?> propFilters = default;
+		LocalJsonValue<bool?> propKeyed = default;
+		LocalJsonValue<bool?> propOtherBucket = default;
+		LocalJsonValue<string?> propOtherBucketKey = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilters.TryReadProperty(ref reader, options, PropFilters, null))
+			{
+				continue;
+			}
+
+			if (propKeyed.TryReadProperty(ref reader, options, PropKeyed, null))
+			{
+				continue;
+			}
+
+			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, null))
+			{
+				continue;
+			}
+
+			if (propOtherBucketKey.TryReadProperty(ref reader, options, PropOtherBucketKey, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filters = propFilters.Value,
+			Keyed = propKeyed.Value,
+			OtherBucket = propOtherBucket.Value,
+			OtherBucketKey = propOtherBucketKey.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilters, value.Filters, null, null);
+		writer.WriteProperty(options, PropKeyed, value.Keyed, null, null);
+		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, null);
+		writer.WriteProperty(options, PropOtherBucketKey, value.OtherBucketKey, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationConverter))]
 public sealed partial class ApiKeyFiltersAggregation
 {
+#if NET7_0_OR_GREATER
+	public ApiKeyFiltersAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ApiKeyFiltersAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filters")]
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? Filters { get; set; }
 
 	/// <summary>
@@ -43,7 +121,6 @@ public sealed partial class ApiKeyFiltersAggregation
 	/// Set to <c>false</c> to return the buckets as an array of objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("keyed")]
 	public bool? Keyed { get; set; }
 
 	/// <summary>
@@ -51,7 +128,6 @@ public sealed partial class ApiKeyFiltersAggregation
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("other_bucket")]
 	public bool? OtherBucket { get; set; }
 
 	/// <summary>
@@ -59,34 +135,48 @@ public sealed partial class ApiKeyFiltersAggregation
 	/// The key with which the other bucket is returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("other_bucket_key")]
 	public string? OtherBucketKey { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(ApiKeyFiltersAggregation apiKeyFiltersAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Filters(apiKeyFiltersAggregation);
 }
 
-public sealed partial class ApiKeyFiltersAggregationDescriptor<TDocument> : SerializableDescriptor<ApiKeyFiltersAggregationDescriptor<TDocument>>
+public readonly partial struct ApiKeyFiltersAggregationDescriptor<TDocument>
 {
-	internal ApiKeyFiltersAggregationDescriptor(Action<ApiKeyFiltersAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Instance { get; init; }
 
-	public ApiKeyFiltersAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyFiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? FiltersValue { get; set; }
-	private bool? KeyedValue { get; set; }
-	private bool? OtherBucketValue { get; set; }
-	private string? OtherBucketKeyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyFiltersAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? filters)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? value)
 	{
-		FiltersValue = filters;
-		return Self;
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of queries from which to build buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -95,10 +185,10 @@ public sealed partial class ApiKeyFiltersAggregationDescriptor<TDocument> : Seri
 	/// Set to <c>false</c> to return the buckets as an array of objects.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor<TDocument> Keyed(bool? keyed = true)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Keyed(bool? value = true)
 	{
-		KeyedValue = keyed;
-		return Self;
+		Instance.Keyed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -106,10 +196,10 @@ public sealed partial class ApiKeyFiltersAggregationDescriptor<TDocument> : Seri
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor<TDocument> OtherBucket(bool? otherBucket = true)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> OtherBucket(bool? value = true)
 	{
-		OtherBucketValue = otherBucket;
-		return Self;
+		Instance.OtherBucket = value;
+		return this;
 	}
 
 	/// <summary>
@@ -117,65 +207,76 @@ public sealed partial class ApiKeyFiltersAggregationDescriptor<TDocument> : Seri
 	/// The key with which the other bucket is returned.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor<TDocument> OtherBucketKey(string? otherBucketKey)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> OtherBucketKey(string? value)
 	{
-		OtherBucketKeyValue = otherBucketKey;
-		return Self;
+		Instance.OtherBucketKey = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (FiltersValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("filters");
-			JsonSerializer.Serialize(writer, FiltersValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (KeyedValue.HasValue)
-		{
-			writer.WritePropertyName("keyed");
-			writer.WriteBooleanValue(KeyedValue.Value);
-		}
-
-		if (OtherBucketValue.HasValue)
-		{
-			writer.WritePropertyName("other_bucket");
-			writer.WriteBooleanValue(OtherBucketValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(OtherBucketKeyValue))
-		{
-			writer.WritePropertyName("other_bucket_key");
-			writer.WriteStringValue(OtherBucketKeyValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class ApiKeyFiltersAggregationDescriptor : SerializableDescriptor<ApiKeyFiltersAggregationDescriptor>
+public readonly partial struct ApiKeyFiltersAggregationDescriptor
 {
-	internal ApiKeyFiltersAggregationDescriptor(Action<ApiKeyFiltersAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Instance { get; init; }
 
-	public ApiKeyFiltersAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyFiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? FiltersValue { get; set; }
-	private bool? KeyedValue { get; set; }
-	private bool? OtherBucketValue { get; set; }
-	private string? OtherBucketKeyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyFiltersAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? filters)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? value)
 	{
-		FiltersValue = filters;
-		return Self;
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of queries from which to build buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of queries from which to build buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -184,10 +285,10 @@ public sealed partial class ApiKeyFiltersAggregationDescriptor : SerializableDes
 	/// Set to <c>false</c> to return the buckets as an array of objects.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor Keyed(bool? keyed = true)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Keyed(bool? value = true)
 	{
-		KeyedValue = keyed;
-		return Self;
+		Instance.Keyed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -195,10 +296,10 @@ public sealed partial class ApiKeyFiltersAggregationDescriptor : SerializableDes
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor OtherBucket(bool? otherBucket = true)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor OtherBucket(bool? value = true)
 	{
-		OtherBucketValue = otherBucket;
-		return Self;
+		Instance.OtherBucket = value;
+		return this;
 	}
 
 	/// <summary>
@@ -206,39 +307,22 @@ public sealed partial class ApiKeyFiltersAggregationDescriptor : SerializableDes
 	/// The key with which the other bucket is returned.
 	/// </para>
 	/// </summary>
-	public ApiKeyFiltersAggregationDescriptor OtherBucketKey(string? otherBucketKey)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor OtherBucketKey(string? value)
 	{
-		OtherBucketKeyValue = otherBucketKey;
-		return Self;
+		Instance.OtherBucketKey = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FiltersValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("filters");
-			JsonSerializer.Serialize(writer, FiltersValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (KeyedValue.HasValue)
-		{
-			writer.WritePropertyName("keyed");
-			writer.WriteBooleanValue(KeyedValue.Value);
-		}
-
-		if (OtherBucketValue.HasValue)
-		{
-			writer.WritePropertyName("other_bucket");
-			writer.WriteBooleanValue(OtherBucketValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(OtherBucketKeyValue))
-		{
-			writer.WritePropertyName("other_bucket_key");
-			writer.WriteStringValue(OtherBucketKeyValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor(new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

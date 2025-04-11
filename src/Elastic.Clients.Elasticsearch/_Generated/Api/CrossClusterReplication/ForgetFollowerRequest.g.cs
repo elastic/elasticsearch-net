@@ -17,21 +17,86 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public sealed partial class ForgetFollowerRequestParameters : RequestParameters
+public sealed partial class ForgetFollowerRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class ForgetFollowerRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerCluster = System.Text.Json.JsonEncodedText.Encode("follower_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndex = System.Text.Json.JsonEncodedText.Encode("follower_index");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndexUuid = System.Text.Json.JsonEncodedText.Encode("follower_index_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderRemoteCluster = System.Text.Json.JsonEncodedText.Encode("leader_remote_cluster");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFollowerCluster = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propFollowerIndex = default;
+		LocalJsonValue<string?> propFollowerIndexUuid = default;
+		LocalJsonValue<string?> propLeaderRemoteCluster = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFollowerCluster.TryReadProperty(ref reader, options, PropFollowerCluster, null))
+			{
+				continue;
+			}
+
+			if (propFollowerIndex.TryReadProperty(ref reader, options, PropFollowerIndex, null))
+			{
+				continue;
+			}
+
+			if (propFollowerIndexUuid.TryReadProperty(ref reader, options, PropFollowerIndexUuid, null))
+			{
+				continue;
+			}
+
+			if (propLeaderRemoteCluster.TryReadProperty(ref reader, options, PropLeaderRemoteCluster, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FollowerCluster = propFollowerCluster.Value,
+			FollowerIndex = propFollowerIndex.Value,
+			FollowerIndexUuid = propFollowerIndexUuid.Value,
+			LeaderRemoteCluster = propLeaderRemoteCluster.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFollowerCluster, value.FollowerCluster, null, null);
+		writer.WriteProperty(options, PropFollowerIndex, value.FollowerIndex, null, null);
+		writer.WriteProperty(options, PropFollowerIndexUuid, value.FollowerIndexUuid, null, null);
+		writer.WriteProperty(options, PropLeaderRemoteCluster, value.LeaderRemoteCluster, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -52,27 +117,52 @@ public sealed partial class ForgetFollowerRequestParameters : RequestParameters
 /// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
 /// </para>
 /// </summary>
-public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestConverter))]
+public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ForgetFollowerRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ForgetFollowerRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ForgetFollowerRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationForgetFollower;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.CrossClusterReplicationForgetFollower;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.forget_follower";
 
-	[JsonInclude, JsonPropertyName("follower_cluster")]
+	/// <summary>
+	/// <para>
+	/// the name of the leader index for which specified follower retention leases should be removed
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public string? FollowerCluster { get; set; }
-	[JsonInclude, JsonPropertyName("follower_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? FollowerIndex { get; set; }
-	[JsonInclude, JsonPropertyName("follower_index_uuid")]
 	public string? FollowerIndexUuid { get; set; }
-	[JsonInclude, JsonPropertyName("leader_remote_cluster")]
 	public string? LeaderRemoteCluster { get; set; }
 }
 
@@ -94,89 +184,124 @@ public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerR
 /// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
 /// </para>
 /// </summary>
-public sealed partial class ForgetFollowerRequestDescriptor<TDocument> : RequestDescriptor<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerRequestParameters>
+public readonly partial struct ForgetFollowerRequestDescriptor
 {
-	internal ForgetFollowerRequestDescriptor(Action<ForgetFollowerRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Instance { get; init; }
 
-	public ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public ForgetFollowerRequestDescriptor() : this(typeof(TDocument))
+	public ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(index);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationForgetFollower;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ccr.forget_follower";
-
-	public ForgetFollowerRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ForgetFollowerRequestDescriptor()
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private string? FollowerClusterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? FollowerIndexValue { get; set; }
-	private string? FollowerIndexUuidValue { get; set; }
-	private string? LeaderRemoteClusterValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor descriptor) => descriptor.Instance;
 
-	public ForgetFollowerRequestDescriptor<TDocument> FollowerCluster(string? followerCluster)
+	/// <summary>
+	/// <para>
+	/// the name of the leader index for which specified follower retention leases should be removed
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		FollowerClusterValue = followerCluster;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public ForgetFollowerRequestDescriptor<TDocument> FollowerIndex(Elastic.Clients.Elasticsearch.IndexName? followerIndex)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FollowerIndexValue = followerIndex;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	public ForgetFollowerRequestDescriptor<TDocument> FollowerIndexUuid(string? followerIndexUuid)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor FollowerCluster(string? value)
 	{
-		FollowerIndexUuidValue = followerIndexUuid;
-		return Self;
+		Instance.FollowerCluster = value;
+		return this;
 	}
 
-	public ForgetFollowerRequestDescriptor<TDocument> LeaderRemoteCluster(string? leaderRemoteCluster)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor FollowerIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		LeaderRemoteClusterValue = leaderRemoteCluster;
-		return Self;
+		Instance.FollowerIndex = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor FollowerIndexUuid(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FollowerClusterValue))
-		{
-			writer.WritePropertyName("follower_cluster");
-			writer.WriteStringValue(FollowerClusterValue);
-		}
+		Instance.FollowerIndexUuid = value;
+		return this;
+	}
 
-		if (FollowerIndexValue is not null)
-		{
-			writer.WritePropertyName("follower_index");
-			JsonSerializer.Serialize(writer, FollowerIndexValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor LeaderRemoteCluster(string? value)
+	{
+		Instance.LeaderRemoteCluster = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(FollowerIndexUuidValue))
-		{
-			writer.WritePropertyName("follower_index_uuid");
-			writer.WriteStringValue(FollowerIndexUuidValue);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(LeaderRemoteClusterValue))
-		{
-			writer.WritePropertyName("leader_remote_cluster");
-			writer.WriteStringValue(LeaderRemoteClusterValue);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -198,84 +323,122 @@ public sealed partial class ForgetFollowerRequestDescriptor<TDocument> : Request
 /// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
 /// </para>
 /// </summary>
-public sealed partial class ForgetFollowerRequestDescriptor : RequestDescriptor<ForgetFollowerRequestDescriptor, ForgetFollowerRequestParameters>
+public readonly partial struct ForgetFollowerRequestDescriptor<TDocument>
 {
-	internal ForgetFollowerRequestDescriptor(Action<ForgetFollowerRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Instance { get; init; }
 
-	public ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationForgetFollower;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ccr.forget_follower";
-
-	public ForgetFollowerRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(index);
 	}
 
-	private string? FollowerClusterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? FollowerIndexValue { get; set; }
-	private string? FollowerIndexUuidValue { get; set; }
-	private string? LeaderRemoteClusterValue { get; set; }
-
-	public ForgetFollowerRequestDescriptor FollowerCluster(string? followerCluster)
+	public ForgetFollowerRequestDescriptor()
 	{
-		FollowerClusterValue = followerCluster;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(typeof(TDocument));
 	}
 
-	public ForgetFollowerRequestDescriptor FollowerIndex(Elastic.Clients.Elasticsearch.IndexName? followerIndex)
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// the name of the leader index for which specified follower retention leases should be removed
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		FollowerIndexValue = followerIndex;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public ForgetFollowerRequestDescriptor FollowerIndexUuid(string? followerIndexUuid)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FollowerIndexUuidValue = followerIndexUuid;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	public ForgetFollowerRequestDescriptor LeaderRemoteCluster(string? leaderRemoteCluster)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> FollowerCluster(string? value)
 	{
-		LeaderRemoteClusterValue = leaderRemoteCluster;
-		return Self;
+		Instance.FollowerCluster = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> FollowerIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FollowerClusterValue))
-		{
-			writer.WritePropertyName("follower_cluster");
-			writer.WriteStringValue(FollowerClusterValue);
-		}
+		Instance.FollowerIndex = value;
+		return this;
+	}
 
-		if (FollowerIndexValue is not null)
-		{
-			writer.WritePropertyName("follower_index");
-			JsonSerializer.Serialize(writer, FollowerIndexValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> FollowerIndexUuid(string? value)
+	{
+		Instance.FollowerIndexUuid = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(FollowerIndexUuidValue))
-		{
-			writer.WritePropertyName("follower_index_uuid");
-			writer.WriteStringValue(FollowerIndexUuidValue);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> LeaderRemoteCluster(string? value)
+	{
+		Instance.LeaderRemoteCluster = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(LeaderRemoteClusterValue))
-		{
-			writer.WritePropertyName("leader_remote_cluster");
-			writer.WriteStringValue(LeaderRemoteClusterValue);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

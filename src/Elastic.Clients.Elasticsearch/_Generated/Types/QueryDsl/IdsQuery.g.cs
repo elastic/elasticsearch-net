@@ -17,18 +17,88 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class IdsQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropValues = System.Text.Json.JsonEncodedText.Encode("values");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ids?> propValues = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propValues.TryReadProperty(ref reader, options, PropValues, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			QueryName = propQueryName.Value,
+			Values = propValues.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropValues, value.Values, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryConverter))]
 public sealed partial class IdsQuery
 {
+#if NET7_0_OR_GREATER
+	public IdsQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IdsQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IdsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,9 +107,7 @@ public sealed partial class IdsQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -47,26 +115,27 @@ public sealed partial class IdsQuery
 	/// An array of document IDs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Ids(idsQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Ids(idsQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Ids(idsQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Ids(idsQuery);
 }
 
-public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQueryDescriptor>
+public readonly partial struct IdsQueryDescriptor
 {
-	internal IdsQueryDescriptor(Action<IdsQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery Instance { get; init; }
 
-	public IdsQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IdsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ids? ValuesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IdsQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery(Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -76,16 +145,16 @@ public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public IdsQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public IdsQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -93,33 +162,22 @@ public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQuery
 	/// An array of document IDs.
 	/// </para>
 	/// </summary>
-	public IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? values)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? value)
 	{
-		ValuesValue = values;
-		return Self;
+		Instance.Values = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ValuesValue is not null)
-		{
-			writer.WritePropertyName("values");
-			JsonSerializer.Serialize(writer, ValuesValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

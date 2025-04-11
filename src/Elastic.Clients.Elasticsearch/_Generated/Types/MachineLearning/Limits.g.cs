@@ -17,26 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class LimitsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Limits>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEffectiveMaxModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("effective_max_model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("max_model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSingleMlNodeProcessors = System.Text.Json.JsonEncodedText.Encode("max_single_ml_node_processors");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalMlMemory = System.Text.Json.JsonEncodedText.Encode("total_ml_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalMlProcessors = System.Text.Json.JsonEncodedText.Encode("total_ml_processors");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Limits Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propEffectiveMaxModelMemoryLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxModelMemoryLimit = default;
+		LocalJsonValue<int?> propMaxSingleMlNodeProcessors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propTotalMlMemory = default;
+		LocalJsonValue<int?> propTotalMlProcessors = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEffectiveMaxModelMemoryLimit.TryReadProperty(ref reader, options, PropEffectiveMaxModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (propMaxModelMemoryLimit.TryReadProperty(ref reader, options, PropMaxModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (propMaxSingleMlNodeProcessors.TryReadProperty(ref reader, options, PropMaxSingleMlNodeProcessors, null))
+			{
+				continue;
+			}
+
+			if (propTotalMlMemory.TryReadProperty(ref reader, options, PropTotalMlMemory, null))
+			{
+				continue;
+			}
+
+			if (propTotalMlProcessors.TryReadProperty(ref reader, options, PropTotalMlProcessors, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Limits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EffectiveMaxModelMemoryLimit = propEffectiveMaxModelMemoryLimit.Value,
+			MaxModelMemoryLimit = propMaxModelMemoryLimit.Value,
+			MaxSingleMlNodeProcessors = propMaxSingleMlNodeProcessors.Value,
+			TotalMlMemory = propTotalMlMemory.Value,
+			TotalMlProcessors = propTotalMlProcessors.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Limits value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEffectiveMaxModelMemoryLimit, value.EffectiveMaxModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropMaxModelMemoryLimit, value.MaxModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropMaxSingleMlNodeProcessors, value.MaxSingleMlNodeProcessors, null, null);
+		writer.WriteProperty(options, PropTotalMlMemory, value.TotalMlMemory, null, null);
+		writer.WriteProperty(options, PropTotalMlProcessors, value.TotalMlProcessors, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.LimitsConverter))]
 public sealed partial class Limits
 {
-	[JsonInclude, JsonPropertyName("effective_max_model_memory_limit")]
-	public Elastic.Clients.Elasticsearch.ByteSize? EffectiveMaxModelMemoryLimit { get; init; }
-	[JsonInclude, JsonPropertyName("max_model_memory_limit")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxModelMemoryLimit { get; init; }
-	[JsonInclude, JsonPropertyName("max_single_ml_node_processors")]
-	public int? MaxSingleMlNodeProcessors { get; init; }
-	[JsonInclude, JsonPropertyName("total_ml_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize TotalMlMemory { get; init; }
-	[JsonInclude, JsonPropertyName("total_ml_processors")]
-	public int? TotalMlProcessors { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Limits(Elastic.Clients.Elasticsearch.ByteSize totalMlMemory)
+	{
+		TotalMlMemory = totalMlMemory;
+	}
+#if NET7_0_OR_GREATER
+	public Limits()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Limits()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Limits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.ByteSize? EffectiveMaxModelMemoryLimit { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxModelMemoryLimit { get; set; }
+	public int? MaxSingleMlNodeProcessors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize TotalMlMemory { get; set; }
+	public int? TotalMlProcessors { get; set; }
 }

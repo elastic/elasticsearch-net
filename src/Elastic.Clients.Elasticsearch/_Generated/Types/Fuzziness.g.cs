@@ -17,29 +17,81 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
-public sealed partial class Fuzziness : Union<string, int>
+internal sealed partial class FuzzinessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Fuzziness>
 {
-	public Fuzziness(string Fuzziness) : base(Fuzziness)
+	public override Elastic.Clients.Elasticsearch.Fuzziness Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Fuzziness(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Fuzziness(reader.ReadValue<int>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Fuzziness)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Fuzziness value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
+	}
+}
+
+/// <summary>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.FuzzinessConverter))]
+public sealed partial class Fuzziness : Elastic.Clients.Elasticsearch.Union<string, int>
+{
+	public Fuzziness(string value) : base(value)
 	{
 	}
 
-	public Fuzziness(int Fuzziness) : base(Fuzziness)
+	public Fuzziness(int value) : base(value)
 	{
+	}
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Fuzziness(string value) => new Elastic.Clients.Elasticsearch.Fuzziness(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.Fuzziness(int value) => new Elastic.Clients.Elasticsearch.Fuzziness(value);
+}
+
+public readonly partial struct FuzzinessFactory
+{
+	public Elastic.Clients.Elasticsearch.Fuzziness Value(string value)
+	{
+		return new Elastic.Clients.Elasticsearch.Fuzziness(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.Fuzziness Value(int value)
+	{
+		return new Elastic.Clients.Elasticsearch.Fuzziness(value);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Fuzziness Build(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.FuzzinessFactory();
+		return action.Invoke(builder);
 	}
 }

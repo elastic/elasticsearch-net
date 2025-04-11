@@ -11,8 +11,6 @@ namespace Elastic.Clients.Elasticsearch.Requests;
 public abstract class PlainRequest<TParameters> : Request<TParameters>
 	where TParameters : RequestParameters, new()
 {
-	private IRequestConfiguration? _requestConfiguration; // TODO: Remove this from the request classes and add to the endpoint methods instead
-
 	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal PlainRequest() { }
@@ -36,7 +34,7 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public string[] FilterPath
+	public string[]? FilterPath
 	{
 		get => Q<string[]>("filter_path");
 		set => Q("filter_path", value);
@@ -63,7 +61,7 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 	///     requests.
 	/// </summary>
 	[JsonIgnore]
-	public string SourceQueryString
+	public string? SourceQueryString
 	{
 		get => Q<string>("source");
 		set => Q("source", value);
@@ -73,9 +71,5 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 	/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
 	/// </summary>
 	[JsonIgnore]
-	public IRequestConfiguration? RequestConfiguration
-	{
-		get => _requestConfiguration;
-		set => _requestConfiguration = value;
-	}
+	public IRequestConfiguration? RequestConfiguration { get; set; }
 }

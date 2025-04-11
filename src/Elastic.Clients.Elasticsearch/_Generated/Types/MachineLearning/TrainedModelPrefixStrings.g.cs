@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelPrefixStringsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propIngest = default;
+		LocalJsonValue<string?> propSearch = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
+
+			if (propSearch.TryReadProperty(ref reader, options, PropSearch, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Ingest = propIngest.Value,
+			Search = propSearch.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropSearch, value.Search, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsConverter))]
 public sealed partial class TrainedModelPrefixStrings
 {
+#if NET7_0_OR_GREATER
+	public TrainedModelPrefixStrings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TrainedModelPrefixStrings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// String prepended to input at ingest
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ingest")]
 	public string? Ingest { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class TrainedModelPrefixStrings
 	/// String prepended to input at search
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search")]
 	public string? Search { get; set; }
 }
 
-public sealed partial class TrainedModelPrefixStringsDescriptor : SerializableDescriptor<TrainedModelPrefixStringsDescriptor>
+public readonly partial struct TrainedModelPrefixStringsDescriptor
 {
-	internal TrainedModelPrefixStringsDescriptor(Action<TrainedModelPrefixStringsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings Instance { get; init; }
 
-	public TrainedModelPrefixStringsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelPrefixStringsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings instance)
 	{
+		Instance = instance;
 	}
 
-	private string? IngestValue { get; set; }
-	private string? SearchValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelPrefixStringsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// String prepended to input at ingest
 	/// </para>
 	/// </summary>
-	public TrainedModelPrefixStringsDescriptor Ingest(string? ingest)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor Ingest(string? value)
 	{
-		IngestValue = ingest;
-		return Self;
+		Instance.Ingest = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class TrainedModelPrefixStringsDescriptor : SerializableDe
 	/// String prepended to input at search
 	/// </para>
 	/// </summary>
-	public TrainedModelPrefixStringsDescriptor Search(string? search)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor Search(string? value)
 	{
-		SearchValue = search;
-		return Self;
+		Instance.Search = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(IngestValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("ingest");
-			writer.WriteStringValue(IngestValue);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(SearchValue))
-		{
-			writer.WritePropertyName("search");
-			writer.WriteStringValue(SearchValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

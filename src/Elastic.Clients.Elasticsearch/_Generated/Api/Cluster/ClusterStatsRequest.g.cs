@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class ClusterStatsRequestParameters : RequestParameters
+public sealed partial class ClusterStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,25 +42,66 @@ public sealed partial class ClusterStatsRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class ClusterStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get cluster statistics.
 /// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 /// </para>
 /// </summary>
-public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestConverter))]
+public sealed partial class ClusterStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>
 {
-	public ClusterStatsRequest()
-	{
-	}
-
 	public ClusterStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClusterStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ClusterStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.ClusterStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -75,10 +109,16 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Include remote cluster data into the response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeRemotes { get => Q<bool?>("include_remotes"); set => Q("include_remotes", value); }
 
 	/// <summary>
@@ -88,7 +128,6 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 	/// However, timed out nodes are included in the response’s <c>_nodes.failed</c> property. Defaults to no timeout.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -98,36 +137,116 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 /// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 /// </para>
 /// </summary>
-public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
+public readonly partial struct ClusterStatsRequestDescriptor
 {
-	internal ClusterStatsRequestDescriptor(Action<ClusterStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest Instance { get; init; }
 
-	public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(nodeId);
 	}
 
 	public ClusterStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "cluster.stats";
-
-	public ClusterStatsRequestDescriptor IncludeRemotes(bool? includeRemotes = true) => Qs("include_remotes", includeRemotes);
-	public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
-		RouteValues.Optional("node_id", nodeId);
-		return Self;
+		Instance.NodeId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Include remote cluster data into the response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor IncludeRemotes(bool? value = true)
 	{
+		Instance.IncludeRemotes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for each node to respond.
+	/// If a node does not respond before its timeout expires, the response does not include its stats.
+	/// However, timed out nodes are included in the response’s <c>_nodes.failed</c> property. Defaults to no timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

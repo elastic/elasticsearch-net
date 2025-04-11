@@ -17,41 +17,180 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class RequestCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.RequestCounts>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropGetBlob = System.Text.Json.JsonEncodedText.Encode("GetBlob");
+	private static readonly System.Text.Json.JsonEncodedText PropGetBlobProperties = System.Text.Json.JsonEncodedText.Encode("GetBlobProperties");
+	private static readonly System.Text.Json.JsonEncodedText PropGetObject = System.Text.Json.JsonEncodedText.Encode("GetObject");
+	private static readonly System.Text.Json.JsonEncodedText PropInsertObject = System.Text.Json.JsonEncodedText.Encode("InsertObject");
+	private static readonly System.Text.Json.JsonEncodedText PropListBlobs = System.Text.Json.JsonEncodedText.Encode("ListBlobs");
+	private static readonly System.Text.Json.JsonEncodedText PropListObjects = System.Text.Json.JsonEncodedText.Encode("ListObjects");
+	private static readonly System.Text.Json.JsonEncodedText PropPutBlob = System.Text.Json.JsonEncodedText.Encode("PutBlob");
+	private static readonly System.Text.Json.JsonEncodedText PropPutBlock = System.Text.Json.JsonEncodedText.Encode("PutBlock");
+	private static readonly System.Text.Json.JsonEncodedText PropPutBlockList = System.Text.Json.JsonEncodedText.Encode("PutBlockList");
+	private static readonly System.Text.Json.JsonEncodedText PropPutMultipartObject = System.Text.Json.JsonEncodedText.Encode("PutMultipartObject");
+	private static readonly System.Text.Json.JsonEncodedText PropPutObject = System.Text.Json.JsonEncodedText.Encode("PutObject");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.RequestCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propGetBlob = default;
+		LocalJsonValue<long?> propGetBlobProperties = default;
+		LocalJsonValue<long?> propGetObject = default;
+		LocalJsonValue<long?> propInsertObject = default;
+		LocalJsonValue<long?> propListBlobs = default;
+		LocalJsonValue<long?> propListObjects = default;
+		LocalJsonValue<long?> propPutBlob = default;
+		LocalJsonValue<long?> propPutBlock = default;
+		LocalJsonValue<long?> propPutBlockList = default;
+		LocalJsonValue<long?> propPutMultipartObject = default;
+		LocalJsonValue<long?> propPutObject = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propGetBlob.TryReadProperty(ref reader, options, PropGetBlob, null))
+			{
+				continue;
+			}
+
+			if (propGetBlobProperties.TryReadProperty(ref reader, options, PropGetBlobProperties, null))
+			{
+				continue;
+			}
+
+			if (propGetObject.TryReadProperty(ref reader, options, PropGetObject, null))
+			{
+				continue;
+			}
+
+			if (propInsertObject.TryReadProperty(ref reader, options, PropInsertObject, null))
+			{
+				continue;
+			}
+
+			if (propListBlobs.TryReadProperty(ref reader, options, PropListBlobs, null))
+			{
+				continue;
+			}
+
+			if (propListObjects.TryReadProperty(ref reader, options, PropListObjects, null))
+			{
+				continue;
+			}
+
+			if (propPutBlob.TryReadProperty(ref reader, options, PropPutBlob, null))
+			{
+				continue;
+			}
+
+			if (propPutBlock.TryReadProperty(ref reader, options, PropPutBlock, null))
+			{
+				continue;
+			}
+
+			if (propPutBlockList.TryReadProperty(ref reader, options, PropPutBlockList, null))
+			{
+				continue;
+			}
+
+			if (propPutMultipartObject.TryReadProperty(ref reader, options, PropPutMultipartObject, null))
+			{
+				continue;
+			}
+
+			if (propPutObject.TryReadProperty(ref reader, options, PropPutObject, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.RequestCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			GetBlob = propGetBlob.Value,
+			GetBlobProperties = propGetBlobProperties.Value,
+			GetObject = propGetObject.Value,
+			InsertObject = propInsertObject.Value,
+			ListBlobs = propListBlobs.Value,
+			ListObjects = propListObjects.Value,
+			PutBlob = propPutBlob.Value,
+			PutBlock = propPutBlock.Value,
+			PutBlockList = propPutBlockList.Value,
+			PutMultipartObject = propPutMultipartObject.Value,
+			PutObject = propPutObject.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.RequestCounts value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropGetBlob, value.GetBlob, null, null);
+		writer.WriteProperty(options, PropGetBlobProperties, value.GetBlobProperties, null, null);
+		writer.WriteProperty(options, PropGetObject, value.GetObject, null, null);
+		writer.WriteProperty(options, PropInsertObject, value.InsertObject, null, null);
+		writer.WriteProperty(options, PropListBlobs, value.ListBlobs, null, null);
+		writer.WriteProperty(options, PropListObjects, value.ListObjects, null, null);
+		writer.WriteProperty(options, PropPutBlob, value.PutBlob, null, null);
+		writer.WriteProperty(options, PropPutBlock, value.PutBlock, null, null);
+		writer.WriteProperty(options, PropPutBlockList, value.PutBlockList, null, null);
+		writer.WriteProperty(options, PropPutMultipartObject, value.PutMultipartObject, null, null);
+		writer.WriteProperty(options, PropPutObject, value.PutObject, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.RequestCountsConverter))]
 public sealed partial class RequestCounts
 {
+#if NET7_0_OR_GREATER
+	public RequestCounts()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RequestCounts()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RequestCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of Get Blob requests (Azure)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("GetBlob")]
-	public long? Getblob { get; init; }
+	public long? GetBlob { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of Get Blob Properties requests (Azure)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("GetBlobProperties")]
-	public long? Getblobproperties { get; init; }
+	public long? GetBlobProperties { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of get object requests (GCP, S3)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("GetObject")]
-	public long? Getobject { get; init; }
+	public long? GetObject { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -60,62 +199,54 @@ public sealed partial class RequestCounts
 	/// since they are billed as an individual operation. (GCP)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("InsertObject")]
-	public long? Insertobject { get; init; }
+	public long? InsertObject { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of List Blobs requests (Azure)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ListBlobs")]
-	public long? Listblobs { get; init; }
+	public long? ListBlobs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of list objects requests (GCP, S3)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ListObjects")]
-	public long? Listobjects { get; init; }
+	public long? ListObjects { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of Put Blob requests (Azure)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("PutBlob")]
-	public long? Putblob { get; init; }
+	public long? PutBlob { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of Put Block (Azure)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("PutBlock")]
-	public long? Putblock { get; init; }
+	public long? PutBlock { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of Put Block List requests
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("PutBlockList")]
-	public long? Putblocklist { get; init; }
+	public long? PutBlockList { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of Multipart requests, including CreateMultipartUpload, UploadPart and CompleteMultipartUpload requests (S3)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("PutMultipartObject")]
-	public long? Putmultipartobject { get; init; }
+	public long? PutMultipartObject { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of PutObject requests (S3)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("PutObject")]
-	public long? Putobject { get; init; }
+	public long? PutObject { get; set; }
 }

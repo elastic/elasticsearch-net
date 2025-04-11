@@ -17,32 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class PhraseSuggestCollateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropPrune = System.Text.Json.JsonEncodedText.Encode("prune");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<bool?> propPrune = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPrune.TryReadProperty(ref reader, options, PropPrune, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Params = propParams.Value,
+			Prune = propPrune.Value,
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPrune, value.Prune, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateConverter))]
 public sealed partial class PhraseSuggestCollate
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public PhraseSuggestCollate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PhraseSuggestCollate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Parameters to use if the query is templated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prune")]
 	public bool? Prune { get; set; }
 
 	/// <summary>
@@ -50,33 +124,70 @@ public sealed partial class PhraseSuggestCollate
 	/// A collate query that is run once for every suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Query { get; set; }
 }
 
-public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescriptor<PhraseSuggestCollateDescriptor>
+public readonly partial struct PhraseSuggestCollateDescriptor
 {
-	internal PhraseSuggestCollateDescriptor(Action<PhraseSuggestCollateDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate Instance { get; init; }
 
-	public PhraseSuggestCollateDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestCollateDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate instance)
 	{
+		Instance = instance;
 	}
 
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private bool? PruneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor> QueryDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestCollateDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Parameters to use if the query is templated.
 	/// </para>
 	/// </summary>
-	public PhraseSuggestCollateDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Parameters to use if the query is templated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Parameters to use if the query is templated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -84,10 +195,10 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	/// Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
 	/// </para>
 	/// </summary>
-	public PhraseSuggestCollateDescriptor Prune(bool? prune = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Prune(bool? value = true)
 	{
-		PruneValue = prune;
-		return Self;
+		Instance.Prune = value;
+		return this;
 	}
 
 	/// <summary>
@@ -95,61 +206,39 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	/// A collate query that is run once for every suggestion.
 	/// </para>
 	/// </summary>
-	public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery query)
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A collate query that is run once for every suggestion.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Query()
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor.Build(null);
+		return this;
 	}
 
-	public PhraseSuggestCollateDescriptor Query(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A collate query that is run once for every suggestion.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor>? action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (PruneValue.HasValue)
-		{
-			writer.WritePropertyName("prune");
-			writer.WriteBooleanValue(PruneValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

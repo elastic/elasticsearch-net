@@ -17,29 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
+
+internal sealed partial class NlpBertTokenizationConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDoLowerCase = System.Text.Json.JsonEncodedText.Encode("do_lower_case");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSequenceLength = System.Text.Json.JsonEncodedText.Encode("max_sequence_length");
+	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span");
+	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate");
+	private static readonly System.Text.Json.JsonEncodedText PropWithSpecialTokens = System.Text.Json.JsonEncodedText.Encode("with_special_tokens");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDoLowerCase = default;
+		LocalJsonValue<int?> propMaxSequenceLength = default;
+		LocalJsonValue<int?> propSpan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate?> propTruncate = default;
+		LocalJsonValue<bool?> propWithSpecialTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDoLowerCase.TryReadProperty(ref reader, options, PropDoLowerCase, null))
+			{
+				continue;
+			}
+
+			if (propMaxSequenceLength.TryReadProperty(ref reader, options, PropMaxSequenceLength, null))
+			{
+				continue;
+			}
+
+			if (propSpan.TryReadProperty(ref reader, options, PropSpan, null))
+			{
+				continue;
+			}
+
+			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, null))
+			{
+				continue;
+			}
+
+			if (propWithSpecialTokens.TryReadProperty(ref reader, options, PropWithSpecialTokens, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DoLowerCase = propDoLowerCase.Value,
+			MaxSequenceLength = propMaxSequenceLength.Value,
+			Span = propSpan.Value,
+			Truncate = propTruncate.Value,
+			WithSpecialTokens = propWithSpecialTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDoLowerCase, value.DoLowerCase, null, null);
+		writer.WriteProperty(options, PropMaxSequenceLength, value.MaxSequenceLength, null, null);
+		writer.WriteProperty(options, PropSpan, value.Span, null, null);
+		writer.WriteProperty(options, PropTruncate, value.Truncate, null, null);
+		writer.WriteProperty(options, PropWithSpecialTokens, value.WithSpecialTokens, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// BERT and MPNet tokenization configuration options
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigConverter))]
 public sealed partial class NlpBertTokenizationConfig
 {
+#if NET7_0_OR_GREATER
+	public NlpBertTokenizationConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public NlpBertTokenizationConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Should the tokenizer lower case the text
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("do_lower_case")]
 	public bool? DoLowerCase { get; set; }
 
 	/// <summary>
@@ -47,7 +134,6 @@ public sealed partial class NlpBertTokenizationConfig
 	/// Maximum input sequence length for the model
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_sequence_length")]
 	public int? MaxSequenceLength { get; set; }
 
 	/// <summary>
@@ -55,7 +141,6 @@ public sealed partial class NlpBertTokenizationConfig
 	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
 
 	/// <summary>
@@ -63,7 +148,6 @@ public sealed partial class NlpBertTokenizationConfig
 	/// Should tokenization input be automatically truncated before sending to the model for inference
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
 
 	/// <summary>
@@ -71,7 +155,6 @@ public sealed partial class NlpBertTokenizationConfig
 	/// Is tokenization completed with special tokens
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("with_special_tokens")]
 	public bool? WithSpecialTokens { get; set; }
 }
 
@@ -80,29 +163,34 @@ public sealed partial class NlpBertTokenizationConfig
 /// BERT and MPNet tokenization configuration options
 /// </para>
 /// </summary>
-public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDescriptor<NlpBertTokenizationConfigDescriptor>
+public readonly partial struct NlpBertTokenizationConfigDescriptor
 {
-	internal NlpBertTokenizationConfigDescriptor(Action<NlpBertTokenizationConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig Instance { get; init; }
 
-	public NlpBertTokenizationConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NlpBertTokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? DoLowerCaseValue { get; set; }
-	private int? MaxSequenceLengthValue { get; set; }
-	private int? SpanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? TruncateValue { get; set; }
-	private bool? WithSpecialTokensValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NlpBertTokenizationConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Should the tokenizer lower case the text
 	/// </para>
 	/// </summary>
-	public NlpBertTokenizationConfigDescriptor DoLowerCase(bool? doLowerCase = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor DoLowerCase(bool? value = true)
 	{
-		DoLowerCaseValue = doLowerCase;
-		return Self;
+		Instance.DoLowerCase = value;
+		return this;
 	}
 
 	/// <summary>
@@ -110,10 +198,10 @@ public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDe
 	/// Maximum input sequence length for the model
 	/// </para>
 	/// </summary>
-	public NlpBertTokenizationConfigDescriptor MaxSequenceLength(int? maxSequenceLength)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor MaxSequenceLength(int? value)
 	{
-		MaxSequenceLengthValue = maxSequenceLength;
-		return Self;
+		Instance.MaxSequenceLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -121,10 +209,10 @@ public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDe
 	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
 	/// </para>
 	/// </summary>
-	public NlpBertTokenizationConfigDescriptor Span(int? span)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor Span(int? value)
 	{
-		SpanValue = span;
-		return Self;
+		Instance.Span = value;
+		return this;
 	}
 
 	/// <summary>
@@ -132,10 +220,10 @@ public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDe
 	/// Should tokenization input be automatically truncated before sending to the model for inference
 	/// </para>
 	/// </summary>
-	public NlpBertTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? truncate)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? value)
 	{
-		TruncateValue = truncate;
-		return Self;
+		Instance.Truncate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -143,45 +231,22 @@ public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDe
 	/// Is tokenization completed with special tokens
 	/// </para>
 	/// </summary>
-	public NlpBertTokenizationConfigDescriptor WithSpecialTokens(bool? withSpecialTokens = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor WithSpecialTokens(bool? value = true)
 	{
-		WithSpecialTokensValue = withSpecialTokens;
-		return Self;
+		Instance.WithSpecialTokens = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DoLowerCaseValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("do_lower_case");
-			writer.WriteBooleanValue(DoLowerCaseValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxSequenceLengthValue.HasValue)
-		{
-			writer.WritePropertyName("max_sequence_length");
-			writer.WriteNumberValue(MaxSequenceLengthValue.Value);
-		}
-
-		if (SpanValue.HasValue)
-		{
-			writer.WritePropertyName("span");
-			writer.WriteNumberValue(SpanValue.Value);
-		}
-
-		if (TruncateValue is not null)
-		{
-			writer.WritePropertyName("truncate");
-			JsonSerializer.Serialize(writer, TruncateValue, options);
-		}
-
-		if (WithSpecialTokensValue.HasValue)
-		{
-			writer.WritePropertyName("with_special_tokens");
-			writer.WriteBooleanValue(WithSpecialTokensValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

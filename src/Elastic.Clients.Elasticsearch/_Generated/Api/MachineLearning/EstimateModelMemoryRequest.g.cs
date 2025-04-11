@@ -17,36 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class EstimateModelMemoryRequestParameters : RequestParameters
+public sealed partial class EstimateModelMemoryRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class EstimateModelMemoryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBucketCardinality = System.Text.Json.JsonEncodedText.Encode("max_bucket_cardinality");
+	private static readonly System.Text.Json.JsonEncodedText PropOverallCardinality = System.Text.Json.JsonEncodedText.Encode("overall_cardinality");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig?> propAnalysisConfig = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>?> propMaxBucketCardinality = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>?> propOverallCardinality = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalysisConfig.TryReadProperty(ref reader, options, PropAnalysisConfig, null))
+			{
+				continue;
+			}
+
+			if (propMaxBucketCardinality.TryReadProperty(ref reader, options, PropMaxBucketCardinality, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propOverallCardinality.TryReadProperty(ref reader, options, PropOverallCardinality, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AnalysisConfig = propAnalysisConfig.Value,
+			MaxBucketCardinality = propMaxBucketCardinality.Value,
+			OverallCardinality = propOverallCardinality.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
+		writer.WriteProperty(options, PropMaxBucketCardinality, value.MaxBucketCardinality, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, v, null, null));
+		writer.WriteProperty(options, PropOverallCardinality, value.OverallCardinality, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Estimate job model memory usage.
-/// Makes an estimation of the memory usage for an anomaly detection job model.
-/// It is based on analysis configuration details for the job and cardinality
+/// </para>
+/// <para>
+/// Make an estimation of the memory usage for an anomaly detection job model.
+/// The estimate is based on analysis configuration details for the job and cardinality
 /// estimates for the fields it references.
 /// </para>
 /// </summary>
-public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateModelMemoryRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestConverter))]
+public sealed partial class EstimateModelMemoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEstimateModelMemory;
+#if NET7_0_OR_GREATER
+	public EstimateModelMemoryRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public EstimateModelMemoryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningEstimateModelMemory;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -58,7 +127,6 @@ public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateMo
 	/// <c>analysis_config</c> component of the body of this API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analysis_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? AnalysisConfig { get; set; }
 
 	/// <summary>
@@ -70,8 +138,7 @@ public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateMo
 	/// has no effect on the estimation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_bucket_cardinality")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, long>? MaxBucketCardinality { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? MaxBucketCardinality { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -84,39 +151,36 @@ public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateMo
 	/// <c>over_field_name</c> or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("overall_cardinality")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, long>? OverallCardinality { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? OverallCardinality { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Estimate job model memory usage.
-/// Makes an estimation of the memory usage for an anomaly detection job model.
-/// It is based on analysis configuration details for the job and cardinality
+/// </para>
+/// <para>
+/// Make an estimation of the memory usage for an anomaly detection job model.
+/// The estimate is based on analysis configuration details for the job and cardinality
 /// estimates for the fields it references.
 /// </para>
 /// </summary>
-public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : RequestDescriptor<EstimateModelMemoryRequestDescriptor<TDocument>, EstimateModelMemoryRequestParameters>
+public readonly partial struct EstimateModelMemoryRequestDescriptor
 {
-	internal EstimateModelMemoryRequestDescriptor(Action<EstimateModelMemoryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EstimateModelMemoryRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EstimateModelMemoryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEstimateModelMemory;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.estimate_model_memory";
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? AnalysisConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> AnalysisConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> AnalysisConfigDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, long>? MaxBucketCardinalityValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, long>? OverallCardinalityValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -124,28 +188,34 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 	/// <c>analysis_config</c> component of the body of this API.
 	/// </para>
 	/// </summary>
-	public EstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? analysisConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? value)
 	{
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigValue = analysisConfig;
-		return Self;
+		Instance.AnalysisConfig = value;
+		return this;
 	}
 
-	public EstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AnalysisConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> action)
 	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigDescriptor = descriptor;
-		return Self;
+		Instance.AnalysisConfig = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public EstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AnalysisConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<T>> action)
 	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisConfig = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -157,122 +227,10 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 	/// has no effect on the estimation.
 	/// </para>
 	/// </summary>
-	public EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? value)
 	{
-		MaxBucketCardinalityValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Estimates of the cardinality that is observed for fields over the whole
-	/// time period that the job analyzes data. To produce a good answer, values
-	/// must be provided for fields referenced in the <c>by_field_name</c>,
-	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
-	/// values for other fields has no effect on the estimation. It can be
-	/// omitted from the request if no detectors have a <c>by_field_name</c>,
-	/// <c>over_field_name</c> or <c>partition_field_name</c>.
-	/// </para>
-	/// </summary>
-	public EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>> selector)
-	{
-		OverallCardinalityValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>());
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AnalysisConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigDescriptor, options);
-		}
-		else if (AnalysisConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>(AnalysisConfigDescriptorAction), options);
-		}
-		else if (AnalysisConfigValue is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigValue, options);
-		}
-
-		if (MaxBucketCardinalityValue is not null)
-		{
-			writer.WritePropertyName("max_bucket_cardinality");
-			JsonSerializer.Serialize(writer, MaxBucketCardinalityValue, options);
-		}
-
-		if (OverallCardinalityValue is not null)
-		{
-			writer.WritePropertyName("overall_cardinality");
-			JsonSerializer.Serialize(writer, OverallCardinalityValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Estimate job model memory usage.
-/// Makes an estimation of the memory usage for an anomaly detection job model.
-/// It is based on analysis configuration details for the job and cardinality
-/// estimates for the fields it references.
-/// </para>
-/// </summary>
-public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescriptor<EstimateModelMemoryRequestDescriptor, EstimateModelMemoryRequestParameters>
-{
-	internal EstimateModelMemoryRequestDescriptor(Action<EstimateModelMemoryRequestDescriptor> configure) => configure.Invoke(this);
-
-	public EstimateModelMemoryRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEstimateModelMemory;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.estimate_model_memory";
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? AnalysisConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor AnalysisConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> AnalysisConfigDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, long>? MaxBucketCardinalityValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, long>? OverallCardinalityValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// For a list of the properties that you can specify in the
-	/// <c>analysis_config</c> component of the body of this API.
-	/// </para>
-	/// </summary>
-	public EstimateModelMemoryRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? analysisConfig)
-	{
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigValue = analysisConfig;
-		return Self;
-	}
-
-	public EstimateModelMemoryRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor descriptor)
-	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public EstimateModelMemoryRequestDescriptor AnalysisConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> configure)
-	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = configure;
-		return Self;
+		Instance.MaxBucketCardinality = value;
+		return this;
 	}
 
 	/// <summary>
@@ -284,10 +242,54 @@ public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescri
 	/// has no effect on the estimation.
 	/// </para>
 	/// </summary>
-	public EstimateModelMemoryRequestDescriptor MaxBucketCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality()
 	{
-		MaxBucketCardinalityValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>());
-		return Self;
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong>? action)
+	{
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>>? action)
+	{
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AddMaxBucketCardinality(Elastic.Clients.Elasticsearch.Field key, long value)
+	{
+		Instance.MaxBucketCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.MaxBucketCardinality.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AddMaxBucketCardinality<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, long value)
+	{
+		Instance.MaxBucketCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.MaxBucketCardinality.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -301,43 +303,361 @@ public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescri
 	/// <c>over_field_name</c> or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public EstimateModelMemoryRequestDescriptor OverallCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? value)
 	{
-		OverallCardinalityValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, long>());
-		return Self;
+		Instance.OverallCardinality = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality()
 	{
-		writer.WriteStartObject();
-		if (AnalysisConfigDescriptor is not null)
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong>? action)
+	{
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>>? action)
+	{
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AddOverallCardinality(Elastic.Clients.Elasticsearch.Field key, long value)
+	{
+		Instance.OverallCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.OverallCardinality.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor AddOverallCardinality<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, long value)
+	{
+		Instance.OverallCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.OverallCardinality.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigDescriptor, options);
-		}
-		else if (AnalysisConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor(AnalysisConfigDescriptorAction), options);
-		}
-		else if (AnalysisConfigValue is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxBucketCardinalityValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Estimate job model memory usage.
+/// </para>
+/// <para>
+/// Make an estimation of the memory usage for an anomaly detection job model.
+/// The estimate is based on analysis configuration details for the job and cardinality
+/// estimates for the fields it references.
+/// </para>
+/// </summary>
+public readonly partial struct EstimateModelMemoryRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EstimateModelMemoryRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public EstimateModelMemoryRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig? value)
+	{
+		Instance.AnalysisConfig = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> action)
+	{
+		Instance.AnalysisConfig = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? value)
+	{
+		Instance.MaxBucketCardinality = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality()
+	{
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>>? action)
+	{
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> AddMaxBucketCardinality(Elastic.Clients.Elasticsearch.Field key, long value)
+	{
+		Instance.MaxBucketCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.MaxBucketCardinality.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> AddMaxBucketCardinality(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, long value)
+	{
+		Instance.MaxBucketCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.MaxBucketCardinality.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? value)
+	{
+		Instance.OverallCardinality = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality()
+	{
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>>? action)
+	{
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> AddOverallCardinality(Elastic.Clients.Elasticsearch.Field key, long value)
+	{
+		Instance.OverallCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.OverallCardinality.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> AddOverallCardinality(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, long value)
+	{
+		Instance.OverallCardinality ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, long>();
+		Instance.OverallCardinality.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max_bucket_cardinality");
-			JsonSerializer.Serialize(writer, MaxBucketCardinalityValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (OverallCardinalityValue is not null)
-		{
-			writer.WritePropertyName("overall_cardinality");
-			JsonSerializer.Serialize(writer, OverallCardinalityValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RrfRankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RrfRank>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRankConstant = System.Text.Json.JsonEncodedText.Encode("rank_constant");
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+
+	public override Elastic.Clients.Elasticsearch.RrfRank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propRankConstant = default;
+		LocalJsonValue<long?> propRankWindowSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRankConstant.TryReadProperty(ref reader, options, PropRankConstant, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.RrfRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RankConstant = propRankConstant.Value,
+			RankWindowSize = propRankWindowSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RrfRank value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RrfRankConverter))]
 public sealed partial class RrfRank
 {
+#if NET7_0_OR_GREATER
+	public RrfRank()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RrfRank()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RrfRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// How much influence documents in individual result sets per query have over the final ranked result set
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_constant")]
 	public long? RankConstant { get; set; }
 
 	/// <summary>
@@ -42,32 +102,37 @@ public sealed partial class RrfRank
 	/// Size of the individual result sets per query
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public long? RankWindowSize { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Rank(RrfRank rrfRank) => Elastic.Clients.Elasticsearch.Rank.Rrf(rrfRank);
 }
 
-public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDescriptor>
+public readonly partial struct RrfRankDescriptor
 {
-	internal RrfRankDescriptor(Action<RrfRankDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RrfRank Instance { get; init; }
 
-	public RrfRankDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RrfRankDescriptor(Elastic.Clients.Elasticsearch.RrfRank instance)
 	{
+		Instance = instance;
 	}
 
-	private long? RankConstantValue { get; set; }
-	private long? RankWindowSizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RrfRankDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.RrfRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.RrfRankDescriptor(Elastic.Clients.Elasticsearch.RrfRank instance) => new Elastic.Clients.Elasticsearch.RrfRankDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RrfRank(Elastic.Clients.Elasticsearch.RrfRankDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// How much influence documents in individual result sets per query have over the final ranked result set
 	/// </para>
 	/// </summary>
-	public RrfRankDescriptor RankConstant(long? rankConstant)
+	public Elastic.Clients.Elasticsearch.RrfRankDescriptor RankConstant(long? value)
 	{
-		RankConstantValue = rankConstant;
-		return Self;
+		Instance.RankConstant = value;
+		return this;
 	}
 
 	/// <summary>
@@ -75,27 +140,22 @@ public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDe
 	/// Size of the individual result sets per query
 	/// </para>
 	/// </summary>
-	public RrfRankDescriptor RankWindowSize(long? rankWindowSize)
+	public Elastic.Clients.Elasticsearch.RrfRankDescriptor RankWindowSize(long? value)
 	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
+		Instance.RankWindowSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RrfRank Build(System.Action<Elastic.Clients.Elasticsearch.RrfRankDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (RankConstantValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("rank_constant");
-			writer.WriteNumberValue(RankConstantValue.Value);
+			return new Elastic.Clients.Elasticsearch.RrfRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.RrfRankDescriptor(new Elastic.Clients.Elasticsearch.RrfRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,49 +17,133 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ProcessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Process>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxFileDescriptors = System.Text.Json.JsonEncodedText.Encode("max_file_descriptors");
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
+	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Process Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Cpu?> propCpu = default;
+		LocalJsonValue<int?> propMaxFileDescriptors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.MemoryStats?> propMem = default;
+		LocalJsonValue<int?> propOpenFileDescriptors = default;
+		LocalJsonValue<long?> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCpu.TryReadProperty(ref reader, options, PropCpu, null))
+			{
+				continue;
+			}
+
+			if (propMaxFileDescriptors.TryReadProperty(ref reader, options, PropMaxFileDescriptors, null))
+			{
+				continue;
+			}
+
+			if (propMem.TryReadProperty(ref reader, options, PropMem, null))
+			{
+				continue;
+			}
+
+			if (propOpenFileDescriptors.TryReadProperty(ref reader, options, PropOpenFileDescriptors, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Process(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cpu = propCpu.Value,
+			MaxFileDescriptors = propMaxFileDescriptors.Value,
+			Mem = propMem.Value,
+			OpenFileDescriptors = propOpenFileDescriptors.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Process value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
+		writer.WriteProperty(options, PropMaxFileDescriptors, value.MaxFileDescriptors, null, null);
+		writer.WriteProperty(options, PropMem, value.Mem, null, null);
+		writer.WriteProperty(options, PropOpenFileDescriptors, value.OpenFileDescriptors, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ProcessConverter))]
 public sealed partial class Process
 {
+#if NET7_0_OR_GREATER
+	public Process()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Process()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Process(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains CPU statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cpu")]
-	public Elastic.Clients.Elasticsearch.Nodes.Cpu? Cpu { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.Cpu? Cpu { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of file descriptors allowed on the system, or <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_file_descriptors")]
-	public int? MaxFileDescriptors { get; init; }
+	public int? MaxFileDescriptors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains virtual memory statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mem")]
-	public Elastic.Clients.Elasticsearch.Nodes.MemoryStats? Mem { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.MemoryStats? Mem { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of opened file descriptors associated with the current or <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("open_file_descriptors")]
-	public int? OpenFileDescriptors { get; init; }
+	public int? OpenFileDescriptors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,6 +151,5 @@ public sealed partial class Process
 	/// Recorded in milliseconds since the Unix Epoch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long? Timestamp { get; init; }
+	public long? Timestamp { get; set; }
 }
