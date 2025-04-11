@@ -187,7 +187,7 @@ This property has not been used for some time (replaced by the `FieldAndFormat` 
 
 `Field`/`Fields` static factory methods and conversion operators no longer return nullable references but throw exceptions instead (`Field`) if the input `string`/`Expression`/`PropertyInfo` argument is `null`.
 
-This makes implicit conversions to `Field` more user-friendly without requiring the null-forgiveness operator (`!`) ([read more](index.md/5-field-name-inference)).
+This makes implicit conversions to `Field` more user-friendly without requiring the null-forgiveness operator (`!`) ([read more](index.md#5-field-name-inference)).
 
 #### 8. `FieldValue` [8-fieldvalue]
 
