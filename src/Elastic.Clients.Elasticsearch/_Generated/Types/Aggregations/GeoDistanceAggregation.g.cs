@@ -37,7 +37,7 @@ internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoDistanceType?> propDistanceType = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation?> propOrigin = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>?> propRanges = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?> propRanges = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -56,7 +56,7 @@ internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>(o, null)))
+			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, null)))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json
 		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
-		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>(o, v, null));
+		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, v, null));
 		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
 		writer.WriteEndObject();
 	}
@@ -143,7 +143,7 @@ public sealed partial class GeoDistanceAggregation
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? Ranges { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -232,7 +232,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
@@ -243,7 +243,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
@@ -254,12 +254,12 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.Build(action));
 		}
 
 		Instance.Ranges = items;
@@ -370,7 +370,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
@@ -381,7 +381,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
@@ -392,12 +392,12 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor.Build(action));
 		}
 
 		Instance.Ranges = items;

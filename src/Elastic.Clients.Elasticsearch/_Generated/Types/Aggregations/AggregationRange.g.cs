@@ -23,107 +23,166 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class IAggregationRangeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>
+internal sealed partial class AggregationRangeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>
 {
-	public override Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.UntypedAggregationRange>(options, null);
-	}
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange value, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Aggregations.AggregationRange Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propFrom = default;
+		LocalJsonValue<string?> propKey = default;
+		LocalJsonValue<double?> propTo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			case Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange v:
-				writer.WriteValue(options, v, null);
-				break;
-			case Elastic.Clients.Elasticsearch.Aggregations.NumberAggregationRange v:
-				writer.WriteValue(options, v, null);
-				break;
-			case Elastic.Clients.Elasticsearch.Aggregations.TermAggregationRange v:
-				writer.WriteValue(options, v, null);
-				break;
-			case Elastic.Clients.Elasticsearch.Aggregations.UntypedAggregationRange v:
-				writer.WriteValue(options, v, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange)}'.");
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
+			{
+				continue;
+			}
+
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.AggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			Key = propKey.Value,
+			To = propTo.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.AggregationRange value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
+		writer.WriteEndObject();
 	}
 }
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeConverter))]
-public partial interface IAggregationRange
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeConverter))]
+public sealed partial class AggregationRange
 {
-	public string Type { get; }
+#if NET7_0_OR_GREATER
+	public AggregationRange()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AggregationRange()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Start of the range (inclusive).
+	/// </para>
+	/// </summary>
+	public double? From { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Custom key to return the range with.
+	/// </para>
+	/// </summary>
+	public string? Key { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// End of the range (exclusive).
+	/// </para>
+	/// </summary>
+	public double? To { get; set; }
 }
 
-public readonly partial struct IAggregationRangeFactory
+public readonly partial struct AggregationRangeDescriptor
 {
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Date(Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange value)
+	internal Elastic.Clients.Elasticsearch.Aggregations.AggregationRange Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AggregationRangeDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AggregationRange instance)
 	{
-		return value;
+		Instance = instance;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Date()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AggregationRangeDescriptor()
 	{
-		return Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor.Build(null);
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.AggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Date(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor>? action)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AggregationRange instance) => new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AggregationRange(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Start of the range (inclusive).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor From(double? value)
 	{
-		return Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor.Build(action);
+		Instance.From = value;
+		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Number(Elastic.Clients.Elasticsearch.Aggregations.NumberAggregationRange value)
+	/// <summary>
+	/// <para>
+	/// Custom key to return the range with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor Key(string? value)
 	{
-		return value;
+		Instance.Key = value;
+		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Number()
+	/// <summary>
+	/// <para>
+	/// End of the range (exclusive).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor To(double? value)
 	{
-		return Elastic.Clients.Elasticsearch.Aggregations.NumberAggregationRangeDescriptor.Build(null);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Number(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NumberAggregationRangeDescriptor>? action)
-	{
-		return Elastic.Clients.Elasticsearch.Aggregations.NumberAggregationRangeDescriptor.Build(action);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Term(Elastic.Clients.Elasticsearch.Aggregations.TermAggregationRange value)
-	{
-		return value;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Term()
-	{
-		return Elastic.Clients.Elasticsearch.Aggregations.TermAggregationRangeDescriptor.Build(null);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Term(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermAggregationRangeDescriptor>? action)
-	{
-		return Elastic.Clients.Elasticsearch.Aggregations.TermAggregationRangeDescriptor.Build(action);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Untyped(Elastic.Clients.Elasticsearch.Aggregations.UntypedAggregationRange value)
-	{
-		return value;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Untyped()
-	{
-		return Elastic.Clients.Elasticsearch.Aggregations.UntypedAggregationRangeDescriptor.Build(null);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Untyped(System.Action<Elastic.Clients.Elasticsearch.Aggregations.UntypedAggregationRangeDescriptor>? action)
-	{
-		return Elastic.Clients.Elasticsearch.Aggregations.UntypedAggregationRangeDescriptor.Build(action);
+		Instance.To = value;
+		return this;
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.AggregationRange Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>? action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory();
-		return action.Invoke(builder);
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Aggregations.AggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.AggregationRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

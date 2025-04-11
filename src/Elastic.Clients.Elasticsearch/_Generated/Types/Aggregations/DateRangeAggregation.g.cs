@@ -37,7 +37,7 @@ internal sealed partial class DateRangeAggregationConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<object?> propMissing = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>?> propRanges = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?> propRanges = default;
 		LocalJsonValue<string?> propTimeZone = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -56,7 +56,7 @@ internal sealed partial class DateRangeAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>(o, null)))
+			if (propRanges.TryReadProperty(ref reader, options, PropRanges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>(o, null)))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class DateRangeAggregationConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>(o, v, null));
+		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>(o, v, null));
 		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
 		writer.WriteEndObject();
 	}
@@ -144,7 +144,7 @@ public sealed partial class DateRangeAggregation
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>? Ranges { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -223,7 +223,7 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? value)
 	{
 		Instance.Ranges = value;
 		return this;
@@ -234,7 +234,7 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
@@ -245,12 +245,12 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>();
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor.Build(action));
 		}
 
 		Instance.Ranges = items;
@@ -351,7 +351,7 @@ public readonly partial struct DateRangeAggregationDescriptor
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? value)
 	{
 		Instance.Ranges = value;
 		return this;
@@ -362,7 +362,7 @@ public readonly partial struct DateRangeAggregationDescriptor
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
@@ -373,12 +373,12 @@ public readonly partial struct DateRangeAggregationDescriptor
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>();
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor.Build(action));
 		}
 
 		Instance.Ranges = items;
