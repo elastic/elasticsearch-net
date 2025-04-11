@@ -34,7 +34,7 @@ To check for security updates, go to [Security announcements for the Elastic sta
   - [2.4. Union Types](#24-union-types)
 - [3. Improved Descriptor Design](#3-improved-descriptor-design)
   - [3.1. Wrap](#31-wrap)
-  - [3.2. Unwrap / Inspect](#32-unwrap--inspect)
+  - [3.2. Unwrap / Inspect](#32-unwrap-inspect)
   - [3.3. Removal of Side Effects](#33-removal-of-side-effects)
 - [4. Request Path Parameter Properties](#4-request-path-parameter-properties)
 - [5. Field Name Inference](#5-field-name-inference)
@@ -203,7 +203,7 @@ Descriptors are now implemented as `struct` instead of `class`, reducing allocat
 
 :::
 
-##### 3.2. Unwrap / Inspect [32-unwrap--inspect]
+##### 3.2. Unwrap / Inspect [32-unwrap-inspect] 
 
 Descriptor values can now be inspected by unwrapping the object using an implicit conversion operator:
 
