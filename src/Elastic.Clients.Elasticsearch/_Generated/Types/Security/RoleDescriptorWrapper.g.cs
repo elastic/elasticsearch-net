@@ -17,18 +17,79 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class RoleDescriptorWrapperConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptor = System.Text.Json.JsonEncodedText.Encode("role_descriptor");
+
+	public override Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead> propRoleDescriptor = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRoleDescriptor.TryReadProperty(ref reader, options, PropRoleDescriptor, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RoleDescriptor = propRoleDescriptor.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRoleDescriptor, value.RoleDescriptor, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapperConverter))]
 public sealed partial class RoleDescriptorWrapper
 {
-	[JsonInclude, JsonPropertyName("role_descriptor")]
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead RoleDescriptor { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleDescriptorWrapper(Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead roleDescriptor)
+	{
+		RoleDescriptor = roleDescriptor;
+	}
+#if NET7_0_OR_GREATER
+	public RoleDescriptorWrapper()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RoleDescriptorWrapper()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoleDescriptorWrapper(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead RoleDescriptor { get; set; }
 }

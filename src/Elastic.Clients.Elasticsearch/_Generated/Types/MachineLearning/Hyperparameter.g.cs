@@ -17,55 +17,158 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class HyperparameterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAbsoluteImportance = System.Text.Json.JsonEncodedText.Encode("absolute_importance");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRelativeImportance = System.Text.Json.JsonEncodedText.Encode("relative_importance");
+	private static readonly System.Text.Json.JsonEncodedText PropSupplied = System.Text.Json.JsonEncodedText.Encode("supplied");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propAbsoluteImportance = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<double?> propRelativeImportance = default;
+		LocalJsonValue<bool> propSupplied = default;
+		LocalJsonValue<double> propValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAbsoluteImportance.TryReadProperty(ref reader, options, PropAbsoluteImportance, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRelativeImportance.TryReadProperty(ref reader, options, PropRelativeImportance, null))
+			{
+				continue;
+			}
+
+			if (propSupplied.TryReadProperty(ref reader, options, PropSupplied, null))
+			{
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AbsoluteImportance = propAbsoluteImportance.Value,
+			Name = propName.Value,
+			RelativeImportance = propRelativeImportance.Value,
+			Supplied = propSupplied.Value,
+			Value = propValue.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAbsoluteImportance, value.AbsoluteImportance, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRelativeImportance, value.RelativeImportance, null, null);
+		writer.WriteProperty(options, PropSupplied, value.Supplied, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.HyperparameterConverter))]
 public sealed partial class Hyperparameter
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Hyperparameter(string name, bool supplied, double value)
+	{
+		Name = name;
+		Supplied = supplied;
+		Value = value;
+	}
+#if NET7_0_OR_GREATER
+	public Hyperparameter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Hyperparameter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Hyperparameter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A positive number showing how much the parameter influences the variation of the loss function. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("absolute_importance")]
-	public double? AbsoluteImportance { get; init; }
+	public double? AbsoluteImportance { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the hyperparameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A number between 0 and 1 showing the proportion of influence on the variation of the loss function among all tuned hyperparameters. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("relative_importance")]
-	public double? RelativeImportance { get; init; }
+	public double? RelativeImportance { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates if the hyperparameter is specified by the user (true) or optimized (false).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("supplied")]
-	public bool Supplied { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Supplied { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The value of the hyperparameter, either optimized or specified by the user.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("value")]
-	public double Value { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Value { get; set; }
 }

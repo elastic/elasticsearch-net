@@ -17,122 +17,168 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexingSlowlogSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLevel = System.Text.Json.JsonEncodedText.Encode("level");
+	private static readonly System.Text.Json.JsonEncodedText PropReformat = System.Text.Json.JsonEncodedText.Encode("reformat");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propLevel = default;
+		LocalJsonValue<bool?> propReformat = default;
+		LocalJsonValue<int?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds?> propThreshold = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLevel.TryReadProperty(ref reader, options, PropLevel, null))
+			{
+				continue;
+			}
+
+			if (propReformat.TryReadProperty(ref reader, options, PropReformat, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propThreshold.TryReadProperty(ref reader, options, PropThreshold, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Level = propLevel.Value,
+			Reformat = propReformat.Value,
+			Source = propSource.Value,
+			Threshold = propThreshold.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLevel, value.Level, null, null);
+		writer.WriteProperty(options, PropReformat, value.Reformat, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropThreshold, value.Threshold, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsConverter))]
 public sealed partial class IndexingSlowlogSettings
 {
-	[JsonInclude, JsonPropertyName("level")]
+#if NET7_0_OR_GREATER
+	public IndexingSlowlogSettings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexingSlowlogSettings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingSlowlogSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Level { get; set; }
-	[JsonInclude, JsonPropertyName("reformat")]
 	public bool? Reformat { get; set; }
-	[JsonInclude, JsonPropertyName("source")]
 	public int? Source { get; set; }
-	[JsonInclude, JsonPropertyName("threshold")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds? Threshold { get; set; }
 }
 
-public sealed partial class IndexingSlowlogSettingsDescriptor : SerializableDescriptor<IndexingSlowlogSettingsDescriptor>
+public readonly partial struct IndexingSlowlogSettingsDescriptor
 {
-	internal IndexingSlowlogSettingsDescriptor(Action<IndexingSlowlogSettingsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings Instance { get; init; }
 
-	public IndexingSlowlogSettingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingSlowlogSettingsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings instance)
 	{
+		Instance = instance;
 	}
 
-	private string? LevelValue { get; set; }
-	private bool? ReformatValue { get; set; }
-	private int? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds? ThresholdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor ThresholdDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor> ThresholdDescriptorAction { get; set; }
-
-	public IndexingSlowlogSettingsDescriptor Level(string? level)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingSlowlogSettingsDescriptor()
 	{
-		LevelValue = level;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IndexingSlowlogSettingsDescriptor Reformat(bool? reformat = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor Level(string? value)
 	{
-		ReformatValue = reformat;
-		return Self;
+		Instance.Level = value;
+		return this;
 	}
 
-	public IndexingSlowlogSettingsDescriptor Source(int? source)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor Reformat(bool? value = true)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Reformat = value;
+		return this;
 	}
 
-	public IndexingSlowlogSettingsDescriptor Threshold(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds? threshold)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor Source(int? value)
 	{
-		ThresholdDescriptor = null;
-		ThresholdDescriptorAction = null;
-		ThresholdValue = threshold;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public IndexingSlowlogSettingsDescriptor Threshold(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor Threshold(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds? value)
 	{
-		ThresholdValue = null;
-		ThresholdDescriptorAction = null;
-		ThresholdDescriptor = descriptor;
-		return Self;
+		Instance.Threshold = value;
+		return this;
 	}
 
-	public IndexingSlowlogSettingsDescriptor Threshold(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor Threshold()
 	{
-		ThresholdValue = null;
-		ThresholdDescriptor = null;
-		ThresholdDescriptorAction = configure;
-		return Self;
+		Instance.Threshold = Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor Threshold(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(LevelValue))
+		Instance.Threshold = Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("level");
-			writer.WriteStringValue(LevelValue);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ReformatValue.HasValue)
-		{
-			writer.WritePropertyName("reformat");
-			writer.WriteBooleanValue(ReformatValue.Value);
-		}
-
-		if (SourceValue.HasValue)
-		{
-			writer.WritePropertyName("source");
-			writer.WriteNumberValue(SourceValue.Value);
-		}
-
-		if (ThresholdDescriptor is not null)
-		{
-			writer.WritePropertyName("threshold");
-			JsonSerializer.Serialize(writer, ThresholdDescriptor, options);
-		}
-		else if (ThresholdDescriptorAction is not null)
-		{
-			writer.WritePropertyName("threshold");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor(ThresholdDescriptorAction), options);
-		}
-		else if (ThresholdValue is not null)
-		{
-			writer.WritePropertyName("threshold");
-			JsonSerializer.Serialize(writer, ThresholdValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

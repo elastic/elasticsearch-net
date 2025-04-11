@@ -17,32 +17,128 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class FrequentItemSetsAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumSetSize = System.Text.Json.JsonEncodedText.Encode("minimum_set_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumSupport = System.Text.Json.JsonEncodedText.Encode("minimum_support");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<int?> propMinimumSetSize = default;
+		LocalJsonValue<double?> propMinimumSupport = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propMinimumSetSize.TryReadProperty(ref reader, options, PropMinimumSetSize, null))
+			{
+				continue;
+			}
+
+			if (propMinimumSupport.TryReadProperty(ref reader, options, PropMinimumSupport, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Fields = propFields.Value,
+			Filter = propFilter.Value,
+			MinimumSetSize = propMinimumSetSize.Value,
+			MinimumSupport = propMinimumSupport.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropMinimumSetSize, value.MinimumSetSize, null, null);
+		writer.WriteProperty(options, PropMinimumSupport, value.MinimumSupport, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationConverter))]
 public sealed partial class FrequentItemSetsAggregation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsAggregation(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> fields)
+	{
+		Fields = fields;
+	}
+#if NET7_0_OR_GREATER
+	public FrequentItemSetsAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FrequentItemSetsAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Fields to analyze.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query that filters documents from analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
@@ -50,7 +146,6 @@ public sealed partial class FrequentItemSetsAggregation
 	/// The minimum size of one item set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_set_size")]
 	public int? MinimumSetSize { get; set; }
 
 	/// <summary>
@@ -58,7 +153,6 @@ public sealed partial class FrequentItemSetsAggregation
 	/// The minimum support of one item set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_support")]
 	public double? MinimumSupport { get; set; }
 
 	/// <summary>
@@ -66,70 +160,65 @@ public sealed partial class FrequentItemSetsAggregation
 	/// The number of top item sets to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(FrequentItemSetsAggregation frequentItemSetsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.FrequentItemSets(frequentItemSetsAggregation);
 }
 
-public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : SerializableDescriptor<FrequentItemSetsAggregationDescriptor<TDocument>>
+public readonly partial struct FrequentItemSetsAggregationDescriptor<TDocument>
 {
-	internal FrequentItemSetsAggregationDescriptor(Action<FrequentItemSetsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Instance { get; init; }
 
-	public FrequentItemSetsAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private int? MinimumSetSizeValue { get; set; }
-	private double? MinimumSupportValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Fields to analyze.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsAggregationDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> fields)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> value)
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public FrequentItemSetsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField[] values)
 	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
+		Instance.Fields = [.. values];
+		return this;
 	}
 
-	public FrequentItemSetsAggregationDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>.Build(action));
+		}
 
-	public FrequentItemSetsAggregationDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>>[] configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		Instance.Fields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -137,193 +226,10 @@ public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : S
 	/// Query that filters documents from analysis.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The minimum size of one item set.
-	/// </para>
-	/// </summary>
-	public FrequentItemSetsAggregationDescriptor<TDocument> MinimumSetSize(int? minimumSetSize)
-	{
-		MinimumSetSizeValue = minimumSetSize;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The minimum support of one item set.
-	/// </para>
-	/// </summary>
-	public FrequentItemSetsAggregationDescriptor<TDocument> MinimumSupport(double? minimumSupport)
-	{
-		MinimumSupportValue = minimumSupport;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of top item sets to return.
-	/// </para>
-	/// </summary>
-	public FrequentItemSetsAggregationDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (MinimumSetSizeValue.HasValue)
-		{
-			writer.WritePropertyName("minimum_set_size");
-			writer.WriteNumberValue(MinimumSetSizeValue.Value);
-		}
-
-		if (MinimumSupportValue.HasValue)
-		{
-			writer.WritePropertyName("minimum_support");
-			writer.WriteNumberValue(MinimumSupportValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class FrequentItemSetsAggregationDescriptor : SerializableDescriptor<FrequentItemSetsAggregationDescriptor>
-{
-	internal FrequentItemSetsAggregationDescriptor(Action<FrequentItemSetsAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public FrequentItemSetsAggregationDescriptor() : base()
-	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor>[] FieldsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private int? MinimumSetSizeValue { get; set; }
-	private double? MinimumSupportValue { get; set; }
-	private int? SizeValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
-	public FrequentItemSetsAggregationDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> fields)
-	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor descriptor)
-	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor Fields(Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor> configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor>[] configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -331,28 +237,10 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	/// Query that filters documents from analysis.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public FrequentItemSetsAggregationDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -360,10 +248,10 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	/// The minimum size of one item set.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsAggregationDescriptor MinimumSetSize(int? minimumSetSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> MinimumSetSize(int? value)
 	{
-		MinimumSetSizeValue = minimumSetSize;
-		return Self;
+		Instance.MinimumSetSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -371,10 +259,10 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	/// The minimum support of one item set.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsAggregationDescriptor MinimumSupport(double? minimumSupport)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> MinimumSupport(double? value)
 	{
-		MinimumSupportValue = minimumSupport;
-		return Self;
+		Instance.MinimumSupport = value;
+		return this;
 	}
 
 	/// <summary>
@@ -382,80 +270,167 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	/// The number of top item sets to return.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsAggregationDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+public readonly partial struct FrequentItemSetsAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Instance { get; init; }
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation instance)
+	{
+		Instance = instance;
+	}
 
-		if (MinimumSetSizeValue.HasValue)
-		{
-			writer.WritePropertyName("minimum_set_size");
-			writer.WriteNumberValue(MinimumSetSizeValue.Value);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		if (MinimumSupportValue.HasValue)
-		{
-			writer.WritePropertyName("minimum_support");
-			writer.WriteNumberValue(MinimumSupportValue.Value);
-		}
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor descriptor) => descriptor.Instance;
 
-		if (SizeValue.HasValue)
+	/// <summary>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(params Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField[] values)
+	{
+		Instance.Fields = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Fields = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<T>.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query that filters documents from analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query that filters documents from analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query that filters documents from analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum size of one item set.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor MinimumSetSize(int? value)
+	{
+		Instance.MinimumSetSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum support of one item set.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor MinimumSupport(double? value)
+	{
+		Instance.MinimumSupport = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of top item sets to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

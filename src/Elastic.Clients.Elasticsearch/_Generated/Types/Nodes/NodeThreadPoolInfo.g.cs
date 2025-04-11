@@ -17,28 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeThreadPoolInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCore = System.Text.Json.JsonEncodedText.Encode("core");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropQueueSize = System.Text.Json.JsonEncodedText.Encode("queue_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propCore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
+		LocalJsonValue<int?> propMax = default;
+		LocalJsonValue<int> propQueueSize = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCore.TryReadProperty(ref reader, options, PropCore, null))
+			{
+				continue;
+			}
+
+			if (propKeepAlive.TryReadProperty(ref reader, options, PropKeepAlive, null))
+			{
+				continue;
+			}
+
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propQueueSize.TryReadProperty(ref reader, options, PropQueueSize, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Core = propCore.Value,
+			KeepAlive = propKeepAlive.Value,
+			Max = propMax.Value,
+			QueueSize = propQueueSize.Value,
+			Size = propSize.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCore, value.Core, null, null);
+		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropQueueSize, value.QueueSize, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfoConverter))]
 public sealed partial class NodeThreadPoolInfo
 {
-	[JsonInclude, JsonPropertyName("core")]
-	public int? Core { get; init; }
-	[JsonInclude, JsonPropertyName("keep_alive")]
-	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; init; }
-	[JsonInclude, JsonPropertyName("max")]
-	public int? Max { get; init; }
-	[JsonInclude, JsonPropertyName("queue_size")]
-	public int QueueSize { get; init; }
-	[JsonInclude, JsonPropertyName("size")]
-	public int? Size { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeThreadPoolInfo(int queueSize, string type)
+	{
+		QueueSize = queueSize;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public NodeThreadPoolInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeThreadPoolInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeThreadPoolInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public int? Core { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
+	public int? Max { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int QueueSize { get; set; }
+	public int? Size { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

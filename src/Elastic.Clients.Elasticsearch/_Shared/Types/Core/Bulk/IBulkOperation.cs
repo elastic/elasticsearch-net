@@ -10,5 +10,5 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// <remarks>Allows objects and descriptors to be stored in the same <see cref="BulkOperationsCollection"/>.</remarks>
 public interface IBulkOperation
 {
-	void PrepareIndex(IndexName bulkRequestIndex);
+	void PrepareIndex(IndexName? bulkRequestIndex);
 }

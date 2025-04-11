@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+[JsonConverter(typeof(BulkResponseItemConverter))]
 public abstract partial class ResponseItem
 {
 	public abstract string Operation { get; }

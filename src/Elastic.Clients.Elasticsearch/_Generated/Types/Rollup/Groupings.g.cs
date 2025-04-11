@@ -17,25 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class GroupingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.Groupings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram");
+	private static readonly System.Text.Json.JsonEncodedText PropHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.Groupings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping?> propDateHistogram = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping?> propHistogram = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Rollup.TermsGrouping?> propTerms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDateHistogram.TryReadProperty(ref reader, options, PropDateHistogram, null))
+			{
+				continue;
+			}
+
+			if (propHistogram.TryReadProperty(ref reader, options, PropHistogram, null))
+			{
+				continue;
+			}
+
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DateHistogram = propDateHistogram.Value,
+			Histogram = propHistogram.Value,
+			Terms = propTerms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.Groupings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDateHistogram, value.DateHistogram, null, null);
+		writer.WriteProperty(options, PropHistogram, value.Histogram, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.GroupingsConverter))]
 public sealed partial class Groupings
 {
+#if NET7_0_OR_GREATER
+	public Groupings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Groupings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A date histogram group aggregates a date field into time-based buckets.
 	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogram { get; set; }
 
 	/// <summary>
@@ -43,7 +112,6 @@ public sealed partial class Groupings
 	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? Histogram { get; set; }
 
 	/// <summary>
@@ -53,27 +121,27 @@ public sealed partial class Groupings
 	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? Terms { get; set; }
 }
 
-public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescriptor<GroupingsDescriptor<TDocument>>
+public readonly partial struct GroupingsDescriptor<TDocument>
 {
-	internal GroupingsDescriptor(Action<GroupingsDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.Groupings Instance { get; init; }
 
-	public GroupingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GroupingsDescriptor(Elastic.Clients.Elasticsearch.Rollup.Groupings instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> DateHistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>> DateHistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? HistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> HistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>> HistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? TermsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> TermsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>> TermsDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GroupingsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.Groupings instance) => new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -81,28 +149,22 @@ public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescrip
 	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
 	/// </para>
 	/// </summary>
-	public GroupingsDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? dateHistogram)
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? value)
 	{
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramValue = dateHistogram;
-		return Self;
+		Instance.DateHistogram = value;
+		return this;
 	}
 
-	public GroupingsDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A date histogram group aggregates a date field into time-based buckets.
+	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>> action)
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramDescriptor = descriptor;
-		return Self;
-	}
-
-	public GroupingsDescriptor<TDocument> DateHistogram(Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>> configure)
-	{
-		DateHistogramValue = null;
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = configure;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -110,28 +172,21 @@ public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescrip
 	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
 	/// </para>
 	/// </summary>
-	public GroupingsDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? histogram)
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? value)
 	{
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = null;
-		HistogramValue = histogram;
-		return Self;
+		Instance.Histogram = value;
+		return this;
 	}
 
-	public GroupingsDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Histogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>> action)
 	{
-		HistogramValue = null;
-		HistogramDescriptorAction = null;
-		HistogramDescriptor = descriptor;
-		return Self;
-	}
-
-	public GroupingsDescriptor<TDocument> Histogram(Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>> configure)
-	{
-		HistogramValue = null;
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = configure;
-		return Self;
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -141,102 +196,57 @@ public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescrip
 	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
 	/// </para>
 	/// </summary>
-	public GroupingsDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? terms)
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? value)
 	{
-		TermsDescriptor = null;
-		TermsDescriptorAction = null;
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
-	public GroupingsDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
+	/// The indexer enumerates and stores all values of a field for each time-period.
+	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>> action)
 	{
-		TermsValue = null;
-		TermsDescriptorAction = null;
-		TermsDescriptor = descriptor;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public GroupingsDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.Groupings Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>>? action)
 	{
-		TermsValue = null;
-		TermsDescriptor = null;
-		TermsDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DateHistogramDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
-		}
-		else if (DateHistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>(DateHistogramDescriptorAction), options);
-		}
-		else if (DateHistogramValue is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramValue, options);
+			return new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (HistogramDescriptor is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramDescriptor, options);
-		}
-		else if (HistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>(HistogramDescriptorAction), options);
-		}
-		else if (HistogramValue is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramValue, options);
-		}
-
-		if (TermsDescriptor is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsDescriptor, options);
-		}
-		else if (TermsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>(TermsDescriptorAction), options);
-		}
-		else if (TermsValue is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GroupingsDescriptor : SerializableDescriptor<GroupingsDescriptor>
+public readonly partial struct GroupingsDescriptor
 {
-	internal GroupingsDescriptor(Action<GroupingsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.Groupings Instance { get; init; }
 
-	public GroupingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GroupingsDescriptor(Elastic.Clients.Elasticsearch.Rollup.Groupings instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor DateHistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor> DateHistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? HistogramValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor HistogramDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor> HistogramDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? TermsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor TermsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor> TermsDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GroupingsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor(Elastic.Clients.Elasticsearch.Rollup.Groupings instance) => new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -244,28 +254,34 @@ public sealed partial class GroupingsDescriptor : SerializableDescriptor<Groupin
 	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
 	/// </para>
 	/// </summary>
-	public GroupingsDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? dateHistogram)
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? value)
 	{
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramValue = dateHistogram;
-		return Self;
+		Instance.DateHistogram = value;
+		return this;
 	}
 
-	public GroupingsDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A date histogram group aggregates a date field into time-based buckets.
+	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor> action)
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptorAction = null;
-		DateHistogramDescriptor = descriptor;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor.Build(action);
+		return this;
 	}
 
-	public GroupingsDescriptor DateHistogram(Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A date histogram group aggregates a date field into time-based buckets.
+	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor DateHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<T>> action)
 	{
-		DateHistogramValue = null;
-		DateHistogramDescriptor = null;
-		DateHistogramDescriptorAction = configure;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -273,28 +289,32 @@ public sealed partial class GroupingsDescriptor : SerializableDescriptor<Groupin
 	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
 	/// </para>
 	/// </summary>
-	public GroupingsDescriptor Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? histogram)
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? value)
 	{
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = null;
-		HistogramValue = histogram;
-		return Self;
+		Instance.Histogram = value;
+		return this;
 	}
 
-	public GroupingsDescriptor Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Histogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor> action)
 	{
-		HistogramValue = null;
-		HistogramDescriptorAction = null;
-		HistogramDescriptor = descriptor;
-		return Self;
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor.Build(action);
+		return this;
 	}
 
-	public GroupingsDescriptor Histogram(Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Histogram<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<T>> action)
 	{
-		HistogramValue = null;
-		HistogramDescriptor = null;
-		HistogramDescriptorAction = configure;
-		return Self;
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -304,81 +324,48 @@ public sealed partial class GroupingsDescriptor : SerializableDescriptor<Groupin
 	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
 	/// </para>
 	/// </summary>
-	public GroupingsDescriptor Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? terms)
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? value)
 	{
-		TermsDescriptor = null;
-		TermsDescriptorAction = null;
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
-	public GroupingsDescriptor Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
+	/// The indexer enumerates and stores all values of a field for each time-period.
+	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor> action)
 	{
-		TermsValue = null;
-		TermsDescriptorAction = null;
-		TermsDescriptor = descriptor;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor.Build(action);
+		return this;
 	}
 
-	public GroupingsDescriptor Terms(Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
+	/// The indexer enumerates and stores all values of a field for each time-period.
+	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<T>> action)
 	{
-		TermsValue = null;
-		TermsDescriptor = null;
-		TermsDescriptorAction = configure;
-		return Self;
+		Instance.Terms = Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.Groupings Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DateHistogramDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
-		}
-		else if (DateHistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor(DateHistogramDescriptorAction), options);
-		}
-		else if (DateHistogramValue is not null)
-		{
-			writer.WritePropertyName("date_histogram");
-			JsonSerializer.Serialize(writer, DateHistogramValue, options);
+			return new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (HistogramDescriptor is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramDescriptor, options);
-		}
-		else if (HistogramDescriptorAction is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor(HistogramDescriptorAction), options);
-		}
-		else if (HistogramValue is not null)
-		{
-			writer.WritePropertyName("histogram");
-			JsonSerializer.Serialize(writer, HistogramValue, options);
-		}
-
-		if (TermsDescriptor is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsDescriptor, options);
-		}
-		else if (TermsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor(TermsDescriptorAction), options);
-		}
-		else if (TermsValue is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor(new Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

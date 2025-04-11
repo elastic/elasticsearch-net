@@ -17,92 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SlowlogTresholdLevelsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDebug = System.Text.Json.JsonEncodedText.Encode("debug");
+	private static readonly System.Text.Json.JsonEncodedText PropInfo = System.Text.Json.JsonEncodedText.Encode("info");
+	private static readonly System.Text.Json.JsonEncodedText PropTrace = System.Text.Json.JsonEncodedText.Encode("trace");
+	private static readonly System.Text.Json.JsonEncodedText PropWarn = System.Text.Json.JsonEncodedText.Encode("warn");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDebug = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propInfo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTrace = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWarn = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDebug.TryReadProperty(ref reader, options, PropDebug, null))
+			{
+				continue;
+			}
+
+			if (propInfo.TryReadProperty(ref reader, options, PropInfo, null))
+			{
+				continue;
+			}
+
+			if (propTrace.TryReadProperty(ref reader, options, PropTrace, null))
+			{
+				continue;
+			}
+
+			if (propWarn.TryReadProperty(ref reader, options, PropWarn, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Debug = propDebug.Value,
+			Info = propInfo.Value,
+			Trace = propTrace.Value,
+			Warn = propWarn.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDebug, value.Debug, null, null);
+		writer.WriteProperty(options, PropInfo, value.Info, null, null);
+		writer.WriteProperty(options, PropTrace, value.Trace, null, null);
+		writer.WriteProperty(options, PropWarn, value.Warn, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsConverter))]
 public sealed partial class SlowlogTresholdLevels
 {
-	[JsonInclude, JsonPropertyName("debug")]
+#if NET7_0_OR_GREATER
+	public SlowlogTresholdLevels()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SlowlogTresholdLevels()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SlowlogTresholdLevels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Duration? Debug { get; set; }
-	[JsonInclude, JsonPropertyName("info")]
 	public Elastic.Clients.Elasticsearch.Duration? Info { get; set; }
-	[JsonInclude, JsonPropertyName("trace")]
 	public Elastic.Clients.Elasticsearch.Duration? Trace { get; set; }
-	[JsonInclude, JsonPropertyName("warn")]
 	public Elastic.Clients.Elasticsearch.Duration? Warn { get; set; }
 }
 
-public sealed partial class SlowlogTresholdLevelsDescriptor : SerializableDescriptor<SlowlogTresholdLevelsDescriptor>
+public readonly partial struct SlowlogTresholdLevelsDescriptor
 {
-	internal SlowlogTresholdLevelsDescriptor(Action<SlowlogTresholdLevelsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels Instance { get; init; }
 
-	public SlowlogTresholdLevelsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlowlogTresholdLevelsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? DebugValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? InfoValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TraceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? WarnValue { get; set; }
-
-	public SlowlogTresholdLevelsDescriptor Debug(Elastic.Clients.Elasticsearch.Duration? debug)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlowlogTresholdLevelsDescriptor()
 	{
-		DebugValue = debug;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SlowlogTresholdLevelsDescriptor Info(Elastic.Clients.Elasticsearch.Duration? info)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor Debug(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		InfoValue = info;
-		return Self;
+		Instance.Debug = value;
+		return this;
 	}
 
-	public SlowlogTresholdLevelsDescriptor Trace(Elastic.Clients.Elasticsearch.Duration? trace)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor Info(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TraceValue = trace;
-		return Self;
+		Instance.Info = value;
+		return this;
 	}
 
-	public SlowlogTresholdLevelsDescriptor Warn(Elastic.Clients.Elasticsearch.Duration? warn)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor Trace(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		WarnValue = warn;
-		return Self;
+		Instance.Trace = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor Warn(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		writer.WriteStartObject();
-		if (DebugValue is not null)
+		Instance.Warn = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("debug");
-			JsonSerializer.Serialize(writer, DebugValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (InfoValue is not null)
-		{
-			writer.WritePropertyName("info");
-			JsonSerializer.Serialize(writer, InfoValue, options);
-		}
-
-		if (TraceValue is not null)
-		{
-			writer.WritePropertyName("trace");
-			JsonSerializer.Serialize(writer, TraceValue, options);
-		}
-
-		if (WarnValue is not null)
-		{
-			writer.WritePropertyName("warn");
-			JsonSerializer.Serialize(writer, WarnValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

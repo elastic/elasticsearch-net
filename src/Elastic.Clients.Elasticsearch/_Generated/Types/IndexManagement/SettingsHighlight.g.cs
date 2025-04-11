@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SettingsHighlightConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxAnalyzedOffset = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxAnalyzedOffset = propMaxAnalyzedOffset.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightConverter))]
 public sealed partial class SettingsHighlight
 {
-	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
+#if NET7_0_OR_GREATER
+	public SettingsHighlight()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SettingsHighlight()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? MaxAnalyzedOffset { get; set; }
 }
 
-public sealed partial class SettingsHighlightDescriptor : SerializableDescriptor<SettingsHighlightDescriptor>
+public readonly partial struct SettingsHighlightDescriptor
 {
-	internal SettingsHighlightDescriptor(Action<SettingsHighlightDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight Instance { get; init; }
 
-	public SettingsHighlightDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsHighlightDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxAnalyzedOffsetValue { get; set; }
-
-	public SettingsHighlightDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsHighlightDescriptor()
 	{
-		MaxAnalyzedOffsetValue = maxAnalyzedOffset;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor MaxAnalyzedOffset(int? value)
 	{
-		writer.WriteStartObject();
-		if (MaxAnalyzedOffsetValue.HasValue)
+		Instance.MaxAnalyzedOffset = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max_analyzed_offset");
-			writer.WriteNumberValue(MaxAnalyzedOffsetValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

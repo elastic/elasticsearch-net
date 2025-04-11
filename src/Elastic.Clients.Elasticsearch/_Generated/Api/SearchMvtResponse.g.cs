@@ -17,15 +17,22 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class SearchMvtResponse : ElasticsearchResponse
+public sealed partial class SearchMvtResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchMvtResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchMvtResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 }

@@ -17,16 +17,9 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -57,13 +50,12 @@ namespace Elastic.Clients.Elasticsearch;
 /// </item>
 /// </list>
 /// </summary>
-[JsonConverter(typeof(GeoLocationConverter))]
-public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>
+public sealed partial class GeoLocation : Elastic.Clients.Elasticsearch.Core.IComplexUnion<Elastic.Clients.Elasticsearch.GeoLocation.Kind>
 {
 	public enum Kind
 	{
 		LatitudeLongitude,
-		Geohash,
+		GeoHash,
 		Coordinates,
 		Text
 	}
@@ -71,9 +63,9 @@ public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>
 	private readonly Kind _kind;
 	private readonly object _value;
 
-	Kind IComplexUnion<Kind>.ValueKind => _kind;
+	Kind Elastic.Clients.Elasticsearch.Core.IComplexUnion<Kind>.ValueKind => _kind;
 
-	object IComplexUnion<Kind>.Value => _value;
+	object Elastic.Clients.Elasticsearch.Core.IComplexUnion<Kind>.Value => _value;
 
 	private GeoLocation(Kind kind, object value)
 	{
@@ -81,11 +73,15 @@ public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>
 		_value = value;
 	}
 
-	public static GeoLocation LatitudeLongitude(Elastic.Clients.Elasticsearch.LatLonGeoLocation latitudeLongitude) => new(Kind.LatitudeLongitude, latitudeLongitude);
+	internal GeoLocation(Elastic.Clients.Elasticsearch.LatLonGeoLocation variant) : this(Kind.LatitudeLongitude, variant)
+	{
+	}
 
-	public bool IsLatitudeLongitude => _kind == Kind.LatitudeLongitude;
+	public static Elastic.Clients.Elasticsearch.GeoLocation LatitudeLongitude(Elastic.Clients.Elasticsearch.LatLonGeoLocation latitudeLongitude) => new(Kind.LatitudeLongitude, latitudeLongitude);
 
-	public bool TryGetLatitudeLongitude([NotNullWhen(true)] out Elastic.Clients.Elasticsearch.LatLonGeoLocation? latitudeLongitude)
+	public bool IsLatitudeLongitude => _kind is Kind.LatitudeLongitude;
+
+	public bool TryGetLatitudeLongitude([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Elastic.Clients.Elasticsearch.LatLonGeoLocation? latitudeLongitude)
 	{
 		latitudeLongitude = null;
 		if (_kind == Kind.LatitudeLongitude)
@@ -97,49 +93,61 @@ public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>
 		return false;
 	}
 
-	public static implicit operator GeoLocation(Elastic.Clients.Elasticsearch.LatLonGeoLocation latitudeLongitude) => GeoLocation.LatitudeLongitude(latitudeLongitude);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoLocation(Elastic.Clients.Elasticsearch.LatLonGeoLocation latitudeLongitude) => GeoLocation.LatitudeLongitude(latitudeLongitude);
 
-	public static GeoLocation Geohash(Elastic.Clients.Elasticsearch.GeoHashLocation geohash) => new(Kind.Geohash, geohash);
-
-	public bool IsGeohash => _kind == Kind.Geohash;
-
-	public bool TryGetGeohash([NotNullWhen(true)] out Elastic.Clients.Elasticsearch.GeoHashLocation? geohash)
+	internal GeoLocation(Elastic.Clients.Elasticsearch.GeoHashLocation variant) : this(Kind.GeoHash, variant)
 	{
-		geohash = null;
-		if (_kind == Kind.Geohash)
+	}
+
+	public static Elastic.Clients.Elasticsearch.GeoLocation GeoHash(Elastic.Clients.Elasticsearch.GeoHashLocation geoHash) => new(Kind.GeoHash, geoHash);
+
+	public bool IsGeoHash => _kind is Kind.GeoHash;
+
+	public bool TryGetGeoHash([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Elastic.Clients.Elasticsearch.GeoHashLocation? geoHash)
+	{
+		geoHash = null;
+		if (_kind == Kind.GeoHash)
 		{
-			geohash = (Elastic.Clients.Elasticsearch.GeoHashLocation)_value;
+			geoHash = (Elastic.Clients.Elasticsearch.GeoHashLocation)_value;
 			return true;
 		}
 
 		return false;
 	}
 
-	public static implicit operator GeoLocation(Elastic.Clients.Elasticsearch.GeoHashLocation geohash) => GeoLocation.Geohash(geohash);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoLocation(Elastic.Clients.Elasticsearch.GeoHashLocation geoHash) => GeoLocation.GeoHash(geoHash);
 
-	public static GeoLocation Coordinates(double[] coordinates) => new(Kind.Coordinates, coordinates);
+	internal GeoLocation(System.Collections.Generic.ICollection<double> variant) : this(Kind.Coordinates, variant)
+	{
+	}
 
-	public bool IsCoordinates => _kind == Kind.Coordinates;
+	public static Elastic.Clients.Elasticsearch.GeoLocation Coordinates(System.Collections.Generic.ICollection<double> coordinates) => new(Kind.Coordinates, coordinates);
 
-	public bool TryGetCoordinates([NotNullWhen(true)] out double[]? coordinates)
+	public bool IsCoordinates => _kind is Kind.Coordinates;
+
+	public bool TryGetCoordinates([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out System.Collections.Generic.ICollection<double>? coordinates)
 	{
 		coordinates = null;
 		if (_kind == Kind.Coordinates)
 		{
-			coordinates = (double[])_value;
+			coordinates = (System.Collections.Generic.ICollection<double>)_value;
 			return true;
 		}
 
 		return false;
 	}
 
-	public static implicit operator GeoLocation(double[] coordinates) => GeoLocation.Coordinates(coordinates);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoLocation(double[] coordinates) => GeoLocation.Coordinates(coordinates);
 
-	public static GeoLocation Text(string text) => new(Kind.Text, text);
+	internal GeoLocation(string variant) : this(Kind.Text, variant)
+	{
+	}
 
-	public bool IsText => _kind == Kind.Text;
+	public static Elastic.Clients.Elasticsearch.GeoLocation Text(string text) => new(Kind.Text, text);
 
-	public bool TryGetText([NotNullWhen(true)] out string? text)
+	public bool IsText => _kind is Kind.Text;
+
+	public bool TryGetText([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? text)
 	{
 		text = null;
 		if (_kind == Kind.Text)
@@ -151,15 +159,50 @@ public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>
 		return false;
 	}
 
-	public static implicit operator GeoLocation(string text) => GeoLocation.Text(text);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoLocation(string text) => GeoLocation.Text(text);
 }
 
-internal sealed class GeoLocationConverter : MultiItemUnionConverter<GeoLocation, GeoLocation.Kind>
+public readonly partial struct GeoLocationFactory
 {
-	public GeoLocationConverter()
+	public Elastic.Clients.Elasticsearch.GeoLocation LatitudeLongitude(Elastic.Clients.Elasticsearch.LatLonGeoLocation value)
 	{
-		_types = new Dictionary<GeoLocation.Kind, Type> { { GeoLocation.Kind.LatitudeLongitude, typeof(Elastic.Clients.Elasticsearch.LatLonGeoLocation) }, { GeoLocation.Kind.Geohash, typeof(Elastic.Clients.Elasticsearch.GeoHashLocation) } };
-		_factories = new Dictionary<Type, Func<object, GeoLocation>> { { typeof(Elastic.Clients.Elasticsearch.LatLonGeoLocation), o => GeoLocation.LatitudeLongitude((Elastic.Clients.Elasticsearch.LatLonGeoLocation)o) }, { typeof(Elastic.Clients.Elasticsearch.GeoHashLocation), o => GeoLocation.Geohash((Elastic.Clients.Elasticsearch.GeoHashLocation)o) } };
-		_uniquePropertyToType = new Dictionary<string, Type> { { "lat", typeof(Elastic.Clients.Elasticsearch.LatLonGeoLocation) }, { "geohash", typeof(Elastic.Clients.Elasticsearch.GeoHashLocation) } };
+		return new Elastic.Clients.Elasticsearch.GeoLocation(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoLocation LatitudeLongitude(System.Action<Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor> action)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoLocation(Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor.Build(action));
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoLocation GeoHash(Elastic.Clients.Elasticsearch.GeoHashLocation value)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoLocation(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoLocation GeoHash(System.Action<Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor> action)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoLocation(Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor.Build(action));
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoLocation Coordinates(System.Collections.Generic.ICollection<double> value)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoLocation(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoLocation Coordinates(params double[] values)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoLocation([.. values]);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoLocation Text(string value)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoLocation(value);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GeoLocation Build(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GeoLocationFactory();
+		return action.Invoke(builder);
 	}
 }

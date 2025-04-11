@@ -17,41 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class VertexDefinitionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Graph.VertexDefinition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propExclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>?> propInclude = default;
+		LocalJsonValue<long?> propMinDocCount = default;
+		LocalJsonValue<long?> propShardMinDocCount = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExclude.TryReadProperty(ref reader, options, PropExclude, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexInclude>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Exclude = propExclude.Value,
+			Field = propField.Value,
+			Include = propInclude.Value,
+			MinDocCount = propMinDocCount.Value,
+			ShardMinDocCount = propShardMinDocCount.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.VertexDefinition value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExclude, value.Exclude, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexInclude>(o, v, null));
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionConverter))]
 public sealed partial class VertexDefinition
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexDefinition(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public VertexDefinition()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public VertexDefinition()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal VertexDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Prevents the specified terms from being included in the results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude")]
-	public ICollection<string>? Exclude { get; set; }
+	public System.Collections.Generic.ICollection<string>? Exclude { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifies a field in the documents of interest.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifies the terms of interest that form the starting points from which you want to spider out.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
-	public ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? Include { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? Include { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -59,7 +163,6 @@ public sealed partial class VertexDefinition
 	/// This setting acts as a certainty threshold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
@@ -67,7 +170,6 @@ public sealed partial class VertexDefinition
 	/// Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
@@ -75,37 +177,48 @@ public sealed partial class VertexDefinition
 	/// Specifies the maximum number of vertex terms returned for each field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
 
-public sealed partial class VertexDefinitionDescriptor<TDocument> : SerializableDescriptor<VertexDefinitionDescriptor<TDocument>>
+public readonly partial struct VertexDefinitionDescriptor<TDocument>
 {
-	internal VertexDefinitionDescriptor(Action<VertexDefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.VertexDefinition Instance { get; init; }
 
-	public VertexDefinitionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexDefinitionDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexDefinition instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? IncludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor IncludeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
-	private long? MinDocCountValue { get; set; }
-	private long? ShardMinDocCountValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexDefinitionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.VertexDefinition instance) => new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Prevents the specified terms from being included in the results.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> Exclude(ICollection<string>? exclude)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude(System.Collections.Generic.ICollection<string>? value)
 	{
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Prevents the specified terms from being included in the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude(params string[] values)
+	{
+		Instance.Exclude = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -113,10 +226,10 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	/// Identifies a field in the documents of interest.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -124,21 +237,10 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	/// Identifies a field in the documents of interest.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -146,40 +248,38 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	/// Identifies the terms of interest that form the starting points from which you want to spider out.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> Include(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? include)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? value)
 	{
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptorActions = null;
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
-	public VertexDefinitionDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Identifies the terms of interest that form the starting points from which you want to spider out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(params Elastic.Clients.Elasticsearch.Graph.VertexInclude[] values)
 	{
-		IncludeValue = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptorActions = null;
-		IncludeDescriptor = descriptor;
-		return Self;
+		Instance.Include = [.. values];
+		return this;
 	}
 
-	public VertexDefinitionDescriptor<TDocument> Include(Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Identifies the terms of interest that form the starting points from which you want to spider out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] actions)
 	{
-		IncludeValue = null;
-		IncludeDescriptor = null;
-		IncludeDescriptorActions = null;
-		IncludeDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexInclude>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor.Build(action));
+		}
 
-	public VertexDefinitionDescriptor<TDocument> Include(params Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] configure)
-	{
-		IncludeValue = null;
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptorActions = configure;
-		return Self;
+		Instance.Include = items;
+		return this;
 	}
 
 	/// <summary>
@@ -188,10 +288,10 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	/// This setting acts as a certainty threshold.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> MinDocCount(long? minDocCount)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> MinDocCount(long? value)
 	{
-		MinDocCountValue = minDocCount;
-		return Self;
+		Instance.MinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -199,10 +299,10 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	/// Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> ShardMinDocCount(long? value)
 	{
-		ShardMinDocCountValue = shardMinDocCount;
-		return Self;
+		Instance.ShardMinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -210,103 +310,60 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	/// Specifies the maximum number of vertex terms returned for each field.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.VertexDefinition Build(System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (ExcludeValue is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IncludeDescriptor is not null)
-		{
-			writer.WritePropertyName("include");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IncludeDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IncludeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("include");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(IncludeDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IncludeDescriptorActions is not null)
-		{
-			writer.WritePropertyName("include");
-			writer.WriteStartArray();
-			foreach (var action in IncludeDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (IncludeValue is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		if (MinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (ShardMinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("shard_min_doc_count");
-			writer.WriteNumberValue(ShardMinDocCountValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<VertexDefinitionDescriptor>
+public readonly partial struct VertexDefinitionDescriptor
 {
-	internal VertexDefinitionDescriptor(Action<VertexDefinitionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.VertexDefinition Instance { get; init; }
 
-	public VertexDefinitionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexDefinitionDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexDefinition instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? IncludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor IncludeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
-	private long? MinDocCountValue { get; set; }
-	private long? ShardMinDocCountValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexDefinitionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexDefinition instance) => new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Prevents the specified terms from being included in the results.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor Exclude(ICollection<string>? exclude)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude(System.Collections.Generic.ICollection<string>? value)
 	{
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Prevents the specified terms from being included in the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude(params string[] values)
+	{
+		Instance.Exclude = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -314,10 +371,10 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	/// Identifies a field in the documents of interest.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -325,21 +382,10 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	/// Identifies a field in the documents of interest.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
-	public VertexDefinitionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -347,40 +393,38 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	/// Identifies the terms of interest that form the starting points from which you want to spider out.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor Include(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? include)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? value)
 	{
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptorActions = null;
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
-	public VertexDefinitionDescriptor Include(Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Identifies the terms of interest that form the starting points from which you want to spider out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(params Elastic.Clients.Elasticsearch.Graph.VertexInclude[] values)
 	{
-		IncludeValue = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptorActions = null;
-		IncludeDescriptor = descriptor;
-		return Self;
+		Instance.Include = [.. values];
+		return this;
 	}
 
-	public VertexDefinitionDescriptor Include(Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Identifies the terms of interest that form the starting points from which you want to spider out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] actions)
 	{
-		IncludeValue = null;
-		IncludeDescriptor = null;
-		IncludeDescriptorActions = null;
-		IncludeDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexInclude>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor.Build(action));
+		}
 
-	public VertexDefinitionDescriptor Include(params Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] configure)
-	{
-		IncludeValue = null;
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptorActions = configure;
-		return Self;
+		Instance.Include = items;
+		return this;
 	}
 
 	/// <summary>
@@ -389,10 +433,10 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	/// This setting acts as a certainty threshold.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor MinDocCount(long? minDocCount)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor MinDocCount(long? value)
 	{
-		MinDocCountValue = minDocCount;
-		return Self;
+		Instance.MinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -400,10 +444,10 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	/// Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor ShardMinDocCount(long? shardMinDocCount)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor ShardMinDocCount(long? value)
 	{
-		ShardMinDocCountValue = shardMinDocCount;
-		return Self;
+		Instance.ShardMinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -411,72 +455,17 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	/// Specifies the maximum number of vertex terms returned for each field.
 	/// </para>
 	/// </summary>
-	public VertexDefinitionDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.VertexDefinition Build(System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ExcludeValue is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IncludeDescriptor is not null)
-		{
-			writer.WritePropertyName("include");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IncludeDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IncludeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("include");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(IncludeDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IncludeDescriptorActions is not null)
-		{
-			writer.WritePropertyName("include");
-			writer.WriteStartArray();
-			foreach (var action in IncludeDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (IncludeValue is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		if (MinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (ShardMinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("shard_min_doc_count");
-			writer.WriteNumberValue(ShardMinDocCountValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(new Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

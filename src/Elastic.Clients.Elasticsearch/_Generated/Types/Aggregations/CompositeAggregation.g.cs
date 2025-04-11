@@ -17,32 +17,100 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class CompositeAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSources = System.Text.Json.JsonEncodedText.Encode("sources");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>?> propAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>?> propSources = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAfter.TryReadProperty(ref reader, options, PropAfter, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSources.TryReadProperty(ref reader, options, PropSources, static System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>(o, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(o, null, null)!)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			After = propAfter.Value,
+			Size = propSize.Value,
+			Sources = propSources.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAfter, value.After, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>(o, v, null, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSources, value.Sources, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? v) => w.WriteCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(o, v, null, null)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationConverter))]
 public sealed partial class CompositeAggregation
 {
+#if NET7_0_OR_GREATER
+	public CompositeAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CompositeAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("after")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? After { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? After { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of composite buckets that should be returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -51,34 +119,73 @@ public sealed partial class CompositeAggregation
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sources")]
-	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(CompositeAggregation compositeAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Composite(compositeAggregation);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(CompositeAggregation compositeAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Composite(compositeAggregation);
+	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 }
 
-public sealed partial class CompositeAggregationDescriptor<TDocument> : SerializableDescriptor<CompositeAggregationDescriptor<TDocument>>
+public readonly partial struct CompositeAggregationDescriptor<TDocument>
 {
-	internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Instance { get; init; }
 
-	public CompositeAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
-		return Self;
+		Instance.After = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After()
+	{
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>>? action)
+	{
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> AddAfter(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.FieldValue value)
+	{
+		Instance.After ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>();
+		Instance.After.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> AddAfter(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.FieldValue value)
+	{
+		Instance.After ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>();
+		Instance.After.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -86,10 +193,10 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	/// The number of composite buckets that should be returned.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -98,69 +205,10 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationDescriptor<TDocument> Sources(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
 	{
-		SourcesValue = sources;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AfterValue is not null)
-		{
-			writer.WritePropertyName("after");
-			JsonSerializer.Serialize(writer, AfterValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SourcesValue is not null)
-		{
-			writer.WritePropertyName("sources");
-			JsonSerializer.Serialize(writer, SourcesValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class CompositeAggregationDescriptor : SerializableDescriptor<CompositeAggregationDescriptor>
-{
-	internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public CompositeAggregationDescriptor() : base()
-	{
-	}
-
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
-	public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
-	{
-		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of composite buckets that should be returned.
-	/// </para>
-	/// </summary>
-	public CompositeAggregationDescriptor Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
+		Instance.Sources = value;
+		return this;
 	}
 
 	/// <summary>
@@ -169,33 +217,202 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public CompositeAggregationDescriptor Sources(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>[] values)
 	{
-		SourcesValue = sources;
-		return Self;
+		Instance.Sources = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<TDocument>>?[] actions)
 	{
-		writer.WriteStartObject();
-		if (AfterValue is not null)
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("after");
-			JsonSerializer.Serialize(writer, AfterValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<TDocument>.Build(action));
 		}
 
-		if (SizeValue.HasValue)
+		Instance.Sources = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SourcesValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct CompositeAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? value)
+	{
+		Instance.After = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After()
+	{
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue>? action)
+	{
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<T>>? action)
+	{
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor AddAfter(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.FieldValue value)
+	{
+		Instance.After ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>();
+		Instance.After.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor AddAfter<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.FieldValue value)
+	{
+		Instance.After ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>();
+		Instance.After.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of composite buckets that should be returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
+	{
+		Instance.Sources = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>[] values)
+	{
+		Instance.Sources = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("sources");
-			JsonSerializer.Serialize(writer, SourcesValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Sources = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<T>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<T>.Build(action));
+		}
+
+		Instance.Sources = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

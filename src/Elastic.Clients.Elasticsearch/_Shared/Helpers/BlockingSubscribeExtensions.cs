@@ -2,10 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if !ELASTICSEARCH_SERVERLESS
-
 using System;
 using System.Threading;
+
 namespace Elastic.Clients.Elasticsearch;
 
 public static class BlockingSubscribeExtensions
@@ -43,5 +42,3 @@ public static class BlockingSubscribeExtensions
 		return observer;
 	}
 }
-
-#endif

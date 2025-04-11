@@ -17,46 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PreviewDataFrameAnalyticsRequestParameters : RequestParameters
+public sealed partial class PreviewDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PreviewDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig?> propConfig = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConfig.TryReadProperty(ref reader, options, PropConfig, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Config = propConfig.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConfig, value.Config, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Preview features used by data frame analytics.
-/// Previews the extracted features used by a data frame analytics config.
+/// Preview the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
-public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<PreviewDataFrameAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestConverter))]
+public sealed partial class PreviewDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>
 {
-	public PreviewDataFrameAnalyticsRequest()
-	{
-	}
-
 	public PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PreviewDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PreviewDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPreviewDataFrameAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPreviewDataFrameAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.preview_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -65,45 +116,48 @@ public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<Prev
 	/// this API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? Config { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Preview features used by data frame analytics.
-/// Previews the extracted features used by a data frame analytics config.
+/// Preview the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
-public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<PreviewDataFrameAnalyticsRequestDescriptor<TDocument>, PreviewDataFrameAnalyticsRequestParameters>
+public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor
 {
-	internal PreviewDataFrameAnalyticsRequestDescriptor(Action<PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Instance { get; init; }
 
-	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(id);
 	}
 
 	public PreviewDataFrameAnalyticsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPreviewDataFrameAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.preview_data_frame_analytics";
-
-	public PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? ConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> ConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>> ConfigDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -112,88 +166,133 @@ public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor<TDocument
 	/// this API.
 	/// </para>
 	/// </summary>
-	public PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? config)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? value)
 	{
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = null;
-		ConfigValue = config;
-		return Self;
+		Instance.Config = value;
+		return this;
 	}
 
-	public PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A data frame analytics config as described in create data frame analytics
+	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+	/// this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor> action)
 	{
-		ConfigValue = null;
-		ConfigDescriptorAction = null;
-		ConfigDescriptor = descriptor;
-		return Self;
+		Instance.Config = Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A data frame analytics config as described in create data frame analytics
+	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+	/// this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Config<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<T>> action)
 	{
-		ConfigValue = null;
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = configure;
-		return Self;
+		Instance.Config = Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ConfigDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigDescriptor, options);
-		}
-		else if (ConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>(ConfigDescriptorAction), options);
-		}
-		else if (ConfigValue is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Preview features used by data frame analytics.
-/// Previews the extracted features used by a data frame analytics config.
+/// Preview the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
-public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor : RequestDescriptor<PreviewDataFrameAnalyticsRequestDescriptor, PreviewDataFrameAnalyticsRequestParameters>
+public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor<TDocument>
 {
-	internal PreviewDataFrameAnalyticsRequestDescriptor(Action<PreviewDataFrameAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Instance { get; init; }
 
-	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(id);
 	}
 
 	public PreviewDataFrameAnalyticsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPreviewDataFrameAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.preview_data_frame_analytics";
-
-	public PreviewDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? ConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor ConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor> ConfigDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -202,49 +301,77 @@ public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor : Request
 	/// this API.
 	/// </para>
 	/// </summary>
-	public PreviewDataFrameAnalyticsRequestDescriptor Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? config)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? value)
 	{
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = null;
-		ConfigValue = config;
-		return Self;
+		Instance.Config = value;
+		return this;
 	}
 
-	public PreviewDataFrameAnalyticsRequestDescriptor Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A data frame analytics config as described in create data frame analytics
+	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+	/// this API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>> action)
 	{
-		ConfigValue = null;
-		ConfigDescriptorAction = null;
-		ConfigDescriptor = descriptor;
-		return Self;
+		Instance.Config = Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PreviewDataFrameAnalyticsRequestDescriptor Config(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>>? action)
 	{
-		ConfigValue = null;
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = configure;
-		return Self;
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (ConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigDescriptor, options);
-		}
-		else if (ConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor(ConfigDescriptorAction), options);
-		}
-		else if (ConfigValue is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

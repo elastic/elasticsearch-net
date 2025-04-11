@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutTrainedModelVocabularyRequestParameters : RequestParameters
+public sealed partial class PutTrainedModelVocabularyRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutTrainedModelVocabularyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges");
+	private static readonly System.Text.Json.JsonEncodedText PropScores = System.Text.Json.JsonEncodedText.Encode("scores");
+	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propMerges = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propScores = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propVocabulary = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMerges.TryReadProperty(ref reader, options, PropMerges, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propScores.TryReadProperty(ref reader, options, PropScores, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
+			{
+				continue;
+			}
+
+			if (propVocabulary.TryReadProperty(ref reader, options, PropVocabulary, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Merges = propMerges.Value,
+			Scores = propScores.Value,
+			Vocabulary = propVocabulary.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMerges, value.Merges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropScores, value.Scores, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
+		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,15 +91,34 @@ public sealed partial class PutTrainedModelVocabularyRequestParameters : Request
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutTrainedModelVocabularyRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestConverter))]
+public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelVocabulary;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Id modelId, System.Collections.Generic.ICollection<string> vocabulary) : base(r => r.Required("model_id", modelId))
+	{
+		Vocabulary = vocabulary;
+	}
+#if NET7_0_OR_GREATER
+	public PutTrainedModelVocabularyRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutTrainedModelVocabulary;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -57,27 +126,39 @@ public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutT
 
 	/// <summary>
 	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The optional model merges if required by the tokenizer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("merges")]
-	public ICollection<string>? Merges { get; set; }
+	public System.Collections.Generic.ICollection<string>? Merges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The optional vocabulary value scores if required by the tokenizer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scores")]
-	public ICollection<double>? Scores { get; set; }
+	public System.Collections.Generic.ICollection<double>? Scores { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The model vocabulary, which must not be empty.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("vocabulary")]
-	public ICollection<string> Vocabulary { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Vocabulary { get; set; }
 }
 
 /// <summary>
@@ -87,41 +168,63 @@ public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutT
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelVocabularyRequestDescriptor : RequestDescriptor<PutTrainedModelVocabularyRequestDescriptor, PutTrainedModelVocabularyRequestParameters>
+public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 {
-	internal PutTrainedModelVocabularyRequestDescriptor(Action<PutTrainedModelVocabularyRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest Instance { get; init; }
 
-	public PutTrainedModelVocabularyRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelVocabularyRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelVocabulary;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_trained_model_vocabulary";
-
-	public PutTrainedModelVocabularyRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public PutTrainedModelVocabularyRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest(modelId);
+#pragma warning restore CS0618
 	}
 
-	private ICollection<string>? MergesValue { get; set; }
-	private ICollection<double>? ScoresValue { get; set; }
-	private ICollection<string> VocabularyValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutTrainedModelVocabularyRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The optional model merges if required by the tokenizer.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelVocabularyRequestDescriptor Merges(ICollection<string>? merges)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges(System.Collections.Generic.ICollection<string>? value)
 	{
-		MergesValue = merges;
-		return Self;
+		Instance.Merges = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The optional model merges if required by the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges(params string[] values)
+	{
+		Instance.Merges = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -129,10 +232,21 @@ public sealed partial class PutTrainedModelVocabularyRequestDescriptor : Request
 	/// The optional vocabulary value scores if required by the tokenizer.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelVocabularyRequestDescriptor Scores(ICollection<double>? scores)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores(System.Collections.Generic.ICollection<double>? value)
 	{
-		ScoresValue = scores;
-		return Self;
+		Instance.Scores = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The optional vocabulary value scores if required by the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores(params double[] values)
+	{
+		Instance.Scores = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -140,29 +254,70 @@ public sealed partial class PutTrainedModelVocabularyRequestDescriptor : Request
 	/// The model vocabulary, which must not be empty.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelVocabularyRequestDescriptor Vocabulary(ICollection<string> vocabulary)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary(System.Collections.Generic.ICollection<string> value)
 	{
-		VocabularyValue = vocabulary;
-		return Self;
+		Instance.Vocabulary = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The model vocabulary, which must not be empty.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (MergesValue is not null)
-		{
-			writer.WritePropertyName("merges");
-			JsonSerializer.Serialize(writer, MergesValue, options);
-		}
+		Instance.Vocabulary = [.. values];
+		return this;
+	}
 
-		if (ScoresValue is not null)
-		{
-			writer.WritePropertyName("scores");
-			JsonSerializer.Serialize(writer, ScoresValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("vocabulary");
-		JsonSerializer.Serialize(writer, VocabularyValue, options);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

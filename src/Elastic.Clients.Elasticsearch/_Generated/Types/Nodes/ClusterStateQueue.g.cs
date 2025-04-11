@@ -17,39 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ClusterStateQueueConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCommitted = System.Text.Json.JsonEncodedText.Encode("committed");
+	private static readonly System.Text.Json.JsonEncodedText PropPending = System.Text.Json.JsonEncodedText.Encode("pending");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCommitted = default;
+		LocalJsonValue<long?> propPending = default;
+		LocalJsonValue<long?> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCommitted.TryReadProperty(ref reader, options, PropCommitted, null))
+			{
+				continue;
+			}
+
+			if (propPending.TryReadProperty(ref reader, options, PropPending, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Committed = propCommitted.Value,
+			Pending = propPending.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCommitted, value.Committed, null, null);
+		writer.WriteProperty(options, PropPending, value.Pending, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueueConverter))]
 public sealed partial class ClusterStateQueue
 {
+#if NET7_0_OR_GREATER
+	public ClusterStateQueue()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ClusterStateQueue()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterStateQueue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of committed cluster states in queue.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("committed")]
-	public long? Committed { get; init; }
+	public long? Committed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of pending cluster states in queue.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pending")]
-	public long? Pending { get; init; }
+	public long? Pending { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of cluster states in queue.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public long? Total { get; init; }
+	public long? Total { get; set; }
 }

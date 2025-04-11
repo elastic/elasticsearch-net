@@ -7,74 +7,60 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal sealed class FieldsConverter : JsonConverter<Fields>
+internal sealed class FieldsConverter :
+	JsonConverter<Fields>
 {
-	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Fields Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		switch (reader.TokenType)
-		{
-			case JsonTokenType.Null:
-				return null;
+		var fields = reader.ReadCollectionValue<Field>(options, null)!;
 
-			case JsonTokenType.StartArray:
-				var fields = JsonSerializer.Deserialize<List<Field>>(ref reader, options);
-				return new Fields(fields);
-
-			default:
-				throw new JsonException("Unexpected token.");
-		}
+		return new Fields(fields);
 	}
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		JsonSerializer.Serialize(writer, value.ListOfFields, options);
+		writer.WriteCollectionValue(options, value.ListOfFields, null);
 	}
 }
 
-internal sealed class SingleOrManyFieldsConverter : JsonConverter<Fields>
+internal sealed class SingleOrManyFieldsMarker;
+
+internal sealed class SingleOrManyFieldsMarkerConverter :
+	JsonConverter<SingleOrManyFieldsMarker>,
+	IMarkerTypeConverter
 {
-	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public JsonConverter WrappedConverter { get; }
+
+	public SingleOrManyFieldsMarkerConverter()
 	{
-		switch (reader.TokenType)
-		{
-			case JsonTokenType.Null:
-				return null;
+		WrappedConverter = new SingleOrManyFieldsConverter();
+	}
 
-			case JsonTokenType.String:
-				var field = JsonSerializer.Deserialize<Field>(ref reader, options);
-				return new Fields([field]);
+	public override SingleOrManyFieldsMarker Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		throw new InvalidOperationException();
+	}
 
-			case JsonTokenType.StartArray:
-				var fields = JsonSerializer.Deserialize<List<Field>>(ref reader, options);
-				return new Fields(fields);
+	public override void Write(Utf8JsonWriter writer, SingleOrManyFieldsMarker value, JsonSerializerOptions options)
+	{
+		throw new InvalidOperationException();
+	}
+}
 
-			default:
-				throw new JsonException("Unexpected token.");
-		}
+internal sealed class SingleOrManyFieldsConverter :
+	JsonConverter<Fields>
+{
+	public override Fields Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var fields = reader.ReadSingleOrManyCollectionValue<Field>(options, null)!;
+
+		return new Fields(fields);
 	}
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		if (value.ListOfFields.Count == 1)
-		{
-			JsonSerializer.Serialize(writer, value.ListOfFields[0], options);
-			return;
-		}
-
-		JsonSerializer.Serialize(writer, value.ListOfFields, options);
+		writer.WriteSingleOrManyCollectionValue(options, value.ListOfFields, null);
 	}
 }

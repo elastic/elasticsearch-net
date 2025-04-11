@@ -17,103 +17,289 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterIndicesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIndices>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache");
+	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes> propAnalysis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.CompletionStats> propCompletion = default;
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.DocStats> propDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FielddataStats> propFielddata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings> propMappings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryCacheStats> propQueryCache = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SegmentsStats> propSegments = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards> propShards = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.StoreStats> propStore = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>?> propVersions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
+			{
+				continue;
+			}
+
+			if (propCompletion.TryReadProperty(ref reader, options, PropCompletion, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, null))
+			{
+				continue;
+			}
+
+			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, null))
+			{
+				continue;
+			}
+
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
+			{
+				continue;
+			}
+
+			if (propQueryCache.TryReadProperty(ref reader, options, PropQueryCache, null))
+			{
+				continue;
+			}
+
+			if (propSegments.TryReadProperty(ref reader, options, PropSegments, null))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propVersions.TryReadProperty(ref reader, options, PropVersions, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterIndices(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analysis = propAnalysis.Value,
+			Completion = propCompletion.Value,
+			Count = propCount.Value,
+			Docs = propDocs.Value,
+			Fielddata = propFielddata.Value,
+			Mappings = propMappings.Value,
+			QueryCache = propQueryCache.Value,
+			Segments = propSegments.Value,
+			Shards = propShards.Value,
+			Store = propStore.Value,
+			Versions = propVersions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterIndices value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropCompletion, value.Completion, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDocs, value.Docs, null, null);
+		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, null);
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
+		writer.WriteProperty(options, PropQueryCache, value.QueryCache, null, null);
+		writer.WriteProperty(options, PropSegments, value.Segments, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropVersions, value.Versions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesConverter))]
 public sealed partial class ClusterIndices
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterIndices(Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes analysis, Elastic.Clients.Elasticsearch.CompletionStats completion, long count, Elastic.Clients.Elasticsearch.DocStats docs, Elastic.Clients.Elasticsearch.FielddataStats fielddata, Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings mappings, Elastic.Clients.Elasticsearch.QueryCacheStats queryCache, Elastic.Clients.Elasticsearch.SegmentsStats segments, Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards shards, Elastic.Clients.Elasticsearch.StoreStats store)
+	{
+		Analysis = analysis;
+		Completion = completion;
+		Count = count;
+		Docs = docs;
+		Fielddata = fielddata;
+		Mappings = mappings;
+		QueryCache = queryCache;
+		Segments = segments;
+		Shards = shards;
+		Store = store;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterIndices()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterIndices()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterIndices(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains statistics about analyzers and analyzer components used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analysis")]
-	public Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes Analysis { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes Analysis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about memory used for completion in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion")]
-	public Elastic.Clients.Elasticsearch.CompletionStats Completion { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.CompletionStats Completion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains counts for documents in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public Elastic.Clients.Elasticsearch.DocStats Docs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.DocStats Docs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the field data cache of selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fielddata")]
-	public Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about field mappings in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mappings")]
-	public Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings Mappings { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings Mappings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the query cache of selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_cache")]
-	public Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about segments in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("segments")]
-	public Elastic.Clients.Elasticsearch.SegmentsStats Segments { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.SegmentsStats Segments { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shards")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Shards { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Shards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the size of shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("store")]
-	public Elastic.Clients.Elasticsearch.StoreStats Store { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.StoreStats Store { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about analyzers and analyzer components used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("versions")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? Versions { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? Versions { get; set; }
 }

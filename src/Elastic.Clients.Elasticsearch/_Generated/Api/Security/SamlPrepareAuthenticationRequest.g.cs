@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlPrepareAuthenticationRequestParameters : RequestParameters
+public sealed partial class SamlPrepareAuthenticationRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SamlPrepareAuthenticationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRelayState = System.Text.Json.JsonEncodedText.Encode("relay_state");
+
+	public override Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAcs = default;
+		LocalJsonValue<string?> propRealm = default;
+		LocalJsonValue<string?> propRelayState = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcs.TryReadProperty(ref reader, options, PropAcs, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (propRelayState.TryReadProperty(ref reader, options, PropRelayState, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Acs = propAcs.Value,
+			Realm = propRealm.Value,
+			RelayState = propRelayState.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcs, value.Acs, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRelayState, value.RelayState, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -55,11 +105,28 @@ public sealed partial class SamlPrepareAuthenticationRequestParameters : Request
 /// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 /// </para>
 /// </summary>
-public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<SamlPrepareAuthenticationRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestConverter))]
+public sealed partial class SamlPrepareAuthenticationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlPrepareAuthentication;
+#if NET7_0_OR_GREATER
+	public SamlPrepareAuthenticationRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SamlPrepareAuthenticationRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecuritySamlPrepareAuthentication;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -71,7 +138,6 @@ public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<Saml
 	/// The realm is used to generate the authentication request. You must specify either this parameter or the <c>realm</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("acs")]
 	public string? Acs { get; set; }
 
 	/// <summary>
@@ -80,7 +146,6 @@ public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<Saml
 	/// You must specify either this parameter or the <c>acs</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
 	public string? Realm { get; set; }
 
 	/// <summary>
@@ -89,7 +154,6 @@ public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<Saml
 	/// If the Authentication Request is signed, this value is used as part of the signature computation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("relay_state")]
 	public string? RelayState { get; set; }
 }
 
@@ -114,25 +178,23 @@ public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<Saml
 /// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 /// </para>
 /// </summary>
-public sealed partial class SamlPrepareAuthenticationRequestDescriptor : RequestDescriptor<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationRequestParameters>
+public readonly partial struct SamlPrepareAuthenticationRequestDescriptor
 {
-	internal SamlPrepareAuthenticationRequestDescriptor(Action<SamlPrepareAuthenticationRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlPrepareAuthenticationRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public SamlPrepareAuthenticationRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlPrepareAuthentication;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.saml_prepare_authentication";
-
-	private string? AcsValue { get; set; }
-	private string? RealmValue { get; set; }
-	private string? RelayStateValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -140,10 +202,10 @@ public sealed partial class SamlPrepareAuthenticationRequestDescriptor : Request
 	/// The realm is used to generate the authentication request. You must specify either this parameter or the <c>realm</c> parameter.
 	/// </para>
 	/// </summary>
-	public SamlPrepareAuthenticationRequestDescriptor Acs(string? acs)
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor Acs(string? value)
 	{
-		AcsValue = acs;
-		return Self;
+		Instance.Acs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,10 +214,10 @@ public sealed partial class SamlPrepareAuthenticationRequestDescriptor : Request
 	/// You must specify either this parameter or the <c>acs</c> parameter.
 	/// </para>
 	/// </summary>
-	public SamlPrepareAuthenticationRequestDescriptor Realm(string? realm)
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor Realm(string? value)
 	{
-		RealmValue = realm;
-		return Self;
+		Instance.Realm = value;
+		return this;
 	}
 
 	/// <summary>
@@ -164,33 +226,64 @@ public sealed partial class SamlPrepareAuthenticationRequestDescriptor : Request
 	/// If the Authentication Request is signed, this value is used as part of the signature computation.
 	/// </para>
 	/// </summary>
-	public SamlPrepareAuthenticationRequestDescriptor RelayState(string? relayState)
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor RelayState(string? value)
 	{
-		RelayStateValue = relayState;
-		return Self;
+		Instance.RelayState = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AcsValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("acs");
-			writer.WriteStringValue(AcsValue);
+			return new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(RealmValue))
-		{
-			writer.WritePropertyName("realm");
-			writer.WriteStringValue(RealmValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(RelayStateValue))
-		{
-			writer.WritePropertyName("relay_state");
-			writer.WriteStringValue(RelayStateValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

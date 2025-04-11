@@ -4,19 +4,26 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(RoutingConverter))]
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-public class Routing : IEquatable<Routing>, IUrlParameter
+public class Routing :
+	IEquatable<Routing>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Routing>
+#endif
 {
-	private static readonly char[] Separator = {','};
+	private static readonly char[] Separator = { ',' };
 
 	internal Routing(Func<object> documentGetter)
 	{
@@ -66,8 +73,10 @@ public class Routing : IEquatable<Routing>, IUrlParameter
 					var t = DocumentGetter();
 					var o = other.DocumentGetter();
 					return t?.Equals(o) ?? false;
+
 				case 4:
 					return Document?.Equals(other.Document) ?? false;
+
 				default:
 					return StringEquals(StringOrLongValue, other.StringOrLongValue);
 			}
@@ -141,12 +150,16 @@ public class Routing : IEquatable<Routing>, IUrlParameter
 		{
 			case Routing r:
 				return Equals(r);
+
 			case string s:
 				return Equals(s);
+
 			case int l:
 				return Equals(l);
+
 			case long l:
 				return Equals(l);
+
 			case Guid g:
 				return Equals(g);
 		}
@@ -167,10 +180,23 @@ public class Routing : IEquatable<Routing>, IUrlParameter
 		}
 	}
 
-	//internal bool ShouldSerialize(IJsonFormatterResolver formatterResolver)
-	//{
-	//	var inferrer = formatterResolver.GetConnectionSettings().Inferrer;
-	//	var resolved = inferrer.Resolve(this);
-	//	return !resolved.IsNullOrEmpty();
-	//}
+	#region IParsable
+
+	public static Routing Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Routing? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Routing(s);
+		return true;
+	}
+
+	#endregion IParsable
 }

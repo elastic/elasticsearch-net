@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class DeleteBehavioralAnalyticsRequestParameters : RequestParameters
+public sealed partial class DeleteBehavioralAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteBehavioralAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,19 +62,42 @@ public sealed partial class DeleteBehavioralAnalyticsRequestParameters : Request
 /// The associated data stream is also deleted.
 /// </para>
 /// </summary>
-public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<DeleteBehavioralAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestConverter))]
+public sealed partial class DeleteBehavioralAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteBehavioralAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationDeleteBehavioralAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchApplicationDeleteBehavioralAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_application.delete_behavioral_analytics";
+
+	/// <summary>
+	/// <para>
+	/// The name of the analytics collection to be deleted
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>
@@ -61,29 +106,88 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<Dele
 /// The associated data stream is also deleted.
 /// </para>
 /// </summary>
-public sealed partial class DeleteBehavioralAnalyticsRequestDescriptor : RequestDescriptor<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsRequestParameters>
+public readonly partial struct DeleteBehavioralAnalyticsRequestDescriptor
 {
-	internal DeleteBehavioralAnalyticsRequestDescriptor(Action<DeleteBehavioralAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest Instance { get; init; }
 
-	public DeleteBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationDeleteBehavioralAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "search_application.delete_behavioral_analytics";
-
-	public DeleteBehavioralAnalyticsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public DeleteBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest(name);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteBehavioralAnalyticsRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the analytics collection to be deleted
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

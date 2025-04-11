@@ -17,24 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class WarmerStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.WarmerStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.WarmerStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCurrent = default;
+		LocalJsonValue<long> propTotal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrent.TryReadProperty(ref reader, options, PropCurrent, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTotalTime.TryReadProperty(ref reader, options, PropTotalTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalTimeInMillis.TryReadProperty(ref reader, options, PropTotalTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.WarmerStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Current = propCurrent.Value,
+			Total = propTotal.Value,
+			TotalTime = propTotalTime.Value,
+			TotalTimeInMillis = propTotalTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.WarmerStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTotalTime, value.TotalTime, null, null);
+		writer.WriteProperty(options, PropTotalTimeInMillis, value.TotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.WarmerStatsConverter))]
 public sealed partial class WarmerStats
 {
-	[JsonInclude, JsonPropertyName("current")]
-	public long Current { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
-	[JsonInclude, JsonPropertyName("total_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_time_in_millis")]
-	public long TotalTimeInMillis { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WarmerStats(long current, long total, System.TimeSpan totalTimeInMillis)
+	{
+		Current = current;
+		Total = total;
+		TotalTimeInMillis = totalTimeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public WarmerStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public WarmerStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal WarmerStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Current { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalTimeInMillis { get; set; }
 }

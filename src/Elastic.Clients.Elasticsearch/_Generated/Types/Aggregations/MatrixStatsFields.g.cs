@@ -17,34 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class MatrixStatsFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCorrelation = System.Text.Json.JsonEncodedText.Encode("correlation");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropCovariance = System.Text.Json.JsonEncodedText.Encode("covariance");
+	private static readonly System.Text.Json.JsonEncodedText PropKurtosis = System.Text.Json.JsonEncodedText.Encode("kurtosis");
+	private static readonly System.Text.Json.JsonEncodedText PropMean = System.Text.Json.JsonEncodedText.Encode("mean");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropSkewness = System.Text.Json.JsonEncodedText.Encode("skewness");
+	private static readonly System.Text.Json.JsonEncodedText PropVariance = System.Text.Json.JsonEncodedText.Encode("variance");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, double>> propCorrelation = default;
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, double>> propCovariance = default;
+		LocalJsonValue<double> propKurtosis = default;
+		LocalJsonValue<double> propMean = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<double> propSkewness = default;
+		LocalJsonValue<double> propVariance = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCorrelation.TryReadProperty(ref reader, options, PropCorrelation, static System.Collections.Generic.IReadOnlyDictionary<string, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propCovariance.TryReadProperty(ref reader, options, PropCovariance, static System.Collections.Generic.IReadOnlyDictionary<string, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propKurtosis.TryReadProperty(ref reader, options, PropKurtosis, null))
+			{
+				continue;
+			}
+
+			if (propMean.TryReadProperty(ref reader, options, PropMean, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propSkewness.TryReadProperty(ref reader, options, PropSkewness, null))
+			{
+				continue;
+			}
+
+			if (propVariance.TryReadProperty(ref reader, options, PropVariance, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Correlation = propCorrelation.Value,
+			Count = propCount.Value,
+			Covariance = propCovariance.Value,
+			Kurtosis = propKurtosis.Value,
+			Mean = propMean.Value,
+			Name = propName.Value,
+			Skewness = propSkewness.Value,
+			Variance = propVariance.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCorrelation, value.Correlation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double> v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropCovariance, value.Covariance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double> v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
+		writer.WriteProperty(options, PropKurtosis, value.Kurtosis, null, null);
+		writer.WriteProperty(options, PropMean, value.Mean, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropSkewness, value.Skewness, null, null);
+		writer.WriteProperty(options, PropVariance, value.Variance, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFieldsConverter))]
 public sealed partial class MatrixStatsFields
 {
-	[JsonInclude, JsonPropertyName("correlation")]
-	[ReadOnlyFieldDictionaryConverter(typeof(double))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, double> Correlation { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("covariance")]
-	[ReadOnlyFieldDictionaryConverter(typeof(double))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, double> Covariance { get; init; }
-	[JsonInclude, JsonPropertyName("kurtosis")]
-	public double Kurtosis { get; init; }
-	[JsonInclude, JsonPropertyName("mean")]
-	public double Mean { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("skewness")]
-	public double Skewness { get; init; }
-	[JsonInclude, JsonPropertyName("variance")]
-	public double Variance { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MatrixStatsFields(System.Collections.Generic.IReadOnlyDictionary<string, double> correlation, long count, System.Collections.Generic.IReadOnlyDictionary<string, double> covariance, double kurtosis, double mean, string name, double skewness, double variance)
+	{
+		Correlation = correlation;
+		Count = count;
+		Covariance = covariance;
+		Kurtosis = kurtosis;
+		Mean = mean;
+		Name = name;
+		Skewness = skewness;
+		Variance = variance;
+	}
+#if NET7_0_OR_GREATER
+	public MatrixStatsFields()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MatrixStatsFields()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MatrixStatsFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, double> Correlation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, double> Covariance { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Kurtosis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Mean { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Skewness { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Variance { get; set; }
 }

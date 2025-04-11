@@ -17,42 +17,74 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class SnapshotStatusRequestParameters : RequestParameters
+public sealed partial class SnapshotStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
+	/// If <c>false</c>, the request returns an error for any snapshots that are unavailable.
+	/// If <c>true</c>, the request ignores snapshots that are unavailable, such as those that are corrupted or temporarily cannot be returned.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class SnapshotStatusRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Get the snapshot status.
 /// Get a detailed description of the current state for each shard participating in the snapshot.
+/// </para>
+/// <para>
 /// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
 /// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+/// </para>
+/// <para>
+/// If you omit the <c>&lt;snapshot></c> request path parameter, the request retrieves information only for currently running snapshots.
+/// This usage is preferred.
+/// If needed, you can specify <c>&lt;repository></c> and <c>&lt;snapshot></c> to retrieve information for specific snapshots, even if they're not currently running.
 /// </para>
 /// <para>
 /// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
@@ -64,12 +96,9 @@ public sealed partial class SnapshotStatusRequestParameters : RequestParameters
 /// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 /// </para>
 /// </summary>
-public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestConverter))]
+public sealed partial class SnapshotStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>
 {
-	public SnapshotStatusRequest()
-	{
-	}
-
 	public SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Name? repository) : base(r => r.Optional("repository", repository))
 	{
 	}
@@ -77,10 +106,25 @@ public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusR
 	public SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot) : base(r => r.Optional("repository", repository).Optional("snapshot", snapshot))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public SnapshotStatusRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SnapshotStatusRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotStatus;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotStatus;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -88,18 +132,36 @@ public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusR
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
+	/// The snapshot repository name used to limit the request.
+	/// It supports wildcards (<c>*</c>) if <c>&lt;snapshot></c> isn't specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Repository { get => P<Elastic.Clients.Elasticsearch.Name?>("repository"); set => PO("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshots to retrieve status for.
+	/// The default is currently running snapshots.
+	/// Wildcards (<c>*</c>) are not supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Names? Snapshot { get => P<Elastic.Clients.Elasticsearch.Names?>("snapshot"); set => PO("snapshot", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error for any snapshots that are unavailable.
+	/// If <c>true</c>, the request ignores snapshots that are unavailable, such as those that are corrupted or temporarily cannot be returned.
+	/// </para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
@@ -107,8 +169,15 @@ public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusR
 /// <para>
 /// Get the snapshot status.
 /// Get a detailed description of the current state for each shard participating in the snapshot.
+/// </para>
+/// <para>
 /// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
 /// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+/// </para>
+/// <para>
+/// If you omit the <c>&lt;snapshot></c> request path parameter, the request retrieves information only for currently running snapshots.
+/// This usage is preferred.
+/// If needed, you can specify <c>&lt;repository></c> and <c>&lt;snapshot></c> to retrieve information for specific snapshots, even if they're not currently running.
 /// </para>
 /// <para>
 /// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
@@ -120,42 +189,136 @@ public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusR
 /// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 /// </para>
 /// </summary>
-public sealed partial class SnapshotStatusRequestDescriptor : RequestDescriptor<SnapshotStatusRequestDescriptor, SnapshotStatusRequestParameters>
+public readonly partial struct SnapshotStatusRequestDescriptor
 {
-	internal SnapshotStatusRequestDescriptor(Action<SnapshotStatusRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest Instance { get; init; }
 
-	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot) : base(r => r.Optional("repository", repository).Optional("snapshot", snapshot))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name? repository)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(repository);
+	}
+
+	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(repository, snapshot);
 	}
 
 	public SnapshotStatusRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotStatus;
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "snapshot.status";
-
-	public SnapshotStatusRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public SnapshotStatusRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public SnapshotStatusRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name? repository)
+	/// <summary>
+	/// <para>
+	/// The snapshot repository name used to limit the request.
+	/// It supports wildcards (<c>*</c>) if <c>&lt;snapshot></c> isn't specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		RouteValues.Optional("repository", repository);
-		return Self;
+		Instance.Repository = value;
+		return this;
 	}
 
-	public SnapshotStatusRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Names? snapshot)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshots to retrieve status for.
+	/// The default is currently running snapshots.
+	/// Wildcards (<c>*</c>) are not supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Names? value)
 	{
-		RouteValues.Optional("snapshot", snapshot);
-		return Self;
+		Instance.Snapshot = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error for any snapshots that are unavailable.
+	/// If <c>true</c>, the request ignores snapshots that are unavailable, such as those that are corrupted or temporarily cannot be returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

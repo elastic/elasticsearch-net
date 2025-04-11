@@ -17,106 +17,193 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class FieldSecurityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.FieldSecurity>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExcept = System.Text.Json.JsonEncodedText.Encode("except");
+	private static readonly System.Text.Json.JsonEncodedText PropGrant = System.Text.Json.JsonEncodedText.Encode("grant");
+
+	public override Elastic.Clients.Elasticsearch.Security.FieldSecurity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propExcept = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propGrant = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExcept.TryReadProperty(ref reader, options, PropExcept, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propGrant.TryReadProperty(ref reader, options, PropGrant, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Except = propExcept.Value,
+			Grant = propGrant.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.FieldSecurity value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExcept, value.Except, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropGrant, value.Grant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.FieldSecurityConverter))]
 public sealed partial class FieldSecurity
 {
-	[JsonInclude, JsonPropertyName("except")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
+#if NET7_0_OR_GREATER
+	public FieldSecurity()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FieldSecurity()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Fields? Except { get; set; }
-	[JsonInclude, JsonPropertyName("grant")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Grant { get; set; }
 }
 
-public sealed partial class FieldSecurityDescriptor<TDocument> : SerializableDescriptor<FieldSecurityDescriptor<TDocument>>
+public readonly partial struct FieldSecurityDescriptor<TDocument>
 {
-	internal FieldSecurityDescriptor(Action<FieldSecurityDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.FieldSecurity Instance { get; init; }
 
-	public FieldSecurityDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSecurityDescriptor(Elastic.Clients.Elasticsearch.Security.FieldSecurity instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? ExceptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? GrantValue { get; set; }
-
-	public FieldSecurityDescriptor<TDocument> Except(Elastic.Clients.Elasticsearch.Fields? except)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSecurityDescriptor()
 	{
-		ExceptValue = except;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public FieldSecurityDescriptor<TDocument> Grant(Elastic.Clients.Elasticsearch.Fields? grant)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.FieldSecurity instance) => new Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> Except(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		GrantValue = grant;
-		return Self;
+		Instance.Except = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> Except(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		if (ExceptValue is not null)
+		Instance.Except = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> Grant(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Grant = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> Grant(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Grant = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.FieldSecurity Build(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("except");
-			JsonSerializer.Serialize(writer, ExceptValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (GrantValue is not null)
-		{
-			writer.WritePropertyName("grant");
-			JsonSerializer.Serialize(writer, GrantValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FieldSecurityDescriptor : SerializableDescriptor<FieldSecurityDescriptor>
+public readonly partial struct FieldSecurityDescriptor
 {
-	internal FieldSecurityDescriptor(Action<FieldSecurityDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.FieldSecurity Instance { get; init; }
 
-	public FieldSecurityDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSecurityDescriptor(Elastic.Clients.Elasticsearch.Security.FieldSecurity instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? ExceptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? GrantValue { get; set; }
-
-	public FieldSecurityDescriptor Except(Elastic.Clients.Elasticsearch.Fields? except)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSecurityDescriptor()
 	{
-		ExceptValue = except;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public FieldSecurityDescriptor Grant(Elastic.Clients.Elasticsearch.Fields? grant)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor(Elastic.Clients.Elasticsearch.Security.FieldSecurity instance) => new Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor Except(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		GrantValue = grant;
-		return Self;
+		Instance.Except = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor Except<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		writer.WriteStartObject();
-		if (ExceptValue is not null)
+		Instance.Except = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor Grant(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Grant = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor Grant<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Grant = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.FieldSecurity Build(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("except");
-			JsonSerializer.Serialize(writer, ExceptValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (GrantValue is not null)
-		{
-			writer.WritePropertyName("grant");
-			JsonSerializer.Serialize(writer, GrantValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor(new Elastic.Clients.Elasticsearch.Security.FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

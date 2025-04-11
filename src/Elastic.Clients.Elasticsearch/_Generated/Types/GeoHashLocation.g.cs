@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class GeoHashLocation
+internal sealed partial class GeoHashLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoHashLocation>
 {
-	[JsonInclude, JsonPropertyName("geohash")]
-	public string Geohash { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropGeohash = System.Text.Json.JsonEncodedText.Encode("geohash");
 
-public sealed partial class GeoHashLocationDescriptor : SerializableDescriptor<GeoHashLocationDescriptor>
-{
-	internal GeoHashLocationDescriptor(Action<GeoHashLocationDescriptor> configure) => configure.Invoke(this);
-
-	public GeoHashLocationDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.GeoHashLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propGeohash = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propGeohash.TryReadProperty(ref reader, options, PropGeohash, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.GeoHashLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Geohash = propGeohash.Value
+		};
 	}
 
-	private string GeohashValue { get; set; }
-
-	public GeoHashLocationDescriptor Geohash(string geohash)
-	{
-		GeohashValue = geohash;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GeoHashLocation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("geohash");
-		writer.WriteStringValue(GeohashValue);
+		writer.WriteProperty(options, PropGeohash, value.Geohash, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GeoHashLocationConverter))]
+public sealed partial class GeoHashLocation
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoHashLocation(string geohash)
+	{
+		Geohash = geohash;
+	}
+#if NET7_0_OR_GREATER
+	public GeoHashLocation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoHashLocation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoHashLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Geohash { get; set; }
+}
+
+public readonly partial struct GeoHashLocationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.GeoHashLocation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoHashLocationDescriptor(Elastic.Clients.Elasticsearch.GeoHashLocation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoHashLocationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GeoHashLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor(Elastic.Clients.Elasticsearch.GeoHashLocation instance) => new Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoHashLocation(Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor Geohash(string value)
+	{
+		Instance.Geohash = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GeoHashLocation Build(System.Action<Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor(new Elastic.Clients.Elasticsearch.GeoHashLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

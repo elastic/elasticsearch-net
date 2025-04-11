@@ -17,73 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Zero shot classification configuration options
-/// </para>
-/// </summary>
-public sealed partial class ZeroShotClassificationInferenceOptions
+internal sealed partial class ZeroShotClassificationInferenceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions>
 {
-	/// <summary>
-	/// <para>
-	/// The zero shot classification labels indicating entailment, neutral, and contradiction
-	/// Must contain exactly and only entailment, neutral, and contradiction
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("classification_labels")]
-	public ICollection<string> ClassificationLabels { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropClassificationLabels = System.Text.Json.JsonEncodedText.Encode("classification_labels");
+	private static readonly System.Text.Json.JsonEncodedText PropHypothesisTemplate = System.Text.Json.JsonEncodedText.Encode("hypothesis_template");
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
+	private static readonly System.Text.Json.JsonEncodedText PropMultiLabel = System.Text.Json.JsonEncodedText.Encode("multi_label");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
 
-	/// <summary>
-	/// <para>
-	/// Hypothesis template used when tokenizing labels for prediction
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("hypothesis_template")]
-	public string? HypothesisTemplate { get; set; }
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propClassificationLabels = default;
+		LocalJsonValue<string?> propHypothesisTemplate = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propLabels = default;
+		LocalJsonValue<bool?> propMultiLabel = default;
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClassificationLabels.TryReadProperty(ref reader, options, PropClassificationLabels, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("labels")]
-	public ICollection<string>? Labels { get; set; }
+			if (propHypothesisTemplate.TryReadProperty(ref reader, options, PropHypothesisTemplate, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if more than one true label exists.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("multi_label")]
-	public bool? MultiLabel { get; set; }
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
-	public string? ResultsField { get; set; }
+			if (propMultiLabel.TryReadProperty(ref reader, options, PropMultiLabel, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.ZeroShotClassification(zeroShotClassificationInferenceOptions);
+			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClassificationLabels = propClassificationLabels.Value,
+			HypothesisTemplate = propHypothesisTemplate.Value,
+			Labels = propLabels.Value,
+			MultiLabel = propMultiLabel.Value,
+			ResultsField = propResultsField.Value,
+			Tokenization = propTokenization.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClassificationLabels, value.ClassificationLabels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropHypothesisTemplate, value.HypothesisTemplate, null, null);
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMultiLabel, value.MultiLabel, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -91,22 +112,30 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 /// Zero shot classification configuration options
 /// </para>
 /// </summary>
-public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsConverter))]
+public sealed partial class ZeroShotClassificationInferenceOptions
 {
-	internal ZeroShotClassificationInferenceOptionsDescriptor(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-
-	public ZeroShotClassificationInferenceOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ZeroShotClassificationInferenceOptions(System.Collections.Generic.ICollection<string> classificationLabels)
+	{
+		ClassificationLabels = classificationLabels;
+	}
+#if NET7_0_OR_GREATER
+	public ZeroShotClassificationInferenceOptions()
 	{
 	}
-
-	private ICollection<string> ClassificationLabelsValue { get; set; }
-	private string? HypothesisTemplateValue { get; set; }
-	private ICollection<string>? LabelsValue { get; set; }
-	private bool? MultiLabelValue { get; set; }
-	private string? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? TokenizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ZeroShotClassificationInferenceOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ZeroShotClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
@@ -114,10 +143,94 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	/// Must contain exactly and only entailment, neutral, and contradiction
 	/// </para>
 	/// </summary>
-	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string> classificationLabels)
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> ClassificationLabels { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Hypothesis template used when tokenizing labels for prediction
+	/// </para>
+	/// </summary>
+	public string? HypothesisTemplate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The labels to predict.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? Labels { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Indicates if more than one true label exists.
+	/// </para>
+	/// </summary>
+	public bool? MultiLabel { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
+	/// </summary>
+	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Zero shot classification configuration options
+/// </para>
+/// </summary>
+public readonly partial struct ZeroShotClassificationInferenceOptionsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ZeroShotClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions instance)
 	{
-		ClassificationLabelsValue = classificationLabels;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ZeroShotClassificationInferenceOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The zero shot classification labels indicating entailment, neutral, and contradiction
+	/// Must contain exactly and only entailment, neutral, and contradiction
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.ClassificationLabels = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The zero shot classification labels indicating entailment, neutral, and contradiction
+	/// Must contain exactly and only entailment, neutral, and contradiction
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(params string[] values)
+	{
+		Instance.ClassificationLabels = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -125,10 +238,10 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	/// Hypothesis template used when tokenizing labels for prediction
 	/// </para>
 	/// </summary>
-	public ZeroShotClassificationInferenceOptionsDescriptor HypothesisTemplate(string? hypothesisTemplate)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor HypothesisTemplate(string? value)
 	{
-		HypothesisTemplateValue = hypothesisTemplate;
-		return Self;
+		Instance.HypothesisTemplate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -136,10 +249,21 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	/// The labels to predict.
 	/// </para>
 	/// </summary>
-	public ZeroShotClassificationInferenceOptionsDescriptor Labels(ICollection<string>? labels)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels(System.Collections.Generic.ICollection<string>? value)
 	{
-		LabelsValue = labels;
-		return Self;
+		Instance.Labels = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The labels to predict.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels(params string[] values)
+	{
+		Instance.Labels = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -147,10 +271,10 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	/// Indicates if more than one true label exists.
 	/// </para>
 	/// </summary>
-	public ZeroShotClassificationInferenceOptionsDescriptor MultiLabel(bool? multiLabel = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor MultiLabel(bool? value = true)
 	{
-		MultiLabelValue = multiLabel;
-		return Self;
+		Instance.MultiLabel = value;
+		return this;
 	}
 
 	/// <summary>
@@ -158,10 +282,10 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public ZeroShotClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ResultsField(string? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -169,75 +293,28 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	/// The tokenization options to update when inferring
 	/// </para>
 	/// </summary>
-	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = null;
-		TokenizationValue = tokenization;
-		return Self;
+		Instance.Tokenization = value;
+		return this;
 	}
 
-	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptorAction = null;
-		TokenizationDescriptor = descriptor;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor> action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("classification_labels");
-		JsonSerializer.Serialize(writer, ClassificationLabelsValue, options);
-		if (!string.IsNullOrEmpty(HypothesisTemplateValue))
-		{
-			writer.WritePropertyName("hypothesis_template");
-			writer.WriteStringValue(HypothesisTemplateValue);
-		}
-
-		if (LabelsValue is not null)
-		{
-			writer.WritePropertyName("labels");
-			JsonSerializer.Serialize(writer, LabelsValue, options);
-		}
-
-		if (MultiLabelValue.HasValue)
-		{
-			writer.WritePropertyName("multi_label");
-			writer.WriteBooleanValue(MultiLabelValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
-		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
-		}
-
-		if (TokenizationDescriptor is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-		}
-		else if (TokenizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
-		}
-		else if (TokenizationValue is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

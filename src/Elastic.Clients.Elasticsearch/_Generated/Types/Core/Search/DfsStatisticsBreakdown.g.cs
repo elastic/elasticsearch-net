@@ -17,32 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class DfsStatisticsBreakdownConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdown>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionStatistics = System.Text.Json.JsonEncodedText.Encode("collection_statistics");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionStatisticsCount = System.Text.Json.JsonEncodedText.Encode("collection_statistics_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCreateWeight = System.Text.Json.JsonEncodedText.Encode("create_weight");
+	private static readonly System.Text.Json.JsonEncodedText PropCreateWeightCount = System.Text.Json.JsonEncodedText.Encode("create_weight_count");
+	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite");
+	private static readonly System.Text.Json.JsonEncodedText PropRewriteCount = System.Text.Json.JsonEncodedText.Encode("rewrite_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics");
+	private static readonly System.Text.Json.JsonEncodedText PropTermStatisticsCount = System.Text.Json.JsonEncodedText.Encode("term_statistics_count");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdown Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCollectionStatistics = default;
+		LocalJsonValue<long> propCollectionStatisticsCount = default;
+		LocalJsonValue<long> propCreateWeight = default;
+		LocalJsonValue<long> propCreateWeightCount = default;
+		LocalJsonValue<long> propRewrite = default;
+		LocalJsonValue<long> propRewriteCount = default;
+		LocalJsonValue<long> propTermStatistics = default;
+		LocalJsonValue<long> propTermStatisticsCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollectionStatistics.TryReadProperty(ref reader, options, PropCollectionStatistics, null))
+			{
+				continue;
+			}
+
+			if (propCollectionStatisticsCount.TryReadProperty(ref reader, options, PropCollectionStatisticsCount, null))
+			{
+				continue;
+			}
+
+			if (propCreateWeight.TryReadProperty(ref reader, options, PropCreateWeight, null))
+			{
+				continue;
+			}
+
+			if (propCreateWeightCount.TryReadProperty(ref reader, options, PropCreateWeightCount, null))
+			{
+				continue;
+			}
+
+			if (propRewrite.TryReadProperty(ref reader, options, PropRewrite, null))
+			{
+				continue;
+			}
+
+			if (propRewriteCount.TryReadProperty(ref reader, options, PropRewriteCount, null))
+			{
+				continue;
+			}
+
+			if (propTermStatistics.TryReadProperty(ref reader, options, PropTermStatistics, null))
+			{
+				continue;
+			}
+
+			if (propTermStatisticsCount.TryReadProperty(ref reader, options, PropTermStatisticsCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CollectionStatistics = propCollectionStatistics.Value,
+			CollectionStatisticsCount = propCollectionStatisticsCount.Value,
+			CreateWeight = propCreateWeight.Value,
+			CreateWeightCount = propCreateWeightCount.Value,
+			Rewrite = propRewrite.Value,
+			RewriteCount = propRewriteCount.Value,
+			TermStatistics = propTermStatistics.Value,
+			TermStatisticsCount = propTermStatisticsCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdown value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollectionStatistics, value.CollectionStatistics, null, null);
+		writer.WriteProperty(options, PropCollectionStatisticsCount, value.CollectionStatisticsCount, null, null);
+		writer.WriteProperty(options, PropCreateWeight, value.CreateWeight, null, null);
+		writer.WriteProperty(options, PropCreateWeightCount, value.CreateWeightCount, null, null);
+		writer.WriteProperty(options, PropRewrite, value.Rewrite, null, null);
+		writer.WriteProperty(options, PropRewriteCount, value.RewriteCount, null, null);
+		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics, null, null);
+		writer.WriteProperty(options, PropTermStatisticsCount, value.TermStatisticsCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdownConverter))]
 public sealed partial class DfsStatisticsBreakdown
 {
-	[JsonInclude, JsonPropertyName("collection_statistics")]
-	public long CollectionStatistics { get; init; }
-	[JsonInclude, JsonPropertyName("collection_statistics_count")]
-	public long CollectionStatisticsCount { get; init; }
-	[JsonInclude, JsonPropertyName("create_weight")]
-	public long CreateWeight { get; init; }
-	[JsonInclude, JsonPropertyName("create_weight_count")]
-	public long CreateWeightCount { get; init; }
-	[JsonInclude, JsonPropertyName("rewrite")]
-	public long Rewrite { get; init; }
-	[JsonInclude, JsonPropertyName("rewrite_count")]
-	public long RewriteCount { get; init; }
-	[JsonInclude, JsonPropertyName("term_statistics")]
-	public long TermStatistics { get; init; }
-	[JsonInclude, JsonPropertyName("term_statistics_count")]
-	public long TermStatisticsCount { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DfsStatisticsBreakdown(long collectionStatistics, long collectionStatisticsCount, long createWeight, long createWeightCount, long rewrite, long rewriteCount, long termStatistics, long termStatisticsCount)
+	{
+		CollectionStatistics = collectionStatistics;
+		CollectionStatisticsCount = collectionStatisticsCount;
+		CreateWeight = createWeight;
+		CreateWeightCount = createWeightCount;
+		Rewrite = rewrite;
+		RewriteCount = rewriteCount;
+		TermStatistics = termStatistics;
+		TermStatisticsCount = termStatisticsCount;
+	}
+#if NET7_0_OR_GREATER
+	public DfsStatisticsBreakdown()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DfsStatisticsBreakdown()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DfsStatisticsBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CollectionStatistics { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CollectionStatisticsCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CreateWeight { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CreateWeightCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Rewrite { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long RewriteCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TermStatistics { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TermStatisticsCount { get; set; }
 }

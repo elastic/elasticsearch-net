@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
-public sealed partial class ListDanglingIndicesRequestParameters : RequestParameters
+public sealed partial class ListDanglingIndicesRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ListDanglingIndicesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest>
+{
+	public override Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,11 +68,28 @@ public sealed partial class ListDanglingIndicesRequestParameters : RequestParame
 /// Use this API to list dangling indices, which you can then import or delete.
 /// </para>
 /// </summary>
-public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDanglingIndicesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestConverter))]
+public sealed partial class ListDanglingIndicesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.DanglingIndicesListDanglingIndices;
+#if NET7_0_OR_GREATER
+	public ListDanglingIndicesRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ListDanglingIndicesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ListDanglingIndicesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.DanglingIndicesListDanglingIndices;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -69,23 +108,76 @@ public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDangli
 /// Use this API to list dangling indices, which you can then import or delete.
 /// </para>
 /// </summary>
-public sealed partial class ListDanglingIndicesRequestDescriptor : RequestDescriptor<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesRequestParameters>
+public readonly partial struct ListDanglingIndicesRequestDescriptor
 {
-	internal ListDanglingIndicesRequestDescriptor(Action<ListDanglingIndicesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ListDanglingIndicesRequestDescriptor(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ListDanglingIndicesRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.DanglingIndicesListDanglingIndices;
+	public static explicit operator Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest instance) => new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "dangling_indices.list_dangling_indices";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest Build(System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor(new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

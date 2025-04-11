@@ -17,77 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GlobalPrivilege
+internal sealed partial class GlobalPrivilegeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>
 {
-	[JsonInclude, JsonPropertyName("application")]
-	public Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Application { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
 
-public sealed partial class GlobalPrivilegeDescriptor : SerializableDescriptor<GlobalPrivilegeDescriptor>
-{
-	internal GlobalPrivilegeDescriptor(Action<GlobalPrivilegeDescriptor> configure) => configure.Invoke(this);
-
-	public GlobalPrivilegeDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges> propApplication = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApplication.TryReadProperty(ref reader, options, PropApplication, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Application = propApplication.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges ApplicationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor ApplicationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor> ApplicationDescriptorAction { get; set; }
-
-	public GlobalPrivilegeDescriptor Application(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges application)
-	{
-		ApplicationDescriptor = null;
-		ApplicationDescriptorAction = null;
-		ApplicationValue = application;
-		return Self;
-	}
-
-	public GlobalPrivilegeDescriptor Application(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor descriptor)
-	{
-		ApplicationValue = null;
-		ApplicationDescriptorAction = null;
-		ApplicationDescriptor = descriptor;
-		return Self;
-	}
-
-	public GlobalPrivilegeDescriptor Application(Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor> configure)
-	{
-		ApplicationValue = null;
-		ApplicationDescriptor = null;
-		ApplicationDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GlobalPrivilege value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (ApplicationDescriptor is not null)
-		{
-			writer.WritePropertyName("application");
-			JsonSerializer.Serialize(writer, ApplicationDescriptor, options);
-		}
-		else if (ApplicationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("application");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor(ApplicationDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("application");
-			JsonSerializer.Serialize(writer, ApplicationValue, options);
-		}
-
+		writer.WriteProperty(options, PropApplication, value.Application, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeConverter))]
+public sealed partial class GlobalPrivilege
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GlobalPrivilege(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges application)
+	{
+		Application = application;
+	}
+#if NET7_0_OR_GREATER
+	public GlobalPrivilege()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GlobalPrivilege()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Application { get; set; }
+}
+
+public readonly partial struct GlobalPrivilegeDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GlobalPrivilegeDescriptor(Elastic.Clients.Elasticsearch.Security.GlobalPrivilege instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GlobalPrivilegeDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(Elastic.Clients.Elasticsearch.Security.GlobalPrivilege instance) => new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges value)
+	{
+		Instance.Application = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor> action)
+	{
+		Instance.Application = Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Build(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(new Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

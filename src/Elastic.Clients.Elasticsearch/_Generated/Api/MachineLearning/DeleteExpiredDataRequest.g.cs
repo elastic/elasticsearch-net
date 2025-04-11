@@ -17,49 +17,104 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteExpiredDataRequestParameters : RequestParameters
+public sealed partial class DeleteExpiredDataRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteExpiredDataRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propRequestsPerSecond = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRequestsPerSecond.TryReadProperty(ref reader, options, PropRequestsPerSecond, null))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RequestsPerSecond = propRequestsPerSecond.Value,
+			Timeout = propTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, null);
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Delete expired ML data.
-/// Deletes all job results, model snapshots and forecast data that have exceeded
+/// </para>
+/// <para>
+/// Delete all job results, model snapshots and forecast data that have exceeded
 /// their retention days period. Machine learning state documents that are not
 /// associated with any job are also deleted.
 /// You can limit the request to a single or set of anomaly detection jobs by
 /// using a job identifier, a group name, a comma-separated list of jobs, or a
 /// wildcard expression. You can delete expired data for all anomaly detection
-/// jobs by using _all, by specifying * as the &lt;job_id>, or by omitting the
-/// &lt;job_id>.
+/// jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
+/// <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
-public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpiredDataRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestConverter))]
+public sealed partial class DeleteExpiredDataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>
 {
-	public DeleteExpiredDataRequest()
-	{
-	}
-
 	public DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Id? jobId) : base(r => r.Optional("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteExpiredDataRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DeleteExpiredDataRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteExpiredData;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteExpiredData;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
 
@@ -67,11 +122,18 @@ public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpire
 
 	/// <summary>
 	/// <para>
+	/// Identifier for an anomaly detection job. It can be a job identifier, a
+	/// group name, or a wildcard expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? JobId { get => P<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => PO("job_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The desired requests per second for the deletion processes. The default
 	/// behavior is no throttling.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float? RequestsPerSecond { get; set; }
 
 	/// <summary>
@@ -79,51 +141,58 @@ public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpire
 	/// How long can the underlying delete processes run until they are canceled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Delete expired ML data.
-/// Deletes all job results, model snapshots and forecast data that have exceeded
+/// </para>
+/// <para>
+/// Delete all job results, model snapshots and forecast data that have exceeded
 /// their retention days period. Machine learning state documents that are not
 /// associated with any job are also deleted.
 /// You can limit the request to a single or set of anomaly detection jobs by
 /// using a job identifier, a group name, a comma-separated list of jobs, or a
 /// wildcard expression. You can delete expired data for all anomaly detection
-/// jobs by using _all, by specifying * as the &lt;job_id>, or by omitting the
-/// &lt;job_id>.
+/// jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
+/// <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
-public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescriptor<DeleteExpiredDataRequestDescriptor, DeleteExpiredDataRequestParameters>
+public readonly partial struct DeleteExpiredDataRequestDescriptor
 {
-	internal DeleteExpiredDataRequestDescriptor(Action<DeleteExpiredDataRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest Instance { get; init; }
 
-	public DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.Id? jobId) : base(r => r.Optional("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.Id? jobId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(jobId);
 	}
 
 	public DeleteExpiredDataRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteExpiredData;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.delete_expired_data";
-
-	public DeleteExpiredDataRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId)
+	/// <summary>
+	/// <para>
+	/// Identifier for an anomaly detection job. It can be a job identifier, a
+	/// group name, or a wildcard expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("job_id", jobId);
-		return Self;
+		Instance.JobId = value;
+		return this;
 	}
-
-	private float? RequestsPerSecondValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -131,10 +200,10 @@ public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescript
 	/// behavior is no throttling.
 	/// </para>
 	/// </summary>
-	public DeleteExpiredDataRequestDescriptor RequestsPerSecond(float? requestsPerSecond)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor RequestsPerSecond(float? value)
 	{
-		RequestsPerSecondValue = requestsPerSecond;
-		return Self;
+		Instance.RequestsPerSecond = value;
+		return this;
 	}
 
 	/// <summary>
@@ -142,27 +211,64 @@ public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescript
 	/// How long can the underlying delete processes run until they are canceled.
 	/// </para>
 	/// </summary>
-	public DeleteExpiredDataRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (RequestsPerSecondValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("requests_per_second");
-			writer.WriteNumberValue(RequestsPerSecondValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

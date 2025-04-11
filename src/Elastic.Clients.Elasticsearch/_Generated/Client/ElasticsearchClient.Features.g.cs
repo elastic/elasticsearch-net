@@ -18,500 +18,115 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
-public partial class FeaturesNamespacedClient : NamespacedClientProxy
+public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="FeaturesNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Features.FeaturesNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected FeaturesNamespacedClient() : base()
 	{
 	}
 
-	internal FeaturesNamespacedClient(ElasticsearchClient client) : base(client)
+	internal FeaturesNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetFeaturesRequest, GetFeaturesResponse, GetFeaturesRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures(System.Action<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetFeaturesRequest, GetFeaturesResponse, GetFeaturesRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetFeaturesResponse GetFeatures()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(System.Action<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetFeaturesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetFeaturesResponse GetFeatures(Action<GetFeaturesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetFeaturesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetFeaturesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the features.
-	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-	/// You can use this API to determine which feature states to include when taking a snapshot.
-	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-	/// </para>
-	/// <para>
-	/// A feature state includes one or more system indices necessary for a given feature to function.
-	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-	/// </para>
-	/// <para>
-	/// The features listed by this API are a combination of built-in features and features defined by plugins.
-	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(Action<GetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetFeaturesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ResetFeaturesRequest, ResetFeaturesResponse, ResetFeaturesRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures(System.Action<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ResetFeaturesRequest, ResetFeaturesResponse, ResetFeaturesRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetFeaturesResponse ResetFeatures()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(System.Action<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ResetFeaturesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetFeaturesResponse ResetFeatures(Action<ResetFeaturesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ResetFeaturesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ResetFeaturesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reset the features.
-	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-	/// </para>
-	/// <para>
-	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-	/// </para>
-	/// <para>
-	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-	/// This deletes all state information stored in system indices.
-	/// </para>
-	/// <para>
-	/// The response code is HTTP 200 if the state is successfully reset for all features.
-	/// It is HTTP 500 if the reset operation failed for any feature.
-	/// </para>
-	/// <para>
-	/// Note that select features might provide a way to reset particular system indices.
-	/// Using this API resets all features, both those that are built-in and implemented as plugins.
-	/// </para>
-	/// <para>
-	/// To list the features that will be affected, use the get features API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(Action<ResetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ResetFeaturesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
 	}
 }

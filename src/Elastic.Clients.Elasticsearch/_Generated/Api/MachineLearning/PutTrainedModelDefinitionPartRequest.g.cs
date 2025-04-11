@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutTrainedModelDefinitionPartRequestParameters : RequestParameters
+public sealed partial class PutTrainedModelDefinitionPartRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutTrainedModelDefinitionPartRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDefinitionLength = System.Text.Json.JsonEncodedText.Encode("total_definition_length");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalParts = System.Text.Json.JsonEncodedText.Encode("total_parts");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propDefinition = default;
+		LocalJsonValue<long> propTotalDefinitionLength = default;
+		LocalJsonValue<int> propTotalParts = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDefinition.TryReadProperty(ref reader, options, PropDefinition, null))
+			{
+				continue;
+			}
+
+			if (propTotalDefinitionLength.TryReadProperty(ref reader, options, PropTotalDefinitionLength, null))
+			{
+				continue;
+			}
+
+			if (propTotalParts.TryReadProperty(ref reader, options, PropTotalParts, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Definition = propDefinition.Value,
+			TotalDefinitionLength = propTotalDefinitionLength.Value,
+			TotalParts = propTotalParts.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDefinition, value.Definition, null, null);
+		writer.WriteProperty(options, PropTotalDefinitionLength, value.TotalDefinitionLength, null, null);
+		writer.WriteProperty(options, PropTotalParts, value.TotalParts, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -39,15 +89,36 @@ public sealed partial class PutTrainedModelDefinitionPartRequestParameters : Req
 /// Create part of a trained model definition.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<PutTrainedModelDefinitionPartRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestConverter))]
+public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Id modelId, int part) : base(r => r.Required("model_id", modelId).Required("part", part))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelDefinitionPart;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Id modelId, int part, string definition, long totalDefinitionLength, int totalParts) : base(r => r.Required("model_id", modelId).Required("part", part))
+	{
+		Definition = definition;
+		TotalDefinitionLength = totalDefinitionLength;
+		TotalParts = totalParts;
+	}
+#if NET7_0_OR_GREATER
+	public PutTrainedModelDefinitionPartRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutTrainedModelDefinitionPart;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -55,27 +126,59 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<
 
 	/// <summary>
 	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The definition part number. When the definition is loaded for inference the definition parts are streamed in the
+	/// order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Part { get => P<int>("part"); set => PR("part", value); }
+
+	/// <summary>
+	/// <para>
 	/// The definition part for the model. Must be a base64 encoded string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("definition")]
-	public string Definition { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Definition { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total uncompressed definition length in bytes. Not base64 encoded.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_definition_length")]
-	public long TotalDefinitionLength { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalDefinitionLength { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of parts that will be uploaded. Must be greater than 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_parts")]
-	public int TotalParts { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int TotalParts { get; set; }
 }
 
 /// <summary>
@@ -83,47 +186,64 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<
 /// Create part of a trained model definition.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : RequestDescriptor<PutTrainedModelDefinitionPartRequestDescriptor, PutTrainedModelDefinitionPartRequestParameters>
+public readonly partial struct PutTrainedModelDefinitionPartRequestDescriptor
 {
-	internal PutTrainedModelDefinitionPartRequestDescriptor(Action<PutTrainedModelDefinitionPartRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest Instance { get; init; }
 
-	public PutTrainedModelDefinitionPartRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId, int part) : base(r => r.Required("model_id", modelId).Required("part", part))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelDefinitionPartRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelDefinitionPart;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_trained_model_definition_part";
-
-	public PutTrainedModelDefinitionPartRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public PutTrainedModelDefinitionPartRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId, int part)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest(modelId, part);
+#pragma warning restore CS0618
 	}
 
-	public PutTrainedModelDefinitionPartRequestDescriptor Part(int part)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutTrainedModelDefinitionPartRequestDescriptor()
 	{
-		RouteValues.Required("part", part);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private string DefinitionValue { get; set; }
-	private long TotalDefinitionLengthValue { get; set; }
-	private int TotalPartsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The definition part number. When the definition is loaded for inference the definition parts are streamed in the
+	/// order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor Part(int value)
+	{
+		Instance.Part = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The definition part for the model. Must be a base64 encoded string.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelDefinitionPartRequestDescriptor Definition(string definition)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor Definition(string value)
 	{
-		DefinitionValue = definition;
-		return Self;
+		Instance.Definition = value;
+		return this;
 	}
 
 	/// <summary>
@@ -131,10 +251,10 @@ public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : Req
 	/// The total uncompressed definition length in bytes. Not base64 encoded.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelDefinitionPartRequestDescriptor TotalDefinitionLength(long totalDefinitionLength)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor TotalDefinitionLength(long value)
 	{
-		TotalDefinitionLengthValue = totalDefinitionLength;
-		return Self;
+		Instance.TotalDefinitionLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -142,21 +262,59 @@ public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : Req
 	/// The total number of parts that will be uploaded. Must be greater than 0.
 	/// </para>
 	/// </summary>
-	public PutTrainedModelDefinitionPartRequestDescriptor TotalParts(int totalParts)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor TotalParts(int value)
 	{
-		TotalPartsValue = totalParts;
-		return Self;
+		Instance.TotalParts = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("definition");
-		writer.WriteStringValue(DefinitionValue);
-		writer.WritePropertyName("total_definition_length");
-		writer.WriteNumberValue(TotalDefinitionLengthValue);
-		writer.WritePropertyName("total_parts");
-		writer.WriteNumberValue(TotalPartsValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

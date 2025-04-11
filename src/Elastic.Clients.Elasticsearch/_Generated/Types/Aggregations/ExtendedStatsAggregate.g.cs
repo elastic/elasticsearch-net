@@ -17,64 +17,367 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class ExtendedStatsAggregate : IAggregate
+internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate>
 {
-	[JsonInclude, JsonPropertyName("avg")]
-	public double? Avg { get; init; }
-	[JsonInclude, JsonPropertyName("avg_as_string")]
-	public string? AvgAsString { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("max")]
-	public double? Max { get; init; }
-	[JsonInclude, JsonPropertyName("max_as_string")]
-	public string? MaxAsString { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("min")]
-	public double? Min { get; init; }
-	[JsonInclude, JsonPropertyName("min_as_string")]
-	public string? MinAsString { get; init; }
-	[JsonInclude, JsonPropertyName("std_deviation")]
-	public double? StdDeviation { get; init; }
-	[JsonInclude, JsonPropertyName("std_deviation_as_string")]
-	public string? StdDeviationAsString { get; init; }
-	[JsonInclude, JsonPropertyName("std_deviation_bounds")]
-	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; init; }
-	[JsonInclude, JsonPropertyName("std_deviation_bounds_as_string")]
-	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; init; }
-	[JsonInclude, JsonPropertyName("std_deviation_population")]
-	public double? StdDeviationPopulation { get; init; }
-	[JsonInclude, JsonPropertyName("std_deviation_sampling")]
-	public double? StdDeviationSampling { get; init; }
-	[JsonInclude, JsonPropertyName("sum")]
-	public double Sum { get; init; }
-	[JsonInclude, JsonPropertyName("sum_as_string")]
-	public string? SumAsString { get; init; }
-	[JsonInclude, JsonPropertyName("sum_of_squares")]
-	public double? SumOfSquares { get; init; }
-	[JsonInclude, JsonPropertyName("sum_of_squares_as_string")]
-	public string? SumOfSquaresAsString { get; init; }
-	[JsonInclude, JsonPropertyName("variance")]
-	public double? Variance { get; init; }
-	[JsonInclude, JsonPropertyName("variance_as_string")]
-	public string? VarianceAsString { get; init; }
-	[JsonInclude, JsonPropertyName("variance_population")]
-	public double? VariancePopulation { get; init; }
-	[JsonInclude, JsonPropertyName("variance_population_as_string")]
-	public string? VariancePopulationAsString { get; init; }
-	[JsonInclude, JsonPropertyName("variance_sampling")]
-	public double? VarianceSampling { get; init; }
-	[JsonInclude, JsonPropertyName("variance_sampling_as_string")]
-	public string? VarianceSamplingAsString { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgAsString = System.Text.Json.JsonEncodedText.Encode("avg_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviation = System.Text.Json.JsonEncodedText.Encode("std_deviation");
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationAsString = System.Text.Json.JsonEncodedText.Encode("std_deviation_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationBounds = System.Text.Json.JsonEncodedText.Encode("std_deviation_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationBoundsAsString = System.Text.Json.JsonEncodedText.Encode("std_deviation_bounds_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationPopulation = System.Text.Json.JsonEncodedText.Encode("std_deviation_population");
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationSampling = System.Text.Json.JsonEncodedText.Encode("std_deviation_sampling");
+	private static readonly System.Text.Json.JsonEncodedText PropSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText PropSumAsString = System.Text.Json.JsonEncodedText.Encode("sum_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropSumOfSquares = System.Text.Json.JsonEncodedText.Encode("sum_of_squares");
+	private static readonly System.Text.Json.JsonEncodedText PropSumOfSquaresAsString = System.Text.Json.JsonEncodedText.Encode("sum_of_squares_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropVariance = System.Text.Json.JsonEncodedText.Encode("variance");
+	private static readonly System.Text.Json.JsonEncodedText PropVarianceAsString = System.Text.Json.JsonEncodedText.Encode("variance_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropVariancePopulation = System.Text.Json.JsonEncodedText.Encode("variance_population");
+	private static readonly System.Text.Json.JsonEncodedText PropVariancePopulationAsString = System.Text.Json.JsonEncodedText.Encode("variance_population_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropVarianceSampling = System.Text.Json.JsonEncodedText.Encode("variance_sampling");
+	private static readonly System.Text.Json.JsonEncodedText PropVarianceSamplingAsString = System.Text.Json.JsonEncodedText.Encode("variance_sampling_as_string");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propAvg = default;
+		LocalJsonValue<string?> propAvgAsString = default;
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<double?> propMax = default;
+		LocalJsonValue<string?> propMaxAsString = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<double?> propMin = default;
+		LocalJsonValue<string?> propMinAsString = default;
+		LocalJsonValue<double?> propStdDeviation = default;
+		LocalJsonValue<string?> propStdDeviationAsString = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds?> propStdDeviationBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString?> propStdDeviationBoundsAsString = default;
+		LocalJsonValue<double?> propStdDeviationPopulation = default;
+		LocalJsonValue<double?> propStdDeviationSampling = default;
+		LocalJsonValue<double> propSum = default;
+		LocalJsonValue<string?> propSumAsString = default;
+		LocalJsonValue<double?> propSumOfSquares = default;
+		LocalJsonValue<string?> propSumOfSquaresAsString = default;
+		LocalJsonValue<double?> propVariance = default;
+		LocalJsonValue<string?> propVarianceAsString = default;
+		LocalJsonValue<double?> propVariancePopulation = default;
+		LocalJsonValue<string?> propVariancePopulationAsString = default;
+		LocalJsonValue<double?> propVarianceSampling = default;
+		LocalJsonValue<string?> propVarianceSamplingAsString = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvg.TryReadProperty(ref reader, options, PropAvg, null))
+			{
+				continue;
+			}
+
+			if (propAvgAsString.TryReadProperty(ref reader, options, PropAvgAsString, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMaxAsString.TryReadProperty(ref reader, options, PropMaxAsString, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (propMinAsString.TryReadProperty(ref reader, options, PropMinAsString, null))
+			{
+				continue;
+			}
+
+			if (propStdDeviation.TryReadProperty(ref reader, options, PropStdDeviation, null))
+			{
+				continue;
+			}
+
+			if (propStdDeviationAsString.TryReadProperty(ref reader, options, PropStdDeviationAsString, null))
+			{
+				continue;
+			}
+
+			if (propStdDeviationBounds.TryReadProperty(ref reader, options, PropStdDeviationBounds, null))
+			{
+				continue;
+			}
+
+			if (propStdDeviationBoundsAsString.TryReadProperty(ref reader, options, PropStdDeviationBoundsAsString, null))
+			{
+				continue;
+			}
+
+			if (propStdDeviationPopulation.TryReadProperty(ref reader, options, PropStdDeviationPopulation, null))
+			{
+				continue;
+			}
+
+			if (propStdDeviationSampling.TryReadProperty(ref reader, options, PropStdDeviationSampling, null))
+			{
+				continue;
+			}
+
+			if (propSum.TryReadProperty(ref reader, options, PropSum, null))
+			{
+				continue;
+			}
+
+			if (propSumAsString.TryReadProperty(ref reader, options, PropSumAsString, null))
+			{
+				continue;
+			}
+
+			if (propSumOfSquares.TryReadProperty(ref reader, options, PropSumOfSquares, null))
+			{
+				continue;
+			}
+
+			if (propSumOfSquaresAsString.TryReadProperty(ref reader, options, PropSumOfSquaresAsString, null))
+			{
+				continue;
+			}
+
+			if (propVariance.TryReadProperty(ref reader, options, PropVariance, null))
+			{
+				continue;
+			}
+
+			if (propVarianceAsString.TryReadProperty(ref reader, options, PropVarianceAsString, null))
+			{
+				continue;
+			}
+
+			if (propVariancePopulation.TryReadProperty(ref reader, options, PropVariancePopulation, null))
+			{
+				continue;
+			}
+
+			if (propVariancePopulationAsString.TryReadProperty(ref reader, options, PropVariancePopulationAsString, null))
+			{
+				continue;
+			}
+
+			if (propVarianceSampling.TryReadProperty(ref reader, options, PropVarianceSampling, null))
+			{
+				continue;
+			}
+
+			if (propVarianceSamplingAsString.TryReadProperty(ref reader, options, PropVarianceSamplingAsString, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Avg = propAvg.Value,
+			AvgAsString = propAvgAsString.Value,
+			Count = propCount.Value,
+			Max = propMax.Value,
+			MaxAsString = propMaxAsString.Value,
+			Meta = propMeta.Value,
+			Min = propMin.Value,
+			MinAsString = propMinAsString.Value,
+			StdDeviation = propStdDeviation.Value,
+			StdDeviationAsString = propStdDeviationAsString.Value,
+			StdDeviationBounds = propStdDeviationBounds.Value,
+			StdDeviationBoundsAsString = propStdDeviationBoundsAsString.Value,
+			StdDeviationPopulation = propStdDeviationPopulation.Value,
+			StdDeviationSampling = propStdDeviationSampling.Value,
+			Sum = propSum.Value,
+			SumAsString = propSumAsString.Value,
+			SumOfSquares = propSumOfSquares.Value,
+			SumOfSquaresAsString = propSumOfSquaresAsString.Value,
+			Variance = propVariance.Value,
+			VarianceAsString = propVarianceAsString.Value,
+			VariancePopulation = propVariancePopulation.Value,
+			VariancePopulationAsString = propVariancePopulationAsString.Value,
+			VarianceSampling = propVarianceSampling.Value,
+			VarianceSamplingAsString = propVarianceSamplingAsString.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvg, value.Avg, null, null);
+		writer.WriteProperty(options, PropAvgAsString, value.AvgAsString, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMaxAsString, value.MaxAsString, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMinAsString, value.MinAsString, null, null);
+		writer.WriteProperty(options, PropStdDeviation, value.StdDeviation, null, null);
+		writer.WriteProperty(options, PropStdDeviationAsString, value.StdDeviationAsString, null, null);
+		writer.WriteProperty(options, PropStdDeviationBounds, value.StdDeviationBounds, null, null);
+		writer.WriteProperty(options, PropStdDeviationBoundsAsString, value.StdDeviationBoundsAsString, null, null);
+		writer.WriteProperty(options, PropStdDeviationPopulation, value.StdDeviationPopulation, null, null);
+		writer.WriteProperty(options, PropStdDeviationSampling, value.StdDeviationSampling, null, null);
+		writer.WriteProperty(options, PropSum, value.Sum, null, null);
+		writer.WriteProperty(options, PropSumAsString, value.SumAsString, null, null);
+		writer.WriteProperty(options, PropSumOfSquares, value.SumOfSquares, null, null);
+		writer.WriteProperty(options, PropSumOfSquaresAsString, value.SumOfSquaresAsString, null, null);
+		writer.WriteProperty(options, PropVariance, value.Variance, null, null);
+		writer.WriteProperty(options, PropVarianceAsString, value.VarianceAsString, null, null);
+		writer.WriteProperty(options, PropVariancePopulation, value.VariancePopulation, null, null);
+		writer.WriteProperty(options, PropVariancePopulationAsString, value.VariancePopulationAsString, null, null);
+		writer.WriteProperty(options, PropVarianceSampling, value.VarianceSampling, null, null);
+		writer.WriteProperty(options, PropVarianceSamplingAsString, value.VarianceSamplingAsString, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregateConverter))]
+public sealed partial class ExtendedStatsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExtendedStatsAggregate(double? avg, long count, double? max, double? min, double? stdDeviation, double? stdDeviationPopulation, double? stdDeviationSampling, double sum, double? sumOfSquares, double? variance, double? variancePopulation, double? varianceSampling)
+	{
+		Avg = avg;
+		Count = count;
+		Max = max;
+		Min = min;
+		StdDeviation = stdDeviation;
+		StdDeviationPopulation = stdDeviationPopulation;
+		StdDeviationSampling = stdDeviationSampling;
+		Sum = sum;
+		SumOfSquares = sumOfSquares;
+		Variance = variance;
+		VariancePopulation = variancePopulation;
+		VarianceSampling = varianceSampling;
+	}
+#if NET7_0_OR_GREATER
+	public ExtendedStatsAggregate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ExtendedStatsAggregate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ExtendedStatsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? Avg { get; set; }
+	public string? AvgAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? Max { get; set; }
+	public string? MaxAsString { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? Min { get; set; }
+	public string? MinAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? StdDeviation { get; set; }
+	public string? StdDeviationAsString { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? StdDeviationPopulation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? StdDeviationSampling { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Sum { get; set; }
+	public string? SumAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? SumOfSquares { get; set; }
+	public string? SumOfSquaresAsString { get; set; }
+
+	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "extended_stats";
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? Variance { get; set; }
+	public string? VarianceAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? VariancePopulation { get; set; }
+	public string? VariancePopulationAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? VarianceSampling { get; set; }
+	public string? VarianceSamplingAsString { get; set; }
 }

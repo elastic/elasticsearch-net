@@ -17,62 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class IndexSettingsTimeSeries
+internal sealed partial class IndexSettingsTimeSeriesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries>
 {
-	[JsonInclude, JsonPropertyName("end_time")]
-	public DateTimeOffset? EndTime { get; set; }
-	[JsonInclude, JsonPropertyName("start_time")]
-	public DateTimeOffset? StartTime { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropEndTime = System.Text.Json.JsonEncodedText.Encode("end_time");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
 
-public sealed partial class IndexSettingsTimeSeriesDescriptor : SerializableDescriptor<IndexSettingsTimeSeriesDescriptor>
-{
-	internal IndexSettingsTimeSeriesDescriptor(Action<IndexSettingsTimeSeriesDescriptor> configure) => configure.Invoke(this);
-
-	public IndexSettingsTimeSeriesDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propEndTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEndTime.TryReadProperty(ref reader, options, PropEndTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EndTime = propEndTime.Value,
+			StartTime = propStartTime.Value
+		};
 	}
 
-	private DateTimeOffset? EndTimeValue { get; set; }
-	private DateTimeOffset? StartTimeValue { get; set; }
-
-	public IndexSettingsTimeSeriesDescriptor EndTime(DateTimeOffset? endTime)
-	{
-		EndTimeValue = endTime;
-		return Self;
-	}
-
-	public IndexSettingsTimeSeriesDescriptor StartTime(DateTimeOffset? startTime)
-	{
-		StartTimeValue = startTime;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (EndTimeValue is not null)
-		{
-			writer.WritePropertyName("end_time");
-			JsonSerializer.Serialize(writer, EndTimeValue, options);
-		}
-
-		if (StartTimeValue is not null)
-		{
-			writer.WritePropertyName("start_time");
-			JsonSerializer.Serialize(writer, StartTimeValue, options);
-		}
-
+		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesConverter))]
+public sealed partial class IndexSettingsTimeSeries
+{
+#if NET7_0_OR_GREATER
+	public IndexSettingsTimeSeries()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexSettingsTimeSeries()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.DateTimeOffset? EndTime { get; set; }
+	public System.DateTimeOffset? StartTime { get; set; }
+}
+
+public readonly partial struct IndexSettingsTimeSeriesDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsTimeSeriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsTimeSeriesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor EndTime(System.DateTimeOffset? value)
+	{
+		Instance.EndTime = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor StartTime(System.DateTimeOffset? value)
+	{
+		Instance.StartTime = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

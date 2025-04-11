@@ -17,47 +17,147 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ConfusionMatrixThresholdConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFalseNegative = System.Text.Json.JsonEncodedText.Encode("fn");
+	private static readonly System.Text.Json.JsonEncodedText PropFalsePositive = System.Text.Json.JsonEncodedText.Encode("fp");
+	private static readonly System.Text.Json.JsonEncodedText PropTrueNegative = System.Text.Json.JsonEncodedText.Encode("tn");
+	private static readonly System.Text.Json.JsonEncodedText PropTruePositive = System.Text.Json.JsonEncodedText.Encode("tp");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propFalseNegative = default;
+		LocalJsonValue<int> propFalsePositive = default;
+		LocalJsonValue<int> propTrueNegative = default;
+		LocalJsonValue<int> propTruePositive = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFalseNegative.TryReadProperty(ref reader, options, PropFalseNegative, null))
+			{
+				continue;
+			}
+
+			if (propFalsePositive.TryReadProperty(ref reader, options, PropFalsePositive, null))
+			{
+				continue;
+			}
+
+			if (propTrueNegative.TryReadProperty(ref reader, options, PropTrueNegative, null))
+			{
+				continue;
+			}
+
+			if (propTruePositive.TryReadProperty(ref reader, options, PropTruePositive, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FalseNegative = propFalseNegative.Value,
+			FalsePositive = propFalsePositive.Value,
+			TrueNegative = propTrueNegative.Value,
+			TruePositive = propTruePositive.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFalseNegative, value.FalseNegative, null, null);
+		writer.WriteProperty(options, PropFalsePositive, value.FalsePositive, null, null);
+		writer.WriteProperty(options, PropTrueNegative, value.TrueNegative, null, null);
+		writer.WriteProperty(options, PropTruePositive, value.TruePositive, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThresholdConverter))]
 public sealed partial class ConfusionMatrixThreshold
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ConfusionMatrixThreshold(int falseNegative, int falsePositive, int trueNegative, int truePositive)
+	{
+		FalseNegative = falseNegative;
+		FalsePositive = falsePositive;
+		TrueNegative = trueNegative;
+		TruePositive = truePositive;
+	}
+#if NET7_0_OR_GREATER
+	public ConfusionMatrixThreshold()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ConfusionMatrixThreshold()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ConfusionMatrixThreshold(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// False Negative
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fn")]
-	public int FalseNegative { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int FalseNegative { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// False Positive
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fp")]
-	public int FalsePositive { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int FalsePositive { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// True Negative
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tn")]
-	public int TrueNegative { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int TrueNegative { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// True Positive
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tp")]
-	public int TruePositive { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int TruePositive { get; set; }
 }

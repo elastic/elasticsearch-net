@@ -17,344 +17,872 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(SpanQueryConverter))]
+internal sealed partial class SpanQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanContaining = System.Text.Json.JsonEncodedText.Encode("span_containing");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanFieldMasking = System.Text.Json.JsonEncodedText.Encode("span_field_masking");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanFirst = System.Text.Json.JsonEncodedText.Encode("span_first");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanGap = System.Text.Json.JsonEncodedText.Encode("span_gap");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanMulti = System.Text.Json.JsonEncodedText.Encode("span_multi");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanNear = System.Text.Json.JsonEncodedText.Encode("span_near");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanNot = System.Text.Json.JsonEncodedText.Encode("span_not");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanOr = System.Text.Json.JsonEncodedText.Encode("span_or");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanTerm = System.Text.Json.JsonEncodedText.Encode("span_term");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanWithin = System.Text.Json.JsonEncodedText.Encode("span_within");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantSpanContaining))
+			{
+				variantType = VariantSpanContaining.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanFieldMasking))
+			{
+				variantType = VariantSpanFieldMasking.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanFirst))
+			{
+				variantType = VariantSpanFirst.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanGap))
+			{
+				variantType = VariantSpanGap.Value;
+				reader.Read();
+				variant = reader.ReadValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>>(options, static System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, int>(o, null, null));
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanMulti))
+			{
+				variantType = VariantSpanMulti.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanNear))
+			{
+				variantType = VariantSpanNear.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanNot))
+			{
+				variantType = VariantSpanNot.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanOr))
+			{
+				variantType = VariantSpanOr.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanTerm))
+			{
+				variantType = VariantSpanTerm.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanWithin))
+			{
+				variantType = VariantSpanWithin.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "span_containing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)value.Variant, null, null);
+				break;
+			case "span_field_masking":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)value.Variant, null, null);
+				break;
+			case "span_first":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)value.Variant, null, null);
+				break;
+			case "span_gap":
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, int>(o, v, null, null));
+				break;
+			case "span_multi":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery)value.Variant, null, null);
+				break;
+			case "span_near":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery)value.Variant, null, null);
+				break;
+			case "span_not":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery)value.Variant, null, null);
+				break;
+			case "span_or":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery)value.Variant, null, null);
+				break;
+			case "span_term":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery)value.Variant, null, null);
+				break;
+			case "span_within":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryConverter))]
 public sealed partial class SpanQuery
 {
-	internal SpanQuery(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public SpanQuery()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SpanQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Accepts a list of span queries, but only returns those spans which also match a second span query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? SpanContaining { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>("span_containing"); set => SetVariant("span_containing", value); }
 
-	public static SpanQuery SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => new SpanQuery("span_containing", spanContainingQuery);
-	public static SpanQuery SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new SpanQuery("span_field_masking", spanFieldMaskingQuery);
-	public static SpanQuery SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => new SpanQuery("span_first", spanFirstQuery);
-	public static SpanQuery SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> integer) => new SpanQuery("span_gap", integer);
-	public static SpanQuery SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => new SpanQuery("span_multi", spanMultiTermQuery);
-	public static SpanQuery SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery spanNearQuery) => new SpanQuery("span_near", spanNearQuery);
-	public static SpanQuery SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery spanNotQuery) => new SpanQuery("span_not", spanNotQuery);
-	public static SpanQuery SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery spanOrQuery) => new SpanQuery("span_or", spanOrQuery);
-	public static SpanQuery SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery spanTermQuery) => new SpanQuery("span_term", spanTermQuery);
-	public static SpanQuery SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => new SpanQuery("span_within", spanWithinQuery);
+	/// <summary>
+	/// <para>
+	/// Allows queries like <c>span_near</c> or <c>span_or</c> across different fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? SpanFieldMasking { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>("span_field_masking"); set => SetVariant("span_field_masking", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Accepts another span query whose matches must appear within the first N positions of the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? SpanFirst { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>("span_first"); set => SetVariant("span_first", value); }
+	public System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>? SpanGap { get => GetVariant<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>>("span_gap"); set => SetVariant("span_gap", value); }
+
+	/// <summary>
+	/// <para>
+	/// Wraps a <c>term</c>, <c>range</c>, <c>prefix</c>, <c>wildcard</c>, <c>regexp</c>, or <c>fuzzy</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? SpanMulti { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>("span_multi"); set => SetVariant("span_multi", value); }
+
+	/// <summary>
+	/// <para>
+	/// Accepts multiple span queries whose matches must be within the specified distance of each other, and possibly in the same order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? SpanNear { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>("span_near"); set => SetVariant("span_near", value); }
+
+	/// <summary>
+	/// <para>
+	/// Wraps another span query, and excludes any documents which match that query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? SpanNot { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>("span_not"); set => SetVariant("span_not", value); }
+
+	/// <summary>
+	/// <para>
+	/// Combines multiple span queries and returns documents which match any of the specified queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? SpanOr { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>("span_or"); set => SetVariant("span_or", value); }
+
+	/// <summary>
+	/// <para>
+	/// The equivalent of the <c>term</c> query but for use with other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery? SpanTerm { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>("span_term"); set => SetVariant("span_term", value); }
+
+	/// <summary>
+	/// <para>
+	/// The result from a single span query is returned as long is its span falls within the spans returned by a list of other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? SpanWithin { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>("span_within"); set => SetVariant("span_within", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanContaining = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanFieldMasking = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanFirst = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanGap = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanMulti = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanNear = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanNot = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanOr = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanTerm = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery { SpanWithin = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
+public readonly partial struct SpanQueryDescriptor<TDocument>
 {
-	public override SpanQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "span_containing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_field_masking")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_first")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_gap")
-			{
-				variantValue = JsonSerializer.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_multi")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_near")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_not")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_or")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_term")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_within")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SpanQuery' from the response.");
-		}
-
-		var result = new SpanQuery(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, SpanQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanQueryDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "span_containing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)value.Variant, options);
-					break;
-				case "span_field_masking":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
-					break;
-				case "span_first":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)value.Variant, options);
-					break;
-				case "span_gap":
-					JsonSerializer.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>>(writer, (KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>)value.Variant, options);
-					break;
-				case "span_multi":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery)value.Variant, options);
-					break;
-				case "span_near":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery)value.Variant, options);
-					break;
-				case "span_not":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery)value.Variant, options);
-					break;
-				case "span_or":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery)value.Variant, options);
-					break;
-				case "span_term":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery)value.Variant, options);
-					break;
-				case "span_within":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Accepts a list of span queries, but only returns those spans which also match a second span query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? value)
+	{
+		Instance.SpanContaining = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts a list of span queries, but only returns those spans which also match a second span query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanContaining = Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Allows queries like <c>span_near</c> or <c>span_or</c> across different fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? value)
+	{
+		Instance.SpanFieldMasking = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Allows queries like <c>span_near</c> or <c>span_or</c> across different fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanFieldMasking(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanFieldMasking = Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts another span query whose matches must appear within the first N positions of the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? value)
+	{
+		Instance.SpanFirst = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts another span query whose matches must appear within the first N positions of the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanFirst(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanFirst = Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanGap(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>? value)
+	{
+		Instance.SpanGap = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanGap(Elastic.Clients.Elasticsearch.Field key, int value)
+	{
+		Instance.SpanGap = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanGap(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, int value)
+	{
+		Instance.SpanGap = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps a <c>term</c>, <c>range</c>, <c>prefix</c>, <c>wildcard</c>, <c>regexp</c>, or <c>fuzzy</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? value)
+	{
+		Instance.SpanMulti = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps a <c>term</c>, <c>range</c>, <c>prefix</c>, <c>wildcard</c>, <c>regexp</c>, or <c>fuzzy</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanMulti(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanMulti = Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts multiple span queries whose matches must be within the specified distance of each other, and possibly in the same order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? value)
+	{
+		Instance.SpanNear = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts multiple span queries whose matches must be within the specified distance of each other, and possibly in the same order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanNear(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanNear = Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps another span query, and excludes any documents which match that query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? value)
+	{
+		Instance.SpanNot = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps another span query, and excludes any documents which match that query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanNot(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanNot = Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Combines multiple span queries and returns documents which match any of the specified queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? value)
+	{
+		Instance.SpanOr = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Combines multiple span queries and returns documents which match any of the specified queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanOr(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanOr = Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The equivalent of the <c>term</c> query but for use with other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery? value)
+	{
+		Instance.SpanTerm = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The equivalent of the <c>term</c> query but for use with other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanTerm(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanTerm = Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The result from a single span query is returned as long is its span falls within the spans returned by a list of other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? value)
+	{
+		Instance.SpanWithin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The result from a single span query is returned as long is its span falls within the spans returned by a list of other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanWithin(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>> action)
+	{
+		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescriptor<SpanQueryDescriptor<TDocument>>
+public readonly partial struct SpanQueryDescriptor
 {
-	internal SpanQueryDescriptor(Action<SpanQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Instance { get; init; }
 
-	public SpanQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private SpanQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanQueryDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private SpanQueryDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Accepts a list of span queries, but only returns those spans which also match a second span query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.SpanContaining = value;
+		return this;
 	}
 
-	public SpanQueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
-	public SpanQueryDescriptor<TDocument> SpanContaining(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
-	public SpanQueryDescriptor<TDocument> SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "span_field_masking");
-	public SpanQueryDescriptor<TDocument> SpanFieldMasking(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "span_field_masking");
-	public SpanQueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
-	public SpanQueryDescriptor<TDocument> SpanFirst(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
-	public SpanQueryDescriptor<TDocument> SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> integer) => Set(integer, "span_gap");
-	public SpanQueryDescriptor<TDocument> SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
-	public SpanQueryDescriptor<TDocument> SpanMulti(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
-	public SpanQueryDescriptor<TDocument> SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
-	public SpanQueryDescriptor<TDocument> SpanNear(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
-	public SpanQueryDescriptor<TDocument> SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
-	public SpanQueryDescriptor<TDocument> SpanNot(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
-	public SpanQueryDescriptor<TDocument> SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
-	public SpanQueryDescriptor<TDocument> SpanOr(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
-	public SpanQueryDescriptor<TDocument> SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
-	public SpanQueryDescriptor<TDocument> SpanTerm(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
-	public SpanQueryDescriptor<TDocument> SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
-	public SpanQueryDescriptor<TDocument> SpanWithin(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Accepts a list of span queries, but only returns those spans which also match a second span query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQueryDescriptor>
-{
-	internal SpanQueryDescriptor(Action<SpanQueryDescriptor> configure) => configure.Invoke(this);
-
-	public SpanQueryDescriptor() : base()
-	{
+		Instance.SpanContaining = Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor.Build(action);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private SpanQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Accepts a list of span queries, but only returns those spans which also match a second span query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanContaining<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<T>> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.SpanContaining = Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	private SpanQueryDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Allows queries like <c>span_near</c> or <c>span_or</c> across different fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.SpanFieldMasking = value;
+		return this;
 	}
 
-	public SpanQueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
-	public SpanQueryDescriptor SpanContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
-	public SpanQueryDescriptor SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "span_field_masking");
-	public SpanQueryDescriptor SpanFieldMasking<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "span_field_masking");
-	public SpanQueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
-	public SpanQueryDescriptor SpanFirst<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
-	public SpanQueryDescriptor SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> integer) => Set(integer, "span_gap");
-	public SpanQueryDescriptor SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
-	public SpanQueryDescriptor SpanMulti<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor> configure) => Set(configure, "span_multi");
-	public SpanQueryDescriptor SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
-	public SpanQueryDescriptor SpanNear<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
-	public SpanQueryDescriptor SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
-	public SpanQueryDescriptor SpanNot<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
-	public SpanQueryDescriptor SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
-	public SpanQueryDescriptor SpanOr<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
-	public SpanQueryDescriptor SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
-	public SpanQueryDescriptor SpanTerm<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
-	public SpanQueryDescriptor SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
-	public SpanQueryDescriptor SpanWithin<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Allows queries like <c>span_near</c> or <c>span_or</c> across different fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanFieldMasking(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.SpanFieldMasking = Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Allows queries like <c>span_near</c> or <c>span_or</c> across different fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanFieldMasking<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<T>> action)
+	{
+		Instance.SpanFieldMasking = Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<T>.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Accepts another span query whose matches must appear within the first N positions of the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? value)
+	{
+		Instance.SpanFirst = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts another span query whose matches must appear within the first N positions of the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanFirst(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor> action)
+	{
+		Instance.SpanFirst = Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts another span query whose matches must appear within the first N positions of the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanFirst<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<T>> action)
+	{
+		Instance.SpanFirst = Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanGap(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>? value)
+	{
+		Instance.SpanGap = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanGap(Elastic.Clients.Elasticsearch.Field key, int value)
+	{
+		Instance.SpanGap = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanGap<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, int value)
+	{
+		Instance.SpanGap = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps a <c>term</c>, <c>range</c>, <c>prefix</c>, <c>wildcard</c>, <c>regexp</c>, or <c>fuzzy</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? value)
+	{
+		Instance.SpanMulti = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps a <c>term</c>, <c>range</c>, <c>prefix</c>, <c>wildcard</c>, <c>regexp</c>, or <c>fuzzy</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanMulti(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor> action)
+	{
+		Instance.SpanMulti = Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps a <c>term</c>, <c>range</c>, <c>prefix</c>, <c>wildcard</c>, <c>regexp</c>, or <c>fuzzy</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanMulti<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<T>> action)
+	{
+		Instance.SpanMulti = Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts multiple span queries whose matches must be within the specified distance of each other, and possibly in the same order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? value)
+	{
+		Instance.SpanNear = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts multiple span queries whose matches must be within the specified distance of each other, and possibly in the same order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanNear(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor> action)
+	{
+		Instance.SpanNear = Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accepts multiple span queries whose matches must be within the specified distance of each other, and possibly in the same order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanNear<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<T>> action)
+	{
+		Instance.SpanNear = Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps another span query, and excludes any documents which match that query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? value)
+	{
+		Instance.SpanNot = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps another span query, and excludes any documents which match that query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanNot(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor> action)
+	{
+		Instance.SpanNot = Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Wraps another span query, and excludes any documents which match that query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanNot<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<T>> action)
+	{
+		Instance.SpanNot = Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Combines multiple span queries and returns documents which match any of the specified queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? value)
+	{
+		Instance.SpanOr = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Combines multiple span queries and returns documents which match any of the specified queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanOr(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor> action)
+	{
+		Instance.SpanOr = Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Combines multiple span queries and returns documents which match any of the specified queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanOr<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<T>> action)
+	{
+		Instance.SpanOr = Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The equivalent of the <c>term</c> query but for use with other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery? value)
+	{
+		Instance.SpanTerm = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The equivalent of the <c>term</c> query but for use with other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanTerm(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor> action)
+	{
+		Instance.SpanTerm = Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The equivalent of the <c>term</c> query but for use with other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanTerm<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<T>> action)
+	{
+		Instance.SpanTerm = Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The result from a single span query is returned as long is its span falls within the spans returned by a list of other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? value)
+	{
+		Instance.SpanWithin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The result from a single span query is returned as long is its span falls within the spans returned by a list of other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanWithin(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor> action)
+	{
+		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The result from a single span query is returned as long is its span falls within the spans returned by a list of other span queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanWithin<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<T>> action)
+	{
+		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

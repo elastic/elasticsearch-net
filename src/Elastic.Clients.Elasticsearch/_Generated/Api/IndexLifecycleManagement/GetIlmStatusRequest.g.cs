@@ -17,34 +17,75 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class GetIlmStatusRequestParameters : RequestParameters
+public sealed partial class GetIlmStatusRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetIlmStatusRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Get the ILM status.
+/// </para>
+/// <para>
 /// Get the current index lifecycle management status.
 /// </para>
 /// </summary>
-public sealed partial class GetIlmStatusRequest : PlainRequest<GetIlmStatusRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestConverter))]
+public sealed partial class GetIlmStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementGetStatus;
+#if NET7_0_OR_GREATER
+	public GetIlmStatusRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetIlmStatusRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetIlmStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexLifecycleManagementGetStatus;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -54,26 +95,81 @@ public sealed partial class GetIlmStatusRequest : PlainRequest<GetIlmStatusReque
 /// <summary>
 /// <para>
 /// Get the ILM status.
+/// </para>
+/// <para>
 /// Get the current index lifecycle management status.
 /// </para>
 /// </summary>
-public sealed partial class GetIlmStatusRequestDescriptor : RequestDescriptor<GetIlmStatusRequestDescriptor, GetIlmStatusRequestParameters>
+public readonly partial struct GetIlmStatusRequestDescriptor
 {
-	internal GetIlmStatusRequestDescriptor(Action<GetIlmStatusRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIlmStatusRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GetIlmStatusRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementGetStatus;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ilm.get_status";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

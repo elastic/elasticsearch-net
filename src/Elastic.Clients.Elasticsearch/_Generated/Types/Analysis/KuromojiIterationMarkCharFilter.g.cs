@@ -17,82 +17,161 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KuromojiIterationMarkCharFilter : ICharFilter
+internal sealed partial class KuromojiIterationMarkCharFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>
 {
-	[JsonInclude, JsonPropertyName("normalize_kana")]
-	public bool NormalizeKana { get; set; }
-	[JsonInclude, JsonPropertyName("normalize_kanji")]
-	public bool NormalizeKanji { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizeKana = System.Text.Json.JsonEncodedText.Encode("normalize_kana");
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizeKanji = System.Text.Json.JsonEncodedText.Encode("normalize_kanji");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propNormalizeKana = default;
+		LocalJsonValue<bool> propNormalizeKanji = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNormalizeKana.TryReadProperty(ref reader, options, PropNormalizeKana, null))
+			{
+				continue;
+			}
+
+			if (propNormalizeKanji.TryReadProperty(ref reader, options, PropNormalizeKanji, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NormalizeKana = propNormalizeKana.Value,
+			NormalizeKanji = propNormalizeKanji.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNormalizeKana, value.NormalizeKana, null, null);
+		writer.WriteProperty(options, PropNormalizeKanji, value.NormalizeKanji, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterConverter))]
+public sealed partial class KuromojiIterationMarkCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiIterationMarkCharFilter(bool normalizeKana, bool normalizeKanji)
+	{
+		NormalizeKana = normalizeKana;
+		NormalizeKanji = normalizeKanji;
+	}
+#if NET7_0_OR_GREATER
+	public KuromojiIterationMarkCharFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KuromojiIterationMarkCharFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KuromojiIterationMarkCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool NormalizeKana { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool NormalizeKanji { get; set; }
+
 	public string Type => "kuromoji_iteration_mark";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KuromojiIterationMarkCharFilterDescriptor : SerializableDescriptor<KuromojiIterationMarkCharFilterDescriptor>, IBuildableDescriptor<KuromojiIterationMarkCharFilter>
+public readonly partial struct KuromojiIterationMarkCharFilterDescriptor
 {
-	internal KuromojiIterationMarkCharFilterDescriptor(Action<KuromojiIterationMarkCharFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter Instance { get; init; }
 
-	public KuromojiIterationMarkCharFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiIterationMarkCharFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool NormalizeKanaValue { get; set; }
-	private bool NormalizeKanjiValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KuromojiIterationMarkCharFilterDescriptor NormalizeKana(bool normalizeKana = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiIterationMarkCharFilterDescriptor()
 	{
-		NormalizeKanaValue = normalizeKana;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KuromojiIterationMarkCharFilterDescriptor NormalizeKanji(bool normalizeKanji = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor NormalizeKana(bool value = true)
 	{
-		NormalizeKanjiValue = normalizeKanji;
-		return Self;
+		Instance.NormalizeKana = value;
+		return this;
 	}
 
-	public KuromojiIterationMarkCharFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor NormalizeKanji(bool value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.NormalizeKanji = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("normalize_kana");
-		writer.WriteBooleanValue(NormalizeKanaValue);
-		writer.WritePropertyName("normalize_kanji");
-		writer.WriteBooleanValue(NormalizeKanjiValue);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("kuromoji_iteration_mark");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	KuromojiIterationMarkCharFilter IBuildableDescriptor<KuromojiIterationMarkCharFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor> action)
 	{
-		NormalizeKana = NormalizeKanaValue,
-		NormalizeKanji = NormalizeKanjiValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

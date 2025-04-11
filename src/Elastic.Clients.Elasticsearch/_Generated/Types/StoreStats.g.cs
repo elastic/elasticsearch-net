@@ -17,49 +17,157 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class StoreStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.StoreStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropReserved = System.Text.Json.JsonEncodedText.Encode("reserved");
+	private static readonly System.Text.Json.JsonEncodedText PropReservedInBytes = System.Text.Json.JsonEncodedText.Encode("reserved_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDataSetSize = System.Text.Json.JsonEncodedText.Encode("total_data_set_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDataSetSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_data_set_size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.StoreStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propReserved = default;
+		LocalJsonValue<long> propReservedInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propSize = default;
+		LocalJsonValue<long> propSizeInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalDataSetSize = default;
+		LocalJsonValue<long?> propTotalDataSetSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propReserved.TryReadProperty(ref reader, options, PropReserved, null))
+			{
+				continue;
+			}
+
+			if (propReservedInBytes.TryReadProperty(ref reader, options, PropReservedInBytes, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalDataSetSize.TryReadProperty(ref reader, options, PropTotalDataSetSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalDataSetSizeInBytes.TryReadProperty(ref reader, options, PropTotalDataSetSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.StoreStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Reserved = propReserved.Value,
+			ReservedInBytes = propReservedInBytes.Value,
+			Size = propSize.Value,
+			SizeInBytes = propSizeInBytes.Value,
+			TotalDataSetSize = propTotalDataSetSize.Value,
+			TotalDataSetSizeInBytes = propTotalDataSetSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.StoreStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropReserved, value.Reserved, null, null);
+		writer.WriteProperty(options, PropReservedInBytes, value.ReservedInBytes, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteProperty(options, PropTotalDataSetSize, value.TotalDataSetSize, null, null);
+		writer.WriteProperty(options, PropTotalDataSetSizeInBytes, value.TotalDataSetSizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.StoreStatsConverter))]
 public sealed partial class StoreStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StoreStats(long reservedInBytes, long sizeInBytes)
+	{
+		ReservedInBytes = reservedInBytes;
+		SizeInBytes = sizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public StoreStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StoreStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StoreStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A prediction of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("reserved")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("reserved_in_bytes")]
-	public long ReservedInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ReservedInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size, in bytes, of all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public long SizeInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,8 +175,7 @@ public sealed partial class StoreStats
 	/// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_data_set_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? TotalDataSetSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalDataSetSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,6 +183,5 @@ public sealed partial class StoreStats
 	/// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_data_set_size_in_bytes")]
-	public long? TotalDataSetSizeInBytes { get; init; }
+	public long? TotalDataSetSizeInBytes { get; set; }
 }

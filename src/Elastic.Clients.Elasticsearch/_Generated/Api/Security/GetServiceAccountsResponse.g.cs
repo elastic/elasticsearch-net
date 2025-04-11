@@ -17,21 +17,42 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
+using System;
+using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetServiceAccountsResponse : DictionaryResponse<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>
+internal sealed partial class GetServiceAccountsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse>
 {
-	public GetServiceAccountsResponse(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> dictionary) : base(dictionary)
+	public override Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { ServiceAccoutns = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>(o, null, null)!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.ServiceAccoutns, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponseConverter))]
+public sealed partial class GetServiceAccountsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetServiceAccountsResponse()
 	{
 	}
 
-	public GetServiceAccountsResponse() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetServiceAccountsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
+		_ = sentinel;
 	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> ServiceAccoutns { get; set; }
 }

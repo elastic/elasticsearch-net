@@ -17,46 +17,234 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
+	private static readonly System.Text.Json.JsonEncodedText PropBootstrap = System.Text.Json.JsonEncodedText.Encode("bootstrap");
+	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery");
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropNetwork = System.Text.Json.JsonEncodedText.Encode("network");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText PropXpack = System.Text.Json.JsonEncodedText.Encode("xpack");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction?> propAction = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap?> propBootstrap = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient?> propClient = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster> propCluster = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover?> propDiscovery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp> propHttp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsIngest?> propIngest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNetwork?> propNetwork = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode> propNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath?> propPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositories?> propRepositories = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript?> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch?> propSearch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport> propTransport = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack?> propXpack = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAction.TryReadProperty(ref reader, options, PropAction, null))
+			{
+				continue;
+			}
+
+			if (propBootstrap.TryReadProperty(ref reader, options, PropBootstrap, null))
+			{
+				continue;
+			}
+
+			if (propClient.TryReadProperty(ref reader, options, PropClient, null))
+			{
+				continue;
+			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, null))
+			{
+				continue;
+			}
+
+			if (propDiscovery.TryReadProperty(ref reader, options, PropDiscovery, null))
+			{
+				continue;
+			}
+
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
+			{
+				continue;
+			}
+
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
+
+			if (propNetwork.TryReadProperty(ref reader, options, PropNetwork, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propRepositories.TryReadProperty(ref reader, options, PropRepositories, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propSearch.TryReadProperty(ref reader, options, PropSearch, null))
+			{
+				continue;
+			}
+
+			if (propTransport.TryReadProperty(ref reader, options, PropTransport, null))
+			{
+				continue;
+			}
+
+			if (propXpack.TryReadProperty(ref reader, options, PropXpack, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Action = propAction.Value,
+			Bootstrap = propBootstrap.Value,
+			Client = propClient.Value,
+			Cluster = propCluster.Value,
+			Discovery = propDiscovery.Value,
+			Http = propHttp.Value,
+			Ingest = propIngest.Value,
+			Network = propNetwork.Value,
+			Node = propNode.Value,
+			Path = propPath.Value,
+			Repositories = propRepositories.Value,
+			Script = propScript.Value,
+			Search = propSearch.Value,
+			Transport = propTransport.Value,
+			Xpack = propXpack.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAction, value.Action, null, null);
+		writer.WriteProperty(options, PropBootstrap, value.Bootstrap, null, null);
+		writer.WriteProperty(options, PropClient, value.Client, null, null);
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, null);
+		writer.WriteProperty(options, PropDiscovery, value.Discovery, null, null);
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropNetwork, value.Network, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropRepositories, value.Repositories, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSearch, value.Search, null, null);
+		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
+		writer.WriteProperty(options, PropXpack, value.Xpack, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsConverter))]
 public sealed partial class NodeInfoSettings
 {
-	[JsonInclude, JsonPropertyName("action")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction? Action { get; init; }
-	[JsonInclude, JsonPropertyName("bootstrap")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap? Bootstrap { get; init; }
-	[JsonInclude, JsonPropertyName("client")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient? Client { get; init; }
-	[JsonInclude, JsonPropertyName("cluster")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Cluster { get; init; }
-	[JsonInclude, JsonPropertyName("discovery")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover? Discovery { get; init; }
-	[JsonInclude, JsonPropertyName("http")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp Http { get; init; }
-	[JsonInclude, JsonPropertyName("ingest")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsIngest? Ingest { get; init; }
-	[JsonInclude, JsonPropertyName("network")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNetwork? Network { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode Node { get; init; }
-	[JsonInclude, JsonPropertyName("path")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath? Path { get; init; }
-	[JsonInclude, JsonPropertyName("repositories")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositories? Repositories { get; init; }
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript? Script { get; init; }
-	[JsonInclude, JsonPropertyName("search")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch? Search { get; init; }
-	[JsonInclude, JsonPropertyName("transport")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Transport { get; init; }
-	[JsonInclude, JsonPropertyName("xpack")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack? Xpack { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoSettings(Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster cluster, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp http, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode node, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport transport)
+	{
+		Cluster = cluster;
+		Http = http;
+		Node = node;
+		Transport = transport;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoSettings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoSettings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction? Action { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap? Bootstrap { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient? Client { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Cluster { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover? Discovery { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp Http { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsIngest? Ingest { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNetwork? Network { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode Node { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath? Path { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositories? Repositories { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript? Script { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch? Search { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Transport { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack? Xpack { get; set; }
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteForecastRequestParameters : RequestParameters
+public sealed partial class DeleteForecastRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -52,32 +45,96 @@ public sealed partial class DeleteForecastRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class DeleteForecastRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Delete forecasts from a job.
+/// </para>
+/// <para>
 /// By default, forecasts are retained for 14 days. You can specify a
 /// different retention period with the <c>expires_in</c> parameter in the forecast
 /// jobs API. The delete forecast API enables you to delete one or more
 /// forecasts before they expire.
 /// </para>
 /// </summary>
-public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestConverter))]
+public sealed partial class DeleteForecastRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteForecastRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteForecastRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId) : base(r => r.Required("job_id", jobId).Optional("forecast_id", forecastId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteForecastRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteForecastRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteForecast;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteForecast;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_forecast";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of forecast identifiers. If you do not specify
+	/// this optional parameter or if you specify <c>_all</c> or <c>*</c> the API deletes
+	/// all forecasts from the job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? ForecastId { get => P<Elastic.Clients.Elasticsearch.Id?>("forecast_id"); set => PO("forecast_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -87,7 +144,6 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 	/// return an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
 	/// <summary>
@@ -97,55 +153,147 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 	/// error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete forecasts from a job.
+/// </para>
+/// <para>
 /// By default, forecasts are retained for 14 days. You can specify a
 /// different retention period with the <c>expires_in</c> parameter in the forecast
 /// jobs API. The delete forecast API enables you to delete one or more
 /// forecasts before they expire.
 /// </para>
 /// </summary>
-public sealed partial class DeleteForecastRequestDescriptor : RequestDescriptor<DeleteForecastRequestDescriptor, DeleteForecastRequestParameters>
+public readonly partial struct DeleteForecastRequestDescriptor
 {
-	internal DeleteForecastRequestDescriptor(Action<DeleteForecastRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest Instance { get; init; }
 
-	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId) : base(r => r.Required("job_id", jobId).Optional("forecast_id", forecastId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(jobId);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteForecast;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.delete_forecast";
-
-	public DeleteForecastRequestDescriptor AllowNoForecasts(bool? allowNoForecasts = true) => Qs("allow_no_forecasts", allowNoForecasts);
-	public DeleteForecastRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public DeleteForecastRequestDescriptor ForecastId(Elastic.Clients.Elasticsearch.Id? forecastId)
+	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId)
 	{
-		RouteValues.Optional("forecast_id", forecastId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(jobId, forecastId);
 	}
 
-	public DeleteForecastRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteForecastRequestDescriptor()
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of forecast identifiers. If you do not specify
+	/// this optional parameter or if you specify <c>_all</c> or <c>*</c> the API deletes
+	/// all forecasts from the job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor ForecastId(Elastic.Clients.Elasticsearch.Id? value)
 	{
+		Instance.ForecastId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether an error occurs when there are no forecasts. In
+	/// particular, if this parameter is set to <c>false</c> and there are no
+	/// forecasts associated with the job, attempts to delete all forecasts
+	/// return an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor AllowNoForecasts(bool? value = true)
+	{
+		Instance.AllowNoForecasts = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the period of time to wait for the completion of the delete
+	/// operation. When this period of time elapses, the API fails and returns an
+	/// error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

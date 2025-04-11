@@ -17,261 +17,360 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Tokenization options stored in inference configuration
-/// </para>
-/// </summary>
-[JsonConverter(typeof(TokenizationConfigConverter))]
+internal sealed partial class TokenizationConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantBert = System.Text.Json.JsonEncodedText.Encode("bert");
+	private static readonly System.Text.Json.JsonEncodedText VariantBertJa = System.Text.Json.JsonEncodedText.Encode("bert_ja");
+	private static readonly System.Text.Json.JsonEncodedText VariantMpnet = System.Text.Json.JsonEncodedText.Encode("mpnet");
+	private static readonly System.Text.Json.JsonEncodedText VariantRoberta = System.Text.Json.JsonEncodedText.Encode("roberta");
+	private static readonly System.Text.Json.JsonEncodedText VariantXlmRoberta = System.Text.Json.JsonEncodedText.Encode("xlm_roberta");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantBert))
+			{
+				variantType = VariantBert.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantBertJa))
+			{
+				variantType = VariantBertJa.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMpnet))
+			{
+				variantType = VariantMpnet.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRoberta))
+			{
+				variantType = VariantRoberta.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantXlmRoberta))
+			{
+				variantType = VariantXlmRoberta.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "bert":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, null, null);
+				break;
+			case "bert_ja":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, null, null);
+				break;
+			case "mpnet":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, null, null);
+				break;
+			case "roberta":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig)value.Variant, null, null);
+				break;
+			case "xlm_roberta":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigConverter))]
 public sealed partial class TokenizationConfig
 {
-	internal TokenizationConfig(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public TokenizationConfig()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TokenizationConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Indicates BERT tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? Bert { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>("bert"); set => SetVariant("bert", value); }
 
-	public static TokenizationConfig Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert", nlpBertTokenizationConfig);
-	public static TokenizationConfig BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert_ja", nlpBertTokenizationConfig);
-	public static TokenizationConfig Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("mpnet", nlpBertTokenizationConfig);
-	public static TokenizationConfig Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfig("roberta", nlpRobertaTokenizationConfig);
+	/// <summary>
+	/// <para>
+	/// Indicates BERT Japanese tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? BertJa { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>("bert_ja"); set => SetVariant("bert_ja", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Indicates MPNET tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? Mpnet { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>("mpnet"); set => SetVariant("mpnet", value); }
+
+	/// <summary>
+	/// <para>
+	/// Indicates RoBERTa tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig? Roberta { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>("roberta"); set => SetVariant("roberta", value); }
+	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig? XlmRoberta { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig>("xlm_roberta"); set => SetVariant("xlm_roberta", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig value) => new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig { Roberta = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig value) => new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig { XlmRoberta = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class TokenizationConfigConverter : JsonConverter<TokenizationConfig>
+public readonly partial struct TokenizationConfigDescriptor
 {
-	public override TokenizationConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "bert")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "bert_ja")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "mpnet")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "roberta")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'TokenizationConfig' from the response.");
-		}
-
-		var result = new TokenizationConfig(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, TokenizationConfig value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TokenizationConfigDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "bert":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
-					break;
-				case "bert_ja":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
-					break;
-				case "mpnet":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
-					break;
-				case "roberta":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class TokenizationConfigDescriptor<TDocument> : SerializableDescriptor<TokenizationConfigDescriptor<TDocument>>
-{
-	internal TokenizationConfigDescriptor(Action<TokenizationConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public TokenizationConfigDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor descriptor) => descriptor.Instance;
 
-	private TokenizationConfigDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Indicates BERT tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Bert = value;
+		return this;
 	}
 
-	private TokenizationConfigDescriptor<TDocument> Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Indicates BERT tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Bert()
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Bert = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(null);
+		return this;
 	}
 
-	public TokenizationConfigDescriptor<TDocument> Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
-	public TokenizationConfigDescriptor<TDocument> Bert(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-	public TokenizationConfigDescriptor<TDocument> BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert_ja");
-	public TokenizationConfigDescriptor<TDocument> BertJa(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert_ja");
-	public TokenizationConfigDescriptor<TDocument> Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
-	public TokenizationConfigDescriptor<TDocument> Mpnet(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-	public TokenizationConfigDescriptor<TDocument> Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
-	public TokenizationConfigDescriptor<TDocument> Roberta(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Indicates BERT tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Bert(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class TokenizationConfigDescriptor : SerializableDescriptor<TokenizationConfigDescriptor>
-{
-	internal TokenizationConfigDescriptor(Action<TokenizationConfigDescriptor> configure) => configure.Invoke(this);
-
-	public TokenizationConfigDescriptor() : base()
-	{
+		Instance.Bert = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(action);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private TokenizationConfigDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Indicates BERT Japanese tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.BertJa = value;
+		return this;
 	}
 
-	private TokenizationConfigDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Indicates BERT Japanese tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor BertJa()
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.BertJa = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(null);
+		return this;
 	}
 
-	public TokenizationConfigDescriptor Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
-	public TokenizationConfigDescriptor Bert(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-	public TokenizationConfigDescriptor BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert_ja");
-	public TokenizationConfigDescriptor BertJa(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert_ja");
-	public TokenizationConfigDescriptor Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
-	public TokenizationConfigDescriptor Mpnet(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-	public TokenizationConfigDescriptor Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
-	public TokenizationConfigDescriptor Roberta(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Indicates BERT Japanese tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor BertJa(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.BertJa = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Indicates MPNET tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? value)
+	{
+		Instance.Mpnet = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Indicates MPNET tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Mpnet()
+	{
+		Instance.Mpnet = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates MPNET tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Mpnet(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
+	{
+		Instance.Mpnet = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates RoBERTa tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig? value)
+	{
+		Instance.Roberta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates RoBERTa tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Roberta()
+	{
+		Instance.Roberta = Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates RoBERTa tokenization and its options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Roberta(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor>? action)
+	{
+		Instance.Roberta = Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor XlmRoberta(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig? value)
+	{
+		Instance.XlmRoberta = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor XlmRoberta()
+	{
+		Instance.XlmRoberta = Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor XlmRoberta(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor>? action)
+	{
+		Instance.XlmRoberta = Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

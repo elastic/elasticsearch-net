@@ -17,78 +17,195 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class TargetMeanEncodingPreprocessor
+internal sealed partial class TargetMeanEncodingPreprocessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor>
 {
-	[JsonInclude, JsonPropertyName("default_value")]
-	public double DefaultValue { get; set; }
-	[JsonInclude, JsonPropertyName("feature_name")]
-	public string FeatureName { get; set; }
-	[JsonInclude, JsonPropertyName("field")]
-	public string Field { get; set; }
-	[JsonInclude, JsonPropertyName("target_map")]
-	public IDictionary<string, double> TargetMap { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultValue = System.Text.Json.JsonEncodedText.Encode("default_value");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetMap = System.Text.Json.JsonEncodedText.Encode("target_map");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(TargetMeanEncodingPreprocessor targetMeanEncodingPreprocessor) => Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor.TargetMeanEncoding(targetMeanEncodingPreprocessor);
-}
-
-public sealed partial class TargetMeanEncodingPreprocessorDescriptor : SerializableDescriptor<TargetMeanEncodingPreprocessorDescriptor>
-{
-	internal TargetMeanEncodingPreprocessorDescriptor(Action<TargetMeanEncodingPreprocessorDescriptor> configure) => configure.Invoke(this);
-
-	public TargetMeanEncodingPreprocessorDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propDefaultValue = default;
+		LocalJsonValue<string> propFeatureName = default;
+		LocalJsonValue<string> propField = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, double>> propTargetMap = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDefaultValue.TryReadProperty(ref reader, options, PropDefaultValue, null))
+			{
+				continue;
+			}
+
+			if (propFeatureName.TryReadProperty(ref reader, options, PropFeatureName, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propTargetMap.TryReadProperty(ref reader, options, PropTargetMap, static System.Collections.Generic.IDictionary<string, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DefaultValue = propDefaultValue.Value,
+			FeatureName = propFeatureName.Value,
+			Field = propField.Value,
+			TargetMap = propTargetMap.Value
+		};
 	}
 
-	private double DefaultValueValue { get; set; }
-	private string FeatureNameValue { get; set; }
-	private string FieldValue { get; set; }
-	private IDictionary<string, double> TargetMapValue { get; set; }
-
-	public TargetMeanEncodingPreprocessorDescriptor DefaultValue(double defaultValue)
-	{
-		DefaultValueValue = defaultValue;
-		return Self;
-	}
-
-	public TargetMeanEncodingPreprocessorDescriptor FeatureName(string featureName)
-	{
-		FeatureNameValue = featureName;
-		return Self;
-	}
-
-	public TargetMeanEncodingPreprocessorDescriptor Field(string field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TargetMeanEncodingPreprocessorDescriptor TargetMap(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector)
-	{
-		TargetMapValue = selector?.Invoke(new FluentDictionary<string, double>());
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("default_value");
-		writer.WriteNumberValue(DefaultValueValue);
-		writer.WritePropertyName("feature_name");
-		writer.WriteStringValue(FeatureNameValue);
-		writer.WritePropertyName("field");
-		writer.WriteStringValue(FieldValue);
-		writer.WritePropertyName("target_map");
-		JsonSerializer.Serialize(writer, TargetMapValue, options);
+		writer.WriteProperty(options, PropDefaultValue, value.DefaultValue, null, null);
+		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropTargetMap, value.TargetMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, double> v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorConverter))]
+public sealed partial class TargetMeanEncodingPreprocessor
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TargetMeanEncodingPreprocessor(double defaultValue, string featureName, string field, System.Collections.Generic.IDictionary<string, double> targetMap)
+	{
+		DefaultValue = defaultValue;
+		FeatureName = featureName;
+		Field = field;
+		TargetMap = targetMap;
+	}
+#if NET7_0_OR_GREATER
+	public TargetMeanEncodingPreprocessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TargetMeanEncodingPreprocessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double DefaultValue { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string FeatureName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IDictionary<string, double> TargetMap { get; set; }
+}
+
+public readonly partial struct TargetMeanEncodingPreprocessorDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TargetMeanEncodingPreprocessorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TargetMeanEncodingPreprocessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor DefaultValue(double value)
+	{
+		Instance.DefaultValue = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor FeatureName(string value)
+	{
+		Instance.FeatureName = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor Field(string value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor TargetMap(System.Collections.Generic.IDictionary<string, double> value)
+	{
+		Instance.TargetMap = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor TargetMap()
+	{
+		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor TargetMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
+	{
+		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor AddTargetMap(string key, double value)
+	{
+		Instance.TargetMap ??= new System.Collections.Generic.Dictionary<string, double>();
+		Instance.TargetMap.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,57 +17,125 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KeywordAnalyzer : IAnalyzer
+internal sealed partial class KeywordAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+#pragma warning disable CS0618
+			Version = propVersion.Value
+#pragma warning restore CS0618
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropVersion, value.Version, null, null)
+#pragma warning restore CS0618
+		;
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerConverter))]
+public sealed partial class KeywordAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+#if NET7_0_OR_GREATER
+	public KeywordAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public KeywordAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KeywordAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "keyword";
 
-	[JsonInclude, JsonPropertyName("version")]
+	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptor<KeywordAnalyzerDescriptor>, IBuildableDescriptor<KeywordAnalyzer>
+public readonly partial struct KeywordAnalyzerDescriptor
 {
-	internal KeywordAnalyzerDescriptor(Action<KeywordAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer Instance { get; init; }
 
-	public KeywordAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeywordAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private string? VersionValue { get; set; }
-
-	public KeywordAnalyzerDescriptor Version(string? version)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeywordAnalyzerDescriptor()
 	{
-		VersionValue = version;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("keyword");
-		if (!string.IsNullOrEmpty(VersionValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	KeywordAnalyzer IBuildableDescriptor<KeywordAnalyzer>.Build() => new()
-	{
-		Version = VersionValue
-	};
 }

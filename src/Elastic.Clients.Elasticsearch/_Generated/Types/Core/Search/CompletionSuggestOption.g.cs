@@ -17,37 +17,186 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class CompletionSuggestOptionConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match");
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText PropScore0 = System.Text.Json.JsonEncodedText.Encode("_score");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCollateMatch = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>?> propContexts = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propFields = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<string?> propIndex = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<double?> propScore = default;
+		LocalJsonValue<double?> propScore0 = default;
+		LocalJsonValue<TDocument?> propSource = default;
+		LocalJsonValue<string> propText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollateMatch.TryReadProperty(ref reader, options, PropCollateMatch, null))
+			{
+				continue;
+			}
+
+			if (propContexts.TryReadProperty(ref reader, options, PropContexts, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>(o, null, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
+			{
+				continue;
+			}
+
+			if (propScore0.TryReadProperty(ref reader, options, PropScore0, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>))))
+			{
+				continue;
+			}
+
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CollateMatch = propCollateMatch.Value,
+			Contexts = propContexts.Value,
+			Fields = propFields.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Routing = propRouting.Value,
+			Score = propScore.Value,
+			Score0 = propScore0.Value,
+			Source = propSource.Value,
+			Text = propText.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch, null, null);
+		writer.WriteProperty(options, PropContexts, value.Contexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(o, v, null)));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, null);
+		writer.WriteProperty(options, PropScore0, value.Score0, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
+		writer.WriteProperty(options, PropText, value.Text, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class CompletionSuggestOptionConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(CompletionSuggestOption<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(CompletionSuggestOptionConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOptionConverterFactory))]
 public sealed partial class CompletionSuggestOption<TDocument>
 {
-	[JsonInclude, JsonPropertyName("collate_match")]
-	public bool? CollateMatch { get; init; }
-	[JsonInclude, JsonPropertyName("contexts")]
-	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? Contexts { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
-	public IReadOnlyDictionary<string, object>? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
-	public string? Id { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
-	public string? Index { get; init; }
-	[JsonInclude, JsonPropertyName("_routing")]
-	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("score")]
-	public double? Score { get; init; }
-	[JsonInclude, JsonPropertyName("_score")]
-	public double? Score0 { get; init; }
-	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
-	public TDocument? Source { get; init; }
-	[JsonInclude, JsonPropertyName("text")]
-	public string Text { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionSuggestOption(string text)
+	{
+		Text = text;
+	}
+#if NET7_0_OR_GREATER
+	public CompletionSuggestOption()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CompletionSuggestOption()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompletionSuggestOption(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? CollateMatch { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? Contexts { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
+	public string? Id { get; set; }
+	public string? Index { get; set; }
+	public string? Routing { get; set; }
+	public double? Score { get; set; }
+	public double? Score0 { get; set; }
+	public TDocument? Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Text { get; set; }
 }

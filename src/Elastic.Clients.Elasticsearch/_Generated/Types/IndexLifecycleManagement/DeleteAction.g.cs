@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class DeleteActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteSearchableSnapshot = System.Text.Json.JsonEncodedText.Encode("delete_searchable_snapshot");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDeleteSearchableSnapshot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeleteSearchableSnapshot.TryReadProperty(ref reader, options, PropDeleteSearchableSnapshot, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DeleteSearchableSnapshot = propDeleteSearchableSnapshot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeleteSearchableSnapshot, value.DeleteSearchableSnapshot, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionConverter))]
 public sealed partial class DeleteAction
 {
-	[JsonInclude, JsonPropertyName("delete_searchable_snapshot")]
+#if NET7_0_OR_GREATER
+	public DeleteAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DeleteAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? DeleteSearchableSnapshot { get; set; }
 }
 
-public sealed partial class DeleteActionDescriptor : SerializableDescriptor<DeleteActionDescriptor>
+public readonly partial struct DeleteActionDescriptor
 {
-	internal DeleteActionDescriptor(Action<DeleteActionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction Instance { get; init; }
 
-	public DeleteActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? DeleteSearchableSnapshotValue { get; set; }
-
-	public DeleteActionDescriptor DeleteSearchableSnapshot(bool? deleteSearchableSnapshot = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteActionDescriptor()
 	{
-		DeleteSearchableSnapshotValue = deleteSearchableSnapshot;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor DeleteSearchableSnapshot(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (DeleteSearchableSnapshotValue.HasValue)
+		Instance.DeleteSearchableSnapshot = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("delete_searchable_snapshot");
-			writer.WriteBooleanValue(DeleteSearchableSnapshotValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

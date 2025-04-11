@@ -17,29 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
+
+internal sealed partial class ElasticsearchVersionMinInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumIndexCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_index_compatibility_version");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumWireCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_wire_compatibility_version");
+	private static readonly System.Text.Json.JsonEncodedText PropNumber = System.Text.Json.JsonEncodedText.Encode("number");
+
+	public override Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propBuildFlavor = default;
+		LocalJsonValue<string> propMinimumIndexCompatibilityVersion = default;
+		LocalJsonValue<string> propMinimumWireCompatibilityVersion = default;
+		LocalJsonValue<string> propNumber = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBuildFlavor.TryReadProperty(ref reader, options, PropBuildFlavor, null))
+			{
+				continue;
+			}
+
+			if (propMinimumIndexCompatibilityVersion.TryReadProperty(ref reader, options, PropMinimumIndexCompatibilityVersion, null))
+			{
+				continue;
+			}
+
+			if (propMinimumWireCompatibilityVersion.TryReadProperty(ref reader, options, PropMinimumWireCompatibilityVersion, null))
+			{
+				continue;
+			}
+
+			if (propNumber.TryReadProperty(ref reader, options, PropNumber, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BuildFlavor = propBuildFlavor.Value,
+			MinimumIndexCompatibilityVersion = propMinimumIndexCompatibilityVersion.Value,
+			MinimumWireCompatibilityVersion = propMinimumWireCompatibilityVersion.Value,
+			Number = propNumber.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBuildFlavor, value.BuildFlavor, null, null);
+		writer.WriteProperty(options, PropMinimumIndexCompatibilityVersion, value.MinimumIndexCompatibilityVersion, null, null);
+		writer.WriteProperty(options, PropMinimumWireCompatibilityVersion, value.MinimumWireCompatibilityVersion, null, null);
+		writer.WriteProperty(options, PropNumber, value.Number, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Reduced (minimal) info ElasticsearchVersion
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfoConverter))]
 public sealed partial class ElasticsearchVersionMinInfo
 {
-	[JsonInclude, JsonPropertyName("build_flavor")]
-	public string BuildFlavor { get; init; }
-	[JsonInclude, JsonPropertyName("minimum_index_compatibility_version")]
-	public string MinimumIndexCompatibilityVersion { get; init; }
-	[JsonInclude, JsonPropertyName("minimum_wire_compatibility_version")]
-	public string MinimumWireCompatibilityVersion { get; init; }
-	[JsonInclude, JsonPropertyName("number")]
-	public string Number { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ElasticsearchVersionMinInfo(string buildFlavor, string minimumIndexCompatibilityVersion, string minimumWireCompatibilityVersion, string number)
+	{
+		BuildFlavor = buildFlavor;
+		MinimumIndexCompatibilityVersion = minimumIndexCompatibilityVersion;
+		MinimumWireCompatibilityVersion = minimumWireCompatibilityVersion;
+		Number = number;
+	}
+#if NET7_0_OR_GREATER
+	public ElasticsearchVersionMinInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ElasticsearchVersionMinInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ElasticsearchVersionMinInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string BuildFlavor { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string MinimumIndexCompatibilityVersion { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string MinimumWireCompatibilityVersion { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Number { get; set; }
 }

@@ -17,18 +17,112 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SpanNearQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropClauses = System.Text.Json.JsonEncodedText.Encode("clauses");
+	private static readonly System.Text.Json.JsonEncodedText PropInOrder = System.Text.Json.JsonEncodedText.Encode("in_order");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropSlop = System.Text.Json.JsonEncodedText.Encode("slop");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>> propClauses = default;
+		LocalJsonValue<bool?> propInOrder = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<int?> propSlop = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propClauses.TryReadProperty(ref reader, options, PropClauses, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propInOrder.TryReadProperty(ref reader, options, PropInOrder, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propSlop.TryReadProperty(ref reader, options, PropSlop, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Clauses = propClauses.Value,
+			InOrder = propInOrder.Value,
+			QueryName = propQueryName.Value,
+			Slop = propSlop.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropClauses, value.Clauses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>(o, v, null));
+		writer.WriteProperty(options, PropInOrder, value.InOrder, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropSlop, value.Slop, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryConverter))]
 public sealed partial class SpanNearQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNearQuery(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	{
+		Clauses = clauses;
+	}
+#if NET7_0_OR_GREATER
+	public SpanNearQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SpanNearQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanNearQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +131,6 @@ public sealed partial class SpanNearQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,17 +138,18 @@ public sealed partial class SpanNearQuery
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("clauses")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Controls whether matches are required to be in-order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("in_order")]
 	public bool? InOrder { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -63,29 +157,27 @@ public sealed partial class SpanNearQuery
 	/// Controls the maximum number of intervening unmatched positions permitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanNearQuery spanNearQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanNear(spanNearQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanNearQuery spanNearQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanNear(spanNearQuery);
 }
 
-public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDescriptor<SpanNearQueryDescriptor<TDocument>>
+public readonly partial struct SpanNearQueryDescriptor<TDocument>
 {
-	internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Instance { get; init; }
 
-	public SpanNearQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNearQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
-	private bool? InOrderValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private int? SlopValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNearQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -95,10 +187,10 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -106,40 +198,38 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesValue = clauses;
-		return Self;
+		Instance.Clauses = value;
+		return this;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
-		ClausesValue = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptor = descriptor;
-		return Self;
+		Instance.Clauses = [.. values];
+		return this;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] actions)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action));
+		}
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(params Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] configure)
-	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = configure;
-		return Self;
+		Instance.Clauses = items;
+		return this;
 	}
 
 	/// <summary>
@@ -147,16 +237,16 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	/// Controls whether matches are required to be in-order.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor<TDocument> InOrder(bool? inOrder = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> InOrder(bool? value = true)
 	{
-		InOrderValue = inOrder;
-		return Self;
+		Instance.InOrder = value;
+		return this;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -164,90 +254,39 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	/// Controls the maximum number of intervening unmatched positions permitted.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor<TDocument> Slop(int? slop)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Slop(int? value)
 	{
-		SlopValue = slop;
-		return Self;
+		Instance.Slop = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (ClausesDescriptor is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ClausesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(ClausesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			foreach (var action in ClausesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, ClausesValue, options);
-		}
-
-		if (InOrderValue.HasValue)
-		{
-			writer.WritePropertyName("in_order");
-			writer.WriteBooleanValue(InOrderValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (SlopValue.HasValue)
-		{
-			writer.WritePropertyName("slop");
-			writer.WriteNumberValue(SlopValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<SpanNearQueryDescriptor>
+public readonly partial struct SpanNearQueryDescriptor
 {
-	internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Instance { get; init; }
 
-	public SpanNearQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNearQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor ClausesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
-	private bool? InOrderValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private int? SlopValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNearQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -257,10 +296,10 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -268,40 +307,55 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesValue = clauses;
-		return Self;
+		Instance.Clauses = value;
+		return this;
 	}
 
-	public SpanNearQueryDescriptor Clauses(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
-		ClausesValue = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptor = descriptor;
-		return Self;
+		Instance.Clauses = [.. values];
+		return this;
 	}
 
-	public SpanNearQueryDescriptor Clauses(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] actions)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorActions = null;
-		ClausesDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action));
+		}
+
+		Instance.Clauses = items;
+		return this;
 	}
 
-	public SpanNearQueryDescriptor Clauses(params Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>>[] actions)
 	{
-		ClausesValue = null;
-		ClausesDescriptor = null;
-		ClausesDescriptorAction = null;
-		ClausesDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Clauses = items;
+		return this;
 	}
 
 	/// <summary>
@@ -309,16 +363,16 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	/// Controls whether matches are required to be in-order.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor InOrder(bool? inOrder = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor InOrder(bool? value = true)
 	{
-		InOrderValue = inOrder;
-		return Self;
+		Instance.InOrder = value;
+		return this;
 	}
 
-	public SpanNearQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -326,70 +380,17 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	/// Controls the maximum number of intervening unmatched positions permitted.
 	/// </para>
 	/// </summary>
-	public SpanNearQueryDescriptor Slop(int? slop)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Slop(int? value)
 	{
-		SlopValue = slop;
-		return Self;
+		Instance.Slop = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (ClausesDescriptor is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ClausesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(ClausesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ClausesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("clauses");
-			writer.WriteStartArray();
-			foreach (var action in ClausesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, ClausesValue, options);
-		}
-
-		if (InOrderValue.HasValue)
-		{
-			writer.WritePropertyName("in_order");
-			writer.WriteBooleanValue(InOrderValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (SlopValue.HasValue)
-		{
-			writer.WritePropertyName("slop");
-			writer.WriteNumberValue(SlopValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

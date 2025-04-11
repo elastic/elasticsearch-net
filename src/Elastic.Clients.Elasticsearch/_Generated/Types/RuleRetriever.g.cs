@@ -17,41 +17,146 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RuleRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetIds = System.Text.Json.JsonEncodedText.Encode("ruleset_ids");
+
+	public override Elastic.Clients.Elasticsearch.RuleRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<object> propMatchCriteria = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>> propRulesetIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, null))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			{
+				continue;
+			}
+
+			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
+			{
+				continue;
+			}
+
+			if (propRulesetIds.TryReadProperty(ref reader, options, PropRulesetIds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filter = propFilter.Value,
+			MatchCriteria = propMatchCriteria.Value,
+			MinScore = propMinScore.Value,
+			RankWindowSize = propRankWindowSize.Value,
+			Retriever = propRetriever.Value,
+			RulesetIds = propRulesetIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RuleRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
+		writer.WriteProperty(options, PropRulesetIds, value.RulesetIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RuleRetrieverConverter))]
 public sealed partial class RuleRetriever
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleRetriever(object matchCriteria, Elastic.Clients.Elasticsearch.Retriever retriever, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> rulesetIds)
+	{
+		MatchCriteria = matchCriteria;
+		Retriever = retriever;
+		RulesetIds = rulesetIds;
+	}
+#if NET7_0_OR_GREATER
+	public RuleRetriever()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RuleRetriever()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("match_criteria")]
-	public object MatchCriteria { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object MatchCriteria { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -59,7 +164,6 @@ public sealed partial class RuleRetriever
 	/// This value determines the size of the individual result set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
@@ -67,79 +171,80 @@ public sealed partial class RuleRetriever
 	/// The retriever whose results rules should be applied to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retriever")]
-	public Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ruleset IDs containing the rules this retriever is evaluating against.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ruleset_ids")]
-	public ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(RuleRetriever ruleRetriever) => Elastic.Clients.Elasticsearch.Retriever.Rule(ruleRetriever);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
 }
 
-public sealed partial class RuleRetrieverDescriptor<TDocument> : SerializableDescriptor<RuleRetrieverDescriptor<TDocument>>
+public readonly partial struct RuleRetrieverDescriptor<TDocument>
 {
-	internal RuleRetrieverDescriptor(Action<RuleRetrieverDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RuleRetriever Instance { get; init; }
 
-	public RuleRetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleRetrieverDescriptor(Elastic.Clients.Elasticsearch.RuleRetriever instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private object MatchCriteriaValue { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int? RankWindowSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Retriever RetrieverValue { get; set; }
-	private Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> RetrieverDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> RetrieverDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIdsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.RuleRetriever instance) => new Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public RuleRetrieverDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public RuleRetrieverDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
 
-	public RuleRetrieverDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -147,10 +252,10 @@ public sealed partial class RuleRetrieverDescriptor<TDocument> : SerializableDes
 	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor<TDocument> MatchCriteria(object matchCriteria)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> MatchCriteria(object value)
 	{
-		MatchCriteriaValue = matchCriteria;
-		return Self;
+		Instance.MatchCriteria = value;
+		return this;
 	}
 
 	/// <summary>
@@ -158,10 +263,10 @@ public sealed partial class RuleRetrieverDescriptor<TDocument> : SerializableDes
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor<TDocument> MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -169,10 +274,10 @@ public sealed partial class RuleRetrieverDescriptor<TDocument> : SerializableDes
 	/// This value determines the size of the individual result set.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor<TDocument> RankWindowSize(int? rankWindowSize)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
+		Instance.RankWindowSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -180,28 +285,21 @@ public sealed partial class RuleRetrieverDescriptor<TDocument> : SerializableDes
 	/// The retriever whose results rules should be applied to.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever retriever)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = null;
-		RetrieverValue = retriever;
-		return Self;
+		Instance.Retriever = value;
+		return this;
 	}
 
-	public RuleRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The retriever whose results rules should be applied to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
-		RetrieverValue = null;
-		RetrieverDescriptorAction = null;
-		RetrieverDescriptor = descriptor;
-		return Self;
-	}
-
-	public RuleRetrieverDescriptor<TDocument> Retriever(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> configure)
-	{
-		RetrieverValue = null;
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = configure;
-		return Self;
+		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -209,139 +307,105 @@ public sealed partial class RuleRetrieverDescriptor<TDocument> : SerializableDes
 	/// The ruleset IDs containing the rules this retriever is evaluating against.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor<TDocument> RulesetIds(ICollection<Elastic.Clients.Elasticsearch.Id> rulesetIds)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
 	{
-		RulesetIdsValue = rulesetIds;
-		return Self;
+		Instance.RulesetIds = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The ruleset IDs containing the rules this retriever is evaluating against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
+		Instance.RulesetIds = [.. values];
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		writer.WritePropertyName("match_criteria");
-		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
-
-		if (RetrieverDescriptor is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverDescriptor, options);
-		}
-		else if (RetrieverDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(RetrieverDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverValue, options);
-		}
-
-		writer.WritePropertyName("ruleset_ids");
-		JsonSerializer.Serialize(writer, RulesetIdsValue, options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RuleRetriever Build(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RuleRetrieverDescriptor : SerializableDescriptor<RuleRetrieverDescriptor>
+public readonly partial struct RuleRetrieverDescriptor
 {
-	internal RuleRetrieverDescriptor(Action<RuleRetrieverDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RuleRetriever Instance { get; init; }
 
-	public RuleRetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleRetrieverDescriptor(Elastic.Clients.Elasticsearch.RuleRetriever instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private object MatchCriteriaValue { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int? RankWindowSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Retriever RetrieverValue { get; set; }
-	private Elastic.Clients.Elasticsearch.RetrieverDescriptor RetrieverDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> RetrieverDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIdsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor(Elastic.Clients.Elasticsearch.RuleRetriever instance) => new Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public RuleRetrieverDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public RuleRetrieverDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
-	public RuleRetrieverDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -349,10 +413,10 @@ public sealed partial class RuleRetrieverDescriptor : SerializableDescriptor<Rul
 	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor MatchCriteria(object matchCriteria)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor MatchCriteria(object value)
 	{
-		MatchCriteriaValue = matchCriteria;
-		return Self;
+		Instance.MatchCriteria = value;
+		return this;
 	}
 
 	/// <summary>
@@ -360,10 +424,10 @@ public sealed partial class RuleRetrieverDescriptor : SerializableDescriptor<Rul
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -371,10 +435,10 @@ public sealed partial class RuleRetrieverDescriptor : SerializableDescriptor<Rul
 	/// This value determines the size of the individual result set.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor RankWindowSize(int? rankWindowSize)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RankWindowSize(int? value)
 	{
-		RankWindowSizeValue = rankWindowSize;
-		return Self;
+		Instance.RankWindowSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -382,28 +446,32 @@ public sealed partial class RuleRetrieverDescriptor : SerializableDescriptor<Rul
 	/// The retriever whose results rules should be applied to.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever retriever)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = null;
-		RetrieverValue = retriever;
-		return Self;
+		Instance.Retriever = value;
+		return this;
 	}
 
-	public RuleRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The retriever whose results rules should be applied to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
-		RetrieverValue = null;
-		RetrieverDescriptorAction = null;
-		RetrieverDescriptor = descriptor;
-		return Self;
+		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
+		return this;
 	}
 
-	public RuleRetrieverDescriptor Retriever(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The retriever whose results rules should be applied to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
-		RetrieverValue = null;
-		RetrieverDescriptor = null;
-		RetrieverDescriptorAction = configure;
-		return Self;
+		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -411,76 +479,28 @@ public sealed partial class RuleRetrieverDescriptor : SerializableDescriptor<Rul
 	/// The ruleset IDs containing the rules this retriever is evaluating against.
 	/// </para>
 	/// </summary>
-	public RuleRetrieverDescriptor RulesetIds(ICollection<Elastic.Clients.Elasticsearch.Id> rulesetIds)
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
 	{
-		RulesetIdsValue = rulesetIds;
-		return Self;
+		Instance.RulesetIds = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The ruleset IDs containing the rules this retriever is evaluating against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
+		Instance.RulesetIds = [.. values];
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		writer.WritePropertyName("match_criteria");
-		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (RankWindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
-		}
-
-		if (RetrieverDescriptor is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverDescriptor, options);
-		}
-		else if (RetrieverDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor(RetrieverDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, RetrieverValue, options);
-		}
-
-		writer.WritePropertyName("ruleset_ids");
-		JsonSerializer.Serialize(writer, RulesetIdsValue, options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RuleRetriever Build(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor(new Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

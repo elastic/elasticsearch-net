@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class PutIpLocationDatabaseRequestParameters : RequestParameters
+public sealed partial class PutIpLocationDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -51,24 +44,67 @@ public sealed partial class PutIpLocationDatabaseRequestParameters : RequestPara
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutIpLocationDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Configuration = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Configuration, null);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update an IP geolocation database configuration.
 /// </para>
 /// </summary>
-public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLocationDatabaseRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestConverter))]
+public sealed partial class PutIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutIpLocationDatabase;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration) : base(r => r.Required("id", id))
+	{
+		Configuration = configuration;
+	}
+#if NET7_0_OR_GREATER
+	public PutIpLocationDatabaseRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IngestPutIpLocationDatabase;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ingest.put_ip_location_database";
+
+	/// <summary>
+	/// <para>
+	/// The database configuration identifier.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -77,7 +113,6 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	/// A value of <c>-1</c> indicates that the request should never time out.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -87,15 +122,12 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	/// A value of <c>-1</c> indicates that the request should never time out.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Configuration { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Configuration, options);
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Configuration { get; set; }
 }
 
 /// <summary>
@@ -103,119 +135,128 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 /// Create or update an IP geolocation database configuration.
 /// </para>
 /// </summary>
-public sealed partial class PutIpLocationDatabaseRequestDescriptor<TDocument> : RequestDescriptor<PutIpLocationDatabaseRequestDescriptor<TDocument>, PutIpLocationDatabaseRequestParameters>
+public readonly partial struct PutIpLocationDatabaseRequestDescriptor
 {
-	internal PutIpLocationDatabaseRequestDescriptor(Action<PutIpLocationDatabaseRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public PutIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id)) => ConfigurationValue = configuration;
+	internal Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutIpLocationDatabase;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ingest.put_ip_location_database";
-
-	public PutIpLocationDatabaseRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutIpLocationDatabaseRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutIpLocationDatabaseRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest instance)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration ConfigurationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor ConfigurationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor> ConfigurationDescriptorAction { get; set; }
-
-	public PutIpLocationDatabaseRequestDescriptor<TDocument> Configuration(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration)
+	public PutIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		ConfigurationDescriptor = null;
-		ConfigurationDescriptorAction = null;
-		ConfigurationValue = configuration;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest(id);
+#pragma warning restore CS0618
 	}
 
-	public PutIpLocationDatabaseRequestDescriptor<TDocument> Configuration(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor descriptor)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutIpLocationDatabaseRequestDescriptor()
 	{
-		ConfigurationValue = null;
-		ConfigurationDescriptorAction = null;
-		ConfigurationDescriptor = descriptor;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public PutIpLocationDatabaseRequestDescriptor<TDocument> Configuration(Action<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The database configuration identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		ConfigurationValue = null;
-		ConfigurationDescriptor = null;
-		ConfigurationDescriptorAction = configure;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// A value of <c>-1</c> indicates that the request should never time out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		JsonSerializer.Serialize(writer, ConfigurationValue, options);
-	}
-}
-
-/// <summary>
-/// <para>
-/// Create or update an IP geolocation database configuration.
-/// </para>
-/// </summary>
-public sealed partial class PutIpLocationDatabaseRequestDescriptor : RequestDescriptor<PutIpLocationDatabaseRequestDescriptor, PutIpLocationDatabaseRequestParameters>
-{
-	internal PutIpLocationDatabaseRequestDescriptor(Action<PutIpLocationDatabaseRequestDescriptor> configure) => configure.Invoke(this);
-	public PutIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id)) => ConfigurationValue = configuration;
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutIpLocationDatabase;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ingest.put_ip_location_database";
-
-	public PutIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutIpLocationDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration ConfigurationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor ConfigurationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor> ConfigurationDescriptorAction { get; set; }
-
-	public PutIpLocationDatabaseRequestDescriptor Configuration(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
+	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response indicates that it was not completely acknowledged.
+	/// A value of <c>-1</c> indicates that the request should never time out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ConfigurationDescriptor = null;
-		ConfigurationDescriptorAction = null;
-		ConfigurationValue = configuration;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	public PutIpLocationDatabaseRequestDescriptor Configuration(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Configuration(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration value)
 	{
-		ConfigurationValue = null;
-		ConfigurationDescriptorAction = null;
-		ConfigurationDescriptor = descriptor;
-		return Self;
+		Instance.Configuration = value;
+		return this;
 	}
 
-	public PutIpLocationDatabaseRequestDescriptor Configuration(Action<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Configuration(System.Action<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor> action)
 	{
-		ConfigurationValue = null;
-		ConfigurationDescriptor = null;
-		ConfigurationDescriptorAction = configure;
-		return Self;
+		Instance.Configuration = Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor> action)
 	{
-		JsonSerializer.Serialize(writer, ConfigurationValue, options);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

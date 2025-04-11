@@ -17,30 +17,159 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class TranslogStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TranslogStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEarliestLastModifiedAge = System.Text.Json.JsonEncodedText.Encode("earliest_last_modified_age");
+	private static readonly System.Text.Json.JsonEncodedText PropOperations = System.Text.Json.JsonEncodedText.Encode("operations");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUncommittedOperations = System.Text.Json.JsonEncodedText.Encode("uncommitted_operations");
+	private static readonly System.Text.Json.JsonEncodedText PropUncommittedSize = System.Text.Json.JsonEncodedText.Encode("uncommitted_size");
+	private static readonly System.Text.Json.JsonEncodedText PropUncommittedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("uncommitted_size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.TranslogStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propEarliestLastModifiedAge = default;
+		LocalJsonValue<long> propOperations = default;
+		LocalJsonValue<string?> propSize = default;
+		LocalJsonValue<long> propSizeInBytes = default;
+		LocalJsonValue<int> propUncommittedOperations = default;
+		LocalJsonValue<string?> propUncommittedSize = default;
+		LocalJsonValue<long> propUncommittedSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEarliestLastModifiedAge.TryReadProperty(ref reader, options, PropEarliestLastModifiedAge, null))
+			{
+				continue;
+			}
+
+			if (propOperations.TryReadProperty(ref reader, options, PropOperations, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propUncommittedOperations.TryReadProperty(ref reader, options, PropUncommittedOperations, null))
+			{
+				continue;
+			}
+
+			if (propUncommittedSize.TryReadProperty(ref reader, options, PropUncommittedSize, null))
+			{
+				continue;
+			}
+
+			if (propUncommittedSizeInBytes.TryReadProperty(ref reader, options, PropUncommittedSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TranslogStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EarliestLastModifiedAge = propEarliestLastModifiedAge.Value,
+			Operations = propOperations.Value,
+			Size = propSize.Value,
+			SizeInBytes = propSizeInBytes.Value,
+			UncommittedOperations = propUncommittedOperations.Value,
+			UncommittedSize = propUncommittedSize.Value,
+			UncommittedSizeInBytes = propUncommittedSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TranslogStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEarliestLastModifiedAge, value.EarliestLastModifiedAge, null, null);
+		writer.WriteProperty(options, PropOperations, value.Operations, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteProperty(options, PropUncommittedOperations, value.UncommittedOperations, null, null);
+		writer.WriteProperty(options, PropUncommittedSize, value.UncommittedSize, null, null);
+		writer.WriteProperty(options, PropUncommittedSizeInBytes, value.UncommittedSizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TranslogStatsConverter))]
 public sealed partial class TranslogStats
 {
-	[JsonInclude, JsonPropertyName("earliest_last_modified_age")]
-	public long EarliestLastModifiedAge { get; init; }
-	[JsonInclude, JsonPropertyName("operations")]
-	public long Operations { get; init; }
-	[JsonInclude, JsonPropertyName("size")]
-	public string? Size { get; init; }
-	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public long SizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("uncommitted_operations")]
-	public int UncommittedOperations { get; init; }
-	[JsonInclude, JsonPropertyName("uncommitted_size")]
-	public string? UncommittedSize { get; init; }
-	[JsonInclude, JsonPropertyName("uncommitted_size_in_bytes")]
-	public long UncommittedSizeInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TranslogStats(long earliestLastModifiedAge, long operations, long sizeInBytes, int uncommittedOperations, long uncommittedSizeInBytes)
+	{
+		EarliestLastModifiedAge = earliestLastModifiedAge;
+		Operations = operations;
+		SizeInBytes = sizeInBytes;
+		UncommittedOperations = uncommittedOperations;
+		UncommittedSizeInBytes = uncommittedSizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public TranslogStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TranslogStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TranslogStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long EarliestLastModifiedAge { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Operations { get; set; }
+	public string? Size { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int UncommittedOperations { get; set; }
+	public string? UncommittedSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long UncommittedSizeInBytes { get; set; }
 }

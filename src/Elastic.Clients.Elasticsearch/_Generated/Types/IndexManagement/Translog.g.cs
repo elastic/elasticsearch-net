@@ -17,24 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class TranslogConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Translog>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDurability = System.Text.Json.JsonEncodedText.Encode("durability");
+	private static readonly System.Text.Json.JsonEncodedText PropFlushThresholdSize = System.Text.Json.JsonEncodedText.Encode("flush_threshold_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention");
+	private static readonly System.Text.Json.JsonEncodedText PropSyncInterval = System.Text.Json.JsonEncodedText.Encode("sync_interval");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Translog Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability?> propDurability = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFlushThresholdSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention?> propRetention = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propSyncInterval = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDurability.TryReadProperty(ref reader, options, PropDurability, null))
+			{
+				continue;
+			}
+
+			if (propFlushThresholdSize.TryReadProperty(ref reader, options, PropFlushThresholdSize, null))
+			{
+				continue;
+			}
+
+			if (propRetention.TryReadProperty(ref reader, options, PropRetention, null))
+			{
+				continue;
+			}
+
+			if (propSyncInterval.TryReadProperty(ref reader, options, PropSyncInterval, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.Translog(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Durability = propDurability.Value,
+			FlushThresholdSize = propFlushThresholdSize.Value,
+			Retention = propRetention.Value,
+			SyncInterval = propSyncInterval.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Translog value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDurability, value.Durability, null, null);
+		writer.WriteProperty(options, PropFlushThresholdSize, value.FlushThresholdSize, null, null);
+		writer.WriteProperty(options, PropRetention, value.Retention, null, null);
+		writer.WriteProperty(options, PropSyncInterval, value.SyncInterval, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogConverter))]
 public sealed partial class Translog
 {
+#if NET7_0_OR_GREATER
+	public Translog()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Translog()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Translog(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Whether or not to <c>fsync</c> and commit the translog after every index, delete, update, or bulk request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("durability")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
 
 	/// <summary>
@@ -46,9 +124,7 @@ public sealed partial class Translog
 	/// maximum size has been reached a flush will happen, generating a new Lucene commit point.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("flush_threshold_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
-	[JsonInclude, JsonPropertyName("retention")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
 
 	/// <summary>
@@ -57,34 +133,37 @@ public sealed partial class Translog
 	/// Values less than 100ms are not allowed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sync_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
 }
 
-public sealed partial class TranslogDescriptor : SerializableDescriptor<TranslogDescriptor>
+public readonly partial struct TranslogDescriptor
 {
-	internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.Translog Instance { get; init; }
 
-	public TranslogDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TranslogDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Translog instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? DurabilityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor RetentionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? SyncIntervalValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TranslogDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.Translog(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Translog instance) => new Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.Translog(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Whether or not to <c>fsync</c> and commit the translog after every index, delete, update, or bulk request.
 	/// </para>
 	/// </summary>
-	public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? value)
 	{
-		DurabilityValue = durability;
-		return Self;
+		Instance.Durability = value;
+		return this;
 	}
 
 	/// <summary>
@@ -96,34 +175,43 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 	/// maximum size has been reached a flush will happen, generating a new Lucene commit point.
 	/// </para>
 	/// </summary>
-	public TranslogDescriptor FlushThresholdSize(Elastic.Clients.Elasticsearch.ByteSize? flushThresholdSize)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor FlushThresholdSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		FlushThresholdSizeValue = flushThresholdSize;
-		return Self;
+		Instance.FlushThresholdSize = value;
+		return this;
 	}
 
-	public TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? retention)
+	/// <summary>
+	/// <para>
+	/// The translog stores all operations that are not yet safely persisted in Lucene (i.e., are not
+	/// part of a Lucene commit point). Although these operations are available for reads, they will need
+	/// to be replayed if the shard was stopped and had to be recovered. This setting controls the
+	/// maximum total size of these operations, to prevent recoveries from taking too long. Once the
+	/// maximum size has been reached a flush will happen, generating a new Lucene commit point.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor FlushThresholdSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		RetentionDescriptor = null;
-		RetentionDescriptorAction = null;
-		RetentionValue = retention;
-		return Self;
+		Instance.FlushThresholdSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
 	}
 
-	public TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? value)
 	{
-		RetentionValue = null;
-		RetentionDescriptorAction = null;
-		RetentionDescriptor = descriptor;
-		return Self;
+		Instance.Retention = value;
+		return this;
 	}
 
-	public TranslogDescriptor Retention(Action<Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor Retention()
 	{
-		RetentionValue = null;
-		RetentionDescriptor = null;
-		RetentionDescriptorAction = configure;
-		return Self;
+		Instance.Retention = Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor Retention(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor>? action)
+	{
+		Instance.Retention = Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -132,49 +220,22 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 	/// Values less than 100ms are not allowed.
 	/// </para>
 	/// </summary>
-	public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Duration? syncInterval)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		SyncIntervalValue = syncInterval;
-		return Self;
+		Instance.SyncInterval = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.Translog Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DurabilityValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("durability");
-			JsonSerializer.Serialize(writer, DurabilityValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.Translog(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FlushThresholdSizeValue is not null)
-		{
-			writer.WritePropertyName("flush_threshold_size");
-			JsonSerializer.Serialize(writer, FlushThresholdSizeValue, options);
-		}
-
-		if (RetentionDescriptor is not null)
-		{
-			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, RetentionDescriptor, options);
-		}
-		else if (RetentionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor(RetentionDescriptorAction), options);
-		}
-		else if (RetentionValue is not null)
-		{
-			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, RetentionValue, options);
-		}
-
-		if (SyncIntervalValue is not null)
-		{
-			writer.WritePropertyName("sync_interval");
-			JsonSerializer.Serialize(writer, SyncIntervalValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.Translog(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

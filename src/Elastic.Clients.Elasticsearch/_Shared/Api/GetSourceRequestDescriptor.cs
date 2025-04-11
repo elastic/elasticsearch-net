@@ -4,14 +4,14 @@
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class GetSourceRequestDescriptor
+public readonly partial struct GetSourceRequestDescriptor
 {
 	/// <summary>
 	/// A shortcut into calling Index(typeof(TOther)).
 	/// </summary>
 	public GetSourceRequestDescriptor Index<TOther>()
 	{
-		RouteValues.Required("index", (IndexName)typeof(TOther));
-		return Self;
+		Instance.Index = typeof(TOther);
+		return this;
 	}
 }

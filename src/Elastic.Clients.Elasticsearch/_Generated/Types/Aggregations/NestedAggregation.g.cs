@@ -17,48 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class NestedAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPath = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Path = propPath.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationConverter))]
 public sealed partial class NestedAggregation
 {
+#if NET7_0_OR_GREATER
+	public NestedAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public NestedAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The path to the field of type <c>nested</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(NestedAggregation nestedAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Nested(nestedAggregation);
 }
 
-public sealed partial class NestedAggregationDescriptor<TDocument> : SerializableDescriptor<NestedAggregationDescriptor<TDocument>>
+public readonly partial struct NestedAggregationDescriptor<TDocument>
 {
-	internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Instance { get; init; }
 
-	public NestedAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The path to the field of type <c>nested</c>.
 	/// </para>
 	/// </summary>
-	public NestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
+	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -66,55 +124,54 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	/// The path to the field of type <c>nested</c>.
 	/// </para>
 	/// </summary>
-	public NestedAggregationDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
-	public NestedAggregationDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>>? action)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (PathValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class NestedAggregationDescriptor : SerializableDescriptor<NestedAggregationDescriptor>
+public readonly partial struct NestedAggregationDescriptor
 {
-	internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Instance { get; init; }
 
-	public NestedAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The path to the field of type <c>nested</c>.
 	/// </para>
 	/// </summary>
-	public NestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
+	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -122,32 +179,22 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	/// The path to the field of type <c>nested</c>.
 	/// </para>
 	/// </summary>
-	public NestedAggregationDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
-	public NestedAggregationDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor>? action)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (PathValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,82 +17,704 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class ShardStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBytesRead = System.Text.Json.JsonEncodedText.Encode("bytes_read");
+	private static readonly System.Text.Json.JsonEncodedText PropFailedReadRequests = System.Text.Json.JsonEncodedText.Encode("failed_read_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropFailedWriteRequests = System.Text.Json.JsonEncodedText.Encode("failed_write_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropFatalException = System.Text.Json.JsonEncodedText.Encode("fatal_exception");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerAliasesVersion = System.Text.Json.JsonEncodedText.Encode("follower_aliases_version");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerGlobalCheckpoint = System.Text.Json.JsonEncodedText.Encode("follower_global_checkpoint");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndex = System.Text.Json.JsonEncodedText.Encode("follower_index");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerMappingVersion = System.Text.Json.JsonEncodedText.Encode("follower_mapping_version");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerMaxSeqNo = System.Text.Json.JsonEncodedText.Encode("follower_max_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerSettingsVersion = System.Text.Json.JsonEncodedText.Encode("follower_settings_version");
+	private static readonly System.Text.Json.JsonEncodedText PropLastRequestedSeqNo = System.Text.Json.JsonEncodedText.Encode("last_requested_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderGlobalCheckpoint = System.Text.Json.JsonEncodedText.Encode("leader_global_checkpoint");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndex = System.Text.Json.JsonEncodedText.Encode("leader_index");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderMaxSeqNo = System.Text.Json.JsonEncodedText.Encode("leader_max_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropOperationsRead = System.Text.Json.JsonEncodedText.Encode("operations_read");
+	private static readonly System.Text.Json.JsonEncodedText PropOperationsWritten = System.Text.Json.JsonEncodedText.Encode("operations_written");
+	private static readonly System.Text.Json.JsonEncodedText PropOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("outstanding_read_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropOutstandingWriteRequests = System.Text.Json.JsonEncodedText.Encode("outstanding_write_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropReadExceptions = System.Text.Json.JsonEncodedText.Encode("read_exceptions");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id");
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessfulReadRequests = System.Text.Json.JsonEncodedText.Encode("successful_read_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessfulWriteRequests = System.Text.Json.JsonEncodedText.Encode("successful_write_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceLastRead = System.Text.Json.JsonEncodedText.Encode("time_since_last_read");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceLastReadMillis = System.Text.Json.JsonEncodedText.Encode("time_since_last_read_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalReadRemoteExecTime = System.Text.Json.JsonEncodedText.Encode("total_read_remote_exec_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalReadRemoteExecTimeMillis = System.Text.Json.JsonEncodedText.Encode("total_read_remote_exec_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalReadTime = System.Text.Json.JsonEncodedText.Encode("total_read_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalReadTimeMillis = System.Text.Json.JsonEncodedText.Encode("total_read_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalWriteTime = System.Text.Json.JsonEncodedText.Encode("total_write_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalWriteTimeMillis = System.Text.Json.JsonEncodedText.Encode("total_write_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropWriteBufferOperationCount = System.Text.Json.JsonEncodedText.Encode("write_buffer_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropWriteBufferSizeInBytes = System.Text.Json.JsonEncodedText.Encode("write_buffer_size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propBytesRead = default;
+		LocalJsonValue<long> propFailedReadRequests = default;
+		LocalJsonValue<long> propFailedWriteRequests = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propFatalException = default;
+		LocalJsonValue<long> propFollowerAliasesVersion = default;
+		LocalJsonValue<long> propFollowerGlobalCheckpoint = default;
+		LocalJsonValue<string> propFollowerIndex = default;
+		LocalJsonValue<long> propFollowerMappingVersion = default;
+		LocalJsonValue<long> propFollowerMaxSeqNo = default;
+		LocalJsonValue<long> propFollowerSettingsVersion = default;
+		LocalJsonValue<long> propLastRequestedSeqNo = default;
+		LocalJsonValue<long> propLeaderGlobalCheckpoint = default;
+		LocalJsonValue<string> propLeaderIndex = default;
+		LocalJsonValue<long> propLeaderMaxSeqNo = default;
+		LocalJsonValue<long> propOperationsRead = default;
+		LocalJsonValue<long> propOperationsWritten = default;
+		LocalJsonValue<int> propOutstandingReadRequests = default;
+		LocalJsonValue<int> propOutstandingWriteRequests = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException>> propReadExceptions = default;
+		LocalJsonValue<string> propRemoteCluster = default;
+		LocalJsonValue<int> propShardId = default;
+		LocalJsonValue<long> propSuccessfulReadRequests = default;
+		LocalJsonValue<long> propSuccessfulWriteRequests = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeSinceLastRead = default;
+		LocalJsonValue<System.TimeSpan> propTimeSinceLastReadMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalReadRemoteExecTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalReadRemoteExecTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalReadTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalReadTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalWriteTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalWriteTimeMillis = default;
+		LocalJsonValue<long> propWriteBufferOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propWriteBufferSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBytesRead.TryReadProperty(ref reader, options, PropBytesRead, null))
+			{
+				continue;
+			}
+
+			if (propFailedReadRequests.TryReadProperty(ref reader, options, PropFailedReadRequests, null))
+			{
+				continue;
+			}
+
+			if (propFailedWriteRequests.TryReadProperty(ref reader, options, PropFailedWriteRequests, null))
+			{
+				continue;
+			}
+
+			if (propFatalException.TryReadProperty(ref reader, options, PropFatalException, null))
+			{
+				continue;
+			}
+
+			if (propFollowerAliasesVersion.TryReadProperty(ref reader, options, PropFollowerAliasesVersion, null))
+			{
+				continue;
+			}
+
+			if (propFollowerGlobalCheckpoint.TryReadProperty(ref reader, options, PropFollowerGlobalCheckpoint, null))
+			{
+				continue;
+			}
+
+			if (propFollowerIndex.TryReadProperty(ref reader, options, PropFollowerIndex, null))
+			{
+				continue;
+			}
+
+			if (propFollowerMappingVersion.TryReadProperty(ref reader, options, PropFollowerMappingVersion, null))
+			{
+				continue;
+			}
+
+			if (propFollowerMaxSeqNo.TryReadProperty(ref reader, options, PropFollowerMaxSeqNo, null))
+			{
+				continue;
+			}
+
+			if (propFollowerSettingsVersion.TryReadProperty(ref reader, options, PropFollowerSettingsVersion, null))
+			{
+				continue;
+			}
+
+			if (propLastRequestedSeqNo.TryReadProperty(ref reader, options, PropLastRequestedSeqNo, null))
+			{
+				continue;
+			}
+
+			if (propLeaderGlobalCheckpoint.TryReadProperty(ref reader, options, PropLeaderGlobalCheckpoint, null))
+			{
+				continue;
+			}
+
+			if (propLeaderIndex.TryReadProperty(ref reader, options, PropLeaderIndex, null))
+			{
+				continue;
+			}
+
+			if (propLeaderMaxSeqNo.TryReadProperty(ref reader, options, PropLeaderMaxSeqNo, null))
+			{
+				continue;
+			}
+
+			if (propOperationsRead.TryReadProperty(ref reader, options, PropOperationsRead, null))
+			{
+				continue;
+			}
+
+			if (propOperationsWritten.TryReadProperty(ref reader, options, PropOperationsWritten, null))
+			{
+				continue;
+			}
+
+			if (propOutstandingReadRequests.TryReadProperty(ref reader, options, PropOutstandingReadRequests, null))
+			{
+				continue;
+			}
+
+			if (propOutstandingWriteRequests.TryReadProperty(ref reader, options, PropOutstandingWriteRequests, null))
+			{
+				continue;
+			}
+
+			if (propReadExceptions.TryReadProperty(ref reader, options, PropReadExceptions, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, null))
+			{
+				continue;
+			}
+
+			if (propShardId.TryReadProperty(ref reader, options, PropShardId, null))
+			{
+				continue;
+			}
+
+			if (propSuccessfulReadRequests.TryReadProperty(ref reader, options, PropSuccessfulReadRequests, null))
+			{
+				continue;
+			}
+
+			if (propSuccessfulWriteRequests.TryReadProperty(ref reader, options, PropSuccessfulWriteRequests, null))
+			{
+				continue;
+			}
+
+			if (propTimeSinceLastRead.TryReadProperty(ref reader, options, PropTimeSinceLastRead, null))
+			{
+				continue;
+			}
+
+			if (propTimeSinceLastReadMillis.TryReadProperty(ref reader, options, PropTimeSinceLastReadMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalReadRemoteExecTime.TryReadProperty(ref reader, options, PropTotalReadRemoteExecTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalReadRemoteExecTimeMillis.TryReadProperty(ref reader, options, PropTotalReadRemoteExecTimeMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalReadTime.TryReadProperty(ref reader, options, PropTotalReadTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalReadTimeMillis.TryReadProperty(ref reader, options, PropTotalReadTimeMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalWriteTime.TryReadProperty(ref reader, options, PropTotalWriteTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalWriteTimeMillis.TryReadProperty(ref reader, options, PropTotalWriteTimeMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propWriteBufferOperationCount.TryReadProperty(ref reader, options, PropWriteBufferOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propWriteBufferSizeInBytes.TryReadProperty(ref reader, options, PropWriteBufferSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BytesRead = propBytesRead.Value,
+			FailedReadRequests = propFailedReadRequests.Value,
+			FailedWriteRequests = propFailedWriteRequests.Value,
+			FatalException = propFatalException.Value,
+			FollowerAliasesVersion = propFollowerAliasesVersion.Value,
+			FollowerGlobalCheckpoint = propFollowerGlobalCheckpoint.Value,
+			FollowerIndex = propFollowerIndex.Value,
+			FollowerMappingVersion = propFollowerMappingVersion.Value,
+			FollowerMaxSeqNo = propFollowerMaxSeqNo.Value,
+			FollowerSettingsVersion = propFollowerSettingsVersion.Value,
+			LastRequestedSeqNo = propLastRequestedSeqNo.Value,
+			LeaderGlobalCheckpoint = propLeaderGlobalCheckpoint.Value,
+			LeaderIndex = propLeaderIndex.Value,
+			LeaderMaxSeqNo = propLeaderMaxSeqNo.Value,
+			OperationsRead = propOperationsRead.Value,
+			OperationsWritten = propOperationsWritten.Value,
+			OutstandingReadRequests = propOutstandingReadRequests.Value,
+			OutstandingWriteRequests = propOutstandingWriteRequests.Value,
+			ReadExceptions = propReadExceptions.Value,
+			RemoteCluster = propRemoteCluster.Value,
+			ShardId = propShardId.Value,
+			SuccessfulReadRequests = propSuccessfulReadRequests.Value,
+			SuccessfulWriteRequests = propSuccessfulWriteRequests.Value,
+			TimeSinceLastRead = propTimeSinceLastRead.Value,
+			TimeSinceLastReadMillis = propTimeSinceLastReadMillis.Value,
+			TotalReadRemoteExecTime = propTotalReadRemoteExecTime.Value,
+			TotalReadRemoteExecTimeMillis = propTotalReadRemoteExecTimeMillis.Value,
+			TotalReadTime = propTotalReadTime.Value,
+			TotalReadTimeMillis = propTotalReadTimeMillis.Value,
+			TotalWriteTime = propTotalWriteTime.Value,
+			TotalWriteTimeMillis = propTotalWriteTimeMillis.Value,
+			WriteBufferOperationCount = propWriteBufferOperationCount.Value,
+			WriteBufferSizeInBytes = propWriteBufferSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBytesRead, value.BytesRead, null, null);
+		writer.WriteProperty(options, PropFailedReadRequests, value.FailedReadRequests, null, null);
+		writer.WriteProperty(options, PropFailedWriteRequests, value.FailedWriteRequests, null, null);
+		writer.WriteProperty(options, PropFatalException, value.FatalException, null, null);
+		writer.WriteProperty(options, PropFollowerAliasesVersion, value.FollowerAliasesVersion, null, null);
+		writer.WriteProperty(options, PropFollowerGlobalCheckpoint, value.FollowerGlobalCheckpoint, null, null);
+		writer.WriteProperty(options, PropFollowerIndex, value.FollowerIndex, null, null);
+		writer.WriteProperty(options, PropFollowerMappingVersion, value.FollowerMappingVersion, null, null);
+		writer.WriteProperty(options, PropFollowerMaxSeqNo, value.FollowerMaxSeqNo, null, null);
+		writer.WriteProperty(options, PropFollowerSettingsVersion, value.FollowerSettingsVersion, null, null);
+		writer.WriteProperty(options, PropLastRequestedSeqNo, value.LastRequestedSeqNo, null, null);
+		writer.WriteProperty(options, PropLeaderGlobalCheckpoint, value.LeaderGlobalCheckpoint, null, null);
+		writer.WriteProperty(options, PropLeaderIndex, value.LeaderIndex, null, null);
+		writer.WriteProperty(options, PropLeaderMaxSeqNo, value.LeaderMaxSeqNo, null, null);
+		writer.WriteProperty(options, PropOperationsRead, value.OperationsRead, null, null);
+		writer.WriteProperty(options, PropOperationsWritten, value.OperationsWritten, null, null);
+		writer.WriteProperty(options, PropOutstandingReadRequests, value.OutstandingReadRequests, null, null);
+		writer.WriteProperty(options, PropOutstandingWriteRequests, value.OutstandingWriteRequests, null, null);
+		writer.WriteProperty(options, PropReadExceptions, value.ReadExceptions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException>(o, v, null));
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, null);
+		writer.WriteProperty(options, PropShardId, value.ShardId, null, null);
+		writer.WriteProperty(options, PropSuccessfulReadRequests, value.SuccessfulReadRequests, null, null);
+		writer.WriteProperty(options, PropSuccessfulWriteRequests, value.SuccessfulWriteRequests, null, null);
+		writer.WriteProperty(options, PropTimeSinceLastRead, value.TimeSinceLastRead, null, null);
+		writer.WriteProperty(options, PropTimeSinceLastReadMillis, value.TimeSinceLastReadMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalReadRemoteExecTime, value.TotalReadRemoteExecTime, null, null);
+		writer.WriteProperty(options, PropTotalReadRemoteExecTimeMillis, value.TotalReadRemoteExecTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalReadTime, value.TotalReadTime, null, null);
+		writer.WriteProperty(options, PropTotalReadTimeMillis, value.TotalReadTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalWriteTime, value.TotalWriteTime, null, null);
+		writer.WriteProperty(options, PropTotalWriteTimeMillis, value.TotalWriteTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropWriteBufferOperationCount, value.WriteBufferOperationCount, null, null);
+		writer.WriteProperty(options, PropWriteBufferSizeInBytes, value.WriteBufferSizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStatsConverter))]
 public sealed partial class ShardStats
 {
-	[JsonInclude, JsonPropertyName("bytes_read")]
-	public long BytesRead { get; init; }
-	[JsonInclude, JsonPropertyName("failed_read_requests")]
-	public long FailedReadRequests { get; init; }
-	[JsonInclude, JsonPropertyName("failed_write_requests")]
-	public long FailedWriteRequests { get; init; }
-	[JsonInclude, JsonPropertyName("fatal_exception")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? FatalException { get; init; }
-	[JsonInclude, JsonPropertyName("follower_aliases_version")]
-	public long FollowerAliasesVersion { get; init; }
-	[JsonInclude, JsonPropertyName("follower_global_checkpoint")]
-	public long FollowerGlobalCheckpoint { get; init; }
-	[JsonInclude, JsonPropertyName("follower_index")]
-	public string FollowerIndex { get; init; }
-	[JsonInclude, JsonPropertyName("follower_mapping_version")]
-	public long FollowerMappingVersion { get; init; }
-	[JsonInclude, JsonPropertyName("follower_max_seq_no")]
-	public long FollowerMaxSeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("follower_settings_version")]
-	public long FollowerSettingsVersion { get; init; }
-	[JsonInclude, JsonPropertyName("last_requested_seq_no")]
-	public long LastRequestedSeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("leader_global_checkpoint")]
-	public long LeaderGlobalCheckpoint { get; init; }
-	[JsonInclude, JsonPropertyName("leader_index")]
-	public string LeaderIndex { get; init; }
-	[JsonInclude, JsonPropertyName("leader_max_seq_no")]
-	public long LeaderMaxSeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("operations_read")]
-	public long OperationsRead { get; init; }
-	[JsonInclude, JsonPropertyName("operations_written")]
-	public long OperationsWritten { get; init; }
-	[JsonInclude, JsonPropertyName("outstanding_read_requests")]
-	public int OutstandingReadRequests { get; init; }
-	[JsonInclude, JsonPropertyName("outstanding_write_requests")]
-	public int OutstandingWriteRequests { get; init; }
-	[JsonInclude, JsonPropertyName("read_exceptions")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> ReadExceptions { get; init; }
-	[JsonInclude, JsonPropertyName("remote_cluster")]
-	public string RemoteCluster { get; init; }
-	[JsonInclude, JsonPropertyName("shard_id")]
-	public int ShardId { get; init; }
-	[JsonInclude, JsonPropertyName("successful_read_requests")]
-	public long SuccessfulReadRequests { get; init; }
-	[JsonInclude, JsonPropertyName("successful_write_requests")]
-	public long SuccessfulWriteRequests { get; init; }
-	[JsonInclude, JsonPropertyName("time_since_last_read")]
-	public Elastic.Clients.Elasticsearch.Duration? TimeSinceLastRead { get; init; }
-	[JsonInclude, JsonPropertyName("time_since_last_read_millis")]
-	public long TimeSinceLastReadMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_read_remote_exec_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalReadRemoteExecTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_read_remote_exec_time_millis")]
-	public long TotalReadRemoteExecTimeMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_read_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalReadTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_read_time_millis")]
-	public long TotalReadTimeMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_write_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalWriteTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_write_time_millis")]
-	public long TotalWriteTimeMillis { get; init; }
-	[JsonInclude, JsonPropertyName("write_buffer_operation_count")]
-	public long WriteBufferOperationCount { get; init; }
-	[JsonInclude, JsonPropertyName("write_buffer_size_in_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardStats(long bytesRead, long failedReadRequests, long failedWriteRequests, long followerAliasesVersion, long followerGlobalCheckpoint, string followerIndex, long followerMappingVersion, long followerMaxSeqNo, long followerSettingsVersion, long lastRequestedSeqNo, long leaderGlobalCheckpoint, string leaderIndex, long leaderMaxSeqNo, long operationsRead, long operationsWritten, int outstandingReadRequests, int outstandingWriteRequests, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> readExceptions, string remoteCluster, int shardId, long successfulReadRequests, long successfulWriteRequests, System.TimeSpan timeSinceLastReadMillis, System.TimeSpan totalReadRemoteExecTimeMillis, System.TimeSpan totalReadTimeMillis, System.TimeSpan totalWriteTimeMillis, long writeBufferOperationCount, Elastic.Clients.Elasticsearch.ByteSize writeBufferSizeInBytes)
+	{
+		BytesRead = bytesRead;
+		FailedReadRequests = failedReadRequests;
+		FailedWriteRequests = failedWriteRequests;
+		FollowerAliasesVersion = followerAliasesVersion;
+		FollowerGlobalCheckpoint = followerGlobalCheckpoint;
+		FollowerIndex = followerIndex;
+		FollowerMappingVersion = followerMappingVersion;
+		FollowerMaxSeqNo = followerMaxSeqNo;
+		FollowerSettingsVersion = followerSettingsVersion;
+		LastRequestedSeqNo = lastRequestedSeqNo;
+		LeaderGlobalCheckpoint = leaderGlobalCheckpoint;
+		LeaderIndex = leaderIndex;
+		LeaderMaxSeqNo = leaderMaxSeqNo;
+		OperationsRead = operationsRead;
+		OperationsWritten = operationsWritten;
+		OutstandingReadRequests = outstandingReadRequests;
+		OutstandingWriteRequests = outstandingWriteRequests;
+		ReadExceptions = readExceptions;
+		RemoteCluster = remoteCluster;
+		ShardId = shardId;
+		SuccessfulReadRequests = successfulReadRequests;
+		SuccessfulWriteRequests = successfulWriteRequests;
+		TimeSinceLastReadMillis = timeSinceLastReadMillis;
+		TotalReadRemoteExecTimeMillis = totalReadRemoteExecTimeMillis;
+		TotalReadTimeMillis = totalReadTimeMillis;
+		TotalWriteTimeMillis = totalWriteTimeMillis;
+		WriteBufferOperationCount = writeBufferOperationCount;
+		WriteBufferSizeInBytes = writeBufferSizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public ShardStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The total of transferred bytes read from the leader.
+	/// This is only an estimate and does not account for compression if enabled.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BytesRead { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of failed reads.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FailedReadRequests { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of failed bulk write requests on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FailedWriteRequests { get; set; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? FatalException { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The index aliases version the follower is synced up to.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FollowerAliasesVersion { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The current global checkpoint on the follower.
+	/// The difference between the <c>leader_global_checkpoint</c> and the <c>follower_global_checkpoint</c> is an indication of how much the follower is lagging the leader.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FollowerGlobalCheckpoint { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string FollowerIndex { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The mapping version the follower is synced up to.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FollowerMappingVersion { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The current maximum sequence number on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FollowerMaxSeqNo { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The index settings version the follower is synced up to.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FollowerSettingsVersion { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The starting sequence number of the last batch of operations requested from the leader.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long LastRequestedSeqNo { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The current global checkpoint on the leader known to the follower task.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long LeaderGlobalCheckpoint { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index in the leader cluster being followed.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string LeaderIndex { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The current maximum sequence number on the leader known to the follower task.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long LeaderMaxSeqNo { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of operations read from the leader.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long OperationsRead { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of operations written on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long OperationsWritten { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of active read requests from the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int OutstandingReadRequests { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of active bulk write requests on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int OutstandingWriteRequests { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// An array of objects representing failed reads.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> ReadExceptions { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The remote cluster containing the leader index.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RemoteCluster { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The numerical shard ID, with values from 0 to one less than the number of replicas.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ShardId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of successful fetches.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SuccessfulReadRequests { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of bulk write requests run on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SuccessfulWriteRequests { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TimeSinceLastRead { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of milliseconds since a read request was sent to the leader.
+	/// When the follower is caught up to the leader, this number will increase up to the configured <c>read_poll_timeout</c> at which point another read request will be sent to the leader.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TimeSinceLastReadMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalReadRemoteExecTime { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total time reads spent running on the remote cluster.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalReadRemoteExecTimeMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalReadTime { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total time reads were outstanding, measured from the time a read was sent to the leader to the time a reply was returned to the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalReadTimeMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalWriteTime { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total time spent writing on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalWriteTimeMillis { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of write operations queued on the follower.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long WriteBufferOperationCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of bytes of operations currently queued for writing.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes { get; set; }
 }

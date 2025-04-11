@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Text.Json;
 using Elastic.Transport.Extensions;
 using Elastic.Clients.Elasticsearch.Core.Search;
@@ -9,7 +10,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-internal abstract class BulkUpdateBody : ISelfSerializable
+internal abstract class BulkUpdateBody
 {
 	public long? IfSequenceNumber { get; set; }
 
@@ -17,7 +18,7 @@ internal abstract class BulkUpdateBody : ISelfSerializable
 
 	protected abstract void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	internal void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 
@@ -45,13 +46,13 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 
 	public TPartialUpdate PartialUpdate { get; set; }
 
-	public Script Script { get; set; }
+	public Script? Script { get; set; }
 
 	public bool? ScriptedUpsert { get; set; }
 
 	public TDocument Upsert { get; set; }
 
-	public Union<bool, SourceFilter> Source { get; set; }
+	public Union<bool, SourceFilter>? Source { get; set; }
 
 	protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -82,14 +83,23 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			settings.SourceSerializer.Serialize(Upsert, writer, null);
+			settings.SourceSerializer.Serialize(Upsert, writer, settings.MemoryStreamFactory);
 		}
 
 		if (Source is not null)
 		{
 			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, Source, options);
+			switch (Source.Tag)
+			{
+				case UnionTag.T1:
+					JsonSerializer.Serialize(writer, Source.Value1, options);
+					break;
+				case UnionTag.T2:
+					JsonSerializer.Serialize(writer, Source.Value2, options);
+					break;
+				default:
+					throw new InvalidOperationException();
+			}
 		}
 	}
 }
-

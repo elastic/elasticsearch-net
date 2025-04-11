@@ -17,26 +17,130 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class PercentileRanksAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropHdr = System.Text.Json.JsonEncodedText.Encode("hdr");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropTDigest = System.Text.Json.JsonEncodedText.Encode("tdigest");
+	private static readonly System.Text.Json.JsonEncodedText PropValues = System.Text.Json.JsonEncodedText.Encode("values");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.HdrMethod?> propHdr = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TDigest?> propTDigest = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propValues = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propHdr.TryReadProperty(ref reader, options, PropHdr, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propTDigest.TryReadProperty(ref reader, options, PropTDigest, null))
+			{
+				continue;
+			}
+
+			if (propValues.TryReadProperty(ref reader, options, PropValues, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Format = propFormat.Value,
+			Hdr = propHdr.Value,
+			Missing = propMissing.Value,
+			Script = propScript.Value,
+			TDigest = propTDigest.Value,
+			Values = propValues.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropHdr, value.Hdr, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropTDigest, value.TDigest, null, null);
+		writer.WriteProperty(options, PropValues, value.Values, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationConverter))]
 public sealed partial class PercentileRanksAggregation
 {
+#if NET7_0_OR_GREATER
+	public PercentileRanksAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PercentileRanksAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -44,7 +148,6 @@ public sealed partial class PercentileRanksAggregation
 	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hdr")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
 
 	/// <summary>
@@ -53,9 +156,7 @@ public sealed partial class PercentileRanksAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
+	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -63,7 +164,6 @@ public sealed partial class PercentileRanksAggregation
 	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tdigest")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
 
 	/// <summary>
@@ -71,54 +171,37 @@ public sealed partial class PercentileRanksAggregation
 	/// An array of values for which to calculate the percentile ranks.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("values")]
-	public ICollection<double>? Values { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(PercentileRanksAggregation percentileRanksAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.PercentileRanks(percentileRanksAggregation);
+	public System.Collections.Generic.ICollection<double>? Values { get; set; }
 }
 
-public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : SerializableDescriptor<PercentileRanksAggregationDescriptor<TDocument>>
+public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 {
-	internal PercentileRanksAggregationDescriptor(Action<PercentileRanksAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Instance { get; init; }
 
-	public PercentileRanksAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentileRanksAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor HdrDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> HdrDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor TDigestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> TDigestDescriptorAction { get; set; }
-	private ICollection<double>? ValuesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentileRanksAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -126,16 +209,16 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -143,28 +226,32 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? value)
 	{
-		HdrDescriptor = null;
-		HdrDescriptorAction = null;
-		HdrValue = hdr;
-		return Self;
+		Instance.Hdr = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Hdr()
 	{
-		HdrValue = null;
-		HdrDescriptorAction = null;
-		HdrDescriptor = descriptor;
-		return Self;
+		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(null);
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> Hdr(Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Hdr(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor>? action)
 	{
-		HdrValue = null;
-		HdrDescriptor = null;
-		HdrDescriptorAction = configure;
-		return Self;
+		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -173,34 +260,28 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -208,28 +289,32 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? value)
 	{
-		TDigestDescriptor = null;
-		TDigestDescriptorAction = null;
-		TDigestValue = tDigest;
-		return Self;
+		Instance.TDigest = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> TDigest()
 	{
-		TDigestValue = null;
-		TDigestDescriptorAction = null;
-		TDigestDescriptor = descriptor;
-		return Self;
+		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(null);
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor<TDocument> TDigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> TDigest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor>? action)
 	{
-		TDigestValue = null;
-		TDigestDescriptor = null;
-		TDigestDescriptorAction = configure;
-		return Self;
+		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -237,133 +322,54 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	/// An array of values for which to calculate the percentile ranks.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor<TDocument> Values(ICollection<double>? values)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Values(System.Collections.Generic.ICollection<double>? value)
 	{
-		ValuesValue = values;
-		return Self;
+		Instance.Values = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (HdrDescriptor is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, HdrDescriptor, options);
-		}
-		else if (HdrDescriptorAction is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(HdrDescriptorAction), options);
-		}
-		else if (HdrValue is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, HdrValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (TDigestDescriptor is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, TDigestDescriptor, options);
-		}
-		else if (TDigestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(TDigestDescriptorAction), options);
-		}
-		else if (TDigestValue is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, TDigestValue, options);
-		}
-
-		if (ValuesValue is not null)
-		{
-			writer.WritePropertyName("values");
-			JsonSerializer.Serialize(writer, ValuesValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PercentileRanksAggregationDescriptor : SerializableDescriptor<PercentileRanksAggregationDescriptor>
+public readonly partial struct PercentileRanksAggregationDescriptor
 {
-	internal PercentileRanksAggregationDescriptor(Action<PercentileRanksAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Instance { get; init; }
 
-	public PercentileRanksAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentileRanksAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor HdrDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> HdrDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor TDigestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> TDigestDescriptorAction { get; set; }
-	private ICollection<double>? ValuesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentileRanksAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public PercentileRanksAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -371,16 +377,16 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -388,28 +394,32 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? value)
 	{
-		HdrDescriptor = null;
-		HdrDescriptorAction = null;
-		HdrValue = hdr;
-		return Self;
+		Instance.Hdr = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Hdr()
 	{
-		HdrValue = null;
-		HdrDescriptorAction = null;
-		HdrDescriptor = descriptor;
-		return Self;
+		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(null);
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor Hdr(Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Hdr(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor>? action)
 	{
-		HdrValue = null;
-		HdrDescriptor = null;
-		HdrDescriptorAction = configure;
-		return Self;
+		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -418,34 +428,28 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -453,28 +457,32 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? value)
 	{
-		TDigestDescriptor = null;
-		TDigestDescriptorAction = null;
-		TDigestValue = tDigest;
-		return Self;
+		Instance.TDigest = value;
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor TDigest()
 	{
-		TDigestValue = null;
-		TDigestDescriptorAction = null;
-		TDigestDescriptor = descriptor;
-		return Self;
+		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(null);
+		return this;
 	}
 
-	public PercentileRanksAggregationDescriptor TDigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor TDigest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor>? action)
 	{
-		TDigestValue = null;
-		TDigestDescriptor = null;
-		TDigestDescriptorAction = configure;
-		return Self;
+		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -482,87 +490,22 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	/// An array of values for which to calculate the percentile ranks.
 	/// </para>
 	/// </summary>
-	public PercentileRanksAggregationDescriptor Values(ICollection<double>? values)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Values(System.Collections.Generic.ICollection<double>? value)
 	{
-		ValuesValue = values;
-		return Self;
+		Instance.Values = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (HdrDescriptor is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, HdrDescriptor, options);
-		}
-		else if (HdrDescriptorAction is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(HdrDescriptorAction), options);
-		}
-		else if (HdrValue is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, HdrValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (TDigestDescriptor is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, TDigestDescriptor, options);
-		}
-		else if (TDigestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(TDigestDescriptorAction), options);
-		}
-		else if (TDigestValue is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, TDigestValue, options);
-		}
-
-		if (ValuesValue is not null)
-		{
-			writer.WritePropertyName("values");
-			JsonSerializer.Serialize(writer, ValuesValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
