@@ -17,25 +17,100 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class DocumentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Document>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.Document Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<object> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.Document(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.Document value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.DocumentConverter))]
 public sealed partial class Document
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Document(object source)
+	{
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public Document()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Document()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Document(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Unique identifier for the document.
 	/// This ID must be unique within the <c>_index</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -43,7 +118,6 @@ public sealed partial class Document
 	/// Name of the index containing the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -51,21 +125,31 @@ public sealed partial class Document
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
-	public object Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object Source { get; set; }
 }
 
-public sealed partial class DocumentDescriptor : SerializableDescriptor<DocumentDescriptor>
+public readonly partial struct DocumentDescriptor
 {
-	internal DocumentDescriptor(Action<DocumentDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.Document Instance { get; init; }
 
-	public DocumentDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocumentDescriptor(Elastic.Clients.Elasticsearch.Ingest.Document instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private object SourceValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocumentDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.Document(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(Elastic.Clients.Elasticsearch.Ingest.Document instance) => new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Document(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -73,10 +157,10 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	/// This ID must be unique within the <c>_index</c>.
 	/// </para>
 	/// </summary>
-	public DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -84,10 +168,10 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	/// Name of the index containing the document.
 	/// </para>
 	/// </summary>
-	public DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -95,29 +179,17 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	public DocumentDescriptor Source(object source)
+	public Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor Source(object value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.Document Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		writer.WritePropertyName("_source");
-		JsonSerializer.Serialize(writer, SourceValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(new Elastic.Clients.Elasticsearch.Ingest.Document(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

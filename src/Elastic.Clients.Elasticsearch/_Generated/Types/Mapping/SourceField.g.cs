@@ -17,122 +17,200 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class SourceFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SourceField>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
+	private static readonly System.Text.Json.JsonEncodedText PropCompressThreshold = System.Text.Json.JsonEncodedText.Encode("compress_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.SourceField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCompress = default;
+		LocalJsonValue<string?> propCompressThreshold = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propExcludes = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIncludes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode?> propMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			{
+				continue;
+			}
+
+			if (propCompressThreshold.TryReadProperty(ref reader, options, PropCompressThreshold, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propExcludes.TryReadProperty(ref reader, options, PropExcludes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIncludes.TryReadProperty(ref reader, options, PropIncludes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Compress = propCompress.Value,
+			CompressThreshold = propCompressThreshold.Value,
+			Enabled = propEnabled.Value,
+			Excludes = propExcludes.Value,
+			Includes = propIncludes.Value,
+			Mode = propMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.SourceField value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropCompressThreshold, value.CompressThreshold, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.SourceFieldConverter))]
 public sealed partial class SourceField
 {
-	[JsonInclude, JsonPropertyName("compress")]
+#if NET7_0_OR_GREATER
+	public SourceField()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SourceField()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Compress { get; set; }
-	[JsonInclude, JsonPropertyName("compress_threshold")]
 	public string? CompressThreshold { get; set; }
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-	[JsonInclude, JsonPropertyName("excludes")]
-	public ICollection<string>? Excludes { get; set; }
-	[JsonInclude, JsonPropertyName("includes")]
-	public ICollection<string>? Includes { get; set; }
-	[JsonInclude, JsonPropertyName("mode")]
+	public System.Collections.Generic.ICollection<string>? Excludes { get; set; }
+	public System.Collections.Generic.ICollection<string>? Includes { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? Mode { get; set; }
 }
 
-public sealed partial class SourceFieldDescriptor : SerializableDescriptor<SourceFieldDescriptor>
+public readonly partial struct SourceFieldDescriptor
 {
-	internal SourceFieldDescriptor(Action<SourceFieldDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.SourceField Instance { get; init; }
 
-	public SourceFieldDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.SourceField instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CompressValue { get; set; }
-	private string? CompressThresholdValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private ICollection<string>? ExcludesValue { get; set; }
-	private ICollection<string>? IncludesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? ModeValue { get; set; }
-
-	public SourceFieldDescriptor Compress(bool? compress = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceFieldDescriptor()
 	{
-		CompressValue = compress;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SourceFieldDescriptor CompressThreshold(string? compressThreshold)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.SourceField instance) => new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Compress(bool? value = true)
 	{
-		CompressThresholdValue = compressThreshold;
-		return Self;
+		Instance.Compress = value;
+		return this;
 	}
 
-	public SourceFieldDescriptor Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor CompressThreshold(string? value)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.CompressThreshold = value;
+		return this;
 	}
 
-	public SourceFieldDescriptor Excludes(ICollection<string>? excludes)
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Enabled(bool? value = true)
 	{
-		ExcludesValue = excludes;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	public SourceFieldDescriptor Includes(ICollection<string>? includes)
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Excludes(System.Collections.Generic.ICollection<string>? value)
 	{
-		IncludesValue = includes;
-		return Self;
+		Instance.Excludes = value;
+		return this;
 	}
 
-	public SourceFieldDescriptor Mode(Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? mode)
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Excludes(params string[] values)
 	{
-		ModeValue = mode;
-		return Self;
+		Instance.Excludes = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Includes(System.Collections.Generic.ICollection<string>? value)
 	{
-		writer.WriteStartObject();
-		if (CompressValue.HasValue)
+		Instance.Includes = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Includes(params string[] values)
+	{
+		Instance.Includes = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Mode(Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? value)
+	{
+		Instance.Mode = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.SourceField Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("compress");
-			writer.WriteBooleanValue(CompressValue.Value);
+			return new Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(CompressThresholdValue))
-		{
-			writer.WritePropertyName("compress_threshold");
-			writer.WriteStringValue(CompressThresholdValue);
-		}
-
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (ExcludesValue is not null)
-		{
-			writer.WritePropertyName("excludes");
-			JsonSerializer.Serialize(writer, ExcludesValue, options);
-		}
-
-		if (IncludesValue is not null)
-		{
-			writer.WritePropertyName("includes");
-			JsonSerializer.Serialize(writer, IncludesValue, options);
-		}
-
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(new Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

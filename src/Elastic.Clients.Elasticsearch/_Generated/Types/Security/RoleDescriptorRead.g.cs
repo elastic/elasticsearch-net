@@ -17,159 +17,217 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class RoleDescriptorReadConverter : JsonConverter<RoleDescriptorRead>
+internal sealed partial class RoleDescriptorReadConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead>
 {
-	public override RoleDescriptorRead Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteIndices = System.Text.Json.JsonEncodedText.Encode("remote_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropRestriction = System.Text.Json.JsonEncodedText.Encode("restriction");
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
+	private static readonly System.Text.Json.JsonEncodedText PropTransientMetadata = System.Text.Json.JsonEncodedText.Encode("transient_metadata");
+
+	public override Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? applications = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster = default;
-		string? description = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? global = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> indices = default;
-		IReadOnlyDictionary<string, object>? metadata = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices = default;
-		Elastic.Clients.Elasticsearch.Security.Restriction? restriction = default;
-		IReadOnlyCollection<string>? runAs = default;
-		IReadOnlyDictionary<string, object>? transientMetadata = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?> propApplications = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>> propCluster = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>?> propGlobal = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>> propIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?> propRemoteCluster = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?> propRemoteIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Restriction?> propRestriction = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propRunAs = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propTransientMetadata = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propApplications.TryReadProperty(ref reader, options, PropApplications, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, null)))
 			{
-				var property = reader.GetString();
-				if (property == "applications")
-				{
-					applications = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "cluster")
-				{
-					cluster = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>>(ref reader, options);
-					continue;
-				}
-
-				if (property == "description")
-				{
-					description = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "global")
-				{
-					global = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices" || property == "index")
-				{
-					indices = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>>(ref reader, options);
-					continue;
-				}
-
-				if (property == "metadata")
-				{
-					metadata = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "remote_cluster")
-				{
-					remoteCluster = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "remote_indices")
-				{
-					remoteIndices = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "restriction")
-				{
-					restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.Restriction?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "run_as")
-				{
-					runAs = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "transient_metadata")
-				{
-					transientMetadata = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)!) || propIndices.TryReadProperty(ref reader, options, PropIndices1, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRemoteIndices.TryReadProperty(ref reader, options, PropRemoteIndices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRestriction.TryReadProperty(ref reader, options, PropRestriction, null))
+			{
+				continue;
+			}
+
+			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTransientMetadata.TryReadProperty(ref reader, options, PropTransientMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return new RoleDescriptorRead { Applications = applications, Cluster = cluster, Description = description, Global = global, Indices = indices, Metadata = metadata, RemoteCluster = remoteCluster, RemoteIndices = remoteIndices, Restriction = restriction, RunAs = runAs, TransientMetadata = transientMetadata };
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Applications = propApplications.Value,
+			Cluster = propCluster.Value,
+			Description = propDescription.Value,
+			Global = propGlobal.Value,
+			Indices = propIndices.Value,
+			Metadata = propMetadata.Value,
+			RemoteCluster = propRemoteCluster.Value,
+			RemoteIndices = propRemoteIndices.Value,
+			Restriction = propRestriction.Value,
+			RunAs = propRunAs.Value,
+			TransientMetadata = propTransientMetadata.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, RoleDescriptorRead value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead value, System.Text.Json.JsonSerializerOptions options)
 	{
-		throw new NotImplementedException("'RoleDescriptorRead' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropGlobal, value.Global, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRemoteIndices, value.RemoteIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>(o, v, null));
+		writer.WriteProperty(options, PropRestriction, value.Restriction, null, null);
+		writer.WriteProperty(options, PropRunAs, value.RunAs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTransientMetadata, value.TransientMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(RoleDescriptorReadConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleDescriptorReadConverter))]
 public sealed partial class RoleDescriptorRead
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleDescriptorRead(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> indices)
+	{
+		Cluster = cluster;
+		Indices = indices;
+	}
+#if NET7_0_OR_GREATER
+	public RoleDescriptorRead()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RoleDescriptorRead()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoleDescriptorRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A list of application privilege entries
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An optional description of the role descriptor.
 	/// </para>
 	/// </summary>
-	public string? Description { get; init; }
+	public string? Description { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; init; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permissions entries.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public IReadOnlyDictionary<string, object>? Metadata { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -177,27 +235,27 @@ public sealed partial class RoleDescriptorRead
 	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of indices permissions for remote clusters.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A restriction for when the role descriptor is allowed to be effective.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; init; }
+	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of users that the API keys can impersonate.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<string>? RunAs { get; init; }
-	public IReadOnlyDictionary<string, object>? TransientMetadata { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? RunAs { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? TransientMetadata { get; set; }
 }

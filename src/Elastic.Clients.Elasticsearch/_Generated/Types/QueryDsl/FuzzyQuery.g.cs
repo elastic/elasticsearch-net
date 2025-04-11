@@ -17,151 +17,160 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
+internal sealed partial class FuzzyQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery>
 {
-	public override FuzzyQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxExpansions = System.Text.Json.JsonEncodedText.Encode("max_expansions");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite");
+	private static readonly System.Text.Json.JsonEncodedText PropTranspositions = System.Text.Json.JsonEncodedText.Encode("transpositions");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		var variant = new FuzzyQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			var value = reader.ReadValue<object>(options, null);
+			reader.Read();
+			return new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fuzziness")
-				{
-					variant.Fuzziness = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fuzziness?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_expansions")
-				{
-					variant.MaxExpansions = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "prefix_length")
-				{
-					variant.PrefixLength = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "rewrite")
-				{
-					variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "transpositions")
-				{
-					variant.Transpositions = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "value")
-				{
-					variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
-					continue;
-				}
-			}
+				Field = propField.Value,
+				Value = value
+			};
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
+		LocalJsonValue<int?> propMaxExpansions = default;
+		LocalJsonValue<int?> propPrefixLength = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<string?> propRewrite = default;
+		LocalJsonValue<bool?> propTranspositions = default;
+		LocalJsonValue<object> propValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propFuzziness.TryReadProperty(ref reader, options, PropFuzziness, null))
+			{
+				continue;
+			}
+
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propRewrite.TryReadProperty(ref reader, options, PropRewrite, null))
+			{
+				continue;
+			}
+
+			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, null))
+			{
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			Fuzziness = propFuzziness.Value,
+			MaxExpansions = propMaxExpansions.Value,
+			PrefixLength = propPrefixLength.Value,
+			QueryName = propQueryName.Value,
+			Rewrite = propRewrite.Value,
+			Transpositions = propTranspositions.Value,
+			Value = propValue.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize FuzzyQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.Fuzziness is not null)
-		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, value.Fuzziness, options);
-		}
-
-		if (value.MaxExpansions.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(value.MaxExpansions.Value);
-		}
-
-		if (value.PrefixLength.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(value.PrefixLength.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (!string.IsNullOrEmpty(value.Rewrite))
-		{
-			writer.WritePropertyName("rewrite");
-			writer.WriteStringValue(value.Rewrite);
-		}
-
-		if (value.Transpositions.HasValue)
-		{
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(value.Transpositions.Value);
-		}
-
-		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, value.Value, options);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRewrite, value.Rewrite, null, null);
+		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(FuzzyQueryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryConverter))]
 public sealed partial class FuzzyQuery
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public FuzzyQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FuzzyQuery(Elastic.Clients.Elasticsearch.Field field, object value)
+	{
+		Field = field;
+		Value = value;
+	}
+#if NET7_0_OR_GREATER
+	public FuzzyQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
 	/// <summary>
@@ -173,7 +182,11 @@ public sealed partial class FuzzyQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -216,28 +229,31 @@ public sealed partial class FuzzyQuery
 	/// Term you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public object Value { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(FuzzyQuery fuzzyQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Fuzzy(fuzzyQuery);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object Value { get; set; }
 }
 
-public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptor<FuzzyQueryDescriptor<TDocument>>
+public readonly partial struct FuzzyQueryDescriptor<TDocument>
 {
-	internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Instance { get; init; }
 
-	public FuzzyQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FuzzyQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-	private int? MaxExpansionsValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private string? RewriteValue { get; set; }
-	private bool? TranspositionsValue { get; set; }
-	private object ValueValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FuzzyQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -247,28 +263,22 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public FuzzyQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public FuzzyQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -276,10 +286,21 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
-		FuzzinessValue = fuzziness;
-		return Self;
+		Instance.Fuzziness = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	{
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -287,10 +308,10 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// Maximum number of variations created.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
-		MaxExpansionsValue = maxExpansions;
-		return Self;
+		Instance.MaxExpansions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -298,16 +319,16 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// Number of beginning characters left unchanged when creating expansions.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
-	public FuzzyQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -315,10 +336,10 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// Number of beginning characters left unchanged when creating expansions.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> Rewrite(string? rewrite)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Rewrite(string? value)
 	{
-		RewriteValue = rewrite;
-		return Self;
+		Instance.Rewrite = value;
+		return this;
 	}
 
 	/// <summary>
@@ -326,10 +347,10 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> Transpositions(bool? transpositions = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Transpositions(bool? value = true)
 	{
-		TranspositionsValue = transpositions;
-		return Self;
+		Instance.Transpositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -337,85 +358,39 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	/// Term you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor<TDocument> Value(object value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Value(object value)
 	{
-		ValueValue = value;
-		return Self;
+		Instance.Value = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (FuzzinessValue is not null)
-		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, FuzzinessValue, options);
-		}
-
-		if (MaxExpansionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(MaxExpansionsValue.Value);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(RewriteValue))
-		{
-			writer.WritePropertyName("rewrite");
-			writer.WriteStringValue(RewriteValue);
-		}
-
-		if (TranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(TranspositionsValue.Value);
-		}
-
-		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, ValueValue, options);
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQueryDescriptor>
+public readonly partial struct FuzzyQueryDescriptor
 {
-	internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Instance { get; init; }
 
-	public FuzzyQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FuzzyQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-	private int? MaxExpansionsValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private string? RewriteValue { get; set; }
-	private bool? TranspositionsValue { get; set; }
-	private object ValueValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FuzzyQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -425,28 +400,22 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public FuzzyQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public FuzzyQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -454,10 +423,21 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
-		FuzzinessValue = fuzziness;
-		return Self;
+		Instance.Fuzziness = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	{
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -465,10 +445,10 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// Maximum number of variations created.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor MaxExpansions(int? maxExpansions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor MaxExpansions(int? value)
 	{
-		MaxExpansionsValue = maxExpansions;
-		return Self;
+		Instance.MaxExpansions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -476,16 +456,16 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// Number of beginning characters left unchanged when creating expansions.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
-	public FuzzyQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -493,10 +473,10 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// Number of beginning characters left unchanged when creating expansions.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor Rewrite(string? rewrite)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Rewrite(string? value)
 	{
-		RewriteValue = rewrite;
-		return Self;
+		Instance.Rewrite = value;
+		return this;
 	}
 
 	/// <summary>
@@ -504,10 +484,10 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor Transpositions(bool? transpositions = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Transpositions(bool? value = true)
 	{
-		TranspositionsValue = transpositions;
-		return Self;
+		Instance.Transpositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -515,64 +495,17 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	/// Term you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public FuzzyQueryDescriptor Value(object value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Value(object value)
 	{
-		ValueValue = value;
-		return Self;
+		Instance.Value = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (FuzzinessValue is not null)
-		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, FuzzinessValue, options);
-		}
-
-		if (MaxExpansionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(MaxExpansionsValue.Value);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(RewriteValue))
-		{
-			writer.WritePropertyName("rewrite");
-			writer.WriteStringValue(RewriteValue);
-		}
-
-		if (TranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(TranspositionsValue.Value);
-		}
-
-		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, ValueValue, options);
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

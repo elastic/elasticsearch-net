@@ -17,24 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class FieldValueFactorScoreFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFactor = System.Text.Json.JsonEncodedText.Encode("factor");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropModifier = System.Text.Json.JsonEncodedText.Encode("modifier");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propFactor = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<double?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier?> propModifier = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFactor.TryReadProperty(ref reader, options, PropFactor, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propModifier.TryReadProperty(ref reader, options, PropModifier, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Factor = propFactor.Value,
+			Field = propField.Value,
+			Missing = propMissing.Value,
+			Modifier = propModifier.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFactor, value.Factor, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropModifier, value.Modifier, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionConverter))]
 public sealed partial class FieldValueFactorScoreFunction
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public FieldValueFactorScoreFunction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldValueFactorScoreFunction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Optional factor to multiply the field value with.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("factor")]
 	public double? Factor { get; set; }
 
 	/// <summary>
@@ -42,8 +126,11 @@ public sealed partial class FieldValueFactorScoreFunction
 	/// Field to be extracted from the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -51,7 +138,6 @@ public sealed partial class FieldValueFactorScoreFunction
 	/// The modifier and factor are still applied to it as though it were read from the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 
 	/// <summary>
@@ -59,34 +145,37 @@ public sealed partial class FieldValueFactorScoreFunction
 	/// Modifier to apply to the field value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("modifier")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.FieldValueFactor(fieldValueFactorScoreFunction);
 }
 
-public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor<TDocument>>
+public readonly partial struct FieldValueFactorScoreFunctionDescriptor<TDocument>
 {
-	internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Instance { get; init; }
 
-	public FieldValueFactorScoreFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldValueFactorScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private double? FactorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private double? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldValueFactorScoreFunctionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Optional factor to multiply the field value with.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? value)
 	{
-		FactorValue = factor;
-		return Self;
+		Instance.Factor = value;
+		return this;
 	}
 
 	/// <summary>
@@ -94,10 +183,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	/// Field to be extracted from the document.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -105,21 +194,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	/// Field to be extracted from the document.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -128,10 +206,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	/// The modifier and factor are still applied to it as though it were read from the document.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -139,61 +217,49 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	/// Modifier to apply to the field value.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? value)
 	{
-		ModifierValue = modifier;
-		return Self;
+		Instance.Modifier = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (FactorValue.HasValue)
-		{
-			writer.WritePropertyName("factor");
-			writer.WriteNumberValue(FactorValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (MissingValue.HasValue)
-		{
-			writer.WritePropertyName("missing");
-			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (ModifierValue is not null)
-		{
-			writer.WritePropertyName("modifier");
-			JsonSerializer.Serialize(writer, ModifierValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FieldValueFactorScoreFunctionDescriptor : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor>
+public readonly partial struct FieldValueFactorScoreFunctionDescriptor
 {
-	internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Instance { get; init; }
 
-	public FieldValueFactorScoreFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldValueFactorScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private double? FactorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private double? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldValueFactorScoreFunctionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Optional factor to multiply the field value with.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Factor(double? value)
 	{
-		FactorValue = factor;
-		return Self;
+		Instance.Factor = value;
+		return this;
 	}
 
 	/// <summary>
@@ -201,10 +267,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	/// Field to be extracted from the document.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -212,21 +278,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	/// Field to be extracted from the document.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -235,10 +290,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	/// The modifier and factor are still applied to it as though it were read from the document.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor Missing(double? missing)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Missing(double? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -246,35 +301,17 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	/// Modifier to apply to the field value.
 	/// </para>
 	/// </summary>
-	public FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? value)
 	{
-		ModifierValue = modifier;
-		return Self;
+		Instance.Modifier = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (FactorValue.HasValue)
-		{
-			writer.WritePropertyName("factor");
-			writer.WriteNumberValue(FactorValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (MissingValue.HasValue)
-		{
-			writer.WritePropertyName("missing");
-			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (ModifierValue is not null)
-		{
-			writer.WritePropertyName("modifier");
-			JsonSerializer.Serialize(writer, ModifierValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

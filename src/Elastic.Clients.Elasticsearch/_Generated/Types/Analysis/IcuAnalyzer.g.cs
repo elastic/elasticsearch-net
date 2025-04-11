@@ -17,65 +17,144 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class IcuAnalyzer : IAnalyzer
+internal sealed partial class IcuAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("method")]
-	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
-	[JsonInclude, JsonPropertyName("mode")]
-	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropMethod = System.Text.Json.JsonEncodedText.Encode("method");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType> propMethod = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode> propMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMethod.TryReadProperty(ref reader, options, PropMethod, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Method = propMethod.Value,
+			Mode = propMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMethod, value.Method, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerConverter))]
+public sealed partial class IcuAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuAnalyzer(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType method, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode mode)
+	{
+		Method = method;
+		Mode = mode;
+	}
+#if NET7_0_OR_GREATER
+	public IcuAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IcuAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IcuAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
+
 	public string Type => "icu_analyzer";
 }
 
-public sealed partial class IcuAnalyzerDescriptor : SerializableDescriptor<IcuAnalyzerDescriptor>, IBuildableDescriptor<IcuAnalyzer>
+public readonly partial struct IcuAnalyzerDescriptor
 {
-	internal IcuAnalyzerDescriptor(Action<IcuAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer Instance { get; init; }
 
-	public IcuAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType MethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode ModeValue { get; set; }
-
-	public IcuAnalyzerDescriptor Method(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType method)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuAnalyzerDescriptor()
 	{
-		MethodValue = method;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IcuAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode mode)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer(Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor Method(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType value)
 	{
-		ModeValue = mode;
-		return Self;
+		Instance.Method = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("method");
-		JsonSerializer.Serialize(writer, MethodValue, options);
-		writer.WritePropertyName("mode");
-		JsonSerializer.Serialize(writer, ModeValue, options);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("icu_analyzer");
-		writer.WriteEndObject();
+		Instance.Mode = value;
+		return this;
 	}
 
-	IcuAnalyzer IBuildableDescriptor<IcuAnalyzer>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor> action)
 	{
-		Method = MethodValue,
-		Mode = ModeValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

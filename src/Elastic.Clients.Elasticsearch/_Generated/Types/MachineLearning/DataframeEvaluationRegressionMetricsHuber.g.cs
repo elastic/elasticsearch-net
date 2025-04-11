@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationRegressionMetricsHuberConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDelta = System.Text.Json.JsonEncodedText.Encode("delta");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propDelta = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDelta.TryReadProperty(ref reader, options, PropDelta, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Delta = propDelta.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDelta, value.Delta, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberConverter))]
 public sealed partial class DataframeEvaluationRegressionMetricsHuber
 {
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationRegressionMetricsHuber()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeEvaluationRegressionMetricsHuber()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delta")]
 	public double? Delta { get; set; }
 }
 
-public sealed partial class DataframeEvaluationRegressionMetricsHuberDescriptor : SerializableDescriptor<DataframeEvaluationRegressionMetricsHuberDescriptor>
+public readonly partial struct DataframeEvaluationRegressionMetricsHuberDescriptor
 {
-	internal DataframeEvaluationRegressionMetricsHuberDescriptor(Action<DataframeEvaluationRegressionMetricsHuberDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber Instance { get; init; }
 
-	public DataframeEvaluationRegressionMetricsHuberDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionMetricsHuberDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber instance)
 	{
+		Instance = instance;
 	}
 
-	private double? DeltaValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionMetricsHuberDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionMetricsHuberDescriptor Delta(double? delta)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor Delta(double? value)
 	{
-		DeltaValue = delta;
-		return Self;
+		Instance.Delta = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DeltaValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("delta");
-			writer.WriteNumberValue(DeltaValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

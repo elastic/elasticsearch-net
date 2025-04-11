@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class GetInferenceRequestParameters : RequestParameters
+public sealed partial class GetInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetInferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -39,12 +61,9 @@ public sealed partial class GetInferenceRequestParameters : RequestParameters
 /// Get an inference endpoint
 /// </para>
 /// </summary>
-public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestConverter))]
+public sealed partial class GetInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>
 {
-	public GetInferenceRequest()
-	{
-	}
-
 	public GetInferenceRequest(Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("inference_id", inferenceId))
 	{
 	}
@@ -52,14 +71,43 @@ public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceReque
 	public GetInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("task_type", taskType).Optional("inference_id", inferenceId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetInferenceRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetInferenceRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceGet;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.InferenceGet;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "inference.get";
+
+	/// <summary>
+	/// <para>
+	/// The inference Id
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? InferenceId { get => P<Elastic.Clients.Elasticsearch.Id?>("inference_id"); set => PO("inference_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 }
 
 /// <summary>
@@ -67,39 +115,108 @@ public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceReque
 /// Get an inference endpoint
 /// </para>
 /// </summary>
-public sealed partial class GetInferenceRequestDescriptor : RequestDescriptor<GetInferenceRequestDescriptor, GetInferenceRequestParameters>
+public readonly partial struct GetInferenceRequestDescriptor
 {
-	internal GetInferenceRequestDescriptor(Action<GetInferenceRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest Instance { get; init; }
 
-	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("task_type", taskType).Optional("inference_id", inferenceId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id? inferenceId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(inferenceId);
+	}
+
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(taskType, inferenceId);
 	}
 
 	public GetInferenceRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceGet;
+	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "inference.get";
-
-	public GetInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? inferenceId)
+	/// <summary>
+	/// <para>
+	/// The inference Id
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("inference_id", inferenceId);
-		return Self;
+		Instance.InferenceId = value;
+		return this;
 	}
 
-	public GetInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
-		RouteValues.Optional("task_type", taskType);
-		return Self;
+		Instance.TaskType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest Build(System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

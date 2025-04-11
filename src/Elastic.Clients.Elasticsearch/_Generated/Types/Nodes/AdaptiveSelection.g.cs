@@ -17,71 +17,170 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class AdaptiveSelectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvgQueueSize = System.Text.Json.JsonEncodedText.Encode("avg_queue_size");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgResponseTime = System.Text.Json.JsonEncodedText.Encode("avg_response_time");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgResponseTimeNs = System.Text.Json.JsonEncodedText.Encode("avg_response_time_ns");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgServiceTime = System.Text.Json.JsonEncodedText.Encode("avg_service_time");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgServiceTimeNs = System.Text.Json.JsonEncodedText.Encode("avg_service_time_ns");
+	private static readonly System.Text.Json.JsonEncodedText PropOutgoingSearches = System.Text.Json.JsonEncodedText.Encode("outgoing_searches");
+	private static readonly System.Text.Json.JsonEncodedText PropRank = System.Text.Json.JsonEncodedText.Encode("rank");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propAvgQueueSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propAvgResponseTime = default;
+		LocalJsonValue<long?> propAvgResponseTimeNs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propAvgServiceTime = default;
+		LocalJsonValue<long?> propAvgServiceTimeNs = default;
+		LocalJsonValue<long?> propOutgoingSearches = default;
+		LocalJsonValue<string?> propRank = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvgQueueSize.TryReadProperty(ref reader, options, PropAvgQueueSize, null))
+			{
+				continue;
+			}
+
+			if (propAvgResponseTime.TryReadProperty(ref reader, options, PropAvgResponseTime, null))
+			{
+				continue;
+			}
+
+			if (propAvgResponseTimeNs.TryReadProperty(ref reader, options, PropAvgResponseTimeNs, null))
+			{
+				continue;
+			}
+
+			if (propAvgServiceTime.TryReadProperty(ref reader, options, PropAvgServiceTime, null))
+			{
+				continue;
+			}
+
+			if (propAvgServiceTimeNs.TryReadProperty(ref reader, options, PropAvgServiceTimeNs, null))
+			{
+				continue;
+			}
+
+			if (propOutgoingSearches.TryReadProperty(ref reader, options, PropOutgoingSearches, null))
+			{
+				continue;
+			}
+
+			if (propRank.TryReadProperty(ref reader, options, PropRank, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AvgQueueSize = propAvgQueueSize.Value,
+			AvgResponseTime = propAvgResponseTime.Value,
+			AvgResponseTimeNs = propAvgResponseTimeNs.Value,
+			AvgServiceTime = propAvgServiceTime.Value,
+			AvgServiceTimeNs = propAvgServiceTimeNs.Value,
+			OutgoingSearches = propOutgoingSearches.Value,
+			Rank = propRank.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvgQueueSize, value.AvgQueueSize, null, null);
+		writer.WriteProperty(options, PropAvgResponseTime, value.AvgResponseTime, null, null);
+		writer.WriteProperty(options, PropAvgResponseTimeNs, value.AvgResponseTimeNs, null, null);
+		writer.WriteProperty(options, PropAvgServiceTime, value.AvgServiceTime, null, null);
+		writer.WriteProperty(options, PropAvgServiceTimeNs, value.AvgServiceTimeNs, null, null);
+		writer.WriteProperty(options, PropOutgoingSearches, value.OutgoingSearches, null, null);
+		writer.WriteProperty(options, PropRank, value.Rank, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelectionConverter))]
 public sealed partial class AdaptiveSelection
 {
+#if NET7_0_OR_GREATER
+	public AdaptiveSelection()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AdaptiveSelection()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AdaptiveSelection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The exponentially weighted moving average queue size of search requests on the keyed node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("avg_queue_size")]
-	public long? AvgQueueSize { get; init; }
+	public long? AvgQueueSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The exponentially weighted moving average response time of search requests on the keyed node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("avg_response_time")]
-	public Elastic.Clients.Elasticsearch.Duration? AvgResponseTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? AvgResponseTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The exponentially weighted moving average response time, in nanoseconds, of search requests on the keyed node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("avg_response_time_ns")]
-	public long? AvgResponseTimeNs { get; init; }
+	public long? AvgResponseTimeNs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The exponentially weighted moving average service time of search requests on the keyed node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("avg_service_time")]
-	public Elastic.Clients.Elasticsearch.Duration? AvgServiceTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? AvgServiceTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The exponentially weighted moving average service time, in nanoseconds, of search requests on the keyed node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("avg_service_time_ns")]
-	public long? AvgServiceTimeNs { get; init; }
+	public long? AvgServiceTimeNs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of outstanding search requests to the keyed node from the node these stats are for.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("outgoing_searches")]
-	public long? OutgoingSearches { get; init; }
+	public long? OutgoingSearches { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The rank of this node; used for shard selection when routing search requests.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank")]
-	public string? Rank { get; init; }
+	public string? Rank { get; set; }
 }

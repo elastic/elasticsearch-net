@@ -17,32 +17,149 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class IndicatorsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamLifecycle = System.Text.Json.JsonEncodedText.Encode("data_stream_lifecycle");
+	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk");
+	private static readonly System.Text.Json.JsonEncodedText PropFileSettings = System.Text.Json.JsonEncodedText.Encode("file_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
+	private static readonly System.Text.Json.JsonEncodedText PropMasterIsStable = System.Text.Json.JsonEncodedText.Encode("master_is_stable");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryIntegrity = System.Text.Json.JsonEncodedText.Encode("repository_integrity");
+	private static readonly System.Text.Json.JsonEncodedText PropShardsAvailability = System.Text.Json.JsonEncodedText.Encode("shards_availability");
+	private static readonly System.Text.Json.JsonEncodedText PropShardsCapacity = System.Text.Json.JsonEncodedText.Encode("shards_capacity");
+	private static readonly System.Text.Json.JsonEncodedText PropSlm = System.Text.Json.JsonEncodedText.Encode("slm");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator?> propDataStreamLifecycle = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator?> propDisk = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator?> propFileSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator?> propIlm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator?> propMasterIsStable = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator?> propRepositoryIntegrity = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicator?> propShardsAvailability = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicator?> propShardsCapacity = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicator?> propSlm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataStreamLifecycle.TryReadProperty(ref reader, options, PropDataStreamLifecycle, null))
+			{
+				continue;
+			}
+
+			if (propDisk.TryReadProperty(ref reader, options, PropDisk, null))
+			{
+				continue;
+			}
+
+			if (propFileSettings.TryReadProperty(ref reader, options, PropFileSettings, null))
+			{
+				continue;
+			}
+
+			if (propIlm.TryReadProperty(ref reader, options, PropIlm, null))
+			{
+				continue;
+			}
+
+			if (propMasterIsStable.TryReadProperty(ref reader, options, PropMasterIsStable, null))
+			{
+				continue;
+			}
+
+			if (propRepositoryIntegrity.TryReadProperty(ref reader, options, PropRepositoryIntegrity, null))
+			{
+				continue;
+			}
+
+			if (propShardsAvailability.TryReadProperty(ref reader, options, PropShardsAvailability, null))
+			{
+				continue;
+			}
+
+			if (propShardsCapacity.TryReadProperty(ref reader, options, PropShardsCapacity, null))
+			{
+				continue;
+			}
+
+			if (propSlm.TryReadProperty(ref reader, options, PropSlm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DataStreamLifecycle = propDataStreamLifecycle.Value,
+			Disk = propDisk.Value,
+			FileSettings = propFileSettings.Value,
+			Ilm = propIlm.Value,
+			MasterIsStable = propMasterIsStable.Value,
+			RepositoryIntegrity = propRepositoryIntegrity.Value,
+			ShardsAvailability = propShardsAvailability.Value,
+			ShardsCapacity = propShardsCapacity.Value,
+			Slm = propSlm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataStreamLifecycle, value.DataStreamLifecycle, null, null);
+		writer.WriteProperty(options, PropDisk, value.Disk, null, null);
+		writer.WriteProperty(options, PropFileSettings, value.FileSettings, null, null);
+		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
+		writer.WriteProperty(options, PropMasterIsStable, value.MasterIsStable, null, null);
+		writer.WriteProperty(options, PropRepositoryIntegrity, value.RepositoryIntegrity, null, null);
+		writer.WriteProperty(options, PropShardsAvailability, value.ShardsAvailability, null, null);
+		writer.WriteProperty(options, PropShardsCapacity, value.ShardsCapacity, null, null);
+		writer.WriteProperty(options, PropSlm, value.Slm, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorsConverter))]
 public sealed partial class Indicators
 {
-	[JsonInclude, JsonPropertyName("data_stream_lifecycle")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator? DataStreamLifecycle { get; init; }
-	[JsonInclude, JsonPropertyName("disk")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator? Disk { get; init; }
-	[JsonInclude, JsonPropertyName("ilm")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator? Ilm { get; init; }
-	[JsonInclude, JsonPropertyName("master_is_stable")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator? MasterIsStable { get; init; }
-	[JsonInclude, JsonPropertyName("repository_integrity")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator? RepositoryIntegrity { get; init; }
-	[JsonInclude, JsonPropertyName("shards_availability")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicator? ShardsAvailability { get; init; }
-	[JsonInclude, JsonPropertyName("shards_capacity")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicator? ShardsCapacity { get; init; }
-	[JsonInclude, JsonPropertyName("slm")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicator? Slm { get; init; }
+#if NET7_0_OR_GREATER
+	public Indicators()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Indicators()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Indicators(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator? DataStreamLifecycle { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator? Disk { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator? FileSettings { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator? Ilm { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator? MasterIsStable { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator? RepositoryIntegrity { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicator? ShardsAvailability { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicator? ShardsCapacity { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicator? Slm { get; set; }
 }

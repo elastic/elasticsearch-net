@@ -17,60 +17,179 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class MigrateToDataTiersResponse : ElasticsearchResponse
+internal sealed partial class MigrateToDataTiersResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse>
 {
-	[JsonInclude, JsonPropertyName("dry_run")]
-	public bool DryRun { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropDryRun = System.Text.Json.JsonEncodedText.Encode("dry_run");
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedComponentTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_component_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedComposableTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_composable_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedIlmPolicies = System.Text.Json.JsonEncodedText.Encode("migrated_ilm_policies");
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedIndices = System.Text.Json.JsonEncodedText.Encode("migrated_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedLegacyTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_legacy_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropRemovedLegacyTemplate = System.Text.Json.JsonEncodedText.Encode("removed_legacy_template");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propDryRun = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMigratedComponentTemplates = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMigratedComposableTemplates = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMigratedIlmPolicies = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propMigratedIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMigratedLegacyTemplates = default;
+		LocalJsonValue<string> propRemovedLegacyTemplate = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDryRun.TryReadProperty(ref reader, options, PropDryRun, null))
+			{
+				continue;
+			}
+
+			if (propMigratedComponentTemplates.TryReadProperty(ref reader, options, PropMigratedComponentTemplates, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMigratedComposableTemplates.TryReadProperty(ref reader, options, PropMigratedComposableTemplates, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMigratedIlmPolicies.TryReadProperty(ref reader, options, PropMigratedIlmPolicies, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMigratedIndices.TryReadProperty(ref reader, options, PropMigratedIndices, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMigratedLegacyTemplates.TryReadProperty(ref reader, options, PropMigratedLegacyTemplates, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRemovedLegacyTemplate.TryReadProperty(ref reader, options, PropRemovedLegacyTemplate, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DryRun = propDryRun.Value,
+			MigratedComponentTemplates = propMigratedComponentTemplates.Value,
+			MigratedComposableTemplates = propMigratedComposableTemplates.Value,
+			MigratedIlmPolicies = propMigratedIlmPolicies.Value,
+			MigratedIndices = propMigratedIndices.Value,
+			MigratedLegacyTemplates = propMigratedLegacyTemplates.Value,
+			RemovedLegacyTemplate = propRemovedLegacyTemplate.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDryRun, value.DryRun, null, null);
+		writer.WriteProperty(options, PropMigratedComponentTemplates, value.MigratedComponentTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedComposableTemplates, value.MigratedComposableTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedIlmPolicies, value.MigratedIlmPolicies, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedIndices, value.MigratedIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMigratedLegacyTemplates, value.MigratedLegacyTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRemovedLegacyTemplate, value.RemovedLegacyTemplate, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponseConverter))]
+public sealed partial class MigrateToDataTiersResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MigrateToDataTiersResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MigrateToDataTiersResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool DryRun { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The component templates that were updated to not contain custom routing settings for the provided data attribute.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("migrated_component_templates")]
-	public IReadOnlyCollection<string> MigratedComponentTemplates { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> MigratedComponentTemplates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The composable index templates that were updated to not contain custom routing settings for the provided data attribute.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("migrated_composable_templates")]
-	public IReadOnlyCollection<string> MigratedComposableTemplates { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> MigratedComposableTemplates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ILM policies that were updated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("migrated_ilm_policies")]
-	public IReadOnlyCollection<string> MigratedIlmPolicies { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> MigratedIlmPolicies { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The indices that were migrated to tier preference routing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("migrated_indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string> MigratedIndices { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> MigratedIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The legacy index templates that were updated to not contain custom routing settings for the provided data attribute.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("migrated_legacy_templates")]
-	public IReadOnlyCollection<string> MigratedLegacyTemplates { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> MigratedLegacyTemplates { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -78,6 +197,9 @@ public sealed partial class MigrateToDataTiersResponse : ElasticsearchResponse
 	/// This information is missing if no legacy index templates were deleted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("removed_legacy_template")]
-	public string RemovedLegacyTemplate { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RemovedLegacyTemplate { get; set; }
 }

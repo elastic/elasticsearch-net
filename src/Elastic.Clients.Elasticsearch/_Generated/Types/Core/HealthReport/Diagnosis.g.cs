@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class DiagnosisConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
+	private static readonly System.Text.Json.JsonEncodedText PropAffectedResources = System.Text.Json.JsonEncodedText.Encode("affected_resources");
+	private static readonly System.Text.Json.JsonEncodedText PropCause = System.Text.Json.JsonEncodedText.Encode("cause");
+	private static readonly System.Text.Json.JsonEncodedText PropHelpUrl = System.Text.Json.JsonEncodedText.Encode("help_url");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAction = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources> propAffectedResources = default;
+		LocalJsonValue<string> propCause = default;
+		LocalJsonValue<string> propHelpUrl = default;
+		LocalJsonValue<string> propId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAction.TryReadProperty(ref reader, options, PropAction, null))
+			{
+				continue;
+			}
+
+			if (propAffectedResources.TryReadProperty(ref reader, options, PropAffectedResources, null))
+			{
+				continue;
+			}
+
+			if (propCause.TryReadProperty(ref reader, options, PropCause, null))
+			{
+				continue;
+			}
+
+			if (propHelpUrl.TryReadProperty(ref reader, options, PropHelpUrl, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Action = propAction.Value,
+			AffectedResources = propAffectedResources.Value,
+			Cause = propCause.Value,
+			HelpUrl = propHelpUrl.Value,
+			Id = propId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAction, value.Action, null, null);
+		writer.WriteProperty(options, PropAffectedResources, value.AffectedResources, null, null);
+		writer.WriteProperty(options, PropCause, value.Cause, null, null);
+		writer.WriteProperty(options, PropHelpUrl, value.HelpUrl, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisConverter))]
 public sealed partial class Diagnosis
 {
-	[JsonInclude, JsonPropertyName("action")]
-	public string Action { get; init; }
-	[JsonInclude, JsonPropertyName("affected_resources")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources AffectedResources { get; init; }
-	[JsonInclude, JsonPropertyName("cause")]
-	public string Cause { get; init; }
-	[JsonInclude, JsonPropertyName("help_url")]
-	public string HelpUrl { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Diagnosis(string action, Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources affectedResources, string cause, string helpUrl, string id)
+	{
+		Action = action;
+		AffectedResources = affectedResources;
+		Cause = cause;
+		HelpUrl = helpUrl;
+		Id = id;
+	}
+#if NET7_0_OR_GREATER
+	public Diagnosis()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Diagnosis()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Diagnosis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Action { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources AffectedResources { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Cause { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string HelpUrl { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 }

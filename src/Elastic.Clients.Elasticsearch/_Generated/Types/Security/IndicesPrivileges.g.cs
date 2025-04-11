@@ -17,24 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class IndicesPrivilegesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowRestrictedIndices = System.Text.Json.JsonEncodedText.Encode("allow_restricted_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldSecurity = System.Text.Json.JsonEncodedText.Encode("field_security");
+	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names");
+	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.Security.IndicesPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowRestrictedIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.FieldSecurity?> propFieldSecurity = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName>> propNames = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>> propPrivileges = default;
+		LocalJsonValue<object?> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowRestrictedIndices.TryReadProperty(ref reader, options, PropAllowRestrictedIndices, null))
+			{
+				continue;
+			}
+
+			if (propFieldSecurity.TryReadProperty(ref reader, options, PropFieldSecurity, null))
+			{
+				continue;
+			}
+
+			if (propNames.TryReadProperty(ref reader, options, PropNames, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPrivileges.TryReadProperty(ref reader, options, PropPrivileges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowRestrictedIndices = propAllowRestrictedIndices.Value,
+			FieldSecurity = propFieldSecurity.Value,
+			Names = propNames.Value,
+			Privileges = propPrivileges.Value,
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.IndicesPrivileges value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, null);
+		writer.WriteProperty(options, PropFieldSecurity, value.FieldSecurity, null, null);
+		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, v, null));
+		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesConverter))]
 public sealed partial class IndicesPrivileges
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesPrivileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> names, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
+	{
+		Names = names;
+		Privileges = privileges;
+	}
+#if NET7_0_OR_GREATER
+	public IndicesPrivileges()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndicesPrivileges()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_restricted_indices")]
 	public bool? AllowRestrictedIndices { get; set; }
 
 	/// <summary>
@@ -42,7 +136,6 @@ public sealed partial class IndicesPrivileges
 	/// The document fields that the owners of the role have read access to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_security")]
 	public Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurity { get; set; }
 
 	/// <summary>
@@ -50,52 +143,59 @@ public sealed partial class IndicesPrivileges
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("names")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexName))]
-	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index level privileges that owners of the role have on the specified indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("privileges")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public object? Query { get; set; }
 }
 
-public sealed partial class IndicesPrivilegesDescriptor<TDocument> : SerializableDescriptor<IndicesPrivilegesDescriptor<TDocument>>
+public readonly partial struct IndicesPrivilegesDescriptor<TDocument>
 {
-	internal IndicesPrivilegesDescriptor(Action<IndicesPrivilegesDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.IndicesPrivileges Instance { get; init; }
 
-	public IndicesPrivilegesDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.IndicesPrivileges instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AllowRestrictedIndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> FieldSecurityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>> FieldSecurityDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.IndexName> NamesValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> PrivilegesValue { get; set; }
-	private object? QueryValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesPrivilegesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.IndicesPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor<TDocument> AllowRestrictedIndices(bool? allowRestrictedIndices = true)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> AllowRestrictedIndices(bool? value = true)
 	{
-		AllowRestrictedIndicesValue = allowRestrictedIndices;
-		return Self;
+		Instance.AllowRestrictedIndices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -103,28 +203,32 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 	/// The document fields that the owners of the role have read access to.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor<TDocument> FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurity? fieldSecurity)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurity? value)
 	{
-		FieldSecurityDescriptor = null;
-		FieldSecurityDescriptorAction = null;
-		FieldSecurityValue = fieldSecurity;
-		return Self;
+		Instance.FieldSecurity = value;
+		return this;
 	}
 
-	public IndicesPrivilegesDescriptor<TDocument> FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The document fields that the owners of the role have read access to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> FieldSecurity()
 	{
-		FieldSecurityValue = null;
-		FieldSecurityDescriptorAction = null;
-		FieldSecurityDescriptor = descriptor;
-		return Self;
+		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public IndicesPrivilegesDescriptor<TDocument> FieldSecurity(Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The document fields that the owners of the role have read access to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> FieldSecurity(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>>? action)
 	{
-		FieldSecurityValue = null;
-		FieldSecurityDescriptor = null;
-		FieldSecurityDescriptorAction = configure;
-		return Self;
+		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -132,10 +236,21 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor<TDocument> Names(ICollection<Elastic.Clients.Elasticsearch.IndexName> names)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Names(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
-		NamesValue = names;
-		return Self;
+		Instance.Names = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
+	{
+		Instance.Names = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -143,10 +258,21 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 	/// The index level privileges that owners of the role have on the specified indices.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor<TDocument> Privileges(ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> value)
 	{
-		PrivilegesValue = privileges;
-		return Self;
+		Instance.Privileges = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The index level privileges that owners of the role have on the specified indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Privileges(params Elastic.Clients.Elasticsearch.Security.IndexPrivilege[] values)
+	{
+		Instance.Privileges = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -154,76 +280,49 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor<TDocument> Query(object? query)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Query(object? value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.IndicesPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AllowRestrictedIndicesValue.HasValue)
-		{
-			writer.WritePropertyName("allow_restricted_indices");
-			writer.WriteBooleanValue(AllowRestrictedIndicesValue.Value);
-		}
-
-		if (FieldSecurityDescriptor is not null)
-		{
-			writer.WritePropertyName("field_security");
-			JsonSerializer.Serialize(writer, FieldSecurityDescriptor, options);
-		}
-		else if (FieldSecurityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("field_security");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>(FieldSecurityDescriptorAction), options);
-		}
-		else if (FieldSecurityValue is not null)
-		{
-			writer.WritePropertyName("field_security");
-			JsonSerializer.Serialize(writer, FieldSecurityValue, options);
-		}
-
-		writer.WritePropertyName("names");
-		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexName>(NamesValue, writer, options);
-		writer.WritePropertyName("privileges");
-		JsonSerializer.Serialize(writer, PrivilegesValue, options);
-		if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor<IndicesPrivilegesDescriptor>
+public readonly partial struct IndicesPrivilegesDescriptor
 {
-	internal IndicesPrivilegesDescriptor(Action<IndicesPrivilegesDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.IndicesPrivileges Instance { get; init; }
 
-	public IndicesPrivilegesDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.IndicesPrivileges instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AllowRestrictedIndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor FieldSecurityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor> FieldSecurityDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.IndexName> NamesValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> PrivilegesValue { get; set; }
-	private object? QueryValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesPrivilegesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.IndicesPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor AllowRestrictedIndices(bool? allowRestrictedIndices = true)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor AllowRestrictedIndices(bool? value = true)
 	{
-		AllowRestrictedIndicesValue = allowRestrictedIndices;
-		return Self;
+		Instance.AllowRestrictedIndices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -231,28 +330,43 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 	/// The document fields that the owners of the role have read access to.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurity? fieldSecurity)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurity? value)
 	{
-		FieldSecurityDescriptor = null;
-		FieldSecurityDescriptorAction = null;
-		FieldSecurityValue = fieldSecurity;
-		return Self;
+		Instance.FieldSecurity = value;
+		return this;
 	}
 
-	public IndicesPrivilegesDescriptor FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The document fields that the owners of the role have read access to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor FieldSecurity()
 	{
-		FieldSecurityValue = null;
-		FieldSecurityDescriptorAction = null;
-		FieldSecurityDescriptor = descriptor;
-		return Self;
+		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor.Build(null);
+		return this;
 	}
 
-	public IndicesPrivilegesDescriptor FieldSecurity(Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The document fields that the owners of the role have read access to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor FieldSecurity(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor>? action)
 	{
-		FieldSecurityValue = null;
-		FieldSecurityDescriptor = null;
-		FieldSecurityDescriptorAction = configure;
-		return Self;
+		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The document fields that the owners of the role have read access to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor FieldSecurity<T>(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<T>>? action)
+	{
+		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -260,10 +374,21 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor Names(ICollection<Elastic.Clients.Elasticsearch.IndexName> names)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Names(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
-		NamesValue = names;
-		return Self;
+		Instance.Names = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
+	{
+		Instance.Names = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -271,10 +396,21 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 	/// The index level privileges that owners of the role have on the specified indices.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor Privileges(ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> value)
 	{
-		PrivilegesValue = privileges;
-		return Self;
+		Instance.Privileges = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The index level privileges that owners of the role have on the specified indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Privileges(params Elastic.Clients.Elasticsearch.Security.IndexPrivilege[] values)
+	{
+		Instance.Privileges = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -282,47 +418,17 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor Query(object? query)
+	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Query(object? value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.IndicesPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowRestrictedIndicesValue.HasValue)
-		{
-			writer.WritePropertyName("allow_restricted_indices");
-			writer.WriteBooleanValue(AllowRestrictedIndicesValue.Value);
-		}
-
-		if (FieldSecurityDescriptor is not null)
-		{
-			writer.WritePropertyName("field_security");
-			JsonSerializer.Serialize(writer, FieldSecurityDescriptor, options);
-		}
-		else if (FieldSecurityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("field_security");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor(FieldSecurityDescriptorAction), options);
-		}
-		else if (FieldSecurityValue is not null)
-		{
-			writer.WritePropertyName("field_security");
-			JsonSerializer.Serialize(writer, FieldSecurityValue, options);
-		}
-
-		writer.WritePropertyName("names");
-		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexName>(NamesValue, writer, options);
-		writer.WritePropertyName("privileges");
-		JsonSerializer.Serialize(writer, PrivilegesValue, options);
-		if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor(new Elastic.Clients.Elasticsearch.Security.IndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

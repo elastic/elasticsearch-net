@@ -5,15 +5,22 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(IdsConverter))]
-public partial class Ids : IUrlParameter, IEquatable<Ids>
+public class Ids :
+	IUrlParameter,
+	IEquatable<Ids>
+#if NET7_0_OR_GREATER
+	, IParsable<Ids>
+#endif
 {
 	private readonly IList<Id> _ids;
 
@@ -21,12 +28,17 @@ public partial class Ids : IUrlParameter, IEquatable<Ids>
 
 	public Ids(IList<Id> ids) => _ids = ids;
 
-	public Ids(IEnumerable<string> ids) => _ids = ids.Select(i  => new Id(i)).ToList();
+	public Ids(IEnumerable<string> ids) => _ids = ids.Select(i => new Id(i)).ToList();
 
 	public Ids(string value)
 	{
 		if (!value.IsNullOrEmptyCommaSeparatedList(out var arr))
 			_ids = arr.Select(i => new Id(i)).ToList();
+	}
+
+	public Ids()
+	{
+		_ids = [];
 	}
 
 	internal IList<Id> IdsToSerialize => _ids;
@@ -82,4 +94,42 @@ public partial class Ids : IUrlParameter, IEquatable<Ids>
 	public static bool operator ==(Ids left, Ids right) => Equals(left, right);
 
 	public static bool operator !=(Ids left, Ids right) => !Equals(left, right);
+
+	#region IParsable
+
+	public static Ids Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Ids? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new Ids();
+			return true;
+		}
+
+		var ids = new List<Id>();
+		foreach (var item in list)
+		{
+			if (!Id.TryParse(item, provider, out var id))
+			{
+				result = null;
+				return false;
+			}
+
+			ids.Add(id);
+		}
+
+		result = new Ids(ids);
+		return true;
+	}
+
+	#endregion IParsable
 }

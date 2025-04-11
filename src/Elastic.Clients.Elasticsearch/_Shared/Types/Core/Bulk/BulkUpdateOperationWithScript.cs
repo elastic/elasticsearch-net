@@ -3,12 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public class BulkUpdateOperationWithScript : BulkUpdateOperation
+public class BulkUpdateOperationWithScript :
+	BulkUpdateOperation
 {
 	public BulkUpdateOperationWithScript(Id id, Script script)
 	{
@@ -23,7 +22,6 @@ public class BulkUpdateOperationWithScript : BulkUpdateOperation
 		Script = script;
 	}
 
-	[JsonIgnore]
 	public Script Script { get; set; }
 
 	protected override string Operation => "update";
@@ -34,9 +32,10 @@ public class BulkUpdateOperationWithScript : BulkUpdateOperation
 	{
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize<BulkUpdateOperationWithScript>(writer, this, options);
-
-	protected override object GetBody() => new ScriptedBulkUpdateBody { Script = Script };
+	private protected override BulkUpdateBody GetBody() => new ScriptedBulkUpdateBody
+	{
+		Script = Script
+	};
 }
 
 public sealed class BulkUpdateOperationWithScript<TDocument> : BulkUpdateOperationWithScript
@@ -45,8 +44,7 @@ public sealed class BulkUpdateOperationWithScript<TDocument> : BulkUpdateOperati
 
 	public BulkUpdateOperationWithScript(TDocument upsert, Id id, IndexName index, Script script) : base(id, index, script) => Upsert = upsert;
 
-	[JsonIgnore]
 	public TDocument Upsert { get; set; }
 
-	protected override object GetBody() => new ScriptedBulkUpdateBody<TDocument> { Script = Script, Upsert = Upsert };
+	private protected override BulkUpdateBody GetBody() => new ScriptedBulkUpdateBody<TDocument> { Script = Script, Upsert = Upsert };
 }

@@ -4,91 +4,100 @@
 
 using System;
 
-using Elastic.Clients.Elasticsearch.Fluent;
-
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-// TODO: This should be removed after implementing descriptor generation for union types
-
-public sealed partial class QueryDescriptor<TDocument>
+public readonly partial struct IRangeQueryBuilder<TDocument>
 {
-	public QueryDescriptor<TDocument> Range(Action<RangeQueryDescriptor<TDocument>> configure) => ProxiedSet(configure, "range");
-
-	private QueryDescriptor<TDocument> ProxiedSet<T>(Action<T> descriptorAction, string variantName) where T : ProxiedDescriptor<T>
+	[Obsolete("Use 'Date()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value)
 	{
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
+		return value;
+	}
 
-		return Set(descriptor.Result, variantName);
+	[Obsolete("Use 'Date()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument>.Build(action);
+	}
+
+	[Obsolete("Use 'Number()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery NumberRange(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value)
+	{
+		return value;
+	}
+
+	[Obsolete("Use 'Number()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery NumberRange(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>.Build(action);
+	}
+
+	[Obsolete("Use 'Term()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery TermRange(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery value)
+	{
+		return value;
+	}
+
+	[Obsolete("Use 'Term()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery TermRange(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument>.Build(action);
 	}
 }
 
-public sealed partial class QueryDescriptor
+public readonly partial struct IRangeQueryBuilder
 {
-	public QueryDescriptor Range(Action<RangeQueryDescriptor> configure) => ProxiedSet(configure, "range");
-	public QueryDescriptor Range<TDocument>(Action<RangeQueryDescriptor<TDocument>> configure) => ProxiedSet(configure, "range");
-
-	private QueryDescriptor ProxiedSet<T>(Action<T> descriptorAction, string variantName) where T : ProxiedDescriptor<T>
+	[Obsolete("Use 'Date()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value)
 	{
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-
-		return Set(descriptor.Result, variantName);
+		return value;
 	}
-}
 
-public abstract class ProxiedDescriptor<T> : Descriptor<T>
-	where T : Descriptor<T>
-{
-	internal Descriptor Result { get; set; }
-
-	protected T SetResult<TD>(Action<TD> descriptorAction) where TD : Descriptor
+	[Obsolete("Use 'Date()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor> action)
 	{
-		var descriptor = (TD)Activator.CreateInstance(typeof(TD), true);
-		descriptorAction?.Invoke(descriptor);
-		Result = descriptor;
-		return Self;
+		return Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor.Build(action);
 	}
-}
 
-public sealed class RangeQueryDescriptor<TDocument> : ProxiedDescriptor<RangeQueryDescriptor<TDocument>>
-{
-	public RangeQueryDescriptor<TDocument> NumberRange(Action<NumberRangeQueryDescriptor<TDocument>> configure) =>
-		SetResult(configure);
+	[Obsolete("Use 'Date()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<T>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<T>.Build(action);
+	}
 
-	public RangeQueryDescriptor<TDocument> DateRange(Action<DateRangeQueryDescriptor<TDocument>> configure) =>
-		SetResult(configure);
+	[Obsolete("Use 'Number()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery NumberRange(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value)
+	{
+		return value;
+	}
 
-	public RangeQueryDescriptor<TDocument> TermRange(Action<DateRangeQueryDescriptor<TDocument>> configure) =>
-		SetResult(configure);
-}
+	[Obsolete("Use 'Number()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery NumberRange(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor.Build(action);
+	}
 
-public sealed class RangeQueryDescriptor : ProxiedDescriptor<RangeQueryDescriptor>
-{
-	public RangeQueryDescriptor NumberRange(Action<NumberRangeQueryDescriptor> configure) => SetResult(configure);
+	[Obsolete("Use 'Number()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery NumberRange<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<T>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<T>.Build(action);
+	}
 
-	public RangeQueryDescriptor NumberRange<TDocument>(Action<NumberRangeQueryDescriptor<TDocument>> configure) => SetResult(configure);
+	[Obsolete("Use 'Term()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery TermRange(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery value)
+	{
+		return value;
+	}
 
-	public RangeQueryDescriptor DateRange(Action<DateRangeQueryDescriptor> configure) => SetResult(configure);
+	[Obsolete("Use 'Term()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery TermRange(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor.Build(action);
+	}
 
-	public RangeQueryDescriptor DateRange<TDocument>(Action<DateRangeQueryDescriptor<TDocument>> configure) => SetResult(configure);
-
-	public RangeQueryDescriptor TermRange(Action<TermRangeQueryDescriptor> configure) => SetResult(configure);
-
-	public RangeQueryDescriptor TermRange<TDocument>(Action<TermRangeQueryDescriptor<TDocument>> configure) => SetResult(configure);
-}
-
-public sealed partial class NumberRangeQuery
-{
-	public static implicit operator Query(NumberRangeQuery numberRangeQuery) => Query.Range(numberRangeQuery);
-}
-
-public sealed partial class DateRangeQuery
-{
-	public static implicit operator Query(DateRangeQuery dateRangeQuery) => Query.Range(dateRangeQuery);
-}
-
-public sealed partial class TermRangeQuery
-{
-	public static implicit operator Query(TermRangeQuery termRangeQuery) => Query.Range(termRangeQuery);
+	[Obsolete("Use 'Term()' instead.")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery TermRange<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<T>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<T>.Build(action);
+	}
 }

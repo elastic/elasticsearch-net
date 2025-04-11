@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class PutAliasRequestParameters : RequestParameters
+public sealed partial class PutAliasRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,21 +42,108 @@ public sealed partial class PutAliasRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutAliasRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propIndexRouting = default;
+		LocalJsonValue<bool?> propIsWriteIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propSearchRouting = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propIndexRouting.TryReadProperty(ref reader, options, PropIndexRouting, null))
+			{
+				continue;
+			}
+
+			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propSearchRouting.TryReadProperty(ref reader, options, PropSearchRouting, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filter = propFilter.Value,
+			IndexRouting = propIndexRouting.Value,
+			IsWriteIndex = propIsWriteIndex.Value,
+			Routing = propRouting.Value,
+			SearchRouting = propSearchRouting.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting, null, null);
+		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update an alias.
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestConverter))]
+public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutAliasRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementPutAlias;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -71,11 +151,36 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of data streams or indices to add.
+	/// Supports wildcards (<c>*</c>).
+	/// Wildcard patterns that match both data streams and indices return an error.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Alias to update.
+	/// If the alias doesn’t exist, the request creates it.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -84,7 +189,6 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -92,7 +196,6 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	/// Query used to limit documents the alias can access.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
@@ -102,7 +205,6 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
 	/// <summary>
@@ -113,7 +215,6 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
 
 	/// <summary>
@@ -122,7 +223,6 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -132,7 +232,6 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
 
@@ -142,76 +241,111 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescriptor<PutAliasRequestDescriptor<TDocument>, PutAliasRequestParameters>
+public readonly partial struct PutAliasRequestDescriptor
 {
-	internal PutAliasRequestDescriptor(Action<PutAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Instance { get; init; }
 
-	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : this(typeof(TDocument), name)
+	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(indices, name);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_alias";
-
-	public PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutAliasRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public PutAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams or indices to add.
+	/// Supports wildcards (<c>*</c>).
+	/// Wildcard patterns that match both data streams and indices return an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-	private bool? IsWriteIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Alias to update.
+	/// If the alias doesn’t exist, the request creates it.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Query used to limit documents the alias can access.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public PutAliasRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -221,10 +355,10 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		IndexRoutingValue = indexRouting;
-		return Self;
+		Instance.IndexRouting = value;
+		return this;
 	}
 
 	/// <summary>
@@ -235,10 +369,10 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IsWriteIndex(bool? value = true)
 	{
-		IsWriteIndexValue = isWriteIndex;
-		return Self;
+		Instance.IsWriteIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -247,10 +381,10 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -260,56 +394,60 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		SearchRoutingValue = searchRouting;
-		return Self;
+		Instance.SearchRouting = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (IndexRoutingValue is not null)
-		{
-			writer.WritePropertyName("index_routing");
-			JsonSerializer.Serialize(writer, IndexRoutingValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (IsWriteIndexValue.HasValue)
-		{
-			writer.WritePropertyName("is_write_index");
-			writer.WriteBooleanValue(IsWriteIndexValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (SearchRoutingValue is not null)
-		{
-			writer.WritePropertyName("search_routing");
-			JsonSerializer.Serialize(writer, SearchRoutingValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -319,72 +457,100 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAliasRequestDescriptor, PutAliasRequestParameters>
+public readonly partial struct PutAliasRequestDescriptor<TDocument>
 {
-	internal PutAliasRequestDescriptor(Action<PutAliasRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Instance { get; init; }
 
-	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_alias";
-
-	public PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(indices, name);
 	}
 
-	public PutAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutAliasRequestDescriptor()
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-	private bool? IsWriteIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams or indices to add.
+	/// Supports wildcards (<c>*</c>).
+	/// Wildcard patterns that match both data streams and indices return an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Alias to update.
+	/// If the alias doesn’t exist, the request creates it.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Query used to limit documents the alias can access.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutAliasRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -394,10 +560,10 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		IndexRoutingValue = indexRouting;
-		return Self;
+		Instance.IndexRouting = value;
+		return this;
 	}
 
 	/// <summary>
@@ -408,10 +574,10 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor IsWriteIndex(bool? isWriteIndex = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IsWriteIndex(bool? value = true)
 	{
-		IsWriteIndexValue = isWriteIndex;
-		return Self;
+		Instance.IsWriteIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -420,10 +586,10 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -433,55 +599,59 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public PutAliasRequestDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		SearchRoutingValue = searchRouting;
-		return Self;
+		Instance.SearchRouting = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (IndexRoutingValue is not null)
-		{
-			writer.WritePropertyName("index_routing");
-			JsonSerializer.Serialize(writer, IndexRoutingValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (IsWriteIndexValue.HasValue)
-		{
-			writer.WritePropertyName("is_write_index");
-			writer.WriteBooleanValue(IsWriteIndexValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (SearchRoutingValue is not null)
-		{
-			writer.WritePropertyName("search_routing");
-			JsonSerializer.Serialize(writer, SearchRoutingValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

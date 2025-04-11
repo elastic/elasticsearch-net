@@ -17,24 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Context>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions");
+	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered");
+	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations");
+	private static readonly System.Text.Json.JsonEncodedText PropContext2 = System.Text.Json.JsonEncodedText.Encode("context");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCacheEvictions = default;
+		LocalJsonValue<long?> propCompilationLimitTriggered = default;
+		LocalJsonValue<long?> propCompilations = default;
+		LocalJsonValue<string?> propContext2 = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCacheEvictions.TryReadProperty(ref reader, options, PropCacheEvictions, null))
+			{
+				continue;
+			}
+
+			if (propCompilationLimitTriggered.TryReadProperty(ref reader, options, PropCompilationLimitTriggered, null))
+			{
+				continue;
+			}
+
+			if (propCompilations.TryReadProperty(ref reader, options, PropCompilations, null))
+			{
+				continue;
+			}
+
+			if (propContext2.TryReadProperty(ref reader, options, PropContext2, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Context(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CacheEvictions = propCacheEvictions.Value,
+			CompilationLimitTriggered = propCompilationLimitTriggered.Value,
+			Compilations = propCompilations.Value,
+			Context2 = propContext2.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Context value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheEvictions, value.CacheEvictions, null, null);
+		writer.WriteProperty(options, PropCompilationLimitTriggered, value.CompilationLimitTriggered, null, null);
+		writer.WriteProperty(options, PropCompilations, value.Compilations, null, null);
+		writer.WriteProperty(options, PropContext2, value.Context2, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ContextConverter))]
 public sealed partial class Context
 {
-	[JsonInclude, JsonPropertyName("cache_evictions")]
-	public long? CacheEvictions { get; init; }
-	[JsonInclude, JsonPropertyName("compilation_limit_triggered")]
-	public long? CompilationLimitTriggered { get; init; }
-	[JsonInclude, JsonPropertyName("compilations")]
-	public long? Compilations { get; init; }
-	[JsonInclude, JsonPropertyName("context")]
-	public string? Context2 { get; init; }
+#if NET7_0_OR_GREATER
+	public Context()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Context()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Context(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public long? CacheEvictions { get; set; }
+	public long? CompilationLimitTriggered { get; set; }
+	public long? Compilations { get; set; }
+	public string? Context2 { get; set; }
 }

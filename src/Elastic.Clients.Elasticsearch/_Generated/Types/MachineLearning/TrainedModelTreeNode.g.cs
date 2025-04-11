@@ -17,163 +17,241 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelTreeNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDecisionType = System.Text.Json.JsonEncodedText.Encode("decision_type");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultLeft = System.Text.Json.JsonEncodedText.Encode("default_left");
+	private static readonly System.Text.Json.JsonEncodedText PropLeafValue = System.Text.Json.JsonEncodedText.Encode("leaf_value");
+	private static readonly System.Text.Json.JsonEncodedText PropLeftChild = System.Text.Json.JsonEncodedText.Encode("left_child");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeIndex = System.Text.Json.JsonEncodedText.Encode("node_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRightChild = System.Text.Json.JsonEncodedText.Encode("right_child");
+	private static readonly System.Text.Json.JsonEncodedText PropSplitFeature = System.Text.Json.JsonEncodedText.Encode("split_feature");
+	private static readonly System.Text.Json.JsonEncodedText PropSplitGain = System.Text.Json.JsonEncodedText.Encode("split_gain");
+	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDecisionType = default;
+		LocalJsonValue<bool?> propDefaultLeft = default;
+		LocalJsonValue<double?> propLeafValue = default;
+		LocalJsonValue<int?> propLeftChild = default;
+		LocalJsonValue<int> propNodeIndex = default;
+		LocalJsonValue<int?> propRightChild = default;
+		LocalJsonValue<int?> propSplitFeature = default;
+		LocalJsonValue<int?> propSplitGain = default;
+		LocalJsonValue<double?> propThreshold = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDecisionType.TryReadProperty(ref reader, options, PropDecisionType, null))
+			{
+				continue;
+			}
+
+			if (propDefaultLeft.TryReadProperty(ref reader, options, PropDefaultLeft, null))
+			{
+				continue;
+			}
+
+			if (propLeafValue.TryReadProperty(ref reader, options, PropLeafValue, null))
+			{
+				continue;
+			}
+
+			if (propLeftChild.TryReadProperty(ref reader, options, PropLeftChild, null))
+			{
+				continue;
+			}
+
+			if (propNodeIndex.TryReadProperty(ref reader, options, PropNodeIndex, null))
+			{
+				continue;
+			}
+
+			if (propRightChild.TryReadProperty(ref reader, options, PropRightChild, null))
+			{
+				continue;
+			}
+
+			if (propSplitFeature.TryReadProperty(ref reader, options, PropSplitFeature, null))
+			{
+				continue;
+			}
+
+			if (propSplitGain.TryReadProperty(ref reader, options, PropSplitGain, null))
+			{
+				continue;
+			}
+
+			if (propThreshold.TryReadProperty(ref reader, options, PropThreshold, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DecisionType = propDecisionType.Value,
+			DefaultLeft = propDefaultLeft.Value,
+			LeafValue = propLeafValue.Value,
+			LeftChild = propLeftChild.Value,
+			NodeIndex = propNodeIndex.Value,
+			RightChild = propRightChild.Value,
+			SplitFeature = propSplitFeature.Value,
+			SplitGain = propSplitGain.Value,
+			Threshold = propThreshold.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDecisionType, value.DecisionType, null, null);
+		writer.WriteProperty(options, PropDefaultLeft, value.DefaultLeft, null, null);
+		writer.WriteProperty(options, PropLeafValue, value.LeafValue, null, null);
+		writer.WriteProperty(options, PropLeftChild, value.LeftChild, null, null);
+		writer.WriteProperty(options, PropNodeIndex, value.NodeIndex, null, null);
+		writer.WriteProperty(options, PropRightChild, value.RightChild, null, null);
+		writer.WriteProperty(options, PropSplitFeature, value.SplitFeature, null, null);
+		writer.WriteProperty(options, PropSplitGain, value.SplitGain, null, null);
+		writer.WriteProperty(options, PropThreshold, value.Threshold, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeConverter))]
 public sealed partial class TrainedModelTreeNode
 {
-	[JsonInclude, JsonPropertyName("decision_type")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelTreeNode(int nodeIndex)
+	{
+		NodeIndex = nodeIndex;
+	}
+#if NET7_0_OR_GREATER
+	public TrainedModelTreeNode()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TrainedModelTreeNode()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModelTreeNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? DecisionType { get; set; }
-	[JsonInclude, JsonPropertyName("default_left")]
 	public bool? DefaultLeft { get; set; }
-	[JsonInclude, JsonPropertyName("leaf_value")]
 	public double? LeafValue { get; set; }
-	[JsonInclude, JsonPropertyName("left_child")]
 	public int? LeftChild { get; set; }
-	[JsonInclude, JsonPropertyName("node_index")]
-	public int NodeIndex { get; set; }
-	[JsonInclude, JsonPropertyName("right_child")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NodeIndex { get; set; }
 	public int? RightChild { get; set; }
-	[JsonInclude, JsonPropertyName("split_feature")]
 	public int? SplitFeature { get; set; }
-	[JsonInclude, JsonPropertyName("split_gain")]
 	public int? SplitGain { get; set; }
-	[JsonInclude, JsonPropertyName("threshold")]
 	public double? Threshold { get; set; }
 }
 
-public sealed partial class TrainedModelTreeNodeDescriptor : SerializableDescriptor<TrainedModelTreeNodeDescriptor>
+public readonly partial struct TrainedModelTreeNodeDescriptor
 {
-	internal TrainedModelTreeNodeDescriptor(Action<TrainedModelTreeNodeDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode Instance { get; init; }
 
-	public TrainedModelTreeNodeDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelTreeNodeDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DecisionTypeValue { get; set; }
-	private bool? DefaultLeftValue { get; set; }
-	private double? LeafValueValue { get; set; }
-	private int? LeftChildValue { get; set; }
-	private int NodeIndexValue { get; set; }
-	private int? RightChildValue { get; set; }
-	private int? SplitFeatureValue { get; set; }
-	private int? SplitGainValue { get; set; }
-	private double? ThresholdValue { get; set; }
-
-	public TrainedModelTreeNodeDescriptor DecisionType(string? decisionType)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelTreeNodeDescriptor()
 	{
-		DecisionTypeValue = decisionType;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public TrainedModelTreeNodeDescriptor DefaultLeft(bool? defaultLeft = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor DecisionType(string? value)
 	{
-		DefaultLeftValue = defaultLeft;
-		return Self;
+		Instance.DecisionType = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor LeafValue(double? leafValue)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor DefaultLeft(bool? value = true)
 	{
-		LeafValueValue = leafValue;
-		return Self;
+		Instance.DefaultLeft = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor LeftChild(int? leftChild)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor LeafValue(double? value)
 	{
-		LeftChildValue = leftChild;
-		return Self;
+		Instance.LeafValue = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor NodeIndex(int nodeIndex)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor LeftChild(int? value)
 	{
-		NodeIndexValue = nodeIndex;
-		return Self;
+		Instance.LeftChild = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor RightChild(int? rightChild)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor NodeIndex(int value)
 	{
-		RightChildValue = rightChild;
-		return Self;
+		Instance.NodeIndex = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor SplitFeature(int? splitFeature)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor RightChild(int? value)
 	{
-		SplitFeatureValue = splitFeature;
-		return Self;
+		Instance.RightChild = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor SplitGain(int? splitGain)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor SplitFeature(int? value)
 	{
-		SplitGainValue = splitGain;
-		return Self;
+		Instance.SplitFeature = value;
+		return this;
 	}
 
-	public TrainedModelTreeNodeDescriptor Threshold(double? threshold)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor SplitGain(int? value)
 	{
-		ThresholdValue = threshold;
-		return Self;
+		Instance.SplitGain = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor Threshold(double? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DecisionTypeValue))
-		{
-			writer.WritePropertyName("decision_type");
-			writer.WriteStringValue(DecisionTypeValue);
-		}
+		Instance.Threshold = value;
+		return this;
+	}
 
-		if (DefaultLeftValue.HasValue)
-		{
-			writer.WritePropertyName("default_left");
-			writer.WriteBooleanValue(DefaultLeftValue.Value);
-		}
-
-		if (LeafValueValue.HasValue)
-		{
-			writer.WritePropertyName("leaf_value");
-			writer.WriteNumberValue(LeafValueValue.Value);
-		}
-
-		if (LeftChildValue.HasValue)
-		{
-			writer.WritePropertyName("left_child");
-			writer.WriteNumberValue(LeftChildValue.Value);
-		}
-
-		writer.WritePropertyName("node_index");
-		writer.WriteNumberValue(NodeIndexValue);
-		if (RightChildValue.HasValue)
-		{
-			writer.WritePropertyName("right_child");
-			writer.WriteNumberValue(RightChildValue.Value);
-		}
-
-		if (SplitFeatureValue.HasValue)
-		{
-			writer.WritePropertyName("split_feature");
-			writer.WriteNumberValue(SplitFeatureValue.Value);
-		}
-
-		if (SplitGainValue.HasValue)
-		{
-			writer.WritePropertyName("split_gain");
-			writer.WriteNumberValue(SplitGainValue.Value);
-		}
-
-		if (ThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("threshold");
-			writer.WriteNumberValue(ThresholdValue.Value);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

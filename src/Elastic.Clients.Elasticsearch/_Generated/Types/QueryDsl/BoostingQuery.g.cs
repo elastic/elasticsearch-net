@@ -17,18 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class BoostingQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropNegative = System.Text.Json.JsonEncodedText.Encode("negative");
+	private static readonly System.Text.Json.JsonEncodedText PropNegativeBoost = System.Text.Json.JsonEncodedText.Encode("negative_boost");
+	private static readonly System.Text.Json.JsonEncodedText PropPositive = System.Text.Json.JsonEncodedText.Encode("positive");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propNegative = default;
+		LocalJsonValue<double> propNegativeBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propPositive = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propNegative.TryReadProperty(ref reader, options, PropNegative, null))
+			{
+				continue;
+			}
+
+			if (propNegativeBoost.TryReadProperty(ref reader, options, PropNegativeBoost, null))
+			{
+				continue;
+			}
+
+			if (propPositive.TryReadProperty(ref reader, options, PropPositive, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Negative = propNegative.Value,
+			NegativeBoost = propNegativeBoost.Value,
+			Positive = propPositive.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropNegative, value.Negative, null, null);
+		writer.WriteProperty(options, PropNegativeBoost, value.NegativeBoost, null, null);
+		writer.WriteProperty(options, PropPositive, value.Positive, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryConverter))]
 public sealed partial class BoostingQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoostingQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query negative, double negativeBoost, Elastic.Clients.Elasticsearch.QueryDsl.Query positive)
+	{
+		Negative = negative;
+		NegativeBoost = negativeBoost;
+		Positive = positive;
+	}
+#if NET7_0_OR_GREATER
+	public BoostingQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BoostingQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +133,6 @@ public sealed partial class BoostingQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,47 +140,54 @@ public sealed partial class BoostingQuery
 	/// Query used to decrease the relevance score of matching documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("negative")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("negative_boost")]
-	public double NegativeBoost { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double NegativeBoost { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Any returned documents must match this query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("positive")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(BoostingQuery boostingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Boosting(boostingQuery);
 }
 
-public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDescriptor<BoostingQueryDescriptor<TDocument>>
+public readonly partial struct BoostingQueryDescriptor<TDocument>
 {
-	internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Instance { get; init; }
 
-	public BoostingQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoostingQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query NegativeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> NegativeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> NegativeDescriptorAction { get; set; }
-	private double NegativeBoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query PositiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> PositiveDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> PositiveDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoostingQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -95,10 +197,10 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -106,28 +208,21 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	/// Query used to decrease the relevance score of matching documents.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query negative)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		NegativeDescriptor = null;
-		NegativeDescriptorAction = null;
-		NegativeValue = negative;
-		return Self;
+		Instance.Negative = value;
+		return this;
 	}
 
-	public BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query used to decrease the relevance score of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Negative(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		NegativeValue = null;
-		NegativeDescriptorAction = null;
-		NegativeDescriptor = descriptor;
-		return Self;
-	}
-
-	public BoostingQueryDescriptor<TDocument> Negative(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		NegativeValue = null;
-		NegativeDescriptor = null;
-		NegativeDescriptorAction = configure;
-		return Self;
+		Instance.Negative = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -135,10 +230,10 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor<TDocument> NegativeBoost(double negativeBoost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> NegativeBoost(double value)
 	{
-		NegativeBoostValue = negativeBoost;
-		return Self;
+		Instance.NegativeBoost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -146,106 +241,56 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	/// Any returned documents must match this query.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor<TDocument> Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query positive)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		PositiveDescriptor = null;
-		PositiveDescriptorAction = null;
-		PositiveValue = positive;
-		return Self;
+		Instance.Positive = value;
+		return this;
 	}
 
-	public BoostingQueryDescriptor<TDocument> Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Any returned documents must match this query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Positive(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		PositiveValue = null;
-		PositiveDescriptorAction = null;
-		PositiveDescriptor = descriptor;
-		return Self;
+		Instance.Positive = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public BoostingQueryDescriptor<TDocument> Positive(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		PositiveValue = null;
-		PositiveDescriptor = null;
-		PositiveDescriptorAction = configure;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public BoostingQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (NegativeDescriptor is not null)
-		{
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, NegativeDescriptor, options);
-		}
-		else if (NegativeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(NegativeDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, NegativeValue, options);
-		}
-
-		writer.WritePropertyName("negative_boost");
-		writer.WriteNumberValue(NegativeBoostValue);
-		if (PositiveDescriptor is not null)
-		{
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, PositiveDescriptor, options);
-		}
-		else if (PositiveDescriptorAction is not null)
-		{
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(PositiveDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, PositiveValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<BoostingQueryDescriptor>
+public readonly partial struct BoostingQueryDescriptor
 {
-	internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Instance { get; init; }
 
-	public BoostingQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoostingQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query NegativeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor NegativeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> NegativeDescriptorAction { get; set; }
-	private double NegativeBoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query PositiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor PositiveDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> PositiveDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoostingQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -255,10 +300,10 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -266,28 +311,32 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	/// Query used to decrease the relevance score of matching documents.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query negative)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		NegativeDescriptor = null;
-		NegativeDescriptorAction = null;
-		NegativeValue = negative;
-		return Self;
+		Instance.Negative = value;
+		return this;
 	}
 
-	public BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query used to decrease the relevance score of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Negative(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		NegativeValue = null;
-		NegativeDescriptorAction = null;
-		NegativeDescriptor = descriptor;
-		return Self;
+		Instance.Negative = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public BoostingQueryDescriptor Negative(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query used to decrease the relevance score of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Negative<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		NegativeValue = null;
-		NegativeDescriptor = null;
-		NegativeDescriptorAction = configure;
-		return Self;
+		Instance.Negative = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -295,10 +344,10 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor NegativeBoost(double negativeBoost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor NegativeBoost(double value)
 	{
-		NegativeBoostValue = negativeBoost;
-		return Self;
+		Instance.NegativeBoost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -306,85 +355,45 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	/// Any returned documents must match this query.
 	/// </para>
 	/// </summary>
-	public BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query positive)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		PositiveDescriptor = null;
-		PositiveDescriptorAction = null;
-		PositiveValue = positive;
-		return Self;
+		Instance.Positive = value;
+		return this;
 	}
 
-	public BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Any returned documents must match this query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Positive(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		PositiveValue = null;
-		PositiveDescriptorAction = null;
-		PositiveDescriptor = descriptor;
-		return Self;
+		Instance.Positive = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public BoostingQueryDescriptor Positive(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Any returned documents must match this query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Positive<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		PositiveValue = null;
-		PositiveDescriptor = null;
-		PositiveDescriptorAction = configure;
-		return Self;
+		Instance.Positive = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public BoostingQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (NegativeDescriptor is not null)
-		{
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, NegativeDescriptor, options);
-		}
-		else if (NegativeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(NegativeDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, NegativeValue, options);
-		}
-
-		writer.WritePropertyName("negative_boost");
-		writer.WriteNumberValue(NegativeBoostValue);
-		if (PositiveDescriptor is not null)
-		{
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, PositiveDescriptor, options);
-		}
-		else if (PositiveDescriptorAction is not null)
-		{
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(PositiveDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, PositiveValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

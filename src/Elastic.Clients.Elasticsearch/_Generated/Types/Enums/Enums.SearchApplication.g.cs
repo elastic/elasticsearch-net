@@ -17,62 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-[JsonConverter(typeof(EventTypeConverter))]
-public enum EventType
+internal sealed partial class EventTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.EventType>
 {
-	[EnumMember(Value = "search_click")]
-	Searchclick,
-	[EnumMember(Value = "search")]
-	Search,
-	[EnumMember(Value = "page_view")]
-	Pageview
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberPageView = System.Text.Json.JsonEncodedText.Encode("page_view");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearchClick = System.Text.Json.JsonEncodedText.Encode("search_click");
 
-internal sealed class EventTypeConverter : JsonConverter<EventType>
-{
-	public override EventType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.SearchApplication.EventType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberPageView))
 		{
-			case "search_click":
-				return EventType.Searchclick;
-			case "search":
-				return EventType.Search;
-			case "page_view":
-				return EventType.Pageview;
+			return Elastic.Clients.Elasticsearch.SearchApplication.EventType.PageView;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSearch))
+		{
+			return Elastic.Clients.Elasticsearch.SearchApplication.EventType.Search;
+		}
+
+		if (reader.ValueTextEquals(MemberSearchClick))
+		{
+			return Elastic.Clients.Elasticsearch.SearchApplication.EventType.SearchClick;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPageView.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.SearchApplication.EventType.PageView;
+		}
+
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.SearchApplication.EventType.Search;
+		}
+
+		if (string.Equals(value, MemberSearchClick.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.SearchApplication.EventType.SearchClick;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.SearchApplication.EventType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, EventType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.EventType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case EventType.Searchclick:
-				writer.WriteStringValue("search_click");
-				return;
-			case EventType.Search:
-				writer.WriteStringValue("search");
-				return;
-			case EventType.Pageview:
-				writer.WriteStringValue("page_view");
-				return;
+			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.PageView:
+				writer.WriteStringValue(MemberPageView);
+				break;
+			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.Search:
+				writer.WriteStringValue(MemberSearch);
+				break;
+			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.SearchClick:
+				writer.WriteStringValue(MemberSearchClick);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.SearchApplication.EventType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
+
+	public override Elastic.Clients.Elasticsearch.SearchApplication.EventType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.EventType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.EventTypeConverter))]
+public enum EventType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "page_view")]
+	PageView,
+	[System.Runtime.Serialization.EnumMember(Value = "search")]
+	Search,
+	[System.Runtime.Serialization.EnumMember(Value = "search_click")]
+	SearchClick
 }

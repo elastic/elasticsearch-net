@@ -46,14 +46,14 @@ public sealed class RouteValues : Dictionary<string, object>
 		switch (routeValue)
 		{
 			case null when !required:
-				{
-					if (!ContainsKey(name))
-						return this;
-					Remove(name);
-					if (IsId(name))
-						ContainsId = false; // invalidate cache
+			{
+				if (!ContainsKey(name))
 					return this;
-				}
+				Remove(name);
+				if (IsId(name))
+					ContainsId = false; // invalidate cache
+				return this;
+			}
 
 			case null:
 				throw new ArgumentNullException(name, $"{name} is required to build a URL to this API.");

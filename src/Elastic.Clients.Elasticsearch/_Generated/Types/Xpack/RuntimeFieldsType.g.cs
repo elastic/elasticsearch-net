@@ -17,44 +17,274 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class RuntimeFieldsTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCharsMax = System.Text.Json.JsonEncodedText.Encode("chars_max");
+	private static readonly System.Text.Json.JsonEncodedText PropCharsTotal = System.Text.Json.JsonEncodedText.Encode("chars_total");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDocMax = System.Text.Json.JsonEncodedText.Encode("doc_max");
+	private static readonly System.Text.Json.JsonEncodedText PropDocTotal = System.Text.Json.JsonEncodedText.Encode("doc_total");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
+	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang");
+	private static readonly System.Text.Json.JsonEncodedText PropLinesMax = System.Text.Json.JsonEncodedText.Encode("lines_max");
+	private static readonly System.Text.Json.JsonEncodedText PropLinesTotal = System.Text.Json.JsonEncodedText.Encode("lines_total");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptlessCount = System.Text.Json.JsonEncodedText.Encode("scriptless_count");
+	private static readonly System.Text.Json.JsonEncodedText PropShadowedCount = System.Text.Json.JsonEncodedText.Encode("shadowed_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSourceMax = System.Text.Json.JsonEncodedText.Encode("source_max");
+	private static readonly System.Text.Json.JsonEncodedText PropSourceTotal = System.Text.Json.JsonEncodedText.Encode("source_total");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCharsMax = default;
+		LocalJsonValue<long> propCharsTotal = default;
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<long> propDocMax = default;
+		LocalJsonValue<long> propDocTotal = default;
+		LocalJsonValue<long> propIndexCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propLang = default;
+		LocalJsonValue<long> propLinesMax = default;
+		LocalJsonValue<long> propLinesTotal = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<long> propScriptlessCount = default;
+		LocalJsonValue<long> propShadowedCount = default;
+		LocalJsonValue<long> propSourceMax = default;
+		LocalJsonValue<long> propSourceTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCharsMax.TryReadProperty(ref reader, options, PropCharsMax, null))
+			{
+				continue;
+			}
+
+			if (propCharsTotal.TryReadProperty(ref reader, options, PropCharsTotal, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propDocMax.TryReadProperty(ref reader, options, PropDocMax, null))
+			{
+				continue;
+			}
+
+			if (propDocTotal.TryReadProperty(ref reader, options, PropDocTotal, null))
+			{
+				continue;
+			}
+
+			if (propIndexCount.TryReadProperty(ref reader, options, PropIndexCount, null))
+			{
+				continue;
+			}
+
+			if (propLang.TryReadProperty(ref reader, options, PropLang, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propLinesMax.TryReadProperty(ref reader, options, PropLinesMax, null))
+			{
+				continue;
+			}
+
+			if (propLinesTotal.TryReadProperty(ref reader, options, PropLinesTotal, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propScriptlessCount.TryReadProperty(ref reader, options, PropScriptlessCount, null))
+			{
+				continue;
+			}
+
+			if (propShadowedCount.TryReadProperty(ref reader, options, PropShadowedCount, null))
+			{
+				continue;
+			}
+
+			if (propSourceMax.TryReadProperty(ref reader, options, PropSourceMax, null))
+			{
+				continue;
+			}
+
+			if (propSourceTotal.TryReadProperty(ref reader, options, PropSourceTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CharsMax = propCharsMax.Value,
+			CharsTotal = propCharsTotal.Value,
+			Count = propCount.Value,
+			DocMax = propDocMax.Value,
+			DocTotal = propDocTotal.Value,
+			IndexCount = propIndexCount.Value,
+			Lang = propLang.Value,
+			LinesMax = propLinesMax.Value,
+			LinesTotal = propLinesTotal.Value,
+			Name = propName.Value,
+			ScriptlessCount = propScriptlessCount.Value,
+			ShadowedCount = propShadowedCount.Value,
+			SourceMax = propSourceMax.Value,
+			SourceTotal = propSourceTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCharsMax, value.CharsMax, null, null);
+		writer.WriteProperty(options, PropCharsTotal, value.CharsTotal, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDocMax, value.DocMax, null, null);
+		writer.WriteProperty(options, PropDocTotal, value.DocTotal, null, null);
+		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
+		writer.WriteProperty(options, PropLang, value.Lang, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropLinesMax, value.LinesMax, null, null);
+		writer.WriteProperty(options, PropLinesTotal, value.LinesTotal, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropScriptlessCount, value.ScriptlessCount, null, null);
+		writer.WriteProperty(options, PropShadowedCount, value.ShadowedCount, null, null);
+		writer.WriteProperty(options, PropSourceMax, value.SourceMax, null, null);
+		writer.WriteProperty(options, PropSourceTotal, value.SourceTotal, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsTypeConverter))]
 public sealed partial class RuntimeFieldsType
 {
-	[JsonInclude, JsonPropertyName("chars_max")]
-	public long CharsMax { get; init; }
-	[JsonInclude, JsonPropertyName("chars_total")]
-	public long CharsTotal { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("doc_max")]
-	public long DocMax { get; init; }
-	[JsonInclude, JsonPropertyName("doc_total")]
-	public long DocTotal { get; init; }
-	[JsonInclude, JsonPropertyName("index_count")]
-	public long IndexCount { get; init; }
-	[JsonInclude, JsonPropertyName("lang")]
-	public IReadOnlyCollection<string> Lang { get; init; }
-	[JsonInclude, JsonPropertyName("lines_max")]
-	public long LinesMax { get; init; }
-	[JsonInclude, JsonPropertyName("lines_total")]
-	public long LinesTotal { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("scriptless_count")]
-	public long ScriptlessCount { get; init; }
-	[JsonInclude, JsonPropertyName("shadowed_count")]
-	public long ShadowedCount { get; init; }
-	[JsonInclude, JsonPropertyName("source_max")]
-	public long SourceMax { get; init; }
-	[JsonInclude, JsonPropertyName("source_total")]
-	public long SourceTotal { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldsType(long charsMax, long charsTotal, long count, long docMax, long docTotal, long indexCount, System.Collections.Generic.IReadOnlyCollection<string> lang, long linesMax, long linesTotal, string name, long scriptlessCount, long shadowedCount, long sourceMax, long sourceTotal)
+	{
+		CharsMax = charsMax;
+		CharsTotal = charsTotal;
+		Count = count;
+		DocMax = docMax;
+		DocTotal = docTotal;
+		IndexCount = indexCount;
+		Lang = lang;
+		LinesMax = linesMax;
+		LinesTotal = linesTotal;
+		Name = name;
+		ScriptlessCount = scriptlessCount;
+		ShadowedCount = shadowedCount;
+		SourceMax = sourceMax;
+		SourceTotal = sourceTotal;
+	}
+#if NET7_0_OR_GREATER
+	public RuntimeFieldsType()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RuntimeFieldsType()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RuntimeFieldsType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CharsMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CharsTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> Lang { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long LinesMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long LinesTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ScriptlessCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ShadowedCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SourceMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SourceTotal { get; set; }
 }

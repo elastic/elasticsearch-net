@@ -17,74 +17,135 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class ClassicTokenizer : ITokenizer
+internal sealed partial class ClassicTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer>
 {
-	[JsonInclude, JsonPropertyName("max_token_length")]
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenLength = System.Text.Json.JsonEncodedText.Encode("max_token_length");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxTokenLength = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxTokenLength.TryReadProperty(ref reader, options, PropMaxTokenLength, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxTokenLength = propMaxTokenLength.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerConverter))]
+public sealed partial class ClassicTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public ClassicTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ClassicTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClassicTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? MaxTokenLength { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "classic";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class ClassicTokenizerDescriptor : SerializableDescriptor<ClassicTokenizerDescriptor>, IBuildableDescriptor<ClassicTokenizer>
+public readonly partial struct ClassicTokenizerDescriptor
 {
-	internal ClassicTokenizerDescriptor(Action<ClassicTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer Instance { get; init; }
 
-	public ClassicTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClassicTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxTokenLengthValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public ClassicTokenizerDescriptor MaxTokenLength(int? maxTokenLength)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClassicTokenizerDescriptor()
 	{
-		MaxTokenLengthValue = maxTokenLength;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ClassicTokenizerDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor MaxTokenLength(int? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.MaxTokenLength = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (MaxTokenLengthValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max_token_length");
-			writer.WriteNumberValue(MaxTokenLengthValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("classic");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	ClassicTokenizer IBuildableDescriptor<ClassicTokenizer>.Build() => new()
-	{
-		MaxTokenLength = MaxTokenLengthValue,
-		Version = VersionValue
-	};
 }

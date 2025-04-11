@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,7 +17,13 @@ namespace Elastic.Clients.Elasticsearch;
 /// Represents a duration value.
 /// </summary>
 [JsonConverter(typeof(DurationConverter))]
-public sealed class Duration : IComparable<Duration>, IEquatable<Duration>, IUrlParameter
+public sealed class Duration :
+	IComparable<Duration>,
+	IEquatable<Duration>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Duration>
+#endif
 {
 	private const double MicrosecondsInATick = 0.1; // 10 ticks = 1 microsecond
 	private const double MillisecondsInADay = MillisecondsInAnHour * 24;
@@ -390,6 +398,35 @@ public sealed class Duration : IComparable<Duration>, IEquatable<Duration>, IUrl
 		var exponent = (int)((bits >> 52) & 0x7ffL);
 		return new string('#', Math.Max(2, exponent));
 	}
+
+	#region IParsable
+
+	public static Duration Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Duration? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		try
+		{
+			result = new Duration(s);
+		}
+		catch
+		{
+			result = null;
+			return false;
+		}
+
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class DurationConverter : JsonConverter<Duration>

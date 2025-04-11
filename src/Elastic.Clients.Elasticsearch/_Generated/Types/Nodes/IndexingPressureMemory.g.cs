@@ -17,25 +17,103 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class IndexingPressureMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+	private static readonly System.Text.Json.JsonEncodedText PropLimitInBytes = System.Text.Json.JsonEncodedText.Encode("limit_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.PressureMemory?> propCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propLimit = default;
+		LocalJsonValue<long?> propLimitInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.PressureMemory?> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrent.TryReadProperty(ref reader, options, PropCurrent, null))
+			{
+				continue;
+			}
+
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			{
+				continue;
+			}
+
+			if (propLimitInBytes.TryReadProperty(ref reader, options, PropLimitInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Current = propCurrent.Value,
+			Limit = propLimit.Value,
+			LimitInBytes = propLimitInBytes.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
+		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteProperty(options, PropLimitInBytes, value.LimitInBytes, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemoryConverter))]
 public sealed partial class IndexingPressureMemory
 {
+#if NET7_0_OR_GREATER
+	public IndexingPressureMemory()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexingPressureMemory()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingPressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains statistics for current indexing load.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("current")]
-	public Elastic.Clients.Elasticsearch.Nodes.PressureMemory? Current { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.PressureMemory? Current { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,8 +121,7 @@ public sealed partial class IndexingPressureMemory
 	/// Replica requests have an automatic limit that is 1.5x this value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Limit { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Limit { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,14 +129,12 @@ public sealed partial class IndexingPressureMemory
 	/// Replica requests have an automatic limit that is 1.5x this value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit_in_bytes")]
-	public long? LimitInBytes { get; init; }
+	public long? LimitInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics for the cumulative indexing load since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.Nodes.PressureMemory? Total { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.PressureMemory? Total { get; set; }
 }

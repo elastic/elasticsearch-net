@@ -17,36 +17,110 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
+
+internal sealed partial class GeoLineConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoLine>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinates = System.Text.Json.JsonEncodedText.Encode("coordinates");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.GeoLine Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>>> propCoordinates = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCoordinates.TryReadProperty(ref reader, options, PropCoordinates, static System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IReadOnlyCollection<double>>(o, static System.Collections.Generic.IReadOnlyCollection<double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)!)!))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.GeoLine(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Coordinates = propCoordinates.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GeoLine value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCoordinates, value.Coordinates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyCollection<double>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<double> v) => w.WriteCollectionValue<double>(o, v, null)));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// A GeoJson GeoLine.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GeoLineConverter))]
 public sealed partial class GeoLine
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLine(System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> coordinates, string type)
+	{
+		Coordinates = coordinates;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public GeoLine()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoLine()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoLine(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Array of <c>[lon, lat]</c> coordinates
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("coordinates")]
-	public IReadOnlyCollection<IReadOnlyCollection<double>> Coordinates { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> Coordinates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Always <c>"LineString"</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

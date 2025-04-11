@@ -17,41 +17,218 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(IntervalsQueryConverter))]
+internal sealed partial class IntervalsQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantAllOf = System.Text.Json.JsonEncodedText.Encode("all_of");
+	private static readonly System.Text.Json.JsonEncodedText VariantAnyOf = System.Text.Json.JsonEncodedText.Encode("any_of");
+	private static readonly System.Text.Json.JsonEncodedText VariantFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
+	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText VariantPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		reader.Read();
+		propField.ReadPropertyName(ref reader, options, null);
+		reader.Read();
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<string?> propQueryName = default;
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantAllOf))
+			{
+				variantType = VariantAllOf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantAnyOf))
+			{
+				variantType = VariantAnyOf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFuzzy))
+			{
+				variantType = VariantFuzzy.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMatch))
+			{
+				variantType = VariantMatch.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPrefix))
+			{
+				variantType = VariantPrefix.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantWildcard))
+			{
+				variantType = VariantWildcard.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		reader.Read();
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName(options, value.Field, null);
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "all_of":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf)value.Variant, null, null);
+				break;
+			case "any_of":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf)value.Variant, null, null);
+				break;
+			case "fuzzy":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy)value.Variant, null, null);
+				break;
+			case "match":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch)value.Variant, null, null);
+				break;
+			case "prefix":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, null, null);
+				break;
+			case "wildcard":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)}'.");
+		}
+
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryConverter))]
 public sealed partial class IntervalsQuery
 {
-	internal IntervalsQuery(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public IntervalsQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntervalsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Returns matches that span a combination of other rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>("all_of"); set => SetVariant("all_of", value); }
 
-	public static IntervalsQuery AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new IntervalsQuery("all_of", intervalsAllOf);
-	public static IntervalsQuery AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new IntervalsQuery("any_of", intervalsAnyOf);
-	public static IntervalsQuery Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => new IntervalsQuery("fuzzy", intervalsFuzzy);
-	public static IntervalsQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery("match", intervalsMatch);
-	public static IntervalsQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery("prefix", intervalsPrefix);
-	public static IntervalsQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery("wildcard", intervalsWildcard);
+	/// <summary>
+	/// <para>
+	/// Returns intervals produced by any of its sub-rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>("any_of"); set => SetVariant("any_of", value); }
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>("fuzzy"); set => SetVariant("fuzzy", value); }
+
+	/// <summary>
+	/// <para>
+	/// Matches analyzed text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>("match"); set => SetVariant("match", value); }
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that start with a specified set of characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>("prefix"); set => SetVariant("prefix", value); }
+
+	/// <summary>
+	/// <para>
+	/// Matches terms using a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>("wildcard"); set => SetVariant("wildcard", value); }
 
 	/// <summary>
 	/// <para>
@@ -61,207 +238,183 @@ public sealed partial class IntervalsQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
+public readonly partial struct IntervalsQueryDescriptor<TDocument>
 {
-	public override IntervalsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		reader.Read();
-		var fieldName = reader.GetString();
-		reader.Read();
-		object? variantValue = default;
-		string? variantNameValue = default;
-		float? boostValue = default;
-		string? queryNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "boost")
-			{
-				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "_name")
-			{
-				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "all_of")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "any_of")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "fuzzy")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "match")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "prefix")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "wildcard")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsQuery' from the response.");
-		}
-
-		reader.Read();
-		var result = new IntervalsQuery(variantNameValue, variantValue);
-		result.Boost = boostValue;
-		result.Field = fieldName;
-		result.QueryName = queryNameValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IntervalsQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsQueryDescriptor()
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize IntervalsQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "all_of":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf)value.Variant, options);
-					break;
-				case "any_of":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf)value.Variant, options);
-					break;
-				case "fuzzy":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy)value.Variant, options);
-					break;
-				case "match":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch)value.Variant, options);
-					break;
-				case "prefix":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, options);
-					break;
-				case "wildcard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDescriptor<IntervalsQueryDescriptor<TDocument>>
-{
-	internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public IntervalsQueryDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	private IntervalsQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Returns matches that span a combination of other rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.AllOf = value;
+		return this;
 	}
 
-	private IntervalsQueryDescriptor<TDocument> Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Returns matches that span a combination of other rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AllOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>> action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.AllOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Returns intervals produced by any of its sub-rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? value)
+	{
+		Instance.AnyOf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns intervals produced by any of its sub-rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AnyOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>> action)
+	{
+		Instance.AnyOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? value)
+	{
+		Instance.Fuzzy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Fuzzy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>> action)
+	{
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches analyzed text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches analyzed text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that start with a specified set of characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that start with a specified set of characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms using a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? value)
+	{
+		Instance.Wildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms using a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -271,120 +424,255 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public IntervalsQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public IntervalsQueryDescriptor<TDocument> AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => Set(intervalsAllOf, "all_of");
-	public IntervalsQueryDescriptor<TDocument> AllOf(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-	public IntervalsQueryDescriptor<TDocument> AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => Set(intervalsAnyOf, "any_of");
-	public IntervalsQueryDescriptor<TDocument> AnyOf(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-	public IntervalsQueryDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => Set(intervalsFuzzy, "fuzzy");
-	public IntervalsQueryDescriptor<TDocument> Fuzzy(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-	public IntervalsQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => Set(intervalsMatch, "match");
-	public IntervalsQueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-	public IntervalsQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => Set(intervalsPrefix, "prefix");
-	public IntervalsQueryDescriptor<TDocument> Prefix(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public IntervalsQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
-	public IntervalsQueryDescriptor<TDocument> Wildcard(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<IntervalsQueryDescriptor>
+public readonly partial struct IntervalsQueryDescriptor
 {
-	internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery Instance { get; init; }
 
-	public IntervalsQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private IntervalsQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsQueryDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private IntervalsQueryDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Returns matches that span a combination of other rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.AllOf = value;
+		return this;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Returns matches that span a combination of other rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AllOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor> action)
+	{
+		Instance.AllOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns matches that span a combination of other rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AllOf<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<T>> action)
+	{
+		Instance.AllOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns intervals produced by any of its sub-rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? value)
+	{
+		Instance.AnyOf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns intervals produced by any of its sub-rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AnyOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor> action)
+	{
+		Instance.AnyOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns intervals produced by any of its sub-rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AnyOf<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<T>> action)
+	{
+		Instance.AnyOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? value)
+	{
+		Instance.Fuzzy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Fuzzy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor> action)
+	{
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Fuzzy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<T>> action)
+	{
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches analyzed text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches analyzed text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches analyzed text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<T>> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that start with a specified set of characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that start with a specified set of characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms that start with a specified set of characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms using a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? value)
+	{
+		Instance.Wildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms using a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches terms using a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Wildcard<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<T>> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<T>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -394,82 +682,35 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public IntervalsQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public IntervalsQueryDescriptor QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public IntervalsQueryDescriptor AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => Set(intervalsAllOf, "all_of");
-	public IntervalsQueryDescriptor AllOf<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
-	public IntervalsQueryDescriptor AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => Set(intervalsAnyOf, "any_of");
-	public IntervalsQueryDescriptor AnyOf<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
-	public IntervalsQueryDescriptor Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => Set(intervalsFuzzy, "fuzzy");
-	public IntervalsQueryDescriptor Fuzzy<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
-	public IntervalsQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => Set(intervalsMatch, "match");
-	public IntervalsQueryDescriptor Match<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor> configure) => Set(configure, "match");
-	public IntervalsQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => Set(intervalsPrefix, "prefix");
-	public IntervalsQueryDescriptor Prefix<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor> configure) => Set(configure, "prefix");
-	public IntervalsQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
-	public IntervalsQueryDescriptor Wildcard<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

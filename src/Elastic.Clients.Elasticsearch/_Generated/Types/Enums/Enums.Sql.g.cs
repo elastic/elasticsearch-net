@@ -17,90 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-[JsonConverter(typeof(SqlFormatConverter))]
-public enum SqlFormat
+internal sealed partial class SqlFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.SqlFormat>
 {
-	[EnumMember(Value = "yaml")]
-	Yaml,
-	[EnumMember(Value = "txt")]
-	Txt,
-	[EnumMember(Value = "tsv")]
-	Tsv,
-	[EnumMember(Value = "smile")]
-	Smile,
-	[EnumMember(Value = "json")]
-	Json,
-	[EnumMember(Value = "csv")]
-	Csv,
-	[EnumMember(Value = "cbor")]
-	Cbor
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberCbor = System.Text.Json.JsonEncodedText.Encode("cbor");
+	private static readonly System.Text.Json.JsonEncodedText MemberCsv = System.Text.Json.JsonEncodedText.Encode("csv");
+	private static readonly System.Text.Json.JsonEncodedText MemberJson = System.Text.Json.JsonEncodedText.Encode("json");
+	private static readonly System.Text.Json.JsonEncodedText MemberSmile = System.Text.Json.JsonEncodedText.Encode("smile");
+	private static readonly System.Text.Json.JsonEncodedText MemberTsv = System.Text.Json.JsonEncodedText.Encode("tsv");
+	private static readonly System.Text.Json.JsonEncodedText MemberTxt = System.Text.Json.JsonEncodedText.Encode("txt");
+	private static readonly System.Text.Json.JsonEncodedText MemberYaml = System.Text.Json.JsonEncodedText.Encode("yaml");
 
-internal sealed class SqlFormatConverter : JsonConverter<SqlFormat>
-{
-	public override SqlFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Sql.SqlFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberCbor))
 		{
-			case "yaml":
-				return SqlFormat.Yaml;
-			case "txt":
-				return SqlFormat.Txt;
-			case "tsv":
-				return SqlFormat.Tsv;
-			case "smile":
-				return SqlFormat.Smile;
-			case "json":
-				return SqlFormat.Json;
-			case "csv":
-				return SqlFormat.Csv;
-			case "cbor":
-				return SqlFormat.Cbor;
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Cbor;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberCsv))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Csv;
+		}
+
+		if (reader.ValueTextEquals(MemberJson))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Json;
+		}
+
+		if (reader.ValueTextEquals(MemberSmile))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Smile;
+		}
+
+		if (reader.ValueTextEquals(MemberTsv))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Tsv;
+		}
+
+		if (reader.ValueTextEquals(MemberTxt))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Txt;
+		}
+
+		if (reader.ValueTextEquals(MemberYaml))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Yaml;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCbor.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Cbor;
+		}
+
+		if (string.Equals(value, MemberCsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Csv;
+		}
+
+		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Json;
+		}
+
+		if (string.Equals(value, MemberSmile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Smile;
+		}
+
+		if (string.Equals(value, MemberTsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Tsv;
+		}
+
+		if (string.Equals(value, MemberTxt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Txt;
+		}
+
+		if (string.Equals(value, MemberYaml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Sql.SqlFormat.Yaml;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Sql.SqlFormat)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, SqlFormat value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.SqlFormat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case SqlFormat.Yaml:
-				writer.WriteStringValue("yaml");
-				return;
-			case SqlFormat.Txt:
-				writer.WriteStringValue("txt");
-				return;
-			case SqlFormat.Tsv:
-				writer.WriteStringValue("tsv");
-				return;
-			case SqlFormat.Smile:
-				writer.WriteStringValue("smile");
-				return;
-			case SqlFormat.Json:
-				writer.WriteStringValue("json");
-				return;
-			case SqlFormat.Csv:
-				writer.WriteStringValue("csv");
-				return;
-			case SqlFormat.Cbor:
-				writer.WriteStringValue("cbor");
-				return;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Cbor:
+				writer.WriteStringValue(MemberCbor);
+				break;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Csv:
+				writer.WriteStringValue(MemberCsv);
+				break;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Json:
+				writer.WriteStringValue(MemberJson);
+				break;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Smile:
+				writer.WriteStringValue(MemberSmile);
+				break;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Tsv:
+				writer.WriteStringValue(MemberTsv);
+				break;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Txt:
+				writer.WriteStringValue(MemberTxt);
+				break;
+			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Yaml:
+				writer.WriteStringValue(MemberYaml);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Sql.SqlFormat)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
+
+	public override Elastic.Clients.Elasticsearch.Sql.SqlFormat ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.SqlFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.SqlFormatConverter))]
+public enum SqlFormat
+{
+	[System.Runtime.Serialization.EnumMember(Value = "cbor")]
+	Cbor,
+	[System.Runtime.Serialization.EnumMember(Value = "csv")]
+	Csv,
+	[System.Runtime.Serialization.EnumMember(Value = "json")]
+	Json,
+	[System.Runtime.Serialization.EnumMember(Value = "smile")]
+	Smile,
+	[System.Runtime.Serialization.EnumMember(Value = "tsv")]
+	Tsv,
+	[System.Runtime.Serialization.EnumMember(Value = "txt")]
+	Txt,
+	[System.Runtime.Serialization.EnumMember(Value = "yaml")]
+	Yaml
 }

@@ -17,22 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoXpackSecurityAuthcRealmsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file");
+	private static readonly System.Text.Json.JsonEncodedText PropNative = System.Text.Json.JsonEncodedText.Encode("native");
+	private static readonly System.Text.Json.JsonEncodedText PropPki = System.Text.Json.JsonEncodedText.Encode("pki");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>?> propFile = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>?> propNative = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>?> propPki = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFile.TryReadProperty(ref reader, options, PropFile, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNative.TryReadProperty(ref reader, options, PropNative, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPki.TryReadProperty(ref reader, options, PropPki, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			File = propFile.Value,
+			Native = propNative.Value,
+			Pki = propPki.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFile, value.File, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>(o, v, null, null));
+		writer.WriteProperty(options, PropNative, value.Native, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>(o, v, null, null));
+		writer.WriteProperty(options, PropPki, value.Pki, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsConverter))]
 public sealed partial class NodeInfoXpackSecurityAuthcRealms
 {
-	[JsonInclude, JsonPropertyName("file")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? File { get; init; }
-	[JsonInclude, JsonPropertyName("native")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? Native { get; init; }
-	[JsonInclude, JsonPropertyName("pki")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? Pki { get; init; }
+#if NET7_0_OR_GREATER
+	public NodeInfoXpackSecurityAuthcRealms()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public NodeInfoXpackSecurityAuthcRealms()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoXpackSecurityAuthcRealms(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? File { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? Native { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? Pki { get; set; }
 }

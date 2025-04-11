@@ -11,8 +11,10 @@ internal static class BoolQueryOrExtensions
 {
 	internal static Query CombineAsShould(this Query leftContainer, Query rightContainer)
 	{
-		var hasLeftBool = leftContainer.TryGet<BoolQuery>(out var leftBool);
-		var hasRightBool = rightContainer.TryGet<BoolQuery>(out var rightBool);
+		var leftBool = leftContainer.Bool;
+		var hasLeftBool = (leftBool is not null);
+		var rightBool = rightContainer.Bool;
+		var hasRightBool = (rightBool is not null);
 
 		if (TryFlattenShould(leftContainer, rightContainer, leftBool, rightBool, out var c))
 			return c;
@@ -20,8 +22,8 @@ internal static class BoolQueryOrExtensions
 		var lHasShouldQueries = hasLeftBool && leftBool.Should.HasAny();
 		var rHasShouldQueries = hasRightBool && rightBool.Should.HasAny();
 
-		var lq = lHasShouldQueries ? leftBool.Should : new[] { leftContainer };
-		var rq = rHasShouldQueries ? rightBool.Should : new[] { rightContainer };
+		var lq = lHasShouldQueries ? leftBool.Should : [leftContainer];
+		var rq = rHasShouldQueries ? rightBool.Should : [rightContainer];
 
 		var shouldClauses = lq.EagerConcat(rq);
 
@@ -39,7 +41,6 @@ internal static class BoolQueryOrExtensions
 			query = CreateShouldContainer(new List<Query> { leftContainer, rightContainer });
 
 		// Left can merge but right's bool can not. instead of wrapping into a new bool we inject the whole bool into left
-
 		else if (leftCanMerge && !rightCanMerge && rightBool is not null)
 		{
 			leftBool.Should = leftBool.Should.AddIfNotNull(rightContainer).ToArray();
@@ -55,14 +56,14 @@ internal static class BoolQueryOrExtensions
 	}
 
 	private static bool CanMergeShould(this Query container) =>
-		container.TryGet<BoolQuery>(out var boolQuery) && boolQuery.CanMergeShould();
+		container.Bool?.CanMergeShould() ?? false;
 
 	private static bool CanMergeShould(this BoolQuery boolQuery) =>
 		boolQuery is not null && !boolQuery.Locked && boolQuery.HasOnlyShouldClauses();
 
 	private static Query CreateShouldContainer(List<Query> shouldClauses) =>
-		new BoolQuery
+		new()
 		{
-			Should = shouldClauses.ToListOrNullIfEmpty()
+			Bool = new() { Should = shouldClauses.ToListOrNullIfEmpty() }
 		};
 }

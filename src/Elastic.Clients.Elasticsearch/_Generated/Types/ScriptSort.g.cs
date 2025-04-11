@@ -17,310 +17,277 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ScriptSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScriptSort>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.ScriptSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScriptSortType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Mode = propMode.Value,
+			Nested = propNested.Value,
+			Order = propOrder.Value,
+			Script = propScript.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScriptSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScriptSortConverter))]
 public sealed partial class ScriptSort
 {
-	[JsonInclude, JsonPropertyName("mode")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptSort(Elastic.Clients.Elasticsearch.Script script)
+	{
+		Script = script;
+	}
+#if NET7_0_OR_GREATER
+	public ScriptSort()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ScriptSort()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
-	[JsonInclude, JsonPropertyName("type")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(ScriptSort scriptSort) => Elastic.Clients.Elasticsearch.SortOptions.Script(scriptSort);
 }
 
-public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescriptor<ScriptSortDescriptor<TDocument>>
+public readonly partial struct ScriptSortDescriptor<TDocument>
 {
-	internal ScriptSortDescriptor(Action<ScriptSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ScriptSort Instance { get; init; }
 
-	public ScriptSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptSortDescriptor(Elastic.Clients.Elasticsearch.ScriptSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
-
-	public ScriptSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptSortDescriptor()
 	{
-		ModeValue = mode;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ScriptSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	public static explicit operator Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ScriptSort instance) => new Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? value)
 	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
+		Instance.Mode = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
 	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
+		Instance.Nested = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> action)
 	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public ScriptSortDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.ScriptSortType? type)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.ScriptSortType? value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ScriptSort Build(System.Action<Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
-
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class ScriptSortDescriptor : SerializableDescriptor<ScriptSortDescriptor>
+public readonly partial struct ScriptSortDescriptor
 {
-	internal ScriptSortDescriptor(Action<ScriptSortDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ScriptSort Instance { get; init; }
 
-	public ScriptSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptSortDescriptor(Elastic.Clients.Elasticsearch.ScriptSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
-
-	public ScriptSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptSortDescriptor()
 	{
-		ModeValue = mode;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ScriptSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	public static explicit operator Elastic.Clients.Elasticsearch.ScriptSortDescriptor(Elastic.Clients.Elasticsearch.ScriptSort instance) => new Elastic.Clients.Elasticsearch.ScriptSortDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.ScriptSortDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? value)
 	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
+		Instance.Mode = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
 	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
+		Instance.Nested = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> action)
 	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor.Build(action);
+		return this;
 	}
 
-	public ScriptSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Nested<T>(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>> action)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public ScriptSortDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ScriptSortDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptSortDescriptor Type(Elastic.Clients.Elasticsearch.ScriptSortType? type)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.ScriptSortDescriptor Type(Elastic.Clients.Elasticsearch.ScriptSortType? value)
 	{
-		writer.WriteStartObject();
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
+		Instance.Type = value;
+		return this;
+	}
 
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ScriptSort Build(System.Action<Elastic.Clients.Elasticsearch.ScriptSortDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ScriptSortDescriptor(new Elastic.Clients.Elasticsearch.ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

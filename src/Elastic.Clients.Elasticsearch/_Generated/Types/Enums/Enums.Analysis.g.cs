@@ -17,1441 +17,2094 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-[JsonConverter(typeof(DelimitedPayloadEncodingConverter))]
-public enum DelimitedPayloadEncoding
+internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode>
 {
-	[EnumMember(Value = "int")]
-	Integer,
-	[EnumMember(Value = "identity")]
-	Identity,
-	[EnumMember(Value = "float")]
-	Float
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberExtended = System.Text.Json.JsonEncodedText.Encode("extended");
+	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
 
-internal sealed class DelimitedPayloadEncodingConverter : JsonConverter<DelimitedPayloadEncoding>
-{
-	public override DelimitedPayloadEncoding Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberExtended))
 		{
-			case "int":
-				return DelimitedPayloadEncoding.Integer;
-			case "identity":
-				return DelimitedPayloadEncoding.Identity;
-			case "float":
-				return DelimitedPayloadEncoding.Float;
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DelimitedPayloadEncoding value, JsonSerializerOptions options)
-	{
-		switch (value)
+		if (reader.ValueTextEquals(MemberNormal))
 		{
-			case DelimitedPayloadEncoding.Integer:
-				writer.WriteStringValue("int");
-				return;
-			case DelimitedPayloadEncoding.Identity:
-				writer.WriteStringValue("identity");
-				return;
-			case DelimitedPayloadEncoding.Float:
-				writer.WriteStringValue("float");
-				return;
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal;
 		}
 
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(EdgeNGramSideConverter))]
-public enum EdgeNGramSide
-{
-	[EnumMember(Value = "front")]
-	Front,
-	[EnumMember(Value = "back")]
-	Back
-}
-
-internal sealed class EdgeNGramSideConverter : JsonConverter<EdgeNGramSide>
-{
-	public override EdgeNGramSide Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberSearch))
 		{
-			case "front":
-				return EdgeNGramSide.Front;
-			case "back":
-				return EdgeNGramSide.Back;
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberExtended.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended;
+		}
+
+		if (string.Equals(value, MemberNormal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal;
+		}
+
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, EdgeNGramSide value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case EdgeNGramSide.Front:
-				writer.WriteStringValue("front");
-				return;
-			case EdgeNGramSide.Back:
-				writer.WriteStringValue("back");
-				return;
+			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended:
+				writer.WriteStringValue(MemberExtended);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal:
+				writer.WriteStringValue(MemberNormal);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search:
+				writer.WriteStringValue(MemberSearch);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
-}
 
-[JsonConverter(typeof(IcuCollationAlternateConverter))]
-public enum IcuCollationAlternate
-{
-	[EnumMember(Value = "shifted")]
-	Shifted,
-	[EnumMember(Value = "non-ignorable")]
-	NonIgnorable
-}
-
-internal sealed class IcuCollationAlternateConverter : JsonConverter<IcuCollationAlternate>
-{
-	public override IcuCollationAlternate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "shifted":
-				return IcuCollationAlternate.Shifted;
-			case "non-ignorable":
-				return IcuCollationAlternate.NonIgnorable;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationAlternate value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode value, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
-		{
-			case IcuCollationAlternate.Shifted:
-				writer.WriteStringValue("shifted");
-				return;
-			case IcuCollationAlternate.NonIgnorable:
-				writer.WriteStringValue("non-ignorable");
-				return;
-		}
-
-		writer.WriteNullValue();
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(IcuCollationCaseFirstConverter))]
-public enum IcuCollationCaseFirst
+internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode>
 {
-	[EnumMember(Value = "upper")]
-	Upper,
-	[EnumMember(Value = "lower")]
-	Lower
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberDiscard = System.Text.Json.JsonEncodedText.Encode("discard");
+	private static readonly System.Text.Json.JsonEncodedText MemberMixed = System.Text.Json.JsonEncodedText.Encode("mixed");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 
-internal sealed class IcuCollationCaseFirstConverter : JsonConverter<IcuCollationCaseFirst>
-{
-	public override IcuCollationCaseFirst Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberDiscard))
 		{
-			case "upper":
-				return IcuCollationCaseFirst.Upper;
-			case "lower":
-				return IcuCollationCaseFirst.Lower;
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMixed))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDiscard.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard;
+		}
+
+		if (string.Equals(value, MemberMixed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationCaseFirst value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case IcuCollationCaseFirst.Upper:
-				writer.WriteStringValue("upper");
-				return;
-			case IcuCollationCaseFirst.Lower:
-				writer.WriteStringValue("lower");
-				return;
+			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard:
+				writer.WriteStringValue(MemberDiscard);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed:
+				writer.WriteStringValue(MemberMixed);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
-}
 
-[JsonConverter(typeof(IcuCollationDecompositionConverter))]
-public enum IcuCollationDecomposition
-{
-	[EnumMember(Value = "no")]
-	No,
-	[EnumMember(Value = "identical")]
-	Identical
-}
-
-internal sealed class IcuCollationDecompositionConverter : JsonConverter<IcuCollationDecomposition>
-{
-	public override IcuCollationDecomposition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "no":
-				return IcuCollationDecomposition.No;
-			case "identical":
-				return IcuCollationDecomposition.Identical;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationDecomposition value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode value, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
-		{
-			case IcuCollationDecomposition.No:
-				writer.WriteStringValue("no");
-				return;
-			case IcuCollationDecomposition.Identical:
-				writer.WriteStringValue("identical");
-				return;
-		}
-
-		writer.WriteNullValue();
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(IcuCollationStrengthConverter))]
-public enum IcuCollationStrength
+internal sealed partial class IcuNormalizationModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode>
 {
-	[EnumMember(Value = "tertiary")]
-	Tertiary,
-	[EnumMember(Value = "secondary")]
-	Secondary,
-	[EnumMember(Value = "quaternary")]
-	Quaternary,
-	[EnumMember(Value = "primary")]
-	Primary,
-	[EnumMember(Value = "identical")]
-	Identical
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberCompose = System.Text.Json.JsonEncodedText.Encode("compose");
+	private static readonly System.Text.Json.JsonEncodedText MemberDecompose = System.Text.Json.JsonEncodedText.Encode("decompose");
 
-internal sealed class IcuCollationStrengthConverter : JsonConverter<IcuCollationStrength>
-{
-	public override IcuCollationStrength Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberCompose))
 		{
-			case "tertiary":
-				return IcuCollationStrength.Tertiary;
-			case "secondary":
-				return IcuCollationStrength.Secondary;
-			case "quaternary":
-				return IcuCollationStrength.Quaternary;
-			case "primary":
-				return IcuCollationStrength.Primary;
-			case "identical":
-				return IcuCollationStrength.Identical;
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberDecompose))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose;
+		}
+
+		if (string.Equals(value, MemberDecompose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationStrength value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case IcuCollationStrength.Tertiary:
-				writer.WriteStringValue("tertiary");
-				return;
-			case IcuCollationStrength.Secondary:
-				writer.WriteStringValue("secondary");
-				return;
-			case IcuCollationStrength.Quaternary:
-				writer.WriteStringValue("quaternary");
-				return;
-			case IcuCollationStrength.Primary:
-				writer.WriteStringValue("primary");
-				return;
-			case IcuCollationStrength.Identical:
-				writer.WriteStringValue("identical");
-				return;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose:
+				writer.WriteStringValue(MemberCompose);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose:
+				writer.WriteStringValue(MemberDecompose);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
-}
 
-[JsonConverter(typeof(IcuNormalizationModeConverter))]
-public enum IcuNormalizationMode
-{
-	[EnumMember(Value = "decompose")]
-	Decompose,
-	[EnumMember(Value = "compose")]
-	Compose
-}
-
-internal sealed class IcuNormalizationModeConverter : JsonConverter<IcuNormalizationMode>
-{
-	public override IcuNormalizationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "decompose":
-				return IcuNormalizationMode.Decompose;
-			case "compose":
-				return IcuNormalizationMode.Compose;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuNormalizationMode value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode value, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
-		{
-			case IcuNormalizationMode.Decompose:
-				writer.WriteStringValue("decompose");
-				return;
-			case IcuNormalizationMode.Compose:
-				writer.WriteStringValue("compose");
-				return;
-		}
-
-		writer.WriteNullValue();
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(IcuNormalizationTypeConverter))]
-public enum IcuNormalizationType
+internal sealed partial class IcuNormalizationTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType>
 {
-	[EnumMember(Value = "nfkc_cf")]
-	NfkcCf,
-	[EnumMember(Value = "nfkc")]
-	Nfkc,
-	[EnumMember(Value = "nfc")]
-	Nfc
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberNfc = System.Text.Json.JsonEncodedText.Encode("nfc");
+	private static readonly System.Text.Json.JsonEncodedText MemberNfkc = System.Text.Json.JsonEncodedText.Encode("nfkc");
+	private static readonly System.Text.Json.JsonEncodedText MemberNfkcCf = System.Text.Json.JsonEncodedText.Encode("nfkc_cf");
 
-internal sealed class IcuNormalizationTypeConverter : JsonConverter<IcuNormalizationType>
-{
-	public override IcuNormalizationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberNfc))
 		{
-			case "nfkc_cf":
-				return IcuNormalizationType.NfkcCf;
-			case "nfkc":
-				return IcuNormalizationType.Nfkc;
-			case "nfc":
-				return IcuNormalizationType.Nfc;
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfc;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNfkc))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfkc;
+		}
+
+		if (reader.ValueTextEquals(MemberNfkcCf))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.NfkcCf;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNfc.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfc;
+		}
+
+		if (string.Equals(value, MemberNfkc.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfkc;
+		}
+
+		if (string.Equals(value, MemberNfkcCf.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.NfkcCf;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuNormalizationType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case IcuNormalizationType.NfkcCf:
-				writer.WriteStringValue("nfkc_cf");
-				return;
-			case IcuNormalizationType.Nfkc:
-				writer.WriteStringValue("nfkc");
-				return;
-			case IcuNormalizationType.Nfc:
-				writer.WriteStringValue("nfc");
-				return;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfc:
+				writer.WriteStringValue(MemberNfc);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfkc:
+				writer.WriteStringValue(MemberNfkc);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.NfkcCf:
+				writer.WriteStringValue(MemberNfkcCf);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
-}
 
-[JsonConverter(typeof(IcuTransformDirectionConverter))]
-public enum IcuTransformDirection
-{
-	[EnumMember(Value = "reverse")]
-	Reverse,
-	[EnumMember(Value = "forward")]
-	Forward
-}
-
-internal sealed class IcuTransformDirectionConverter : JsonConverter<IcuTransformDirection>
-{
-	public override IcuTransformDirection Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "reverse":
-				return IcuTransformDirection.Reverse;
-			case "forward":
-				return IcuTransformDirection.Forward;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuTransformDirection value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType value, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
-		{
-			case IcuTransformDirection.Reverse:
-				writer.WriteStringValue("reverse");
-				return;
-			case IcuTransformDirection.Forward:
-				writer.WriteStringValue("forward");
-				return;
-		}
-
-		writer.WriteNullValue();
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(KeepTypesModeConverter))]
-public enum KeepTypesMode
+internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding>
 {
-	[EnumMember(Value = "include")]
-	Include,
-	[EnumMember(Value = "exclude")]
-	Exclude
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentity = System.Text.Json.JsonEncodedText.Encode("identity");
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("int");
 
-internal sealed class KeepTypesModeConverter : JsonConverter<KeepTypesMode>
-{
-	public override KeepTypesMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberFloat))
 		{
-			case "include":
-				return KeepTypesMode.Include;
-			case "exclude":
-				return KeepTypesMode.Exclude;
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIdentity))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity;
+		}
+
+		if (reader.ValueTextEquals(MemberInteger))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float;
+		}
+
+		if (string.Equals(value, MemberIdentity.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity;
+		}
+
+		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, KeepTypesMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case KeepTypesMode.Include:
-				writer.WriteStringValue("include");
-				return;
-			case KeepTypesMode.Exclude:
-				writer.WriteStringValue("exclude");
-				return;
+			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float:
+				writer.WriteStringValue(MemberFloat);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity:
+				writer.WriteStringValue(MemberIdentity);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer:
+				writer.WriteStringValue(MemberInteger);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding)}'.");
 		}
+	}
 
-		writer.WriteNullValue();
+	public override Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(KuromojiTokenizationModeConverter))]
+internal sealed partial class EdgeNGramSideConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberBack = System.Text.Json.JsonEncodedText.Encode("back");
+	private static readonly System.Text.Json.JsonEncodedText MemberFront = System.Text.Json.JsonEncodedText.Encode("front");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberBack))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back;
+		}
+
+		if (reader.ValueTextEquals(MemberFront))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBack.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back;
+		}
+
+		if (string.Equals(value, MemberFront.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back:
+				writer.WriteStringValue(MemberBack);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front:
+				writer.WriteStringValue(MemberFront);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class KeepTypesModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberExclude))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude;
+		}
+
+		if (reader.ValueTextEquals(MemberInclude))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude;
+		}
+
+		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude:
+				writer.WriteStringValue(MemberExclude);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include:
+				writer.WriteStringValue(MemberInclude);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SnowballLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("Armenian");
+	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("Basque");
+	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("Catalan");
+	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("Danish");
+	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("Dutch");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("English");
+	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("Finnish");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("French");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("German");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman2 = System.Text.Json.JsonEncodedText.Encode("German2");
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("Hungarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("Italian");
+	private static readonly System.Text.Json.JsonEncodedText MemberKp = System.Text.Json.JsonEncodedText.Encode("Kp");
+	private static readonly System.Text.Json.JsonEncodedText MemberLovins = System.Text.Json.JsonEncodedText.Encode("Lovins");
+	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("Norwegian");
+	private static readonly System.Text.Json.JsonEncodedText MemberPorter = System.Text.Json.JsonEncodedText.Encode("Porter");
+	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("Portuguese");
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("Romanian");
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("Russian");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("Spanish");
+	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("Swedish");
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("Turkish");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberArmenian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian;
+		}
+
+		if (reader.ValueTextEquals(MemberBasque))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Basque;
+		}
+
+		if (reader.ValueTextEquals(MemberCatalan))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Catalan;
+		}
+
+		if (reader.ValueTextEquals(MemberDanish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Danish;
+		}
+
+		if (reader.ValueTextEquals(MemberDutch))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Dutch;
+		}
+
+		if (reader.ValueTextEquals(MemberEnglish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English;
+		}
+
+		if (reader.ValueTextEquals(MemberFinnish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish;
+		}
+
+		if (reader.ValueTextEquals(MemberFrench))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.French;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman2))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German2;
+		}
+
+		if (reader.ValueTextEquals(MemberHungarian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian;
+		}
+
+		if (reader.ValueTextEquals(MemberItalian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian;
+		}
+
+		if (reader.ValueTextEquals(MemberKp))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp;
+		}
+
+		if (reader.ValueTextEquals(MemberLovins))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lovins;
+		}
+
+		if (reader.ValueTextEquals(MemberNorwegian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Norwegian;
+		}
+
+		if (reader.ValueTextEquals(MemberPorter))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Porter;
+		}
+
+		if (reader.ValueTextEquals(MemberPortuguese))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Portuguese;
+		}
+
+		if (reader.ValueTextEquals(MemberRomanian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Romanian;
+		}
+
+		if (reader.ValueTextEquals(MemberRussian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian;
+		}
+
+		if (reader.ValueTextEquals(MemberSpanish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish;
+		}
+
+		if (reader.ValueTextEquals(MemberSwedish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Swedish;
+		}
+
+		if (reader.ValueTextEquals(MemberTurkish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Turkish;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberArmenian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian;
+		}
+
+		if (string.Equals(value, MemberBasque.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Basque;
+		}
+
+		if (string.Equals(value, MemberCatalan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Catalan;
+		}
+
+		if (string.Equals(value, MemberDanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Danish;
+		}
+
+		if (string.Equals(value, MemberDutch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Dutch;
+		}
+
+		if (string.Equals(value, MemberEnglish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English;
+		}
+
+		if (string.Equals(value, MemberFinnish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish;
+		}
+
+		if (string.Equals(value, MemberFrench.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.French;
+		}
+
+		if (string.Equals(value, MemberGerman.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German;
+		}
+
+		if (string.Equals(value, MemberGerman2.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German2;
+		}
+
+		if (string.Equals(value, MemberHungarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian;
+		}
+
+		if (string.Equals(value, MemberItalian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian;
+		}
+
+		if (string.Equals(value, MemberKp.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp;
+		}
+
+		if (string.Equals(value, MemberLovins.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lovins;
+		}
+
+		if (string.Equals(value, MemberNorwegian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Norwegian;
+		}
+
+		if (string.Equals(value, MemberPorter.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Porter;
+		}
+
+		if (string.Equals(value, MemberPortuguese.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Portuguese;
+		}
+
+		if (string.Equals(value, MemberRomanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Romanian;
+		}
+
+		if (string.Equals(value, MemberRussian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian;
+		}
+
+		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish;
+		}
+
+		if (string.Equals(value, MemberSwedish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Swedish;
+		}
+
+		if (string.Equals(value, MemberTurkish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Turkish;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian:
+				writer.WriteStringValue(MemberArmenian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Basque:
+				writer.WriteStringValue(MemberBasque);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Catalan:
+				writer.WriteStringValue(MemberCatalan);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Danish:
+				writer.WriteStringValue(MemberDanish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Dutch:
+				writer.WriteStringValue(MemberDutch);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English:
+				writer.WriteStringValue(MemberEnglish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish:
+				writer.WriteStringValue(MemberFinnish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.French:
+				writer.WriteStringValue(MemberFrench);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German:
+				writer.WriteStringValue(MemberGerman);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German2:
+				writer.WriteStringValue(MemberGerman2);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian:
+				writer.WriteStringValue(MemberHungarian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian:
+				writer.WriteStringValue(MemberItalian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp:
+				writer.WriteStringValue(MemberKp);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lovins:
+				writer.WriteStringValue(MemberLovins);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Norwegian:
+				writer.WriteStringValue(MemberNorwegian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Porter:
+				writer.WriteStringValue(MemberPorter);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Portuguese:
+				writer.WriteStringValue(MemberPortuguese);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Romanian:
+				writer.WriteStringValue(MemberRomanian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian:
+				writer.WriteStringValue(MemberRussian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish:
+				writer.WriteStringValue(MemberSpanish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Swedish:
+				writer.WriteStringValue(MemberSwedish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Turkish:
+				writer.WriteStringValue(MemberTurkish);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SynonymFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SynonymFormat>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSolr = System.Text.Json.JsonEncodedText.Encode("solr");
+	private static readonly System.Text.Json.JsonEncodedText MemberWordnet = System.Text.Json.JsonEncodedText.Encode("wordnet");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.SynonymFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSolr))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Solr;
+		}
+
+		if (reader.ValueTextEquals(MemberWordnet))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Wordnet;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSolr.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Solr;
+		}
+
+		if (string.Equals(value, MemberWordnet.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Wordnet;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SynonymFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Solr:
+				writer.WriteStringValue(MemberSolr);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Wordnet:
+				writer.WriteStringValue(MemberWordnet);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.SynonymFormat ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SynonymFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IcuCollationAlternateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberNonIgnorable = System.Text.Json.JsonEncodedText.Encode("non-ignorable");
+	private static readonly System.Text.Json.JsonEncodedText MemberShifted = System.Text.Json.JsonEncodedText.Encode("shifted");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberNonIgnorable))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable;
+		}
+
+		if (reader.ValueTextEquals(MemberShifted))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNonIgnorable.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable;
+		}
+
+		if (string.Equals(value, MemberShifted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable:
+				writer.WriteStringValue(MemberNonIgnorable);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted:
+				writer.WriteStringValue(MemberShifted);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IcuCollationCaseFirstConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberLower = System.Text.Json.JsonEncodedText.Encode("lower");
+	private static readonly System.Text.Json.JsonEncodedText MemberUpper = System.Text.Json.JsonEncodedText.Encode("upper");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberLower))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Lower;
+		}
+
+		if (reader.ValueTextEquals(MemberUpper))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Upper;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLower.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Lower;
+		}
+
+		if (string.Equals(value, MemberUpper.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Upper;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Lower:
+				writer.WriteStringValue(MemberLower);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Upper:
+				writer.WriteStringValue(MemberUpper);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IcuCollationDecompositionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberIdentical))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical;
+		}
+
+		if (reader.ValueTextEquals(MemberNo))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical;
+		}
+
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical:
+				writer.WriteStringValue(MemberIdentical);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No:
+				writer.WriteStringValue(MemberNo);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText MemberQuaternary = System.Text.Json.JsonEncodedText.Encode("quaternary");
+	private static readonly System.Text.Json.JsonEncodedText MemberSecondary = System.Text.Json.JsonEncodedText.Encode("secondary");
+	private static readonly System.Text.Json.JsonEncodedText MemberTertiary = System.Text.Json.JsonEncodedText.Encode("tertiary");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberIdentical))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical;
+		}
+
+		if (reader.ValueTextEquals(MemberPrimary))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary;
+		}
+
+		if (reader.ValueTextEquals(MemberQuaternary))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary;
+		}
+
+		if (reader.ValueTextEquals(MemberSecondary))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Secondary;
+		}
+
+		if (reader.ValueTextEquals(MemberTertiary))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical;
+		}
+
+		if (string.Equals(value, MemberPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary;
+		}
+
+		if (string.Equals(value, MemberQuaternary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary;
+		}
+
+		if (string.Equals(value, MemberSecondary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Secondary;
+		}
+
+		if (string.Equals(value, MemberTertiary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical:
+				writer.WriteStringValue(MemberIdentical);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary:
+				writer.WriteStringValue(MemberPrimary);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary:
+				writer.WriteStringValue(MemberQuaternary);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Secondary:
+				writer.WriteStringValue(MemberSecondary);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary:
+				writer.WriteStringValue(MemberTertiary);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IcuTransformDirectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberForward = System.Text.Json.JsonEncodedText.Encode("forward");
+	private static readonly System.Text.Json.JsonEncodedText MemberReverse = System.Text.Json.JsonEncodedText.Encode("reverse");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberForward))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Forward;
+		}
+
+		if (reader.ValueTextEquals(MemberReverse))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Reverse;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberForward.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Forward;
+		}
+
+		if (string.Equals(value, MemberReverse.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Reverse;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Forward:
+				writer.WriteStringValue(MemberForward);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Reverse:
+				writer.WriteStringValue(MemberReverse);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberBeiderMorse = System.Text.Json.JsonEncodedText.Encode("beider_morse");
+	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone1 = System.Text.Json.JsonEncodedText.Encode("caverphone1");
+	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone2 = System.Text.Json.JsonEncodedText.Encode("caverphone2");
+	private static readonly System.Text.Json.JsonEncodedText MemberCologne = System.Text.Json.JsonEncodedText.Encode("cologne");
+	private static readonly System.Text.Json.JsonEncodedText MemberDaitchMokotoff = System.Text.Json.JsonEncodedText.Encode("daitch_mokotoff");
+	private static readonly System.Text.Json.JsonEncodedText MemberDoubleMetaphone = System.Text.Json.JsonEncodedText.Encode("double_metaphone");
+	private static readonly System.Text.Json.JsonEncodedText MemberHaasephonetik = System.Text.Json.JsonEncodedText.Encode("haasephonetik");
+	private static readonly System.Text.Json.JsonEncodedText MemberKoelnerphonetik = System.Text.Json.JsonEncodedText.Encode("koelnerphonetik");
+	private static readonly System.Text.Json.JsonEncodedText MemberMetaphone = System.Text.Json.JsonEncodedText.Encode("metaphone");
+	private static readonly System.Text.Json.JsonEncodedText MemberNysiis = System.Text.Json.JsonEncodedText.Encode("nysiis");
+	private static readonly System.Text.Json.JsonEncodedText MemberRefinedSoundex = System.Text.Json.JsonEncodedText.Encode("refined_soundex");
+	private static readonly System.Text.Json.JsonEncodedText MemberSoundex = System.Text.Json.JsonEncodedText.Encode("soundex");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberBeiderMorse))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse;
+		}
+
+		if (reader.ValueTextEquals(MemberCaverphone1))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone1;
+		}
+
+		if (reader.ValueTextEquals(MemberCaverphone2))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone2;
+		}
+
+		if (reader.ValueTextEquals(MemberCologne))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne;
+		}
+
+		if (reader.ValueTextEquals(MemberDaitchMokotoff))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff;
+		}
+
+		if (reader.ValueTextEquals(MemberDoubleMetaphone))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone;
+		}
+
+		if (reader.ValueTextEquals(MemberHaasephonetik))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik;
+		}
+
+		if (reader.ValueTextEquals(MemberKoelnerphonetik))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik;
+		}
+
+		if (reader.ValueTextEquals(MemberMetaphone))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone;
+		}
+
+		if (reader.ValueTextEquals(MemberNysiis))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis;
+		}
+
+		if (reader.ValueTextEquals(MemberRefinedSoundex))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex;
+		}
+
+		if (reader.ValueTextEquals(MemberSoundex))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBeiderMorse.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse;
+		}
+
+		if (string.Equals(value, MemberCaverphone1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone1;
+		}
+
+		if (string.Equals(value, MemberCaverphone2.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone2;
+		}
+
+		if (string.Equals(value, MemberCologne.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne;
+		}
+
+		if (string.Equals(value, MemberDaitchMokotoff.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff;
+		}
+
+		if (string.Equals(value, MemberDoubleMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone;
+		}
+
+		if (string.Equals(value, MemberHaasephonetik.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik;
+		}
+
+		if (string.Equals(value, MemberKoelnerphonetik.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik;
+		}
+
+		if (string.Equals(value, MemberMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone;
+		}
+
+		if (string.Equals(value, MemberNysiis.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis;
+		}
+
+		if (string.Equals(value, MemberRefinedSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex;
+		}
+
+		if (string.Equals(value, MemberSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse:
+				writer.WriteStringValue(MemberBeiderMorse);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone1:
+				writer.WriteStringValue(MemberCaverphone1);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone2:
+				writer.WriteStringValue(MemberCaverphone2);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne:
+				writer.WriteStringValue(MemberCologne);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff:
+				writer.WriteStringValue(MemberDaitchMokotoff);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone:
+				writer.WriteStringValue(MemberDoubleMetaphone);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik:
+				writer.WriteStringValue(MemberHaasephonetik);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik:
+				writer.WriteStringValue(MemberKoelnerphonetik);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone:
+				writer.WriteStringValue(MemberMetaphone);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis:
+				writer.WriteStringValue(MemberNysiis);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex:
+				writer.WriteStringValue(MemberRefinedSoundex);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex:
+				writer.WriteStringValue(MemberSoundex);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class PhoneticNameTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAshkenazi = System.Text.Json.JsonEncodedText.Encode("ashkenazi");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeneric = System.Text.Json.JsonEncodedText.Encode("generic");
+	private static readonly System.Text.Json.JsonEncodedText MemberSephardic = System.Text.Json.JsonEncodedText.Encode("sephardic");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAshkenazi))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi;
+		}
+
+		if (reader.ValueTextEquals(MemberGeneric))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic;
+		}
+
+		if (reader.ValueTextEquals(MemberSephardic))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Sephardic;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAshkenazi.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi;
+		}
+
+		if (string.Equals(value, MemberGeneric.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic;
+		}
+
+		if (string.Equals(value, MemberSephardic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Sephardic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi:
+				writer.WriteStringValue(MemberAshkenazi);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic:
+				writer.WriteStringValue(MemberGeneric);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Sephardic:
+				writer.WriteStringValue(MemberSephardic);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class PhoneticRuleTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberApprox = System.Text.Json.JsonEncodedText.Encode("approx");
+	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberApprox))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Approx;
+		}
+
+		if (reader.ValueTextEquals(MemberExact))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Exact;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberApprox.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Approx;
+		}
+
+		if (string.Equals(value, MemberExact.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Exact;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Approx:
+				writer.WriteStringValue(MemberApprox);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Exact:
+				writer.WriteStringValue(MemberExact);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TokenCharConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.TokenChar>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCustom = System.Text.Json.JsonEncodedText.Encode("custom");
+	private static readonly System.Text.Json.JsonEncodedText MemberDigit = System.Text.Json.JsonEncodedText.Encode("digit");
+	private static readonly System.Text.Json.JsonEncodedText MemberLetter = System.Text.Json.JsonEncodedText.Encode("letter");
+	private static readonly System.Text.Json.JsonEncodedText MemberPunctuation = System.Text.Json.JsonEncodedText.Encode("punctuation");
+	private static readonly System.Text.Json.JsonEncodedText MemberSymbol = System.Text.Json.JsonEncodedText.Encode("symbol");
+	private static readonly System.Text.Json.JsonEncodedText MemberWhitespace = System.Text.Json.JsonEncodedText.Encode("whitespace");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.TokenChar Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCustom))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom;
+		}
+
+		if (reader.ValueTextEquals(MemberDigit))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit;
+		}
+
+		if (reader.ValueTextEquals(MemberLetter))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter;
+		}
+
+		if (reader.ValueTextEquals(MemberPunctuation))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Punctuation;
+		}
+
+		if (reader.ValueTextEquals(MemberSymbol))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol;
+		}
+
+		if (reader.ValueTextEquals(MemberWhitespace))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCustom.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom;
+		}
+
+		if (string.Equals(value, MemberDigit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit;
+		}
+
+		if (string.Equals(value, MemberLetter.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter;
+		}
+
+		if (string.Equals(value, MemberPunctuation.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Punctuation;
+		}
+
+		if (string.Equals(value, MemberSymbol.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol;
+		}
+
+		if (string.Equals(value, MemberWhitespace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.TokenChar)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.TokenChar value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom:
+				writer.WriteStringValue(MemberCustom);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit:
+				writer.WriteStringValue(MemberDigit);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter:
+				writer.WriteStringValue(MemberLetter);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Punctuation:
+				writer.WriteStringValue(MemberPunctuation);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol:
+				writer.WriteStringValue(MemberSymbol);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace:
+				writer.WriteStringValue(MemberWhitespace);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.TokenChar)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.TokenChar ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.TokenChar value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class PhoneticLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAny = System.Text.Json.JsonEncodedText.Encode("any");
+	private static readonly System.Text.Json.JsonEncodedText MemberCommon = System.Text.Json.JsonEncodedText.Encode("common");
+	private static readonly System.Text.Json.JsonEncodedText MemberCyrillic = System.Text.Json.JsonEncodedText.Encode("cyrillic");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("english");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("french");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("german");
+	private static readonly System.Text.Json.JsonEncodedText MemberHebrew = System.Text.Json.JsonEncodedText.Encode("hebrew");
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("hungarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberPolish = System.Text.Json.JsonEncodedText.Encode("polish");
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("romanian");
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("russian");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("spanish");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAny))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Any;
+		}
+
+		if (reader.ValueTextEquals(MemberCommon))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Common;
+		}
+
+		if (reader.ValueTextEquals(MemberCyrillic))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Cyrillic;
+		}
+
+		if (reader.ValueTextEquals(MemberEnglish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.English;
+		}
+
+		if (reader.ValueTextEquals(MemberFrench))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.French;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.German;
+		}
+
+		if (reader.ValueTextEquals(MemberHebrew))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hebrew;
+		}
+
+		if (reader.ValueTextEquals(MemberHungarian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hungarian;
+		}
+
+		if (reader.ValueTextEquals(MemberPolish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Polish;
+		}
+
+		if (reader.ValueTextEquals(MemberRomanian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Romanian;
+		}
+
+		if (reader.ValueTextEquals(MemberRussian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Russian;
+		}
+
+		if (reader.ValueTextEquals(MemberSpanish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Spanish;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAny.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Any;
+		}
+
+		if (string.Equals(value, MemberCommon.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Common;
+		}
+
+		if (string.Equals(value, MemberCyrillic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Cyrillic;
+		}
+
+		if (string.Equals(value, MemberEnglish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.English;
+		}
+
+		if (string.Equals(value, MemberFrench.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.French;
+		}
+
+		if (string.Equals(value, MemberGerman.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.German;
+		}
+
+		if (string.Equals(value, MemberHebrew.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hebrew;
+		}
+
+		if (string.Equals(value, MemberHungarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hungarian;
+		}
+
+		if (string.Equals(value, MemberPolish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Polish;
+		}
+
+		if (string.Equals(value, MemberRomanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Romanian;
+		}
+
+		if (string.Equals(value, MemberRussian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Russian;
+		}
+
+		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Spanish;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Any:
+				writer.WriteStringValue(MemberAny);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Common:
+				writer.WriteStringValue(MemberCommon);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Cyrillic:
+				writer.WriteStringValue(MemberCyrillic);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.English:
+				writer.WriteStringValue(MemberEnglish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.French:
+				writer.WriteStringValue(MemberFrench);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.German:
+				writer.WriteStringValue(MemberGerman);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hebrew:
+				writer.WriteStringValue(MemberHebrew);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hungarian:
+				writer.WriteStringValue(MemberHungarian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Polish:
+				writer.WriteStringValue(MemberPolish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Romanian:
+				writer.WriteStringValue(MemberRomanian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Russian:
+				writer.WriteStringValue(MemberRussian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Spanish:
+				writer.WriteStringValue(MemberSpanish);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeConverter))]
 public enum KuromojiTokenizationMode
 {
-	[EnumMember(Value = "search")]
-	Search,
-	[EnumMember(Value = "normal")]
+	[System.Runtime.Serialization.EnumMember(Value = "extended")]
+	Extended,
+	[System.Runtime.Serialization.EnumMember(Value = "normal")]
 	Normal,
-	[EnumMember(Value = "extended")]
-	Extended
+	[System.Runtime.Serialization.EnumMember(Value = "search")]
+	Search
 }
 
-internal sealed class KuromojiTokenizationModeConverter : JsonConverter<KuromojiTokenizationMode>
-{
-	public override KuromojiTokenizationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "search":
-				return KuromojiTokenizationMode.Search;
-			case "normal":
-				return KuromojiTokenizationMode.Normal;
-			case "extended":
-				return KuromojiTokenizationMode.Extended;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, KuromojiTokenizationMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case KuromojiTokenizationMode.Search:
-				writer.WriteStringValue("search");
-				return;
-			case KuromojiTokenizationMode.Normal:
-				writer.WriteStringValue("normal");
-				return;
-			case KuromojiTokenizationMode.Extended:
-				writer.WriteStringValue("extended");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(LanguageConverter))]
-public enum Language
-{
-	[EnumMember(Value = "Turkish")]
-	Turkish,
-	[EnumMember(Value = "Thai")]
-	Thai,
-	[EnumMember(Value = "Swedish")]
-	Swedish,
-	[EnumMember(Value = "Spanish")]
-	Spanish,
-	[EnumMember(Value = "Sorani")]
-	Sorani,
-	[EnumMember(Value = "Russian")]
-	Russian,
-	[EnumMember(Value = "Romanian")]
-	Romanian,
-	[EnumMember(Value = "Portuguese")]
-	Portuguese,
-	[EnumMember(Value = "Persian")]
-	Persian,
-	[EnumMember(Value = "Norwegian")]
-	Norwegian,
-	[EnumMember(Value = "Latvian")]
-	Latvian,
-	[EnumMember(Value = "Italian")]
-	Italian,
-	[EnumMember(Value = "Irish")]
-	Irish,
-	[EnumMember(Value = "Indonesian")]
-	Indonesian,
-	[EnumMember(Value = "Hungarian")]
-	Hungarian,
-	[EnumMember(Value = "Hindi")]
-	Hindi,
-	[EnumMember(Value = "Greek")]
-	Greek,
-	[EnumMember(Value = "German")]
-	German,
-	[EnumMember(Value = "Galician")]
-	Galician,
-	[EnumMember(Value = "French")]
-	French,
-	[EnumMember(Value = "Finnish")]
-	Finnish,
-	[EnumMember(Value = "Estonian")]
-	Estonian,
-	[EnumMember(Value = "English")]
-	English,
-	[EnumMember(Value = "Dutch")]
-	Dutch,
-	[EnumMember(Value = "Danish")]
-	Danish,
-	[EnumMember(Value = "Czech")]
-	Czech,
-	[EnumMember(Value = "Cjk")]
-	Cjk,
-	[EnumMember(Value = "Chinese")]
-	Chinese,
-	[EnumMember(Value = "Catalan")]
-	Catalan,
-	[EnumMember(Value = "Bulgarian")]
-	Bulgarian,
-	[EnumMember(Value = "Brazilian")]
-	Brazilian,
-	[EnumMember(Value = "Basque")]
-	Basque,
-	[EnumMember(Value = "Armenian")]
-	Armenian,
-	[EnumMember(Value = "Arabic")]
-	Arabic
-}
-
-internal sealed class LanguageConverter : JsonConverter<Language>
-{
-	public override Language Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "Turkish":
-				return Language.Turkish;
-			case "Thai":
-				return Language.Thai;
-			case "Swedish":
-				return Language.Swedish;
-			case "Spanish":
-				return Language.Spanish;
-			case "Sorani":
-				return Language.Sorani;
-			case "Russian":
-				return Language.Russian;
-			case "Romanian":
-				return Language.Romanian;
-			case "Portuguese":
-				return Language.Portuguese;
-			case "Persian":
-				return Language.Persian;
-			case "Norwegian":
-				return Language.Norwegian;
-			case "Latvian":
-				return Language.Latvian;
-			case "Italian":
-				return Language.Italian;
-			case "Irish":
-				return Language.Irish;
-			case "Indonesian":
-				return Language.Indonesian;
-			case "Hungarian":
-				return Language.Hungarian;
-			case "Hindi":
-				return Language.Hindi;
-			case "Greek":
-				return Language.Greek;
-			case "German":
-				return Language.German;
-			case "Galician":
-				return Language.Galician;
-			case "French":
-				return Language.French;
-			case "Finnish":
-				return Language.Finnish;
-			case "Estonian":
-				return Language.Estonian;
-			case "English":
-				return Language.English;
-			case "Dutch":
-				return Language.Dutch;
-			case "Danish":
-				return Language.Danish;
-			case "Czech":
-				return Language.Czech;
-			case "Cjk":
-				return Language.Cjk;
-			case "Chinese":
-				return Language.Chinese;
-			case "Catalan":
-				return Language.Catalan;
-			case "Bulgarian":
-				return Language.Bulgarian;
-			case "Brazilian":
-				return Language.Brazilian;
-			case "Basque":
-				return Language.Basque;
-			case "Armenian":
-				return Language.Armenian;
-			case "Arabic":
-				return Language.Arabic;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, Language value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Language.Turkish:
-				writer.WriteStringValue("Turkish");
-				return;
-			case Language.Thai:
-				writer.WriteStringValue("Thai");
-				return;
-			case Language.Swedish:
-				writer.WriteStringValue("Swedish");
-				return;
-			case Language.Spanish:
-				writer.WriteStringValue("Spanish");
-				return;
-			case Language.Sorani:
-				writer.WriteStringValue("Sorani");
-				return;
-			case Language.Russian:
-				writer.WriteStringValue("Russian");
-				return;
-			case Language.Romanian:
-				writer.WriteStringValue("Romanian");
-				return;
-			case Language.Portuguese:
-				writer.WriteStringValue("Portuguese");
-				return;
-			case Language.Persian:
-				writer.WriteStringValue("Persian");
-				return;
-			case Language.Norwegian:
-				writer.WriteStringValue("Norwegian");
-				return;
-			case Language.Latvian:
-				writer.WriteStringValue("Latvian");
-				return;
-			case Language.Italian:
-				writer.WriteStringValue("Italian");
-				return;
-			case Language.Irish:
-				writer.WriteStringValue("Irish");
-				return;
-			case Language.Indonesian:
-				writer.WriteStringValue("Indonesian");
-				return;
-			case Language.Hungarian:
-				writer.WriteStringValue("Hungarian");
-				return;
-			case Language.Hindi:
-				writer.WriteStringValue("Hindi");
-				return;
-			case Language.Greek:
-				writer.WriteStringValue("Greek");
-				return;
-			case Language.German:
-				writer.WriteStringValue("German");
-				return;
-			case Language.Galician:
-				writer.WriteStringValue("Galician");
-				return;
-			case Language.French:
-				writer.WriteStringValue("French");
-				return;
-			case Language.Finnish:
-				writer.WriteStringValue("Finnish");
-				return;
-			case Language.Estonian:
-				writer.WriteStringValue("Estonian");
-				return;
-			case Language.English:
-				writer.WriteStringValue("English");
-				return;
-			case Language.Dutch:
-				writer.WriteStringValue("Dutch");
-				return;
-			case Language.Danish:
-				writer.WriteStringValue("Danish");
-				return;
-			case Language.Czech:
-				writer.WriteStringValue("Czech");
-				return;
-			case Language.Cjk:
-				writer.WriteStringValue("Cjk");
-				return;
-			case Language.Chinese:
-				writer.WriteStringValue("Chinese");
-				return;
-			case Language.Catalan:
-				writer.WriteStringValue("Catalan");
-				return;
-			case Language.Bulgarian:
-				writer.WriteStringValue("Bulgarian");
-				return;
-			case Language.Brazilian:
-				writer.WriteStringValue("Brazilian");
-				return;
-			case Language.Basque:
-				writer.WriteStringValue("Basque");
-				return;
-			case Language.Armenian:
-				writer.WriteStringValue("Armenian");
-				return;
-			case Language.Arabic:
-				writer.WriteStringValue("Arabic");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(NoriDecompoundModeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeConverter))]
 public enum NoriDecompoundMode
 {
-	[EnumMember(Value = "none")]
-	None,
-	[EnumMember(Value = "mixed")]
+	[System.Runtime.Serialization.EnumMember(Value = "discard")]
+	Discard,
+	[System.Runtime.Serialization.EnumMember(Value = "mixed")]
 	Mixed,
-	[EnumMember(Value = "discard")]
-	Discard
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None
 }
 
-internal sealed class NoriDecompoundModeConverter : JsonConverter<NoriDecompoundMode>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeConverter))]
+public enum IcuNormalizationMode
 {
-	public override NoriDecompoundMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "none":
-				return NoriDecompoundMode.None;
-			case "mixed":
-				return NoriDecompoundMode.Mixed;
-			case "discard":
-				return NoriDecompoundMode.Discard;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, NoriDecompoundMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case NoriDecompoundMode.None:
-				writer.WriteStringValue("none");
-				return;
-			case NoriDecompoundMode.Mixed:
-				writer.WriteStringValue("mixed");
-				return;
-			case NoriDecompoundMode.Discard:
-				writer.WriteStringValue("discard");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "compose")]
+	Compose,
+	[System.Runtime.Serialization.EnumMember(Value = "decompose")]
+	Decompose
 }
 
-[JsonConverter(typeof(PhoneticEncoderConverter))]
-public enum PhoneticEncoder
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeConverter))]
+public enum IcuNormalizationType
 {
-	[EnumMember(Value = "soundex")]
-	Soundex,
-	[EnumMember(Value = "refined_soundex")]
-	RefinedSoundex,
-	[EnumMember(Value = "nysiis")]
-	Nysiis,
-	[EnumMember(Value = "metaphone")]
-	Metaphone,
-	[EnumMember(Value = "koelnerphonetik")]
-	Koelnerphonetik,
-	[EnumMember(Value = "haasephonetik")]
-	Haasephonetik,
-	[EnumMember(Value = "double_metaphone")]
-	DoubleMetaphone,
-	[EnumMember(Value = "daitch_mokotoff")]
-	DaitchMokotoff,
-	[EnumMember(Value = "cologne")]
-	Cologne,
-	[EnumMember(Value = "caverphone2")]
-	Caverphone2,
-	[EnumMember(Value = "caverphone1")]
-	Caverphone1,
-	[EnumMember(Value = "beider_morse")]
-	BeiderMorse
+	[System.Runtime.Serialization.EnumMember(Value = "nfc")]
+	Nfc,
+	[System.Runtime.Serialization.EnumMember(Value = "nfkc")]
+	Nfkc,
+	[System.Runtime.Serialization.EnumMember(Value = "nfkc_cf")]
+	NfkcCf
 }
 
-internal sealed class PhoneticEncoderConverter : JsonConverter<PhoneticEncoder>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingConverter))]
+public enum DelimitedPayloadEncoding
 {
-	public override PhoneticEncoder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "soundex":
-				return PhoneticEncoder.Soundex;
-			case "refined_soundex":
-				return PhoneticEncoder.RefinedSoundex;
-			case "nysiis":
-				return PhoneticEncoder.Nysiis;
-			case "metaphone":
-				return PhoneticEncoder.Metaphone;
-			case "koelnerphonetik":
-				return PhoneticEncoder.Koelnerphonetik;
-			case "haasephonetik":
-				return PhoneticEncoder.Haasephonetik;
-			case "double_metaphone":
-				return PhoneticEncoder.DoubleMetaphone;
-			case "daitch_mokotoff":
-				return PhoneticEncoder.DaitchMokotoff;
-			case "cologne":
-				return PhoneticEncoder.Cologne;
-			case "caverphone2":
-				return PhoneticEncoder.Caverphone2;
-			case "caverphone1":
-				return PhoneticEncoder.Caverphone1;
-			case "beider_morse":
-				return PhoneticEncoder.BeiderMorse;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, PhoneticEncoder value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case PhoneticEncoder.Soundex:
-				writer.WriteStringValue("soundex");
-				return;
-			case PhoneticEncoder.RefinedSoundex:
-				writer.WriteStringValue("refined_soundex");
-				return;
-			case PhoneticEncoder.Nysiis:
-				writer.WriteStringValue("nysiis");
-				return;
-			case PhoneticEncoder.Metaphone:
-				writer.WriteStringValue("metaphone");
-				return;
-			case PhoneticEncoder.Koelnerphonetik:
-				writer.WriteStringValue("koelnerphonetik");
-				return;
-			case PhoneticEncoder.Haasephonetik:
-				writer.WriteStringValue("haasephonetik");
-				return;
-			case PhoneticEncoder.DoubleMetaphone:
-				writer.WriteStringValue("double_metaphone");
-				return;
-			case PhoneticEncoder.DaitchMokotoff:
-				writer.WriteStringValue("daitch_mokotoff");
-				return;
-			case PhoneticEncoder.Cologne:
-				writer.WriteStringValue("cologne");
-				return;
-			case PhoneticEncoder.Caverphone2:
-				writer.WriteStringValue("caverphone2");
-				return;
-			case PhoneticEncoder.Caverphone1:
-				writer.WriteStringValue("caverphone1");
-				return;
-			case PhoneticEncoder.BeiderMorse:
-				writer.WriteStringValue("beider_morse");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float,
+	[System.Runtime.Serialization.EnumMember(Value = "identity")]
+	Identity,
+	[System.Runtime.Serialization.EnumMember(Value = "int")]
+	Integer
 }
 
-[JsonConverter(typeof(PhoneticLanguageConverter))]
-public enum PhoneticLanguage
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSideConverter))]
+public enum EdgeNGramSide
 {
-	[EnumMember(Value = "spanish")]
-	Spanish,
-	[EnumMember(Value = "russian")]
-	Russian,
-	[EnumMember(Value = "romanian")]
-	Romanian,
-	[EnumMember(Value = "polish")]
-	Polish,
-	[EnumMember(Value = "hungarian")]
-	Hungarian,
-	[EnumMember(Value = "hebrew")]
-	Hebrew,
-	[EnumMember(Value = "german")]
-	German,
-	[EnumMember(Value = "french")]
-	French,
-	[EnumMember(Value = "english")]
-	English,
-	[EnumMember(Value = "cyrillic")]
-	Cyrillic,
-	[EnumMember(Value = "common")]
-	Common,
-	[EnumMember(Value = "any")]
-	Any
+	[System.Runtime.Serialization.EnumMember(Value = "back")]
+	Back,
+	[System.Runtime.Serialization.EnumMember(Value = "front")]
+	Front
 }
 
-internal sealed class PhoneticLanguageConverter : JsonConverter<PhoneticLanguage>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeConverter))]
+public enum KeepTypesMode
 {
-	public override PhoneticLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "spanish":
-				return PhoneticLanguage.Spanish;
-			case "russian":
-				return PhoneticLanguage.Russian;
-			case "romanian":
-				return PhoneticLanguage.Romanian;
-			case "polish":
-				return PhoneticLanguage.Polish;
-			case "hungarian":
-				return PhoneticLanguage.Hungarian;
-			case "hebrew":
-				return PhoneticLanguage.Hebrew;
-			case "german":
-				return PhoneticLanguage.German;
-			case "french":
-				return PhoneticLanguage.French;
-			case "english":
-				return PhoneticLanguage.English;
-			case "cyrillic":
-				return PhoneticLanguage.Cyrillic;
-			case "common":
-				return PhoneticLanguage.Common;
-			case "any":
-				return PhoneticLanguage.Any;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, PhoneticLanguage value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case PhoneticLanguage.Spanish:
-				writer.WriteStringValue("spanish");
-				return;
-			case PhoneticLanguage.Russian:
-				writer.WriteStringValue("russian");
-				return;
-			case PhoneticLanguage.Romanian:
-				writer.WriteStringValue("romanian");
-				return;
-			case PhoneticLanguage.Polish:
-				writer.WriteStringValue("polish");
-				return;
-			case PhoneticLanguage.Hungarian:
-				writer.WriteStringValue("hungarian");
-				return;
-			case PhoneticLanguage.Hebrew:
-				writer.WriteStringValue("hebrew");
-				return;
-			case PhoneticLanguage.German:
-				writer.WriteStringValue("german");
-				return;
-			case PhoneticLanguage.French:
-				writer.WriteStringValue("french");
-				return;
-			case PhoneticLanguage.English:
-				writer.WriteStringValue("english");
-				return;
-			case PhoneticLanguage.Cyrillic:
-				writer.WriteStringValue("cyrillic");
-				return;
-			case PhoneticLanguage.Common:
-				writer.WriteStringValue("common");
-				return;
-			case PhoneticLanguage.Any:
-				writer.WriteStringValue("any");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "exclude")]
+	Exclude,
+	[System.Runtime.Serialization.EnumMember(Value = "include")]
+	Include
 }
 
-[JsonConverter(typeof(PhoneticNameTypeConverter))]
-public enum PhoneticNameType
-{
-	[EnumMember(Value = "sephardic")]
-	Sephardic,
-	[EnumMember(Value = "generic")]
-	Generic,
-	[EnumMember(Value = "ashkenazi")]
-	Ashkenazi
-}
-
-internal sealed class PhoneticNameTypeConverter : JsonConverter<PhoneticNameType>
-{
-	public override PhoneticNameType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "sephardic":
-				return PhoneticNameType.Sephardic;
-			case "generic":
-				return PhoneticNameType.Generic;
-			case "ashkenazi":
-				return PhoneticNameType.Ashkenazi;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, PhoneticNameType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case PhoneticNameType.Sephardic:
-				writer.WriteStringValue("sephardic");
-				return;
-			case PhoneticNameType.Generic:
-				writer.WriteStringValue("generic");
-				return;
-			case PhoneticNameType.Ashkenazi:
-				writer.WriteStringValue("ashkenazi");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(PhoneticRuleTypeConverter))]
-public enum PhoneticRuleType
-{
-	[EnumMember(Value = "exact")]
-	Exact,
-	[EnumMember(Value = "approx")]
-	Approx
-}
-
-internal sealed class PhoneticRuleTypeConverter : JsonConverter<PhoneticRuleType>
-{
-	public override PhoneticRuleType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "exact":
-				return PhoneticRuleType.Exact;
-			case "approx":
-				return PhoneticRuleType.Approx;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, PhoneticRuleType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case PhoneticRuleType.Exact:
-				writer.WriteStringValue("exact");
-				return;
-			case PhoneticRuleType.Approx:
-				writer.WriteStringValue("approx");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SnowballLanguageConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageConverter))]
 public enum SnowballLanguage
 {
-	[EnumMember(Value = "Turkish")]
-	Turkish,
-	[EnumMember(Value = "Swedish")]
-	Swedish,
-	[EnumMember(Value = "Spanish")]
-	Spanish,
-	[EnumMember(Value = "Russian")]
-	Russian,
-	[EnumMember(Value = "Romanian")]
-	Romanian,
-	[EnumMember(Value = "Portuguese")]
-	Portuguese,
-	[EnumMember(Value = "Porter")]
-	Porter,
-	[EnumMember(Value = "Norwegian")]
-	Norwegian,
-	[EnumMember(Value = "Lovins")]
-	Lovins,
-	[EnumMember(Value = "Kp")]
-	Kp,
-	[EnumMember(Value = "Italian")]
-	Italian,
-	[EnumMember(Value = "Hungarian")]
-	Hungarian,
-	[EnumMember(Value = "German2")]
-	German2,
-	[EnumMember(Value = "German")]
-	German,
-	[EnumMember(Value = "French")]
-	French,
-	[EnumMember(Value = "Finnish")]
-	Finnish,
-	[EnumMember(Value = "English")]
-	English,
-	[EnumMember(Value = "Dutch")]
-	Dutch,
-	[EnumMember(Value = "Danish")]
-	Danish,
-	[EnumMember(Value = "Catalan")]
-	Catalan,
-	[EnumMember(Value = "Basque")]
+	[System.Runtime.Serialization.EnumMember(Value = "Armenian")]
+	Armenian,
+	[System.Runtime.Serialization.EnumMember(Value = "Basque")]
 	Basque,
-	[EnumMember(Value = "Armenian")]
-	Armenian
+	[System.Runtime.Serialization.EnumMember(Value = "Catalan")]
+	Catalan,
+	[System.Runtime.Serialization.EnumMember(Value = "Danish")]
+	Danish,
+	[System.Runtime.Serialization.EnumMember(Value = "Dutch")]
+	Dutch,
+	[System.Runtime.Serialization.EnumMember(Value = "English")]
+	English,
+	[System.Runtime.Serialization.EnumMember(Value = "Finnish")]
+	Finnish,
+	[System.Runtime.Serialization.EnumMember(Value = "French")]
+	French,
+	[System.Runtime.Serialization.EnumMember(Value = "German")]
+	German,
+	[System.Runtime.Serialization.EnumMember(Value = "German2")]
+	German2,
+	[System.Runtime.Serialization.EnumMember(Value = "Hungarian")]
+	Hungarian,
+	[System.Runtime.Serialization.EnumMember(Value = "Italian")]
+	Italian,
+	[System.Runtime.Serialization.EnumMember(Value = "Kp")]
+	Kp,
+	[System.Runtime.Serialization.EnumMember(Value = "Lovins")]
+	Lovins,
+	[System.Runtime.Serialization.EnumMember(Value = "Norwegian")]
+	Norwegian,
+	[System.Runtime.Serialization.EnumMember(Value = "Porter")]
+	Porter,
+	[System.Runtime.Serialization.EnumMember(Value = "Portuguese")]
+	Portuguese,
+	[System.Runtime.Serialization.EnumMember(Value = "Romanian")]
+	Romanian,
+	[System.Runtime.Serialization.EnumMember(Value = "Russian")]
+	Russian,
+	[System.Runtime.Serialization.EnumMember(Value = "Spanish")]
+	Spanish,
+	[System.Runtime.Serialization.EnumMember(Value = "Swedish")]
+	Swedish,
+	[System.Runtime.Serialization.EnumMember(Value = "Turkish")]
+	Turkish
 }
 
-internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage>
-{
-	public override SnowballLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "Turkish":
-				return SnowballLanguage.Turkish;
-			case "Swedish":
-				return SnowballLanguage.Swedish;
-			case "Spanish":
-				return SnowballLanguage.Spanish;
-			case "Russian":
-				return SnowballLanguage.Russian;
-			case "Romanian":
-				return SnowballLanguage.Romanian;
-			case "Portuguese":
-				return SnowballLanguage.Portuguese;
-			case "Porter":
-				return SnowballLanguage.Porter;
-			case "Norwegian":
-				return SnowballLanguage.Norwegian;
-			case "Lovins":
-				return SnowballLanguage.Lovins;
-			case "Kp":
-				return SnowballLanguage.Kp;
-			case "Italian":
-				return SnowballLanguage.Italian;
-			case "Hungarian":
-				return SnowballLanguage.Hungarian;
-			case "German2":
-				return SnowballLanguage.German2;
-			case "German":
-				return SnowballLanguage.German;
-			case "French":
-				return SnowballLanguage.French;
-			case "Finnish":
-				return SnowballLanguage.Finnish;
-			case "English":
-				return SnowballLanguage.English;
-			case "Dutch":
-				return SnowballLanguage.Dutch;
-			case "Danish":
-				return SnowballLanguage.Danish;
-			case "Catalan":
-				return SnowballLanguage.Catalan;
-			case "Basque":
-				return SnowballLanguage.Basque;
-			case "Armenian":
-				return SnowballLanguage.Armenian;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SnowballLanguage value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SnowballLanguage.Turkish:
-				writer.WriteStringValue("Turkish");
-				return;
-			case SnowballLanguage.Swedish:
-				writer.WriteStringValue("Swedish");
-				return;
-			case SnowballLanguage.Spanish:
-				writer.WriteStringValue("Spanish");
-				return;
-			case SnowballLanguage.Russian:
-				writer.WriteStringValue("Russian");
-				return;
-			case SnowballLanguage.Romanian:
-				writer.WriteStringValue("Romanian");
-				return;
-			case SnowballLanguage.Portuguese:
-				writer.WriteStringValue("Portuguese");
-				return;
-			case SnowballLanguage.Porter:
-				writer.WriteStringValue("Porter");
-				return;
-			case SnowballLanguage.Norwegian:
-				writer.WriteStringValue("Norwegian");
-				return;
-			case SnowballLanguage.Lovins:
-				writer.WriteStringValue("Lovins");
-				return;
-			case SnowballLanguage.Kp:
-				writer.WriteStringValue("Kp");
-				return;
-			case SnowballLanguage.Italian:
-				writer.WriteStringValue("Italian");
-				return;
-			case SnowballLanguage.Hungarian:
-				writer.WriteStringValue("Hungarian");
-				return;
-			case SnowballLanguage.German2:
-				writer.WriteStringValue("German2");
-				return;
-			case SnowballLanguage.German:
-				writer.WriteStringValue("German");
-				return;
-			case SnowballLanguage.French:
-				writer.WriteStringValue("French");
-				return;
-			case SnowballLanguage.Finnish:
-				writer.WriteStringValue("Finnish");
-				return;
-			case SnowballLanguage.English:
-				writer.WriteStringValue("English");
-				return;
-			case SnowballLanguage.Dutch:
-				writer.WriteStringValue("Dutch");
-				return;
-			case SnowballLanguage.Danish:
-				writer.WriteStringValue("Danish");
-				return;
-			case SnowballLanguage.Catalan:
-				writer.WriteStringValue("Catalan");
-				return;
-			case SnowballLanguage.Basque:
-				writer.WriteStringValue("Basque");
-				return;
-			case SnowballLanguage.Armenian:
-				writer.WriteStringValue("Armenian");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SynonymFormatConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SynonymFormatConverter))]
 public enum SynonymFormat
 {
-	[EnumMember(Value = "wordnet")]
-	Wordnet,
-	[EnumMember(Value = "solr")]
-	Solr
+	[System.Runtime.Serialization.EnumMember(Value = "solr")]
+	Solr,
+	[System.Runtime.Serialization.EnumMember(Value = "wordnet")]
+	Wordnet
 }
 
-internal sealed class SynonymFormatConverter : JsonConverter<SynonymFormat>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateConverter))]
+public enum IcuCollationAlternate
 {
-	public override SynonymFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "wordnet":
-				return SynonymFormat.Wordnet;
-			case "solr":
-				return SynonymFormat.Solr;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SynonymFormat value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SynonymFormat.Wordnet:
-				writer.WriteStringValue("wordnet");
-				return;
-			case SynonymFormat.Solr:
-				writer.WriteStringValue("solr");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "non-ignorable")]
+	NonIgnorable,
+	[System.Runtime.Serialization.EnumMember(Value = "shifted")]
+	Shifted
 }
 
-[JsonConverter(typeof(TokenCharConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstConverter))]
+public enum IcuCollationCaseFirst
+{
+	[System.Runtime.Serialization.EnumMember(Value = "lower")]
+	Lower,
+	[System.Runtime.Serialization.EnumMember(Value = "upper")]
+	Upper
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionConverter))]
+public enum IcuCollationDecomposition
+{
+	[System.Runtime.Serialization.EnumMember(Value = "identical")]
+	Identical,
+	[System.Runtime.Serialization.EnumMember(Value = "no")]
+	No
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthConverter))]
+public enum IcuCollationStrength
+{
+	[System.Runtime.Serialization.EnumMember(Value = "identical")]
+	Identical,
+	[System.Runtime.Serialization.EnumMember(Value = "primary")]
+	Primary,
+	[System.Runtime.Serialization.EnumMember(Value = "quaternary")]
+	Quaternary,
+	[System.Runtime.Serialization.EnumMember(Value = "secondary")]
+	Secondary,
+	[System.Runtime.Serialization.EnumMember(Value = "tertiary")]
+	Tertiary
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionConverter))]
+public enum IcuTransformDirection
+{
+	[System.Runtime.Serialization.EnumMember(Value = "forward")]
+	Forward,
+	[System.Runtime.Serialization.EnumMember(Value = "reverse")]
+	Reverse
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderConverter))]
+public enum PhoneticEncoder
+{
+	[System.Runtime.Serialization.EnumMember(Value = "beider_morse")]
+	BeiderMorse,
+	[System.Runtime.Serialization.EnumMember(Value = "caverphone1")]
+	Caverphone1,
+	[System.Runtime.Serialization.EnumMember(Value = "caverphone2")]
+	Caverphone2,
+	[System.Runtime.Serialization.EnumMember(Value = "cologne")]
+	Cologne,
+	[System.Runtime.Serialization.EnumMember(Value = "daitch_mokotoff")]
+	DaitchMokotoff,
+	[System.Runtime.Serialization.EnumMember(Value = "double_metaphone")]
+	DoubleMetaphone,
+	[System.Runtime.Serialization.EnumMember(Value = "haasephonetik")]
+	Haasephonetik,
+	[System.Runtime.Serialization.EnumMember(Value = "koelnerphonetik")]
+	Koelnerphonetik,
+	[System.Runtime.Serialization.EnumMember(Value = "metaphone")]
+	Metaphone,
+	[System.Runtime.Serialization.EnumMember(Value = "nysiis")]
+	Nysiis,
+	[System.Runtime.Serialization.EnumMember(Value = "refined_soundex")]
+	RefinedSoundex,
+	[System.Runtime.Serialization.EnumMember(Value = "soundex")]
+	Soundex
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeConverter))]
+public enum PhoneticNameType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "ashkenazi")]
+	Ashkenazi,
+	[System.Runtime.Serialization.EnumMember(Value = "generic")]
+	Generic,
+	[System.Runtime.Serialization.EnumMember(Value = "sephardic")]
+	Sephardic
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeConverter))]
+public enum PhoneticRuleType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "approx")]
+	Approx,
+	[System.Runtime.Serialization.EnumMember(Value = "exact")]
+	Exact
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.TokenCharConverter))]
 public enum TokenChar
 {
-	[EnumMember(Value = "whitespace")]
-	Whitespace,
-	[EnumMember(Value = "symbol")]
-	Symbol,
-	[EnumMember(Value = "punctuation")]
-	Punctuation,
-	[EnumMember(Value = "letter")]
-	Letter,
-	[EnumMember(Value = "digit")]
+	[System.Runtime.Serialization.EnumMember(Value = "custom")]
+	Custom,
+	[System.Runtime.Serialization.EnumMember(Value = "digit")]
 	Digit,
-	[EnumMember(Value = "custom")]
-	Custom
+	[System.Runtime.Serialization.EnumMember(Value = "letter")]
+	Letter,
+	[System.Runtime.Serialization.EnumMember(Value = "punctuation")]
+	Punctuation,
+	[System.Runtime.Serialization.EnumMember(Value = "symbol")]
+	Symbol,
+	[System.Runtime.Serialization.EnumMember(Value = "whitespace")]
+	Whitespace
 }
 
-internal sealed class TokenCharConverter : JsonConverter<TokenChar>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageConverter))]
+public enum PhoneticLanguage
 {
-	public override TokenChar Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "whitespace":
-				return TokenChar.Whitespace;
-			case "symbol":
-				return TokenChar.Symbol;
-			case "punctuation":
-				return TokenChar.Punctuation;
-			case "letter":
-				return TokenChar.Letter;
-			case "digit":
-				return TokenChar.Digit;
-			case "custom":
-				return TokenChar.Custom;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TokenChar value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case TokenChar.Whitespace:
-				writer.WriteStringValue("whitespace");
-				return;
-			case TokenChar.Symbol:
-				writer.WriteStringValue("symbol");
-				return;
-			case TokenChar.Punctuation:
-				writer.WriteStringValue("punctuation");
-				return;
-			case TokenChar.Letter:
-				writer.WriteStringValue("letter");
-				return;
-			case TokenChar.Digit:
-				writer.WriteStringValue("digit");
-				return;
-			case TokenChar.Custom:
-				writer.WriteStringValue("custom");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "any")]
+	Any,
+	[System.Runtime.Serialization.EnumMember(Value = "common")]
+	Common,
+	[System.Runtime.Serialization.EnumMember(Value = "cyrillic")]
+	Cyrillic,
+	[System.Runtime.Serialization.EnumMember(Value = "english")]
+	English,
+	[System.Runtime.Serialization.EnumMember(Value = "french")]
+	French,
+	[System.Runtime.Serialization.EnumMember(Value = "german")]
+	German,
+	[System.Runtime.Serialization.EnumMember(Value = "hebrew")]
+	Hebrew,
+	[System.Runtime.Serialization.EnumMember(Value = "hungarian")]
+	Hungarian,
+	[System.Runtime.Serialization.EnumMember(Value = "polish")]
+	Polish,
+	[System.Runtime.Serialization.EnumMember(Value = "romanian")]
+	Romanian,
+	[System.Runtime.Serialization.EnumMember(Value = "russian")]
+	Russian,
+	[System.Runtime.Serialization.EnumMember(Value = "spanish")]
+	Spanish
 }

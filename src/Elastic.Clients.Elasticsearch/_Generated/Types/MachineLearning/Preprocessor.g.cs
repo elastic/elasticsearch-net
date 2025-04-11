@@ -17,241 +17,198 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-[JsonConverter(typeof(PreprocessorConverter))]
+internal sealed partial class PreprocessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantFrequencyEncoding = System.Text.Json.JsonEncodedText.Encode("frequency_encoding");
+	private static readonly System.Text.Json.JsonEncodedText VariantOneHotEncoding = System.Text.Json.JsonEncodedText.Encode("one_hot_encoding");
+	private static readonly System.Text.Json.JsonEncodedText VariantTargetMeanEncoding = System.Text.Json.JsonEncodedText.Encode("target_mean_encoding");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantFrequencyEncoding))
+			{
+				variantType = VariantFrequencyEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantOneHotEncoding))
+			{
+				variantType = VariantOneHotEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTargetMeanEncoding))
+			{
+				variantType = VariantTargetMeanEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "frequency_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor)value.Variant, null, null);
+				break;
+			case "one_hot_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor)value.Variant, null, null);
+				break;
+			case "target_mean_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorConverter))]
 public sealed partial class Preprocessor
 {
-	internal Preprocessor(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public Preprocessor()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Preprocessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Preprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor? FrequencyEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor>("frequency_encoding"); set => SetVariant("frequency_encoding", value); }
+	public Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor? OneHotEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor>("one_hot_encoding"); set => SetVariant("one_hot_encoding", value); }
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor? TargetMeanEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor>("target_mean_encoding"); set => SetVariant("target_mean_encoding", value); }
 
-	public static Preprocessor FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor frequencyEncodingPreprocessor) => new Preprocessor("frequency_encoding", frequencyEncodingPreprocessor);
-	public static Preprocessor OneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor oneHotEncodingPreprocessor) => new Preprocessor("one_hot_encoding", oneHotEncodingPreprocessor);
-	public static Preprocessor TargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor targetMeanEncodingPreprocessor) => new Preprocessor("target_mean_encoding", targetMeanEncodingPreprocessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor value) => new Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor { FrequencyEncoding = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor value) => new Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor { OneHotEncoding = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor value) => new Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor { TargetMeanEncoding = value };
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class PreprocessorConverter : JsonConverter<Preprocessor>
+public readonly partial struct PreprocessorDescriptor
 {
-	public override Preprocessor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PreprocessorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "frequency_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "one_hot_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "target_mean_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Preprocessor' from the response.");
-		}
-
-		var result = new Preprocessor(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, Preprocessor value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PreprocessorDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "frequency_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor)value.Variant, options);
-					break;
-				case "one_hot_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor)value.Variant, options);
-					break;
-				case "target_mean_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class PreprocessorDescriptor<TDocument> : SerializableDescriptor<PreprocessorDescriptor<TDocument>>
-{
-	internal PreprocessorDescriptor(Action<PreprocessorDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public PreprocessorDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor descriptor) => descriptor.Instance;
 
-	private PreprocessorDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.FrequencyEncoding = value;
+		return this;
 	}
 
-	private PreprocessorDescriptor<TDocument> Set(object variant, string variantName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor FrequencyEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor> action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.FrequencyEncoding = Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor.Build(action);
+		return this;
 	}
 
-	public PreprocessorDescriptor<TDocument> FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor frequencyEncodingPreprocessor) => Set(frequencyEncodingPreprocessor, "frequency_encoding");
-	public PreprocessorDescriptor<TDocument> FrequencyEncoding(Action<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor> configure) => Set(configure, "frequency_encoding");
-	public PreprocessorDescriptor<TDocument> OneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor oneHotEncodingPreprocessor) => Set(oneHotEncodingPreprocessor, "one_hot_encoding");
-	public PreprocessorDescriptor<TDocument> OneHotEncoding(Action<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor> configure) => Set(configure, "one_hot_encoding");
-	public PreprocessorDescriptor<TDocument> TargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor targetMeanEncodingPreprocessor) => Set(targetMeanEncodingPreprocessor, "target_mean_encoding");
-	public PreprocessorDescriptor<TDocument> TargetMeanEncoding(Action<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor> configure) => Set(configure, "target_mean_encoding");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor OneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class PreprocessorDescriptor : SerializableDescriptor<PreprocessorDescriptor>
-{
-	internal PreprocessorDescriptor(Action<PreprocessorDescriptor> configure) => configure.Invoke(this);
-
-	public PreprocessorDescriptor() : base()
-	{
+		Instance.OneHotEncoding = value;
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private PreprocessorDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor OneHotEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.OneHotEncoding = Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor.Build(action);
+		return this;
 	}
 
-	private PreprocessorDescriptor Set(object variant, string variantName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor TargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.TargetMeanEncoding = value;
+		return this;
 	}
 
-	public PreprocessorDescriptor FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor frequencyEncodingPreprocessor) => Set(frequencyEncodingPreprocessor, "frequency_encoding");
-	public PreprocessorDescriptor FrequencyEncoding(Action<Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor> configure) => Set(configure, "frequency_encoding");
-	public PreprocessorDescriptor OneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor oneHotEncodingPreprocessor) => Set(oneHotEncodingPreprocessor, "one_hot_encoding");
-	public PreprocessorDescriptor OneHotEncoding(Action<Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor> configure) => Set(configure, "one_hot_encoding");
-	public PreprocessorDescriptor TargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor targetMeanEncodingPreprocessor) => Set(targetMeanEncodingPreprocessor, "target_mean_encoding");
-	public PreprocessorDescriptor TargetMeanEncoding(Action<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor> configure) => Set(configure, "target_mean_encoding");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor TargetMeanEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.TargetMeanEncoding = Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

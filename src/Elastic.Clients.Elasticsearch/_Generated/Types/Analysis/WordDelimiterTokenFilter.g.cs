@@ -17,266 +17,339 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class WordDelimiterTokenFilter : ITokenFilter
+internal sealed partial class WordDelimiterTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("catenate_all")]
+	private static readonly System.Text.Json.JsonEncodedText PropCatenateAll = System.Text.Json.JsonEncodedText.Encode("catenate_all");
+	private static readonly System.Text.Json.JsonEncodedText PropCatenateNumbers = System.Text.Json.JsonEncodedText.Encode("catenate_numbers");
+	private static readonly System.Text.Json.JsonEncodedText PropCatenateWords = System.Text.Json.JsonEncodedText.Encode("catenate_words");
+	private static readonly System.Text.Json.JsonEncodedText PropGenerateNumberParts = System.Text.Json.JsonEncodedText.Encode("generate_number_parts");
+	private static readonly System.Text.Json.JsonEncodedText PropGenerateWordParts = System.Text.Json.JsonEncodedText.Encode("generate_word_parts");
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original");
+	private static readonly System.Text.Json.JsonEncodedText PropProtectedWords = System.Text.Json.JsonEncodedText.Encode("protected_words");
+	private static readonly System.Text.Json.JsonEncodedText PropProtectedWordsPath = System.Text.Json.JsonEncodedText.Encode("protected_words_path");
+	private static readonly System.Text.Json.JsonEncodedText PropSplitOnCaseChange = System.Text.Json.JsonEncodedText.Encode("split_on_case_change");
+	private static readonly System.Text.Json.JsonEncodedText PropSplitOnNumerics = System.Text.Json.JsonEncodedText.Encode("split_on_numerics");
+	private static readonly System.Text.Json.JsonEncodedText PropStemEnglishPossessive = System.Text.Json.JsonEncodedText.Encode("stem_english_possessive");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropTypeTable = System.Text.Json.JsonEncodedText.Encode("type_table");
+	private static readonly System.Text.Json.JsonEncodedText PropTypeTablePath = System.Text.Json.JsonEncodedText.Encode("type_table_path");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCatenateAll = default;
+		LocalJsonValue<bool?> propCatenateNumbers = default;
+		LocalJsonValue<bool?> propCatenateWords = default;
+		LocalJsonValue<bool?> propGenerateNumberParts = default;
+		LocalJsonValue<bool?> propGenerateWordParts = default;
+		LocalJsonValue<bool?> propPreserveOriginal = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propProtectedWords = default;
+		LocalJsonValue<string?> propProtectedWordsPath = default;
+		LocalJsonValue<bool?> propSplitOnCaseChange = default;
+		LocalJsonValue<bool?> propSplitOnNumerics = default;
+		LocalJsonValue<bool?> propStemEnglishPossessive = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propTypeTable = default;
+		LocalJsonValue<string?> propTypeTablePath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCatenateAll.TryReadProperty(ref reader, options, PropCatenateAll, null))
+			{
+				continue;
+			}
+
+			if (propCatenateNumbers.TryReadProperty(ref reader, options, PropCatenateNumbers, null))
+			{
+				continue;
+			}
+
+			if (propCatenateWords.TryReadProperty(ref reader, options, PropCatenateWords, null))
+			{
+				continue;
+			}
+
+			if (propGenerateNumberParts.TryReadProperty(ref reader, options, PropGenerateNumberParts, null))
+			{
+				continue;
+			}
+
+			if (propGenerateWordParts.TryReadProperty(ref reader, options, PropGenerateWordParts, null))
+			{
+				continue;
+			}
+
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
+			{
+				continue;
+			}
+
+			if (propProtectedWords.TryReadProperty(ref reader, options, PropProtectedWords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProtectedWordsPath.TryReadProperty(ref reader, options, PropProtectedWordsPath, null))
+			{
+				continue;
+			}
+
+			if (propSplitOnCaseChange.TryReadProperty(ref reader, options, PropSplitOnCaseChange, null))
+			{
+				continue;
+			}
+
+			if (propSplitOnNumerics.TryReadProperty(ref reader, options, PropSplitOnNumerics, null))
+			{
+				continue;
+			}
+
+			if (propStemEnglishPossessive.TryReadProperty(ref reader, options, PropStemEnglishPossessive, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propTypeTable.TryReadProperty(ref reader, options, PropTypeTable, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTypeTablePath.TryReadProperty(ref reader, options, PropTypeTablePath, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CatenateAll = propCatenateAll.Value,
+			CatenateNumbers = propCatenateNumbers.Value,
+			CatenateWords = propCatenateWords.Value,
+			GenerateNumberParts = propGenerateNumberParts.Value,
+			GenerateWordParts = propGenerateWordParts.Value,
+			PreserveOriginal = propPreserveOriginal.Value,
+			ProtectedWords = propProtectedWords.Value,
+			ProtectedWordsPath = propProtectedWordsPath.Value,
+			SplitOnCaseChange = propSplitOnCaseChange.Value,
+			SplitOnNumerics = propSplitOnNumerics.Value,
+			StemEnglishPossessive = propStemEnglishPossessive.Value,
+			TypeTable = propTypeTable.Value,
+			TypeTablePath = propTypeTablePath.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCatenateAll, value.CatenateAll, null, null);
+		writer.WriteProperty(options, PropCatenateNumbers, value.CatenateNumbers, null, null);
+		writer.WriteProperty(options, PropCatenateWords, value.CatenateWords, null, null);
+		writer.WriteProperty(options, PropGenerateNumberParts, value.GenerateNumberParts, null, null);
+		writer.WriteProperty(options, PropGenerateWordParts, value.GenerateWordParts, null, null);
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
+		writer.WriteProperty(options, PropProtectedWords, value.ProtectedWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropProtectedWordsPath, value.ProtectedWordsPath, null, null);
+		writer.WriteProperty(options, PropSplitOnCaseChange, value.SplitOnCaseChange, null, null);
+		writer.WriteProperty(options, PropSplitOnNumerics, value.SplitOnNumerics, null, null);
+		writer.WriteProperty(options, PropStemEnglishPossessive, value.StemEnglishPossessive, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropTypeTable, value.TypeTable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTypeTablePath, value.TypeTablePath, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterConverter))]
+public sealed partial class WordDelimiterTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public WordDelimiterTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public WordDelimiterTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? CatenateAll { get; set; }
-	[JsonInclude, JsonPropertyName("catenate_numbers")]
 	public bool? CatenateNumbers { get; set; }
-	[JsonInclude, JsonPropertyName("catenate_words")]
 	public bool? CatenateWords { get; set; }
-	[JsonInclude, JsonPropertyName("generate_number_parts")]
 	public bool? GenerateNumberParts { get; set; }
-	[JsonInclude, JsonPropertyName("generate_word_parts")]
 	public bool? GenerateWordParts { get; set; }
-	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
-	[JsonInclude, JsonPropertyName("protected_words")]
-	public ICollection<string>? ProtectedWords { get; set; }
-	[JsonInclude, JsonPropertyName("protected_words_path")]
+	public System.Collections.Generic.ICollection<string>? ProtectedWords { get; set; }
 	public string? ProtectedWordsPath { get; set; }
-	[JsonInclude, JsonPropertyName("split_on_case_change")]
 	public bool? SplitOnCaseChange { get; set; }
-	[JsonInclude, JsonPropertyName("split_on_numerics")]
 	public bool? SplitOnNumerics { get; set; }
-	[JsonInclude, JsonPropertyName("stem_english_possessive")]
 	public bool? StemEnglishPossessive { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "word_delimiter";
 
-	[JsonInclude, JsonPropertyName("type_table")]
-	public ICollection<string>? TypeTable { get; set; }
-	[JsonInclude, JsonPropertyName("type_table_path")]
+	public System.Collections.Generic.ICollection<string>? TypeTable { get; set; }
 	public string? TypeTablePath { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDescriptor<WordDelimiterTokenFilterDescriptor>, IBuildableDescriptor<WordDelimiterTokenFilter>
+public readonly partial struct WordDelimiterTokenFilterDescriptor
 {
-	internal WordDelimiterTokenFilterDescriptor(Action<WordDelimiterTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter Instance { get; init; }
 
-	public WordDelimiterTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WordDelimiterTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CatenateAllValue { get; set; }
-	private bool? CatenateNumbersValue { get; set; }
-	private bool? CatenateWordsValue { get; set; }
-	private bool? GenerateNumberPartsValue { get; set; }
-	private bool? GenerateWordPartsValue { get; set; }
-	private bool? PreserveOriginalValue { get; set; }
-	private ICollection<string>? ProtectedWordsValue { get; set; }
-	private string? ProtectedWordsPathValue { get; set; }
-	private bool? SplitOnCaseChangeValue { get; set; }
-	private bool? SplitOnNumericsValue { get; set; }
-	private bool? StemEnglishPossessiveValue { get; set; }
-	private ICollection<string>? TypeTableValue { get; set; }
-	private string? TypeTablePathValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public WordDelimiterTokenFilterDescriptor CatenateAll(bool? catenateAll = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WordDelimiterTokenFilterDescriptor()
 	{
-		CatenateAllValue = catenateAll;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public WordDelimiterTokenFilterDescriptor CatenateNumbers(bool? catenateNumbers = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor CatenateAll(bool? value = true)
 	{
-		CatenateNumbersValue = catenateNumbers;
-		return Self;
+		Instance.CatenateAll = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor CatenateWords(bool? catenateWords = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor CatenateNumbers(bool? value = true)
 	{
-		CatenateWordsValue = catenateWords;
-		return Self;
+		Instance.CatenateNumbers = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor GenerateNumberParts(bool? generateNumberParts = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor CatenateWords(bool? value = true)
 	{
-		GenerateNumberPartsValue = generateNumberParts;
-		return Self;
+		Instance.CatenateWords = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor GenerateWordParts(bool? generateWordParts = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor GenerateNumberParts(bool? value = true)
 	{
-		GenerateWordPartsValue = generateWordParts;
-		return Self;
+		Instance.GenerateNumberParts = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor GenerateWordParts(bool? value = true)
 	{
-		PreserveOriginalValue = preserveOriginal;
-		return Self;
+		Instance.GenerateWordParts = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor ProtectedWords(ICollection<string>? protectedWords)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
-		ProtectedWordsValue = protectedWords;
-		return Self;
+		Instance.PreserveOriginal = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor ProtectedWordsPath(string? protectedWordsPath)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor ProtectedWords(System.Collections.Generic.ICollection<string>? value)
 	{
-		ProtectedWordsPathValue = protectedWordsPath;
-		return Self;
+		Instance.ProtectedWords = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor SplitOnCaseChange(bool? splitOnCaseChange = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor ProtectedWords(params string[] values)
 	{
-		SplitOnCaseChangeValue = splitOnCaseChange;
-		return Self;
+		Instance.ProtectedWords = [.. values];
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor SplitOnNumerics(bool? splitOnNumerics = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor ProtectedWordsPath(string? value)
 	{
-		SplitOnNumericsValue = splitOnNumerics;
-		return Self;
+		Instance.ProtectedWordsPath = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor StemEnglishPossessive(bool? stemEnglishPossessive = true)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor SplitOnCaseChange(bool? value = true)
 	{
-		StemEnglishPossessiveValue = stemEnglishPossessive;
-		return Self;
+		Instance.SplitOnCaseChange = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor TypeTable(ICollection<string>? typeTable)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor SplitOnNumerics(bool? value = true)
 	{
-		TypeTableValue = typeTable;
-		return Self;
+		Instance.SplitOnNumerics = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor TypeTablePath(string? typeTablePath)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor StemEnglishPossessive(bool? value = true)
 	{
-		TypeTablePathValue = typeTablePath;
-		return Self;
+		Instance.StemEnglishPossessive = value;
+		return this;
 	}
 
-	public WordDelimiterTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor TypeTable(System.Collections.Generic.ICollection<string>? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.TypeTable = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor TypeTable(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (CatenateAllValue.HasValue)
+		Instance.TypeTable = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor TypeTablePath(string? value)
+	{
+		Instance.TypeTablePath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("catenate_all");
-			writer.WriteBooleanValue(CatenateAllValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CatenateNumbersValue.HasValue)
-		{
-			writer.WritePropertyName("catenate_numbers");
-			writer.WriteBooleanValue(CatenateNumbersValue.Value);
-		}
-
-		if (CatenateWordsValue.HasValue)
-		{
-			writer.WritePropertyName("catenate_words");
-			writer.WriteBooleanValue(CatenateWordsValue.Value);
-		}
-
-		if (GenerateNumberPartsValue.HasValue)
-		{
-			writer.WritePropertyName("generate_number_parts");
-			writer.WriteBooleanValue(GenerateNumberPartsValue.Value);
-		}
-
-		if (GenerateWordPartsValue.HasValue)
-		{
-			writer.WritePropertyName("generate_word_parts");
-			writer.WriteBooleanValue(GenerateWordPartsValue.Value);
-		}
-
-		if (PreserveOriginalValue.HasValue)
-		{
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue.Value);
-		}
-
-		if (ProtectedWordsValue is not null)
-		{
-			writer.WritePropertyName("protected_words");
-			JsonSerializer.Serialize(writer, ProtectedWordsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(ProtectedWordsPathValue))
-		{
-			writer.WritePropertyName("protected_words_path");
-			writer.WriteStringValue(ProtectedWordsPathValue);
-		}
-
-		if (SplitOnCaseChangeValue.HasValue)
-		{
-			writer.WritePropertyName("split_on_case_change");
-			writer.WriteBooleanValue(SplitOnCaseChangeValue.Value);
-		}
-
-		if (SplitOnNumericsValue.HasValue)
-		{
-			writer.WritePropertyName("split_on_numerics");
-			writer.WriteBooleanValue(SplitOnNumericsValue.Value);
-		}
-
-		if (StemEnglishPossessiveValue.HasValue)
-		{
-			writer.WritePropertyName("stem_english_possessive");
-			writer.WriteBooleanValue(StemEnglishPossessiveValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("word_delimiter");
-		if (TypeTableValue is not null)
-		{
-			writer.WritePropertyName("type_table");
-			JsonSerializer.Serialize(writer, TypeTableValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TypeTablePathValue))
-		{
-			writer.WritePropertyName("type_table_path");
-			writer.WriteStringValue(TypeTablePathValue);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	WordDelimiterTokenFilter IBuildableDescriptor<WordDelimiterTokenFilter>.Build() => new()
-	{
-		CatenateAll = CatenateAllValue,
-		CatenateNumbers = CatenateNumbersValue,
-		CatenateWords = CatenateWordsValue,
-		GenerateNumberParts = GenerateNumberPartsValue,
-		GenerateWordParts = GenerateWordPartsValue,
-		PreserveOriginal = PreserveOriginalValue,
-		ProtectedWords = ProtectedWordsValue,
-		ProtectedWordsPath = ProtectedWordsPathValue,
-		SplitOnCaseChange = SplitOnCaseChangeValue,
-		SplitOnNumerics = SplitOnNumericsValue,
-		StemEnglishPossessive = StemEnglishPossessiveValue,
-		TypeTable = TypeTableValue,
-		TypeTablePath = TypeTablePathValue,
-		Version = VersionValue
-	};
 }

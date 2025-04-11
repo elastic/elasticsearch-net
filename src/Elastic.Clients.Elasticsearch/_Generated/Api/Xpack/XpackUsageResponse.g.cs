@@ -17,73 +17,414 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-public sealed partial class XpackUsageResponse : ElasticsearchResponse
+internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse>
 {
-	[JsonInclude, JsonPropertyName("aggregate_metric")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base AggregateMetric { get; init; }
-	[JsonInclude, JsonPropertyName("analytics")]
-	public Elastic.Clients.Elasticsearch.Xpack.Analytics Analytics { get; init; }
-	[JsonInclude, JsonPropertyName("archive")]
-	public Elastic.Clients.Elasticsearch.Xpack.Archive Archive { get; init; }
-	[JsonInclude, JsonPropertyName("ccr")]
-	public Elastic.Clients.Elasticsearch.Xpack.Ccr Ccr { get; init; }
-	[JsonInclude, JsonPropertyName("data_frame")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base? DataFrame { get; init; }
-	[JsonInclude, JsonPropertyName("data_science")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base? DataScience { get; init; }
-	[JsonInclude, JsonPropertyName("data_streams")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataStreams? DataStreams { get; init; }
-	[JsonInclude, JsonPropertyName("data_tiers")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataTiers DataTiers { get; init; }
-	[JsonInclude, JsonPropertyName("enrich")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base? Enrich { get; init; }
-	[JsonInclude, JsonPropertyName("eql")]
-	public Elastic.Clients.Elasticsearch.Xpack.Eql Eql { get; init; }
-	[JsonInclude, JsonPropertyName("flattened")]
-	public Elastic.Clients.Elasticsearch.Xpack.Flattened? Flattened { get; init; }
-	[JsonInclude, JsonPropertyName("frozen_indices")]
-	public Elastic.Clients.Elasticsearch.Xpack.FrozenIndices FrozenIndices { get; init; }
-	[JsonInclude, JsonPropertyName("graph")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; init; }
-	[JsonInclude, JsonPropertyName("health_api")]
-	public Elastic.Clients.Elasticsearch.Xpack.HealthStatistics? HealthApi { get; init; }
-	[JsonInclude, JsonPropertyName("ilm")]
-	public Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; init; }
-	[JsonInclude, JsonPropertyName("logstash")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base Logstash { get; init; }
-	[JsonInclude, JsonPropertyName("ml")]
-	public Elastic.Clients.Elasticsearch.Xpack.MachineLearning Ml { get; init; }
-	[JsonInclude, JsonPropertyName("monitoring")]
-	public Elastic.Clients.Elasticsearch.Xpack.Monitoring Monitoring { get; init; }
-	[JsonInclude, JsonPropertyName("rollup")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base Rollup { get; init; }
-	[JsonInclude, JsonPropertyName("runtime_fields")]
-	public Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldTypes? RuntimeFields { get; init; }
-	[JsonInclude, JsonPropertyName("searchable_snapshots")]
-	public Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots SearchableSnapshots { get; init; }
-	[JsonInclude, JsonPropertyName("security")]
-	public Elastic.Clients.Elasticsearch.Xpack.Security Security { get; init; }
-	[JsonInclude, JsonPropertyName("slm")]
-	public Elastic.Clients.Elasticsearch.Xpack.Slm Slm { get; init; }
-	[JsonInclude, JsonPropertyName("spatial")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base Spatial { get; init; }
-	[JsonInclude, JsonPropertyName("sql")]
-	public Elastic.Clients.Elasticsearch.Xpack.Sql Sql { get; init; }
-	[JsonInclude, JsonPropertyName("transform")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base Transform { get; init; }
-	[JsonInclude, JsonPropertyName("vectors")]
-	public Elastic.Clients.Elasticsearch.Xpack.Vector? Vectors { get; init; }
-	[JsonInclude, JsonPropertyName("voting_only")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base VotingOnly { get; init; }
-	[JsonInclude, JsonPropertyName("watcher")]
-	public Elastic.Clients.Elasticsearch.Xpack.Watcher Watcher { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAggregateMetric = System.Text.Json.JsonEncodedText.Encode("aggregate_metric");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalytics = System.Text.Json.JsonEncodedText.Encode("analytics");
+	private static readonly System.Text.Json.JsonEncodedText PropArchive = System.Text.Json.JsonEncodedText.Encode("archive");
+	private static readonly System.Text.Json.JsonEncodedText PropCcr = System.Text.Json.JsonEncodedText.Encode("ccr");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrame = System.Text.Json.JsonEncodedText.Encode("data_frame");
+	private static readonly System.Text.Json.JsonEncodedText PropDataScience = System.Text.Json.JsonEncodedText.Encode("data_science");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
+	private static readonly System.Text.Json.JsonEncodedText PropDataTiers = System.Text.Json.JsonEncodedText.Encode("data_tiers");
+	private static readonly System.Text.Json.JsonEncodedText PropEnrich = System.Text.Json.JsonEncodedText.Encode("enrich");
+	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql");
+	private static readonly System.Text.Json.JsonEncodedText PropFlattened = System.Text.Json.JsonEncodedText.Encode("flattened");
+	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph");
+	private static readonly System.Text.Json.JsonEncodedText PropHealthApi = System.Text.Json.JsonEncodedText.Encode("health_api");
+	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
+	private static readonly System.Text.Json.JsonEncodedText PropLogstash = System.Text.Json.JsonEncodedText.Encode("logstash");
+	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
+	private static readonly System.Text.Json.JsonEncodedText PropMonitoring = System.Text.Json.JsonEncodedText.Encode("monitoring");
+	private static readonly System.Text.Json.JsonEncodedText PropRollup = System.Text.Json.JsonEncodedText.Encode("rollup");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFields = System.Text.Json.JsonEncodedText.Encode("runtime_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchableSnapshots = System.Text.Json.JsonEncodedText.Encode("searchable_snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
+	private static readonly System.Text.Json.JsonEncodedText PropSlm = System.Text.Json.JsonEncodedText.Encode("slm");
+	private static readonly System.Text.Json.JsonEncodedText PropSpatial = System.Text.Json.JsonEncodedText.Encode("spatial");
+	private static readonly System.Text.Json.JsonEncodedText PropSql = System.Text.Json.JsonEncodedText.Encode("sql");
+	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform");
+	private static readonly System.Text.Json.JsonEncodedText PropVectors = System.Text.Json.JsonEncodedText.Encode("vectors");
+	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only");
+	private static readonly System.Text.Json.JsonEncodedText PropWatcher = System.Text.Json.JsonEncodedText.Encode("watcher");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propAggregateMetric = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Analytics> propAnalytics = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Archive> propArchive = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ccr> propCcr = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propDataFrame = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propDataScience = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataStreams?> propDataStreams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataTiers> propDataTiers = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propEnrich = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Eql> propEql = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Flattened?> propFlattened = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propGraph = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.HealthStatistics?> propHealthApi = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ilm> propIlm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propLogstash = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MachineLearning> propMl = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Monitoring> propMonitoring = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propRollup = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldTypes?> propRuntimeFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots> propSearchableSnapshots = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Security> propSecurity = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Slm> propSlm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propSpatial = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Sql> propSql = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propTransform = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Vector?> propVectors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propVotingOnly = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Watcher> propWatcher = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregateMetric.TryReadProperty(ref reader, options, PropAggregateMetric, null))
+			{
+				continue;
+			}
+
+			if (propAnalytics.TryReadProperty(ref reader, options, PropAnalytics, null))
+			{
+				continue;
+			}
+
+			if (propArchive.TryReadProperty(ref reader, options, PropArchive, null))
+			{
+				continue;
+			}
+
+			if (propCcr.TryReadProperty(ref reader, options, PropCcr, null))
+			{
+				continue;
+			}
+
+			if (propDataFrame.TryReadProperty(ref reader, options, PropDataFrame, null))
+			{
+				continue;
+			}
+
+			if (propDataScience.TryReadProperty(ref reader, options, PropDataScience, null))
+			{
+				continue;
+			}
+
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, null))
+			{
+				continue;
+			}
+
+			if (propDataTiers.TryReadProperty(ref reader, options, PropDataTiers, null))
+			{
+				continue;
+			}
+
+			if (propEnrich.TryReadProperty(ref reader, options, PropEnrich, null))
+			{
+				continue;
+			}
+
+			if (propEql.TryReadProperty(ref reader, options, PropEql, null))
+			{
+				continue;
+			}
+
+			if (propFlattened.TryReadProperty(ref reader, options, PropFlattened, null))
+			{
+				continue;
+			}
+
+			if (propGraph.TryReadProperty(ref reader, options, PropGraph, null))
+			{
+				continue;
+			}
+
+			if (propHealthApi.TryReadProperty(ref reader, options, PropHealthApi, null))
+			{
+				continue;
+			}
+
+			if (propIlm.TryReadProperty(ref reader, options, PropIlm, null))
+			{
+				continue;
+			}
+
+			if (propLogstash.TryReadProperty(ref reader, options, PropLogstash, null))
+			{
+				continue;
+			}
+
+			if (propMl.TryReadProperty(ref reader, options, PropMl, null))
+			{
+				continue;
+			}
+
+			if (propMonitoring.TryReadProperty(ref reader, options, PropMonitoring, null))
+			{
+				continue;
+			}
+
+			if (propRollup.TryReadProperty(ref reader, options, PropRollup, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeFields.TryReadProperty(ref reader, options, PropRuntimeFields, null))
+			{
+				continue;
+			}
+
+			if (propSearchableSnapshots.TryReadProperty(ref reader, options, PropSearchableSnapshots, null))
+			{
+				continue;
+			}
+
+			if (propSecurity.TryReadProperty(ref reader, options, PropSecurity, null))
+			{
+				continue;
+			}
+
+			if (propSlm.TryReadProperty(ref reader, options, PropSlm, null))
+			{
+				continue;
+			}
+
+			if (propSpatial.TryReadProperty(ref reader, options, PropSpatial, null))
+			{
+				continue;
+			}
+
+			if (propSql.TryReadProperty(ref reader, options, PropSql, null))
+			{
+				continue;
+			}
+
+			if (propTransform.TryReadProperty(ref reader, options, PropTransform, null))
+			{
+				continue;
+			}
+
+			if (propVectors.TryReadProperty(ref reader, options, PropVectors, null))
+			{
+				continue;
+			}
+
+			if (propVotingOnly.TryReadProperty(ref reader, options, PropVotingOnly, null))
+			{
+				continue;
+			}
+
+			if (propWatcher.TryReadProperty(ref reader, options, PropWatcher, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AggregateMetric = propAggregateMetric.Value,
+			Analytics = propAnalytics.Value,
+			Archive = propArchive.Value,
+			Ccr = propCcr.Value,
+			DataFrame = propDataFrame.Value,
+			DataScience = propDataScience.Value,
+			DataStreams = propDataStreams.Value,
+			DataTiers = propDataTiers.Value,
+			Enrich = propEnrich.Value,
+			Eql = propEql.Value,
+			Flattened = propFlattened.Value,
+			Graph = propGraph.Value,
+			HealthApi = propHealthApi.Value,
+			Ilm = propIlm.Value,
+			Logstash = propLogstash.Value,
+			Ml = propMl.Value,
+			Monitoring = propMonitoring.Value,
+			Rollup = propRollup.Value,
+			RuntimeFields = propRuntimeFields.Value,
+			SearchableSnapshots = propSearchableSnapshots.Value,
+			Security = propSecurity.Value,
+			Slm = propSlm.Value,
+			Spatial = propSpatial.Value,
+			Sql = propSql.Value,
+			Transform = propTransform.Value,
+			Vectors = propVectors.Value,
+			VotingOnly = propVotingOnly.Value,
+			Watcher = propWatcher.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregateMetric, value.AggregateMetric, null, null);
+		writer.WriteProperty(options, PropAnalytics, value.Analytics, null, null);
+		writer.WriteProperty(options, PropArchive, value.Archive, null, null);
+		writer.WriteProperty(options, PropCcr, value.Ccr, null, null);
+		writer.WriteProperty(options, PropDataFrame, value.DataFrame, null, null);
+		writer.WriteProperty(options, PropDataScience, value.DataScience, null, null);
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, null);
+		writer.WriteProperty(options, PropDataTiers, value.DataTiers, null, null);
+		writer.WriteProperty(options, PropEnrich, value.Enrich, null, null);
+		writer.WriteProperty(options, PropEql, value.Eql, null, null);
+		writer.WriteProperty(options, PropFlattened, value.Flattened, null, null);
+		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
+		writer.WriteProperty(options, PropHealthApi, value.HealthApi, null, null);
+		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
+		writer.WriteProperty(options, PropLogstash, value.Logstash, null, null);
+		writer.WriteProperty(options, PropMl, value.Ml, null, null);
+		writer.WriteProperty(options, PropMonitoring, value.Monitoring, null, null);
+		writer.WriteProperty(options, PropRollup, value.Rollup, null, null);
+		writer.WriteProperty(options, PropRuntimeFields, value.RuntimeFields, null, null);
+		writer.WriteProperty(options, PropSearchableSnapshots, value.SearchableSnapshots, null, null);
+		writer.WriteProperty(options, PropSecurity, value.Security, null, null);
+		writer.WriteProperty(options, PropSlm, value.Slm, null, null);
+		writer.WriteProperty(options, PropSpatial, value.Spatial, null, null);
+		writer.WriteProperty(options, PropSql, value.Sql, null, null);
+		writer.WriteProperty(options, PropTransform, value.Transform, null, null);
+		writer.WriteProperty(options, PropVectors, value.Vectors, null, null);
+		writer.WriteProperty(options, PropVotingOnly, value.VotingOnly, null, null);
+		writer.WriteProperty(options, PropWatcher, value.Watcher, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponseConverter))]
+public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public XpackUsageResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal XpackUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base AggregateMetric { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Analytics Analytics { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Archive Archive { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Ccr Ccr { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Base? DataFrame { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Base? DataScience { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.DataStreams? DataStreams { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.DataTiers DataTiers { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Base? Enrich { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Eql Eql { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Flattened? Flattened { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.HealthStatistics? HealthApi { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base Logstash { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.MachineLearning Ml { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Monitoring Monitoring { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base Rollup { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldTypes? RuntimeFields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots SearchableSnapshots { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Security Security { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Slm Slm { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base Spatial { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Sql Sql { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base Transform { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Vector? Vectors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Base VotingOnly { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.Watcher Watcher { get; set; }
 }

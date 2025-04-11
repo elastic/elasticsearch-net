@@ -17,21 +17,143 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutDataFrameAnalyticsRequestParameters : RequestParameters
+public sealed partial class PutDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzedFields = System.Text.Json.JsonEncodedText.Encode("analyzed_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowLazyStart = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis> propAnalysis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields?> propAnalyzedFields = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination> propDest = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>?> propHeaders = default;
+		LocalJsonValue<int?> propMaxNumThreads = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<string?> propModelMemoryLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource> propSource = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, null))
+			{
+				continue;
+			}
+
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
+			{
+				continue;
+			}
+
+			if (propAnalyzedFields.TryReadProperty(ref reader, options, PropAnalyzedFields, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowLazyStart = propAllowLazyStart.Value,
+			Analysis = propAnalysis.Value,
+			AnalyzedFields = propAnalyzedFields.Value,
+			Description = propDescription.Value,
+			Dest = propDest.Value,
+			Headers = propHeaders.Value,
+			MaxNumThreads = propMaxNumThreads.Value,
+			Meta = propMeta.Value,
+			ModelMemoryLimit = propModelMemoryLimit.Value,
+			Source = propSource.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, null);
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -48,19 +170,53 @@ public sealed partial class PutDataFrameAnalyticsRequestParameters : RequestPara
 /// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
 /// </para>
 /// </summary>
-public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataFrameAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestConverter))]
+public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutDataFrameAnalytics;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination dest, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source) : base(r => r.Required("id", id))
+	{
+		Analysis = analysis;
+		Dest = dest;
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public PutDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutDataFrameAnalytics;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -74,7 +230,6 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// <c>xpack.ml.max_lazy_ml_nodes</c> setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_lazy_start")]
 	public bool? AllowLazyStart { get; set; }
 
 	/// <summary>
@@ -84,8 +239,11 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analysis")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -119,7 +277,6 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzed_fields")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
 	/// <summary>
@@ -127,7 +284,6 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -135,10 +291,12 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// The destination configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dest")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
-	[JsonInclude, JsonPropertyName("headers")]
-	public IDictionary<string, Union<string, ICollection<string>>>? Headers { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
+	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Headers { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -148,10 +306,8 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -162,7 +318,6 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string? ModelMemoryLimit { get; set; }
 
 	/// <summary>
@@ -170,9 +325,11 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// The configuration of how to source the analysis data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
 	public string? Version { get; set; }
 }
 
@@ -190,47 +347,44 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 /// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
 /// </para>
 /// </summary>
-public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<PutDataFrameAnalyticsRequestDescriptor<TDocument>, PutDataFrameAnalyticsRequestParameters>
+public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 {
-	internal PutDataFrameAnalyticsRequestDescriptor(Action<PutDataFrameAnalyticsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Instance { get; init; }
 
-	public PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutDataFrameAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_data_frame_analytics";
-
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(id);
+#pragma warning restore CS0618
 	}
 
-	private bool? AllowLazyStartValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis AnalysisValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> AnalysisDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> AnalysisDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> AnalyzedFieldsDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> DestDescriptorAction { get; set; }
-	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
-	private string? VersionValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutDataFrameAnalyticsRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -244,10 +398,10 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// <c>xpack.ml.max_lazy_ml_nodes</c> setting.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? allowLazyStart = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? value = true)
 	{
-		AllowLazyStartValue = allowLazyStart;
-		return Self;
+		Instance.AllowLazyStart = value;
+		return this;
 	}
 
 	/// <summary>
@@ -257,28 +411,36 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value)
 	{
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = null;
-		AnalysisValue = analysis;
-		return Self;
+		Instance.Analysis = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptorAction = null;
-		AnalysisDescriptor = descriptor;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Analysis<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = configure;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -313,28 +475,86 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsValue = analyzedFields;
-		return Self;
+		Instance.AnalyzedFields = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
+	/// will be included in the analysis. The patterns specified in <c>excludes</c>
+	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
+	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
+	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
+	/// not set, only the relevant fields will be included. For example, all the
+	/// numeric fields for outlier detection.
+	/// The supported fields vary for each type of analysis. Outlier detection
+	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
+	/// support missing values therefore fields that have data types other than
+	/// numeric or boolean are ignored. Documents where included fields contain
+	/// missing values, null values, or an array are also ignored. Therefore the
+	/// <c>dest</c> index may contain documents that don’t have an outlier score.
+	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the regression analysis.
+	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the classification analysis.
+	/// Classification analysis can be improved by mapping ordinal variable
+	/// values to a single number. For example, in case of age ranges, you can
+	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields()
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
+	/// will be included in the analysis. The patterns specified in <c>excludes</c>
+	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
+	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
+	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
+	/// not set, only the relevant fields will be included. For example, all the
+	/// numeric fields for outlier detection.
+	/// The supported fields vary for each type of analysis. Outlier detection
+	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
+	/// support missing values therefore fields that have data types other than
+	/// numeric or boolean are ignored. Documents where included fields contain
+	/// missing values, null values, or an array are also ignored. Therefore the
+	/// <c>dest</c> index may contain documents that don’t have an outlier score.
+	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the regression analysis.
+	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the classification analysis.
+	/// Classification analysis can be improved by mapping ordinal variable
+	/// values to a single number. For example, in case of age ranges, you can
+	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -342,10 +562,10 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -353,34 +573,64 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// The destination configuration.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination dest)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> action)
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The destination configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Dest<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<T>> action)
 	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Headers(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
 	{
-		HeadersValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
+		Instance.Headers = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AddHeader(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AddHeader(string key, params string[] values)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, [.. values]);
+		return this;
 	}
 
 	/// <summary>
@@ -391,16 +641,35 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -412,10 +681,10 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -423,146 +692,88 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	/// The configuration of how to source the analysis data.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The configuration of how to source the analysis data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The configuration of how to source the analysis data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Version(string? version)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Version(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyStartValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_start");
-			writer.WriteBooleanValue(AllowLazyStartValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (AnalysisDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-		}
-		else if (AnalysisDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(AnalysisDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (AnalyzedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsDescriptor, options);
-		}
-		else if (AnalyzedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(AnalyzedFieldsDescriptorAction), options);
-		}
-		else if (AnalyzedFieldsValue is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(DestDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (HeadersValue is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, HeadersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -580,47 +791,44 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 /// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
 /// </para>
 /// </summary>
-public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDescriptor<PutDataFrameAnalyticsRequestDescriptor, PutDataFrameAnalyticsRequestParameters>
+public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 {
-	internal PutDataFrameAnalyticsRequestDescriptor(Action<PutDataFrameAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Instance { get; init; }
 
-	public PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutDataFrameAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_data_frame_analytics";
-
-	public PutDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(id);
+#pragma warning restore CS0618
 	}
 
-	private bool? AllowLazyStartValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis AnalysisValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor AnalysisDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> AnalyzedFieldsDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> DestDescriptorAction { get; set; }
-	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> SourceDescriptorAction { get; set; }
-	private string? VersionValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutDataFrameAnalyticsRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -634,10 +842,10 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// <c>xpack.ml.max_lazy_ml_nodes</c> setting.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? allowLazyStart = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? value = true)
 	{
-		AllowLazyStartValue = allowLazyStart;
-		return Self;
+		Instance.AllowLazyStart = value;
+		return this;
 	}
 
 	/// <summary>
@@ -647,28 +855,23 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value)
 	{
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = null;
-		AnalysisValue = analysis;
-		return Self;
+		Instance.Analysis = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptorAction = null;
-		AnalysisDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutDataFrameAnalyticsRequestDescriptor Analysis(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> configure)
-	{
-		AnalysisValue = null;
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = configure;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -703,28 +906,86 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsValue = analyzedFields;
-		return Self;
+		Instance.AnalyzedFields = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
+	/// will be included in the analysis. The patterns specified in <c>excludes</c>
+	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
+	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
+	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
+	/// not set, only the relevant fields will be included. For example, all the
+	/// numeric fields for outlier detection.
+	/// The supported fields vary for each type of analysis. Outlier detection
+	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
+	/// support missing values therefore fields that have data types other than
+	/// numeric or boolean are ignored. Documents where included fields contain
+	/// missing values, null values, or an array are also ignored. Therefore the
+	/// <c>dest</c> index may contain documents that don’t have an outlier score.
+	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the regression analysis.
+	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the classification analysis.
+	/// Classification analysis can be improved by mapping ordinal variable
+	/// values to a single number. For example, in case of age ranges, you can
+	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields()
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
+	/// will be included in the analysis. The patterns specified in <c>excludes</c>
+	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
+	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
+	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
+	/// not set, only the relevant fields will be included. For example, all the
+	/// numeric fields for outlier detection.
+	/// The supported fields vary for each type of analysis. Outlier detection
+	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
+	/// support missing values therefore fields that have data types other than
+	/// numeric or boolean are ignored. Documents where included fields contain
+	/// missing values, null values, or an array are also ignored. Therefore the
+	/// <c>dest</c> index may contain documents that don’t have an outlier score.
+	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the regression analysis.
+	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+	/// Fields that are supported are included in the analysis, other fields are
+	/// ignored. Documents where included fields contain an array with two or
+	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
+	/// contain a results field are not included in the classification analysis.
+	/// Classification analysis can be improved by mapping ordinal variable
+	/// values to a single number. For example, in case of age ranges, you can
+	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -732,10 +993,10 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -743,34 +1004,53 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// The destination configuration.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination dest)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> action)
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Dest(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
 	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Headers = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Headers(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers()
 	{
-		HeadersValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AddHeader(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AddHeader(string key, params string[] values)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, [.. values]);
+		return this;
 	}
 
 	/// <summary>
@@ -781,16 +1061,35 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -802,10 +1101,10 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -813,145 +1112,76 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	/// The configuration of how to source the analysis data.
 	/// </para>
 	/// </summary>
-	public PutDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The configuration of how to source the analysis data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Version(string? value)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	public PutDataFrameAnalyticsRequestDescriptor Version(string? version)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>> action)
 	{
-		VersionValue = version;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyStartValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_start");
-			writer.WriteBooleanValue(AllowLazyStartValue.Value);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (AnalysisDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-		}
-		else if (AnalysisDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(AnalysisDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (AnalyzedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsDescriptor, options);
-		}
-		else if (AnalyzedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(AnalyzedFieldsDescriptorAction), options);
-		}
-		else if (AnalyzedFieldsValue is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(DestDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (HeadersValue is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, HeadersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

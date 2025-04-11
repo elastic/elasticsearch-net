@@ -17,35 +17,194 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public sealed partial class GetStatsResponse : ElasticsearchResponse
+internal sealed partial class GetStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse>
 {
-	[JsonInclude, JsonPropertyName("policy_stats")]
-	public IReadOnlyCollection<string> PolicyStats { get; init; }
-	[JsonInclude, JsonPropertyName("retention_deletion_time")]
-	public Elastic.Clients.Elasticsearch.Duration RetentionDeletionTime { get; init; }
-	[JsonInclude, JsonPropertyName("retention_deletion_time_millis")]
-	public long RetentionDeletionTimeMillis { get; init; }
-	[JsonInclude, JsonPropertyName("retention_failed")]
-	public long RetentionFailed { get; init; }
-	[JsonInclude, JsonPropertyName("retention_runs")]
-	public long RetentionRuns { get; init; }
-	[JsonInclude, JsonPropertyName("retention_timed_out")]
-	public long RetentionTimedOut { get; init; }
-	[JsonInclude, JsonPropertyName("total_snapshot_deletion_failures")]
-	public long TotalSnapshotDeletionFailures { get; init; }
-	[JsonInclude, JsonPropertyName("total_snapshots_deleted")]
-	public long TotalSnapshotsDeleted { get; init; }
-	[JsonInclude, JsonPropertyName("total_snapshots_failed")]
-	public long TotalSnapshotsFailed { get; init; }
-	[JsonInclude, JsonPropertyName("total_snapshots_taken")]
-	public long TotalSnapshotsTaken { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionDeletionTime = System.Text.Json.JsonEncodedText.Encode("retention_deletion_time");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionDeletionTimeMillis = System.Text.Json.JsonEncodedText.Encode("retention_deletion_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionFailed = System.Text.Json.JsonEncodedText.Encode("retention_failed");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionRuns = System.Text.Json.JsonEncodedText.Encode("retention_runs");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionTimedOut = System.Text.Json.JsonEncodedText.Encode("retention_timed_out");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotDeletionFailures = System.Text.Json.JsonEncodedText.Encode("total_snapshot_deletion_failures");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsDeleted = System.Text.Json.JsonEncodedText.Encode("total_snapshots_deleted");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsFailed = System.Text.Json.JsonEncodedText.Encode("total_snapshots_failed");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsTaken = System.Text.Json.JsonEncodedText.Encode("total_snapshots_taken");
+
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propPolicyStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propRetentionDeletionTime = default;
+		LocalJsonValue<System.TimeSpan> propRetentionDeletionTimeMillis = default;
+		LocalJsonValue<long> propRetentionFailed = default;
+		LocalJsonValue<long> propRetentionRuns = default;
+		LocalJsonValue<long> propRetentionTimedOut = default;
+		LocalJsonValue<long> propTotalSnapshotDeletionFailures = default;
+		LocalJsonValue<long> propTotalSnapshotsDeleted = default;
+		LocalJsonValue<long> propTotalSnapshotsFailed = default;
+		LocalJsonValue<long> propTotalSnapshotsTaken = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPolicyStats.TryReadProperty(ref reader, options, PropPolicyStats, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRetentionDeletionTime.TryReadProperty(ref reader, options, PropRetentionDeletionTime, null))
+			{
+				continue;
+			}
+
+			if (propRetentionDeletionTimeMillis.TryReadProperty(ref reader, options, PropRetentionDeletionTimeMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propRetentionFailed.TryReadProperty(ref reader, options, PropRetentionFailed, null))
+			{
+				continue;
+			}
+
+			if (propRetentionRuns.TryReadProperty(ref reader, options, PropRetentionRuns, null))
+			{
+				continue;
+			}
+
+			if (propRetentionTimedOut.TryReadProperty(ref reader, options, PropRetentionTimedOut, null))
+			{
+				continue;
+			}
+
+			if (propTotalSnapshotDeletionFailures.TryReadProperty(ref reader, options, PropTotalSnapshotDeletionFailures, null))
+			{
+				continue;
+			}
+
+			if (propTotalSnapshotsDeleted.TryReadProperty(ref reader, options, PropTotalSnapshotsDeleted, null))
+			{
+				continue;
+			}
+
+			if (propTotalSnapshotsFailed.TryReadProperty(ref reader, options, PropTotalSnapshotsFailed, null))
+			{
+				continue;
+			}
+
+			if (propTotalSnapshotsTaken.TryReadProperty(ref reader, options, PropTotalSnapshotsTaken, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			PolicyStats = propPolicyStats.Value,
+			RetentionDeletionTime = propRetentionDeletionTime.Value,
+			RetentionDeletionTimeMillis = propRetentionDeletionTimeMillis.Value,
+			RetentionFailed = propRetentionFailed.Value,
+			RetentionRuns = propRetentionRuns.Value,
+			RetentionTimedOut = propRetentionTimedOut.Value,
+			TotalSnapshotDeletionFailures = propTotalSnapshotDeletionFailures.Value,
+			TotalSnapshotsDeleted = propTotalSnapshotsDeleted.Value,
+			TotalSnapshotsFailed = propTotalSnapshotsFailed.Value,
+			TotalSnapshotsTaken = propTotalSnapshotsTaken.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRetentionDeletionTime, value.RetentionDeletionTime, null, null);
+		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed, null, null);
+		writer.WriteProperty(options, PropRetentionRuns, value.RetentionRuns, null, null);
+		writer.WriteProperty(options, PropRetentionTimedOut, value.RetentionTimedOut, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotDeletionFailures, value.TotalSnapshotDeletionFailures, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotsDeleted, value.TotalSnapshotsDeleted, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotsFailed, value.TotalSnapshotsFailed, null, null);
+		writer.WriteProperty(options, PropTotalSnapshotsTaken, value.TotalSnapshotsTaken, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponseConverter))]
+public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetStatsResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyCollection<string> PolicyStats { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Duration RetentionDeletionTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.TimeSpan RetentionDeletionTimeMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long RetentionFailed { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long RetentionRuns { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long RetentionTimedOut { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long TotalSnapshotDeletionFailures { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long TotalSnapshotsDeleted { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long TotalSnapshotsFailed { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long TotalSnapshotsTaken { get; set; }
 }

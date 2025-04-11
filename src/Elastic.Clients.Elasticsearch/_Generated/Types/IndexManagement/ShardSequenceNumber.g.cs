@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ShardSequenceNumberConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropGlobalCheckpoint = System.Text.Json.JsonEncodedText.Encode("global_checkpoint");
+	private static readonly System.Text.Json.JsonEncodedText PropLocalCheckpoint = System.Text.Json.JsonEncodedText.Encode("local_checkpoint");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSeqNo = System.Text.Json.JsonEncodedText.Encode("max_seq_no");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propGlobalCheckpoint = default;
+		LocalJsonValue<long> propLocalCheckpoint = default;
+		LocalJsonValue<long> propMaxSeqNo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propGlobalCheckpoint.TryReadProperty(ref reader, options, PropGlobalCheckpoint, null))
+			{
+				continue;
+			}
+
+			if (propLocalCheckpoint.TryReadProperty(ref reader, options, PropLocalCheckpoint, null))
+			{
+				continue;
+			}
+
+			if (propMaxSeqNo.TryReadProperty(ref reader, options, PropMaxSeqNo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			GlobalCheckpoint = propGlobalCheckpoint.Value,
+			LocalCheckpoint = propLocalCheckpoint.Value,
+			MaxSeqNo = propMaxSeqNo.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropGlobalCheckpoint, value.GlobalCheckpoint, null, null);
+		writer.WriteProperty(options, PropLocalCheckpoint, value.LocalCheckpoint, null, null);
+		writer.WriteProperty(options, PropMaxSeqNo, value.MaxSeqNo, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumberConverter))]
 public sealed partial class ShardSequenceNumber
 {
-	[JsonInclude, JsonPropertyName("global_checkpoint")]
-	public long GlobalCheckpoint { get; init; }
-	[JsonInclude, JsonPropertyName("local_checkpoint")]
-	public long LocalCheckpoint { get; init; }
-	[JsonInclude, JsonPropertyName("max_seq_no")]
-	public long MaxSeqNo { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardSequenceNumber(long globalCheckpoint, long localCheckpoint, long maxSeqNo)
+	{
+		GlobalCheckpoint = globalCheckpoint;
+		LocalCheckpoint = localCheckpoint;
+		MaxSeqNo = maxSeqNo;
+	}
+#if NET7_0_OR_GREATER
+	public ShardSequenceNumber()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardSequenceNumber()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardSequenceNumber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long GlobalCheckpoint { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long LocalCheckpoint { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxSeqNo { get; set; }
 }

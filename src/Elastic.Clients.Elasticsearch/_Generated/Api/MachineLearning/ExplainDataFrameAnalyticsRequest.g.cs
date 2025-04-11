@@ -17,26 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class ExplainDataFrameAnalyticsRequestParameters : RequestParameters
+public sealed partial class ExplainDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ExplainDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzedFields = System.Text.Json.JsonEncodedText.Encode("analyzed_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowLazyStart = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis?> propAnalysis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields?> propAnalyzedFields = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination?> propDest = default;
+		LocalJsonValue<int?> propMaxNumThreads = default;
+		LocalJsonValue<string?> propModelMemoryLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, null))
+			{
+				continue;
+			}
+
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
+			{
+				continue;
+			}
+
+			if (propAnalyzedFields.TryReadProperty(ref reader, options, PropAnalyzedFields, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowLazyStart = propAllowLazyStart.Value,
+			Analysis = propAnalysis.Value,
+			AnalyzedFields = propAnalyzedFields.Value,
+			Description = propDescription.Value,
+			Dest = propDest.Value,
+			MaxNumThreads = propMaxNumThreads.Value,
+			ModelMemoryLimit = propModelMemoryLimit.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, null);
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Explain data frame analytics config.
+/// </para>
+/// <para>
 /// This API provides explanations for a data frame analytics config that either
 /// exists already or one that has not been created yet. The following
 /// explanations are provided:
@@ -55,19 +152,31 @@ public sealed partial class ExplainDataFrameAnalyticsRequestParameters : Request
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<ExplainDataFrameAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestConverter))]
+public sealed partial class ExplainDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>
 {
-	public ExplainDataFrameAnalyticsRequest()
-	{
-	}
-
 	public ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ExplainDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ExplainDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningExplainDataFrameAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningExplainDataFrameAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -75,11 +184,19 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies whether this job can start when there is insufficient machine
 	/// learning node capacity for it to be immediately assigned to a node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_lazy_start")]
 	public bool? AllowLazyStart { get; set; }
 
 	/// <summary>
@@ -89,7 +206,6 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analysis")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? Analysis { get; set; }
 
 	/// <summary>
@@ -101,7 +217,6 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// be included in the analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzed_fields")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
 	/// <summary>
@@ -109,7 +224,6 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -118,7 +232,6 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// results_field (ml by default).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? Dest { get; set; }
 
 	/// <summary>
@@ -129,7 +242,6 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
 
 	/// <summary>
@@ -141,7 +253,6 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string? ModelMemoryLimit { get; set; }
 
 	/// <summary>
@@ -150,13 +261,14 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	/// index. Optionally, query and _source may be specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? Source { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Explain data frame analytics config.
+/// </para>
+/// <para>
 /// This API provides explanations for a data frame analytics config that either
 /// exists already or one that has not been created yet. The following
 /// explanations are provided:
@@ -175,48 +287,41 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<ExplainDataFrameAnalyticsRequestDescriptor<TDocument>, ExplainDataFrameAnalyticsRequestParameters>
+public readonly partial struct ExplainDataFrameAnalyticsRequestDescriptor
 {
-	internal ExplainDataFrameAnalyticsRequestDescriptor(Action<ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest Instance { get; init; }
 
-	public ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(id);
 	}
 
 	public ExplainDataFrameAnalyticsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningExplainDataFrameAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.explain_data_frame_analytics";
-
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
-
-	private bool? AllowLazyStartValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? AnalysisValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> AnalysisDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> AnalysisDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> AnalyzedFieldsDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> DestDescriptorAction { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -224,10 +329,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// learning node capacity for it to be immediately assigned to a node.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? allowLazyStart = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? value = true)
 	{
-		AllowLazyStartValue = allowLazyStart;
-		return Self;
+		Instance.AllowLazyStart = value;
+		return this;
 	}
 
 	/// <summary>
@@ -237,28 +342,36 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? analysis)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? value)
 	{
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = null;
-		AnalysisValue = analysis;
-		return Self;
+		Instance.Analysis = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptorAction = null;
-		AnalysisDescriptor = descriptor;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor.Build(action);
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Analysis<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = configure;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -270,28 +383,40 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// be included in the analysis.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsValue = analyzedFields;
-		return Self;
+		Instance.AnalyzedFields = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields()
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -299,10 +424,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -311,28 +436,34 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// results_field (ml by default).
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? dest)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination configuration, consisting of index and optionally
+	/// results_field (ml by default).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> action)
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor.Build(action);
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The destination configuration, consisting of index and optionally
+	/// results_field (ml by default).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Dest<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<T>> action)
 	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -343,10 +474,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
 	/// <summary>
@@ -358,10 +489,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -370,128 +501,97 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	/// index. Optionally, query and _source may be specified.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? source)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The configuration of how to source the analysis data. It requires an
+	/// index. Optionally, query and _source may be specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor.Build(action);
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The configuration of how to source the analysis data. It requires an
+	/// index. Optionally, query and _source may be specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyStartValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("allow_lazy_start");
-			writer.WriteBooleanValue(AllowLazyStartValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AnalysisDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-		}
-		else if (AnalysisDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(AnalysisDescriptorAction), options);
-		}
-		else if (AnalysisValue is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (AnalyzedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsDescriptor, options);
-		}
-		else if (AnalyzedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(AnalyzedFieldsDescriptorAction), options);
-		}
-		else if (AnalyzedFieldsValue is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(DestDescriptorAction), options);
-		}
-		else if (DestValue is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Explain data frame analytics config.
+/// </para>
+/// <para>
 /// This API provides explanations for a data frame analytics config that either
 /// exists already or one that has not been created yet. The following
 /// explanations are provided:
@@ -510,48 +610,41 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : RequestDescriptor<ExplainDataFrameAnalyticsRequestDescriptor, ExplainDataFrameAnalyticsRequestParameters>
+public readonly partial struct ExplainDataFrameAnalyticsRequestDescriptor<TDocument>
 {
-	internal ExplainDataFrameAnalyticsRequestDescriptor(Action<ExplainDataFrameAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest Instance { get; init; }
 
-	public ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public ExplainDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(id);
 	}
 
 	public ExplainDataFrameAnalyticsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningExplainDataFrameAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.explain_data_frame_analytics";
-
-	public ExplainDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
-
-	private bool? AllowLazyStartValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? AnalysisValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor AnalysisDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> AnalyzedFieldsDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> DestDescriptorAction { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -559,10 +652,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// learning node capacity for it to be immediately assigned to a node.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? allowLazyStart = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? value = true)
 	{
-		AllowLazyStartValue = allowLazyStart;
-		return Self;
+		Instance.AllowLazyStart = value;
+		return this;
 	}
 
 	/// <summary>
@@ -572,28 +665,23 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? analysis)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? value)
 	{
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = null;
-		AnalysisValue = analysis;
-		return Self;
+		Instance.Analysis = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptorAction = null;
-		AnalysisDescriptor = descriptor;
-		return Self;
-	}
-
-	public ExplainDataFrameAnalyticsRequestDescriptor Analysis(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> configure)
-	{
-		AnalysisValue = null;
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = configure;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -605,28 +693,40 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// be included in the analysis.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsValue = analyzedFields;
-		return Self;
+		Instance.AnalyzedFields = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields()
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -634,10 +734,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -646,28 +746,22 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// results_field (ml by default).
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? dest)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination configuration, consisting of index and optionally
+	/// results_field (ml by default).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> action)
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
-	}
-
-	public ExplainDataFrameAnalyticsRequestDescriptor Dest(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> configure)
-	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -678,10 +772,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// for operational functionality other than the analysis itself.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
 	/// <summary>
@@ -693,10 +787,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// greater than that setting.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -705,121 +799,76 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	/// index. Optionally, query and _source may be specified.
 	/// </para>
 	/// </summary>
-	public ExplainDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? source)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The configuration of how to source the analysis data. It requires an
+	/// index. Optionally, query and _source may be specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public ExplainDataFrameAnalyticsRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>>? action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyStartValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_start");
-			writer.WriteBooleanValue(AllowLazyStartValue.Value);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (AnalysisDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-		}
-		else if (AnalysisDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(AnalysisDescriptorAction), options);
-		}
-		else if (AnalysisValue is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (AnalyzedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsDescriptor, options);
-		}
-		else if (AnalyzedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(AnalyzedFieldsDescriptorAction), options);
-		}
-		else if (AnalyzedFieldsValue is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(DestDescriptorAction), options);
-		}
-		else if (DestValue is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

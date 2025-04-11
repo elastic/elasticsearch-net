@@ -17,21 +17,23 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public sealed partial class GetLicenseRequestParameters : RequestParameters
+public sealed partial class GetLicenseRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+	/// This parameter is deprecated and will always be set to true in 8.x.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
+
 	/// <summary>
 	/// <para>
 	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
@@ -40,21 +42,70 @@ public sealed partial class GetLicenseRequestParameters : RequestParameters
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
+internal sealed partial class GetLicenseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest>
+{
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get license information.
+/// </para>
+/// <para>
 /// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
 /// </para>
 /// <para>
-/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+/// info
+/// If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
 /// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 /// </para>
 /// </summary>
-public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestConverter))]
+public sealed partial class GetLicenseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGet;
+#if NET7_0_OR_GREATER
+	public GetLicenseRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetLicenseRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetLicenseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.LicenseManagementGet;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -62,42 +113,128 @@ public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestPa
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+	/// This parameter is deprecated and will always be set to true in 8.x.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get license information.
+/// </para>
+/// <para>
 /// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
 /// </para>
 /// <para>
-/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+/// info
+/// If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
 /// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 /// </para>
 /// </summary>
-public sealed partial class GetLicenseRequestDescriptor : RequestDescriptor<GetLicenseRequestDescriptor, GetLicenseRequestParameters>
+public readonly partial struct GetLicenseRequestDescriptor
 {
-	internal GetLicenseRequestDescriptor(Action<GetLicenseRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetLicenseRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GetLicenseRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGet;
+	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "license.get";
-
-	public GetLicenseRequestDescriptor Local(bool? local = true) => Qs("local", local);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("Deprecated in '7.6.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+	/// This parameter is deprecated and will always be set to true in 8.x.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor AcceptEnterprise(bool? value = true)
 	{
+		Instance.AcceptEnterprise = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest Build(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor(new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

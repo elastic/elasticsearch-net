@@ -17,38 +17,101 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class BulkDeleteRoleResponse : ElasticsearchResponse
+internal sealed partial class BulkDeleteRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
+	private static readonly System.Text.Json.JsonEncodedText PropNotFound = System.Text.Json.JsonEncodedText.Encode("not_found");
+
+	public override Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propDeleted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.BulkError?> propErrors = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propNotFound = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
+			{
+				continue;
+			}
+
+			if (propNotFound.TryReadProperty(ref reader, options, PropNotFound, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Deleted = propDeleted.Value,
+			Errors = propErrors.Value,
+			NotFound = propNotFound.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropNotFound, value.NotFound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponseConverter))]
+public sealed partial class BulkDeleteRoleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkDeleteRoleResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BulkDeleteRoleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Array of deleted roles
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deleted")]
-	public IReadOnlyCollection<string>? Deleted { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? Deleted { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Present if any deletes resulted in errors
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("errors")]
-	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; init; }
+	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Array of roles that could not be found
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("not_found")]
-	public IReadOnlyCollection<string>? NotFound { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? NotFound { get; set; }
 }

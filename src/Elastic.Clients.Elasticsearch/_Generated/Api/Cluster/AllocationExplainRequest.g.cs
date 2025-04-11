@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class AllocationExplainRequestParameters : RequestParameters
+public sealed partial class AllocationExplainRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -45,6 +38,79 @@ public sealed partial class AllocationExplainRequestParameters : RequestParamete
 	/// </para>
 	/// </summary>
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class AllocationExplainRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentNode = System.Text.Json.JsonEncodedText.Encode("current_node");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propCurrentNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<bool?> propPrimary = default;
+		LocalJsonValue<int?> propShard = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrentNode.TryReadProperty(ref reader, options, PropCurrentNode, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, null))
+			{
+				continue;
+			}
+
+			if (propShard.TryReadProperty(ref reader, options, PropShard, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CurrentNode = propCurrentNode.Value,
+			Index = propIndex.Value,
+			Primary = propPrimary.Value,
+			Shard = propShard.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
+		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -56,11 +122,28 @@ public sealed partial class AllocationExplainRequestParameters : RequestParamete
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 /// </para>
 /// </summary>
-public sealed partial class AllocationExplainRequest : PlainRequest<AllocationExplainRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestConverter))]
+public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterAllocationExplain;
+#if NET7_0_OR_GREATER
+	public AllocationExplainRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AllocationExplainRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AllocationExplainRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.ClusterAllocationExplain;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -71,7 +154,6 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	/// If true, returns information about disk usage and shard sizes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
 	/// <summary>
@@ -79,15 +161,20 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	/// If true, returns YES decisions in explanation.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("current_node")]
 	public string? CurrentNode { get; set; }
 
 	/// <summary>
@@ -95,7 +182,6 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	/// Specifies the name of the index that you would like an explanation for.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -103,7 +189,6 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	/// If true, returns explanation for the primary shard for the given shard ID.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("primary")]
 	public bool? Primary { get; set; }
 
 	/// <summary>
@@ -111,7 +196,6 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	/// Specifies the ID of the shard that you would like an explanation for.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard")]
 	public int? Shard { get; set; }
 }
 
@@ -124,39 +208,66 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 /// </para>
 /// </summary>
-public sealed partial class AllocationExplainRequestDescriptor : RequestDescriptor<AllocationExplainRequestDescriptor, AllocationExplainRequestParameters>
+public readonly partial struct AllocationExplainRequestDescriptor
 {
-	internal AllocationExplainRequestDescriptor(Action<AllocationExplainRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AllocationExplainRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public AllocationExplainRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterAllocationExplain;
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If true, returns information about disk usage and shard sizes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor IncludeDiskInfo(bool? value = true)
+	{
+		Instance.IncludeDiskInfo = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// If true, returns YES decisions in explanation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor IncludeYesDecisions(bool? value = true)
+	{
+		Instance.IncludeYesDecisions = value;
+		return this;
+	}
 
-	internal override string OperationName => "cluster.allocation_explain";
-
-	public AllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
-	public AllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
-
-	private string? CurrentNodeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private bool? PrimaryValue { get; set; }
-	private int? ShardValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
 	/// </para>
 	/// </summary>
-	public AllocationExplainRequestDescriptor CurrentNode(string? currentNode)
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor CurrentNode(string? value)
 	{
-		CurrentNodeValue = currentNode;
-		return Self;
+		Instance.CurrentNode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -164,10 +275,10 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	/// Specifies the name of the index that you would like an explanation for.
 	/// </para>
 	/// </summary>
-	public AllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -175,10 +286,10 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	/// If true, returns explanation for the primary shard for the given shard ID.
 	/// </para>
 	/// </summary>
-	public AllocationExplainRequestDescriptor Primary(bool? primary = true)
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Primary(bool? value = true)
 	{
-		PrimaryValue = primary;
-		return Self;
+		Instance.Primary = value;
+		return this;
 	}
 
 	/// <summary>
@@ -186,39 +297,64 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	/// Specifies the ID of the shard that you would like an explanation for.
 	/// </para>
 	/// </summary>
-	public AllocationExplainRequestDescriptor Shard(int? shard)
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Shard(int? value)
 	{
-		ShardValue = shard;
-		return Self;
+		Instance.Shard = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CurrentNodeValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("current_node");
-			writer.WriteStringValue(CurrentNodeValue);
+			return new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor(new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (PrimaryValue.HasValue)
-		{
-			writer.WritePropertyName("primary");
-			writer.WriteBooleanValue(PrimaryValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ShardValue.HasValue)
-		{
-			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(ShardValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

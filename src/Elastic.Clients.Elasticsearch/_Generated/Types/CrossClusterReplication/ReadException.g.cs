@@ -17,22 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class ReadExceptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception");
+	private static readonly System.Text.Json.JsonEncodedText PropFromSeqNo = System.Text.Json.JsonEncodedText.Encode("from_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause> propException = default;
+		LocalJsonValue<long> propFromSeqNo = default;
+		LocalJsonValue<int> propRetries = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propException.TryReadProperty(ref reader, options, PropException, null))
+			{
+				continue;
+			}
+
+			if (propFromSeqNo.TryReadProperty(ref reader, options, PropFromSeqNo, null))
+			{
+				continue;
+			}
+
+			if (propRetries.TryReadProperty(ref reader, options, PropRetries, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Exception = propException.Value,
+			FromSeqNo = propFromSeqNo.Value,
+			Retries = propRetries.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropException, value.Exception, null, null);
+		writer.WriteProperty(options, PropFromSeqNo, value.FromSeqNo, null, null);
+		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadExceptionConverter))]
 public sealed partial class ReadException
 {
-	[JsonInclude, JsonPropertyName("exception")]
-	public Elastic.Clients.Elasticsearch.ErrorCause Exception { get; init; }
-	[JsonInclude, JsonPropertyName("from_seq_no")]
-	public long FromSeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("retries")]
-	public int Retries { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReadException(Elastic.Clients.Elasticsearch.ErrorCause exception, long fromSeqNo, int retries)
+	{
+		Exception = exception;
+		FromSeqNo = fromSeqNo;
+		Retries = retries;
+	}
+#if NET7_0_OR_GREATER
+	public ReadException()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReadException()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReadException(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The exception that caused the read to fail.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ErrorCause Exception { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The starting sequence number of the batch requested from the leader.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FromSeqNo { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of times the batch has been retried.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Retries { get; set; }
 }

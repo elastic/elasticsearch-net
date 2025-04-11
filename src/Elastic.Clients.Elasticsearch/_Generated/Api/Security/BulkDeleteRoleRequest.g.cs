@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class BulkDeleteRoleRequestParameters : RequestParameters
+public sealed partial class BulkDeleteRoleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,6 +31,45 @@ public sealed partial class BulkDeleteRoleRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+}
+
+internal sealed partial class BulkDeleteRoleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names");
+
+	public override Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propNames = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNames.TryReadProperty(ref reader, options, PropNames, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Names = propNames.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -49,11 +81,34 @@ public sealed partial class BulkDeleteRoleRequestParameters : RequestParameters
 /// The bulk delete roles API cannot delete roles that are defined in roles files.
 /// </para>
 /// </summary>
-public sealed partial class BulkDeleteRoleRequest : PlainRequest<BulkDeleteRoleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestConverter))]
+public sealed partial class BulkDeleteRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityBulkDeleteRole;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkDeleteRoleRequest(System.Collections.Generic.ICollection<string> names)
+	{
+		Names = names;
+	}
+#if NET7_0_OR_GREATER
+	public BulkDeleteRoleRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BulkDeleteRoleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BulkDeleteRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityBulkDeleteRole;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
 
@@ -64,7 +119,6 @@ public sealed partial class BulkDeleteRoleRequest : PlainRequest<BulkDeleteRoleR
 	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -72,8 +126,11 @@ public sealed partial class BulkDeleteRoleRequest : PlainRequest<BulkDeleteRoleR
 	/// An array of role names to delete
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("names")]
-	public ICollection<string> Names { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Names { get; set; }
 }
 
 /// <summary>
@@ -85,42 +142,104 @@ public sealed partial class BulkDeleteRoleRequest : PlainRequest<BulkDeleteRoleR
 /// The bulk delete roles API cannot delete roles that are defined in roles files.
 /// </para>
 /// </summary>
-public sealed partial class BulkDeleteRoleRequestDescriptor : RequestDescriptor<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleRequestParameters>
+public readonly partial struct BulkDeleteRoleRequestDescriptor
 {
-	internal BulkDeleteRoleRequestDescriptor(Action<BulkDeleteRoleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkDeleteRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public BulkDeleteRoleRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityBulkDeleteRole;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.bulk_delete_role";
-
-	public BulkDeleteRoleRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	private ICollection<string> NamesValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// An array of role names to delete
 	/// </para>
 	/// </summary>
-	public BulkDeleteRoleRequestDescriptor Names(ICollection<string> names)
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names(System.Collections.Generic.ICollection<string> value)
 	{
-		NamesValue = names;
-		return Self;
+		Instance.Names = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// An array of role names to delete
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names(params string[] values)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("names");
-		JsonSerializer.Serialize(writer, NamesValue, options);
-		writer.WriteEndObject();
+		Instance.Names = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

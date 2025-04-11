@@ -17,95 +17,146 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class IpPrefixBucketConverter : JsonConverter<IpPrefixBucket>
+internal sealed partial class IpPrefixBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket>
 {
-	public override IpPrefixBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIsIpv6 = System.Text.Json.JsonEncodedText.Encode("is_ipv6");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropNetmask = System.Text.Json.JsonEncodedText.Encode("netmask");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		long docCount = default;
-		bool isIpv6 = default;
-		string key = default;
-		string? netmask = default;
-		int prefixLength = default;
-		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<bool> propIsIpv6 = default;
+		LocalJsonValue<string> propKey = default;
+		LocalJsonValue<string?> propNetmask = default;
+		LocalJsonValue<int> propPrefixLength = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
-				var property = reader.GetString();
-				if (property == "doc_count")
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "is_ipv6")
-				{
-					isIpv6 = JsonSerializer.Deserialize<bool>(ref reader, options);
-					continue;
-				}
+			if (propIsIpv6.TryReadProperty(ref reader, options, PropIsIpv6, null))
+			{
+				continue;
+			}
 
-				if (property == "key")
-				{
-					key = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
+			{
+				continue;
+			}
 
-				if (property == "netmask")
-				{
-					netmask = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propNetmask.TryReadProperty(ref reader, options, PropNetmask, null))
+			{
+				continue;
+			}
 
-				if (property == "prefix_length")
-				{
-					prefixLength = JsonSerializer.Deserialize<int>(ref reader, options);
-					continue;
-				}
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
 
-				if (property.Contains("#"))
-				{
-					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
-					continue;
-				}
+			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
+			propAggregations[key] = value;
+		}
 
-				throw new JsonException("Unknown property read from JSON.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations),
+			DocCount = propDocCount.Value,
+			IsIpv6 = propIsIpv6.Value,
+			Key = propKey.Value,
+			Netmask = propNetmask.Value,
+			PrefixLength = propPrefixLength.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropIsIpv6, value.IsIpv6, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropNetmask, value.Netmask, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		if (value.Aggregations is not null)
+		{
+			foreach (var item in value.Aggregations)
+			{
+				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
 			}
 		}
 
-		return new IpPrefixBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, IsIpv6 = isIpv6, Key = key, Netmask = netmask, PrefixLength = prefixLength };
-	}
-
-	public override void Write(Utf8JsonWriter writer, IpPrefixBucket value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'IpPrefixBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(IpPrefixBucketConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucketConverter))]
 public sealed partial class IpPrefixBucket
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpPrefixBucket(long docCount, bool isIpv6, string key, int prefixLength)
+	{
+		DocCount = docCount;
+		IsIpv6 = isIpv6;
+		Key = key;
+		PrefixLength = prefixLength;
+	}
+#if NET7_0_OR_GREATER
+	public IpPrefixBucket()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IpPrefixBucket()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IpPrefixBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Nested aggregations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
-	public long DocCount { get; init; }
-	public bool IsIpv6 { get; init; }
-	public string Key { get; init; }
-	public string? Netmask { get; init; }
-	public int PrefixLength { get; init; }
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IsIpv6 { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Key { get; set; }
+	public string? Netmask { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int PrefixLength { get; set; }
 }

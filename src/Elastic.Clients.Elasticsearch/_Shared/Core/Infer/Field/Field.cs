@@ -24,6 +24,9 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class Field :
 	IEquatable<Field>,
 	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Field>
+#endif
 {
 	private readonly object _comparisonValue;
 	private readonly Type? _type;
@@ -55,47 +58,25 @@ public sealed class Field :
 	/// </summary>
 	public double? Boost { get; set; }
 
-	/// <summary>
-	///     A format to apply to the field.
-	/// </summary>
-	/// <remarks>
-	///     Can be used only for Doc Value Fields Elasticsearch 6.4.0+
-	/// </remarks>
-	public string? Format { get; set; }
-
 	internal bool CachableExpression { get; }
 
 	#region Constructors
 
-	public Field(string name) : this(name, null, null)
-	{
-	}
-
-	public Field(string name, double boost) : this(name, boost, null)
-	{
-	}
-
-	public Field(string name, string format) : this(name, null, format)
-	{
-	}
-
-	public Field(string name, double? boost, string? format)
+	public Field(string name, double? boost = null)
 	{
 		if (string.IsNullOrEmpty(name))
 			throw new ArgumentException($"{name} can not be null or empty.", nameof(name));
 
 		Name = ParseFieldName(name, out var b);
 		Boost = b ?? boost;
-		Format = format;
 
 		_comparisonValue = Name;
 	}
 
-	public Field(Expression expression, double? boost = null, string? format = null)
+	public Field(Expression expression, double? boost = null)
 	{
 		Expression = expression ?? throw new ArgumentNullException(nameof(expression));
 		Boost = boost;
-		Format = format;
 
 		_comparisonValue = expression.ComparisonValueFromExpression(out var type, out var cachable);
 		_type = type;
@@ -103,35 +84,39 @@ public sealed class Field :
 		CachableExpression = cachable;
 	}
 
-	public Field(PropertyInfo property, double? boost = null, string? format = null)
+	public Field(PropertyInfo property, double? boost = null)
 	{
 		Property = property ?? throw new ArgumentNullException(nameof(property));
 		Boost = boost;
-		Format = format;
 
 		_comparisonValue = property;
 		_type = property.DeclaringType;
+	}
+
+	public Field(string name) : this(name, null)
+	{
+		// Used internally by `KeyValuePairConverter`.
 	}
 
 	#endregion Constructors
 
 	#region Factory Methods
 
-	public static Field? FromString(string? name) => string.IsNullOrEmpty(name) ? null : new Field(name);
+	public static Field FromString(string name) => new Field(name);
 
-	public static Field? FromExpression(Expression? expression) => expression is null ? null : new Field(expression);
+	public static Field FromExpression(Expression expression) => new Field(expression);
 
-	public static Field? FromProperty(PropertyInfo? property) => property is null ? null : new Field(property);
+	public static Field FromProperty(PropertyInfo property) => new Field(property);
 
 	#endregion Factory Methods
 
 	#region Conversion Operators
 
-	public static implicit operator Field?(string? name) => FromString(name);
+	public static implicit operator Field(string name) => FromString(name);
 
-	public static implicit operator Field?(Expression? expression) => FromExpression(expression);
+	public static implicit operator Field(Expression expression) => FromExpression(expression);
 
-	public static implicit operator Field?(PropertyInfo? property) => FromProperty(property);
+	public static implicit operator Field(PropertyInfo property) => FromProperty(property);
 
 	#endregion Conversion Operators
 
@@ -145,36 +130,36 @@ public sealed class Field :
 		return new([this, field]);
 	}
 
-	public Fields And<T, TValue>(Expression<Func<T, TValue>> expression, double? boost = null, string? format = null)
+	public Fields And<T, TValue>(Expression<Func<T, TValue>> expression, double? boost = null)
 	{
 		if (expression is null)
 			throw new ArgumentNullException(nameof(expression));
 
-		return new([this, new Field(expression, boost, format)]);
+		return new([this, new Field(expression, boost)]);
 	}
 
-	public Fields And<T>(Expression<Func<T, object>> expression, double? boost = null, string? format = null)
+	public Fields And<T>(Expression<Func<T, object>> expression, double? boost = null)
 	{
 		if (expression is null)
 			throw new ArgumentNullException(nameof(expression));
 
-		return new([this, new Field(expression, boost, format)]);
+		return new([this, new Field(expression, boost)]);
 	}
 
-	public Fields And(string field, double? boost = null, string? format = null)
+	public Fields And(string field, double? boost = null)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 
-		return new([this, new Field(field, boost, format)]);
+		return new([this, new Field(field, boost)]);
 	}
 
-	public Fields And(PropertyInfo property, double? boost = null, string? format = null)
+	public Fields And(PropertyInfo property, double? boost = null)
 	{
 		if (property is null)
 			throw new ArgumentNullException(nameof(property));
 
-		return new([this, new Field(property, boost, format)]);
+		return new([this, new Field(property, boost)]);
 	}
 
 	#endregion Combinator Methods
@@ -215,6 +200,26 @@ public sealed class Field :
 
 	#endregion Equality
 
+	#region IParsable
+
+	public static Field Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Field? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Field(s);
+		return true;
+	}
+
+	#endregion IParsable
+
 	#region IUrlParameter
 
 	string IUrlParameter.GetString(ITransportConfiguration settings)
@@ -234,7 +239,6 @@ public sealed class Field :
 
 	public override string ToString() =>
 		$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value : string.Empty)}" +
-		$"{(!string.IsNullOrEmpty(Format) ? " format: " + Format : string.Empty)}" +
 		$"{(_type == null ? string.Empty : " typeof: " + _type.Name)}";
 
 	internal string DebuggerDisplay => ToString();
@@ -243,12 +247,9 @@ public sealed class Field :
 
 	#endregion Debugging
 
-	[return: NotNullIfNotNull(nameof(name))]
-	private static string? ParseFieldName(string? name, out double? boost)
+	private static string ParseFieldName(string name, out double? boost)
 	{
 		boost = null;
-		if (name is null)
-			return null;
 
 		var caretIndex = name.IndexOf('^');
 		if (caretIndex == -1)

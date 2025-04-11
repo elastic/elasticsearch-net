@@ -17,123 +17,189 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
+internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("ignore_case")]
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case");
+	private static readonly System.Text.Json.JsonEncodedText PropKeywords = System.Text.Json.JsonEncodedText.Encode("keywords");
+	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPath = System.Text.Json.JsonEncodedText.Encode("keywords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPattern = System.Text.Json.JsonEncodedText.Encode("keywords_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propIgnoreCase = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propKeywords = default;
+		LocalJsonValue<string?> propKeywordsPath = default;
+		LocalJsonValue<string?> propKeywordsPattern = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, null))
+			{
+				continue;
+			}
+
+			if (propKeywords.TryReadProperty(ref reader, options, PropKeywords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propKeywordsPath.TryReadProperty(ref reader, options, PropKeywordsPath, null))
+			{
+				continue;
+			}
+
+			if (propKeywordsPattern.TryReadProperty(ref reader, options, PropKeywordsPattern, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IgnoreCase = propIgnoreCase.Value,
+			Keywords = propKeywords.Value,
+			KeywordsPath = propKeywordsPath.Value,
+			KeywordsPattern = propKeywordsPattern.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
+		writer.WriteProperty(options, PropKeywords, value.Keywords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropKeywordsPath, value.KeywordsPath, null, null);
+		writer.WriteProperty(options, PropKeywordsPattern, value.KeywordsPattern, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterConverter))]
+public sealed partial class KeywordMarkerTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public KeywordMarkerTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public KeywordMarkerTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? IgnoreCase { get; set; }
-	[JsonInclude, JsonPropertyName("keywords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Keywords { get; set; }
-	[JsonInclude, JsonPropertyName("keywords_path")]
+	public System.Collections.Generic.ICollection<string>? Keywords { get; set; }
 	public string? KeywordsPath { get; set; }
-	[JsonInclude, JsonPropertyName("keywords_pattern")]
 	public string? KeywordsPattern { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword_marker";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDescriptor<KeywordMarkerTokenFilterDescriptor>, IBuildableDescriptor<KeywordMarkerTokenFilter>
+public readonly partial struct KeywordMarkerTokenFilterDescriptor
 {
-	internal KeywordMarkerTokenFilterDescriptor(Action<KeywordMarkerTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter Instance { get; init; }
 
-	public KeywordMarkerTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeywordMarkerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? IgnoreCaseValue { get; set; }
-	private ICollection<string>? KeywordsValue { get; set; }
-	private string? KeywordsPathValue { get; set; }
-	private string? KeywordsPatternValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeywordMarkerTokenFilterDescriptor()
 	{
-		IgnoreCaseValue = ignoreCase;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KeywordMarkerTokenFilterDescriptor Keywords(ICollection<string>? keywords)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? value = true)
 	{
-		KeywordsValue = keywords;
-		return Self;
+		Instance.IgnoreCase = value;
+		return this;
 	}
 
-	public KeywordMarkerTokenFilterDescriptor KeywordsPath(string? keywordsPath)
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords(System.Collections.Generic.ICollection<string>? value)
 	{
-		KeywordsPathValue = keywordsPath;
-		return Self;
+		Instance.Keywords = value;
+		return this;
 	}
 
-	public KeywordMarkerTokenFilterDescriptor KeywordsPattern(string? keywordsPattern)
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords(params string[] values)
 	{
-		KeywordsPatternValue = keywordsPattern;
-		return Self;
+		Instance.Keywords = [.. values];
+		return this;
 	}
 
-	public KeywordMarkerTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor KeywordsPath(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.KeywordsPath = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor KeywordsPattern(string? value)
 	{
-		writer.WriteStartObject();
-		if (IgnoreCaseValue.HasValue)
+		Instance.KeywordsPattern = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("ignore_case");
-			writer.WriteBooleanValue(IgnoreCaseValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (KeywordsValue is not null)
-		{
-			writer.WritePropertyName("keywords");
-			SingleOrManySerializationHelper.Serialize<string>(KeywordsValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(KeywordsPathValue))
-		{
-			writer.WritePropertyName("keywords_path");
-			writer.WriteStringValue(KeywordsPathValue);
-		}
-
-		if (!string.IsNullOrEmpty(KeywordsPatternValue))
-		{
-			writer.WritePropertyName("keywords_pattern");
-			writer.WriteStringValue(KeywordsPatternValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("keyword_marker");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	KeywordMarkerTokenFilter IBuildableDescriptor<KeywordMarkerTokenFilter>.Build() => new()
-	{
-		IgnoreCase = IgnoreCaseValue,
-		Keywords = KeywordsValue,
-		KeywordsPath = KeywordsPathValue,
-		KeywordsPattern = KeywordsPatternValue,
-		Version = VersionValue
-	};
 }

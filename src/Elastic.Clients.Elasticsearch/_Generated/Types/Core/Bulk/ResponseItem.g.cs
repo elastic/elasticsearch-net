@@ -17,40 +17,54 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public partial class ResponseItem
+public abstract partial class ResponseItem
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ResponseItem(string index, int status)
+	{
+		Index = index;
+		Status = status;
+	}
+#if NET7_0_OR_GREATER
+	public ResponseItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ResponseItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ResponseItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Additional information about the failed operation.
 	/// The property is returned only for failed operations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("error")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
-	[JsonInclude, JsonPropertyName("failure_store")]
-	public Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? FailureStore { get; init; }
-	[JsonInclude, JsonPropertyName("forced_refresh")]
-	public bool? ForcedRefresh { get; init; }
-	[JsonInclude, JsonPropertyName("get")]
-	public Elastic.Clients.Elasticsearch.InlineGet<IReadOnlyDictionary<string, object>>? Get { get; init; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? FailureStore { get; set; }
+	public bool? ForcedRefresh { get; set; }
+	public Elastic.Clients.Elasticsearch.InlineGet<System.Collections.Generic.IReadOnlyDictionary<string, object>>? Get { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The document ID associated with the operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
-	public string? Id { get; init; }
+	public string? Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -58,8 +72,11 @@ public partial class ResponseItem
 	/// If the operation targeted a data stream, this is the backing index into which the document was written.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
-	public string Index { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,8 +84,7 @@ public partial class ResponseItem
 	/// This property is returned only for successful operations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_primary_term")]
-	public long? PrimaryTerm { get; init; }
+	public long? PrimaryTerm { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,8 +92,7 @@ public partial class ResponseItem
 	/// Successful values are <c>created</c>, <c>deleted</c>, and <c>updated</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("result")]
-	public string? Result { get; init; }
+	public string? Result { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,24 +100,25 @@ public partial class ResponseItem
 	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_seq_no")]
-	public long? SeqNo { get; init; }
+	public long? SeqNo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Shard information for the operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_shards")]
-	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
+	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The HTTP status code returned for the operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("status")]
-	public int Status { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Status { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,6 +127,5 @@ public partial class ResponseItem
 	/// This property is returned only for successful actions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_version")]
-	public long? Version { get; init; }
+	public long? Version { get; set; }
 }

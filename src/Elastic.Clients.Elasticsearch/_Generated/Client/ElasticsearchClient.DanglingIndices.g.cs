@@ -18,186 +18,69 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
-public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
+public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected DanglingIndicesNamespacedClient() : base()
 	{
 	}
 
-	internal DanglingIndicesNamespacedClient(ElasticsearchClient client) : base(client)
+	internal DanglingIndicesNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequest request)
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ListDanglingIndicesRequest, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices(System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequest, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListDanglingIndicesResponse ListDanglingIndices()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ListDanglingIndicesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListDanglingIndicesResponse ListDanglingIndices(Action<ListDanglingIndicesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ListDanglingIndicesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ListDanglingIndicesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the dangling indices.
-	/// </para>
-	/// <para>
-	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-	/// </para>
-	/// <para>
-	/// Use this API to list dangling indices, which you can then import or delete.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(Action<ListDanglingIndicesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ListDanglingIndicesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
 	}
 }

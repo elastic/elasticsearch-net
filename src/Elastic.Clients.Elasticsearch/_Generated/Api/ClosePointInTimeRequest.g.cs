@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ClosePointInTimeRequestParameters : RequestParameters
+public sealed partial class ClosePointInTimeRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClosePointInTimeRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ClosePointInTimeRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+
+	public override Elastic.Clients.Elasticsearch.ClosePointInTimeRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ClosePointInTimeRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -43,11 +75,34 @@ public sealed partial class ClosePointInTimeRequestParameters : RequestParameter
 /// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 /// </para>
 /// </summary>
-public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ClosePointInTimeRequestConverter))]
+public sealed partial class ClosePointInTimeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClosePointInTime;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Id = id;
+	}
+#if NET7_0_OR_GREATER
+	public ClosePointInTimeRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClosePointInTimeRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceClosePointInTime;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
 
@@ -58,8 +113,11 @@ public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInT
 	/// The ID of the point-in-time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get; set; }
 }
 
 /// <summary>
@@ -71,40 +129,82 @@ public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInT
 /// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 /// </para>
 /// </summary>
-public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptor<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
+public readonly partial struct ClosePointInTimeRequestDescriptor
 {
-	internal ClosePointInTimeRequestDescriptor(Action<ClosePointInTimeRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ClosePointInTimeRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClosePointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.ClosePointInTimeRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ClosePointInTimeRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClosePointInTime;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "close_point_in_time";
-
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.ClosePointInTimeRequest instance) => new Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The ID of the point-in-time.
 	/// </para>
 	/// </summary>
-	public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ClosePointInTimeRequest Build(System.Action<Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor(new Elastic.Clients.Elasticsearch.ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

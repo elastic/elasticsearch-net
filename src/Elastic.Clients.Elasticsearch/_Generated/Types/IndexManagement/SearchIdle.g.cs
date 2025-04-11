@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SearchIdleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propAfter = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAfter.TryReadProperty(ref reader, options, PropAfter, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			After = propAfter.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAfter, value.After, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleConverter))]
 public sealed partial class SearchIdle
 {
-	[JsonInclude, JsonPropertyName("after")]
+#if NET7_0_OR_GREATER
+	public SearchIdle()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SearchIdle()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchIdle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Duration? After { get; set; }
 }
 
-public sealed partial class SearchIdleDescriptor : SerializableDescriptor<SearchIdleDescriptor>
+public readonly partial struct SearchIdleDescriptor
 {
-	internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle Instance { get; init; }
 
-	public SearchIdleDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchIdleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? AfterValue { get; set; }
-
-	public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Duration? after)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchIdleDescriptor()
 	{
-		AfterValue = after;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		writer.WriteStartObject();
-		if (AfterValue is not null)
+		Instance.After = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("after");
-			JsonSerializer.Serialize(writer, AfterValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

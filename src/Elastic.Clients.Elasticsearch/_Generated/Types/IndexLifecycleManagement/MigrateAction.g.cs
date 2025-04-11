@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class MigrateActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Enabled = propEnabled.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionConverter))]
 public sealed partial class MigrateAction
 {
-	[JsonInclude, JsonPropertyName("enabled")]
+#if NET7_0_OR_GREATER
+	public MigrateAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MigrateAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MigrateAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Enabled { get; set; }
 }
 
-public sealed partial class MigrateActionDescriptor : SerializableDescriptor<MigrateActionDescriptor>
+public readonly partial struct MigrateActionDescriptor
 {
-	internal MigrateActionDescriptor(Action<MigrateActionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction Instance { get; init; }
 
-	public MigrateActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MigrateActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? EnabledValue { get; set; }
-
-	public MigrateActionDescriptor Enabled(bool? enabled = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MigrateActionDescriptor()
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor Enabled(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (EnabledValue.HasValue)
+		Instance.Enabled = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

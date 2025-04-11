@@ -17,26 +17,177 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class DirectGeneratorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxEdits = System.Text.Json.JsonEncodedText.Encode("max_edits");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInspections = System.Text.Json.JsonEncodedText.Encode("max_inspections");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTermFreq = System.Text.Json.JsonEncodedText.Encode("max_term_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length");
+	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropPreFilter = System.Text.Json.JsonEncodedText.Encode("pre_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestMode = System.Text.Json.JsonEncodedText.Encode("suggest_mode");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<int?> propMaxEdits = default;
+		LocalJsonValue<float?> propMaxInspections = default;
+		LocalJsonValue<float?> propMaxTermFreq = default;
+		LocalJsonValue<float?> propMinDocFreq = default;
+		LocalJsonValue<int?> propMinWordLength = default;
+		LocalJsonValue<string?> propPostFilter = default;
+		LocalJsonValue<string?> propPreFilter = default;
+		LocalJsonValue<int?> propPrefixLength = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SuggestMode?> propSuggestMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMaxEdits.TryReadProperty(ref reader, options, PropMaxEdits, null))
+			{
+				continue;
+			}
+
+			if (propMaxInspections.TryReadProperty(ref reader, options, PropMaxInspections, null))
+			{
+				continue;
+			}
+
+			if (propMaxTermFreq.TryReadProperty(ref reader, options, PropMaxTermFreq, null))
+			{
+				continue;
+			}
+
+			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, null))
+			{
+				continue;
+			}
+
+			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, null))
+			{
+				continue;
+			}
+
+			if (propPostFilter.TryReadProperty(ref reader, options, PropPostFilter, null))
+			{
+				continue;
+			}
+
+			if (propPreFilter.TryReadProperty(ref reader, options, PropPreFilter, null))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSuggestMode.TryReadProperty(ref reader, options, PropSuggestMode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			MaxEdits = propMaxEdits.Value,
+			MaxInspections = propMaxInspections.Value,
+			MaxTermFreq = propMaxTermFreq.Value,
+			MinDocFreq = propMinDocFreq.Value,
+			MinWordLength = propMinWordLength.Value,
+			PostFilter = propPostFilter.Value,
+			PreFilter = propPreFilter.Value,
+			PrefixLength = propPrefixLength.Value,
+			Size = propSize.Value,
+			SuggestMode = propSuggestMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMaxEdits, value.MaxEdits, null, null);
+		writer.WriteProperty(options, PropMaxInspections, value.MaxInspections, null, null);
+		writer.WriteProperty(options, PropMaxTermFreq, value.MaxTermFreq, null, null);
+		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, null);
+		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
+		writer.WriteProperty(options, PropPostFilter, value.PostFilter, null, null);
+		writer.WriteProperty(options, PropPreFilter, value.PreFilter, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSuggestMode, value.SuggestMode, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorConverter))]
 public sealed partial class DirectGenerator
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DirectGenerator(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public DirectGenerator()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DirectGenerator()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DirectGenerator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field to fetch the candidate suggestions from.
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,7 +195,6 @@ public sealed partial class DirectGenerator
 	/// Can only be <c>1</c> or <c>2</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
 
 	/// <summary>
@@ -53,7 +203,6 @@ public sealed partial class DirectGenerator
 	/// Can improve accuracy at the cost of performance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_inspections")]
 	public float? MaxInspections { get; set; }
 
 	/// <summary>
@@ -64,7 +213,6 @@ public sealed partial class DirectGenerator
 	/// If a value higher than 1 is specified, then fractional can not be specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
 
 	/// <summary>
@@ -75,7 +223,6 @@ public sealed partial class DirectGenerator
 	/// If a value higher than 1 is specified, the number cannot be fractional.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
 
 	/// <summary>
@@ -83,7 +230,6 @@ public sealed partial class DirectGenerator
 	/// The minimum length a suggest text term must have in order to be included.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 
 	/// <summary>
@@ -91,7 +237,6 @@ public sealed partial class DirectGenerator
 	/// A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("post_filter")]
 	public string? PostFilter { get; set; }
 
 	/// <summary>
@@ -100,7 +245,6 @@ public sealed partial class DirectGenerator
 	/// This filter is applied to the original token before candidates are generated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pre_filter")]
 	public string? PreFilter { get; set; }
 
 	/// <summary>
@@ -109,7 +253,6 @@ public sealed partial class DirectGenerator
 	/// Increasing this number improves spellcheck performance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
@@ -117,7 +260,6 @@ public sealed partial class DirectGenerator
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -125,29 +267,27 @@ public sealed partial class DirectGenerator
 	/// Controls what suggestions are included on the suggestions generated on each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 }
 
-public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableDescriptor<DirectGeneratorDescriptor<TDocument>>
+public readonly partial struct DirectGeneratorDescriptor<TDocument>
 {
-	internal DirectGeneratorDescriptor(Action<DirectGeneratorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Instance { get; init; }
 
-	public DirectGeneratorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DirectGeneratorDescriptor(Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? MaxEditsValue { get; set; }
-	private float? MaxInspectionsValue { get; set; }
-	private float? MaxTermFreqValue { get; set; }
-	private float? MinDocFreqValue { get; set; }
-	private int? MinWordLengthValue { get; set; }
-	private string? PostFilterValue { get; set; }
-	private string? PreFilterValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DirectGeneratorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator instance) => new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -155,22 +295,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -179,10 +307,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -191,10 +319,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// Can only be <c>1</c> or <c>2</c>.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> MaxEdits(int? maxEdits)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MaxEdits(int? value)
 	{
-		MaxEditsValue = maxEdits;
-		return Self;
+		Instance.MaxEdits = value;
+		return this;
 	}
 
 	/// <summary>
@@ -203,10 +331,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// Can improve accuracy at the cost of performance.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> MaxInspections(float? maxInspections)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MaxInspections(float? value)
 	{
-		MaxInspectionsValue = maxInspections;
-		return Self;
+		Instance.MaxInspections = value;
+		return this;
 	}
 
 	/// <summary>
@@ -217,10 +345,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// If a value higher than 1 is specified, then fractional can not be specified.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> MaxTermFreq(float? maxTermFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MaxTermFreq(float? value)
 	{
-		MaxTermFreqValue = maxTermFreq;
-		return Self;
+		Instance.MaxTermFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -231,10 +359,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// If a value higher than 1 is specified, the number cannot be fractional.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> MinDocFreq(float? minDocFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MinDocFreq(float? value)
 	{
-		MinDocFreqValue = minDocFreq;
-		return Self;
+		Instance.MinDocFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -242,10 +370,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// The minimum length a suggest text term must have in order to be included.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> MinWordLength(int? minWordLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MinWordLength(int? value)
 	{
-		MinWordLengthValue = minWordLength;
-		return Self;
+		Instance.MinWordLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -253,10 +381,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> PostFilter(string? postFilter)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> PostFilter(string? value)
 	{
-		PostFilterValue = postFilter;
-		return Self;
+		Instance.PostFilter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -265,10 +393,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// This filter is applied to the original token before candidates are generated.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> PreFilter(string? preFilter)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> PreFilter(string? value)
 	{
-		PreFilterValue = preFilter;
-		return Self;
+		Instance.PreFilter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,10 +405,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// Increasing this number improves spellcheck performance.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,10 +416,10 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -299,100 +427,39 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	/// Controls what suggestions are included on the suggestions generated on each shard.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
-		SuggestModeValue = suggestMode;
-		return Self;
+		Instance.SuggestMode = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (MaxEditsValue.HasValue)
-		{
-			writer.WritePropertyName("max_edits");
-			writer.WriteNumberValue(MaxEditsValue.Value);
-		}
-
-		if (MaxInspectionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_inspections");
-			writer.WriteNumberValue(MaxInspectionsValue.Value);
-		}
-
-		if (MaxTermFreqValue.HasValue)
-		{
-			writer.WritePropertyName("max_term_freq");
-			writer.WriteNumberValue(MaxTermFreqValue.Value);
-		}
-
-		if (MinDocFreqValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_freq");
-			writer.WriteNumberValue(MinDocFreqValue.Value);
-		}
-
-		if (MinWordLengthValue.HasValue)
-		{
-			writer.WritePropertyName("min_word_length");
-			writer.WriteNumberValue(MinWordLengthValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(PostFilterValue))
-		{
-			writer.WritePropertyName("post_filter");
-			writer.WriteStringValue(PostFilterValue);
-		}
-
-		if (!string.IsNullOrEmpty(PreFilterValue))
-		{
-			writer.WritePropertyName("pre_filter");
-			writer.WriteStringValue(PreFilterValue);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SuggestModeValue is not null)
-		{
-			writer.WritePropertyName("suggest_mode");
-			JsonSerializer.Serialize(writer, SuggestModeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<DirectGeneratorDescriptor>
+public readonly partial struct DirectGeneratorDescriptor
 {
-	internal DirectGeneratorDescriptor(Action<DirectGeneratorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Instance { get; init; }
 
-	public DirectGeneratorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DirectGeneratorDescriptor(Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? MaxEditsValue { get; set; }
-	private float? MaxInspectionsValue { get; set; }
-	private float? MaxTermFreqValue { get; set; }
-	private float? MinDocFreqValue { get; set; }
-	private int? MinWordLengthValue { get; set; }
-	private string? PostFilterValue { get; set; }
-	private string? PreFilterValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DirectGeneratorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator instance) => new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -400,22 +467,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public DirectGeneratorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -424,10 +479,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -436,10 +491,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// Can only be <c>1</c> or <c>2</c>.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor MaxEdits(int? maxEdits)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MaxEdits(int? value)
 	{
-		MaxEditsValue = maxEdits;
-		return Self;
+		Instance.MaxEdits = value;
+		return this;
 	}
 
 	/// <summary>
@@ -448,10 +503,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// Can improve accuracy at the cost of performance.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor MaxInspections(float? maxInspections)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MaxInspections(float? value)
 	{
-		MaxInspectionsValue = maxInspections;
-		return Self;
+		Instance.MaxInspections = value;
+		return this;
 	}
 
 	/// <summary>
@@ -462,10 +517,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// If a value higher than 1 is specified, then fractional can not be specified.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor MaxTermFreq(float? maxTermFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MaxTermFreq(float? value)
 	{
-		MaxTermFreqValue = maxTermFreq;
-		return Self;
+		Instance.MaxTermFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -476,10 +531,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// If a value higher than 1 is specified, the number cannot be fractional.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor MinDocFreq(float? minDocFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MinDocFreq(float? value)
 	{
-		MinDocFreqValue = minDocFreq;
-		return Self;
+		Instance.MinDocFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -487,10 +542,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// The minimum length a suggest text term must have in order to be included.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor MinWordLength(int? minWordLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MinWordLength(int? value)
 	{
-		MinWordLengthValue = minWordLength;
-		return Self;
+		Instance.MinWordLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -498,10 +553,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor PostFilter(string? postFilter)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor PostFilter(string? value)
 	{
-		PostFilterValue = postFilter;
-		return Self;
+		Instance.PostFilter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -510,10 +565,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// This filter is applied to the original token before candidates are generated.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor PreFilter(string? preFilter)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor PreFilter(string? value)
 	{
-		PreFilterValue = preFilter;
-		return Self;
+		Instance.PreFilter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -522,10 +577,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// Increasing this number improves spellcheck performance.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -533,10 +588,10 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -544,77 +599,17 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	/// Controls what suggestions are included on the suggestions generated on each shard.
 	/// </para>
 	/// </summary>
-	public DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
+	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
-		SuggestModeValue = suggestMode;
-		return Self;
+		Instance.SuggestMode = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (MaxEditsValue.HasValue)
-		{
-			writer.WritePropertyName("max_edits");
-			writer.WriteNumberValue(MaxEditsValue.Value);
-		}
-
-		if (MaxInspectionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_inspections");
-			writer.WriteNumberValue(MaxInspectionsValue.Value);
-		}
-
-		if (MaxTermFreqValue.HasValue)
-		{
-			writer.WritePropertyName("max_term_freq");
-			writer.WriteNumberValue(MaxTermFreqValue.Value);
-		}
-
-		if (MinDocFreqValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_freq");
-			writer.WriteNumberValue(MinDocFreqValue.Value);
-		}
-
-		if (MinWordLengthValue.HasValue)
-		{
-			writer.WritePropertyName("min_word_length");
-			writer.WriteNumberValue(MinWordLengthValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(PostFilterValue))
-		{
-			writer.WritePropertyName("post_filter");
-			writer.WriteStringValue(PostFilterValue);
-		}
-
-		if (!string.IsNullOrEmpty(PreFilterValue))
-		{
-			writer.WritePropertyName("pre_filter");
-			writer.WriteStringValue(PreFilterValue);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SuggestModeValue is not null)
-		{
-			writer.WritePropertyName("suggest_mode");
-			JsonSerializer.Serialize(writer, SuggestModeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

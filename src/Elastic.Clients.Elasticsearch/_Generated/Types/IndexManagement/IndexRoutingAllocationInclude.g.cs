@@ -17,62 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexRoutingAllocationIncludeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropTierPreference = System.Text.Json.JsonEncodedText.Encode("_tier_preference");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<string?> propTierPreference = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propTierPreference.TryReadProperty(ref reader, options, PropTierPreference, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			TierPreference = propTierPreference.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropTierPreference, value.TierPreference, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeConverter))]
 public sealed partial class IndexRoutingAllocationInclude
 {
-	[JsonInclude, JsonPropertyName("_id")]
+#if NET7_0_OR_GREATER
+	public IndexRoutingAllocationInclude()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexRoutingAllocationInclude()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexRoutingAllocationInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-	[JsonInclude, JsonPropertyName("_tier_preference")]
 	public string? TierPreference { get; set; }
 }
 
-public sealed partial class IndexRoutingAllocationIncludeDescriptor : SerializableDescriptor<IndexRoutingAllocationIncludeDescriptor>
+public readonly partial struct IndexRoutingAllocationIncludeDescriptor
 {
-	internal IndexRoutingAllocationIncludeDescriptor(Action<IndexRoutingAllocationIncludeDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude Instance { get; init; }
 
-	public IndexRoutingAllocationIncludeDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRoutingAllocationIncludeDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private string? TierPreferenceValue { get; set; }
-
-	public IndexRoutingAllocationIncludeDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRoutingAllocationIncludeDescriptor()
 	{
-		IdValue = id;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IndexRoutingAllocationIncludeDescriptor TierPreference(string? tierPreference)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		TierPreferenceValue = tierPreference;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor TierPreference(string? value)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
+		Instance.TierPreference = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(TierPreferenceValue))
-		{
-			writer.WritePropertyName("_tier_preference");
-			writer.WriteStringValue(TierPreferenceValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

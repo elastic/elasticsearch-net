@@ -17,24 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class IntervalsAnyOfConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropIntervals = System.Text.Json.JsonEncodedText.Encode("intervals");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter?> propFilter = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>> propIntervals = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propIntervals.TryReadProperty(ref reader, options, PropIntervals, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filter = propFilter.Value,
+			Intervals = propIntervals.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIntervals, value.Intervals, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfConverter))]
 public sealed partial class IntervalsAnyOf
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsAnyOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
+	{
+		Intervals = intervals;
+	}
+#if NET7_0_OR_GREATER
+	public IntervalsAnyOf()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IntervalsAnyOf()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Rule used to filter returned intervals.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
 	/// <summary>
@@ -42,56 +108,52 @@ public sealed partial class IntervalsAnyOf
 	/// An array of rules to match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("intervals")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(IntervalsAnyOf intervalsAnyOf) => Elastic.Clients.Elasticsearch.QueryDsl.Intervals.AnyOf(intervalsAnyOf);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(IntervalsAnyOf intervalsAnyOf) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.AnyOf(intervalsAnyOf);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 }
 
-public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDescriptor<IntervalsAnyOfDescriptor<TDocument>>
+public readonly partial struct IntervalsAnyOfDescriptor<TDocument>
 {
-	internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Instance { get; init; }
 
-	public IntervalsAnyOfDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsAnyOfDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> IntervalsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsAnyOfDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Rule used to filter returned intervals.
 	/// </para>
 	/// </summary>
-	public IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -99,139 +161,10 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 	/// An array of rules to match.
 	/// </para>
 	/// </summary>
-	public IntervalsAnyOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
-		IntervalsDescriptor = null;
-		IntervalsDescriptorAction = null;
-		IntervalsDescriptorActions = null;
-		IntervalsValue = intervals;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor<TDocument> Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> descriptor)
-	{
-		IntervalsValue = null;
-		IntervalsDescriptorAction = null;
-		IntervalsDescriptorActions = null;
-		IntervalsDescriptor = descriptor;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor<TDocument> Intervals(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure)
-	{
-		IntervalsValue = null;
-		IntervalsDescriptor = null;
-		IntervalsDescriptorActions = null;
-		IntervalsDescriptorAction = configure;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor<TDocument> Intervals(params Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>>[] configure)
-	{
-		IntervalsValue = null;
-		IntervalsDescriptor = null;
-		IntervalsDescriptorAction = null;
-		IntervalsDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (IntervalsDescriptor is not null)
-		{
-			writer.WritePropertyName("intervals");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IntervalsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("intervals");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>(IntervalsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IntervalsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("intervals");
-			writer.WriteStartArray();
-			foreach (var action in IntervalsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("intervals");
-			JsonSerializer.Serialize(writer, IntervalsValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<IntervalsAnyOfDescriptor>
-{
-	internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor> configure) => configure.Invoke(this);
-
-	public IntervalsAnyOfDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor IntervalsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> IntervalsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor>[] IntervalsDescriptorActions { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
-	public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
-	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Intervals = value;
+		return this;
 	}
 
 	/// <summary>
@@ -239,92 +172,151 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 	/// An array of rules to match.
 	/// </para>
 	/// </summary>
-	public IntervalsAnyOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
-		IntervalsDescriptor = null;
-		IntervalsDescriptorAction = null;
-		IntervalsDescriptorActions = null;
-		IntervalsValue = intervals;
-		return Self;
+		Instance.Intervals = [.. values];
+		return this;
 	}
 
-	public IntervalsAnyOfDescriptor Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>>[] actions)
 	{
-		IntervalsValue = null;
-		IntervalsDescriptorAction = null;
-		IntervalsDescriptorActions = null;
-		IntervalsDescriptor = descriptor;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Intervals = items;
+		return this;
 	}
 
-	public IntervalsAnyOfDescriptor Intervals(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>> action)
 	{
-		IntervalsValue = null;
-		IntervalsDescriptor = null;
-		IntervalsDescriptorActions = null;
-		IntervalsDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct IntervalsAnyOfDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsAnyOfDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf instance)
+	{
+		Instance = instance;
 	}
 
-	public IntervalsAnyOfDescriptor Intervals(params Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor>[] configure)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsAnyOfDescriptor()
 	{
-		IntervalsValue = null;
-		IntervalsDescriptor = null;
-		IntervalsDescriptorAction = null;
-		IntervalsDescriptorActions = configure;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
-		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
+	{
+		Instance.Intervals = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
+	{
+		Instance.Intervals = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action));
 		}
 
-		if (IntervalsDescriptor is not null)
-		{
-			writer.WritePropertyName("intervals");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IntervalsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("intervals");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor(IntervalsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IntervalsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("intervals");
-			writer.WriteStartArray();
-			foreach (var action in IntervalsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor(action), options);
-			}
+		Instance.Intervals = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
+	/// <summary>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("intervals");
-			JsonSerializer.Serialize(writer, IntervalsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Intervals = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

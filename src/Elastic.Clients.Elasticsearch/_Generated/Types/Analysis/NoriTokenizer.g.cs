@@ -17,122 +17,189 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class NoriTokenizer : ITokenizer
+internal sealed partial class NoriTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>
 {
-	[JsonInclude, JsonPropertyName("decompound_mode")]
+	private static readonly System.Text.Json.JsonEncodedText PropDecompoundMode = System.Text.Json.JsonEncodedText.Encode("decompound_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscardPunctuation = System.Text.Json.JsonEncodedText.Encode("discard_punctuation");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary");
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionaryRules = System.Text.Json.JsonEncodedText.Encode("user_dictionary_rules");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode?> propDecompoundMode = default;
+		LocalJsonValue<bool?> propDiscardPunctuation = default;
+		LocalJsonValue<string?> propUserDictionary = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUserDictionaryRules = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDecompoundMode.TryReadProperty(ref reader, options, PropDecompoundMode, null))
+			{
+				continue;
+			}
+
+			if (propDiscardPunctuation.TryReadProperty(ref reader, options, PropDiscardPunctuation, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUserDictionary.TryReadProperty(ref reader, options, PropUserDictionary, null))
+			{
+				continue;
+			}
+
+			if (propUserDictionaryRules.TryReadProperty(ref reader, options, PropUserDictionaryRules, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DecompoundMode = propDecompoundMode.Value,
+			DiscardPunctuation = propDiscardPunctuation.Value,
+			UserDictionary = propUserDictionary.Value,
+			UserDictionaryRules = propUserDictionaryRules.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDecompoundMode, value.DecompoundMode, null, null);
+		writer.WriteProperty(options, PropDiscardPunctuation, value.DiscardPunctuation, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
+		writer.WriteProperty(options, PropUserDictionaryRules, value.UserDictionaryRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerConverter))]
+public sealed partial class NoriTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public NoriTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public NoriTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NoriTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; set; }
-	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "nori_tokenizer";
 
-	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
-	[JsonInclude, JsonPropertyName("user_dictionary_rules")]
-	public ICollection<string>? UserDictionaryRules { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
+	public System.Collections.Generic.ICollection<string>? UserDictionaryRules { get; set; }
 	public string? Version { get; set; }
 }
 
-public sealed partial class NoriTokenizerDescriptor : SerializableDescriptor<NoriTokenizerDescriptor>, IBuildableDescriptor<NoriTokenizer>
+public readonly partial struct NoriTokenizerDescriptor
 {
-	internal NoriTokenizerDescriptor(Action<NoriTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer Instance { get; init; }
 
-	public NoriTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NoriTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundModeValue { get; set; }
-	private bool? DiscardPunctuationValue { get; set; }
-	private string? UserDictionaryValue { get; set; }
-	private ICollection<string>? UserDictionaryRulesValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public NoriTokenizerDescriptor DecompoundMode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? decompoundMode)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NoriTokenizerDescriptor()
 	{
-		DecompoundModeValue = decompoundMode;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public NoriTokenizerDescriptor DiscardPunctuation(bool? discardPunctuation = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor DecompoundMode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? value)
 	{
-		DiscardPunctuationValue = discardPunctuation;
-		return Self;
+		Instance.DecompoundMode = value;
+		return this;
 	}
 
-	public NoriTokenizerDescriptor UserDictionary(string? userDictionary)
+	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor DiscardPunctuation(bool? value = true)
 	{
-		UserDictionaryValue = userDictionary;
-		return Self;
+		Instance.DiscardPunctuation = value;
+		return this;
 	}
 
-	public NoriTokenizerDescriptor UserDictionaryRules(ICollection<string>? userDictionaryRules)
+	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor UserDictionary(string? value)
 	{
-		UserDictionaryRulesValue = userDictionaryRules;
-		return Self;
+		Instance.UserDictionary = value;
+		return this;
 	}
 
-	public NoriTokenizerDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor UserDictionaryRules(System.Collections.Generic.ICollection<string>? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.UserDictionaryRules = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor UserDictionaryRules(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (DecompoundModeValue is not null)
+		Instance.UserDictionaryRules = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("decompound_mode");
-			JsonSerializer.Serialize(writer, DecompoundModeValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DiscardPunctuationValue.HasValue)
-		{
-			writer.WritePropertyName("discard_punctuation");
-			writer.WriteBooleanValue(DiscardPunctuationValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("nori_tokenizer");
-		if (!string.IsNullOrEmpty(UserDictionaryValue))
-		{
-			writer.WritePropertyName("user_dictionary");
-			writer.WriteStringValue(UserDictionaryValue);
-		}
-
-		if (UserDictionaryRulesValue is not null)
-		{
-			writer.WritePropertyName("user_dictionary_rules");
-			JsonSerializer.Serialize(writer, UserDictionaryRulesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	NoriTokenizer IBuildableDescriptor<NoriTokenizer>.Build() => new()
-	{
-		DecompoundMode = DecompoundModeValue,
-		DiscardPunctuation = DiscardPunctuationValue,
-		UserDictionary = UserDictionaryValue,
-		UserDictionaryRules = UserDictionaryRulesValue,
-		Version = VersionValue
-	};
 }

@@ -17,23 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
+
+internal sealed partial class SettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Settings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAlignCheckpoints = System.Text.Json.JsonEncodedText.Encode("align_checkpoints");
+	private static readonly System.Text.Json.JsonEncodedText PropDatesAsEpochMillis = System.Text.Json.JsonEncodedText.Encode("dates_as_epoch_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropDeduceMappings = System.Text.Json.JsonEncodedText.Encode("deduce_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size");
+	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.Settings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAlignCheckpoints = default;
+		LocalJsonValue<bool?> propDatesAsEpochMillis = default;
+		LocalJsonValue<bool?> propDeduceMappings = default;
+		LocalJsonValue<float?> propDocsPerSecond = default;
+		LocalJsonValue<int?> propMaxPageSearchSize = default;
+		LocalJsonValue<bool?> propUnattended = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlignCheckpoints.TryReadProperty(ref reader, options, PropAlignCheckpoints, null))
+			{
+				continue;
+			}
+
+			if (propDatesAsEpochMillis.TryReadProperty(ref reader, options, PropDatesAsEpochMillis, null))
+			{
+				continue;
+			}
+
+			if (propDeduceMappings.TryReadProperty(ref reader, options, PropDeduceMappings, null))
+			{
+				continue;
+			}
+
+			if (propDocsPerSecond.TryReadProperty(ref reader, options, PropDocsPerSecond, null))
+			{
+				continue;
+			}
+
+			if (propMaxPageSearchSize.TryReadProperty(ref reader, options, PropMaxPageSearchSize, null))
+			{
+				continue;
+			}
+
+			if (propUnattended.TryReadProperty(ref reader, options, PropUnattended, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AlignCheckpoints = propAlignCheckpoints.Value,
+			DatesAsEpochMillis = propDatesAsEpochMillis.Value,
+			DeduceMappings = propDeduceMappings.Value,
+			DocsPerSecond = propDocsPerSecond.Value,
+			MaxPageSearchSize = propMaxPageSearchSize.Value,
+			Unattended = propUnattended.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Settings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAlignCheckpoints, value.AlignCheckpoints, null, null);
+		writer.WriteProperty(options, PropDatesAsEpochMillis, value.DatesAsEpochMillis, null, null);
+		writer.WriteProperty(options, PropDeduceMappings, value.DeduceMappings, null, null);
+		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, null);
+		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, null);
+		writer.WriteProperty(options, PropUnattended, value.Unattended, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// The source of the data for the transform.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.SettingsConverter))]
 public sealed partial class Settings
 {
+#if NET7_0_OR_GREATER
+	public Settings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Settings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align
@@ -42,7 +139,6 @@ public sealed partial class Settings
 	/// overall performance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("align_checkpoints")]
 	public bool? AlignCheckpoints { get; set; }
 
 	/// <summary>
@@ -51,7 +147,6 @@ public sealed partial class Settings
 	/// the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dates_as_epoch_millis")]
 	public bool? DatesAsEpochMillis { get; set; }
 
 	/// <summary>
@@ -59,7 +154,6 @@ public sealed partial class Settings
 	/// Specifies whether the transform should deduce the destination index mappings from the transform configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deduce_mappings")]
 	public bool? DeduceMappings { get; set; }
 
 	/// <summary>
@@ -68,7 +162,6 @@ public sealed partial class Settings
 	/// wait time between search requests. The default value is null, which disables throttling.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs_per_second")]
 	public float? DocsPerSecond { get; set; }
 
 	/// <summary>
@@ -78,7 +171,6 @@ public sealed partial class Settings
 	/// maximum is <c>65,536</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_page_search_size")]
 	public int? MaxPageSearchSize { get; set; }
 
 	/// <summary>
@@ -88,7 +180,6 @@ public sealed partial class Settings
 	/// validation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unattended")]
 	public bool? Unattended { get; set; }
 }
 
@@ -97,20 +188,24 @@ public sealed partial class Settings
 /// The source of the data for the transform.
 /// </para>
 /// </summary>
-public sealed partial class SettingsDescriptor : SerializableDescriptor<SettingsDescriptor>
+public readonly partial struct SettingsDescriptor
 {
-	internal SettingsDescriptor(Action<SettingsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Settings Instance { get; init; }
 
-	public SettingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Settings instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AlignCheckpointsValue { get; set; }
-	private bool? DatesAsEpochMillisValue { get; set; }
-	private bool? DeduceMappingsValue { get; set; }
-	private float? DocsPerSecondValue { get; set; }
-	private int? MaxPageSearchSizeValue { get; set; }
-	private bool? UnattendedValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Settings instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -120,10 +215,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	/// overall performance.
 	/// </para>
 	/// </summary>
-	public SettingsDescriptor AlignCheckpoints(bool? alignCheckpoints = true)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor AlignCheckpoints(bool? value = true)
 	{
-		AlignCheckpointsValue = alignCheckpoints;
-		return Self;
+		Instance.AlignCheckpoints = value;
+		return this;
 	}
 
 	/// <summary>
@@ -132,10 +227,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	/// the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public SettingsDescriptor DatesAsEpochMillis(bool? datesAsEpochMillis = true)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DatesAsEpochMillis(bool? value = true)
 	{
-		DatesAsEpochMillisValue = datesAsEpochMillis;
-		return Self;
+		Instance.DatesAsEpochMillis = value;
+		return this;
 	}
 
 	/// <summary>
@@ -143,10 +238,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	/// Specifies whether the transform should deduce the destination index mappings from the transform configuration.
 	/// </para>
 	/// </summary>
-	public SettingsDescriptor DeduceMappings(bool? deduceMappings = true)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DeduceMappings(bool? value = true)
 	{
-		DeduceMappingsValue = deduceMappings;
-		return Self;
+		Instance.DeduceMappings = value;
+		return this;
 	}
 
 	/// <summary>
@@ -155,10 +250,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	/// wait time between search requests. The default value is null, which disables throttling.
 	/// </para>
 	/// </summary>
-	public SettingsDescriptor DocsPerSecond(float? docsPerSecond)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DocsPerSecond(float? value)
 	{
-		DocsPerSecondValue = docsPerSecond;
-		return Self;
+		Instance.DocsPerSecond = value;
+		return this;
 	}
 
 	/// <summary>
@@ -168,10 +263,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	/// maximum is <c>65,536</c>.
 	/// </para>
 	/// </summary>
-	public SettingsDescriptor MaxPageSearchSize(int? maxPageSearchSize)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor MaxPageSearchSize(int? value)
 	{
-		MaxPageSearchSizeValue = maxPageSearchSize;
-		return Self;
+		Instance.MaxPageSearchSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -181,51 +276,22 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	/// validation.
 	/// </para>
 	/// </summary>
-	public SettingsDescriptor Unattended(bool? unattended = true)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor Unattended(bool? value = true)
 	{
-		UnattendedValue = unattended;
-		return Self;
+		Instance.Unattended = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Settings Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AlignCheckpointsValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("align_checkpoints");
-			writer.WriteBooleanValue(AlignCheckpointsValue.Value);
+			return new Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DatesAsEpochMillisValue.HasValue)
-		{
-			writer.WritePropertyName("dates_as_epoch_millis");
-			writer.WriteBooleanValue(DatesAsEpochMillisValue.Value);
-		}
-
-		if (DeduceMappingsValue.HasValue)
-		{
-			writer.WritePropertyName("deduce_mappings");
-			writer.WriteBooleanValue(DeduceMappingsValue.Value);
-		}
-
-		if (DocsPerSecondValue.HasValue)
-		{
-			writer.WritePropertyName("docs_per_second");
-			writer.WriteNumberValue(DocsPerSecondValue.Value);
-		}
-
-		if (MaxPageSearchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("max_page_search_size");
-			writer.WriteNumberValue(MaxPageSearchSizeValue.Value);
-		}
-
-		if (UnattendedValue.HasValue)
-		{
-			writer.WritePropertyName("unattended");
-			writer.WriteBooleanValue(UnattendedValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

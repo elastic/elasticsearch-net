@@ -17,47 +17,147 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+internal sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
+	private static readonly System.Text.Json.JsonEncodedText PropMetricDetails = System.Text.Json.JsonEncodedText.Encode("metric_details");
+	private static readonly System.Text.Json.JsonEncodedText PropMetricScore = System.Text.Json.JsonEncodedText.Encode("metric_score");
+	private static readonly System.Text.Json.JsonEncodedText PropUnratedDocs = System.Text.Json.JsonEncodedText.Encode("unrated_docs");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>> propHits = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>>> propMetricDetails = default;
+		LocalJsonValue<double> propMetricScore = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument>> propUnratedDocs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHits.TryReadProperty(ref reader, options, PropHits, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMetricDetails.TryReadProperty(ref reader, options, PropMetricDetails, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, object>>(o, null, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!)!))
+			{
+				continue;
+			}
+
+			if (propMetricScore.TryReadProperty(ref reader, options, PropMetricScore, null))
+			{
+				continue;
+			}
+
+			if (propUnratedDocs.TryReadProperty(ref reader, options, PropUnratedDocs, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Hits = propHits.Value,
+			MetricDetails = propMetricDetails.Value,
+			MetricScore = propMetricScore.Value,
+			UnratedDocs = propUnratedDocs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHits, value.Hits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>(o, v, null));
+		writer.WriteProperty(options, PropMetricDetails, value.MetricDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null)));
+		writer.WriteProperty(options, PropMetricScore, value.MetricScore, null, null);
+		writer.WriteProperty(options, PropUnratedDocs, value.UnratedDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetailConverter))]
 public sealed partial class RankEvalMetricDetail
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricDetail(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> hits, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> metricDetails, double metricScore, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> unratedDocs)
+	{
+		Hits = hits;
+		MetricDetails = metricDetails;
+		MetricScore = metricScore;
+		UnratedDocs = unratedDocs;
+	}
+#if NET7_0_OR_GREATER
+	public RankEvalMetricDetail()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankEvalMetricDetail()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalMetricDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The hits section shows a grouping of the search results with their supplied ratings
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hits")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The metric_details give additional information about the calculated quality metric (e.g. how many of the retrieved documents were relevant). The content varies for each metric but allows for better interpretation of the results
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metric_details")]
-	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> MetricDetails { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> MetricDetails { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The metric_score in the details section shows the contribution of this query to the global quality metric score
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metric_score")]
-	public double MetricScore { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double MetricScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unrated_docs section contains an _index and _id entry for each document in the search result for this query that didn’t have a ratings value. This can be used to ask the user to supply ratings for these documents
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unrated_docs")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; set; }
 }

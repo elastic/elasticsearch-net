@@ -17,21 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-public sealed partial class PutJobRequestParameters : RequestParameters
+public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron");
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
+	private static readonly System.Text.Json.JsonEncodedText PropPageSize = System.Text.Json.JsonEncodedText.Encode("page_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.PutJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propCron = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Rollup.Groupings> propGroups = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>?> propHeaders = default;
+		LocalJsonValue<string> propIndexPattern = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>?> propMetrics = default;
+		LocalJsonValue<int> propPageSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propRollupIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCron.TryReadProperty(ref reader, options, PropCron, null))
+			{
+				continue;
+			}
+
+			if (propGroups.TryReadProperty(ref reader, options, PropGroups, null))
+			{
+				continue;
+			}
+
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propIndexPattern.TryReadProperty(ref reader, options, PropIndexPattern, null))
+			{
+				continue;
+			}
+
+			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPageSize.TryReadProperty(ref reader, options, PropPageSize, null))
+			{
+				continue;
+			}
+
+			if (propRollupIndex.TryReadProperty(ref reader, options, PropRollupIndex, null))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cron = propCron.Value,
+			Groups = propGroups.Value,
+			Headers = propHeaders.Value,
+			IndexPattern = propIndexPattern.Value,
+			Metrics = propMetrics.Value,
+			PageSize = propPageSize.Value,
+			RollupIndex = propRollupIndex.Value,
+			Timeout = propTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.PutJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCron, value.Cron, null, null);
+		writer.WriteProperty(options, PropGroups, value.Groups, null, null);
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropIndexPattern, value.IndexPattern, null, null);
+		writer.WriteProperty(options, PropMetrics, value.Metrics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>(o, v, null));
+		writer.WriteProperty(options, PropPageSize, value.PageSize, null, null);
+		writer.WriteProperty(options, PropRollupIndex, value.RollupIndex, null, null);
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -51,19 +146,57 @@ public sealed partial class PutJobRequestParameters : RequestParameters
 /// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
-public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.PutJobRequestConverter))]
+public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutJobRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupPutJob;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequest(Elastic.Clients.Elasticsearch.Id id, string cron, Elastic.Clients.Elasticsearch.Rollup.Groupings groups, string indexPattern, int pageSize, Elastic.Clients.Elasticsearch.IndexName rollupIndex) : base(r => r.Required("id", id))
+	{
+		Cron = cron;
+		Groups = groups;
+		IndexPattern = indexPattern;
+		PageSize = pageSize;
+		RollupIndex = rollupIndex;
+	}
+#if NET7_0_OR_GREATER
+	public PutJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.RollupPutJob;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "rollup.put_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the rollup job. This can be any alphanumeric string and uniquely identifies the
+	/// data that is associated with the rollup job. The ID is persistent; it is stored with the rolled
+	/// up data. If you create a job, let it run for a while, then delete the job, the data that the job
+	/// rolled up is still be associated with this job ID. You cannot create a new job with the same ID
+	/// since that could lead to problems with mismatched job configurations.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -74,8 +207,11 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// cron pattern is defined just like a Watcher cron schedule.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cron")]
-	public string Cron { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Cron { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,10 +222,12 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("groups")]
-	public Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
-	[JsonInclude, JsonPropertyName("headers")]
-	public IDictionary<string, Union<string, ICollection<string>>>? Headers { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
+	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Headers { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -97,8 +235,11 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// rollup the entire index or index-pattern.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_pattern")]
-	public string IndexPattern { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexPattern { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -107,8 +248,7 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// on a per-field basis and for each field you configure which metric should be collected.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metrics")]
-	public ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? Metrics { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? Metrics { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -117,23 +257,28 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("page_size")]
-	public int PageSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int PageSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rollup_index")]
-	public Elastic.Clients.Elasticsearch.IndexName RollupIndex { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName RollupIndex { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Time to wait for the request to complete.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
@@ -154,41 +299,46 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 /// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
-public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
+public readonly partial struct PutJobRequestDescriptor
 {
-	internal PutJobRequestDescriptor(Action<PutJobRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.PutJobRequest Instance { get; init; }
 
-	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupPutJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "rollup.put_job";
-
-	public PutJobRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(id);
+#pragma warning restore CS0618
 	}
 
-	private string CronValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.Groupings GroupsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> GroupsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>> GroupsDescriptorAction { get; set; }
-	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
-	private string IndexPatternValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>> MetricsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>>[] MetricsDescriptorActions { get; set; }
-	private int PageSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName RollupIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutJobRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the rollup job. This can be any alphanumeric string and uniquely identifies the
+	/// data that is associated with the rollup job. The ID is persistent; it is stored with the rolled
+	/// up data. If you create a job, let it run for a while, then delete the job, the data that the job
+	/// rolled up is still be associated with this job ID. You cannot create a new job with the same ID
+	/// since that could lead to problems with mismatched job configurations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -199,10 +349,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// cron pattern is defined just like a Watcher cron schedule.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> Cron(string cron)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Cron(string value)
 	{
-		CronValue = cron;
-		return Self;
+		Instance.Cron = value;
+		return this;
 	}
 
 	/// <summary>
@@ -214,34 +364,87 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings groups)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings value)
 	{
-		GroupsDescriptor = null;
-		GroupsDescriptorAction = null;
-		GroupsValue = groups;
-		return Self;
+		Instance.Groups = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> Groups(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Groups()
 	{
-		GroupsValue = null;
-		GroupsDescriptorAction = null;
-		GroupsDescriptor = descriptor;
-		return Self;
+		Instance.Groups = Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> Groups(Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Groups(System.Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor>? action)
 	{
-		GroupsValue = null;
-		GroupsDescriptor = null;
-		GroupsDescriptorAction = configure;
-		return Self;
+		Instance.Groups = Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor.Build(action);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> Headers(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
+	/// <summary>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Groups<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<T>>? action)
 	{
-		HeadersValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
+		Instance.Groups = Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Headers(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
+	{
+		Instance.Headers = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor AddHeader(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor AddHeader(string key, params string[] values)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, [.. values]);
+		return this;
 	}
 
 	/// <summary>
@@ -250,10 +453,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// rollup the entire index or index-pattern.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> IndexPattern(string indexPattern)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor IndexPattern(string value)
 	{
-		IndexPatternValue = indexPattern;
-		return Self;
+		Instance.IndexPattern = value;
+		return this;
 	}
 
 	/// <summary>
@@ -263,40 +466,61 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// on a per-field basis and for each field you configure which metric should be collected.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? metrics)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? value)
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptorActions = null;
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics(params Elastic.Clients.Elasticsearch.Rollup.FieldMetric[] values)
 	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptorActions = null;
-		MetricsDescriptor = descriptor;
-		return Self;
+		Instance.Metrics = [.. values];
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> Metrics(Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics(params System.Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor>[] actions)
 	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorActions = null;
-		MetricsDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor.Build(action));
+		}
+
+		Instance.Metrics = items;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> Metrics(params Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics<T>(params System.Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<T>>[] actions)
 	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<T>.Build(action));
+		}
+
+		Instance.Metrics = items;
+		return this;
 	}
 
 	/// <summary>
@@ -306,10 +530,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> PageSize(int pageSize)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor PageSize(int value)
 	{
-		PageSizeValue = pageSize;
-		return Self;
+		Instance.PageSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -317,10 +541,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> RollupIndex(Elastic.Clients.Elasticsearch.IndexName rollupIndex)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor RollupIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		RollupIndexValue = rollupIndex;
-		return Self;
+		Instance.RollupIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -328,83 +552,60 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Time to wait for the request to complete.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.PutJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("cron");
-		writer.WriteStringValue(CronValue);
-		if (GroupsDescriptor is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsDescriptor, options);
-		}
-		else if (GroupsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>(GroupsDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor(new Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (HeadersValue is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, HeadersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WritePropertyName("index_pattern");
-		writer.WriteStringValue(IndexPatternValue);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(MetricsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (MetricsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
-			foreach (var action in MetricsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WritePropertyName("page_size");
-		writer.WriteNumberValue(PageSizeValue);
-		writer.WritePropertyName("rollup_index");
-		JsonSerializer.Serialize(writer, RollupIndexValue, options);
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -425,41 +626,46 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 /// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
-public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>
+public readonly partial struct PutJobRequestDescriptor<TDocument>
 {
-	internal PutJobRequestDescriptor(Action<PutJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.PutJobRequest Instance { get; init; }
 
-	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupPutJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "rollup.put_job";
-
-	public PutJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(id);
+#pragma warning restore CS0618
 	}
 
-	private string CronValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.Groupings GroupsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor GroupsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor> GroupsDescriptorAction { get; set; }
-	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
-	private string IndexPatternValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor> MetricsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor>[] MetricsDescriptorActions { get; set; }
-	private int PageSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName RollupIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutJobRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the rollup job. This can be any alphanumeric string and uniquely identifies the
+	/// data that is associated with the rollup job. The ID is persistent; it is stored with the rolled
+	/// up data. If you create a job, let it run for a while, then delete the job, the data that the job
+	/// rolled up is still be associated with this job ID. You cannot create a new job with the same ID
+	/// since that could lead to problems with mismatched job configurations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -470,10 +676,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// cron pattern is defined just like a Watcher cron schedule.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor Cron(string cron)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Cron(string value)
 	{
-		CronValue = cron;
-		return Self;
+		Instance.Cron = value;
+		return this;
 	}
 
 	/// <summary>
@@ -485,34 +691,72 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings groups)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings value)
 	{
-		GroupsDescriptor = null;
-		GroupsDescriptorAction = null;
-		GroupsValue = groups;
-		return Self;
+		Instance.Groups = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor Groups(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Groups()
 	{
-		GroupsValue = null;
-		GroupsDescriptorAction = null;
-		GroupsDescriptor = descriptor;
-		return Self;
+		Instance.Groups = Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor Groups(Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Groups(System.Action<Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>>? action)
 	{
-		GroupsValue = null;
-		GroupsDescriptor = null;
-		GroupsDescriptorAction = configure;
-		return Self;
+		Instance.Groups = Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PutJobRequestDescriptor Headers(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Headers(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
 	{
-		HeadersValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
+		Instance.Headers = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> AddHeader(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> AddHeader(string key, params string[] values)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, [.. values]);
+		return this;
 	}
 
 	/// <summary>
@@ -521,10 +765,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// rollup the entire index or index-pattern.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor IndexPattern(string indexPattern)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> IndexPattern(string value)
 	{
-		IndexPatternValue = indexPattern;
-		return Self;
+		Instance.IndexPattern = value;
+		return this;
 	}
 
 	/// <summary>
@@ -534,40 +778,42 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// on a per-field basis and for each field you configure which metric should be collected.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? metrics)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? value)
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptorActions = null;
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor Metrics(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Metrics(params Elastic.Clients.Elasticsearch.Rollup.FieldMetric[] values)
 	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptorActions = null;
-		MetricsDescriptor = descriptor;
-		return Self;
+		Instance.Metrics = [.. values];
+		return this;
 	}
 
-	public PutJobRequestDescriptor Metrics(Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Metrics(params System.Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>>[] actions)
 	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorActions = null;
-		MetricsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>.Build(action));
+		}
 
-	public PutJobRequestDescriptor Metrics(params Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor>[] configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptorActions = configure;
-		return Self;
+		Instance.Metrics = items;
+		return this;
 	}
 
 	/// <summary>
@@ -577,10 +823,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor PageSize(int pageSize)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> PageSize(int value)
 	{
-		PageSizeValue = pageSize;
-		return Self;
+		Instance.PageSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -588,10 +834,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor RollupIndex(Elastic.Clients.Elasticsearch.IndexName rollupIndex)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> RollupIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		RollupIndexValue = rollupIndex;
-		return Self;
+		Instance.RollupIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -599,82 +845,59 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Time to wait for the request to complete.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.PutJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("cron");
-		writer.WriteStringValue(CronValue);
-		if (GroupsDescriptor is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsDescriptor, options);
-		}
-		else if (GroupsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor(GroupsDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (HeadersValue is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, HeadersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WritePropertyName("index_pattern");
-		writer.WriteStringValue(IndexPatternValue);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(MetricsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (MetricsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
-			foreach (var action in MetricsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WritePropertyName("page_size");
-		writer.WriteNumberValue(PageSizeValue);
-		writer.WritePropertyName("rollup_index");
-		JsonSerializer.Serialize(writer, RollupIndexValue, options);
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

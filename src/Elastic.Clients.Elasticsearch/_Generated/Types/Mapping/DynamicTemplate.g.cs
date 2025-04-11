@@ -17,519 +17,512 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-[JsonConverter(typeof(DynamicTemplateConverter))]
+internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchMappingType = System.Text.Json.JsonEncodedText.Encode("match_mapping_type");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchPattern = System.Text.Json.JsonEncodedText.Encode("match_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropPathMatch = System.Text.Json.JsonEncodedText.Encode("path_match");
+	private static readonly System.Text.Json.JsonEncodedText PropPathUnmatch = System.Text.Json.JsonEncodedText.Encode("path_unmatch");
+	private static readonly System.Text.Json.JsonEncodedText PropUnmatch = System.Text.Json.JsonEncodedText.Encode("unmatch");
+	private static readonly System.Text.Json.JsonEncodedText PropUnmatchMappingType = System.Text.Json.JsonEncodedText.Encode("unmatch_mapping_type");
+	private static readonly System.Text.Json.JsonEncodedText VariantMapping = System.Text.Json.JsonEncodedText.Encode("mapping");
+	private static readonly System.Text.Json.JsonEncodedText VariantRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propMatch = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propMatchMappingType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.MatchType?> propMatchPattern = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propPathMatch = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propPathUnmatch = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUnmatch = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUnmatchMappingType = default;
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMatch.TryReadProperty(ref reader, options, PropMatch, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMatchMappingType.TryReadProperty(ref reader, options, PropMatchMappingType, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMatchPattern.TryReadProperty(ref reader, options, PropMatchPattern, null))
+			{
+				continue;
+			}
+
+			if (propPathMatch.TryReadProperty(ref reader, options, PropPathMatch, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPathUnmatch.TryReadProperty(ref reader, options, PropPathUnmatch, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propUnmatch.TryReadProperty(ref reader, options, PropUnmatch, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propUnmatchMappingType.TryReadProperty(ref reader, options, PropUnmatchMappingType, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMapping))
+			{
+				variantType = VariantMapping.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.IProperty>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRuntime))
+			{
+				variantType = VariantRuntime.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Match = propMatch.Value,
+			MatchMappingType = propMatchMappingType.Value,
+			MatchPattern = propMatchPattern.Value,
+			PathMatch = propPathMatch.Value,
+			PathUnmatch = propPathUnmatch.Value,
+			Unmatch = propUnmatch.Value,
+			UnmatchMappingType = propUnmatchMappingType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "mapping":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.IProperty)value.Variant, null, null);
+				break;
+			case "runtime":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.RuntimeField)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate)}'.");
+		}
+
+		writer.WriteProperty(options, PropMatch, value.Match, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMatchMappingType, value.MatchMappingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMatchPattern, value.MatchPattern, null, null);
+		writer.WriteProperty(options, PropPathMatch, value.PathMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPathUnmatch, value.PathUnmatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUnmatch, value.Unmatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUnmatchMappingType, value.UnmatchMappingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateConverter))]
 public sealed partial class DynamicTemplate
 {
-	internal DynamicTemplate(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public DynamicTemplate()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DynamicTemplate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
-
-	public static DynamicTemplate Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => new DynamicTemplate("mapping", property);
-	public static DynamicTemplate Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => new DynamicTemplate("runtime", property);
-
-	[JsonInclude, JsonPropertyName("match")]
-	public ICollection<string>? Match { get; set; }
-	[JsonInclude, JsonPropertyName("match_mapping_type")]
-	public ICollection<string>? MatchMappingType { get; set; }
-	[JsonInclude, JsonPropertyName("match_pattern")]
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty? Mapping { get => GetVariant<Elastic.Clients.Elasticsearch.Mapping.IProperty>("mapping"); set => SetVariant("mapping", value); }
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeField? Runtime { get => GetVariant<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>("runtime"); set => SetVariant("runtime", value); }
+	public System.Collections.Generic.ICollection<string>? Match { get; set; }
+	public System.Collections.Generic.ICollection<string>? MatchMappingType { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
-	[JsonInclude, JsonPropertyName("path_match")]
-	public ICollection<string>? PathMatch { get; set; }
-	[JsonInclude, JsonPropertyName("path_unmatch")]
-	public ICollection<string>? PathUnmatch { get; set; }
-	[JsonInclude, JsonPropertyName("unmatch")]
-	public ICollection<string>? Unmatch { get; set; }
-	[JsonInclude, JsonPropertyName("unmatch_mapping_type")]
-	public ICollection<string>? UnmatchMappingType { get; set; }
+	public System.Collections.Generic.ICollection<string>? PathMatch { get; set; }
+	public System.Collections.Generic.ICollection<string>? PathUnmatch { get; set; }
+	public System.Collections.Generic.ICollection<string>? Unmatch { get; set; }
+	public System.Collections.Generic.ICollection<string>? UnmatchMappingType { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.BinaryProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.BooleanProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.CompletionProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DateProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.HistogramProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.IpProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.JoinProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.KeywordProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.NestedProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ObjectProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.PointProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ShapeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.TextProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.VersionProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.WildcardProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.RuntimeField value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Runtime = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class DynamicTemplateConverter : JsonConverter<DynamicTemplate>
+public readonly partial struct DynamicTemplateDescriptor<TDocument>
 {
-	public override DynamicTemplate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicTemplateDescriptor(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		ICollection<string>? matchValue = default;
-		ICollection<string>? matchMappingTypeValue = default;
-		Elastic.Clients.Elasticsearch.Mapping.MatchType? matchPatternValue = default;
-		ICollection<string>? pathMatchValue = default;
-		ICollection<string>? pathUnmatchValue = default;
-		ICollection<string>? unmatchValue = default;
-		ICollection<string>? unmatchMappingTypeValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "match")
-			{
-				matchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "match_mapping_type")
-			{
-				matchMappingTypeValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "match_pattern")
-			{
-				matchPatternValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.MatchType?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "path_match")
-			{
-				pathMatchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "path_unmatch")
-			{
-				pathUnmatchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "unmatch")
-			{
-				unmatchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "unmatch_mapping_type")
-			{
-				unmatchMappingTypeValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "mapping")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "runtime")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DynamicTemplate' from the response.");
-		}
-
-		var result = new DynamicTemplate(variantNameValue, variantValue);
-		result.Match = matchValue;
-		result.MatchMappingType = matchMappingTypeValue;
-		result.MatchPattern = matchPatternValue;
-		result.PathMatch = pathMatchValue;
-		result.PathUnmatch = pathUnmatchValue;
-		result.Unmatch = unmatchValue;
-		result.UnmatchMappingType = unmatchMappingTypeValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, DynamicTemplate value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicTemplateDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.Match is not null)
-		{
-			writer.WritePropertyName("match");
-			SingleOrManySerializationHelper.Serialize<string>(value.Match, writer, options);
-		}
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		if (value.MatchMappingType is not null)
-		{
-			writer.WritePropertyName("match_mapping_type");
-			SingleOrManySerializationHelper.Serialize<string>(value.MatchMappingType, writer, options);
-		}
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate instance) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-		if (value.MatchPattern is not null)
-		{
-			writer.WritePropertyName("match_pattern");
-			JsonSerializer.Serialize(writer, value.MatchPattern, options);
-		}
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty? value)
+	{
+		Instance.Mapping = value;
+		return this;
+	}
 
-		if (value.PathMatch is not null)
-		{
-			writer.WritePropertyName("path_match");
-			SingleOrManySerializationHelper.Serialize<string>(value.PathMatch, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Mapping(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<TDocument>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
+	{
+		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<TDocument>.Build(action);
+		return this;
+	}
 
-		if (value.PathUnmatch is not null)
-		{
-			writer.WritePropertyName("path_unmatch");
-			SingleOrManySerializationHelper.Serialize<string>(value.PathUnmatch, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Runtime(Elastic.Clients.Elasticsearch.Mapping.RuntimeField? value)
+	{
+		Instance.Runtime = value;
+		return this;
+	}
 
-		if (value.Unmatch is not null)
-		{
-			writer.WritePropertyName("unmatch");
-			SingleOrManySerializationHelper.Serialize<string>(value.Unmatch, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
-		if (value.UnmatchMappingType is not null)
-		{
-			writer.WritePropertyName("unmatch_mapping_type");
-			SingleOrManySerializationHelper.Serialize<string>(value.UnmatchMappingType, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Match(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
 
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "mapping":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Mapping.IProperty>(writer, (Elastic.Clients.Elasticsearch.Mapping.IProperty)value.Variant, options);
-					break;
-				case "runtime":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Mapping.IProperty>(writer, (Elastic.Clients.Elasticsearch.Mapping.IProperty)value.Variant, options);
-					break;
-			}
-		}
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Match(params string[] values)
+	{
+		Instance.Match = [.. values];
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> MatchMappingType(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.MatchMappingType = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> MatchMappingType(params string[] values)
+	{
+		Instance.MatchMappingType = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? value)
+	{
+		Instance.MatchPattern = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathMatch(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.PathMatch = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathMatch(params string[] values)
+	{
+		Instance.PathMatch = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathUnmatch(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.PathUnmatch = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathUnmatch(params string[] values)
+	{
+		Instance.PathUnmatch = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Unmatch(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Unmatch = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Unmatch(params string[] values)
+	{
+		Instance.Unmatch = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> UnmatchMappingType(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.UnmatchMappingType = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> UnmatchMappingType(params string[] values)
+	{
+		Instance.UnmatchMappingType = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DynamicTemplateDescriptor<TDocument> : SerializableDescriptor<DynamicTemplateDescriptor<TDocument>>
+public readonly partial struct DynamicTemplateDescriptor
 {
-	internal DynamicTemplateDescriptor(Action<DynamicTemplateDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate Instance { get; init; }
 
-	public DynamicTemplateDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicTemplateDescriptor(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private DynamicTemplateDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicTemplateDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private DynamicTemplateDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate instance) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Mapping = value;
+		return this;
 	}
 
-	private ICollection<string>? MatchValue { get; set; }
-	private ICollection<string>? MatchMappingTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPatternValue { get; set; }
-	private ICollection<string>? PathMatchValue { get; set; }
-	private ICollection<string>? PathUnmatchValue { get; set; }
-	private ICollection<string>? UnmatchValue { get; set; }
-	private ICollection<string>? UnmatchMappingTypeValue { get; set; }
-
-	public DynamicTemplateDescriptor<TDocument> Match(ICollection<string>? match)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		MatchValue = match;
-		return Self;
+		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.PropertyFactory.Build(action);
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> MatchMappingType(ICollection<string>? matchMappingType)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping<T>(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<T>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		MatchMappingTypeValue = matchMappingType;
-		return Self;
+		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<T>.Build(action);
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? matchPattern)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Runtime(Elastic.Clients.Elasticsearch.Mapping.RuntimeField? value)
 	{
-		MatchPatternValue = matchPattern;
-		return Self;
+		Instance.Runtime = value;
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> PathMatch(ICollection<string>? pathMatch)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
 	{
-		PathMatchValue = pathMatch;
-		return Self;
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> PathUnmatch(ICollection<string>? pathUnmatch)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
 	{
-		PathUnmatchValue = pathUnmatch;
-		return Self;
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> Unmatch(ICollection<string>? unmatch)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Match(System.Collections.Generic.ICollection<string>? value)
 	{
-		UnmatchValue = unmatch;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> UnmatchMappingType(ICollection<string>? unmatchMappingType)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Match(params string[] values)
 	{
-		UnmatchMappingTypeValue = unmatchMappingType;
-		return Self;
+		Instance.Match = [.. values];
+		return this;
 	}
 
-	public DynamicTemplateDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "mapping");
-	public DynamicTemplateDescriptor<TDocument> Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "runtime");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor MatchMappingType(System.Collections.Generic.ICollection<string>? value)
 	{
-		writer.WriteStartObject();
-		if (MatchValue is not null)
-		{
-			writer.WritePropertyName("match");
-			SingleOrManySerializationHelper.Serialize<string>(MatchValue, writer, options);
-		}
-
-		if (MatchMappingTypeValue is not null)
-		{
-			writer.WritePropertyName("match_mapping_type");
-			SingleOrManySerializationHelper.Serialize<string>(MatchMappingTypeValue, writer, options);
-		}
-
-		if (MatchPatternValue is not null)
-		{
-			writer.WritePropertyName("match_pattern");
-			JsonSerializer.Serialize(writer, MatchPatternValue, options);
-		}
-
-		if (PathMatchValue is not null)
-		{
-			writer.WritePropertyName("path_match");
-			SingleOrManySerializationHelper.Serialize<string>(PathMatchValue, writer, options);
-		}
-
-		if (PathUnmatchValue is not null)
-		{
-			writer.WritePropertyName("path_unmatch");
-			SingleOrManySerializationHelper.Serialize<string>(PathUnmatchValue, writer, options);
-		}
-
-		if (UnmatchValue is not null)
-		{
-			writer.WritePropertyName("unmatch");
-			SingleOrManySerializationHelper.Serialize<string>(UnmatchValue, writer, options);
-		}
-
-		if (UnmatchMappingTypeValue is not null)
-		{
-			writer.WritePropertyName("unmatch_mapping_type");
-			SingleOrManySerializationHelper.Serialize<string>(UnmatchMappingTypeValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<DynamicTemplateDescriptor>
-{
-	internal DynamicTemplateDescriptor(Action<DynamicTemplateDescriptor> configure) => configure.Invoke(this);
-
-	public DynamicTemplateDescriptor() : base()
-	{
+		Instance.MatchMappingType = value;
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private DynamicTemplateDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor MatchMappingType(params string[] values)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.MatchMappingType = [.. values];
+		return this;
 	}
 
-	private DynamicTemplateDescriptor Set(object variant, string variantName)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.MatchPattern = value;
+		return this;
 	}
 
-	private ICollection<string>? MatchValue { get; set; }
-	private ICollection<string>? MatchMappingTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPatternValue { get; set; }
-	private ICollection<string>? PathMatchValue { get; set; }
-	private ICollection<string>? PathUnmatchValue { get; set; }
-	private ICollection<string>? UnmatchValue { get; set; }
-	private ICollection<string>? UnmatchMappingTypeValue { get; set; }
-
-	public DynamicTemplateDescriptor Match(ICollection<string>? match)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathMatch(System.Collections.Generic.ICollection<string>? value)
 	{
-		MatchValue = match;
-		return Self;
+		Instance.PathMatch = value;
+		return this;
 	}
 
-	public DynamicTemplateDescriptor MatchMappingType(ICollection<string>? matchMappingType)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathMatch(params string[] values)
 	{
-		MatchMappingTypeValue = matchMappingType;
-		return Self;
+		Instance.PathMatch = [.. values];
+		return this;
 	}
 
-	public DynamicTemplateDescriptor MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? matchPattern)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathUnmatch(System.Collections.Generic.ICollection<string>? value)
 	{
-		MatchPatternValue = matchPattern;
-		return Self;
+		Instance.PathUnmatch = value;
+		return this;
 	}
 
-	public DynamicTemplateDescriptor PathMatch(ICollection<string>? pathMatch)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathUnmatch(params string[] values)
 	{
-		PathMatchValue = pathMatch;
-		return Self;
+		Instance.PathUnmatch = [.. values];
+		return this;
 	}
 
-	public DynamicTemplateDescriptor PathUnmatch(ICollection<string>? pathUnmatch)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Unmatch(System.Collections.Generic.ICollection<string>? value)
 	{
-		PathUnmatchValue = pathUnmatch;
-		return Self;
+		Instance.Unmatch = value;
+		return this;
 	}
 
-	public DynamicTemplateDescriptor Unmatch(ICollection<string>? unmatch)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Unmatch(params string[] values)
 	{
-		UnmatchValue = unmatch;
-		return Self;
+		Instance.Unmatch = [.. values];
+		return this;
 	}
 
-	public DynamicTemplateDescriptor UnmatchMappingType(ICollection<string>? unmatchMappingType)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor UnmatchMappingType(System.Collections.Generic.ICollection<string>? value)
 	{
-		UnmatchMappingTypeValue = unmatchMappingType;
-		return Self;
+		Instance.UnmatchMappingType = value;
+		return this;
 	}
 
-	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "mapping");
-	public DynamicTemplateDescriptor Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "runtime");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor UnmatchMappingType(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (MatchValue is not null)
-		{
-			writer.WritePropertyName("match");
-			SingleOrManySerializationHelper.Serialize<string>(MatchValue, writer, options);
-		}
+		Instance.UnmatchMappingType = [.. values];
+		return this;
+	}
 
-		if (MatchMappingTypeValue is not null)
-		{
-			writer.WritePropertyName("match_mapping_type");
-			SingleOrManySerializationHelper.Serialize<string>(MatchMappingTypeValue, writer, options);
-		}
-
-		if (MatchPatternValue is not null)
-		{
-			writer.WritePropertyName("match_pattern");
-			JsonSerializer.Serialize(writer, MatchPatternValue, options);
-		}
-
-		if (PathMatchValue is not null)
-		{
-			writer.WritePropertyName("path_match");
-			SingleOrManySerializationHelper.Serialize<string>(PathMatchValue, writer, options);
-		}
-
-		if (PathUnmatchValue is not null)
-		{
-			writer.WritePropertyName("path_unmatch");
-			SingleOrManySerializationHelper.Serialize<string>(PathUnmatchValue, writer, options);
-		}
-
-		if (UnmatchValue is not null)
-		{
-			writer.WritePropertyName("unmatch");
-			SingleOrManySerializationHelper.Serialize<string>(UnmatchValue, writer, options);
-		}
-
-		if (UnmatchMappingTypeValue is not null)
-		{
-			writer.WritePropertyName("unmatch_mapping_type");
-			SingleOrManySerializationHelper.Serialize<string>(UnmatchMappingTypeValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor(new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,31 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class RankFeatureFunctionLinear
+internal sealed partial class RankFeatureFunctionLinearConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear>
 {
-}
-
-public sealed partial class RankFeatureFunctionLinearDescriptor : SerializableDescriptor<RankFeatureFunctionLinearDescriptor>
-{
-	internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
-
-	public RankFeatureFunctionLinearDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearConverter))]
+public sealed partial class RankFeatureFunctionLinear
+{
+#if NET7_0_OR_GREATER
+	public RankFeatureFunctionLinear()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RankFeatureFunctionLinear()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankFeatureFunctionLinear(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+}
+
+public readonly partial struct RankFeatureFunctionLinearDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionLinearDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionLinearDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor descriptor) => descriptor.Instance;
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,38 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
+internal sealed partial class RankEvalMetricDiscountedCumulativeGainConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
+	private static readonly System.Text.Json.JsonEncodedText PropNormalize = System.Text.Json.JsonEncodedText.Encode("normalize");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propK = default;
+		LocalJsonValue<bool?> propNormalize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			{
+				continue;
+			}
+
+			if (propNormalize.TryReadProperty(ref reader, options, PropNormalize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			K = propK.Value,
+			Normalize = propNormalize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropK, value.K, null, null);
+		writer.WriteProperty(options, PropNormalize, value.Normalize, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Discounted cumulative gain (DCG)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainConverter))]
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
+#if NET7_0_OR_GREATER
+	public RankEvalMetricDiscountedCumulativeGain()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RankEvalMetricDiscountedCumulativeGain()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("k")]
-	public int? k { get; set; }
+	public int? K { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If set to true, this metric will calculate the Normalized DCG.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("normalize")]
 	public bool? Normalize { get; set; }
 }
 
@@ -56,28 +115,36 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGain
 /// <para>
 /// Discounted cumulative gain (DCG)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : SerializableDescriptor<RankEvalMetricDiscountedCumulativeGainDescriptor>
+public readonly partial struct RankEvalMetricDiscountedCumulativeGainDescriptor
 {
-	internal RankEvalMetricDiscountedCumulativeGainDescriptor(Action<RankEvalMetricDiscountedCumulativeGainDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain Instance { get; init; }
 
-	public RankEvalMetricDiscountedCumulativeGainDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricDiscountedCumulativeGainDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain instance)
 	{
+		Instance = instance;
 	}
 
-	private int? kValue { get; set; }
-	private bool? NormalizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricDiscountedCumulativeGainDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
 	/// </para>
 	/// </summary>
-	public RankEvalMetricDiscountedCumulativeGainDescriptor k(int? k)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor K(int? value)
 	{
-		kValue = k;
-		return Self;
+		Instance.K = value;
+		return this;
 	}
 
 	/// <summary>
@@ -85,27 +152,22 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : S
 	/// If set to true, this metric will calculate the Normalized DCG.
 	/// </para>
 	/// </summary>
-	public RankEvalMetricDiscountedCumulativeGainDescriptor Normalize(bool? normalize = true)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor Normalize(bool? value = true)
 	{
-		NormalizeValue = normalize;
-		return Self;
+		Instance.Normalize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (kValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("k");
-			writer.WriteNumberValue(kValue.Value);
+			return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NormalizeValue.HasValue)
-		{
-			writer.WritePropertyName("normalize");
-			writer.WriteBooleanValue(NormalizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

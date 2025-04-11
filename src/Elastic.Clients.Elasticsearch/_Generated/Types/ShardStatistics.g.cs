@@ -17,43 +17,146 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ShardStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ShardStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
+	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessful = System.Text.Json.JsonEncodedText.Encode("successful");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.ShardStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propFailed = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>?> propFailures = default;
+		LocalJsonValue<int?> propSkipped = default;
+		LocalJsonValue<int> propSuccessful = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFailed.TryReadProperty(ref reader, options, PropFailed, null))
+			{
+				continue;
+			}
+
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSkipped.TryReadProperty(ref reader, options, PropSkipped, null))
+			{
+				continue;
+			}
+
+			if (propSuccessful.TryReadProperty(ref reader, options, PropSuccessful, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ShardStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Failed = propFailed.Value,
+			Failures = propFailures.Value,
+			Skipped = propSkipped.Value,
+			Successful = propSuccessful.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ShardStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, v, null));
+		writer.WriteProperty(options, PropSkipped, value.Skipped, null, null);
+		writer.WriteProperty(options, PropSuccessful, value.Successful, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ShardStatisticsConverter))]
 public sealed partial class ShardStatistics
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardStatistics(int failed, int successful, int total)
+	{
+		Failed = failed;
+		Successful = successful;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public ShardStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of shards the operation or search attempted to run on but failed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int? Skipped { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Failed { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; set; }
+	public int? Skipped { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards the operation or search succeeded on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Successful { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards the operation or search will run on overall.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Total { get; set; }
 }
