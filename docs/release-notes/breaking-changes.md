@@ -36,7 +36,7 @@ Breaking changes can impact your Elastic applications, potentially disrupting no
 
 ### Breaking changes
 
-#### 1. Container types
+#### 1. Container types [1-container-types]
 
 **Impact**: High.
 
@@ -67,7 +67,7 @@ new SearchRequest
 };
 ```
 
-#### 2. Removal of certain generic request descriptors
+#### 2. Removal of certain generic request descriptors [2-removal-of-certain-generic-request-descriptors]
 
 **Impact**: High.
 
@@ -126,7 +126,7 @@ List of affected descriptors:
 - `TokenizationConfigDescriptor<TDocument>`
 - `UpdateDataFrameAnalyticsRequestDescriptor<TDocument>`
 
-#### 3. Removal of certain descriptor constructors and related request APIs
+#### 3. Removal of certain descriptor constructors and related request APIs [3-removal-of-certain-descriptor-constructors-and-related-request-apis]
 
 **Impact**: High.
 
@@ -159,13 +159,13 @@ new IndexRequestDescriptor(document, "my_index", Id.From(document));
 await client.IndexAsync(document, "my_index", Id.From(document), ...);
 ```
 
-#### 4. Date / Time / Duration values
+#### 4. Date / Time / Duration values [4-date--time--duration-values]
 
 **Impact**: High.
 
 In places where previously `long` or `double` was used to represent a date/time/duration value, `DateTimeOffset` or `TimeSpan` is now used instead.
 
-#### 5. `ExtendedBounds`
+#### 5. `ExtendedBounds` [5-extendedbounds]
 
 **Impact**: High.
 
@@ -173,7 +173,7 @@ Removed `ExtendedBoundsDate`/`ExtendedBoundsDateDescriptor`, `ExtendedBoundsFloa
 
 Replaced by `ExtendedBounds<T>`, `ExtendedBoundsOfFieldDateMathDescriptor`, and `ExtendedBoundsOfDoubleDescriptor`.
 
-#### 6. `Field.Format`
+#### 6. `Field.Format` [6-fieldformat]
 
 **Impact**: Low.
 
@@ -181,7 +181,7 @@ Removed `Field.Format` property and corresponding constructor and inferrer overl
 
 This property has not been used for some time (replaced by the `FieldAndFormat` type).
 
-#### 7. `Field`/`Fields` semantics
+#### 7. `Field`/`Fields` semantics [7-fieldfields-semantics]
 
 **Impact**: Low.
 
@@ -189,7 +189,7 @@ This property has not been used for some time (replaced by the `FieldAndFormat` 
 
 This makes implicit conversions to `Field` more user-friendly without requiring the null-forgiveness operator (`!`) ([read more](index.md#field-name-inference)).
 
-#### 8. `FieldValue`
+#### 8. `FieldValue` [8-fieldvalue]
 
 **Impact**: Low.
 
@@ -197,7 +197,7 @@ Removed `FieldValue.IsLazyDocument`, `FieldValue.IsComposite`, and the correspon
 
 These values have not been used for some time.
 
-#### 9. `FieldSort`
+#### 9. `FieldSort` [9-fieldsort]
 
 **Impact**: Low.
 
@@ -205,7 +205,7 @@ Removed static `FieldSort.Empty` member.
 
 Sorting got reworked which makes this member obsolete ([read more](index.md#sorting)).
 
-#### 10. Descriptor types `class` -> `struct`
+#### 10. Descriptor types `class` -> `struct` [10-descriptor-types-class---struct]
 
 **Impact**: Low.
 
