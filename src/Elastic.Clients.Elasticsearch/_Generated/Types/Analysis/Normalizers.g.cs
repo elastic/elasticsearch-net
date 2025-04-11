@@ -17,115 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public partial class Normalizers : IsADictionary<string, INormalizer>
+internal sealed partial class NormalizersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.Normalizers>
+{
+	public override Elastic.Clients.Elasticsearch.Analysis.Normalizers Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Analysis.Normalizers(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer>(o, null, null)));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.Normalizers value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.NormalizersConverter))]
+public sealed partial class Normalizers : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer>
 {
 	public Normalizers()
 	{
 	}
 
-	public Normalizers(IDictionary<string, INormalizer> container) : base(container)
+	public Normalizers(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.INormalizer> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(string name, INormalizer normalizer) => BackingDictionary.Add(Sanitize(name), normalizer);
-	public bool TryGetNormalizer(string name, [NotNullWhen(returnValue: true)] out INormalizer normalizer) => BackingDictionary.TryGetValue(Sanitize(name), out normalizer);
+	public void Add(string key, Elastic.Clients.Elasticsearch.Analysis.INormalizer value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetNormalizer(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.Analysis.INormalizer value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetNormalizer<T>(string name, [NotNullWhen(returnValue: true)] out T? normalizer) where T : class, INormalizer
+	public bool TryGetNormalizer<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, INormalizer
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			normalizer = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		normalizer = null;
+		value = null;
 		return false;
 	}
 }
 
-public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<NormalizersDescriptor, Normalizers, string, INormalizer>
+public readonly partial struct NormalizersDescriptor
 {
-	public NormalizersDescriptor() : base(new Normalizers())
+	private readonly Elastic.Clients.Elasticsearch.Analysis.Normalizers _items = new();
+
+	private Elastic.Clients.Elasticsearch.Analysis.Normalizers Value => _items;
+
+	public NormalizersDescriptor()
 	{
 	}
 
-	public NormalizersDescriptor(Normalizers normalizers) : base(normalizers ?? new Normalizers())
+	public Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor Custom(string key, Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer value)
 	{
+		_items.Add(key, value);
+		return this;
 	}
 
-	public NormalizersDescriptor Custom(string normalizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, null);
-	public NormalizersDescriptor Custom(string normalizerName, Action<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, configure);
-	public NormalizersDescriptor Custom(string normalizerName, CustomNormalizer customNormalizer) => AssignVariant(normalizerName, customNormalizer);
-	public NormalizersDescriptor Lowercase(string normalizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, null);
-	public NormalizersDescriptor Lowercase(string normalizerName, Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, configure);
-	public NormalizersDescriptor Lowercase(string normalizerName, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizerName, lowercaseNormalizer);
-}
-
-internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INormalizer>
-{
-	public override INormalizer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor Custom(string key)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
-
-		switch (type)
-		{
-			case "custom":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(ref reader, options);
-			case "lowercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(ref reader, options);
-			default:
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(ref reader, options);
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor.Build(null));
+		return this;
 	}
 
-	public override void Write(Utf8JsonWriter writer, INormalizer value, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor Custom(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor>? action)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "custom":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer), options);
-				return;
-			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor.Build(action));
+		return this;
 	}
-}
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/analysis-normalizers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
-[JsonConverter(typeof(NormalizerInterfaceConverter))]
-public partial interface INormalizer
-{
-	public string? Type { get; }
+	public Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor Lowercase(string key, Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor Lowercase(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor Lowercase(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizerDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.Normalizers Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.Normalizers();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }

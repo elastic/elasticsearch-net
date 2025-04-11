@@ -17,39 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class JvmClassesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.JvmClasses>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentLoadedCount = System.Text.Json.JsonEncodedText.Encode("current_loaded_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalLoadedCount = System.Text.Json.JsonEncodedText.Encode("total_loaded_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalUnloadedCount = System.Text.Json.JsonEncodedText.Encode("total_unloaded_count");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.JvmClasses Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCurrentLoadedCount = default;
+		LocalJsonValue<long?> propTotalLoadedCount = default;
+		LocalJsonValue<long?> propTotalUnloadedCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrentLoadedCount.TryReadProperty(ref reader, options, PropCurrentLoadedCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalLoadedCount.TryReadProperty(ref reader, options, PropTotalLoadedCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalUnloadedCount.TryReadProperty(ref reader, options, PropTotalUnloadedCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.JvmClasses(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CurrentLoadedCount = propCurrentLoadedCount.Value,
+			TotalLoadedCount = propTotalLoadedCount.Value,
+			TotalUnloadedCount = propTotalUnloadedCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.JvmClasses value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrentLoadedCount, value.CurrentLoadedCount, null, null);
+		writer.WriteProperty(options, PropTotalLoadedCount, value.TotalLoadedCount, null, null);
+		writer.WriteProperty(options, PropTotalUnloadedCount, value.TotalUnloadedCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.JvmClassesConverter))]
 public sealed partial class JvmClasses
 {
+#if NET7_0_OR_GREATER
+	public JvmClasses()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public JvmClasses()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal JvmClasses(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of classes currently loaded by JVM.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("current_loaded_count")]
-	public long? CurrentLoadedCount { get; init; }
+	public long? CurrentLoadedCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of classes loaded since the JVM started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_loaded_count")]
-	public long? TotalLoadedCount { get; init; }
+	public long? TotalLoadedCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of classes unloaded since the JVM started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_unloaded_count")]
-	public long? TotalUnloadedCount { get; init; }
+	public long? TotalUnloadedCount { get; set; }
 }

@@ -17,22 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class MultiSearchRequestParameters : RequestParameters
+public sealed partial class MultiSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -53,7 +44,7 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -71,17 +62,30 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Indicates whether hit.matched_queries should be rendered as a map that includes
+	/// the name of the matched query associated with its score (true)
+	/// or as an array containing the name of the matched queries (false)
+	/// This functionality reruns each named query on every hit in a search response.
+	/// Typically, this adds a small overhead to a request.
+	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+	public bool? IncludeNamedQueriesScore { get => Q<bool?>("include_named_queries_score"); set => Q("include_named_queries_score", value); }
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
+	/// </para>
+	/// </summary>
+	public int? MaxConcurrentSearches { get => Q<int?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
 	/// </para>
 	/// </summary>
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
@@ -119,6 +123,19 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
+internal sealed partial class MultiSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MultiSearchRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MultiSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Searches = reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem>(o, null)!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MultiSearchRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Searches, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem>(o, v, null));
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run multiple searches.
@@ -142,19 +159,46 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 /// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
-public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequestParameters>, IStreamSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MultiSearchRequestConverter))]
+public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>
 {
-	public MultiSearchRequest()
-	{
-	}
-
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MultiSearchRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearch;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> searches) : base(r => r.Optional("index", indices))
+	{
+		Searches = searches;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> searches)
+	{
+		Searches = searches;
+	}
+#if NET7_0_OR_GREATER
+	public MultiSearchRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MultiSearchRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceMultiSearch;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -162,10 +206,16 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases to search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -173,7 +223,6 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
@@ -181,15 +230,13 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If true, concrete, expanded or aliased indices are ignored when frozen.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
@@ -197,31 +244,40 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// If true, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Indicates whether hit.matched_queries should be rendered as a map that includes
+	/// the name of the matched query associated with its score (true)
+	/// or as an array containing the name of the matched queries (false)
+	/// This functionality reruns each named query on every hit in a search response.
+	/// Typically, this adds a small overhead to a request.
+	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+	public bool? IncludeNamedQueriesScore { get => Q<bool?>("include_named_queries_score"); set => Q("include_named_queries_score", value); }
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
+	/// </para>
+	/// </summary>
+	public int? MaxConcurrentSearches { get => Q<int?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
 	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
@@ -229,7 +285,6 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
@@ -237,7 +292,6 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// Custom routing value used to route search operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -245,7 +299,6 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -253,31 +306,12 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public List<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> Searches { get; set; }
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (Searches is null)
-			return;
-		foreach (var item in Searches)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (Searches is null)
-			return;
-		foreach (var item in Searches)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> Searches { get; set; }
 }
 
 /// <summary>
@@ -303,76 +337,261 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 /// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
-public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>, IStreamSerializable
+public readonly partial struct MultiSearchRequestDescriptor
 {
-	internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MultiSearchRequest Instance { get; init; }
 
-	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchRequest(indices);
+#pragma warning restore CS0618
 	}
 
 	public MultiSearchRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearch;
+	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "msearch";
-
-	public MultiSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public MultiSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public MultiSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public MultiSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
-	public MultiSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public MultiSearchRequestDescriptor<TDocument> MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
-	public MultiSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public MultiSearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
-	public MultiSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public MultiSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public MultiSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public MultiSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public MultiSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases to search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor AllowNoIndices(bool? value = true)
 	{
+		Instance.AllowNoIndices = value;
+		return this;
 	}
 
-	List<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> _items = new();
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	/// <summary>
+	/// <para>
+	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
 	}
 
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
+		Instance.ExpandWildcards = value;
+		return this;
 	}
 
-	public MultiSearchRequestDescriptor<TDocument> AddSearches(Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem searches)
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
-		_items.Add(searches);
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether hit.matched_queries should be rendered as a map that includes
+	/// the name of the matched query associated with its score (true)
+	/// or as an array containing the name of the matched queries (false)
+	/// This functionality reruns each named query on every hit in a search response.
+	/// Typically, this adds a small overhead to a request.
+	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor IncludeNamedQueriesScore(bool? value = true)
+	{
+		Instance.IncludeNamedQueriesScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentSearches(int? value)
+	{
+		Instance.MaxConcurrentSearches = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentShardRequests(int? value)
+	{
+		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor PreFilterShardSize(long? value)
+	{
+		Instance.PreFilterShardSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Custom routing value used to route search operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> value)
+	{
+		Instance.Searches = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches(params Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem[] values)
+	{
+		Instance.Searches = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MultiSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
 		return this;
 	}
 }
@@ -400,76 +619,261 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 /// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
-public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<MultiSearchRequestDescriptor, MultiSearchRequestParameters>, IStreamSerializable
+public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 {
-	internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MultiSearchRequest Instance { get; init; }
 
-	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchRequest(indices);
+#pragma warning restore CS0618
 	}
 
 	public MultiSearchRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearch;
+	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "msearch";
-
-	public MultiSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public MultiSearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public MultiSearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public MultiSearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
-	public MultiSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public MultiSearchRequestDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
-	public MultiSearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public MultiSearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
-	public MultiSearchRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public MultiSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public MultiSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public MultiSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public MultiSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases to search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
+		Instance.AllowNoIndices = value;
+		return this;
 	}
 
-	List<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> _items = new();
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	/// <summary>
+	/// <para>
+	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
 	}
 
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
+		Instance.ExpandWildcards = value;
+		return this;
 	}
 
-	public MultiSearchRequestDescriptor AddSearches(Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem searches)
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
-		_items.Add(searches);
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether hit.matched_queries should be rendered as a map that includes
+	/// the name of the matched query associated with its score (true)
+	/// or as an array containing the name of the matched queries (false)
+	/// This functionality reruns each named query on every hit in a search response.
+	/// Typically, this adds a small overhead to a request.
+	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> IncludeNamedQueriesScore(bool? value = true)
+	{
+		Instance.IncludeNamedQueriesScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent searches the multi search API can execute.
+	/// Defaults to <c>max(1, (# of data nodes * min(search thread pool size, 10)))</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentSearches(int? value)
+	{
+		Instance.MaxConcurrentSearches = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
+	{
+		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> PreFilterShardSize(long? value)
+	{
+		Instance.PreFilterShardSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Custom routing value used to route search operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> value)
+	{
+		Instance.Searches = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches(params Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem[] values)
+	{
+		Instance.Searches = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MultiSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
 		return this;
 	}
 }

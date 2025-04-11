@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public sealed partial class PutLifecycleRequestParameters : RequestParameters
+public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -51,6 +44,81 @@ public sealed partial class PutLifecycleRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention");
+	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule");
+
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration?> propConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<string?> propRepository = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention?> propRetention = default;
+		LocalJsonValue<string?> propSchedule = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConfig.TryReadProperty(ref reader, options, PropConfig, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRepository.TryReadProperty(ref reader, options, PropRepository, null))
+			{
+				continue;
+			}
+
+			if (propRetention.TryReadProperty(ref reader, options, PropRetention, null))
+			{
+				continue;
+			}
+
+			if (propSchedule.TryReadProperty(ref reader, options, PropSchedule, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Config = propConfig.Value,
+			Name = propName.Value,
+			Repository = propRepository.Value,
+			Retention = propRetention.Value,
+			Schedule = propSchedule.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConfig, value.Config, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
+		writer.WriteProperty(options, PropRetention, value.Retention, null, null);
+		writer.WriteProperty(options, PropSchedule, value.Schedule, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a policy.
@@ -59,19 +127,42 @@ public sealed partial class PutLifecycleRequestParameters : RequestParameters
 /// Only the latest version of a policy is stored.
 /// </para>
 /// </summary>
-public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestConverter))]
+public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutLifecycleRequest(Elastic.Clients.Elasticsearch.Name policyId) : base(r => r.Required("policy_id", policyId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutLifecycleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementPutLifecycle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotLifecycleManagementPutLifecycle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "slm.put_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the snapshot lifecycle policy you want to create or update.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -80,7 +171,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -90,7 +180,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -98,7 +187,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// Configuration for each snapshot created by the policy.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("config")]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? Config { get; set; }
 
 	/// <summary>
@@ -106,7 +194,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
 	/// <summary>
@@ -114,7 +201,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository")]
 	public string? Repository { get; set; }
 
 	/// <summary>
@@ -122,7 +208,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// Retention rules used to retain and delete snapshots created by the policy.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retention")]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? Retention { get; set; }
 
 	/// <summary>
@@ -130,7 +215,6 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("schedule")]
 	public string? Schedule { get; set; }
 }
 
@@ -142,68 +226,98 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 /// Only the latest version of a policy is stored.
 /// </para>
 /// </summary>
-public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<PutLifecycleRequestDescriptor, PutLifecycleRequestParameters>
+public readonly partial struct PutLifecycleRequestDescriptor
 {
-	internal PutLifecycleRequestDescriptor(Action<PutLifecycleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest Instance { get; init; }
 
-	public PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Name policyId) : base(r => r.Required("policy_id", policyId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementPutLifecycle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "slm.put_lifecycle";
-
-	public PutLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name policyId)
+	public PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Name policyId)
 	{
-		RouteValues.Required("policy_id", policyId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(policyId);
 	}
 
-	private Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? ConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor ConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor> ConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private string? RepositoryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? RetentionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor RetentionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor> RetentionDescriptorAction { get; set; }
-	private string? ScheduleValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutLifecycleRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the snapshot lifecycle policy you want to create or update.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.PolicyId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Configuration for each snapshot created by the policy.
 	/// </para>
 	/// </summary>
-	public PutLifecycleRequestDescriptor Config(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? config)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Config(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? value)
 	{
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = null;
-		ConfigValue = config;
-		return Self;
+		Instance.Config = value;
+		return this;
 	}
 
-	public PutLifecycleRequestDescriptor Config(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Configuration for each snapshot created by the policy.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Config()
 	{
-		ConfigValue = null;
-		ConfigDescriptorAction = null;
-		ConfigDescriptor = descriptor;
-		return Self;
+		Instance.Config = Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor.Build(null);
+		return this;
 	}
 
-	public PutLifecycleRequestDescriptor Config(Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Configuration for each snapshot created by the policy.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor>? action)
 	{
-		ConfigValue = null;
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = configure;
-		return Self;
+		Instance.Config = Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -211,10 +325,10 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	/// Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.
 	/// </para>
 	/// </summary>
-	public PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
 	/// <summary>
@@ -222,10 +336,10 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	/// Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.
 	/// </para>
 	/// </summary>
-	public PutLifecycleRequestDescriptor Repository(string? repository)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Repository(string? value)
 	{
-		RepositoryValue = repository;
-		return Self;
+		Instance.Repository = value;
+		return this;
 	}
 
 	/// <summary>
@@ -233,28 +347,21 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	/// Retention rules used to retain and delete snapshots created by the policy.
 	/// </para>
 	/// </summary>
-	public PutLifecycleRequestDescriptor Retention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? retention)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Retention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? value)
 	{
-		RetentionDescriptor = null;
-		RetentionDescriptorAction = null;
-		RetentionValue = retention;
-		return Self;
+		Instance.Retention = value;
+		return this;
 	}
 
-	public PutLifecycleRequestDescriptor Retention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Retention rules used to retain and delete snapshots created by the policy.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Retention(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor> action)
 	{
-		RetentionValue = null;
-		RetentionDescriptorAction = null;
-		RetentionDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutLifecycleRequestDescriptor Retention(Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor> configure)
-	{
-		RetentionValue = null;
-		RetentionDescriptor = null;
-		RetentionDescriptorAction = configure;
-		return Self;
+		Instance.Retention = Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -262,65 +369,59 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	/// Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.
 	/// </para>
 	/// </summary>
-	public PutLifecycleRequestDescriptor Schedule(string? schedule)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Schedule(string? value)
 	{
-		ScheduleValue = schedule;
-		return Self;
+		Instance.Schedule = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest Build(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigDescriptor, options);
-		}
-		else if (ConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor(ConfigDescriptorAction), options);
-		}
-		else if (ConfigValue is not null)
-		{
-			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, ConfigValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RepositoryValue))
-		{
-			writer.WritePropertyName("repository");
-			writer.WriteStringValue(RepositoryValue);
-		}
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (RetentionDescriptor is not null)
-		{
-			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, RetentionDescriptor, options);
-		}
-		else if (RetentionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor(RetentionDescriptorAction), options);
-		}
-		else if (RetentionValue is not null)
-		{
-			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, RetentionValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ScheduleValue))
-		{
-			writer.WritePropertyName("schedule");
-			writer.WriteStringValue(ScheduleValue);
-		}
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

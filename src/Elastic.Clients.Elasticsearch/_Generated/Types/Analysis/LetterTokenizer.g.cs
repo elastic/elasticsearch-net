@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class LetterTokenizer : ITokenizer
+internal sealed partial class LetterTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerConverter))]
+public sealed partial class LetterTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public LetterTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public LetterTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LetterTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "letter";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class LetterTokenizerDescriptor : SerializableDescriptor<LetterTokenizerDescriptor>, IBuildableDescriptor<LetterTokenizer>
+public readonly partial struct LetterTokenizerDescriptor
 {
-	internal LetterTokenizerDescriptor(Action<LetterTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer Instance { get; init; }
 
-	public LetterTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LetterTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private string? VersionValue { get; set; }
-
-	public LetterTokenizerDescriptor Version(string? version)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LetterTokenizerDescriptor()
 	{
-		VersionValue = version;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("letter");
-		if (!string.IsNullOrEmpty(VersionValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	LetterTokenizer IBuildableDescriptor<LetterTokenizer>.Build() => new()
-	{
-		Version = VersionValue
-	};
 }

@@ -17,54 +17,138 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
-public sealed partial class VertexInclude
+internal sealed partial class VertexIncludeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.VertexInclude>
 {
-	[JsonInclude, JsonPropertyName("boost")]
-	public double Boost { get; set; }
-	[JsonInclude, JsonPropertyName("term")]
-	public string Term { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropTerm = System.Text.Json.JsonEncodedText.Encode("term");
 
-public sealed partial class VertexIncludeDescriptor : SerializableDescriptor<VertexIncludeDescriptor>
-{
-	internal VertexIncludeDescriptor(Action<VertexIncludeDescriptor> configure) => configure.Invoke(this);
-
-	public VertexIncludeDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Graph.VertexInclude Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<string>(options, null);
+			return new Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				Term = value
+			};
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<string> propTerm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propTerm.TryReadProperty(ref reader, options, PropTerm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Term = propTerm.Value
+		};
 	}
 
-	private double BoostValue { get; set; }
-	private string TermValue { get; set; }
-
-	public VertexIncludeDescriptor Boost(double boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	public VertexIncludeDescriptor Term(string term)
-	{
-		TermValue = term;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.VertexInclude value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("boost");
-		writer.WriteNumberValue(BoostValue);
-		writer.WritePropertyName("term");
-		writer.WriteStringValue(TermValue);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropTerm, value.Term, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.VertexIncludeConverter))]
+public sealed partial class VertexInclude
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexInclude(string term)
+	{
+		Term = term;
+	}
+#if NET7_0_OR_GREATER
+	public VertexInclude()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public VertexInclude()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public double? Boost { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Term { get; set; }
+}
+
+public readonly partial struct VertexIncludeDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Graph.VertexInclude Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexIncludeDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexInclude instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VertexIncludeDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexInclude instance) => new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor Boost(double? value)
+	{
+		Instance.Boost = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor Term(string value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.VertexInclude Build(System.Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(new Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

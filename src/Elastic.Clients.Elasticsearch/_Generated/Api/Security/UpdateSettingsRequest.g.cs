@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class UpdateSettingsRequestParameters : RequestParameters
+public sealed partial class UpdateSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,6 +42,63 @@ public sealed partial class UpdateSettingsRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class UpdateSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
+	private static readonly System.Text.Json.JsonEncodedText PropSecurityProfile = System.Text.Json.JsonEncodedText.Encode("security-profile");
+	private static readonly System.Text.Json.JsonEncodedText PropSecurityTokens = System.Text.Json.JsonEncodedText.Encode("security-tokens");
+
+	public override Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.SecuritySettings?> propSecurity = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.SecuritySettings?> propSecurityProfile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.SecuritySettings?> propSecurityTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSecurity.TryReadProperty(ref reader, options, PropSecurity, null))
+			{
+				continue;
+			}
+
+			if (propSecurityProfile.TryReadProperty(ref reader, options, PropSecurityProfile, null))
+			{
+				continue;
+			}
+
+			if (propSecurityTokens.TryReadProperty(ref reader, options, PropSecurityTokens, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Security = propSecurity.Value,
+			SecurityProfile = propSecurityProfile.Value,
+			SecurityTokens = propSecurityTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSecurity, value.Security, null, null);
+		writer.WriteProperty(options, PropSecurityProfile, value.SecurityProfile, null, null);
+		writer.WriteProperty(options, PropSecurityTokens, value.SecurityTokens, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update security index settings.
@@ -64,11 +114,28 @@ public sealed partial class UpdateSettingsRequestParameters : RequestParameters
 /// This API does not yet support configuring the settings for indices before they are in use.
 /// </para>
 /// </summary>
-public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestConverter))]
+public sealed partial class UpdateSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateSettings;
+#if NET7_0_OR_GREATER
+	public UpdateSettingsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public UpdateSettingsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityUpdateSettings;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -80,7 +147,6 @@ public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsR
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -89,7 +155,6 @@ public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsR
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -97,7 +162,6 @@ public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsR
 	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("security")]
 	public Elastic.Clients.Elasticsearch.Security.SecuritySettings? Security { get; set; }
 
 	/// <summary>
@@ -105,7 +169,6 @@ public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsR
 	/// Settings for the index used to store profile information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("security-profile")]
 	public Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityProfile { get; set; }
 
 	/// <summary>
@@ -113,7 +176,6 @@ public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsR
 	/// Settings for the index used to store tokens.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("security-tokens")]
 	public Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityTokens { get; set; }
 }
 
@@ -132,62 +194,90 @@ public sealed partial class UpdateSettingsRequest : PlainRequest<UpdateSettingsR
 /// This API does not yet support configuring the settings for indices before they are in use.
 /// </para>
 /// </summary>
-public sealed partial class UpdateSettingsRequestDescriptor<TDocument> : RequestDescriptor<UpdateSettingsRequestDescriptor<TDocument>, UpdateSettingsRequestParameters>
+public readonly partial struct UpdateSettingsRequestDescriptor
 {
-	internal UpdateSettingsRequestDescriptor(Action<UpdateSettingsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public UpdateSettingsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateSettings;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.update_settings";
-
-	public UpdateSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public UpdateSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> SecurityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>> SecurityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityProfileValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> SecurityProfileDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>> SecurityProfileDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityTokensValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> SecurityTokensDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>> SecurityTokensDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
 	/// </para>
 	/// </summary>
-	public UpdateSettingsRequestDescriptor<TDocument> Security(Elastic.Clients.Elasticsearch.Security.SecuritySettings? security)
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
-		SecurityDescriptor = null;
-		SecurityDescriptorAction = null;
-		SecurityValue = security;
-		return Self;
+		Instance.Security = value;
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor<TDocument> Security(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security()
 	{
-		SecurityValue = null;
-		SecurityDescriptorAction = null;
-		SecurityDescriptor = descriptor;
-		return Self;
+		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor<TDocument> Security(Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
 	{
-		SecurityValue = null;
-		SecurityDescriptor = null;
-		SecurityDescriptorAction = configure;
-		return Self;
+		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security<T>(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>>? action)
+	{
+		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -195,28 +285,43 @@ public sealed partial class UpdateSettingsRequestDescriptor<TDocument> : Request
 	/// Settings for the index used to store profile information.
 	/// </para>
 	/// </summary>
-	public UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettings? securityProfile)
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
-		SecurityProfileDescriptor = null;
-		SecurityProfileDescriptorAction = null;
-		SecurityProfileValue = securityProfile;
-		return Self;
+		Instance.SecurityProfile = value;
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store profile information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile()
 	{
-		SecurityProfileValue = null;
-		SecurityProfileDescriptorAction = null;
-		SecurityProfileDescriptor = descriptor;
-		return Self;
+		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store profile information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
 	{
-		SecurityProfileValue = null;
-		SecurityProfileDescriptor = null;
-		SecurityProfileDescriptorAction = configure;
-		return Self;
+		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store profile information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile<T>(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>>? action)
+	{
+		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -224,82 +329,98 @@ public sealed partial class UpdateSettingsRequestDescriptor<TDocument> : Request
 	/// Settings for the index used to store tokens.
 	/// </para>
 	/// </summary>
-	public UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettings? securityTokens)
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
-		SecurityTokensDescriptor = null;
-		SecurityTokensDescriptorAction = null;
-		SecurityTokensValue = securityTokens;
-		return Self;
+		Instance.SecurityTokens = value;
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens()
 	{
-		SecurityTokensValue = null;
-		SecurityTokensDescriptorAction = null;
-		SecurityTokensDescriptor = descriptor;
-		return Self;
+		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
 	{
-		SecurityTokensValue = null;
-		SecurityTokensDescriptor = null;
-		SecurityTokensDescriptorAction = configure;
-		return Self;
+		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens<T>(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (SecurityDescriptor is not null)
+		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("security");
-			JsonSerializer.Serialize(writer, SecurityDescriptor, options);
-		}
-		else if (SecurityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("security");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>(SecurityDescriptorAction), options);
-		}
-		else if (SecurityValue is not null)
-		{
-			writer.WritePropertyName("security");
-			JsonSerializer.Serialize(writer, SecurityValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SecurityProfileDescriptor is not null)
-		{
-			writer.WritePropertyName("security-profile");
-			JsonSerializer.Serialize(writer, SecurityProfileDescriptor, options);
-		}
-		else if (SecurityProfileDescriptorAction is not null)
-		{
-			writer.WritePropertyName("security-profile");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>(SecurityProfileDescriptorAction), options);
-		}
-		else if (SecurityProfileValue is not null)
-		{
-			writer.WritePropertyName("security-profile");
-			JsonSerializer.Serialize(writer, SecurityProfileValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SecurityTokensDescriptor is not null)
-		{
-			writer.WritePropertyName("security-tokens");
-			JsonSerializer.Serialize(writer, SecurityTokensDescriptor, options);
-		}
-		else if (SecurityTokensDescriptorAction is not null)
-		{
-			writer.WritePropertyName("security-tokens");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>(SecurityTokensDescriptorAction), options);
-		}
-		else if (SecurityTokensValue is not null)
-		{
-			writer.WritePropertyName("security-tokens");
-			JsonSerializer.Serialize(writer, SecurityTokensValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -318,62 +439,79 @@ public sealed partial class UpdateSettingsRequestDescriptor<TDocument> : Request
 /// This API does not yet support configuring the settings for indices before they are in use.
 /// </para>
 /// </summary>
-public sealed partial class UpdateSettingsRequestDescriptor : RequestDescriptor<UpdateSettingsRequestDescriptor, UpdateSettingsRequestParameters>
+public readonly partial struct UpdateSettingsRequestDescriptor<TDocument>
 {
-	internal UpdateSettingsRequestDescriptor(Action<UpdateSettingsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public UpdateSettingsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateSettings;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.update_settings";
-
-	public UpdateSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public UpdateSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor SecurityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor> SecurityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityProfileValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor SecurityProfileDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor> SecurityProfileDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityTokensValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor SecurityTokensDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor> SecurityTokensDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
 	/// </para>
 	/// </summary>
-	public UpdateSettingsRequestDescriptor Security(Elastic.Clients.Elasticsearch.Security.SecuritySettings? security)
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Security(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
-		SecurityDescriptor = null;
-		SecurityDescriptorAction = null;
-		SecurityValue = security;
-		return Self;
+		Instance.Security = value;
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor Security(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Security()
 	{
-		SecurityValue = null;
-		SecurityDescriptorAction = null;
-		SecurityDescriptor = descriptor;
-		return Self;
+		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor Security(Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Security(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
 	{
-		SecurityValue = null;
-		SecurityDescriptor = null;
-		SecurityDescriptorAction = configure;
-		return Self;
+		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -381,28 +519,32 @@ public sealed partial class UpdateSettingsRequestDescriptor : RequestDescriptor<
 	/// Settings for the index used to store profile information.
 	/// </para>
 	/// </summary>
-	public UpdateSettingsRequestDescriptor SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettings? securityProfile)
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
-		SecurityProfileDescriptor = null;
-		SecurityProfileDescriptorAction = null;
-		SecurityProfileValue = securityProfile;
-		return Self;
+		Instance.SecurityProfile = value;
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store profile information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityProfile()
 	{
-		SecurityProfileValue = null;
-		SecurityProfileDescriptorAction = null;
-		SecurityProfileDescriptor = descriptor;
-		return Self;
+		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor SecurityProfile(Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store profile information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
 	{
-		SecurityProfileValue = null;
-		SecurityProfileDescriptor = null;
-		SecurityProfileDescriptorAction = configure;
-		return Self;
+		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -410,81 +552,86 @@ public sealed partial class UpdateSettingsRequestDescriptor : RequestDescriptor<
 	/// Settings for the index used to store tokens.
 	/// </para>
 	/// </summary>
-	public UpdateSettingsRequestDescriptor SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettings? securityTokens)
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
-		SecurityTokensDescriptor = null;
-		SecurityTokensDescriptorAction = null;
-		SecurityTokensValue = securityTokens;
-		return Self;
+		Instance.SecurityTokens = value;
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityTokens()
 	{
-		SecurityTokensValue = null;
-		SecurityTokensDescriptorAction = null;
-		SecurityTokensDescriptor = descriptor;
-		return Self;
+		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UpdateSettingsRequestDescriptor SecurityTokens(Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings for the index used to store tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
 	{
-		SecurityTokensValue = null;
-		SecurityTokensDescriptor = null;
-		SecurityTokensDescriptorAction = configure;
-		return Self;
+		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (SecurityDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("security");
-			JsonSerializer.Serialize(writer, SecurityDescriptor, options);
-		}
-		else if (SecurityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("security");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor(SecurityDescriptorAction), options);
-		}
-		else if (SecurityValue is not null)
-		{
-			writer.WritePropertyName("security");
-			JsonSerializer.Serialize(writer, SecurityValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SecurityProfileDescriptor is not null)
-		{
-			writer.WritePropertyName("security-profile");
-			JsonSerializer.Serialize(writer, SecurityProfileDescriptor, options);
-		}
-		else if (SecurityProfileDescriptorAction is not null)
-		{
-			writer.WritePropertyName("security-profile");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor(SecurityProfileDescriptorAction), options);
-		}
-		else if (SecurityProfileValue is not null)
-		{
-			writer.WritePropertyName("security-profile");
-			JsonSerializer.Serialize(writer, SecurityProfileValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SecurityTokensDescriptor is not null)
-		{
-			writer.WritePropertyName("security-tokens");
-			JsonSerializer.Serialize(writer, SecurityTokensDescriptor, options);
-		}
-		else if (SecurityTokensDescriptorAction is not null)
-		{
-			writer.WritePropertyName("security-tokens");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor(SecurityTokensDescriptorAction), options);
-		}
-		else if (SecurityTokensValue is not null)
-		{
-			writer.WritePropertyName("security-tokens");
-			JsonSerializer.Serialize(writer, SecurityTokensValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

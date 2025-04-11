@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class Input
+internal sealed partial class InputConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Input>
 {
-	[JsonInclude, JsonPropertyName("field_names")]
-	public Elastic.Clients.Elasticsearch.Names FieldNames { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("field_names");
 
-public sealed partial class InputDescriptor : SerializableDescriptor<InputDescriptor>
-{
-	internal InputDescriptor(Action<InputDescriptor> configure) => configure.Invoke(this);
-
-	public InputDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Input Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Names> propFieldNames = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFieldNames.TryReadProperty(ref reader, options, PropFieldNames, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Input(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FieldNames = propFieldNames.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Names FieldNamesValue { get; set; }
-
-	public InputDescriptor FieldNames(Elastic.Clients.Elasticsearch.Names fieldNames)
-	{
-		FieldNamesValue = fieldNames;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Input value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("field_names");
-		JsonSerializer.Serialize(writer, FieldNamesValue, options);
+		writer.WriteProperty(options, PropFieldNames, value.FieldNames, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.InputConverter))]
+public sealed partial class Input
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Input(Elastic.Clients.Elasticsearch.Names fieldNames)
+	{
+		FieldNames = fieldNames;
+	}
+#if NET7_0_OR_GREATER
+	public Input()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Input()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Input(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names FieldNames { get; set; }
+}
+
+public readonly partial struct InputDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Input Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InputDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Input instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InputDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Input(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Input instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Input(Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor FieldNames(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.FieldNames = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Input Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Input(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

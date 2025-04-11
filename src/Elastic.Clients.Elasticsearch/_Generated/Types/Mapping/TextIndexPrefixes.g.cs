@@ -17,54 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class TextIndexPrefixes
+internal sealed partial class TextIndexPrefixesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes>
 {
-	[JsonInclude, JsonPropertyName("max_chars")]
-	public int MaxChars { get; set; }
-	[JsonInclude, JsonPropertyName("min_chars")]
-	public int MinChars { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChars = System.Text.Json.JsonEncodedText.Encode("max_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropMinChars = System.Text.Json.JsonEncodedText.Encode("min_chars");
 
-public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptor<TextIndexPrefixesDescriptor>
-{
-	internal TextIndexPrefixesDescriptor(Action<TextIndexPrefixesDescriptor> configure) => configure.Invoke(this);
-
-	public TextIndexPrefixesDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propMaxChars = default;
+		LocalJsonValue<int> propMinChars = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxChars.TryReadProperty(ref reader, options, PropMaxChars, null))
+			{
+				continue;
+			}
+
+			if (propMinChars.TryReadProperty(ref reader, options, PropMinChars, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxChars = propMaxChars.Value,
+			MinChars = propMinChars.Value
+		};
 	}
 
-	private int MaxCharsValue { get; set; }
-	private int MinCharsValue { get; set; }
-
-	public TextIndexPrefixesDescriptor MaxChars(int maxChars)
-	{
-		MaxCharsValue = maxChars;
-		return Self;
-	}
-
-	public TextIndexPrefixesDescriptor MinChars(int minChars)
-	{
-		MinCharsValue = minChars;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("max_chars");
-		writer.WriteNumberValue(MaxCharsValue);
-		writer.WritePropertyName("min_chars");
-		writer.WriteNumberValue(MinCharsValue);
+		writer.WriteProperty(options, PropMaxChars, value.MaxChars, null, null);
+		writer.WriteProperty(options, PropMinChars, value.MinChars, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesConverter))]
+public sealed partial class TextIndexPrefixes
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextIndexPrefixes(int maxChars, int minChars)
+	{
+		MaxChars = maxChars;
+		MinChars = minChars;
+	}
+#if NET7_0_OR_GREATER
+	public TextIndexPrefixes()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TextIndexPrefixes()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TextIndexPrefixes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxChars { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MinChars { get; set; }
+}
+
+public readonly partial struct TextIndexPrefixesDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextIndexPrefixesDescriptor(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextIndexPrefixesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes instance) => new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor MaxChars(int value)
+	{
+		Instance.MaxChars = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor MinChars(int value)
+	{
+		Instance.MinChars = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

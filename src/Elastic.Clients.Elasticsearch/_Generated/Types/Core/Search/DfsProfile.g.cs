@@ -17,20 +17,79 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class DfsProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DfsProfile>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText PropStatistics = System.Text.Json.JsonEncodedText.Encode("statistics");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.DfsProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>?> propKnn = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsProfile?> propStatistics = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propKnn.TryReadProperty(ref reader, options, PropKnn, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStatistics.TryReadProperty(ref reader, options, PropStatistics, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.DfsProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Knn = propKnn.Value,
+			Statistics = propStatistics.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.DfsProfile value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropKnn, value.Knn, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>(o, v, null));
+		writer.WriteProperty(options, PropStatistics, value.Statistics, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.DfsProfileConverter))]
 public sealed partial class DfsProfile
 {
-	[JsonInclude, JsonPropertyName("knn")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>? Knn { get; init; }
-	[JsonInclude, JsonPropertyName("statistics")]
-	public Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsProfile? Statistics { get; init; }
+#if NET7_0_OR_GREATER
+	public DfsProfile()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DfsProfile()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DfsProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>? Knn { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsProfile? Statistics { get; set; }
 }

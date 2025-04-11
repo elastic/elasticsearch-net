@@ -17,286 +17,542 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-[JsonConverter(typeof(AllocationExplainDecisionConverter))]
+internal sealed partial class AllocationExplainDecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("ALWAYS");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("NO");
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottle = System.Text.Json.JsonEncodedText.Encode("THROTTLE");
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("YES");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAlways))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Always;
+		}
+
+		if (reader.ValueTextEquals(MemberNo))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.No;
+		}
+
+		if (reader.ValueTextEquals(MemberThrottle))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Throttle;
+		}
+
+		if (reader.ValueTextEquals(MemberYes))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Yes;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAlways.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Always;
+		}
+
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.No;
+		}
+
+		if (string.Equals(value, MemberThrottle.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Throttle;
+		}
+
+		if (string.Equals(value, MemberYes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Yes;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Always:
+				writer.WriteStringValue(MemberAlways);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.No:
+				writer.WriteStringValue(MemberNo);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Throttle:
+				writer.WriteStringValue(MemberThrottle);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Yes:
+				writer.WriteStringValue(MemberYes);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class DecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.Decision>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocationDelayed = System.Text.Json.JsonEncodedText.Encode("allocation_delayed");
+	private static readonly System.Text.Json.JsonEncodedText MemberAwaitingInfo = System.Text.Json.JsonEncodedText.Encode("awaiting_info");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
+	private static readonly System.Text.Json.JsonEncodedText MemberNoAttempt = System.Text.Json.JsonEncodedText.Encode("no_attempt");
+	private static readonly System.Text.Json.JsonEncodedText MemberNoValidShardCopy = System.Text.Json.JsonEncodedText.Encode("no_valid_shard_copy");
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
+	private static readonly System.Text.Json.JsonEncodedText MemberWorseBalance = System.Text.Json.JsonEncodedText.Encode("worse_balance");
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.Decision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAllocationDelayed))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.AllocationDelayed;
+		}
+
+		if (reader.ValueTextEquals(MemberAwaitingInfo))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.AwaitingInfo;
+		}
+
+		if (reader.ValueTextEquals(MemberNo))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.No;
+		}
+
+		if (reader.ValueTextEquals(MemberNoAttempt))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.NoAttempt;
+		}
+
+		if (reader.ValueTextEquals(MemberNoValidShardCopy))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.NoValidShardCopy;
+		}
+
+		if (reader.ValueTextEquals(MemberThrottled))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.Throttled;
+		}
+
+		if (reader.ValueTextEquals(MemberWorseBalance))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.WorseBalance;
+		}
+
+		if (reader.ValueTextEquals(MemberYes))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.Yes;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAllocationDelayed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.AllocationDelayed;
+		}
+
+		if (string.Equals(value, MemberAwaitingInfo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.AwaitingInfo;
+		}
+
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.No;
+		}
+
+		if (string.Equals(value, MemberNoAttempt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.NoAttempt;
+		}
+
+		if (string.Equals(value, MemberNoValidShardCopy.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.NoValidShardCopy;
+		}
+
+		if (string.Equals(value, MemberThrottled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.Throttled;
+		}
+
+		if (string.Equals(value, MemberWorseBalance.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.WorseBalance;
+		}
+
+		if (string.Equals(value, MemberYes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.Decision.Yes;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Cluster.Decision)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.Decision value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.AllocationDelayed:
+				writer.WriteStringValue(MemberAllocationDelayed);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.AwaitingInfo:
+				writer.WriteStringValue(MemberAwaitingInfo);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.No:
+				writer.WriteStringValue(MemberNo);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.NoAttempt:
+				writer.WriteStringValue(MemberNoAttempt);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.NoValidShardCopy:
+				writer.WriteStringValue(MemberNoValidShardCopy);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.Throttled:
+				writer.WriteStringValue(MemberThrottled);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.WorseBalance:
+				writer.WriteStringValue(MemberWorseBalance);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.Decision.Yes:
+				writer.WriteStringValue(MemberYes);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Cluster.Decision)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Cluster.Decision ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.Decision value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class UnassignedInformationReasonConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocationFailed = System.Text.Json.JsonEncodedText.Encode("ALLOCATION_FAILED");
+	private static readonly System.Text.Json.JsonEncodedText MemberClusterRecovered = System.Text.Json.JsonEncodedText.Encode("CLUSTER_RECOVERED");
+	private static readonly System.Text.Json.JsonEncodedText MemberDanglingIndexImported = System.Text.Json.JsonEncodedText.Encode("DANGLING_INDEX_IMPORTED");
+	private static readonly System.Text.Json.JsonEncodedText MemberExistingIndexRestored = System.Text.Json.JsonEncodedText.Encode("EXISTING_INDEX_RESTORED");
+	private static readonly System.Text.Json.JsonEncodedText MemberForcedEmptyPrimary = System.Text.Json.JsonEncodedText.Encode("FORCED_EMPTY_PRIMARY");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexCreated = System.Text.Json.JsonEncodedText.Encode("INDEX_CREATED");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexReopened = System.Text.Json.JsonEncodedText.Encode("INDEX_REOPENED");
+	private static readonly System.Text.Json.JsonEncodedText MemberManualAllocation = System.Text.Json.JsonEncodedText.Encode("MANUAL_ALLOCATION");
+	private static readonly System.Text.Json.JsonEncodedText MemberNewIndexRestored = System.Text.Json.JsonEncodedText.Encode("NEW_INDEX_RESTORED");
+	private static readonly System.Text.Json.JsonEncodedText MemberNodeLeft = System.Text.Json.JsonEncodedText.Encode("NODE_LEFT");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaryFailed = System.Text.Json.JsonEncodedText.Encode("PRIMARY_FAILED");
+	private static readonly System.Text.Json.JsonEncodedText MemberReallocatedReplica = System.Text.Json.JsonEncodedText.Encode("REALLOCATED_REPLICA");
+	private static readonly System.Text.Json.JsonEncodedText MemberReinitialized = System.Text.Json.JsonEncodedText.Encode("REINITIALIZED");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplicaAdded = System.Text.Json.JsonEncodedText.Encode("REPLICA_ADDED");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerouteCancelled = System.Text.Json.JsonEncodedText.Encode("REROUTE_CANCELLED");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAllocationFailed))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.AllocationFailed;
+		}
+
+		if (reader.ValueTextEquals(MemberClusterRecovered))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ClusterRecovered;
+		}
+
+		if (reader.ValueTextEquals(MemberDanglingIndexImported))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.DanglingIndexImported;
+		}
+
+		if (reader.ValueTextEquals(MemberExistingIndexRestored))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ExistingIndexRestored;
+		}
+
+		if (reader.ValueTextEquals(MemberForcedEmptyPrimary))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ForcedEmptyPrimary;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexCreated))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexCreated;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexReopened))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexReopened;
+		}
+
+		if (reader.ValueTextEquals(MemberManualAllocation))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ManualAllocation;
+		}
+
+		if (reader.ValueTextEquals(MemberNewIndexRestored))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NewIndexRestored;
+		}
+
+		if (reader.ValueTextEquals(MemberNodeLeft))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NodeLeft;
+		}
+
+		if (reader.ValueTextEquals(MemberPrimaryFailed))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.PrimaryFailed;
+		}
+
+		if (reader.ValueTextEquals(MemberReallocatedReplica))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReallocatedReplica;
+		}
+
+		if (reader.ValueTextEquals(MemberReinitialized))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.Reinitialized;
+		}
+
+		if (reader.ValueTextEquals(MemberReplicaAdded))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReplicaAdded;
+		}
+
+		if (reader.ValueTextEquals(MemberRerouteCancelled))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.RerouteCancelled;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAllocationFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.AllocationFailed;
+		}
+
+		if (string.Equals(value, MemberClusterRecovered.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ClusterRecovered;
+		}
+
+		if (string.Equals(value, MemberDanglingIndexImported.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.DanglingIndexImported;
+		}
+
+		if (string.Equals(value, MemberExistingIndexRestored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ExistingIndexRestored;
+		}
+
+		if (string.Equals(value, MemberForcedEmptyPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ForcedEmptyPrimary;
+		}
+
+		if (string.Equals(value, MemberIndexCreated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexCreated;
+		}
+
+		if (string.Equals(value, MemberIndexReopened.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexReopened;
+		}
+
+		if (string.Equals(value, MemberManualAllocation.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ManualAllocation;
+		}
+
+		if (string.Equals(value, MemberNewIndexRestored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NewIndexRestored;
+		}
+
+		if (string.Equals(value, MemberNodeLeft.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NodeLeft;
+		}
+
+		if (string.Equals(value, MemberPrimaryFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.PrimaryFailed;
+		}
+
+		if (string.Equals(value, MemberReallocatedReplica.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReallocatedReplica;
+		}
+
+		if (string.Equals(value, MemberReinitialized.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.Reinitialized;
+		}
+
+		if (string.Equals(value, MemberReplicaAdded.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReplicaAdded;
+		}
+
+		if (string.Equals(value, MemberRerouteCancelled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.RerouteCancelled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.AllocationFailed:
+				writer.WriteStringValue(MemberAllocationFailed);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ClusterRecovered:
+				writer.WriteStringValue(MemberClusterRecovered);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.DanglingIndexImported:
+				writer.WriteStringValue(MemberDanglingIndexImported);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ExistingIndexRestored:
+				writer.WriteStringValue(MemberExistingIndexRestored);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ForcedEmptyPrimary:
+				writer.WriteStringValue(MemberForcedEmptyPrimary);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexCreated:
+				writer.WriteStringValue(MemberIndexCreated);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexReopened:
+				writer.WriteStringValue(MemberIndexReopened);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ManualAllocation:
+				writer.WriteStringValue(MemberManualAllocation);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NewIndexRestored:
+				writer.WriteStringValue(MemberNewIndexRestored);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NodeLeft:
+				writer.WriteStringValue(MemberNodeLeft);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.PrimaryFailed:
+				writer.WriteStringValue(MemberPrimaryFailed);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReallocatedReplica:
+				writer.WriteStringValue(MemberReallocatedReplica);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.Reinitialized:
+				writer.WriteStringValue(MemberReinitialized);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReplicaAdded:
+				writer.WriteStringValue(MemberReplicaAdded);
+				break;
+			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.RerouteCancelled:
+				writer.WriteStringValue(MemberRerouteCancelled);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecisionConverter))]
 public enum AllocationExplainDecision
 {
-	[EnumMember(Value = "YES")]
-	Yes,
-	[EnumMember(Value = "THROTTLE")]
-	Throttle,
-	[EnumMember(Value = "NO")]
+	[System.Runtime.Serialization.EnumMember(Value = "ALWAYS")]
+	Always,
+	[System.Runtime.Serialization.EnumMember(Value = "NO")]
 	No,
-	[EnumMember(Value = "ALWAYS")]
-	Always
+	[System.Runtime.Serialization.EnumMember(Value = "THROTTLE")]
+	Throttle,
+	[System.Runtime.Serialization.EnumMember(Value = "YES")]
+	Yes
 }
 
-internal sealed class AllocationExplainDecisionConverter : JsonConverter<AllocationExplainDecision>
-{
-	public override AllocationExplainDecision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "YES":
-				return AllocationExplainDecision.Yes;
-			case "THROTTLE":
-				return AllocationExplainDecision.Throttle;
-			case "NO":
-				return AllocationExplainDecision.No;
-			case "ALWAYS":
-				return AllocationExplainDecision.Always;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, AllocationExplainDecision value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case AllocationExplainDecision.Yes:
-				writer.WriteStringValue("YES");
-				return;
-			case AllocationExplainDecision.Throttle:
-				writer.WriteStringValue("THROTTLE");
-				return;
-			case AllocationExplainDecision.No:
-				writer.WriteStringValue("NO");
-				return;
-			case AllocationExplainDecision.Always:
-				writer.WriteStringValue("ALWAYS");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(DecisionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.DecisionConverter))]
 public enum Decision
 {
-	[EnumMember(Value = "yes")]
-	Yes,
-	[EnumMember(Value = "worse_balance")]
-	WorseBalance,
-	[EnumMember(Value = "throttled")]
-	Throttled,
-	[EnumMember(Value = "no_valid_shard_copy")]
-	NoValidShardCopy,
-	[EnumMember(Value = "no_attempt")]
-	NoAttempt,
-	[EnumMember(Value = "no")]
-	No,
-	[EnumMember(Value = "awaiting_info")]
+	[System.Runtime.Serialization.EnumMember(Value = "allocation_delayed")]
+	AllocationDelayed,
+	[System.Runtime.Serialization.EnumMember(Value = "awaiting_info")]
 	AwaitingInfo,
-	[EnumMember(Value = "allocation_delayed")]
-	AllocationDelayed
+	[System.Runtime.Serialization.EnumMember(Value = "no")]
+	No,
+	[System.Runtime.Serialization.EnumMember(Value = "no_attempt")]
+	NoAttempt,
+	[System.Runtime.Serialization.EnumMember(Value = "no_valid_shard_copy")]
+	NoValidShardCopy,
+	[System.Runtime.Serialization.EnumMember(Value = "throttled")]
+	Throttled,
+	[System.Runtime.Serialization.EnumMember(Value = "worse_balance")]
+	WorseBalance,
+	[System.Runtime.Serialization.EnumMember(Value = "yes")]
+	Yes
 }
 
-internal sealed class DecisionConverter : JsonConverter<Decision>
-{
-	public override Decision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "yes":
-				return Decision.Yes;
-			case "worse_balance":
-				return Decision.WorseBalance;
-			case "throttled":
-				return Decision.Throttled;
-			case "no_valid_shard_copy":
-				return Decision.NoValidShardCopy;
-			case "no_attempt":
-				return Decision.NoAttempt;
-			case "no":
-				return Decision.No;
-			case "awaiting_info":
-				return Decision.AwaitingInfo;
-			case "allocation_delayed":
-				return Decision.AllocationDelayed;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, Decision value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Decision.Yes:
-				writer.WriteStringValue("yes");
-				return;
-			case Decision.WorseBalance:
-				writer.WriteStringValue("worse_balance");
-				return;
-			case Decision.Throttled:
-				writer.WriteStringValue("throttled");
-				return;
-			case Decision.NoValidShardCopy:
-				writer.WriteStringValue("no_valid_shard_copy");
-				return;
-			case Decision.NoAttempt:
-				writer.WriteStringValue("no_attempt");
-				return;
-			case Decision.No:
-				writer.WriteStringValue("no");
-				return;
-			case Decision.AwaitingInfo:
-				writer.WriteStringValue("awaiting_info");
-				return;
-			case Decision.AllocationDelayed:
-				writer.WriteStringValue("allocation_delayed");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(UnassignedInformationReasonConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReasonConverter))]
 public enum UnassignedInformationReason
 {
-	[EnumMember(Value = "REROUTE_CANCELLED")]
-	RerouteCancelled,
-	[EnumMember(Value = "REPLICA_ADDED")]
-	ReplicaAdded,
-	[EnumMember(Value = "REINITIALIZED")]
-	Reinitialized,
-	[EnumMember(Value = "REALLOCATED_REPLICA")]
-	ReallocatedReplica,
-	[EnumMember(Value = "PRIMARY_FAILED")]
-	PrimaryFailed,
-	[EnumMember(Value = "NODE_LEFT")]
-	NodeLeft,
-	[EnumMember(Value = "NEW_INDEX_RESTORED")]
-	NewIndexRestored,
-	[EnumMember(Value = "MANUAL_ALLOCATION")]
-	ManualAllocation,
-	[EnumMember(Value = "INDEX_REOPENED")]
-	IndexReopened,
-	[EnumMember(Value = "INDEX_CREATED")]
-	IndexCreated,
-	[EnumMember(Value = "FORCED_EMPTY_PRIMARY")]
-	ForcedEmptyPrimary,
-	[EnumMember(Value = "EXISTING_INDEX_RESTORED")]
-	ExistingIndexRestored,
-	[EnumMember(Value = "DANGLING_INDEX_IMPORTED")]
-	DanglingIndexImported,
-	[EnumMember(Value = "CLUSTER_RECOVERED")]
+	[System.Runtime.Serialization.EnumMember(Value = "ALLOCATION_FAILED")]
+	AllocationFailed,
+	[System.Runtime.Serialization.EnumMember(Value = "CLUSTER_RECOVERED")]
 	ClusterRecovered,
-	[EnumMember(Value = "ALLOCATION_FAILED")]
-	AllocationFailed
-}
-
-internal sealed class UnassignedInformationReasonConverter : JsonConverter<UnassignedInformationReason>
-{
-	public override UnassignedInformationReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "REROUTE_CANCELLED":
-				return UnassignedInformationReason.RerouteCancelled;
-			case "REPLICA_ADDED":
-				return UnassignedInformationReason.ReplicaAdded;
-			case "REINITIALIZED":
-				return UnassignedInformationReason.Reinitialized;
-			case "REALLOCATED_REPLICA":
-				return UnassignedInformationReason.ReallocatedReplica;
-			case "PRIMARY_FAILED":
-				return UnassignedInformationReason.PrimaryFailed;
-			case "NODE_LEFT":
-				return UnassignedInformationReason.NodeLeft;
-			case "NEW_INDEX_RESTORED":
-				return UnassignedInformationReason.NewIndexRestored;
-			case "MANUAL_ALLOCATION":
-				return UnassignedInformationReason.ManualAllocation;
-			case "INDEX_REOPENED":
-				return UnassignedInformationReason.IndexReopened;
-			case "INDEX_CREATED":
-				return UnassignedInformationReason.IndexCreated;
-			case "FORCED_EMPTY_PRIMARY":
-				return UnassignedInformationReason.ForcedEmptyPrimary;
-			case "EXISTING_INDEX_RESTORED":
-				return UnassignedInformationReason.ExistingIndexRestored;
-			case "DANGLING_INDEX_IMPORTED":
-				return UnassignedInformationReason.DanglingIndexImported;
-			case "CLUSTER_RECOVERED":
-				return UnassignedInformationReason.ClusterRecovered;
-			case "ALLOCATION_FAILED":
-				return UnassignedInformationReason.AllocationFailed;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, UnassignedInformationReason value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case UnassignedInformationReason.RerouteCancelled:
-				writer.WriteStringValue("REROUTE_CANCELLED");
-				return;
-			case UnassignedInformationReason.ReplicaAdded:
-				writer.WriteStringValue("REPLICA_ADDED");
-				return;
-			case UnassignedInformationReason.Reinitialized:
-				writer.WriteStringValue("REINITIALIZED");
-				return;
-			case UnassignedInformationReason.ReallocatedReplica:
-				writer.WriteStringValue("REALLOCATED_REPLICA");
-				return;
-			case UnassignedInformationReason.PrimaryFailed:
-				writer.WriteStringValue("PRIMARY_FAILED");
-				return;
-			case UnassignedInformationReason.NodeLeft:
-				writer.WriteStringValue("NODE_LEFT");
-				return;
-			case UnassignedInformationReason.NewIndexRestored:
-				writer.WriteStringValue("NEW_INDEX_RESTORED");
-				return;
-			case UnassignedInformationReason.ManualAllocation:
-				writer.WriteStringValue("MANUAL_ALLOCATION");
-				return;
-			case UnassignedInformationReason.IndexReopened:
-				writer.WriteStringValue("INDEX_REOPENED");
-				return;
-			case UnassignedInformationReason.IndexCreated:
-				writer.WriteStringValue("INDEX_CREATED");
-				return;
-			case UnassignedInformationReason.ForcedEmptyPrimary:
-				writer.WriteStringValue("FORCED_EMPTY_PRIMARY");
-				return;
-			case UnassignedInformationReason.ExistingIndexRestored:
-				writer.WriteStringValue("EXISTING_INDEX_RESTORED");
-				return;
-			case UnassignedInformationReason.DanglingIndexImported:
-				writer.WriteStringValue("DANGLING_INDEX_IMPORTED");
-				return;
-			case UnassignedInformationReason.ClusterRecovered:
-				writer.WriteStringValue("CLUSTER_RECOVERED");
-				return;
-			case UnassignedInformationReason.AllocationFailed:
-				writer.WriteStringValue("ALLOCATION_FAILED");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "DANGLING_INDEX_IMPORTED")]
+	DanglingIndexImported,
+	[System.Runtime.Serialization.EnumMember(Value = "EXISTING_INDEX_RESTORED")]
+	ExistingIndexRestored,
+	[System.Runtime.Serialization.EnumMember(Value = "FORCED_EMPTY_PRIMARY")]
+	ForcedEmptyPrimary,
+	[System.Runtime.Serialization.EnumMember(Value = "INDEX_CREATED")]
+	IndexCreated,
+	[System.Runtime.Serialization.EnumMember(Value = "INDEX_REOPENED")]
+	IndexReopened,
+	[System.Runtime.Serialization.EnumMember(Value = "MANUAL_ALLOCATION")]
+	ManualAllocation,
+	[System.Runtime.Serialization.EnumMember(Value = "NEW_INDEX_RESTORED")]
+	NewIndexRestored,
+	[System.Runtime.Serialization.EnumMember(Value = "NODE_LEFT")]
+	NodeLeft,
+	[System.Runtime.Serialization.EnumMember(Value = "PRIMARY_FAILED")]
+	PrimaryFailed,
+	[System.Runtime.Serialization.EnumMember(Value = "REALLOCATED_REPLICA")]
+	ReallocatedReplica,
+	[System.Runtime.Serialization.EnumMember(Value = "REINITIALIZED")]
+	Reinitialized,
+	[System.Runtime.Serialization.EnumMember(Value = "REPLICA_ADDED")]
+	ReplicaAdded,
+	[System.Runtime.Serialization.EnumMember(Value = "REROUTE_CANCELLED")]
+	RerouteCancelled
 }

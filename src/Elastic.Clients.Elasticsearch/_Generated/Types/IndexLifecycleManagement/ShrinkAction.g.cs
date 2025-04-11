@@ -17,77 +17,146 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class ShrinkActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowWriteAfterShrink = System.Text.Json.JsonEncodedText.Encode("allow_write_after_shrink");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowWriteAfterShrink = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxPrimaryShardSize = default;
+		LocalJsonValue<int?> propNumberOfShards = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowWriteAfterShrink.TryReadProperty(ref reader, options, PropAllowWriteAfterShrink, null))
+			{
+				continue;
+			}
+
+			if (propMaxPrimaryShardSize.TryReadProperty(ref reader, options, PropMaxPrimaryShardSize, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfShards.TryReadProperty(ref reader, options, PropNumberOfShards, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowWriteAfterShrink = propAllowWriteAfterShrink.Value,
+			MaxPrimaryShardSize = propMaxPrimaryShardSize.Value,
+			NumberOfShards = propNumberOfShards.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowWriteAfterShrink, value.AllowWriteAfterShrink, null, null);
+		writer.WriteProperty(options, PropMaxPrimaryShardSize, value.MaxPrimaryShardSize, null, null);
+		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionConverter))]
 public sealed partial class ShrinkAction
 {
-	[JsonInclude, JsonPropertyName("allow_write_after_shrink")]
+#if NET7_0_OR_GREATER
+	public ShrinkAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ShrinkAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? AllowWriteAfterShrink { get; set; }
-	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
-	[JsonInclude, JsonPropertyName("number_of_shards")]
 	public int? NumberOfShards { get; set; }
 }
 
-public sealed partial class ShrinkActionDescriptor : SerializableDescriptor<ShrinkActionDescriptor>
+public readonly partial struct ShrinkActionDescriptor
 {
-	internal ShrinkActionDescriptor(Action<ShrinkActionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction Instance { get; init; }
 
-	public ShrinkActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShrinkActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AllowWriteAfterShrinkValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeValue { get; set; }
-	private int? NumberOfShardsValue { get; set; }
-
-	public ShrinkActionDescriptor AllowWriteAfterShrink(bool? allowWriteAfterShrink = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShrinkActionDescriptor()
 	{
-		AllowWriteAfterShrinkValue = allowWriteAfterShrink;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ShrinkActionDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor AllowWriteAfterShrink(bool? value = true)
 	{
-		MaxPrimaryShardSizeValue = maxPrimaryShardSize;
-		return Self;
+		Instance.AllowWriteAfterShrink = value;
+		return this;
 	}
 
-	public ShrinkActionDescriptor NumberOfShards(int? numberOfShards)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		NumberOfShardsValue = numberOfShards;
-		return Self;
+		Instance.MaxPrimaryShardSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor MaxPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		writer.WriteStartObject();
-		if (AllowWriteAfterShrinkValue.HasValue)
+		Instance.MaxPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor NumberOfShards(int? value)
+	{
+		Instance.NumberOfShards = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("allow_write_after_shrink");
-			writer.WriteBooleanValue(AllowWriteAfterShrinkValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxPrimaryShardSizeValue is not null)
-		{
-			writer.WritePropertyName("max_primary_shard_size");
-			JsonSerializer.Serialize(writer, MaxPrimaryShardSizeValue, options);
-		}
-
-		if (NumberOfShardsValue.HasValue)
-		{
-			writer.WritePropertyName("number_of_shards");
-			writer.WriteNumberValue(NumberOfShardsValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

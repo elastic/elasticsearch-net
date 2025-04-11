@@ -17,62 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class MergeSchedulerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMergeCount = System.Text.Json.JsonEncodedText.Encode("max_merge_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxThreadCount = System.Text.Json.JsonEncodedText.Encode("max_thread_count");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxMergeCount = default;
+		LocalJsonValue<int?> propMaxThreadCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxMergeCount.TryReadProperty(ref reader, options, PropMaxMergeCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxThreadCount.TryReadProperty(ref reader, options, PropMaxThreadCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxMergeCount = propMaxMergeCount.Value,
+			MaxThreadCount = propMaxThreadCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxMergeCount, value.MaxMergeCount, null, null);
+		writer.WriteProperty(options, PropMaxThreadCount, value.MaxThreadCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerConverter))]
 public sealed partial class MergeScheduler
 {
-	[JsonInclude, JsonPropertyName("max_merge_count")]
+#if NET7_0_OR_GREATER
+	public MergeScheduler()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MergeScheduler()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MergeScheduler(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? MaxMergeCount { get; set; }
-	[JsonInclude, JsonPropertyName("max_thread_count")]
 	public int? MaxThreadCount { get; set; }
 }
 
-public sealed partial class MergeSchedulerDescriptor : SerializableDescriptor<MergeSchedulerDescriptor>
+public readonly partial struct MergeSchedulerDescriptor
 {
-	internal MergeSchedulerDescriptor(Action<MergeSchedulerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler Instance { get; init; }
 
-	public MergeSchedulerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MergeSchedulerDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxMergeCountValue { get; set; }
-	private int? MaxThreadCountValue { get; set; }
-
-	public MergeSchedulerDescriptor MaxMergeCount(int? maxMergeCount)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MergeSchedulerDescriptor()
 	{
-		MaxMergeCountValue = maxMergeCount;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public MergeSchedulerDescriptor MaxThreadCount(int? maxThreadCount)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor MaxMergeCount(int? value)
 	{
-		MaxThreadCountValue = maxThreadCount;
-		return Self;
+		Instance.MaxMergeCount = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor MaxThreadCount(int? value)
 	{
-		writer.WriteStartObject();
-		if (MaxMergeCountValue.HasValue)
+		Instance.MaxThreadCount = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max_merge_count");
-			writer.WriteNumberValue(MaxMergeCountValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxThreadCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_thread_count");
-			writer.WriteNumberValue(MaxThreadCountValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

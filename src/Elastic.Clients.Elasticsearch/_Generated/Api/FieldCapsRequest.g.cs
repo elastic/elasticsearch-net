@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class FieldCapsRequestParameters : RequestParameters
+public sealed partial class FieldCapsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -46,7 +39,7 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -83,7 +76,64 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 	/// It defaults to empty, meaning that all field types are returned.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
+	public System.Collections.Generic.ICollection<string>? Types { get => Q<System.Collections.Generic.ICollection<string>?>("types"); set => Q("types", value); }
+}
+
+internal sealed partial class FieldCapsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.FieldCapsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+
+	public override Elastic.Clients.Elasticsearch.FieldCapsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Fields = propFields.Value,
+			IndexFilter = propIndexFilter.Value,
+			RuntimeMappings = propRuntimeMappings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.FieldCapsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -99,23 +149,42 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 /// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
-public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.FieldCapsRequestConverter))]
+public sealed partial class FieldCapsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>
 {
-	public FieldCapsRequest()
-	{
-	}
-
 	public FieldCapsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public FieldCapsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FieldCapsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceFieldCaps;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceFieldCaps;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "field_caps";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -124,7 +193,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -132,15 +200,13 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
@@ -148,7 +214,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// If <c>true</c>, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -156,7 +221,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// If false, empty fields are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeEmptyFields { get => Q<bool?>("include_empty_fields"); set => Q("include_empty_fields", value); }
 
 	/// <summary>
@@ -164,7 +228,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// If true, unmapped fields are included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
 	/// <summary>
@@ -174,16 +237,13 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// It defaults to empty, meaning that all field types are returned.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
+	public System.Collections.Generic.ICollection<string>? Types { get => Q<System.Collections.Generic.ICollection<string>?>("types"); set => Q("types", value); }
 
 	/// <summary>
 	/// <para>
 	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -196,7 +256,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
 	/// <summary>
@@ -205,8 +264,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
 /// <summary>
@@ -222,55 +280,165 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 /// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
-public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescriptor<FieldCapsRequestDescriptor<TDocument>, FieldCapsRequestParameters>
+public readonly partial struct FieldCapsRequestDescriptor
 {
-	internal FieldCapsRequestDescriptor(Action<FieldCapsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.FieldCapsRequest Instance { get; init; }
 
-	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.FieldCapsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.FieldCapsRequest(indices);
 	}
 
 	public FieldCapsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceFieldCaps;
+	public static explicit operator Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.FieldCapsRequest instance) => new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "field_caps";
-
-	public FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public FieldCapsRequestDescriptor<TDocument> Filters(string? filters) => Qs("filters", filters);
-	public FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public FieldCapsRequestDescriptor<TDocument> IncludeEmptyFields(bool? includeEmptyFields = true) => Qs("include_empty_fields", includeEmptyFields);
-	public FieldCapsRequestDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
-	public FieldCapsRequestDescriptor<TDocument> Types(ICollection<string>? types) => Qs("types", types);
-
-	public FieldCapsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias,
+	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of filters to apply to the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Filters(string? value)
+	{
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, empty fields are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IncludeEmptyFields(bool? value = true)
+	{
+		Instance.IncludeEmptyFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, unmapped fields are included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IncludeUnmapped(bool? value = true)
+	{
+		Instance.IncludeUnmapped = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of field types to include.
+	/// Any fields that do not match one of these types will be excluded from the results.
+	/// It defaults to empty, meaning that all field types are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Types(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Types = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of field types to include.
+	/// Any fields that do not match one of these types will be excluded from the results.
+	/// It defaults to empty, meaning that all field types are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Types(params string[] values)
+	{
+		Instance.Types = [.. values];
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
-	public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -283,28 +451,42 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
 	/// </para>
 	/// </summary>
-	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
+		Instance.IndexFilter = value;
+		return this;
 	}
 
-	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IndexFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -313,44 +495,143 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>
-	public FieldCapsRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings()
 	{
-		writer.WriteStartObject();
-		if (FieldsValue is not null)
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.FieldCapsRequest Build(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
+			return new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IndexFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
-		}
-		else if (IndexFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(IndexFilterDescriptorAction), options);
-		}
-		else if (IndexFilterValue is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -367,55 +648,165 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 /// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
-public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<FieldCapsRequestDescriptor, FieldCapsRequestParameters>
+public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 {
-	internal FieldCapsRequestDescriptor(Action<FieldCapsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.FieldCapsRequest Instance { get; init; }
 
-	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.FieldCapsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.FieldCapsRequest(indices);
 	}
 
 	public FieldCapsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceFieldCaps;
+	public static explicit operator Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.FieldCapsRequest instance) => new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "field_caps";
-
-	public FieldCapsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public FieldCapsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public FieldCapsRequestDescriptor Filters(string? filters) => Qs("filters", filters);
-	public FieldCapsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public FieldCapsRequestDescriptor IncludeEmptyFields(bool? includeEmptyFields = true) => Qs("include_empty_fields", includeEmptyFields);
-	public FieldCapsRequestDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
-	public FieldCapsRequestDescriptor Types(ICollection<string>? types) => Qs("types", types);
-
-	public FieldCapsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias,
+	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of filters to apply to the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Filters(string? value)
+	{
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, empty fields are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IncludeEmptyFields(bool? value = true)
+	{
+		Instance.IncludeEmptyFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, unmapped fields are included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IncludeUnmapped(bool? value = true)
+	{
+		Instance.IncludeUnmapped = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of field types to include.
+	/// Any fields that do not match one of these types will be excluded from the results.
+	/// It defaults to empty, meaning that all field types are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Types(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Types = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of field types to include.
+	/// Any fields that do not match one of these types will be excluded from the results.
+	/// It defaults to empty, meaning that all field types are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Types(params string[] values)
+	{
+		Instance.Types = [.. values];
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
-	public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -428,28 +819,26 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
 	/// </para>
 	/// </summary>
-	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
+		Instance.IndexFilter = value;
+		return this;
 	}
 
-	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public FieldCapsRequestDescriptor IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -458,43 +847,116 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>
-	public FieldCapsRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		writer.WriteStartObject();
-		if (FieldsValue is not null)
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.FieldCapsRequest Build(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
+			return new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IndexFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
-		}
-		else if (IndexFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(IndexFilterDescriptorAction), options);
-		}
-		else if (IndexFilterValue is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

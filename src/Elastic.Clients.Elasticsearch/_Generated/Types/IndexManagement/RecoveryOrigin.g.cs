@@ -17,40 +17,179 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class RecoveryOriginConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBootstrapNewHistoryUuid = System.Text.Json.JsonEncodedText.Encode("bootstrap_new_history_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host");
+	private static readonly System.Text.Json.JsonEncodedText PropHostname = System.Text.Json.JsonEncodedText.Encode("hostname");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText PropRestoreUuid = System.Text.Json.JsonEncodedText.Encode("restoreUUID");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propBootstrapNewHistoryUuid = default;
+		LocalJsonValue<string?> propHost = default;
+		LocalJsonValue<string?> propHostname = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<string?> propIndex = default;
+		LocalJsonValue<string?> propIp = default;
+		LocalJsonValue<string?> propName = default;
+		LocalJsonValue<string?> propRepository = default;
+		LocalJsonValue<string?> propRestoreUuid = default;
+		LocalJsonValue<string?> propSnapshot = default;
+		LocalJsonValue<string?> propTransportAddress = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBootstrapNewHistoryUuid.TryReadProperty(ref reader, options, PropBootstrapNewHistoryUuid, null))
+			{
+				continue;
+			}
+
+			if (propHost.TryReadProperty(ref reader, options, PropHost, null))
+			{
+				continue;
+			}
+
+			if (propHostname.TryReadProperty(ref reader, options, PropHostname, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIp.TryReadProperty(ref reader, options, PropIp, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRepository.TryReadProperty(ref reader, options, PropRepository, null))
+			{
+				continue;
+			}
+
+			if (propRestoreUuid.TryReadProperty(ref reader, options, PropRestoreUuid, null))
+			{
+				continue;
+			}
+
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
+			{
+				continue;
+			}
+
+			if (propTransportAddress.TryReadProperty(ref reader, options, PropTransportAddress, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BootstrapNewHistoryUuid = propBootstrapNewHistoryUuid.Value,
+			Host = propHost.Value,
+			Hostname = propHostname.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Ip = propIp.Value,
+			Name = propName.Value,
+			Repository = propRepository.Value,
+			RestoreUuid = propRestoreUuid.Value,
+			Snapshot = propSnapshot.Value,
+			TransportAddress = propTransportAddress.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBootstrapNewHistoryUuid, value.BootstrapNewHistoryUuid, null, null);
+		writer.WriteProperty(options, PropHost, value.Host, null, null);
+		writer.WriteProperty(options, PropHostname, value.Hostname, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIp, value.Ip, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
+		writer.WriteProperty(options, PropRestoreUuid, value.RestoreUuid, null, null);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
+		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOriginConverter))]
 public sealed partial class RecoveryOrigin
 {
-	[JsonInclude, JsonPropertyName("bootstrap_new_history_uuid")]
-	public bool? BootstrapNewHistoryUuid { get; init; }
-	[JsonInclude, JsonPropertyName("host")]
-	public string? Host { get; init; }
-	[JsonInclude, JsonPropertyName("hostname")]
-	public string? Hostname { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string? Id { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	public string? Index { get; init; }
-	[JsonInclude, JsonPropertyName("ip")]
-	public string? Ip { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; init; }
-	[JsonInclude, JsonPropertyName("repository")]
-	public string? Repository { get; init; }
-	[JsonInclude, JsonPropertyName("restoreUUID")]
-	public string? Restoreuuid { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot")]
-	public string? Snapshot { get; init; }
-	[JsonInclude, JsonPropertyName("transport_address")]
-	public string? TransportAddress { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
-	public string? Version { get; init; }
+#if NET7_0_OR_GREATER
+	public RecoveryOrigin()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RecoveryOrigin()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RecoveryOrigin(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? BootstrapNewHistoryUuid { get; set; }
+	public string? Host { get; set; }
+	public string? Hostname { get; set; }
+	public string? Id { get; set; }
+	public string? Index { get; set; }
+	public string? Ip { get; set; }
+	public string? Name { get; set; }
+	public string? Repository { get; set; }
+	public string? RestoreUuid { get; set; }
+	public string? Snapshot { get; set; }
+	public string? TransportAddress { get; set; }
+	public string? Version { get; set; }
 }

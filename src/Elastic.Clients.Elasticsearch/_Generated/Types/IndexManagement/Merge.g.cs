@@ -17,77 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class MergeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Merge>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropScheduler = System.Text.Json.JsonEncodedText.Encode("scheduler");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Merge Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler?> propScheduler = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScheduler.TryReadProperty(ref reader, options, PropScheduler, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.Merge(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Scheduler = propScheduler.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Merge value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropScheduler, value.Scheduler, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MergeConverter))]
 public sealed partial class Merge
 {
-	[JsonInclude, JsonPropertyName("scheduler")]
+#if NET7_0_OR_GREATER
+	public Merge()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Merge()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Merge(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? Scheduler { get; set; }
 }
 
-public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescriptor>
+public readonly partial struct MergeDescriptor
 {
-	internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.Merge Instance { get; init; }
 
-	public MergeDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MergeDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Merge instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
-
-	public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? scheduler)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MergeDescriptor()
 	{
-		SchedulerDescriptor = null;
-		SchedulerDescriptorAction = null;
-		SchedulerValue = scheduler;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.Merge(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Merge instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.Merge(Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? value)
 	{
-		SchedulerValue = null;
-		SchedulerDescriptorAction = null;
-		SchedulerDescriptor = descriptor;
-		return Self;
+		Instance.Scheduler = value;
+		return this;
 	}
 
-	public MergeDescriptor Scheduler(Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor Scheduler()
 	{
-		SchedulerValue = null;
-		SchedulerDescriptor = null;
-		SchedulerDescriptorAction = configure;
-		return Self;
+		Instance.Scheduler = Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor Scheduler(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (SchedulerDescriptor is not null)
+		Instance.Scheduler = Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.Merge Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("scheduler");
-			JsonSerializer.Serialize(writer, SchedulerDescriptor, options);
-		}
-		else if (SchedulerDescriptorAction is not null)
-		{
-			writer.WritePropertyName("scheduler");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
-		}
-		else if (SchedulerValue is not null)
-		{
-			writer.WritePropertyName("scheduler");
-			JsonSerializer.Serialize(writer, SchedulerValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.Merge(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.Merge(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

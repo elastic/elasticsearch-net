@@ -10,7 +10,6 @@ using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Extensions;
-using Tests.Core.Client.Serializers;
 
 namespace Tests.Core.Client.Settings
 {
@@ -76,7 +75,7 @@ namespace Tests.Core.Client.Settings
 			if (!TestConfiguration.Instance.Random.SourceSerializer)
 				return null;
 
-			return (builtin, values) => new TestSourceSerializer(builtin, values);
+			return (builtin, values) => builtin; //new TestSourceSerializer(builtin, values);
 		}
 
 		private static NodePool CreatePool(Func<ICollection<Uri>, NodePool> createPool = null,

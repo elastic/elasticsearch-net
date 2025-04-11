@@ -18,944 +18,309 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
+public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="AsyncSearchNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected AsyncSearchNamespacedClient() : base()
 	{
 	}
 
-	internal AsyncSearchNamespacedClient(ElasticsearchClient client) : base(client)
+	internal AsyncSearchNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequest request)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequest, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(DeleteAsyncSearchRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequest, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchResponse, Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(DeleteAsyncSearchRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async search.
-	/// </para>
-	/// <para>
-	/// If the asynchronous search is still running, it is cancelled.
-	/// Otherwise, the saved search results are deleted.
-	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(GetAsyncSearchRequest request)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetAsyncSearchRequest, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(GetAsyncSearchRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetAsyncSearchRequest, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(GetAsyncSearchRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetAsyncSearchRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncSearchRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetAsyncSearchRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(GetAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetAsyncSearchRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async search results.
-	/// </para>
-	/// <para>
-	/// Retrieve the results of a previously submitted asynchronous search request.
-	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetAsyncSearchRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequest request)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequest, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequest, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusResponse, Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the async search status.
-	/// </para>
-	/// <para>
-	/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(SubmitAsyncSearchRequest request)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<SubmitAsyncSearchRequest, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<SubmitAsyncSearchRequest, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(SubmitAsyncSearchRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async search.
-	/// </para>
-	/// <para>
-	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-	/// </para>
-	/// <para>
-	/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-	/// </para>
-	/// <para>
-	/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 }

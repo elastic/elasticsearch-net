@@ -17,38 +17,144 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(GeoGridQueryConverter))]
+internal sealed partial class GeoGridQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeogrid = System.Text.Json.JsonEncodedText.Encode("geogrid");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeohash = System.Text.Json.JsonEncodedText.Encode("geohash");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		reader.Read();
+		propField.ReadPropertyName(ref reader, options, null);
+		reader.Read();
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<string?> propQueryName = default;
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeogrid))
+			{
+				variantType = VariantGeogrid.Value;
+				reader.Read();
+				variant = reader.ReadValue<string>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeohash))
+			{
+				variantType = VariantGeohash.Value;
+				reader.Read();
+				variant = reader.ReadValue<string>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeohex))
+			{
+				variantType = VariantGeohex.Value;
+				reader.Read();
+				variant = reader.ReadValue<string>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		reader.Read();
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName(options, value.Field, null);
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "geogrid":
+				writer.WriteProperty(options, value.VariantType, (string)value.Variant, null, null);
+				break;
+			case "geohash":
+				writer.WriteProperty(options, value.VariantType, (string)value.Variant, null, null);
+				break;
+			case "geohex":
+				writer.WriteProperty(options, value.VariantType, (string)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery)}'.");
+		}
+
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryConverter))]
 public sealed partial class GeoGridQuery
 {
-	internal GeoGridQuery(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public GeoGridQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoGridQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
-
-	public static GeoGridQuery Geogrid(string s) => new GeoGridQuery("geogrid", s);
-	public static GeoGridQuery Geohash(string s) => new GeoGridQuery("geohash", s);
-	public static GeoGridQuery Geohex(string s) => new GeoGridQuery("geohex", s);
+	public string? Geogrid { get => GetVariant<string>("geogrid"); set => SetVariant("geogrid", value); }
+	public string? Geohash { get => GetVariant<string>("geohash"); set => SetVariant("geohash", value); }
+	public string? Geohex { get => GetVariant<string>("geohex"); set => SetVariant("geohex", value); }
 
 	/// <summary>
 	/// <para>
@@ -58,177 +164,69 @@ public sealed partial class GeoGridQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class GeoGridQueryConverter : JsonConverter<GeoGridQuery>
+public readonly partial struct GeoGridQueryDescriptor<TDocument>
 {
-	public override GeoGridQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		reader.Read();
-		var fieldName = reader.GetString();
-		reader.Read();
-		object? variantValue = default;
-		string? variantNameValue = default;
-		float? boostValue = default;
-		string? queryNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "boost")
-			{
-				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "_name")
-			{
-				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "geogrid")
-			{
-				variantValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geohash")
-			{
-				variantValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geohex")
-			{
-				variantValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'GeoGridQuery' from the response.");
-		}
-
-		reader.Read();
-		var result = new GeoGridQuery(variantNameValue, variantValue);
-		result.Boost = boostValue;
-		result.Field = fieldName;
-		result.QueryName = queryNameValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoGridQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridQueryDescriptor()
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize GeoGridQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "geogrid":
-					JsonSerializer.Serialize<string>(writer, (string)value.Variant, options);
-					break;
-				case "geohash":
-					JsonSerializer.Serialize<string>(writer, (string)value.Variant, options);
-					break;
-				case "geohex":
-					JsonSerializer.Serialize<string>(writer, (string)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class GeoGridQueryDescriptor<TDocument> : SerializableDescriptor<GeoGridQueryDescriptor<TDocument>>
-{
-	internal GeoGridQueryDescriptor(Action<GeoGridQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public GeoGridQueryDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	private GeoGridQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Geogrid(string? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Geogrid = value;
+		return this;
 	}
 
-	private GeoGridQueryDescriptor<TDocument> Set(object variant, string variantName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Geohash(string? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Geohash = value;
+		return this;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Geohex(string? value)
+	{
+		Instance.Geohex = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -238,111 +236,75 @@ public sealed partial class GeoGridQueryDescriptor<TDocument> : SerializableDesc
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public GeoGridQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public GeoGridQueryDescriptor<TDocument> Geogrid(string s) => Set(s, "geogrid");
-	public GeoGridQueryDescriptor<TDocument> Geohash(string s) => Set(s, "geohash");
-	public GeoGridQueryDescriptor<TDocument> Geohex(string s) => Set(s, "geohex");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoGridQueryDescriptor : SerializableDescriptor<GeoGridQueryDescriptor>
+public readonly partial struct GeoGridQueryDescriptor
 {
-	internal GeoGridQueryDescriptor(Action<GeoGridQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery Instance { get; init; }
 
-	public GeoGridQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private GeoGridQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridQueryDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private GeoGridQueryDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Geogrid(string? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Geogrid = value;
+		return this;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Geohash(string? value)
+	{
+		Instance.Geohash = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Geohex(string? value)
+	{
+		Instance.Geohex = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -352,73 +314,35 @@ public sealed partial class GeoGridQueryDescriptor : SerializableDescriptor<GeoG
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public GeoGridQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public GeoGridQueryDescriptor QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public GeoGridQueryDescriptor Geogrid(string s) => Set(s, "geogrid");
-	public GeoGridQueryDescriptor Geohash(string s) => Set(s, "geohash");
-	public GeoGridQueryDescriptor Geohex(string s) => Set(s, "geohex");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

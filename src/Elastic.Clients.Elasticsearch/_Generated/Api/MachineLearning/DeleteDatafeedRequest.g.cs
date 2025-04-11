@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteDatafeedRequestParameters : RequestParameters
+public sealed partial class DeleteDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -41,20 +34,61 @@ public sealed partial class DeleteDatafeedRequestParameters : RequestParameters
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
+internal sealed partial class DeleteDatafeedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Delete a datafeed.
 /// </para>
 /// </summary>
-public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestConverter))]
+public sealed partial class DeleteDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteDatafeedRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteDatafeed;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteDatafeed;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
@@ -62,11 +96,24 @@ public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedR
 
 	/// <summary>
 	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This
+	/// identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+	/// hyphens, and underscores. It must start and end with alphanumeric
+	/// characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Use to forcefully delete a started datafeed; this method is quicker than
 	/// stopping and deleting the datafeed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
@@ -75,31 +122,103 @@ public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedR
 /// Delete a datafeed.
 /// </para>
 /// </summary>
-public sealed partial class DeleteDatafeedRequestDescriptor : RequestDescriptor<DeleteDatafeedRequestDescriptor, DeleteDatafeedRequestParameters>
+public readonly partial struct DeleteDatafeedRequestDescriptor
 {
-	internal DeleteDatafeedRequestDescriptor(Action<DeleteDatafeedRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest Instance { get; init; }
 
-	public DeleteDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteDatafeed;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.delete_datafeed";
-
-	public DeleteDatafeedRequestDescriptor Force(bool? force = true) => Qs("force", force);
-
-	public DeleteDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id datafeedId)
+	public DeleteDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
-		RouteValues.Required("datafeed_id", datafeedId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest(datafeedId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteDatafeedRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This
+	/// identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+	/// hyphens, and underscores. It must start and end with alphanumeric
+	/// characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.DatafeedId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use to forcefully delete a started datafeed; this method is quicker than
+	/// stopping and deleting the datafeed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

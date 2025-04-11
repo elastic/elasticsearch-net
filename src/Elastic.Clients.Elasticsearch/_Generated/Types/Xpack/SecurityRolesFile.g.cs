@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class SecurityRolesFileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesFile>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDls = System.Text.Json.JsonEncodedText.Encode("dls");
+	private static readonly System.Text.Json.JsonEncodedText PropFls = System.Text.Json.JsonEncodedText.Encode("fls");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRolesFile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propDls = default;
+		LocalJsonValue<bool> propFls = default;
+		LocalJsonValue<long> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDls.TryReadProperty(ref reader, options, PropDls, null))
+			{
+				continue;
+			}
+
+			if (propFls.TryReadProperty(ref reader, options, PropFls, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.SecurityRolesFile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dls = propDls.Value,
+			Fls = propFls.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.SecurityRolesFile value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDls, value.Dls, null, null);
+		writer.WriteProperty(options, PropFls, value.Fls, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SecurityRolesFileConverter))]
 public sealed partial class SecurityRolesFile
 {
-	[JsonInclude, JsonPropertyName("dls")]
-	public bool Dls { get; init; }
-	[JsonInclude, JsonPropertyName("fls")]
-	public bool Fls { get; init; }
-	[JsonInclude, JsonPropertyName("size")]
-	public long Size { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SecurityRolesFile(bool dls, bool fls, long size)
+	{
+		Dls = dls;
+		Fls = fls;
+		Size = size;
+	}
+#if NET7_0_OR_GREATER
+	public SecurityRolesFile()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SecurityRolesFile()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SecurityRolesFile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Dls { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Fls { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Size { get; set; }
 }

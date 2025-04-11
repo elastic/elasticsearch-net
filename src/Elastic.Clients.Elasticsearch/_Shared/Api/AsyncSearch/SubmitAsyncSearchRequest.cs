@@ -9,24 +9,16 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public partial class SubmitAsyncSearchRequest
 {
-	// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+	// Any request may contain aggregations so we force typed_keys in order to successfully deserialize them.
 	internal override void BeforeRequest() => TypedKeys = true;
 }
 
-public sealed partial class SubmitAsyncSearchRequestDescriptor
+public readonly partial struct SubmitAsyncSearchRequestDescriptor
 {
-	public SubmitAsyncSearchRequestDescriptor MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll(new MatchAllQuery())) : Query(q => q.MatchAll(selector));
-
-	internal override void BeforeRequest() => TypedKeys(true);
+	public SubmitAsyncSearchRequestDescriptor MatchAll(Action<MatchAllQueryDescriptor>? action = null) => Query(q => q.MatchAll(action));
 }
 
-public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument>
+public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 {
-	public SubmitAsyncSearchRequestDescriptor<TDocument> MatchAll()
-	{
-		Query(new MatchAllQuery());
-		return Self;
-	}
-
-	internal override void BeforeRequest() => TypedKeys(true);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> MatchAll(Action<MatchAllQueryDescriptor>? action = null) => Query(q => q.MatchAll(action));
 }

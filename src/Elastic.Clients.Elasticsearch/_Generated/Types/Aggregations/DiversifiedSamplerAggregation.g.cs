@@ -17,24 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class DiversifiedSamplerAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocsPerValue = System.Text.Json.JsonEncodedText.Encode("max_docs_per_value");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint?> propExecutionHint = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<int?> propMaxDocsPerValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<int?> propShardSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocsPerValue.TryReadProperty(ref reader, options, PropMaxDocsPerValue, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ExecutionHint = propExecutionHint.Value,
+			Field = propField.Value,
+			MaxDocsPerValue = propMaxDocsPerValue.Value,
+			Script = propScript.Value,
+			ShardSize = propShardSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMaxDocsPerValue, value.MaxDocsPerValue, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationConverter))]
 public sealed partial class DiversifiedSamplerAggregation
 {
+#if NET7_0_OR_GREATER
+	public DiversifiedSamplerAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DiversifiedSamplerAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The type of value used for de-duplication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
@@ -42,7 +129,6 @@ public sealed partial class DiversifiedSamplerAggregation
 	/// The field used to provide values used for de-duplication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -50,9 +136,7 @@ public sealed partial class DiversifiedSamplerAggregation
 	/// Limits how many documents are permitted per choice of de-duplicating value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_docs_per_value")]
 	public int? MaxDocsPerValue { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -60,37 +144,37 @@ public sealed partial class DiversifiedSamplerAggregation
 	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(DiversifiedSamplerAggregation diversifiedSamplerAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DiversifiedSampler(diversifiedSamplerAggregation);
 }
 
-public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> : SerializableDescriptor<DiversifiedSamplerAggregationDescriptor<TDocument>>
+public readonly partial struct DiversifiedSamplerAggregationDescriptor<TDocument>
 {
-	internal DiversifiedSamplerAggregationDescriptor(Action<DiversifiedSamplerAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Instance { get; init; }
 
-	public DiversifiedSamplerAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiversifiedSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHintValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private int? MaxDocsPerValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private int? ShardSizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiversifiedSamplerAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The type of value used for de-duplication.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? value)
 	{
-		ExecutionHintValue = executionHint;
-		return Self;
+		Instance.ExecutionHint = value;
+		return this;
 	}
 
 	/// <summary>
@@ -98,10 +182,10 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 	/// The field used to provide values used for de-duplication.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -109,21 +193,10 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 	/// The field used to provide values used for de-duplication.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -131,34 +204,28 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 	/// Limits how many documents are permitted per choice of de-duplicating value.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor<TDocument> MaxDocsPerValue(int? maxDocsPerValue)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> MaxDocsPerValue(int? value)
 	{
-		MaxDocsPerValueValue = maxDocsPerValue;
-		return Self;
+		Instance.MaxDocsPerValue = value;
+		return this;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -166,84 +233,54 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor<TDocument> ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (ExecutionHintValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("execution_hint");
-			JsonSerializer.Serialize(writer, ExecutionHintValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MaxDocsPerValueValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs_per_value");
-			writer.WriteNumberValue(MaxDocsPerValueValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DiversifiedSamplerAggregationDescriptor : SerializableDescriptor<DiversifiedSamplerAggregationDescriptor>
+public readonly partial struct DiversifiedSamplerAggregationDescriptor
 {
-	internal DiversifiedSamplerAggregationDescriptor(Action<DiversifiedSamplerAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Instance { get; init; }
 
-	public DiversifiedSamplerAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiversifiedSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHintValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private int? MaxDocsPerValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private int? ShardSizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiversifiedSamplerAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The type of value used for de-duplication.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? value)
 	{
-		ExecutionHintValue = executionHint;
-		return Self;
+		Instance.ExecutionHint = value;
+		return this;
 	}
 
 	/// <summary>
@@ -251,10 +288,10 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 	/// The field used to provide values used for de-duplication.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -262,21 +299,10 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 	/// The field used to provide values used for de-duplication.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -284,34 +310,28 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 	/// Limits how many documents are permitted per choice of de-duplicating value.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor MaxDocsPerValue(int? maxDocsPerValue)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor MaxDocsPerValue(int? value)
 	{
-		MaxDocsPerValueValue = maxDocsPerValue;
-		return Self;
+		Instance.MaxDocsPerValue = value;
+		return this;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -319,55 +339,22 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
 	/// </para>
 	/// </summary>
-	public DiversifiedSamplerAggregationDescriptor ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ExecutionHintValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("execution_hint");
-			JsonSerializer.Serialize(writer, ExecutionHintValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MaxDocsPerValueValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs_per_value");
-			writer.WriteNumberValue(MaxDocsPerValueValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

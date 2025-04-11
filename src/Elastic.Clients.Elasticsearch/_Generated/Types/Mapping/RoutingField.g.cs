@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class RoutingField
+internal sealed partial class RoutingFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RoutingField>
 {
-	[JsonInclude, JsonPropertyName("required")]
-	public bool Required { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropRequired = System.Text.Json.JsonEncodedText.Encode("required");
 
-public sealed partial class RoutingFieldDescriptor : SerializableDescriptor<RoutingFieldDescriptor>
-{
-	internal RoutingFieldDescriptor(Action<RoutingFieldDescriptor> configure) => configure.Invoke(this);
-
-	public RoutingFieldDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Mapping.RoutingField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propRequired = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRequired.TryReadProperty(ref reader, options, PropRequired, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.RoutingField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Required = propRequired.Value
+		};
 	}
 
-	private bool RequiredValue { get; set; }
-
-	public RoutingFieldDescriptor Required(bool required = true)
-	{
-		RequiredValue = required;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RoutingField value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("required");
-		writer.WriteBooleanValue(RequiredValue);
+		writer.WriteProperty(options, PropRequired, value.Required, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldConverter))]
+public sealed partial class RoutingField
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoutingField(bool required)
+	{
+		Required = required;
+	}
+#if NET7_0_OR_GREATER
+	public RoutingField()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RoutingField()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoutingField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Required { get; set; }
+}
+
+public readonly partial struct RoutingFieldDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Mapping.RoutingField Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoutingFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.RoutingField instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoutingFieldDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RoutingField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.RoutingField instance) => new Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RoutingField(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor Required(bool value = true)
+	{
+		Instance.Required = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RoutingField Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(new Elastic.Clients.Elasticsearch.Mapping.RoutingField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

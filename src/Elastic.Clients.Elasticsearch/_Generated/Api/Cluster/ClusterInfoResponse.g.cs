@@ -17,25 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class ClusterInfoResponse : ElasticsearchResponse
+internal sealed partial class ClusterInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse>
 {
-	[JsonInclude, JsonPropertyName("cluster_name")]
-	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("http")]
-	public Elastic.Clients.Elasticsearch.Nodes.Http? Http { get; init; }
-	[JsonInclude, JsonPropertyName("ingest")]
-	public Elastic.Clients.Elasticsearch.Nodes.Ingest? Ingest { get; init; }
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Nodes.Scripting? Script { get; init; }
-	[JsonInclude, JsonPropertyName("thread_pool")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? ThreadPool { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Http?> propHttp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Ingest?> propIngest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Scripting?> propScript = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>?> propThreadPool = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
+			{
+				continue;
+			}
+
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propThreadPool.TryReadProperty(ref reader, options, PropThreadPool, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClusterName = propClusterName.Value,
+			Http = propHttp.Value,
+			Ingest = propIngest.Value,
+			Script = propScript.Value,
+			ThreadPool = propThreadPool.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponseConverter))]
+public sealed partial class ClusterInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterInfoResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterInfoResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string ClusterName { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.Http? Http { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.Ingest? Ingest { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.Scripting? Script { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? ThreadPool { get; set; }
 }

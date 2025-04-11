@@ -17,25 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class CgroupMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CgroupMemory>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group");
+	private static readonly System.Text.Json.JsonEncodedText PropLimitInBytes = System.Text.Json.JsonEncodedText.Encode("limit_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUsageInBytes = System.Text.Json.JsonEncodedText.Encode("usage_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.CgroupMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propControlGroup = default;
+		LocalJsonValue<string?> propLimitInBytes = default;
+		LocalJsonValue<string?> propUsageInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propControlGroup.TryReadProperty(ref reader, options, PropControlGroup, null))
+			{
+				continue;
+			}
+
+			if (propLimitInBytes.TryReadProperty(ref reader, options, PropLimitInBytes, null))
+			{
+				continue;
+			}
+
+			if (propUsageInBytes.TryReadProperty(ref reader, options, PropUsageInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.CgroupMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ControlGroup = propControlGroup.Value,
+			LimitInBytes = propLimitInBytes.Value,
+			UsageInBytes = propUsageInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.CgroupMemory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropControlGroup, value.ControlGroup, null, null);
+		writer.WriteProperty(options, PropLimitInBytes, value.LimitInBytes, null, null);
+		writer.WriteProperty(options, PropUsageInBytes, value.UsageInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.CgroupMemoryConverter))]
 public sealed partial class CgroupMemory
 {
+#if NET7_0_OR_GREATER
+	public CgroupMemory()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CgroupMemory()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CgroupMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The <c>memory</c> control group to which the Elasticsearch process belongs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("control_group")]
-	public string? ControlGroup { get; init; }
+	public string? ControlGroup { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,8 +113,7 @@ public sealed partial class CgroupMemory
 	/// Any value that is too large to parse into a <c>long</c> almost certainly means no limit has been set for the cgroup.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit_in_bytes")]
-	public string? LimitInBytes { get; init; }
+	public string? LimitInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,6 +121,5 @@ public sealed partial class CgroupMemory
 	/// This value is stored as a string for consistency with <c>limit_in_bytes</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("usage_in_bytes")]
-	public string? UsageInBytes { get; init; }
+	public string? UsageInBytes { get; set; }
 }

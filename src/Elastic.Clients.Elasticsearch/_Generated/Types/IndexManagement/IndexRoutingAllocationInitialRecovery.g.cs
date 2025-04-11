@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexRoutingAllocationInitialRecoveryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryConverter))]
 public sealed partial class IndexRoutingAllocationInitialRecovery
 {
-	[JsonInclude, JsonPropertyName("_id")]
+#if NET7_0_OR_GREATER
+	public IndexRoutingAllocationInitialRecovery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexRoutingAllocationInitialRecovery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 }
 
-public sealed partial class IndexRoutingAllocationInitialRecoveryDescriptor : SerializableDescriptor<IndexRoutingAllocationInitialRecoveryDescriptor>
+public readonly partial struct IndexRoutingAllocationInitialRecoveryDescriptor
 {
-	internal IndexRoutingAllocationInitialRecoveryDescriptor(Action<IndexRoutingAllocationInitialRecoveryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery Instance { get; init; }
 
-	public IndexRoutingAllocationInitialRecoveryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRoutingAllocationInitialRecoveryDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
-	public IndexRoutingAllocationInitialRecoveryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRoutingAllocationInitialRecoveryDescriptor()
 	{
-		IdValue = id;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
+		Instance.Id = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

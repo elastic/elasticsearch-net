@@ -17,27 +17,175 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class DenseVectorProperty : IProperty
+internal sealed partial class DenseVectorPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDims = System.Text.Json.JsonEncodedText.Encode("dims");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropElementType = System.Text.Json.JsonEncodedText.Encode("element_type");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propDims = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType?> propElementType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> propIndexOptions = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity?> propSimilarity = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDims.TryReadProperty(ref reader, options, PropDims, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propElementType.TryReadProperty(ref reader, options, PropElementType, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dims = propDims.Value,
+			Dynamic = propDynamic.Value,
+			ElementType = propElementType.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			Index = propIndex.Value,
+			IndexOptions = propIndexOptions.Value,
+			Meta = propMeta.Value,
+			Properties = propProperties.Value,
+			Similarity = propSimilarity.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDims, value.Dims, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropElementType, value.ElementType, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyConverter))]
+public sealed partial class DenseVectorProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public DenseVectorProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DenseVectorProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of vector dimensions. Can't exceed <c>4096</c>. If <c>dims</c> is not specified, it will be set to the length of
 	/// the first vector added to the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dims")]
 	public int? Dims { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
 	/// <summary>
@@ -45,11 +193,8 @@ public sealed partial class DenseVectorProperty : IProperty
 	/// The data type used to encode vectors. The supported data types are <c>float</c> (default), <c>byte</c>, and <c>bit</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("element_type")]
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? ElementType { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
@@ -57,7 +202,6 @@ public sealed partial class DenseVectorProperty : IProperty
 	/// If <c>true</c>, you can search this field using the kNN search API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
 
 	/// <summary>
@@ -70,7 +214,6 @@ public sealed partial class DenseVectorProperty : IProperty
 	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; set; }
 
 	/// <summary>
@@ -78,9 +221,7 @@ public sealed partial class DenseVectorProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 	/// <summary>
@@ -102,36 +243,30 @@ public sealed partial class DenseVectorProperty : IProperty
 	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("similarity")]
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? Similarity { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "dense_vector";
 }
 
-public sealed partial class DenseVectorPropertyDescriptor<TDocument> : SerializableDescriptor<DenseVectorPropertyDescriptor<TDocument>>, IBuildableDescriptor<DenseVectorProperty>
+public readonly partial struct DenseVectorPropertyDescriptor<TDocument>
 {
-	internal DenseVectorPropertyDescriptor(Action<DenseVectorPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty Instance { get; init; }
 
-	public DenseVectorPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private int? DimsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? ElementTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor IndexOptionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? SimilarityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorPropertyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -139,16 +274,16 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	/// the first vector added to the field.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor<TDocument> Dims(int? dims)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Dims(int? value)
 	{
-		DimsValue = dims;
-		return Self;
+		Instance.Dims = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
 	/// <summary>
@@ -156,36 +291,28 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	/// The data type used to encode vectors. The supported data types are <c>float</c> (default), <c>byte</c>, and <c>bit</c>.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor<TDocument> ElementType(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? elementType)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> ElementType(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? value)
 	{
-		ElementTypeValue = elementType;
-		return Self;
+		Instance.ElementType = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
-	}
-
-	public DenseVectorPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
-	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -193,10 +320,10 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	/// If <c>true</c>, you can search this field using the kNN search API.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor<TDocument> Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Index(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -209,28 +336,26 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? value)
 	{
-		IndexOptionsDescriptor = null;
-		IndexOptionsDescriptorAction = null;
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An optional section that configures the kNN indexing algorithm. The HNSW algorithm has two internal parameters
+	/// that influence how the data structure is built. These can be adjusted to improve the accuracy of results, at the
+	/// expense of slower indexing speed.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> action)
 	{
-		IndexOptionsValue = null;
-		IndexOptionsDescriptorAction = null;
-		IndexOptionsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DenseVectorPropertyDescriptor<TDocument> IndexOptions(Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> configure)
-	{
-		IndexOptionsValue = null;
-		IndexOptionsDescriptor = null;
-		IndexOptionsDescriptorAction = configure;
-		return Self;
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -238,30 +363,51 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Meta()
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
+	{
+		Instance.Properties = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -283,163 +429,50 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? similarity)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? value)
 	{
-		SimilarityValue = similarity;
-		return Self;
+		Instance.Similarity = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DimsValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("dims");
-			writer.WriteNumberValue(DimsValue.Value);
+			return new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (ElementTypeValue is not null)
-		{
-			writer.WritePropertyName("element_type");
-			JsonSerializer.Serialize(writer, ElementTypeValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsDescriptor is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsDescriptor, options);
-		}
-		else if (IndexOptionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction), options);
-		}
-		else if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (SimilarityValue is not null)
-		{
-			writer.WritePropertyName("similarity");
-			JsonSerializer.Serialize(writer, SimilarityValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("dense_vector");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? BuildIndexOptions()
-	{
-		if (IndexOptionsValue is not null)
-		{
-			return IndexOptionsValue;
-		}
-
-		if ((object)IndexOptionsDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (IndexOptionsDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
-	}
-
-	DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-	{
-		Dims = DimsValue,
-		Dynamic = DynamicValue,
-		ElementType = ElementTypeValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Index = IndexValue,
-		IndexOptions = BuildIndexOptions(),
-		Meta = MetaValue,
-		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
 }
 
-public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptor<DenseVectorPropertyDescriptor>, IBuildableDescriptor<DenseVectorProperty>
+public readonly partial struct DenseVectorPropertyDescriptor
 {
-	internal DenseVectorPropertyDescriptor(Action<DenseVectorPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty Instance { get; init; }
 
-	public DenseVectorPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private int? DimsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? ElementTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor IndexOptionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? SimilarityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DenseVectorPropertyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -447,16 +480,16 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	/// the first vector added to the field.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor Dims(int? dims)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Dims(int? value)
 	{
-		DimsValue = dims;
-		return Self;
+		Instance.Dims = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
 	/// <summary>
@@ -464,36 +497,34 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	/// The data type used to encode vectors. The supported data types are <c>float</c> (default), <c>byte</c>, and <c>bit</c>.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor ElementType(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? elementType)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor ElementType(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? value)
 	{
-		ElementTypeValue = elementType;
-		return Self;
+		Instance.ElementType = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor IgnoreAbove(int? value)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -501,10 +532,10 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	/// If <c>true</c>, you can search this field using the kNN search API.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Index(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -517,28 +548,26 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? value)
 	{
-		IndexOptionsDescriptor = null;
-		IndexOptionsDescriptorAction = null;
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An optional section that configures the kNN indexing algorithm. The HNSW algorithm has two internal parameters
+	/// that influence how the data structure is built. These can be adjusted to improve the accuracy of results, at the
+	/// expense of slower indexing speed.
+	/// </para>
+	/// <para>
+	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> action)
 	{
-		IndexOptionsValue = null;
-		IndexOptionsDescriptorAction = null;
-		IndexOptionsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DenseVectorPropertyDescriptor IndexOptions(Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> configure)
-	{
-		IndexOptionsValue = null;
-		IndexOptionsDescriptor = null;
-		IndexOptionsDescriptorAction = configure;
-		return Self;
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -546,30 +575,57 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Meta()
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor AddMeta(string key, string value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
+	{
+		Instance.Properties = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -591,138 +647,28 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	/// This parameter can only be specified when <c>index</c> is <c>true</c>.
 	/// </para>
 	/// </summary>
-	public DenseVectorPropertyDescriptor Similarity(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? similarity)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor Similarity(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? value)
 	{
-		SimilarityValue = similarity;
-		return Self;
+		Instance.Similarity = value;
+		return this;
 	}
 
-	public DenseVectorPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DimsValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("dims");
-			writer.WriteNumberValue(DimsValue.Value);
+			return new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (ElementTypeValue is not null)
-		{
-			writer.WritePropertyName("element_type");
-			JsonSerializer.Serialize(writer, ElementTypeValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsDescriptor is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsDescriptor, options);
-		}
-		else if (IndexOptionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction), options);
-		}
-		else if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (SimilarityValue is not null)
-		{
-			writer.WritePropertyName("similarity");
-			JsonSerializer.Serialize(writer, SimilarityValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("dense_vector");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? BuildIndexOptions()
-	{
-		if (IndexOptionsValue is not null)
-		{
-			return IndexOptionsValue;
-		}
-
-		if ((object)IndexOptionsDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (IndexOptionsDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
-	}
-
-	DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-	{
-		Dims = DimsValue,
-		Dynamic = DynamicValue,
-		ElementType = ElementTypeValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Index = IndexValue,
-		IndexOptions = BuildIndexOptions(),
-		Meta = MetaValue,
-		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class InferTrainedModelRequestParameters : RequestParameters
+public sealed partial class InferTrainedModelRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,20 +33,87 @@ public sealed partial class InferTrainedModelRequestParameters : RequestParamete
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class InferTrainedModelRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>>> propDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate?> propInferenceConfig = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IDictionary<string, object>>(o, static System.Collections.Generic.IDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!)!))
+			{
+				continue;
+			}
+
+			if (propInferenceConfig.TryReadProperty(ref reader, options, PropInferenceConfig, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Docs = propDocs.Value,
+			InferenceConfig = propInferenceConfig.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> v) => w.WriteCollectionValue<System.Collections.Generic.IDictionary<string, object>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null)));
+		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Evaluate a trained model.
 /// </para>
 /// </summary>
-public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrainedModelRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestConverter))]
+public sealed partial class InferTrainedModelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public InferTrainedModelRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningInferTrainedModel;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferTrainedModelRequest(Elastic.Clients.Elasticsearch.Id modelId, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> docs) : base(r => r.Required("model_id", modelId))
+	{
+		Docs = docs;
+	}
+#if NET7_0_OR_GREATER
+	public InferTrainedModelRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningInferTrainedModel;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -61,10 +121,20 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 
 	/// <summary>
 	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Controls the amount of time to wait for inference results.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -74,15 +144,17 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public ICollection<IDictionary<string, object>> Docs { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> Docs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The inference configuration updates to apply on the API call
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? InferenceConfig { get; set; }
 }
 
@@ -91,34 +163,53 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 /// Evaluate a trained model.
 /// </para>
 /// </summary>
-public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : RequestDescriptor<InferTrainedModelRequestDescriptor<TDocument>, InferTrainedModelRequestParameters>
+public readonly partial struct InferTrainedModelRequestDescriptor
 {
-	internal InferTrainedModelRequestDescriptor(Action<InferTrainedModelRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Instance { get; init; }
 
-	public InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningInferTrainedModel;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.infer_trained_model";
-
-	public InferTrainedModelRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public InferTrainedModelRequestDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(modelId);
+#pragma warning restore CS0618
 	}
 
-	private ICollection<IDictionary<string, object>> DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public InferTrainedModelRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls the amount of time to wait for inference results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -127,10 +218,42 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	public InferTrainedModelRequestDescriptor<TDocument> Docs(ICollection<IDictionary<string, object>> docs)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> value)
 	{
-		DocsValue = docs;
-		return Self;
+		Instance.Docs = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Collections.Generic.IDictionary<string, object>[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
 	}
 
 	/// <summary>
@@ -138,52 +261,82 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 	/// The inference configuration updates to apply on the API call
 	/// </para>
 	/// </summary>
-	public InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? inferenceConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? value)
 	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
+		Instance.InferenceConfig = value;
+		return this;
 	}
 
-	public InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The inference configuration updates to apply on the API call
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor.Build(action);
+		return this;
 	}
 
-	public InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The inference configuration updates to apply on the API call
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<T>> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("docs");
-		JsonSerializer.Serialize(writer, DocsValue, options);
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -192,34 +345,53 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 /// Evaluate a trained model.
 /// </para>
 /// </summary>
-public sealed partial class InferTrainedModelRequestDescriptor : RequestDescriptor<InferTrainedModelRequestDescriptor, InferTrainedModelRequestParameters>
+public readonly partial struct InferTrainedModelRequestDescriptor<TDocument>
 {
-	internal InferTrainedModelRequestDescriptor(Action<InferTrainedModelRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Instance { get; init; }
 
-	public InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningInferTrainedModel;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.infer_trained_model";
-
-	public InferTrainedModelRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public InferTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(modelId);
+#pragma warning restore CS0618
 	}
 
-	private ICollection<IDictionary<string, object>> DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor> InferenceConfigDescriptorAction { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public InferTrainedModelRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls the amount of time to wait for inference results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -228,10 +400,42 @@ public sealed partial class InferTrainedModelRequestDescriptor : RequestDescript
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	public InferTrainedModelRequestDescriptor Docs(ICollection<IDictionary<string, object>> docs)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> value)
 	{
-		DocsValue = docs;
-		return Self;
+		Instance.Docs = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Collections.Generic.IDictionary<string, object>[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
 	}
 
 	/// <summary>
@@ -239,51 +443,70 @@ public sealed partial class InferTrainedModelRequestDescriptor : RequestDescript
 	/// The inference configuration updates to apply on the API call
 	/// </para>
 	/// </summary>
-	public InferTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? inferenceConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? value)
 	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
+		Instance.InferenceConfig = value;
+		return this;
 	}
 
-	public InferTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The inference configuration updates to apply on the API call
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public InferTrainedModelRequestDescriptor InferenceConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument>> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("docs");
-		JsonSerializer.Serialize(writer, DocsValue, options);
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

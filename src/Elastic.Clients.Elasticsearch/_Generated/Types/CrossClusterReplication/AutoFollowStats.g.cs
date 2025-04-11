@@ -17,26 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class AutoFollowStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAutoFollowedClusters = System.Text.Json.JsonEncodedText.Encode("auto_followed_clusters");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFailedFollowIndices = System.Text.Json.JsonEncodedText.Encode("number_of_failed_follow_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFailedRemoteClusterStateRequests = System.Text.Json.JsonEncodedText.Encode("number_of_failed_remote_cluster_state_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfSuccessfulFollowIndices = System.Text.Json.JsonEncodedText.Encode("number_of_successful_follow_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropRecentAutoFollowErrors = System.Text.Json.JsonEncodedText.Encode("recent_auto_follow_errors");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster>> propAutoFollowedClusters = default;
+		LocalJsonValue<long> propNumberOfFailedFollowIndices = default;
+		LocalJsonValue<long> propNumberOfFailedRemoteClusterStateRequests = default;
+		LocalJsonValue<long> propNumberOfSuccessfulFollowIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>> propRecentAutoFollowErrors = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAutoFollowedClusters.TryReadProperty(ref reader, options, PropAutoFollowedClusters, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propNumberOfFailedFollowIndices.TryReadProperty(ref reader, options, PropNumberOfFailedFollowIndices, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfFailedRemoteClusterStateRequests.TryReadProperty(ref reader, options, PropNumberOfFailedRemoteClusterStateRequests, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfSuccessfulFollowIndices.TryReadProperty(ref reader, options, PropNumberOfSuccessfulFollowIndices, null))
+			{
+				continue;
+			}
+
+			if (propRecentAutoFollowErrors.TryReadProperty(ref reader, options, PropRecentAutoFollowErrors, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AutoFollowedClusters = propAutoFollowedClusters.Value,
+			NumberOfFailedFollowIndices = propNumberOfFailedFollowIndices.Value,
+			NumberOfFailedRemoteClusterStateRequests = propNumberOfFailedRemoteClusterStateRequests.Value,
+			NumberOfSuccessfulFollowIndices = propNumberOfSuccessfulFollowIndices.Value,
+			RecentAutoFollowErrors = propRecentAutoFollowErrors.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAutoFollowedClusters, value.AutoFollowedClusters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster>(o, v, null));
+		writer.WriteProperty(options, PropNumberOfFailedFollowIndices, value.NumberOfFailedFollowIndices, null, null);
+		writer.WriteProperty(options, PropNumberOfFailedRemoteClusterStateRequests, value.NumberOfFailedRemoteClusterStateRequests, null, null);
+		writer.WriteProperty(options, PropNumberOfSuccessfulFollowIndices, value.NumberOfSuccessfulFollowIndices, null, null);
+		writer.WriteProperty(options, PropRecentAutoFollowErrors, value.RecentAutoFollowErrors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStatsConverter))]
 public sealed partial class AutoFollowStats
 {
-	[JsonInclude, JsonPropertyName("auto_followed_clusters")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> AutoFollowedClusters { get; init; }
-	[JsonInclude, JsonPropertyName("number_of_failed_follow_indices")]
-	public long NumberOfFailedFollowIndices { get; init; }
-	[JsonInclude, JsonPropertyName("number_of_failed_remote_cluster_state_requests")]
-	public long NumberOfFailedRemoteClusterStateRequests { get; init; }
-	[JsonInclude, JsonPropertyName("number_of_successful_follow_indices")]
-	public long NumberOfSuccessfulFollowIndices { get; init; }
-	[JsonInclude, JsonPropertyName("recent_auto_follow_errors")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AutoFollowStats(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> autoFollowedClusters, long numberOfFailedFollowIndices, long numberOfFailedRemoteClusterStateRequests, long numberOfSuccessfulFollowIndices, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> recentAutoFollowErrors)
+	{
+		AutoFollowedClusters = autoFollowedClusters;
+		NumberOfFailedFollowIndices = numberOfFailedFollowIndices;
+		NumberOfFailedRemoteClusterStateRequests = numberOfFailedRemoteClusterStateRequests;
+		NumberOfSuccessfulFollowIndices = numberOfSuccessfulFollowIndices;
+		RecentAutoFollowErrors = recentAutoFollowErrors;
+	}
+#if NET7_0_OR_GREATER
+	public AutoFollowStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AutoFollowStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AutoFollowStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> AutoFollowedClusters { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of indices that the auto-follow coordinator failed to automatically follow.
+	/// The causes of recent failures are captured in the logs of the elected master node and in the <c>auto_follow_stats.recent_auto_follow_errors</c> field.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NumberOfFailedFollowIndices { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of times that the auto-follow coordinator failed to retrieve the cluster state from a remote cluster registered in a collection of auto-follow patterns.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NumberOfFailedRemoteClusterStateRequests { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of indices that the auto-follow coordinator successfully followed.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NumberOfSuccessfulFollowIndices { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// An array of objects representing failures by the auto-follow coordinator.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors { get; set; }
 }

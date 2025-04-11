@@ -17,25 +17,163 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class FingerprintProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropMethod = System.Text.Json.JsonEncodedText.Encode("method");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropSalt = System.Text.Json.JsonEncodedText.Encode("salt");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest?> propMethod = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propSalt = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propMethod.TryReadProperty(ref reader, options, PropMethod, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSalt.TryReadProperty(ref reader, options, PropSalt, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Fields = propFields.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			Method = propMethod.Value,
+			OnFailure = propOnFailure.Value,
+			Salt = propSalt.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropMethod, value.Method, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropSalt, value.Salt, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorConverter))]
 public sealed partial class FingerprintProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintProcessor(Elastic.Clients.Elasticsearch.Fields fields)
+	{
+		Fields = fields;
+	}
+#if NET7_0_OR_GREATER
+	public FingerprintProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FingerprintProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FingerprintProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -45,24 +183,24 @@ public sealed partial class FingerprintProcessor
 	/// only the field value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -71,7 +209,6 @@ public sealed partial class FingerprintProcessor
 	/// missing, the processor silently exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -80,7 +217,6 @@ public sealed partial class FingerprintProcessor
 	/// SHA-256, SHA-512, or MurmurHash3.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("method")]
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? Method { get; set; }
 
 	/// <summary>
@@ -88,15 +224,13 @@ public sealed partial class FingerprintProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Salt value for the hash function.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("salt")]
 	public string? Salt { get; set; }
 
 	/// <summary>
@@ -105,7 +239,6 @@ public sealed partial class FingerprintProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -113,33 +246,27 @@ public sealed partial class FingerprintProcessor
 	/// Output field for the fingerprint.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(FingerprintProcessor fingerprintProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Fingerprint(fingerprintProcessor);
 }
 
-public sealed partial class FingerprintProcessorDescriptor<TDocument> : SerializableDescriptor<FingerprintProcessorDescriptor<TDocument>>
+public readonly partial struct FingerprintProcessorDescriptor<TDocument>
 {
-	internal FingerprintProcessorDescriptor(Action<FingerprintProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Instance { get; init; }
 
-	public FingerprintProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? MethodValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? SaltValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -147,10 +274,10 @@ public sealed partial class FingerprintProcessorDescriptor<TDocument> : Serializ
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -160,275 +287,10 @@ public sealed partial class FingerprintProcessorDescriptor<TDocument> : Serializ
 	/// only the field value.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> If(string? value)
-	{
-		IfValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If true, the processor ignores any missing fields. If all fields are
-	/// missing, the processor silently exits without modifying the document.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
-	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The hash method used to compute the fingerprint. Must be one of MD5, SHA-1,
-	/// SHA-256, SHA-512, or MurmurHash3.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> Method(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? method)
-	{
-		MethodValue = method;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public FingerprintProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public FingerprintProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public FingerprintProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Salt value for the hash function.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> Salt(string? salt)
-	{
-		SaltValue = salt;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> Tag(string? tag)
-	{
-		TagValue = tag;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (MethodValue is not null)
-		{
-			writer.WritePropertyName("method");
-			JsonSerializer.Serialize(writer, MethodValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SaltValue))
-		{
-			writer.WritePropertyName("salt");
-			writer.WriteStringValue(SaltValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class FingerprintProcessorDescriptor : SerializableDescriptor<FingerprintProcessorDescriptor>
-{
-	internal FingerprintProcessorDescriptor(Action<FingerprintProcessorDescriptor> configure) => configure.Invoke(this);
-
-	public FingerprintProcessorDescriptor() : base()
-	{
-	}
-
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? MethodValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? SaltValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
-	public FingerprintProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,10 +300,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// only the field value.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -449,10 +311,32 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -460,10 +344,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -472,10 +356,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// missing, the processor silently exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -484,10 +368,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// SHA-256, SHA-512, or MurmurHash3.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor Method(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? method)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Method(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? value)
 	{
-		MethodValue = method;
-		return Self;
+		Instance.Method = value;
+		return this;
 	}
 
 	/// <summary>
@@ -495,40 +379,38 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public FingerprintProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public FingerprintProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
 
-	public FingerprintProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -536,10 +418,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Salt value for the hash function.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor Salt(string? salt)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Salt(string? value)
 	{
-		SaltValue = salt;
-		return Self;
+		Instance.Salt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -548,10 +430,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -559,10 +441,10 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Output field for the fingerprint.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -570,10 +452,223 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Output field for the fingerprint.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct FingerprintProcessorDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Description(string? value)
+	{
+		Instance.Description = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of fields to include in the fingerprint. For objects, the processor
+	/// hashes both the field key and value. For other fields, the processor hashes
+	/// only the field value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of fields to include in the fingerprint. For objects, the processor
+	/// hashes both the field key and value. For other fields, the processor hashes
+	/// only the field value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor IgnoreFailure(bool? value = true)
+	{
+		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the processor ignores any missing fields. If all fields are
+	/// missing, the processor silently exits without modifying the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor IgnoreMissing(bool? value = true)
+	{
+		Instance.IgnoreMissing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The hash method used to compute the fingerprint. Must be one of MD5, SHA-1,
+	/// SHA-256, SHA-512, or MurmurHash3.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Method(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? value)
+	{
+		Instance.Method = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
+	{
+		Instance.OnFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Salt value for the hash function.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Salt(string? value)
+	{
+		Instance.Salt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Tag(string? value)
+	{
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -581,96 +676,28 @@ public sealed partial class FingerprintProcessorDescriptor : SerializableDescrip
 	/// Output field for the fingerprint.
 	/// </para>
 	/// </summary>
-	public FingerprintProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Output field for the fingerprint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+		Instance.TargetField = value;
+		return this;
+	}
 
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (MethodValue is not null)
-		{
-			writer.WritePropertyName("method");
-			JsonSerializer.Serialize(writer, MethodValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SaltValue))
-		{
-			writer.WritePropertyName("salt");
-			writer.WriteStringValue(SaltValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

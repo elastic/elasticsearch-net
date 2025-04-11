@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class ShardsStatsSummaryItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFileCount = System.Text.Json.JsonEncodedText.Encode("file_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propFileCount = default;
+		LocalJsonValue<long> propSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFileCount.TryReadProperty(ref reader, options, PropFileCount, null))
+			{
+				continue;
+			}
+
+			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FileCount = propFileCount.Value,
+			SizeInBytes = propSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFileCount, value.FileCount, null, null);
+		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItemConverter))]
 public sealed partial class ShardsStatsSummaryItem
 {
-	[JsonInclude, JsonPropertyName("file_count")]
-	public long FileCount { get; init; }
-	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public long SizeInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardsStatsSummaryItem(long fileCount, long sizeInBytes)
+	{
+		FileCount = fileCount;
+		SizeInBytes = sizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public ShardsStatsSummaryItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardsStatsSummaryItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardsStatsSummaryItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FileCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SizeInBytes { get; set; }
 }

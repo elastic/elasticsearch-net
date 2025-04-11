@@ -17,39 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class PublishedClusterStatesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("compatible_diffs");
+	private static readonly System.Text.Json.JsonEncodedText PropFullStates = System.Text.Json.JsonEncodedText.Encode("full_states");
+	private static readonly System.Text.Json.JsonEncodedText PropIncompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("incompatible_diffs");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCompatibleDiffs = default;
+		LocalJsonValue<long?> propFullStates = default;
+		LocalJsonValue<long?> propIncompatibleDiffs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompatibleDiffs.TryReadProperty(ref reader, options, PropCompatibleDiffs, null))
+			{
+				continue;
+			}
+
+			if (propFullStates.TryReadProperty(ref reader, options, PropFullStates, null))
+			{
+				continue;
+			}
+
+			if (propIncompatibleDiffs.TryReadProperty(ref reader, options, PropIncompatibleDiffs, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CompatibleDiffs = propCompatibleDiffs.Value,
+			FullStates = propFullStates.Value,
+			IncompatibleDiffs = propIncompatibleDiffs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompatibleDiffs, value.CompatibleDiffs, null, null);
+		writer.WriteProperty(options, PropFullStates, value.FullStates, null, null);
+		writer.WriteProperty(options, PropIncompatibleDiffs, value.IncompatibleDiffs, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStatesConverter))]
 public sealed partial class PublishedClusterStates
 {
+#if NET7_0_OR_GREATER
+	public PublishedClusterStates()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PublishedClusterStates()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PublishedClusterStates(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of compatible differences between published cluster states.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("compatible_diffs")]
-	public long? CompatibleDiffs { get; init; }
+	public long? CompatibleDiffs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of published cluster states.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("full_states")]
-	public long? FullStates { get; init; }
+	public long? FullStates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of incompatible differences between published cluster states.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("incompatible_diffs")]
-	public long? IncompatibleDiffs { get; init; }
+	public long? IncompatibleDiffs { get; set; }
 }

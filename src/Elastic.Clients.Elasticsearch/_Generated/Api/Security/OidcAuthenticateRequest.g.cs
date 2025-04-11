@@ -17,21 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class OidcAuthenticateRequestParameters : RequestParameters
+public sealed partial class OidcAuthenticateRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class OidcAuthenticateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNonce = System.Text.Json.JsonEncodedText.Encode("nonce");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRedirectUri = System.Text.Json.JsonEncodedText.Encode("redirect_uri");
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+
+	public override Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propNonce = default;
+		LocalJsonValue<string?> propRealm = default;
+		LocalJsonValue<string> propRedirectUri = default;
+		LocalJsonValue<string> propState = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNonce.TryReadProperty(ref reader, options, PropNonce, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (propRedirectUri.TryReadProperty(ref reader, options, PropRedirectUri, null))
+			{
+				continue;
+			}
+
+			if (propState.TryReadProperty(ref reader, options, PropState, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Nonce = propNonce.Value,
+			Realm = propRealm.Value,
+			RedirectUri = propRedirectUri.Value,
+			State = propState.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNonce, value.Nonce, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRedirectUri, value.RedirectUri, null, null);
+		writer.WriteProperty(options, PropState, value.State, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,11 +105,36 @@ public sealed partial class OidcAuthenticateRequestParameters : RequestParameter
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-public sealed partial class OidcAuthenticateRequest : PlainRequest<OidcAuthenticateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestConverter))]
+public sealed partial class OidcAuthenticateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityOidcAuthenticate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OidcAuthenticateRequest(string nonce, string redirectUri, string state)
+	{
+		Nonce = nonce;
+		RedirectUri = redirectUri;
+		State = state;
+	}
+#if NET7_0_OR_GREATER
+	public OidcAuthenticateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public OidcAuthenticateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal OidcAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityOidcAuthenticate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -62,8 +146,11 @@ public sealed partial class OidcAuthenticateRequest : PlainRequest<OidcAuthentic
 	/// This value needs to be the same as the one that was provided to the <c>/_security/oidc/prepare</c> API or the one that was generated by Elasticsearch and included in the response to that call.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nonce")]
-	public string Nonce { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Nonce { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,7 +158,6 @@ public sealed partial class OidcAuthenticateRequest : PlainRequest<OidcAuthentic
 	/// This property is useful in cases where multiple realms are defined.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
 	public string? Realm { get; set; }
 
 	/// <summary>
@@ -80,8 +166,11 @@ public sealed partial class OidcAuthenticateRequest : PlainRequest<OidcAuthentic
 	/// This URL must be provided as-is (URL encoded), taken from the body of the response or as the value of a location header in the response from the OpenID Connect Provider.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("redirect_uri")]
-	public string RedirectUri { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RedirectUri { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -89,8 +178,11 @@ public sealed partial class OidcAuthenticateRequest : PlainRequest<OidcAuthentic
 	/// This value needs to be the same as the one that was provided to the <c>/_security/oidc/prepare</c> API or the one that was generated by Elasticsearch and included in the response to that call.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("state")]
-	public string State { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string State { get; set; }
 }
 
 /// <summary>
@@ -105,26 +197,23 @@ public sealed partial class OidcAuthenticateRequest : PlainRequest<OidcAuthentic
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-public sealed partial class OidcAuthenticateRequestDescriptor : RequestDescriptor<OidcAuthenticateRequestDescriptor, OidcAuthenticateRequestParameters>
+public readonly partial struct OidcAuthenticateRequestDescriptor
 {
-	internal OidcAuthenticateRequestDescriptor(Action<OidcAuthenticateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OidcAuthenticateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public OidcAuthenticateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityOidcAuthenticate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.oidc_authenticate";
-
-	private string NonceValue { get; set; }
-	private string? RealmValue { get; set; }
-	private string RedirectUriValue { get; set; }
-	private string StateValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest instance) => new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -132,10 +221,10 @@ public sealed partial class OidcAuthenticateRequestDescriptor : RequestDescripto
 	/// This value needs to be the same as the one that was provided to the <c>/_security/oidc/prepare</c> API or the one that was generated by Elasticsearch and included in the response to that call.
 	/// </para>
 	/// </summary>
-	public OidcAuthenticateRequestDescriptor Nonce(string nonce)
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor Nonce(string value)
 	{
-		NonceValue = nonce;
-		return Self;
+		Instance.Nonce = value;
+		return this;
 	}
 
 	/// <summary>
@@ -144,10 +233,10 @@ public sealed partial class OidcAuthenticateRequestDescriptor : RequestDescripto
 	/// This property is useful in cases where multiple realms are defined.
 	/// </para>
 	/// </summary>
-	public OidcAuthenticateRequestDescriptor Realm(string? realm)
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor Realm(string? value)
 	{
-		RealmValue = realm;
-		return Self;
+		Instance.Realm = value;
+		return this;
 	}
 
 	/// <summary>
@@ -156,10 +245,10 @@ public sealed partial class OidcAuthenticateRequestDescriptor : RequestDescripto
 	/// This URL must be provided as-is (URL encoded), taken from the body of the response or as the value of a location header in the response from the OpenID Connect Provider.
 	/// </para>
 	/// </summary>
-	public OidcAuthenticateRequestDescriptor RedirectUri(string redirectUri)
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor RedirectUri(string value)
 	{
-		RedirectUriValue = redirectUri;
-		return Self;
+		Instance.RedirectUri = value;
+		return this;
 	}
 
 	/// <summary>
@@ -168,27 +257,59 @@ public sealed partial class OidcAuthenticateRequestDescriptor : RequestDescripto
 	/// This value needs to be the same as the one that was provided to the <c>/_security/oidc/prepare</c> API or the one that was generated by Elasticsearch and included in the response to that call.
 	/// </para>
 	/// </summary>
-	public OidcAuthenticateRequestDescriptor State(string state)
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor State(string value)
 	{
-		StateValue = state;
-		return Self;
+		Instance.State = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("nonce");
-		writer.WriteStringValue(NonceValue);
-		if (!string.IsNullOrEmpty(RealmValue))
-		{
-			writer.WritePropertyName("realm");
-			writer.WriteStringValue(RealmValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("redirect_uri");
-		writer.WriteStringValue(RedirectUriValue);
-		writer.WritePropertyName("state");
-		writer.WriteStringValue(StateValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

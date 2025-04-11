@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -11,7 +13,12 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Represents a collection of unique metric names to be included in URL paths to limit the request.
 /// </summary>
-public sealed class Metrics : IEquatable<Metrics>, IUrlParameter
+public sealed class Metrics :
+	IEquatable<Metrics>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Metrics>
+#endif
 {
 	private static readonly HashSet<string> EmptyMetrics = new();
 
@@ -50,7 +57,8 @@ public sealed class Metrics : IEquatable<Metrics>, IUrlParameter
 	/// <inheritdoc />
 	public bool Equals(Metrics other)
 	{
-		if (other is null) return false;
+		if (other is null)
+			return false;
 
 		// Equality is true when both instances have the same metric names.
 		return Values.SetEquals(other.Values);
@@ -82,16 +90,45 @@ public sealed class Metrics : IEquatable<Metrics>, IUrlParameter
 	}
 
 	public static bool operator ==(Metrics left, Metrics right) => Equals(left, right);
+
 	public static bool operator !=(Metrics left, Metrics right) => !Equals(left, right);
 
 	public static implicit operator Metrics(string metric) => new(metric);
+
 	public static implicit operator Metrics(string[] metrics) => new(metrics);
 
 	/// <inheritdoc />
 	public override bool Equals(object obj)
 	{
-		if (obj is not Metrics metrics) return false;
+		if (obj is not Metrics metrics)
+			return false;
 
 		return Equals(metrics);
 	}
+
+	#region IParsable
+
+	public static Metrics Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Metrics? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new Metrics(string.Empty);
+			return true;
+		}
+
+		result = new Metrics(list);
+		return true;
+	}
+
+	#endregion IParsable
 }

@@ -17,40 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class DelegatePkiResponse : ElasticsearchResponse
+internal sealed partial class DelegatePkiResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+	private static readonly System.Text.Json.JsonEncodedText PropAuthentication = System.Text.Json.JsonEncodedText.Encode("authentication");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAccessToken = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Authentication?> propAuthentication = default;
+		LocalJsonValue<long> propExpiresIn = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
+			{
+				continue;
+			}
+
+			if (propAuthentication.TryReadProperty(ref reader, options, PropAuthentication, null))
+			{
+				continue;
+			}
+
+			if (propExpiresIn.TryReadProperty(ref reader, options, PropExpiresIn, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AccessToken = propAccessToken.Value,
+			Authentication = propAuthentication.Value,
+			ExpiresIn = propExpiresIn.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
+		writer.WriteProperty(options, PropAuthentication, value.Authentication, null, null);
+		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.DelegatePkiResponseConverter))]
+public sealed partial class DelegatePkiResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DelegatePkiResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DelegatePkiResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// An access token associated with the subject distinguished name of the client's certificate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("access_token")]
-	public string AccessToken { get; init; }
-	[JsonInclude, JsonPropertyName("authentication")]
-	public Elastic.Clients.Elasticsearch.Security.Authentication? Authentication { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string AccessToken { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.Authentication? Authentication { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The amount of time (in seconds) before the token expires.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expires_in")]
-	public long ExpiresIn { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ExpiresIn { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

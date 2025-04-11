@@ -17,69 +17,88 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class StemmerTokenFilterConverter : JsonConverter<StemmerTokenFilter>
+internal sealed partial class StemmerTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter>
 {
-	public override StemmerTokenFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new StemmerTokenFilter();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "language" || property == "name")
-				{
-					variant.Language = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage1 = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-				if (property == "version")
-				{
-					variant.Version = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+	public override Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propLanguage = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null) || propLanguage.TryReadProperty(ref reader, options, PropLanguage1, null))
+			{
+				continue;
 			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Language = propLanguage.Value,
+			Version = propVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, StemmerTokenFilter value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Language))
-		{
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(value.Language);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("stemmer");
-		if (!string.IsNullOrEmpty(value.Version))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(value.Version);
-		}
-
+		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(StemmerTokenFilterConverter))]
-public sealed partial class StemmerTokenFilter : ITokenFilter
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterConverter))]
+public sealed partial class StemmerTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
+#if NET7_0_OR_GREATER
+	public StemmerTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public StemmerTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Language { get; set; }
 
 	public string Type => "stemmer";
@@ -87,52 +106,47 @@ public sealed partial class StemmerTokenFilter : ITokenFilter
 	public string? Version { get; set; }
 }
 
-public sealed partial class StemmerTokenFilterDescriptor : SerializableDescriptor<StemmerTokenFilterDescriptor>, IBuildableDescriptor<StemmerTokenFilter>
+public readonly partial struct StemmerTokenFilterDescriptor
 {
-	internal StemmerTokenFilterDescriptor(Action<StemmerTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter Instance { get; init; }
 
-	public StemmerTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StemmerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private string? LanguageValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public StemmerTokenFilterDescriptor Language(string? language)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StemmerTokenFilterDescriptor()
 	{
-		LanguageValue = language;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public StemmerTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter(Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor Language(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Language = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(LanguageValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(LanguageValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("stemmer");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	StemmerTokenFilter IBuildableDescriptor<StemmerTokenFilter>.Build() => new()
-	{
-		Language = LanguageValue,
-		Version = VersionValue
-	};
 }

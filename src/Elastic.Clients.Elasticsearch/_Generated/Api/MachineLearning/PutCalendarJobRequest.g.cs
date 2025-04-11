@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutCalendarJobRequestParameters : RequestParameters
+public sealed partial class PutCalendarJobRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutCalendarJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -39,19 +61,53 @@ public sealed partial class PutCalendarJobRequestParameters : RequestParameters
 /// Add anomaly detection job to calendar.
 /// </para>
 /// </summary>
-public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestConverter))]
+public sealed partial class PutCalendarJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutCalendarJobRequest(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId) : base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutCalendarJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutCalendarJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutCalendarJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutCalendarJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.put_calendar_job";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ids JobId { get => P<Elastic.Clients.Elasticsearch.Ids>("job_id"); set => PR("job_id", value); }
 }
 
 /// <summary>
@@ -59,35 +115,99 @@ public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobR
 /// Add anomaly detection job to calendar.
 /// </para>
 /// </summary>
-public sealed partial class PutCalendarJobRequestDescriptor : RequestDescriptor<PutCalendarJobRequestDescriptor, PutCalendarJobRequestParameters>
+public readonly partial struct PutCalendarJobRequestDescriptor
 {
-	internal PutCalendarJobRequestDescriptor(Action<PutCalendarJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest Instance { get; init; }
 
-	public PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId) : base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutCalendarJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.put_calendar_job";
-
-	public PutCalendarJobRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id calendarId)
+	public PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId)
 	{
-		RouteValues.Required("calendar_id", calendarId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest(calendarId, jobId);
 	}
 
-	public PutCalendarJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids jobId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutCalendarJobRequestDescriptor()
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.CalendarId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

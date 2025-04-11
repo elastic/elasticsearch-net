@@ -17,79 +17,187 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class ClearTrainedModelDeploymentCacheRequestParameters : RequestParameters
+public sealed partial class ClearTrainedModelDeploymentCacheRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearTrainedModelDeploymentCacheRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Clear trained model deployment cache.
+/// </para>
+/// <para>
 /// Cache will be cleared on all nodes where the trained model is assigned.
 /// A trained model deployment may have an inference cache enabled.
 /// As requests are handled by each allocated node, their responses may be cached on that individual node.
 /// Calling this API clears the caches without restarting the deployment.
 /// </para>
 /// </summary>
-public sealed partial class ClearTrainedModelDeploymentCacheRequest : PlainRequest<ClearTrainedModelDeploymentCacheRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestConverter))]
+public sealed partial class ClearTrainedModelDeploymentCacheRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClearTrainedModelDeploymentCacheRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningClearTrainedModelDeploymentCache;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningClearTrainedModelDeploymentCache;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.clear_trained_model_deployment_cache";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 }
 
 /// <summary>
 /// <para>
 /// Clear trained model deployment cache.
+/// </para>
+/// <para>
 /// Cache will be cleared on all nodes where the trained model is assigned.
 /// A trained model deployment may have an inference cache enabled.
 /// As requests are handled by each allocated node, their responses may be cached on that individual node.
 /// Calling this API clears the caches without restarting the deployment.
 /// </para>
 /// </summary>
-public sealed partial class ClearTrainedModelDeploymentCacheRequestDescriptor : RequestDescriptor<ClearTrainedModelDeploymentCacheRequestDescriptor, ClearTrainedModelDeploymentCacheRequestParameters>
+public readonly partial struct ClearTrainedModelDeploymentCacheRequestDescriptor
 {
-	internal ClearTrainedModelDeploymentCacheRequestDescriptor(Action<ClearTrainedModelDeploymentCacheRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest Instance { get; init; }
 
-	public ClearTrainedModelDeploymentCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearTrainedModelDeploymentCacheRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningClearTrainedModelDeploymentCache;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.clear_trained_model_deployment_cache";
-
-	public ClearTrainedModelDeploymentCacheRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public ClearTrainedModelDeploymentCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest(modelId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ClearTrainedModelDeploymentCacheRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

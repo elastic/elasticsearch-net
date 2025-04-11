@@ -17,24 +17,183 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 
+internal sealed partial class MultiTermVectorsOperationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldStatistics = System.Text.Json.JsonEncodedText.Encode("field_statistics");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropOffsets = System.Text.Json.JsonEncodedText.Encode("offsets");
+	private static readonly System.Text.Json.JsonEncodedText PropPayloads = System.Text.Json.JsonEncodedText.Encode("payloads");
+	private static readonly System.Text.Json.JsonEncodedText PropPositions = System.Text.Json.JsonEncodedText.Encode("positions");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
+	public override Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object?> propDoc = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<bool?> propFieldStatistics = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.TermVectors.Filter?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<bool?> propOffsets = default;
+		LocalJsonValue<bool?> propPayloads = default;
+		LocalJsonValue<bool?> propPositions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<bool?> propTermStatistics = default;
+		LocalJsonValue<long?> propVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propFieldStatistics.TryReadProperty(ref reader, options, PropFieldStatistics, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propOffsets.TryReadProperty(ref reader, options, PropOffsets, null))
+			{
+				continue;
+			}
+
+			if (propPayloads.TryReadProperty(ref reader, options, PropPayloads, null))
+			{
+				continue;
+			}
+
+			if (propPositions.TryReadProperty(ref reader, options, PropPositions, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propTermStatistics.TryReadProperty(ref reader, options, PropTermStatistics, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Doc = propDoc.Value,
+			Fields = propFields.Value,
+			FieldStatistics = propFieldStatistics.Value,
+			Filter = propFilter.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Offsets = propOffsets.Value,
+			Payloads = propPayloads.Value,
+			Positions = propPositions.Value,
+			Routing = propRouting.Value,
+			TermStatistics = propTermStatistics.Value,
+			Version = propVersion.Value,
+			VersionType = propVersionType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropFieldStatistics, value.FieldStatistics, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropOffsets, value.Offsets, null, null);
+		writer.WriteProperty(options, PropPayloads, value.Payloads, null, null);
+		writer.WriteProperty(options, PropPositions, value.Positions, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationConverter))]
 public sealed partial class MultiTermVectorsOperation
 {
+#if NET7_0_OR_GREATER
+	public MultiTermVectorsOperation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MultiTermVectorsOperation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
 
 	/// <summary>
@@ -43,8 +202,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -52,7 +209,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_statistics")]
 	public bool? FieldStatistics { get; set; }
 
 	/// <summary>
@@ -60,7 +216,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// Filter terms based on their tf-idf scores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
 
 	/// <summary>
@@ -68,7 +223,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// The ID of the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -76,7 +230,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// The index of the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -84,7 +237,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// If <c>true</c>, the response includes term offsets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offsets")]
 	public bool? Offsets { get; set; }
 
 	/// <summary>
@@ -92,7 +244,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// If <c>true</c>, the response includes term payloads.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("payloads")]
 	public bool? Payloads { get; set; }
 
 	/// <summary>
@@ -100,7 +251,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// If <c>true</c>, the response includes term positions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("positions")]
 	public bool? Positions { get; set; }
 
 	/// <summary>
@@ -108,7 +258,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -116,7 +265,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// If true, the response includes term frequency and document frequency.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("term_statistics")]
 	public bool? TermStatistics { get; set; }
 
 	/// <summary>
@@ -124,7 +272,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// If <c>true</c>, returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 
 	/// <summary>
@@ -132,43 +279,37 @@ public sealed partial class MultiTermVectorsOperation
 	/// Specific version type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
-public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : SerializableDescriptor<MultiTermVectorsOperationDescriptor<TDocument>>
+public readonly partial struct MultiTermVectorsOperationDescriptor<TDocument>
 {
-	internal MultiTermVectorsOperationDescriptor(Action<MultiTermVectorsOperationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation Instance { get; init; }
 
-	public MultiTermVectorsOperationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiTermVectorsOperationDescriptor(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation instance)
 	{
+		Instance = instance;
 	}
 
-	private object? DocValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private bool? FieldStatisticsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private bool? OffsetsValue { get; set; }
-	private bool? PayloadsValue { get; set; }
-	private bool? PositionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private bool? TermStatisticsValue { get; set; }
-	private long? VersionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiTermVectorsOperationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation instance) => new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Doc(object? doc)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Doc(object? value)
 	{
-		DocValue = doc;
-		return Self;
+		Instance.Doc = value;
+		return this;
 	}
 
 	/// <summary>
@@ -177,10 +318,22 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -188,10 +341,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> FieldStatistics(bool? value = true)
 	{
-		FieldStatisticsValue = fieldStatistics;
-		return Self;
+		Instance.FieldStatistics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -199,28 +352,32 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// Filter terms based on their tf-idf scores.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? filter)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter terms based on their tf-idf scores.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Filter()
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.Build(null);
+		return this;
 	}
 
-	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Filter terms based on their tf-idf scores.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor>? action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -228,10 +385,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// The ID of the document.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -239,10 +396,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// The index of the document.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -250,10 +407,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// If <c>true</c>, the response includes term offsets.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Offsets(bool? offsets = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Offsets(bool? value = true)
 	{
-		OffsetsValue = offsets;
-		return Self;
+		Instance.Offsets = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,10 +418,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// If <c>true</c>, the response includes term payloads.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Payloads(bool? payloads = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Payloads(bool? value = true)
 	{
-		PayloadsValue = payloads;
-		return Self;
+		Instance.Payloads = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,10 +429,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// If <c>true</c>, the response includes term positions.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Positions(bool? positions = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Positions(bool? value = true)
 	{
-		PositionsValue = positions;
-		return Self;
+		Instance.Positions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -283,10 +440,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -294,10 +451,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// If true, the response includes term frequency and document frequency.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> TermStatistics(bool? termStatistics = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> TermStatistics(bool? value = true)
 	{
-		TermStatisticsValue = termStatistics;
-		return Self;
+		Instance.TermStatistics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -305,10 +462,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// If <c>true</c>, returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Version(long? version)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
 	/// <summary>
@@ -316,140 +473,54 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// Specific version type.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
-		VersionTypeValue = versionType;
-		return Self;
+		Instance.VersionType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation Build(System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DocValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("doc");
-			JsonSerializer.Serialize(writer, DocValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FieldStatisticsValue.HasValue)
-		{
-			writer.WritePropertyName("field_statistics");
-			writer.WriteBooleanValue(FieldStatisticsValue.Value);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (OffsetsValue.HasValue)
-		{
-			writer.WritePropertyName("offsets");
-			writer.WriteBooleanValue(OffsetsValue.Value);
-		}
-
-		if (PayloadsValue.HasValue)
-		{
-			writer.WritePropertyName("payloads");
-			writer.WriteBooleanValue(PayloadsValue.Value);
-		}
-
-		if (PositionsValue.HasValue)
-		{
-			writer.WritePropertyName("positions");
-			writer.WriteBooleanValue(PositionsValue.Value);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (TermStatisticsValue.HasValue)
-		{
-			writer.WritePropertyName("term_statistics");
-			writer.WriteBooleanValue(TermStatisticsValue.Value);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		if (VersionTypeValue is not null)
-		{
-			writer.WritePropertyName("version_type");
-			JsonSerializer.Serialize(writer, VersionTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDescriptor<MultiTermVectorsOperationDescriptor>
+public readonly partial struct MultiTermVectorsOperationDescriptor
 {
-	internal MultiTermVectorsOperationDescriptor(Action<MultiTermVectorsOperationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation Instance { get; init; }
 
-	public MultiTermVectorsOperationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiTermVectorsOperationDescriptor(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation instance)
 	{
+		Instance = instance;
 	}
 
-	private object? DocValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private bool? FieldStatisticsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private bool? OffsetsValue { get; set; }
-	private bool? PayloadsValue { get; set; }
-	private bool? PositionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private bool? TermStatisticsValue { get; set; }
-	private long? VersionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiTermVectorsOperationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation instance) => new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Doc(object? doc)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Doc(object? value)
 	{
-		DocValue = doc;
-		return Self;
+		Instance.Doc = value;
+		return this;
 	}
 
 	/// <summary>
@@ -458,10 +529,22 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -469,10 +552,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor FieldStatistics(bool? fieldStatistics = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor FieldStatistics(bool? value = true)
 	{
-		FieldStatisticsValue = fieldStatistics;
-		return Self;
+		Instance.FieldStatistics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -480,28 +563,32 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// Filter terms based on their tf-idf scores.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? filter)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public MultiTermVectorsOperationDescriptor Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter terms based on their tf-idf scores.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Filter()
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.Build(null);
+		return this;
 	}
 
-	public MultiTermVectorsOperationDescriptor Filter(Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Filter terms based on their tf-idf scores.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor>? action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -509,10 +596,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// The ID of the document.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -520,10 +607,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// The index of the document.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -531,10 +618,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// If <c>true</c>, the response includes term offsets.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Offsets(bool? offsets = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Offsets(bool? value = true)
 	{
-		OffsetsValue = offsets;
-		return Self;
+		Instance.Offsets = value;
+		return this;
 	}
 
 	/// <summary>
@@ -542,10 +629,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// If <c>true</c>, the response includes term payloads.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Payloads(bool? payloads = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Payloads(bool? value = true)
 	{
-		PayloadsValue = payloads;
-		return Self;
+		Instance.Payloads = value;
+		return this;
 	}
 
 	/// <summary>
@@ -553,10 +640,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// If <c>true</c>, the response includes term positions.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Positions(bool? positions = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Positions(bool? value = true)
 	{
-		PositionsValue = positions;
-		return Self;
+		Instance.Positions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -564,10 +651,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -575,10 +662,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// If true, the response includes term frequency and document frequency.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor TermStatistics(bool? termStatistics = true)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor TermStatistics(bool? value = true)
 	{
-		TermStatisticsValue = termStatistics;
-		return Self;
+		Instance.TermStatistics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -586,10 +673,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// If <c>true</c>, returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Version(long? version)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
 	/// <summary>
@@ -597,103 +684,22 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// Specific version type.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
-		VersionTypeValue = versionType;
-		return Self;
+		Instance.VersionType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation Build(System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DocValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("doc");
-			JsonSerializer.Serialize(writer, DocValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FieldStatisticsValue.HasValue)
-		{
-			writer.WritePropertyName("field_statistics");
-			writer.WriteBooleanValue(FieldStatisticsValue.Value);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (OffsetsValue.HasValue)
-		{
-			writer.WritePropertyName("offsets");
-			writer.WriteBooleanValue(OffsetsValue.Value);
-		}
-
-		if (PayloadsValue.HasValue)
-		{
-			writer.WritePropertyName("payloads");
-			writer.WriteBooleanValue(PayloadsValue.Value);
-		}
-
-		if (PositionsValue.HasValue)
-		{
-			writer.WritePropertyName("positions");
-			writer.WriteBooleanValue(PositionsValue.Value);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (TermStatisticsValue.HasValue)
-		{
-			writer.WritePropertyName("term_statistics");
-			writer.WriteBooleanValue(TermStatisticsValue.Value);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		if (VersionTypeValue is not null)
-		{
-			writer.WritePropertyName("version_type");
-			JsonSerializer.Serialize(writer, VersionTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

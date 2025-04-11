@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public sealed partial class ClearRepositoriesMeteringArchiveRequestParameters : RequestParameters
+public sealed partial class ClearRepositoriesMeteringArchiveRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearRepositoriesMeteringArchiveRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,19 +62,53 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequestParameters : 
 /// Clear the archived repositories metering information in the cluster.
 /// </para>
 /// </summary>
-public sealed partial class ClearRepositoriesMeteringArchiveRequest : PlainRequest<ClearRepositoriesMeteringArchiveRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestConverter))]
+public sealed partial class ClearRepositoriesMeteringArchiveRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion) : base(r => r.Required("node_id", nodeId).Required("max_archive_version", maxArchiveVersion))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClearRepositoriesMeteringArchiveRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NodesClearRepositoriesMeteringArchive;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NodesClearRepositoriesMeteringArchive;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.clear_repositories_metering_archive";
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum <c>archive_version</c> to be cleared from the archive.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxArchiveVersion { get => P<long>("max_archive_version"); set => PR("max_archive_version", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
 /// <summary>
@@ -61,35 +117,99 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : PlainReque
 /// Clear the archived repositories metering information in the cluster.
 /// </para>
 /// </summary>
-public sealed partial class ClearRepositoriesMeteringArchiveRequestDescriptor : RequestDescriptor<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveRequestParameters>
+public readonly partial struct ClearRepositoriesMeteringArchiveRequestDescriptor
 {
-	internal ClearRepositoriesMeteringArchiveRequestDescriptor(Action<ClearRepositoriesMeteringArchiveRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest Instance { get; init; }
 
-	public ClearRepositoriesMeteringArchiveRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion) : base(r => r.Required("node_id", nodeId).Required("max_archive_version", maxArchiveVersion))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearRepositoriesMeteringArchiveRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NodesClearRepositoriesMeteringArchive;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "nodes.clear_repositories_metering_archive";
-
-	public ClearRepositoriesMeteringArchiveRequestDescriptor MaxArchiveVersion(long maxArchiveVersion)
+	public ClearRepositoriesMeteringArchiveRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion)
 	{
-		RouteValues.Required("max_archive_version", maxArchiveVersion);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest(nodeId, maxArchiveVersion);
 	}
 
-	public ClearRepositoriesMeteringArchiveRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ClearRepositoriesMeteringArchiveRequestDescriptor()
 	{
-		RouteValues.Required("node_id", nodeId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum <c>archive_version</c> to be cleared from the archive.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor MaxArchiveVersion(long value)
 	{
+		Instance.MaxArchiveVersion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds value)
+	{
+		Instance.NodeId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest Build(System.Action<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

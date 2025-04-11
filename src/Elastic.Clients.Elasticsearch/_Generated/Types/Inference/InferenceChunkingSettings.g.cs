@@ -17,92 +17,76 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// Chunking configuration object
-/// </para>
-/// </summary>
-public sealed partial class InferenceChunkingSettings
+internal sealed partial class InferenceChunkingSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings>
 {
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("chunking_settings")]
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChunkSize = System.Text.Json.JsonEncodedText.Encode("max_chunk_size");
+	private static readonly System.Text.Json.JsonEncodedText PropOverlap = System.Text.Json.JsonEncodedText.Encode("overlap");
+	private static readonly System.Text.Json.JsonEncodedText PropSentenceOverlap = System.Text.Json.JsonEncodedText.Encode("sentence_overlap");
+	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum size of a chunk in words
-	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy)
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("max_chunk_size")]
-	public int? MaxChunkSize { get; set; }
+	public override Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxChunkSize = default;
+		LocalJsonValue<int?> propOverlap = default;
+		LocalJsonValue<int?> propSentenceOverlap = default;
+		LocalJsonValue<string?> propStrategy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxChunkSize.TryReadProperty(ref reader, options, PropMaxChunkSize, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of overlapping words for chunks
-	/// Only for <c>word</c> chunking strategy
-	/// This value cannot be higher than the half of <c>max_chunk_size</c>
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("overlap")]
-	public int? Overlap { get; set; }
+			if (propOverlap.TryReadProperty(ref reader, options, PropOverlap, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of overlapping sentences for chunks
-	/// Only for <c>sentence</c> chunking strategy
-	/// It can be either <c>1</c> or <c>0</c>
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("sentence_overlap")]
-	public int? SentenceOverlap { get; set; }
+			if (propSentenceOverlap.TryReadProperty(ref reader, options, PropSentenceOverlap, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("service")]
-	public string Service { get; set; }
+			if (propStrategy.TryReadProperty(ref reader, options, PropStrategy, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("service_settings")]
-	public object ServiceSettings { get; set; }
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the chunking strategy
-	/// It could be either <c>sentence</c> or <c>word</c>
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("strategy")]
-	public string? Strategy { get; set; }
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("task_settings")]
-	public object? TaskSettings { get; set; }
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxChunkSize = propMaxChunkSize.Value,
+			Overlap = propOverlap.Value,
+			SentenceOverlap = propSentenceOverlap.Value,
+			Strategy = propStrategy.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxChunkSize, value.MaxChunkSize, null, null);
+		writer.WriteProperty(options, PropOverlap, value.Overlap, null, null);
+		writer.WriteProperty(options, PropSentenceOverlap, value.SentenceOverlap, null, null);
+		writer.WriteProperty(options, PropStrategy, value.Strategy, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -110,190 +94,142 @@ public sealed partial class InferenceChunkingSettings
 /// Chunking configuration object
 /// </para>
 /// </summary>
-public sealed partial class InferenceChunkingSettingsDescriptor : SerializableDescriptor<InferenceChunkingSettingsDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsConverter))]
+public sealed partial class InferenceChunkingSettings
 {
-	internal InferenceChunkingSettingsDescriptor(Action<InferenceChunkingSettingsDescriptor> configure) => configure.Invoke(this);
-
-	public InferenceChunkingSettingsDescriptor() : base()
+#if NET7_0_OR_GREATER
+	public InferenceChunkingSettings()
 	{
 	}
-
-	private Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor ChunkingSettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> ChunkingSettingsDescriptorAction { get; set; }
-	private int? MaxChunkSizeValue { get; set; }
-	private int? OverlapValue { get; set; }
-	private int? SentenceOverlapValue { get; set; }
-	private string ServiceValue { get; set; }
-	private object ServiceSettingsValue { get; set; }
-	private string? StrategyValue { get; set; }
-	private object? TaskSettingsValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
-	public InferenceChunkingSettingsDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? chunkingSettings)
+#endif
+#if !NET7_0_OR_GREATER
+	public InferenceChunkingSettings()
 	{
-		ChunkingSettingsDescriptor = null;
-		ChunkingSettingsDescriptorAction = null;
-		ChunkingSettingsValue = chunkingSettings;
-		return Self;
 	}
-
-	public InferenceChunkingSettingsDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor descriptor)
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
-		ChunkingSettingsValue = null;
-		ChunkingSettingsDescriptorAction = null;
-		ChunkingSettingsDescriptor = descriptor;
-		return Self;
-	}
-
-	public InferenceChunkingSettingsDescriptor ChunkingSettings(Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> configure)
-	{
-		ChunkingSettingsValue = null;
-		ChunkingSettingsDescriptor = null;
-		ChunkingSettingsDescriptorAction = configure;
-		return Self;
+		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies the maximum size of a chunk in words
-	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy)
+	/// The maximum size of a chunk in words.
+	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
 	/// </para>
 	/// </summary>
-	public InferenceChunkingSettingsDescriptor MaxChunkSize(int? maxChunkSize)
+	public int? MaxChunkSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of overlapping words for chunks.
+	/// It is applicable only to a <c>word</c> chunking strategy.
+	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
+	/// </para>
+	/// </summary>
+	public int? Overlap { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of overlapping sentences for chunks.
+	/// It is applicable only for a <c>sentence</c> chunking strategy.
+	/// It can be either <c>1</c> or <c>0</c>.
+	/// </para>
+	/// </summary>
+	public int? SentenceOverlap { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
+	/// </para>
+	/// </summary>
+	public string? Strategy { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Chunking configuration object
+/// </para>
+/// </summary>
+public readonly partial struct InferenceChunkingSettingsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceChunkingSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings instance)
 	{
-		MaxChunkSizeValue = maxChunkSize;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceChunkingSettingsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings instance) => new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The maximum size of a chunk in words.
+	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor MaxChunkSize(int? value)
+	{
+		Instance.MaxChunkSize = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies the number of overlapping words for chunks
-	/// Only for <c>word</c> chunking strategy
-	/// This value cannot be higher than the half of <c>max_chunk_size</c>
+	/// The number of overlapping words for chunks.
+	/// It is applicable only to a <c>word</c> chunking strategy.
+	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
 	/// </para>
 	/// </summary>
-	public InferenceChunkingSettingsDescriptor Overlap(int? overlap)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Overlap(int? value)
 	{
-		OverlapValue = overlap;
-		return Self;
+		Instance.Overlap = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies the number of overlapping sentences for chunks
-	/// Only for <c>sentence</c> chunking strategy
-	/// It can be either <c>1</c> or <c>0</c>
+	/// The number of overlapping sentences for chunks.
+	/// It is applicable only for a <c>sentence</c> chunking strategy.
+	/// It can be either <c>1</c> or <c>0</c>.
 	/// </para>
 	/// </summary>
-	public InferenceChunkingSettingsDescriptor SentenceOverlap(int? sentenceOverlap)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SentenceOverlap(int? value)
 	{
-		SentenceOverlapValue = sentenceOverlap;
-		return Self;
+		Instance.SentenceOverlap = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The service type
+	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
 	/// </para>
 	/// </summary>
-	public InferenceChunkingSettingsDescriptor Service(string service)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Strategy(string? value)
 	{
-		ServiceValue = service;
-		return Self;
+		Instance.Strategy = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
-	public InferenceChunkingSettingsDescriptor ServiceSettings(object serviceSettings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
-		ServiceSettingsValue = serviceSettings;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies the chunking strategy
-	/// It could be either <c>sentence</c> or <c>word</c>
-	/// </para>
-	/// </summary>
-	public InferenceChunkingSettingsDescriptor Strategy(string? strategy)
-	{
-		StrategyValue = strategy;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
-	public InferenceChunkingSettingsDescriptor TaskSettings(object? taskSettings)
-	{
-		TaskSettingsValue = taskSettings;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ChunkingSettingsDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("chunking_settings");
-			JsonSerializer.Serialize(writer, ChunkingSettingsDescriptor, options);
-		}
-		else if (ChunkingSettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("chunking_settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(ChunkingSettingsDescriptorAction), options);
-		}
-		else if (ChunkingSettingsValue is not null)
-		{
-			writer.WritePropertyName("chunking_settings");
-			JsonSerializer.Serialize(writer, ChunkingSettingsValue, options);
+			return new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxChunkSizeValue.HasValue)
-		{
-			writer.WritePropertyName("max_chunk_size");
-			writer.WriteNumberValue(MaxChunkSizeValue.Value);
-		}
-
-		if (OverlapValue.HasValue)
-		{
-			writer.WritePropertyName("overlap");
-			writer.WriteNumberValue(OverlapValue.Value);
-		}
-
-		if (SentenceOverlapValue.HasValue)
-		{
-			writer.WritePropertyName("sentence_overlap");
-			writer.WriteNumberValue(SentenceOverlapValue.Value);
-		}
-
-		writer.WritePropertyName("service");
-		writer.WriteStringValue(ServiceValue);
-		writer.WritePropertyName("service_settings");
-		JsonSerializer.Serialize(writer, ServiceSettingsValue, options);
-		if (!string.IsNullOrEmpty(StrategyValue))
-		{
-			writer.WritePropertyName("strategy");
-			writer.WriteStringValue(StrategyValue);
-		}
-
-		if (TaskSettingsValue is not null)
-		{
-			writer.WritePropertyName("task_settings");
-			JsonSerializer.Serialize(writer, TaskSettingsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

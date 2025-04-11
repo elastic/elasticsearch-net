@@ -17,32 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationOutlierDetectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedProbabilityField = System.Text.Json.JsonEncodedText.Encode("predicted_probability_field");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propActualField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics?> propMetrics = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPredictedProbabilityField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActualField.TryReadProperty(ref reader, options, PropActualField, null))
+			{
+				continue;
+			}
+
+			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, null))
+			{
+				continue;
+			}
+
+			if (propPredictedProbabilityField.TryReadProperty(ref reader, options, PropPredictedProbabilityField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ActualField = propActualField.Value,
+			Metrics = propMetrics.Value,
+			PredictedProbabilityField = propPredictedProbabilityField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActualField, value.ActualField, null, null);
+		writer.WriteProperty(options, PropMetrics, value.Metrics, null, null);
+		writer.WriteProperty(options, PropPredictedProbabilityField, value.PredictedProbabilityField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionConverter))]
 public sealed partial class DataframeEvaluationOutlierDetection
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Field actualField, Elastic.Clients.Elasticsearch.Field predictedProbabilityField)
+	{
+		ActualField = actualField;
+		PredictedProbabilityField = predictedProbabilityField;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationOutlierDetection()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeEvaluationOutlierDetection()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actual_field")]
-	public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the metrics that are used for the evaluation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metrics")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
 
 	/// <summary>
@@ -50,46 +129,41 @@ public sealed partial class DataframeEvaluationOutlierDetection
 	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("predicted_probability_field")]
-	public Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation(DataframeEvaluationOutlierDetection dataframeEvaluationOutlierDetection) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation.OutlierDetection(dataframeEvaluationOutlierDetection);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
 }
 
-public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocument> : SerializableDescriptor<DataframeEvaluationOutlierDetectionDescriptor<TDocument>>
+public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor<TDocument>
 {
-	internal DataframeEvaluationOutlierDetectionDescriptor(Action<DataframeEvaluationOutlierDetectionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Instance { get; init; }
 
-	public DataframeEvaluationOutlierDetectionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field ActualFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor> MetricsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PredictedProbabilityFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetectionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field actualField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField<TValue>(Expression<Func<TDocument, TValue>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.ActualField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,10 +171,10 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(Expression<Func<TDocument, object>> actualField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.ActualField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -108,135 +182,10 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	/// Specifies the metrics that are used for the evaluation.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? metrics)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? value)
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsValue = metrics;
-		return Self;
-	}
-
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor descriptor)
-	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor> configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field predictedProbabilityField)
-	{
-		PredictedProbabilityFieldValue = predictedProbabilityField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField<TValue>(Expression<Func<TDocument, TValue>> predictedProbabilityField)
-	{
-		PredictedProbabilityFieldValue = predictedProbabilityField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(Expression<Func<TDocument, object>> predictedProbabilityField)
-	{
-		PredictedProbabilityFieldValue = predictedProbabilityField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actual_field");
-		JsonSerializer.Serialize(writer, ActualFieldValue, options);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(MetricsDescriptorAction), options);
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
-
-		writer.WritePropertyName("predicted_probability_field");
-		JsonSerializer.Serialize(writer, PredictedProbabilityFieldValue, options);
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : SerializableDescriptor<DataframeEvaluationOutlierDetectionDescriptor>
-{
-	internal DataframeEvaluationOutlierDetectionDescriptor(Action<DataframeEvaluationOutlierDetectionDescriptor> configure) => configure.Invoke(this);
-
-	public DataframeEvaluationOutlierDetectionDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Field ActualFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor> MetricsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PredictedProbabilityFieldValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor ActualField<TDocument, TValue>(Expression<Func<TDocument, TValue>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor ActualField<TDocument>(Expression<Func<TDocument, object>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -244,28 +193,21 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	/// Specifies the metrics that are used for the evaluation.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? metrics)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics()
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationOutlierDetectionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor>? action)
 	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataframeEvaluationOutlierDetectionDescriptor Metrics(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor> configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = configure;
-		return Self;
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -273,10 +215,10 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field predictedProbabilityField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PredictedProbabilityFieldValue = predictedProbabilityField;
-		return Self;
+		Instance.PredictedProbabilityField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -284,10 +226,93 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictedProbabilityField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PredictedProbabilityFieldValue = predictedProbabilityField;
-		return Self;
+		Instance.PredictedProbabilityField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetectionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.ActualField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor ActualField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.ActualField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? value)
+	{
+		Instance.Metrics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor Metrics()
+	{
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor>? action)
+	{
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -295,35 +320,28 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField<TDocument>(Expression<Func<TDocument, object>> predictedProbabilityField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PredictedProbabilityFieldValue = predictedProbabilityField;
-		return Self;
+		Instance.PredictedProbabilityField = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actual_field");
-		JsonSerializer.Serialize(writer, ActualFieldValue, options);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(MetricsDescriptorAction), options);
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
+		Instance.PredictedProbabilityField = value;
+		return this;
+	}
 
-		writer.WritePropertyName("predicted_probability_field");
-		JsonSerializer.Serialize(writer, PredictedProbabilityFieldValue, options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

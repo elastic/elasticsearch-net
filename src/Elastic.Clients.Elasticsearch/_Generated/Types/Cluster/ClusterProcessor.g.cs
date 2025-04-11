@@ -17,26 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<long> propCurrent = default;
+		LocalJsonValue<long> propFailed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTime = default;
+		LocalJsonValue<System.TimeSpan> propTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propCurrent.TryReadProperty(ref reader, options, PropCurrent, null))
+			{
+				continue;
+			}
+
+			if (propFailed.TryReadProperty(ref reader, options, PropFailed, null))
+			{
+				continue;
+			}
+
+			if (propTime.TryReadProperty(ref reader, options, PropTime, null))
+			{
+				continue;
+			}
+
+			if (propTimeInMillis.TryReadProperty(ref reader, options, PropTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			Current = propCurrent.Value,
+			Failed = propFailed.Value,
+			Time = propTime.Value,
+			TimeInMillis = propTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
+		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
+		writer.WriteProperty(options, PropTime, value.Time, null, null);
+		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterProcessorConverter))]
 public sealed partial class ClusterProcessor
 {
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("current")]
-	public long Current { get; init; }
-	[JsonInclude, JsonPropertyName("failed")]
-	public long Failed { get; init; }
-	[JsonInclude, JsonPropertyName("time")]
-	public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
-	[JsonInclude, JsonPropertyName("time_in_millis")]
-	public long TimeInMillis { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterProcessor(long count, long current, long failed, System.TimeSpan timeInMillis)
+	{
+		Count = count;
+		Current = current;
+		Failed = failed;
+		TimeInMillis = timeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Current { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Failed { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TimeInMillis { get; set; }
 }

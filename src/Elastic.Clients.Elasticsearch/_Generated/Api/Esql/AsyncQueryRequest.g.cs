@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-public sealed partial class AsyncQueryRequestParameters : RequestParameters
+public sealed partial class AsyncQueryRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -72,16 +65,108 @@ public sealed partial class AsyncQueryRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata = System.Text.Json.JsonEncodedText.Encode("include_ccs_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout");
+
+	public override Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propColumnar = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<bool?> propIncludeCcsMetadata = default;
+		LocalJsonValue<string?> propLocale = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propParams = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, null))
+			{
+				continue;
+			}
+
+			if (propLocale.TryReadProperty(ref reader, options, PropLocale, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propWaitForCompletionTimeout.TryReadProperty(ref reader, options, PropWaitForCompletionTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Columnar = propColumnar.Value,
+			Filter = propFilter.Value,
+			IncludeCcsMetadata = propIncludeCcsMetadata.Value,
+			Locale = propLocale.Value,
+			Params = propParams.Value,
+			Profile = propProfile.Value,
+			Query = propQuery.Value,
+			WaitForCompletionTimeout = propWaitForCompletionTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, null);
+		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -93,11 +178,34 @@ public sealed partial class AsyncQueryRequestParameters : RequestParameters
 /// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 /// </para>
 /// </summary>
-public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestConverter))]
+public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlAsyncQuery;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AsyncQueryRequest(string query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public AsyncQueryRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AsyncQueryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AsyncQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EsqlAsyncQuery;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -109,7 +217,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// It is valid only for the CSV format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
@@ -118,7 +225,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
 	/// <summary>
@@ -126,7 +232,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
 	/// <summary>
@@ -137,7 +242,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
@@ -146,26 +250,13 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
 	/// <summary>
 	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 
 	/// <summary>
@@ -173,7 +264,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
@@ -183,9 +273,7 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// count.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include_ccs_metadata")]
 	public bool? IncludeCcsMetadata { get; set; }
-	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -193,8 +281,7 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? Params { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -204,7 +291,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// of each part of the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
@@ -212,8 +298,21 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the request to finish.
+	/// By default, the request waits for 1 second for the query results.
+	/// If the query completes during this period, results are returned
+	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
 /// <summary>
@@ -225,48 +324,94 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 /// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 /// </para>
 /// </summary>
-public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDescriptor<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryRequestParameters>
+public readonly partial struct AsyncQueryRequestDescriptor
 {
-	internal AsyncQueryRequestDescriptor(Action<AsyncQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AsyncQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public AsyncQueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlAsyncQuery;
+	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// The character to use between values within a CSV row.
+	/// It is valid only for the CSV format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
+	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor DropNullColumns(bool? value = true)
+	{
+		Instance.DropNullColumns = value;
+		return this;
+	}
 
-	internal override string OperationName => "esql.async_query";
+	/// <summary>
+	/// <para>
+	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
 
-	public AsyncQueryRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public AsyncQueryRequestDescriptor<TDocument> DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
-	public AsyncQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? format) => Qs("format", format);
-	public AsyncQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public AsyncQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
-	public AsyncQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+	/// <summary>
+	/// <para>
+	/// The period for which the query and its results are stored in the cluster.
+	/// The default period is five days.
+	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
+	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
 
-	private bool? ColumnarValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private bool? IncludeCcsMetadataValue { get; set; }
-	private string? LocaleValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
-	private bool? ProfileValue { get; set; }
-	private string QueryValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Indicates whether the query and its results are stored in the cluster.
+	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepOnCompletion(bool? value = true)
+	{
+		Instance.KeepOnCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Columnar(bool? value = true)
 	{
-		ColumnarValue = columnar;
-		return Self;
+		Instance.Columnar = value;
+		return this;
 	}
 
 	/// <summary>
@@ -274,28 +419,32 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public AsyncQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public AsyncQueryRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -305,16 +454,16 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	/// count.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? includeCcsMetadata = true)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor IncludeCcsMetadata(bool? value = true)
 	{
-		IncludeCcsMetadataValue = includeCcsMetadata;
-		return Self;
+		Instance.IncludeCcsMetadata = value;
+		return this;
 	}
 
-	public AsyncQueryRequestDescriptor<TDocument> Locale(string? locale)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Locale(string? value)
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.Locale = value;
+		return this;
 	}
 
 	/// <summary>
@@ -322,10 +471,21 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor<TDocument> Params(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		ParamsValue = value;
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.Params = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -336,10 +496,10 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	/// of each part of the query.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor<TDocument> Profile(bool? profile = true)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Profile(bool? value = true)
 	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -347,64 +507,74 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The period to wait for the request to finish.
+	/// By default, the request waits for 1 second for the query results.
+	/// If the query completes during this period, results are returned
+	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		writer.WriteStartObject();
-		if (ColumnarValue.HasValue)
-		{
-			writer.WritePropertyName("columnar");
-			writer.WriteBooleanValue(ColumnarValue.Value);
-		}
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor(new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (IncludeCcsMetadataValue.HasValue)
-		{
-			writer.WritePropertyName("include_ccs_metadata");
-			writer.WriteBooleanValue(IncludeCcsMetadataValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(LocaleValue))
-		{
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(LocaleValue);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -417,48 +587,94 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 /// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 /// </para>
 /// </summary>
-public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<AsyncQueryRequestDescriptor, AsyncQueryRequestParameters>
+public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 {
-	internal AsyncQueryRequestDescriptor(Action<AsyncQueryRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AsyncQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public AsyncQueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlAsyncQuery;
+	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// The character to use between values within a CSV row.
+	/// It is valid only for the CSV format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
+	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> DropNullColumns(bool? value = true)
+	{
+		Instance.DropNullColumns = value;
+		return this;
+	}
 
-	internal override string OperationName => "esql.async_query";
+	/// <summary>
+	/// <para>
+	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
 
-	public AsyncQueryRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public AsyncQueryRequestDescriptor DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
-	public AsyncQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? format) => Qs("format", format);
-	public AsyncQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public AsyncQueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
-	public AsyncQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+	/// <summary>
+	/// <para>
+	/// The period for which the query and its results are stored in the cluster.
+	/// The default period is five days.
+	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
+	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
 
-	private bool? ColumnarValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private bool? IncludeCcsMetadataValue { get; set; }
-	private string? LocaleValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
-	private bool? ProfileValue { get; set; }
-	private string QueryValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Indicates whether the query and its results are stored in the cluster.
+	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
+	{
+		Instance.KeepOnCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor Columnar(bool? columnar = true)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Columnar(bool? value = true)
 	{
-		ColumnarValue = columnar;
-		return Self;
+		Instance.Columnar = value;
+		return this;
 	}
 
 	/// <summary>
@@ -466,28 +682,21 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public AsyncQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public AsyncQueryRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -497,16 +706,16 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	/// count.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor IncludeCcsMetadata(bool? includeCcsMetadata = true)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
-		IncludeCcsMetadataValue = includeCcsMetadata;
-		return Self;
+		Instance.IncludeCcsMetadata = value;
+		return this;
 	}
 
-	public AsyncQueryRequestDescriptor Locale(string? locale)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Locale(string? value)
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.Locale = value;
+		return this;
 	}
 
 	/// <summary>
@@ -514,10 +723,21 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor Params(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		ParamsValue = value;
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.Params = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -528,10 +748,10 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	/// of each part of the query.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor Profile(bool? profile = true)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -539,63 +759,73 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
-	public AsyncQueryRequestDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The period to wait for the request to finish.
+	/// By default, the request waits for 1 second for the query results.
+	/// If the query completes during this period, results are returned
+	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		writer.WriteStartObject();
-		if (ColumnarValue.HasValue)
-		{
-			writer.WritePropertyName("columnar");
-			writer.WriteBooleanValue(ColumnarValue.Value);
-		}
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (IncludeCcsMetadataValue.HasValue)
-		{
-			writer.WritePropertyName("include_ccs_metadata");
-			writer.WriteBooleanValue(IncludeCcsMetadataValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(LocaleValue))
-		{
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(LocaleValue);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

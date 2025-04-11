@@ -17,128 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class AzureRepository : IRepository
+internal sealed partial class AzureRepositoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.AzureRepository>
 {
-	[JsonInclude, JsonPropertyName("settings")]
-	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings Settings { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings?> propSettings = default;
+		LocalJsonValue<string?> propUuid = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Settings = propSettings.Value,
+			Uuid = propUuid.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.AzureRepository value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryConverter))]
+public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
+{
+#if NET7_0_OR_GREATER
+	public AzureRepository()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AzureRepository()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings? Settings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The Azure repository type.
+	/// </para>
+	/// </summary>
 	public string Type => "azure";
 
-	[JsonInclude, JsonPropertyName("uuid")]
 	public string? Uuid { get; set; }
 }
 
-public sealed partial class AzureRepositoryDescriptor : SerializableDescriptor<AzureRepositoryDescriptor>, IBuildableDescriptor<AzureRepository>
+public readonly partial struct AzureRepositoryDescriptor
 {
-	internal AzureRepositoryDescriptor(Action<AzureRepositoryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Instance { get; init; }
 
-	public AzureRepositoryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AzureRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor> SettingsDescriptorAction { get; set; }
-	private string? UuidValue { get; set; }
-
-	public AzureRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings settings)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AzureRepositoryDescriptor()
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public AzureRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings? value)
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	public AzureRepositoryDescriptor Settings(Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings()
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public AzureRepositoryDescriptor Uuid(string? uuid)
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor>? action)
 	{
-		UuidValue = uuid;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Uuid(string? value)
 	{
-		writer.WriteStartObject();
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor(SettingsDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("azure");
-		if (!string.IsNullOrEmpty(UuidValue))
-		{
-			writer.WritePropertyName("uuid");
-			writer.WriteStringValue(UuidValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Uuid = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings BuildSettings()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor>? action)
 	{
-		if (SettingsValue is not null)
+		if (action is null)
 		{
-			return SettingsValue;
+			return new Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if ((object)SettingsDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (SettingsDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor(SettingsDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	AzureRepository IBuildableDescriptor<AzureRepository>.Build() => new()
-	{
-		Settings = BuildSettings(),
-		Uuid = UuidValue
-	};
 }

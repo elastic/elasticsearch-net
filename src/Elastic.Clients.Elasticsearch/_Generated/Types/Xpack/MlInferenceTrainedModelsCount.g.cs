@@ -17,32 +17,159 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class MlInferenceTrainedModelsCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText PropNer = System.Text.Json.JsonEncodedText.Encode("ner");
+	private static readonly System.Text.Json.JsonEncodedText PropOther = System.Text.Json.JsonEncodedText.Encode("other");
+	private static readonly System.Text.Json.JsonEncodedText PropPassThrough = System.Text.Json.JsonEncodedText.Encode("pass_through");
+	private static readonly System.Text.Json.JsonEncodedText PropPrepackaged = System.Text.Json.JsonEncodedText.Encode("prepackaged");
+	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+	private static readonly System.Text.Json.JsonEncodedText PropTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propClassification = default;
+		LocalJsonValue<long?> propNer = default;
+		LocalJsonValue<long> propOther = default;
+		LocalJsonValue<long?> propPassThrough = default;
+		LocalJsonValue<long> propPrepackaged = default;
+		LocalJsonValue<long?> propRegression = default;
+		LocalJsonValue<long?> propTextEmbedding = default;
+		LocalJsonValue<long> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClassification.TryReadProperty(ref reader, options, PropClassification, null))
+			{
+				continue;
+			}
+
+			if (propNer.TryReadProperty(ref reader, options, PropNer, null))
+			{
+				continue;
+			}
+
+			if (propOther.TryReadProperty(ref reader, options, PropOther, null))
+			{
+				continue;
+			}
+
+			if (propPassThrough.TryReadProperty(ref reader, options, PropPassThrough, null))
+			{
+				continue;
+			}
+
+			if (propPrepackaged.TryReadProperty(ref reader, options, PropPrepackaged, null))
+			{
+				continue;
+			}
+
+			if (propRegression.TryReadProperty(ref reader, options, PropRegression, null))
+			{
+				continue;
+			}
+
+			if (propTextEmbedding.TryReadProperty(ref reader, options, PropTextEmbedding, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Classification = propClassification.Value,
+			Ner = propNer.Value,
+			Other = propOther.Value,
+			PassThrough = propPassThrough.Value,
+			Prepackaged = propPrepackaged.Value,
+			Regression = propRegression.Value,
+			TextEmbedding = propTextEmbedding.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClassification, value.Classification, null, null);
+		writer.WriteProperty(options, PropNer, value.Ner, null, null);
+		writer.WriteProperty(options, PropOther, value.Other, null, null);
+		writer.WriteProperty(options, PropPassThrough, value.PassThrough, null, null);
+		writer.WriteProperty(options, PropPrepackaged, value.Prepackaged, null, null);
+		writer.WriteProperty(options, PropRegression, value.Regression, null, null);
+		writer.WriteProperty(options, PropTextEmbedding, value.TextEmbedding, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCountConverter))]
 public sealed partial class MlInferenceTrainedModelsCount
 {
-	[JsonInclude, JsonPropertyName("classification")]
-	public long? Classification { get; init; }
-	[JsonInclude, JsonPropertyName("ner")]
-	public long? Ner { get; init; }
-	[JsonInclude, JsonPropertyName("other")]
-	public long Other { get; init; }
-	[JsonInclude, JsonPropertyName("pass_through")]
-	public long? PassThrough { get; init; }
-	[JsonInclude, JsonPropertyName("prepackaged")]
-	public long Prepackaged { get; init; }
-	[JsonInclude, JsonPropertyName("regression")]
-	public long? Regression { get; init; }
-	[JsonInclude, JsonPropertyName("text_embedding")]
-	public long? TextEmbedding { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MlInferenceTrainedModelsCount(long other, long prepackaged, long total)
+	{
+		Other = other;
+		Prepackaged = prepackaged;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public MlInferenceTrainedModelsCount()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MlInferenceTrainedModelsCount()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MlInferenceTrainedModelsCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public long? Classification { get; set; }
+	public long? Ner { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Other { get; set; }
+	public long? PassThrough { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Prepackaged { get; set; }
+	public long? Regression { get; set; }
+	public long? TextEmbedding { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
 }

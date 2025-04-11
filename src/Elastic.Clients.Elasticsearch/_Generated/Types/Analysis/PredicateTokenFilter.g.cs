@@ -17,128 +17,152 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class PredicateTokenFilter : ITokenFilter
+internal sealed partial class PredicateTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script> propScript = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Script = propScript.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterConverter))]
+public sealed partial class PredicateTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PredicateTokenFilter(Elastic.Clients.Elasticsearch.Script script)
+	{
+		Script = script;
+	}
+#if NET7_0_OR_GREATER
+	public PredicateTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PredicateTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PredicateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+
 	public string Type => "predicate_token_filter";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class PredicateTokenFilterDescriptor : SerializableDescriptor<PredicateTokenFilterDescriptor>, IBuildableDescriptor<PredicateTokenFilter>
+public readonly partial struct PredicateTokenFilterDescriptor
 {
-	internal PredicateTokenFilterDescriptor(Action<PredicateTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter Instance { get; init; }
 
-	public PredicateTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PredicateTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? VersionValue { get; set; }
-
-	public PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PredicateTokenFilterDescriptor()
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public PredicateTokenFilterDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public PredicateTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("predicate_token_filter");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script BuildScript()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor> action)
 	{
-		if (ScriptValue is not null)
-		{
-			return ScriptValue;
-		}
-
-		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (ScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	PredicateTokenFilter IBuildableDescriptor<PredicateTokenFilter>.Build() => new()
-	{
-		Script = BuildScript(),
-		Version = VersionValue
-	};
 }

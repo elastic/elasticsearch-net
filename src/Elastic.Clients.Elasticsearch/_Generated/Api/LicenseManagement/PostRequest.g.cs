@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public sealed partial class PostRequestParameters : RequestParameters
+public sealed partial class PostRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,11 +31,75 @@ public sealed partial class PostRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class PostRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
+	private static readonly System.Text.Json.JsonEncodedText PropLicenses = System.Text.Json.JsonEncodedText.Encode("licenses");
+
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.License?> propLicense = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>?> propLicenses = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLicense.TryReadProperty(ref reader, options, PropLicense, null))
+			{
+				continue;
+			}
+
+			if (propLicenses.TryReadProperty(ref reader, options, PropLicenses, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.LicenseManagement.License>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			License = propLicense.Value,
+			Licenses = propLicenses.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLicense, value.License, null, null);
+		writer.WriteProperty(options, PropLicenses, value.Licenses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.LicenseManagement.License>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Update the license.
+/// </para>
+/// <para>
 /// You can update your license at runtime without shutting down your nodes.
 /// License updates take effect immediately.
 /// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
@@ -53,11 +110,28 @@ public sealed partial class PostRequestParameters : RequestParameters
 /// If the operator privileges feature is enabled, only operator users can use this API.
 /// </para>
 /// </summary>
-public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestConverter))]
+public sealed partial class PostRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPost;
+#if NET7_0_OR_GREATER
+	public PostRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PostRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PostRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.LicenseManagementPost;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -68,9 +142,21 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 	/// Specifies whether you acknowledge the license changes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-	[JsonInclude, JsonPropertyName("license")]
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public Elastic.Clients.Elasticsearch.LicenseManagement.License? License { get; set; }
 
 	/// <summary>
@@ -78,13 +164,14 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 	/// A sequence of one or more JSON documents containing the license information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("licenses")]
-	public ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? Licenses { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? Licenses { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Update the license.
+/// </para>
+/// <para>
 /// You can update your license at runtime without shutting down your nodes.
 /// License updates take effect immediately.
 /// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
@@ -95,54 +182,67 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 /// If the operator privileges feature is enabled, only operator users can use this API.
 /// </para>
 /// </summary>
-public sealed partial class PostRequestDescriptor : RequestDescriptor<PostRequestDescriptor, PostRequestParameters>
+public readonly partial struct PostRequestDescriptor
 {
-	internal PostRequestDescriptor(Action<PostRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PostRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public PostRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPost;
+	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "license.post";
-
-	public PostRequestDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
-
-	private Elastic.Clients.Elasticsearch.LicenseManagement.License? LicenseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor LicenseDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor> LicenseDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? LicensesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor LicensesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor> LicensesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor>[] LicensesDescriptorActions { get; set; }
-
-	public PostRequestDescriptor License(Elastic.Clients.Elasticsearch.LicenseManagement.License? license)
+	/// <summary>
+	/// <para>
+	/// Specifies whether you acknowledge the license changes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Acknowledge(bool? value = true)
 	{
-		LicenseDescriptor = null;
-		LicenseDescriptorAction = null;
-		LicenseValue = license;
-		return Self;
+		Instance.Acknowledge = value;
+		return this;
 	}
 
-	public PostRequestDescriptor License(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		LicenseValue = null;
-		LicenseDescriptorAction = null;
-		LicenseDescriptor = descriptor;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	public PostRequestDescriptor License(Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		LicenseValue = null;
-		LicenseDescriptor = null;
-		LicenseDescriptorAction = configure;
-		return Self;
+		Instance.Timeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor License(Elastic.Clients.Elasticsearch.LicenseManagement.License? value)
+	{
+		Instance.License = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor License(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor> action)
+	{
+		Instance.License = Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -150,92 +250,92 @@ public sealed partial class PostRequestDescriptor : RequestDescriptor<PostReques
 	/// A sequence of one or more JSON documents containing the license information.
 	/// </para>
 	/// </summary>
-	public PostRequestDescriptor Licenses(ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? licenses)
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? value)
 	{
-		LicensesDescriptor = null;
-		LicensesDescriptorAction = null;
-		LicensesDescriptorActions = null;
-		LicensesValue = licenses;
-		return Self;
+		Instance.Licenses = value;
+		return this;
 	}
 
-	public PostRequestDescriptor Licenses(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A sequence of one or more JSON documents containing the license information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(params Elastic.Clients.Elasticsearch.LicenseManagement.License[] values)
 	{
-		LicensesValue = null;
-		LicensesDescriptorAction = null;
-		LicensesDescriptorActions = null;
-		LicensesDescriptor = descriptor;
-		return Self;
+		Instance.Licenses = [.. values];
+		return this;
 	}
 
-	public PostRequestDescriptor Licenses(Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A sequence of one or more JSON documents containing the license information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(params System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor>[] actions)
 	{
-		LicensesValue = null;
-		LicensesDescriptor = null;
-		LicensesDescriptorActions = null;
-		LicensesDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.LicenseManagement.License>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor.Build(action));
+		}
+
+		Instance.Licenses = items;
+		return this;
 	}
 
-	public PostRequestDescriptor Licenses(params Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor>[] configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest Build(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor>? action)
 	{
-		LicensesValue = null;
-		LicensesDescriptor = null;
-		LicensesDescriptorAction = null;
-		LicensesDescriptorActions = configure;
-		return Self;
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor(new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (LicenseDescriptor is not null)
-		{
-			writer.WritePropertyName("license");
-			JsonSerializer.Serialize(writer, LicenseDescriptor, options);
-		}
-		else if (LicenseDescriptorAction is not null)
-		{
-			writer.WritePropertyName("license");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor(LicenseDescriptorAction), options);
-		}
-		else if (LicenseValue is not null)
-		{
-			writer.WritePropertyName("license");
-			JsonSerializer.Serialize(writer, LicenseValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (LicensesDescriptor is not null)
-		{
-			writer.WritePropertyName("licenses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, LicensesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (LicensesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("licenses");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor(LicensesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (LicensesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("licenses");
-			writer.WriteStartArray();
-			foreach (var action in LicensesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (LicensesValue is not null)
-		{
-			writer.WritePropertyName("licenses");
-			JsonSerializer.Serialize(writer, LicensesValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,63 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class IoStatDeviceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IoStatDevice>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeviceName = System.Text.Json.JsonEncodedText.Encode("device_name");
+	private static readonly System.Text.Json.JsonEncodedText PropOperations = System.Text.Json.JsonEncodedText.Encode("operations");
+	private static readonly System.Text.Json.JsonEncodedText PropReadKilobytes = System.Text.Json.JsonEncodedText.Encode("read_kilobytes");
+	private static readonly System.Text.Json.JsonEncodedText PropReadOperations = System.Text.Json.JsonEncodedText.Encode("read_operations");
+	private static readonly System.Text.Json.JsonEncodedText PropWriteKilobytes = System.Text.Json.JsonEncodedText.Encode("write_kilobytes");
+	private static readonly System.Text.Json.JsonEncodedText PropWriteOperations = System.Text.Json.JsonEncodedText.Encode("write_operations");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.IoStatDevice Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDeviceName = default;
+		LocalJsonValue<long?> propOperations = default;
+		LocalJsonValue<long?> propReadKilobytes = default;
+		LocalJsonValue<long?> propReadOperations = default;
+		LocalJsonValue<long?> propWriteKilobytes = default;
+		LocalJsonValue<long?> propWriteOperations = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeviceName.TryReadProperty(ref reader, options, PropDeviceName, null))
+			{
+				continue;
+			}
+
+			if (propOperations.TryReadProperty(ref reader, options, PropOperations, null))
+			{
+				continue;
+			}
+
+			if (propReadKilobytes.TryReadProperty(ref reader, options, PropReadKilobytes, null))
+			{
+				continue;
+			}
+
+			if (propReadOperations.TryReadProperty(ref reader, options, PropReadOperations, null))
+			{
+				continue;
+			}
+
+			if (propWriteKilobytes.TryReadProperty(ref reader, options, PropWriteKilobytes, null))
+			{
+				continue;
+			}
+
+			if (propWriteOperations.TryReadProperty(ref reader, options, PropWriteOperations, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.IoStatDevice(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DeviceName = propDeviceName.Value,
+			Operations = propOperations.Value,
+			ReadKilobytes = propReadKilobytes.Value,
+			ReadOperations = propReadOperations.Value,
+			WriteKilobytes = propWriteKilobytes.Value,
+			WriteOperations = propWriteOperations.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.IoStatDevice value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeviceName, value.DeviceName, null, null);
+		writer.WriteProperty(options, PropOperations, value.Operations, null, null);
+		writer.WriteProperty(options, PropReadKilobytes, value.ReadKilobytes, null, null);
+		writer.WriteProperty(options, PropReadOperations, value.ReadOperations, null, null);
+		writer.WriteProperty(options, PropWriteKilobytes, value.WriteKilobytes, null, null);
+		writer.WriteProperty(options, PropWriteOperations, value.WriteOperations, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.IoStatDeviceConverter))]
 public sealed partial class IoStatDevice
 {
+#if NET7_0_OR_GREATER
+	public IoStatDevice()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IoStatDevice()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IoStatDevice(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The Linux device name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("device_name")]
-	public string? DeviceName { get; init; }
+	public string? DeviceName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of read and write operations for the device completed since starting Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("operations")]
-	public long? Operations { get; init; }
+	public long? Operations { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of kilobytes read for the device since starting Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_kilobytes")]
-	public long? ReadKilobytes { get; init; }
+	public long? ReadKilobytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of read operations for the device completed since starting Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_operations")]
-	public long? ReadOperations { get; init; }
+	public long? ReadOperations { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of kilobytes written for the device since starting Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("write_kilobytes")]
-	public long? WriteKilobytes { get; init; }
+	public long? WriteKilobytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of write operations for the device completed since starting Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("write_operations")]
-	public long? WriteOperations { get; init; }
+	public long? WriteOperations { get; set; }
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ChangePasswordRequestParameters : RequestParameters
+public sealed partial class ChangePasswordRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,6 +31,54 @@ public sealed partial class ChangePasswordRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+}
+
+internal sealed partial class ChangePasswordRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash");
+
+	public override Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propPassword = default;
+		LocalJsonValue<string?> propPasswordHash = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
+			{
+				continue;
+			}
+
+			if (propPasswordHash.TryReadProperty(ref reader, options, PropPasswordHash, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Password = propPassword.Value,
+			PasswordHash = propPasswordHash.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPassword, value.Password, null, null);
+		writer.WriteProperty(options, PropPasswordHash, value.PasswordHash, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -48,19 +89,31 @@ public sealed partial class ChangePasswordRequestParameters : RequestParameters
 /// Change the passwords of users in the native realm and built-in users.
 /// </para>
 /// </summary>
-public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestConverter))]
+public sealed partial class ChangePasswordRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>
 {
-	public ChangePasswordRequest()
-	{
-	}
-
 	public ChangePasswordRequest(Elastic.Clients.Elasticsearch.Username? username) : base(r => r.Optional("username", username))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ChangePasswordRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ChangePasswordRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ChangePasswordRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityChangePassword;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityChangePassword;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -68,10 +121,17 @@ public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordR
 
 	/// <summary>
 	/// <para>
+	/// The user whose password you want to change. If you do not specify this
+	/// parameter, the password is changed for the current user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Username? Username { get => P<Elastic.Clients.Elasticsearch.Username?>("username"); set => PO("username", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -79,7 +139,6 @@ public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordR
 	/// The new password value. Passwords must be at least 6 characters long.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
 
 	/// <summary>
@@ -90,7 +149,6 @@ public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordR
 	/// setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("password_hash")]
 	public string? PasswordHash { get; set; }
 }
 
@@ -102,46 +160,61 @@ public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordR
 /// Change the passwords of users in the native realm and built-in users.
 /// </para>
 /// </summary>
-public sealed partial class ChangePasswordRequestDescriptor : RequestDescriptor<ChangePasswordRequestDescriptor, ChangePasswordRequestParameters>
+public readonly partial struct ChangePasswordRequestDescriptor
 {
-	internal ChangePasswordRequestDescriptor(Action<ChangePasswordRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest Instance { get; init; }
 
-	public ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Username? username) : base(r => r.Optional("username", username))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Username? username)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(username);
 	}
 
 	public ChangePasswordRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityChangePassword;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest instance) => new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.change_password";
-
-	public ChangePasswordRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	public ChangePasswordRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
+	/// <summary>
+	/// <para>
+	/// The user whose password you want to change. If you do not specify this
+	/// parameter, the password is changed for the current user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		RouteValues.Optional("username", username);
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	private string? PasswordValue { get; set; }
-	private string? PasswordHashValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The new password value. Passwords must be at least 6 characters long.
 	/// </para>
 	/// </summary>
-	public ChangePasswordRequestDescriptor Password(string? password)
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Password(string? value)
 	{
-		PasswordValue = password;
-		return Self;
+		Instance.Password = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,27 +225,64 @@ public sealed partial class ChangePasswordRequestDescriptor : RequestDescriptor<
 	/// setting.
 	/// </para>
 	/// </summary>
-	public ChangePasswordRequestDescriptor PasswordHash(string? passwordHash)
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor PasswordHash(string? value)
 	{
-		PasswordHashValue = passwordHash;
-		return Self;
+		Instance.PasswordHash = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(PasswordValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("password");
-			writer.WriteStringValue(PasswordValue);
+			return new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(PasswordHashValue))
-		{
-			writer.WritePropertyName("password_hash");
-			writer.WriteStringValue(PasswordHashValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

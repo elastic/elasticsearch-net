@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ReloadDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropReloadedAnalyzers = System.Text.Json.JsonEncodedText.Encode("reloaded_analyzers");
+	private static readonly System.Text.Json.JsonEncodedText PropReloadedNodeIds = System.Text.Json.JsonEncodedText.Encode("reloaded_node_ids");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propReloadedAnalyzers = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propReloadedNodeIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propReloadedAnalyzers.TryReadProperty(ref reader, options, PropReloadedAnalyzers, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propReloadedNodeIds.TryReadProperty(ref reader, options, PropReloadedNodeIds, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			ReloadedAnalyzers = propReloadedAnalyzers.Value,
+			ReloadedNodeIds = propReloadedNodeIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropReloadedAnalyzers, value.ReloadedAnalyzers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropReloadedNodeIds, value.ReloadedNodeIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetailsConverter))]
 public sealed partial class ReloadDetails
 {
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("reloaded_analyzers")]
-	public IReadOnlyCollection<string> ReloadedAnalyzers { get; init; }
-	[JsonInclude, JsonPropertyName("reloaded_node_ids")]
-	public IReadOnlyCollection<string> ReloadedNodeIds { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReloadDetails(string index, System.Collections.Generic.IReadOnlyCollection<string> reloadedAnalyzers, System.Collections.Generic.IReadOnlyCollection<string> reloadedNodeIds)
+	{
+		Index = index;
+		ReloadedAnalyzers = reloadedAnalyzers;
+		ReloadedNodeIds = reloadedNodeIds;
+	}
+#if NET7_0_OR_GREATER
+	public ReloadDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReloadDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReloadDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> ReloadedAnalyzers { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> ReloadedNodeIds { get; set; }
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ReindexRequestParameters : RequestParameters
+public sealed partial class ReindexRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -105,6 +98,90 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+}
+
+internal sealed partial class ReindexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ReindexRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConflicts = System.Text.Json.JsonEncodedText.Encode("conflicts");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.ReindexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Conflicts?> propConflicts = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
+		LocalJsonValue<long?> propMaxDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<long?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Source> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, null))
+			{
+				continue;
+			}
+
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Conflicts = propConflicts.Value,
+			Dest = propDest.Value,
+			MaxDocs = propMaxDocs.Value,
+			Script = propScript.Value,
+			Size = propSize.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ReindexRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -212,7 +289,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 /// done
 /// </code>
 /// <para>
-/// ** Throttling**
+/// <strong>Throttling</strong>
 /// </para>
 /// <para>
 /// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -400,11 +477,35 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 /// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ReindexRequestConverter))]
+public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ReindexRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRequest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest, Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+	{
+		Dest = dest;
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public ReindexRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReindexRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceReindex;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -415,7 +516,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -424,7 +524,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// By default, there is no throttle.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
@@ -432,7 +531,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>true</c>, the destination must be an index alias.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
@@ -440,7 +538,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The period of time that a consistent view of the index should be maintained for scrolled search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
@@ -461,7 +558,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
@@ -471,7 +567,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -481,7 +576,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The default value is one, which means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -489,7 +583,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>true</c>, the request blocks until the operation is complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
@@ -497,7 +590,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
 	/// <summary>
@@ -505,8 +597,11 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dest")]
-	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -518,7 +613,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
 	/// <summary>
@@ -526,9 +620,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The script to run to update the document source or metadata when reindexing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("size")]
 	public long? Size { get; set; }
 
 	/// <summary>
@@ -536,8 +628,11 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The source you are copying from.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
-	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 }
 
 /// <summary>
@@ -645,7 +740,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 /// done
 /// </code>
 /// <para>
-/// ** Throttling**
+/// <strong>Throttling</strong>
 /// </para>
 /// <para>
 /// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -833,53 +928,163 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 /// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
+public readonly partial struct ReindexRequestDescriptor
 {
-	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ReindexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ReindexRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
+	public static explicit operator Elastic.Clients.Elasticsearch.ReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRequest instance) => new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.ReindexRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// By default, there is no throttle.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
 
-	internal override string OperationName => "reindex";
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
 
-	public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-	public ReindexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-	public ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+	/// <summary>
+	/// <para>
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
 
-	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private long? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? value)
+	{
+		Instance.Slices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
+	{
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
-		ConflictsValue = conflicts;
-		return Self;
+		Instance.Conflicts = value;
+		return this;
 	}
 
 	/// <summary>
@@ -887,28 +1092,21 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> action)
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Dest(Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> configure)
-	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -921,10 +1119,10 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor MaxDocs(long? value)
 	{
-		MaxDocsValue = maxDocs;
-		return Self;
+		Instance.MaxDocs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -932,34 +1130,38 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// The script to run to update the document source or metadata when reindexing.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Size(long? size)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Size(long? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -967,100 +1169,82 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// The source you are copying from.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor.Build(action);
+		return this;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<T>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ReindexRequest Build(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor(new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -1169,7 +1353,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 /// done
 /// </code>
 /// <para>
-/// ** Throttling**
+/// <strong>Throttling</strong>
 /// </para>
 /// <para>
 /// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -1357,53 +1541,163 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 /// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
+public readonly partial struct ReindexRequestDescriptor<TDocument>
 {
-	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ReindexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ReindexRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
+	public static explicit operator Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ReindexRequest instance) => new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// By default, there is no throttle.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
 
-	internal override string OperationName => "reindex";
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
 
-	public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-	public ReindexRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-	public ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+	/// <summary>
+	/// <para>
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
 
-	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private long? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? value)
+	{
+		Instance.Slices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
+	{
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
-		ConflictsValue = conflicts;
-		return Self;
+		Instance.Conflicts = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1411,28 +1705,21 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> action)
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor Dest(Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> configure)
-	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1445,10 +1732,10 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor MaxDocs(long? maxDocs)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> MaxDocs(long? value)
 	{
-		MaxDocsValue = maxDocs;
-		return Self;
+		Instance.MaxDocs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1456,34 +1743,38 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// The script to run to update the document source or metadata when reindexing.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ReindexRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public ReindexRequestDescriptor Size(long? size)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Size(long? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1491,99 +1782,70 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// The source you are copying from.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public ReindexRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ReindexRequest Build(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

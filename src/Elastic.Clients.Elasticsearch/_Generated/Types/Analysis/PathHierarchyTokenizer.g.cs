@@ -17,138 +17,199 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class PathHierarchyTokenizer : ITokenizer
+internal sealed partial class PathHierarchyTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>
 {
-	[JsonInclude, JsonPropertyName("buffer_size")]
+	private static readonly System.Text.Json.JsonEncodedText PropBufferSize = System.Text.Json.JsonEncodedText.Encode("buffer_size");
+	private static readonly System.Text.Json.JsonEncodedText PropDelimiter = System.Text.Json.JsonEncodedText.Encode("delimiter");
+	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement");
+	private static readonly System.Text.Json.JsonEncodedText PropReverse = System.Text.Json.JsonEncodedText.Encode("reverse");
+	private static readonly System.Text.Json.JsonEncodedText PropSkip = System.Text.Json.JsonEncodedText.Encode("skip");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propBufferSize = default;
+		LocalJsonValue<string?> propDelimiter = default;
+		LocalJsonValue<string?> propReplacement = default;
+		LocalJsonValue<bool?> propReverse = default;
+		LocalJsonValue<int?> propSkip = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBufferSize.TryReadProperty(ref reader, options, PropBufferSize, null))
+			{
+				continue;
+			}
+
+			if (propDelimiter.TryReadProperty(ref reader, options, PropDelimiter, null))
+			{
+				continue;
+			}
+
+			if (propReplacement.TryReadProperty(ref reader, options, PropReplacement, null))
+			{
+				continue;
+			}
+
+			if (propReverse.TryReadProperty(ref reader, options, PropReverse, null))
+			{
+				continue;
+			}
+
+			if (propSkip.TryReadProperty(ref reader, options, PropSkip, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BufferSize = propBufferSize.Value,
+			Delimiter = propDelimiter.Value,
+			Replacement = propReplacement.Value,
+			Reverse = propReverse.Value,
+			Skip = propSkip.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBufferSize, value.BufferSize, null, null);
+		writer.WriteProperty(options, PropDelimiter, value.Delimiter, null, null);
+		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
+		writer.WriteProperty(options, PropReverse, value.Reverse, null, null);
+		writer.WriteProperty(options, PropSkip, value.Skip, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerConverter))]
+public sealed partial class PathHierarchyTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public PathHierarchyTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PathHierarchyTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PathHierarchyTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? BufferSize { get; set; }
-	[JsonInclude, JsonPropertyName("delimiter")]
 	public string? Delimiter { get; set; }
-	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
-	[JsonInclude, JsonPropertyName("reverse")]
 	public bool? Reverse { get; set; }
-	[JsonInclude, JsonPropertyName("skip")]
 	public int? Skip { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "path_hierarchy";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescriptor<PathHierarchyTokenizerDescriptor>, IBuildableDescriptor<PathHierarchyTokenizer>
+public readonly partial struct PathHierarchyTokenizerDescriptor
 {
-	internal PathHierarchyTokenizerDescriptor(Action<PathHierarchyTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer Instance { get; init; }
 
-	public PathHierarchyTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PathHierarchyTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private int? BufferSizeValue { get; set; }
-	private string? DelimiterValue { get; set; }
-	private string? ReplacementValue { get; set; }
-	private bool? ReverseValue { get; set; }
-	private int? SkipValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public PathHierarchyTokenizerDescriptor BufferSize(int? bufferSize)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PathHierarchyTokenizerDescriptor()
 	{
-		BufferSizeValue = bufferSize;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PathHierarchyTokenizerDescriptor Delimiter(string? delimiter)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor BufferSize(int? value)
 	{
-		DelimiterValue = delimiter;
-		return Self;
+		Instance.BufferSize = value;
+		return this;
 	}
 
-	public PathHierarchyTokenizerDescriptor Replacement(string? replacement)
+	public Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor Delimiter(string? value)
 	{
-		ReplacementValue = replacement;
-		return Self;
+		Instance.Delimiter = value;
+		return this;
 	}
 
-	public PathHierarchyTokenizerDescriptor Reverse(bool? reverse = true)
+	public Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor Replacement(string? value)
 	{
-		ReverseValue = reverse;
-		return Self;
+		Instance.Replacement = value;
+		return this;
 	}
 
-	public PathHierarchyTokenizerDescriptor Skip(int? skip)
+	public Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor Reverse(bool? value = true)
 	{
-		SkipValue = skip;
-		return Self;
+		Instance.Reverse = value;
+		return this;
 	}
 
-	public PathHierarchyTokenizerDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor Skip(int? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Skip = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (BufferSizeValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("buffer_size");
-			writer.WriteNumberValue(BufferSizeValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(DelimiterValue))
-		{
-			writer.WritePropertyName("delimiter");
-			writer.WriteStringValue(DelimiterValue);
-		}
-
-		if (!string.IsNullOrEmpty(ReplacementValue))
-		{
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(ReplacementValue);
-		}
-
-		if (ReverseValue.HasValue)
-		{
-			writer.WritePropertyName("reverse");
-			writer.WriteBooleanValue(ReverseValue.Value);
-		}
-
-		if (SkipValue.HasValue)
-		{
-			writer.WritePropertyName("skip");
-			writer.WriteNumberValue(SkipValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("path_hierarchy");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	PathHierarchyTokenizer IBuildableDescriptor<PathHierarchyTokenizer>.Build() => new()
-	{
-		BufferSize = BufferSizeValue,
-		Delimiter = DelimiterValue,
-		Replacement = ReplacementValue,
-		Reverse = ReverseValue,
-		Skip = SkipValue,
-		Version = VersionValue
-	};
 }

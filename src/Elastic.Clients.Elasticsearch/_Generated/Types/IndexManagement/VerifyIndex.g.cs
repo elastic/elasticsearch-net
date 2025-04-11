@@ -17,24 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class VerifyIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCheckIndexTime = System.Text.Json.JsonEncodedText.Encode("check_index_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCheckIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("check_index_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCheckIndexTime = default;
+		LocalJsonValue<System.TimeSpan> propCheckIndexTimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCheckIndexTime.TryReadProperty(ref reader, options, PropCheckIndexTime, null))
+			{
+				continue;
+			}
+
+			if (propCheckIndexTimeInMillis.TryReadProperty(ref reader, options, PropCheckIndexTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalTime.TryReadProperty(ref reader, options, PropTotalTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalTimeInMillis.TryReadProperty(ref reader, options, PropTotalTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CheckIndexTime = propCheckIndexTime.Value,
+			CheckIndexTimeInMillis = propCheckIndexTimeInMillis.Value,
+			TotalTime = propTotalTime.Value,
+			TotalTimeInMillis = propTotalTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCheckIndexTime, value.CheckIndexTime, null, null);
+		writer.WriteProperty(options, PropCheckIndexTimeInMillis, value.CheckIndexTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalTime, value.TotalTime, null, null);
+		writer.WriteProperty(options, PropTotalTimeInMillis, value.TotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndexConverter))]
 public sealed partial class VerifyIndex
 {
-	[JsonInclude, JsonPropertyName("check_index_time")]
-	public Elastic.Clients.Elasticsearch.Duration? CheckIndexTime { get; init; }
-	[JsonInclude, JsonPropertyName("check_index_time_in_millis")]
-	public long CheckIndexTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_time_in_millis")]
-	public long TotalTimeInMillis { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VerifyIndex(System.TimeSpan checkIndexTimeInMillis, System.TimeSpan totalTimeInMillis)
+	{
+		CheckIndexTimeInMillis = checkIndexTimeInMillis;
+		TotalTimeInMillis = totalTimeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public VerifyIndex()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public VerifyIndex()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal VerifyIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Duration? CheckIndexTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan CheckIndexTimeInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalTimeInMillis { get; set; }
 }

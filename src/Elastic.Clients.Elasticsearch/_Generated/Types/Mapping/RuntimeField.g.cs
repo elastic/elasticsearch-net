@@ -17,40 +17,158 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class RuntimeFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFetchFields = System.Text.Json.JsonEncodedText.Encode("fetch_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetIndex = System.Text.Json.JsonEncodedText.Encode("target_index");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.RuntimeField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>?> propFetchFields = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>?> propFields = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propInputField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propTargetIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFetchFields.TryReadProperty(ref reader, options, PropFetchFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propInputField.TryReadProperty(ref reader, options, PropInputField, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (propTargetIndex.TryReadProperty(ref reader, options, PropTargetIndex, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FetchFields = propFetchFields.Value,
+			Fields = propFields.Value,
+			Format = propFormat.Value,
+			InputField = propInputField.Value,
+			Script = propScript.Value,
+			TargetField = propTargetField.Value,
+			TargetIndex = propTargetIndex.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFetchFields, value.FetchFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>(o, v, null));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>(o, v, null, null));
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropInputField, value.InputField, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteProperty(options, PropTargetIndex, value.TargetIndex, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldConverter))]
 public sealed partial class RuntimeField
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeField(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public RuntimeField()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RuntimeField()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fetch_fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? FetchFields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? FetchFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For type <c>composite</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? Fields { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A custom format for <c>date</c> type runtime fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -58,7 +176,6 @@ public sealed partial class RuntimeField
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("input_field")]
 	public Elastic.Clients.Elasticsearch.Field? InputField { get; set; }
 
 	/// <summary>
@@ -66,7 +183,6 @@ public sealed partial class RuntimeField
 	/// Painless script executed at query time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -74,7 +190,6 @@ public sealed partial class RuntimeField
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
 	/// <summary>
@@ -82,7 +197,6 @@ public sealed partial class RuntimeField
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? TargetIndex { get; set; }
 
 	/// <summary>
@@ -90,71 +204,69 @@ public sealed partial class RuntimeField
 	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
 
-public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDescriptor<RuntimeFieldDescriptor<TDocument>>
+public readonly partial struct RuntimeFieldDescriptor<TDocument>
 {
-	internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeField Instance { get; init; }
 
-	public RuntimeFieldDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeField instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? FetchFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> FetchFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>> FetchFieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>>[] FetchFieldsDescriptorActions { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor> FieldsValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? InputFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? TargetIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.RuntimeField instance) => new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> FetchFields(ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? fetchFields)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? value)
 	{
-		FetchFieldsDescriptor = null;
-		FetchFieldsDescriptorAction = null;
-		FetchFieldsDescriptorActions = null;
-		FetchFieldsValue = fetchFields;
-		return Self;
+		Instance.FetchFields = value;
+		return this;
 	}
 
-	public RuntimeFieldDescriptor<TDocument> FetchFields(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(params Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields[] values)
 	{
-		FetchFieldsValue = null;
-		FetchFieldsDescriptorAction = null;
-		FetchFieldsDescriptorActions = null;
-		FetchFieldsDescriptor = descriptor;
-		return Self;
+		Instance.FetchFields = [.. values];
+		return this;
 	}
 
-	public RuntimeFieldDescriptor<TDocument> FetchFields(Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(params System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>>[] actions)
 	{
-		FetchFieldsValue = null;
-		FetchFieldsDescriptor = null;
-		FetchFieldsDescriptorActions = null;
-		FetchFieldsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>.Build(action));
+		}
 
-	public RuntimeFieldDescriptor<TDocument> FetchFields(params Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>>[] configure)
-	{
-		FetchFieldsValue = null;
-		FetchFieldsDescriptor = null;
-		FetchFieldsDescriptorAction = null;
-		FetchFieldsDescriptorActions = configure;
-		return Self;
+		Instance.FetchFields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -162,287 +274,10 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	/// For type <c>composite</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> Fields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? value)
 	{
-		FieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A custom format for <c>date</c> type runtime fields.
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> InputField(Elastic.Clients.Elasticsearch.Field? inputField)
-	{
-		InputFieldValue = inputField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> InputField<TValue>(Expression<Func<TDocument, TValue>> inputField)
-	{
-		InputFieldValue = inputField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> InputField(Expression<Func<TDocument, object>> inputField)
-	{
-		InputFieldValue = inputField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
-	}
-
-	public RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public RuntimeFieldDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.IndexName? targetIndex)
-	{
-		TargetIndexValue = targetIndex;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FetchFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FetchFieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FetchFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>(FetchFieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FetchFieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			writer.WriteStartArray();
-			foreach (var action in FetchFieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (FetchFieldsValue is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			JsonSerializer.Serialize(writer, FetchFieldsValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (InputFieldValue is not null)
-		{
-			writer.WritePropertyName("input_field");
-			JsonSerializer.Serialize(writer, InputFieldValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (TargetIndexValue is not null)
-		{
-			writer.WritePropertyName("target_index");
-			JsonSerializer.Serialize(writer, TargetIndexValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<RuntimeFieldDescriptor>
-{
-	internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
-
-	public RuntimeFieldDescriptor() : base()
-	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? FetchFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor FetchFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor> FetchFieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor>[] FetchFieldsDescriptorActions { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor> FieldsValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? InputFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? TargetIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor FetchFields(ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? fetchFields)
-	{
-		FetchFieldsDescriptor = null;
-		FetchFieldsDescriptorAction = null;
-		FetchFieldsDescriptorActions = null;
-		FetchFieldsValue = fetchFields;
-		return Self;
-	}
-
-	public RuntimeFieldDescriptor FetchFields(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor descriptor)
-	{
-		FetchFieldsValue = null;
-		FetchFieldsDescriptorAction = null;
-		FetchFieldsDescriptorActions = null;
-		FetchFieldsDescriptor = descriptor;
-		return Self;
-	}
-
-	public RuntimeFieldDescriptor FetchFields(Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor> configure)
-	{
-		FetchFieldsValue = null;
-		FetchFieldsDescriptor = null;
-		FetchFieldsDescriptorActions = null;
-		FetchFieldsDescriptorAction = configure;
-		return Self;
-	}
-
-	public RuntimeFieldDescriptor FetchFields(params Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor>[] configure)
-	{
-		FetchFieldsValue = null;
-		FetchFieldsDescriptor = null;
-		FetchFieldsDescriptorAction = null;
-		FetchFieldsDescriptorActions = configure;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -450,10 +285,35 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// For type <c>composite</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor Fields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields()
 	{
-		FieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor>());
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> AddField(string key, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField value)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>();
+		Instance.Fields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> AddField(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor> action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -461,10 +321,10 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// A custom format for <c>date</c> type runtime fields.
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -472,10 +332,10 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor InputField(Elastic.Clients.Elasticsearch.Field? inputField)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> InputField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		InputFieldValue = inputField;
-		return Self;
+		Instance.InputField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -483,21 +343,10 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor InputField<TDocument, TValue>(Expression<Func<TDocument, TValue>> inputField)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> InputField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		InputFieldValue = inputField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor InputField<TDocument>(Expression<Func<TDocument, object>> inputField)
-	{
-		InputFieldValue = inputField;
-		return Self;
+		Instance.InputField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -505,28 +354,32 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// Painless script executed at query time.
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public RuntimeFieldDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -534,10 +387,10 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -545,10 +398,10 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -556,21 +409,10 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public RuntimeFieldDescriptor TargetIndex(Elastic.Clients.Elasticsearch.IndexName? targetIndex)
-	{
-		TargetIndexValue = targetIndex;
-		return Self;
+		Instance.TargetIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -578,94 +420,258 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
 	/// </para>
 	/// </summary>
-	public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RuntimeField Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (FetchFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FetchFieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FetchFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor(FetchFieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FetchFieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			writer.WriteStartArray();
-			foreach (var action in FetchFieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-			writer.WriteEndArray();
-		}
-		else if (FetchFieldsValue is not null)
-		{
-			writer.WritePropertyName("fetch_fields");
-			JsonSerializer.Serialize(writer, FetchFieldsValue, options);
-		}
+public readonly partial struct RuntimeFieldDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeField Instance { get; init; }
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeField instance)
+	{
+		Instance = instance;
+	}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		if (InputFieldValue is not null)
-		{
-			writer.WritePropertyName("input_field");
-			JsonSerializer.Serialize(writer, InputFieldValue, options);
-		}
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeField instance) => new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor descriptor) => descriptor.Instance;
 
-		if (ScriptDescriptor is not null)
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? value)
+	{
+		Instance.FetchFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(params Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields[] values)
+	{
+		Instance.FetchFields = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(params System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor.Build(action));
 		}
 
-		if (TargetFieldValue is not null)
+		Instance.FetchFields = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields<T>(params System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<T>.Build(action));
 		}
 
-		if (TargetIndexValue is not null)
-		{
-			writer.WritePropertyName("target_index");
-			JsonSerializer.Serialize(writer, TargetIndexValue, options);
-		}
+		Instance.FetchFields = items;
+		return this;
+	}
 
-		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields()
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor AddField(string key, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField value)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>();
+		Instance.Fields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor AddField(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor> action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom format for <c>date</c> type runtime fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Format(string? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor InputField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.InputField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor InputField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.InputField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TargetField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.TargetField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor TargetIndex(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.TargetIndex = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RuntimeField Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor(new Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

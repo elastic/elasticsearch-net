@@ -21,7 +21,9 @@ public abstract class DateMath
 	public static DateMathExpression Now => new("now");
 
 	internal DateMath(string anchor) => Anchor = anchor;
+
 	internal DateMath(DateTime anchor) => Anchor = anchor;
+
 	internal DateMath(Union<DateTime, string> anchor, DateMathTime range, DateMathOperation operation)
 	{
 		anchor.ThrowIfNull(nameof(anchor));
@@ -45,10 +47,12 @@ public abstract class DateMath
 
 	public static DateMath FromString(string dateMath)
 	{
-		if (dateMath == null) return null;
+		if (dateMath == null)
+			return null;
 
 		var match = DateMathRegex.Match(dateMath);
-		if (!match.Success) throw new ArgumentException($"Cannot create a {nameof(DateMathExpression)} out of '{dateMath}'");
+		if (!match.Success)
+			throw new ArgumentException($"Cannot create a {nameof(DateMathExpression)} out of '{dateMath}'");
 
 		var math = new DateMathExpression(match.Groups["anchor"].Value);
 
@@ -58,7 +62,8 @@ public abstract class DateMath
 			do
 			{
 				var nextRangeStart = rangeString.Substring(1).IndexOfAny(new[] { '+', '-', '/' });
-				if (nextRangeStart == -1) nextRangeStart = rangeString.Length - 1;
+				if (nextRangeStart == -1)
+					nextRangeStart = rangeString.Length - 1;
 				var unit = rangeString.Substring(1, nextRangeStart);
 				if (rangeString.StartsWith("+", StringComparison.Ordinal))
 				{
@@ -70,7 +75,8 @@ public abstract class DateMath
 					math = math.Subtract(unit);
 					rangeString = rangeString.Substring(nextRangeStart + 1);
 				}
-				else rangeString = null;
+				else
+					rangeString = null;
 			} while (!rangeString.IsNullOrEmpty());
 		}
 
@@ -89,7 +95,8 @@ public abstract class DateMath
 
 	public override string ToString()
 	{
-		if (!IsValid) return string.Empty;
+		if (!IsValid)
+			return string.Empty;
 
 		var separator = Round.HasValue || Ranges.HasAny() ? "||" : string.Empty;
 
@@ -143,6 +150,7 @@ public abstract class DateMath
 				builder.Append(':');
 				AppendTwoDigitNumber(builder, offset.Minutes);
 				break;
+
 			case DateTimeKind.Utc:
 				builder.Append('Z');
 				break;
@@ -168,7 +176,6 @@ internal sealed class DateMathConverter : JsonConverter<DateMath>
 		// TODO: Performance - Review potential to avoid allocation on DateTime path and use Span<byte>
 
 		var value = reader.GetString();
-		reader.Read();
 
 		if (!value.Contains("|") && DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dateTime))
 			return DateMath.Anchored(dateTime);
@@ -178,12 +185,6 @@ internal sealed class DateMathConverter : JsonConverter<DateMath>
 
 	public override void Write(Utf8JsonWriter writer, DateMath value, JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStringValue(value.ToString());
 	}
 }

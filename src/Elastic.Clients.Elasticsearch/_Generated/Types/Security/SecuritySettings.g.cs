@@ -17,136 +17,177 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class SecuritySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SecuritySettings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+
+	public override Elastic.Clients.Elasticsearch.Security.SecuritySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SecuritySettings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SecuritySettingsConverter))]
 public sealed partial class SecuritySettings
 {
-	[JsonInclude, JsonPropertyName("index")]
+#if NET7_0_OR_GREATER
+	public SecuritySettings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SecuritySettings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
 }
 
-public sealed partial class SecuritySettingsDescriptor<TDocument> : SerializableDescriptor<SecuritySettingsDescriptor<TDocument>>
+public readonly partial struct SecuritySettingsDescriptor<TDocument>
 {
-	internal SecuritySettingsDescriptor(Action<SecuritySettingsDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SecuritySettings Instance { get; init; }
 
-	public SecuritySettingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SecuritySettingsDescriptor(Elastic.Clients.Elasticsearch.Security.SecuritySettings instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> IndexDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; set; }
-
-	public SecuritySettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SecuritySettingsDescriptor()
 	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexValue = index;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SecuritySettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.SecuritySettings instance) => new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptor = descriptor;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public SecuritySettingsDescriptor<TDocument> Index(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> Index()
 	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = configure;
-		return Self;
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument> Index(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (IndexDescriptor is not null)
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SecuritySettings Build(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>(IndexDescriptorAction), options);
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SecuritySettingsDescriptor : SerializableDescriptor<SecuritySettingsDescriptor>
+public readonly partial struct SecuritySettingsDescriptor
 {
-	internal SecuritySettingsDescriptor(Action<SecuritySettingsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SecuritySettings Instance { get; init; }
 
-	public SecuritySettingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SecuritySettingsDescriptor(Elastic.Clients.Elasticsearch.Security.SecuritySettings instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor IndexDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> IndexDescriptorAction { get; set; }
-
-	public SecuritySettingsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SecuritySettingsDescriptor()
 	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexValue = index;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SecuritySettingsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor(Elastic.Clients.Elasticsearch.Security.SecuritySettings instance) => new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptor = descriptor;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public SecuritySettingsDescriptor Index(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor Index()
 	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = configure;
-		return Self;
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor Index(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IndexDescriptor is not null)
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor Index<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
+	{
+		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SecuritySettings Build(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor(IndexDescriptorAction), options);
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor(new Elastic.Clients.Elasticsearch.Security.SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ScoreSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScoreSort>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+
+	public override Elastic.Clients.Elasticsearch.ScoreSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ScoreSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Order = propOrder.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScoreSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScoreSortConverter))]
 public sealed partial class ScoreSort
 {
-	[JsonInclude, JsonPropertyName("order")]
+#if NET7_0_OR_GREATER
+	public ScoreSort()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ScoreSort()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScoreSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 }
 
-public sealed partial class ScoreSortDescriptor : SerializableDescriptor<ScoreSortDescriptor>
+public readonly partial struct ScoreSortDescriptor
 {
-	internal ScoreSortDescriptor(Action<ScoreSortDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ScoreSort Instance { get; init; }
 
-	public ScoreSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScoreSortDescriptor(Elastic.Clients.Elasticsearch.ScoreSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
-	public ScoreSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScoreSortDescriptor()
 	{
-		OrderValue = order;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.ScoreSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.ScoreSortDescriptor(Elastic.Clients.Elasticsearch.ScoreSort instance) => new Elastic.Clients.Elasticsearch.ScoreSortDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ScoreSort(Elastic.Clients.Elasticsearch.ScoreSortDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.ScoreSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
-		writer.WriteStartObject();
-		if (OrderValue is not null)
+		Instance.Order = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ScoreSort Build(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
+			return new Elastic.Clients.Elasticsearch.ScoreSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.ScoreSortDescriptor(new Elastic.Clients.Elasticsearch.ScoreSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,40 +17,304 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class IcuCollationProperty : IProperty
+internal sealed partial class IcuCollationPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>
 {
-	[JsonInclude, JsonPropertyName("alternate")]
+	private static readonly System.Text.Json.JsonEncodedText PropAlternate = System.Text.Json.JsonEncodedText.Encode("alternate");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseFirst = System.Text.Json.JsonEncodedText.Encode("case_first");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseLevel = System.Text.Json.JsonEncodedText.Encode("case_level");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropCountry = System.Text.Json.JsonEncodedText.Encode("country");
+	private static readonly System.Text.Json.JsonEncodedText PropDecomposition = System.Text.Json.JsonEncodedText.Encode("decomposition");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropHiraganaQuaternaryMode = System.Text.Json.JsonEncodedText.Encode("hiragana_quaternary_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropNumeric = System.Text.Json.JsonEncodedText.Encode("numeric");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropStrength = System.Text.Json.JsonEncodedText.Encode("strength");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVariableTop = System.Text.Json.JsonEncodedText.Encode("variable_top");
+	private static readonly System.Text.Json.JsonEncodedText PropVariant = System.Text.Json.JsonEncodedText.Encode("variant");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate?> propAlternate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst?> propCaseFirst = default;
+		LocalJsonValue<bool?> propCaseLevel = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<string?> propCountry = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition?> propDecomposition = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<bool?> propHiraganaQuaternaryMode = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions?> propIndexOptions = default;
+		LocalJsonValue<string?> propLanguage = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<bool?> propNorms = default;
+		LocalJsonValue<string?> propNullValue = default;
+		LocalJsonValue<bool?> propNumeric = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<string?> propRules = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength?> propStrength = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<string?> propVariableTop = default;
+		LocalJsonValue<string?> propVariant = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlternate.TryReadProperty(ref reader, options, PropAlternate, null))
+			{
+				continue;
+			}
+
+			if (propCaseFirst.TryReadProperty(ref reader, options, PropCaseFirst, null))
+			{
+				continue;
+			}
+
+			if (propCaseLevel.TryReadProperty(ref reader, options, PropCaseLevel, null))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propCountry.TryReadProperty(ref reader, options, PropCountry, null))
+			{
+				continue;
+			}
+
+			if (propDecomposition.TryReadProperty(ref reader, options, PropDecomposition, null))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propHiraganaQuaternaryMode.TryReadProperty(ref reader, options, PropHiraganaQuaternaryMode, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
+			{
+				continue;
+			}
+
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNorms.TryReadProperty(ref reader, options, PropNorms, null))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
+			{
+				continue;
+			}
+
+			if (propNumeric.TryReadProperty(ref reader, options, PropNumeric, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propRules.TryReadProperty(ref reader, options, PropRules, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propStrength.TryReadProperty(ref reader, options, PropStrength, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVariableTop.TryReadProperty(ref reader, options, PropVariableTop, null))
+			{
+				continue;
+			}
+
+			if (propVariant.TryReadProperty(ref reader, options, PropVariant, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Alternate = propAlternate.Value,
+			CaseFirst = propCaseFirst.Value,
+			CaseLevel = propCaseLevel.Value,
+			CopyTo = propCopyTo.Value,
+			Country = propCountry.Value,
+			Decomposition = propDecomposition.Value,
+			DocValues = propDocValues.Value,
+			Dynamic = propDynamic.Value,
+			Fields = propFields.Value,
+			HiraganaQuaternaryMode = propHiraganaQuaternaryMode.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			Index = propIndex.Value,
+			IndexOptions = propIndexOptions.Value,
+			Language = propLanguage.Value,
+			Meta = propMeta.Value,
+			Norms = propNorms.Value,
+			NullValue = propNullValue.Value,
+			Numeric = propNumeric.Value,
+			Properties = propProperties.Value,
+			Rules = propRules.Value,
+			Store = propStore.Value,
+			Strength = propStrength.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			VariableTop = propVariableTop.Value,
+			Variant = propVariant.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAlternate, value.Alternate, null, null);
+		writer.WriteProperty(options, PropCaseFirst, value.CaseFirst, null, null);
+		writer.WriteProperty(options, PropCaseLevel, value.CaseLevel, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropCountry, value.Country, null, null);
+		writer.WriteProperty(options, PropDecomposition, value.Decomposition, null, null);
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropHiraganaQuaternaryMode, value.HiraganaQuaternaryMode, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNorms, value.Norms, null, null);
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropNumeric, value.Numeric, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropRules, value.Rules, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropStrength, value.Strength, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVariableTop, value.VariableTop, null, null);
+		writer.WriteProperty(options, PropVariant, value.Variant, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyConverter))]
+public sealed partial class IcuCollationProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public IcuCollationProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IcuCollationProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? Alternate { get; set; }
-	[JsonInclude, JsonPropertyName("case_first")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? CaseFirst { get; set; }
-	[JsonInclude, JsonPropertyName("case_level")]
 	public bool? CaseLevel { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("country")]
 	public string? Country { get; set; }
-	[JsonInclude, JsonPropertyName("decomposition")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? Decomposition { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("hiragana_quaternary_mode")]
 	public bool? HiraganaQuaternaryMode { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
@@ -58,11 +322,8 @@ public sealed partial class IcuCollationProperty : IProperty
 	/// Should the field be searchable?
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-	[JsonInclude, JsonPropertyName("language")]
 	public string? Language { get; set; }
 
 	/// <summary>
@@ -70,9 +331,7 @@ public sealed partial class IcuCollationProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("norms")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? Norms { get; set; }
 
 	/// <summary>
@@ -80,142 +339,115 @@ public sealed partial class IcuCollationProperty : IProperty
 	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("numeric")]
 	public bool? Numeric { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("rules")]
 	public string? Rules { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("strength")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_collation_keyword";
 
-	[JsonInclude, JsonPropertyName("variable_top")]
 	public string? VariableTop { get; set; }
-	[JsonInclude, JsonPropertyName("variant")]
 	public string? Variant { get; set; }
 }
 
-public sealed partial class IcuCollationPropertyDescriptor<TDocument> : SerializableDescriptor<IcuCollationPropertyDescriptor<TDocument>>, IBuildableDescriptor<IcuCollationProperty>
+public readonly partial struct IcuCollationPropertyDescriptor<TDocument>
 {
-	internal IcuCollationPropertyDescriptor(Action<IcuCollationPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Instance { get; init; }
 
-	public IcuCollationPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuCollationPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? AlternateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? CaseFirstValue { get; set; }
-	private bool? CaseLevelValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private string? CountryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? DecompositionValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private bool? HiraganaQuaternaryModeValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-	private string? LanguageValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private bool? NormsValue { get; set; }
-	private string? NullValueValue { get; set; }
-	private bool? NumericValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? RulesValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? StrengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-	private string? VariableTopValue { get; set; }
-	private string? VariantValue { get; set; }
-
-	public IcuCollationPropertyDescriptor<TDocument> Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? alternate)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuCollationPropertyDescriptor()
 	{
-		AlternateValue = alternate;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> CaseFirst(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? caseFirst)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? value)
 	{
-		CaseFirstValue = caseFirst;
-		return Self;
+		Instance.Alternate = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> CaseLevel(bool? caseLevel = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> CaseFirst(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? value)
 	{
-		CaseLevelValue = caseLevel;
-		return Self;
+		Instance.CaseFirst = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> CaseLevel(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.CaseLevel = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Country(string? country)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		CountryValue = country;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Decomposition(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? decomposition)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		DecompositionValue = decomposition;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Country(string? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.Country = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Decomposition(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.Decomposition = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> HiraganaQuaternaryMode(bool? hiraganaQuaternaryMode = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		HiraganaQuaternaryModeValue = hiraganaQuaternaryMode;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> HiraganaQuaternaryMode(bool? value = true)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.HiraganaQuaternaryMode = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> IgnoreAbove(int? value)
+	{
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -223,22 +455,22 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	/// Should the field be searchable?
 	/// </para>
 	/// </summary>
-	public IcuCollationPropertyDescriptor<TDocument> Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Index(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? value)
 	{
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Language(string? language)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Language(string? value)
 	{
-		LanguageValue = language;
-		return Self;
+		Instance.Language = value;
+		return this;
 	}
 
 	/// <summary>
@@ -246,16 +478,45 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public IcuCollationPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Norms(bool? norms = true)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Meta()
 	{
-		NormsValue = norms;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> AddMeta(string key, string value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Norms(bool? value = true)
+	{
+		Instance.Norms = value;
+		return this;
 	}
 
 	/// <summary>
@@ -263,374 +524,181 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
 	/// </para>
 	/// </summary>
-	public IcuCollationPropertyDescriptor<TDocument> NullValue(string? nullValue)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> NullValue(string? value)
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Numeric(bool? numeric = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Numeric(bool? value = true)
 	{
-		NumericValue = numeric;
-		return Self;
+		Instance.Numeric = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Rules(string? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Rules = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Rules(string? rules)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Store(bool? value = true)
 	{
-		RulesValue = rules;
-		return Self;
+		Instance.Store = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Strength(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Strength = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Strength(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? strength)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		StrengthValue = strength;
-		return Self;
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> VariableTop(string? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.VariableTop = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> VariableTop(string? variableTop)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Variant(string? value)
 	{
-		VariableTopValue = variableTop;
-		return Self;
+		Instance.Variant = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Variant(string? variant)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>>? action)
 	{
-		VariantValue = variant;
-		return Self;
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AlternateValue is not null)
-		{
-			writer.WritePropertyName("alternate");
-			JsonSerializer.Serialize(writer, AlternateValue, options);
-		}
-
-		if (CaseFirstValue is not null)
-		{
-			writer.WritePropertyName("case_first");
-			JsonSerializer.Serialize(writer, CaseFirstValue, options);
-		}
-
-		if (CaseLevelValue.HasValue)
-		{
-			writer.WritePropertyName("case_level");
-			writer.WriteBooleanValue(CaseLevelValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(CountryValue))
-		{
-			writer.WritePropertyName("country");
-			writer.WriteStringValue(CountryValue);
-		}
-
-		if (DecompositionValue is not null)
-		{
-			writer.WritePropertyName("decomposition");
-			JsonSerializer.Serialize(writer, DecompositionValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (HiraganaQuaternaryModeValue.HasValue)
-		{
-			writer.WritePropertyName("hiragana_quaternary_mode");
-			writer.WriteBooleanValue(HiraganaQuaternaryModeValue.Value);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(LanguageValue))
-		{
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(LanguageValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NormsValue.HasValue)
-		{
-			writer.WritePropertyName("norms");
-			writer.WriteBooleanValue(NormsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NullValueValue))
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteStringValue(NullValueValue);
-		}
-
-		if (NumericValue.HasValue)
-		{
-			writer.WritePropertyName("numeric");
-			writer.WriteBooleanValue(NumericValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(RulesValue))
-		{
-			writer.WritePropertyName("rules");
-			writer.WriteStringValue(RulesValue);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (StrengthValue is not null)
-		{
-			writer.WritePropertyName("strength");
-			JsonSerializer.Serialize(writer, StrengthValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("icu_collation_keyword");
-		if (!string.IsNullOrEmpty(VariableTopValue))
-		{
-			writer.WritePropertyName("variable_top");
-			writer.WriteStringValue(VariableTopValue);
-		}
-
-		if (!string.IsNullOrEmpty(VariantValue))
-		{
-			writer.WritePropertyName("variant");
-			writer.WriteStringValue(VariantValue);
-		}
-
-		writer.WriteEndObject();
-	}
-
-	IcuCollationProperty IBuildableDescriptor<IcuCollationProperty>.Build() => new()
-	{
-		Alternate = AlternateValue,
-		CaseFirst = CaseFirstValue,
-		CaseLevel = CaseLevelValue,
-		CopyTo = CopyToValue,
-		Country = CountryValue,
-		Decomposition = DecompositionValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		HiraganaQuaternaryMode = HiraganaQuaternaryModeValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Index = IndexValue,
-		IndexOptions = IndexOptionsValue,
-		Language = LanguageValue,
-		Meta = MetaValue,
-		Norms = NormsValue,
-		NullValue = NullValueValue,
-		Numeric = NumericValue,
-		Properties = PropertiesValue,
-		Rules = RulesValue,
-		Store = StoreValue,
-		Strength = StrengthValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue,
-		VariableTop = VariableTopValue,
-		Variant = VariantValue
-	};
 }
 
-public sealed partial class IcuCollationPropertyDescriptor : SerializableDescriptor<IcuCollationPropertyDescriptor>, IBuildableDescriptor<IcuCollationProperty>
+public readonly partial struct IcuCollationPropertyDescriptor
 {
-	internal IcuCollationPropertyDescriptor(Action<IcuCollationPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Instance { get; init; }
 
-	public IcuCollationPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuCollationPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? AlternateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? CaseFirstValue { get; set; }
-	private bool? CaseLevelValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private string? CountryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? DecompositionValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private bool? HiraganaQuaternaryModeValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-	private string? LanguageValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private bool? NormsValue { get; set; }
-	private string? NullValueValue { get; set; }
-	private bool? NumericValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? RulesValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? StrengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-	private string? VariableTopValue { get; set; }
-	private string? VariantValue { get; set; }
-
-	public IcuCollationPropertyDescriptor Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? alternate)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuCollationPropertyDescriptor()
 	{
-		AlternateValue = alternate;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IcuCollationPropertyDescriptor CaseFirst(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? caseFirst)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? value)
 	{
-		CaseFirstValue = caseFirst;
-		return Self;
+		Instance.Alternate = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor CaseLevel(bool? caseLevel = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor CaseFirst(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? value)
 	{
-		CaseLevelValue = caseLevel;
-		return Self;
+		Instance.CaseFirst = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor CaseLevel(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.CaseLevel = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Country(string? country)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		CountryValue = country;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Decomposition(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? decomposition)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		DecompositionValue = decomposition;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Country(string? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.Country = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Decomposition(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.Decomposition = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor HiraganaQuaternaryMode(bool? hiraganaQuaternaryMode = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		HiraganaQuaternaryModeValue = hiraganaQuaternaryMode;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor HiraganaQuaternaryMode(bool? value = true)
+	{
+		Instance.HiraganaQuaternaryMode = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor IgnoreAbove(int? value)
+	{
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -638,22 +706,22 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	/// Should the field be searchable?
 	/// </para>
 	/// </summary>
-	public IcuCollationPropertyDescriptor Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Index(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? value)
 	{
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Language(string? language)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Language(string? value)
 	{
-		LanguageValue = language;
-		return Self;
+		Instance.Language = value;
+		return this;
 	}
 
 	/// <summary>
@@ -661,16 +729,45 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public IcuCollationPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Norms(bool? norms = true)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Meta()
 	{
-		NormsValue = norms;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor AddMeta(string key, string value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Norms(bool? value = true)
+	{
+		Instance.Norms = value;
+		return this;
 	}
 
 	/// <summary>
@@ -678,258 +775,82 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
 	/// </para>
 	/// </summary>
-	public IcuCollationPropertyDescriptor NullValue(string? nullValue)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor NullValue(string? value)
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Numeric(bool? numeric = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Numeric(bool? value = true)
 	{
-		NumericValue = numeric;
-		return Self;
+		Instance.Numeric = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Rules(string? rules)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Rules(string? value)
 	{
-		RulesValue = rules;
-		return Self;
+		Instance.Rules = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Store(bool? value = true)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Store = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Strength(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? strength)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Strength(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? value)
 	{
-		StrengthValue = strength;
-		return Self;
+		Instance.Strength = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor VariableTop(string? variableTop)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor VariableTop(string? value)
 	{
-		VariableTopValue = variableTop;
-		return Self;
+		Instance.VariableTop = value;
+		return this;
 	}
 
-	public IcuCollationPropertyDescriptor Variant(string? variant)
+	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Variant(string? value)
 	{
-		VariantValue = variant;
-		return Self;
+		Instance.Variant = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AlternateValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("alternate");
-			JsonSerializer.Serialize(writer, AlternateValue, options);
+			return new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CaseFirstValue is not null)
-		{
-			writer.WritePropertyName("case_first");
-			JsonSerializer.Serialize(writer, CaseFirstValue, options);
-		}
-
-		if (CaseLevelValue.HasValue)
-		{
-			writer.WritePropertyName("case_level");
-			writer.WriteBooleanValue(CaseLevelValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(CountryValue))
-		{
-			writer.WritePropertyName("country");
-			writer.WriteStringValue(CountryValue);
-		}
-
-		if (DecompositionValue is not null)
-		{
-			writer.WritePropertyName("decomposition");
-			JsonSerializer.Serialize(writer, DecompositionValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (HiraganaQuaternaryModeValue.HasValue)
-		{
-			writer.WritePropertyName("hiragana_quaternary_mode");
-			writer.WriteBooleanValue(HiraganaQuaternaryModeValue.Value);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(LanguageValue))
-		{
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(LanguageValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NormsValue.HasValue)
-		{
-			writer.WritePropertyName("norms");
-			writer.WriteBooleanValue(NormsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NullValueValue))
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteStringValue(NullValueValue);
-		}
-
-		if (NumericValue.HasValue)
-		{
-			writer.WritePropertyName("numeric");
-			writer.WriteBooleanValue(NumericValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(RulesValue))
-		{
-			writer.WritePropertyName("rules");
-			writer.WriteStringValue(RulesValue);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (StrengthValue is not null)
-		{
-			writer.WritePropertyName("strength");
-			JsonSerializer.Serialize(writer, StrengthValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("icu_collation_keyword");
-		if (!string.IsNullOrEmpty(VariableTopValue))
-		{
-			writer.WritePropertyName("variable_top");
-			writer.WriteStringValue(VariableTopValue);
-		}
-
-		if (!string.IsNullOrEmpty(VariantValue))
-		{
-			writer.WritePropertyName("variant");
-			writer.WriteStringValue(VariantValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	IcuCollationProperty IBuildableDescriptor<IcuCollationProperty>.Build() => new()
-	{
-		Alternate = AlternateValue,
-		CaseFirst = CaseFirstValue,
-		CaseLevel = CaseLevelValue,
-		CopyTo = CopyToValue,
-		Country = CountryValue,
-		Decomposition = DecompositionValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		HiraganaQuaternaryMode = HiraganaQuaternaryModeValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Index = IndexValue,
-		IndexOptions = IndexOptionsValue,
-		Language = LanguageValue,
-		Meta = MetaValue,
-		Norms = NormsValue,
-		NullValue = NullValueValue,
-		Numeric = NumericValue,
-		Properties = PropertiesValue,
-		Rules = RulesValue,
-		Store = StoreValue,
-		Strength = StrengthValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue,
-		VariableTop = VariableTopValue,
-		Variant = VariantValue
-	};
 }

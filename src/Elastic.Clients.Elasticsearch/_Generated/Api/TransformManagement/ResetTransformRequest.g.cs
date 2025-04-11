@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class ResetTransformRequestParameters : RequestParameters
+public sealed partial class ResetTransformRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,25 +32,74 @@ public sealed partial class ResetTransformRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class ResetTransformRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest>
+{
+	public override Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Reset a transform.
-/// Resets a transform.
+/// </para>
+/// <para>
 /// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 /// If the destination index was created by the transform, it is deleted.
 /// </para>
 /// </summary>
-public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestConverter))]
+public sealed partial class ResetTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ResetTransformRequest(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ResetTransformRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ResetTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementResetTransform;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TransformManagementResetTransform;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -65,47 +107,147 @@ public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformR
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// If this value is <c>true</c>, the transform is reset regardless of its current state. If it's <c>false</c>, the transform
 	/// must be stopped before it can be reset.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Reset a transform.
-/// Resets a transform.
+/// </para>
+/// <para>
 /// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 /// If the destination index was created by the transform, it is deleted.
 /// </para>
 /// </summary>
-public sealed partial class ResetTransformRequestDescriptor : RequestDescriptor<ResetTransformRequestDescriptor, ResetTransformRequestParameters>
+public readonly partial struct ResetTransformRequestDescriptor
 {
-	internal ResetTransformRequestDescriptor(Action<ResetTransformRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest Instance { get; init; }
 
-	public ResetTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ResetTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementResetTransform;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "transform.reset_transform";
-
-	public ResetTransformRequestDescriptor Force(bool? force = true) => Qs("force", force);
-
-	public ResetTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id transformId)
+	public ResetTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId)
 	{
-		RouteValues.Required("transform_id", transformId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest(transformId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ResetTransformRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this value is <c>true</c>, the transform is reset regardless of its current state. If it's <c>false</c>, the transform
+	/// must be stopped before it can be reset.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

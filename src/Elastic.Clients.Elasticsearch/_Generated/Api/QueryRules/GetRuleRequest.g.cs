@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-public sealed partial class GetRuleRequestParameters : RequestParameters
+public sealed partial class GetRuleRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetRuleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest>
+{
+	public override Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,19 +62,53 @@ public sealed partial class GetRuleRequestParameters : RequestParameters
 /// Get details about a query rule within a query ruleset.
 /// </para>
 /// </summary>
-public sealed partial class GetRuleRequest : PlainRequest<GetRuleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestConverter))]
+public sealed partial class GetRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetRuleRequest(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId) : base(r => r.Required("ruleset_id", rulesetId).Required("rule_id", ruleId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetRuleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesGetRule;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.QueryRulesGetRule;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "query_rules.get_rule";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query rule within the specified ruleset to retrieve
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset containing the rule to retrieve
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
 /// <summary>
@@ -61,35 +117,99 @@ public sealed partial class GetRuleRequest : PlainRequest<GetRuleRequestParamete
 /// Get details about a query rule within a query ruleset.
 /// </para>
 /// </summary>
-public sealed partial class GetRuleRequestDescriptor : RequestDescriptor<GetRuleRequestDescriptor, GetRuleRequestParameters>
+public readonly partial struct GetRuleRequestDescriptor
 {
-	internal GetRuleRequestDescriptor(Action<GetRuleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest Instance { get; init; }
 
-	public GetRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId) : base(r => r.Required("ruleset_id", rulesetId).Required("rule_id", ruleId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRuleRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesGetRule;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "query_rules.get_rule";
-
-	public GetRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id ruleId)
+	public GetRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
-		RouteValues.Required("rule_id", ruleId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest(rulesetId, ruleId);
 	}
 
-	public GetRuleRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id rulesetId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetRuleRequestDescriptor()
 	{
-		RouteValues.Required("ruleset_id", rulesetId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query rule within the specified ruleset to retrieve
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.RuleId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset containing the rule to retrieve
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.RulesetId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest Build(System.Action<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

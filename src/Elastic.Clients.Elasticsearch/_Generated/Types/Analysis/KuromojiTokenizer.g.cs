@@ -17,166 +17,242 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KuromojiTokenizer : ITokenizer
+internal sealed partial class KuromojiTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>
 {
-	[JsonInclude, JsonPropertyName("discard_compound_token")]
+	private static readonly System.Text.Json.JsonEncodedText PropDiscardCompoundToken = System.Text.Json.JsonEncodedText.Encode("discard_compound_token");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscardPunctuation = System.Text.Json.JsonEncodedText.Encode("discard_punctuation");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNbestCost = System.Text.Json.JsonEncodedText.Encode("nbest_cost");
+	private static readonly System.Text.Json.JsonEncodedText PropNbestExamples = System.Text.Json.JsonEncodedText.Encode("nbest_examples");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary");
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionaryRules = System.Text.Json.JsonEncodedText.Encode("user_dictionary_rules");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDiscardCompoundToken = default;
+		LocalJsonValue<bool?> propDiscardPunctuation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode> propMode = default;
+		LocalJsonValue<int?> propNbestCost = default;
+		LocalJsonValue<string?> propNbestExamples = default;
+		LocalJsonValue<string?> propUserDictionary = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUserDictionaryRules = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDiscardCompoundToken.TryReadProperty(ref reader, options, PropDiscardCompoundToken, null))
+			{
+				continue;
+			}
+
+			if (propDiscardPunctuation.TryReadProperty(ref reader, options, PropDiscardPunctuation, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNbestCost.TryReadProperty(ref reader, options, PropNbestCost, null))
+			{
+				continue;
+			}
+
+			if (propNbestExamples.TryReadProperty(ref reader, options, PropNbestExamples, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUserDictionary.TryReadProperty(ref reader, options, PropUserDictionary, null))
+			{
+				continue;
+			}
+
+			if (propUserDictionaryRules.TryReadProperty(ref reader, options, PropUserDictionaryRules, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DiscardCompoundToken = propDiscardCompoundToken.Value,
+			DiscardPunctuation = propDiscardPunctuation.Value,
+			Mode = propMode.Value,
+			NbestCost = propNbestCost.Value,
+			NbestExamples = propNbestExamples.Value,
+			UserDictionary = propUserDictionary.Value,
+			UserDictionaryRules = propUserDictionaryRules.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDiscardCompoundToken, value.DiscardCompoundToken, null, null);
+		writer.WriteProperty(options, PropDiscardPunctuation, value.DiscardPunctuation, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNbestCost, value.NbestCost, null, null);
+		writer.WriteProperty(options, PropNbestExamples, value.NbestExamples, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
+		writer.WriteProperty(options, PropUserDictionaryRules, value.UserDictionaryRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerConverter))]
+public sealed partial class KuromojiTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiTokenizer(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)
+	{
+		Mode = mode;
+	}
+#if NET7_0_OR_GREATER
+	public KuromojiTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KuromojiTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KuromojiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? DiscardCompoundToken { get; set; }
-	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
-	[JsonInclude, JsonPropertyName("mode")]
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
-	[JsonInclude, JsonPropertyName("nbest_cost")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 	public int? NbestCost { get; set; }
-	[JsonInclude, JsonPropertyName("nbest_examples")]
 	public string? NbestExamples { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_tokenizer";
 
-	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
-	[JsonInclude, JsonPropertyName("user_dictionary_rules")]
-	public ICollection<string>? UserDictionaryRules { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
+	public System.Collections.Generic.ICollection<string>? UserDictionaryRules { get; set; }
 	public string? Version { get; set; }
 }
 
-public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptor<KuromojiTokenizerDescriptor>, IBuildableDescriptor<KuromojiTokenizer>
+public readonly partial struct KuromojiTokenizerDescriptor
 {
-	internal KuromojiTokenizerDescriptor(Action<KuromojiTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer Instance { get; init; }
 
-	public KuromojiTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? DiscardCompoundTokenValue { get; set; }
-	private bool? DiscardPunctuationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode ModeValue { get; set; }
-	private int? NbestCostValue { get; set; }
-	private string? NbestExamplesValue { get; set; }
-	private string? UserDictionaryValue { get; set; }
-	private ICollection<string>? UserDictionaryRulesValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KuromojiTokenizerDescriptor DiscardCompoundToken(bool? discardCompoundToken = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiTokenizerDescriptor()
 	{
-		DiscardCompoundTokenValue = discardCompoundToken;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KuromojiTokenizerDescriptor DiscardPunctuation(bool? discardPunctuation = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor DiscardCompoundToken(bool? value = true)
 	{
-		DiscardPunctuationValue = discardPunctuation;
-		return Self;
+		Instance.DiscardCompoundToken = value;
+		return this;
 	}
 
-	public KuromojiTokenizerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor DiscardPunctuation(bool? value = true)
 	{
-		ModeValue = mode;
-		return Self;
+		Instance.DiscardPunctuation = value;
+		return this;
 	}
 
-	public KuromojiTokenizerDescriptor NbestCost(int? nbestCost)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode value)
 	{
-		NbestCostValue = nbestCost;
-		return Self;
+		Instance.Mode = value;
+		return this;
 	}
 
-	public KuromojiTokenizerDescriptor NbestExamples(string? nbestExamples)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor NbestCost(int? value)
 	{
-		NbestExamplesValue = nbestExamples;
-		return Self;
+		Instance.NbestCost = value;
+		return this;
 	}
 
-	public KuromojiTokenizerDescriptor UserDictionary(string? userDictionary)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor NbestExamples(string? value)
 	{
-		UserDictionaryValue = userDictionary;
-		return Self;
+		Instance.NbestExamples = value;
+		return this;
 	}
 
-	public KuromojiTokenizerDescriptor UserDictionaryRules(ICollection<string>? userDictionaryRules)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor UserDictionary(string? value)
 	{
-		UserDictionaryRulesValue = userDictionaryRules;
-		return Self;
+		Instance.UserDictionary = value;
+		return this;
 	}
 
-	public KuromojiTokenizerDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor UserDictionaryRules(System.Collections.Generic.ICollection<string>? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.UserDictionaryRules = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor UserDictionaryRules(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (DiscardCompoundTokenValue.HasValue)
-		{
-			writer.WritePropertyName("discard_compound_token");
-			writer.WriteBooleanValue(DiscardCompoundTokenValue.Value);
-		}
-
-		if (DiscardPunctuationValue.HasValue)
-		{
-			writer.WritePropertyName("discard_punctuation");
-			writer.WriteBooleanValue(DiscardPunctuationValue.Value);
-		}
-
-		writer.WritePropertyName("mode");
-		JsonSerializer.Serialize(writer, ModeValue, options);
-		if (NbestCostValue.HasValue)
-		{
-			writer.WritePropertyName("nbest_cost");
-			writer.WriteNumberValue(NbestCostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NbestExamplesValue))
-		{
-			writer.WritePropertyName("nbest_examples");
-			writer.WriteStringValue(NbestExamplesValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("kuromoji_tokenizer");
-		if (!string.IsNullOrEmpty(UserDictionaryValue))
-		{
-			writer.WritePropertyName("user_dictionary");
-			writer.WriteStringValue(UserDictionaryValue);
-		}
-
-		if (UserDictionaryRulesValue is not null)
-		{
-			writer.WritePropertyName("user_dictionary_rules");
-			JsonSerializer.Serialize(writer, UserDictionaryRulesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.UserDictionaryRules = [.. values];
+		return this;
 	}
 
-	KuromojiTokenizer IBuildableDescriptor<KuromojiTokenizer>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor Version(string? value)
 	{
-		DiscardCompoundToken = DiscardCompoundTokenValue,
-		DiscardPunctuation = DiscardPunctuationValue,
-		Mode = ModeValue,
-		NbestCost = NbestCostValue,
-		NbestExamples = NbestExamplesValue,
-		UserDictionary = UserDictionaryValue,
-		UserDictionaryRules = UserDictionaryRulesValue,
-		Version = VersionValue
-	};
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

@@ -17,20 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class ShardsCapacityIndicatorTierDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentUsedShards = System.Text.Json.JsonEncodedText.Encode("current_used_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxShardsInCluster = System.Text.Json.JsonEncodedText.Encode("max_shards_in_cluster");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propCurrentUsedShards = default;
+		LocalJsonValue<int> propMaxShardsInCluster = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrentUsedShards.TryReadProperty(ref reader, options, PropCurrentUsedShards, null))
+			{
+				continue;
+			}
+
+			if (propMaxShardsInCluster.TryReadProperty(ref reader, options, PropMaxShardsInCluster, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CurrentUsedShards = propCurrentUsedShards.Value,
+			MaxShardsInCluster = propMaxShardsInCluster.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrentUsedShards, value.CurrentUsedShards, null, null);
+		writer.WriteProperty(options, PropMaxShardsInCluster, value.MaxShardsInCluster, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetailConverter))]
 public sealed partial class ShardsCapacityIndicatorTierDetail
 {
-	[JsonInclude, JsonPropertyName("current_used_shards")]
-	public int? CurrentUsedShards { get; init; }
-	[JsonInclude, JsonPropertyName("max_shards_in_cluster")]
-	public int MaxShardsInCluster { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardsCapacityIndicatorTierDetail(int maxShardsInCluster)
+	{
+		MaxShardsInCluster = maxShardsInCluster;
+	}
+#if NET7_0_OR_GREATER
+	public ShardsCapacityIndicatorTierDetail()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardsCapacityIndicatorTierDetail()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardsCapacityIndicatorTierDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public int? CurrentUsedShards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxShardsInCluster { get; set; }
 }

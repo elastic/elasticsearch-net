@@ -17,24 +17,207 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SimpleQueryStringQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzeWildcard = System.Text.Json.JsonEncodedText.Encode("analyze_wildcard");
+	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultOperator = System.Text.Json.JsonEncodedText.Encode("default_operator");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyMaxExpansions = System.Text.Json.JsonEncodedText.Encode("fuzzy_max_expansions");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyPrefixLength = System.Text.Json.JsonEncodedText.Encode("fuzzy_prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
+	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropQuoteFieldSuffix = System.Text.Json.JsonEncodedText.Encode("quote_field_suffix");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<bool?> propAnalyzeWildcard = default;
+		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator?> propDefaultOperator = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags?> propFlags = default;
+		LocalJsonValue<int?> propFuzzyMaxExpansions = default;
+		LocalJsonValue<int?> propFuzzyPrefixLength = default;
+		LocalJsonValue<bool?> propFuzzyTranspositions = default;
+		LocalJsonValue<bool?> propLenient = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<string?> propQuoteFieldSuffix = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propAnalyzeWildcard.TryReadProperty(ref reader, options, PropAnalyzeWildcard, null))
+			{
+				continue;
+			}
+
+			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propDefaultOperator.TryReadProperty(ref reader, options, PropDefaultOperator, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
+			{
+				continue;
+			}
+
+			if (propFuzzyMaxExpansions.TryReadProperty(ref reader, options, PropFuzzyMaxExpansions, null))
+			{
+				continue;
+			}
+
+			if (propFuzzyPrefixLength.TryReadProperty(ref reader, options, PropFuzzyPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propFuzzyTranspositions.TryReadProperty(ref reader, options, PropFuzzyTranspositions, null))
+			{
+				continue;
+			}
+
+			if (propLenient.TryReadProperty(ref reader, options, PropLenient, null))
+			{
+				continue;
+			}
+
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propQuoteFieldSuffix.TryReadProperty(ref reader, options, PropQuoteFieldSuffix, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			AnalyzeWildcard = propAnalyzeWildcard.Value,
+			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value,
+			Boost = propBoost.Value,
+			DefaultOperator = propDefaultOperator.Value,
+			Fields = propFields.Value,
+			Flags = propFlags.Value,
+			FuzzyMaxExpansions = propFuzzyMaxExpansions.Value,
+			FuzzyPrefixLength = propFuzzyPrefixLength.Value,
+			FuzzyTranspositions = propFuzzyTranspositions.Value,
+			Lenient = propLenient.Value,
+			MinimumShouldMatch = propMinimumShouldMatch.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value,
+			QuoteFieldSuffix = propQuoteFieldSuffix.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropAnalyzeWildcard, value.AnalyzeWildcard, null, null);
+		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropDefaultOperator, value.DefaultOperator, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
+		writer.WriteProperty(options, PropFuzzyMaxExpansions, value.FuzzyMaxExpansions, null, null);
+		writer.WriteProperty(options, PropFuzzyPrefixLength, value.FuzzyPrefixLength, null, null);
+		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, null);
+		writer.WriteProperty(options, PropLenient, value.Lenient, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropQuoteFieldSuffix, value.QuoteFieldSuffix, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryConverter))]
 public sealed partial class SimpleQueryStringQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimpleQueryStringQuery(string query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public SimpleQueryStringQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SimpleQueryStringQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Analyzer used to convert text in the query string into tokens.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -42,7 +225,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
@@ -50,7 +232,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
@@ -61,7 +242,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -69,7 +249,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Default boolean logic used to interpret text in the query string if no operators are specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
 	/// <summary>
@@ -80,8 +259,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -89,15 +266,13 @@ public sealed partial class SimpleQueryStringQuery
 	/// List of enabled operators for the simple query string syntax.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("flags")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? Flags { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? Flags { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of terms to which the query expands for fuzzy matching.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 
 	/// <summary>
@@ -105,7 +280,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Number of beginning characters left unchanged for fuzzy matching.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
 
 	/// <summary>
@@ -113,7 +287,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
@@ -121,7 +294,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
 	/// <summary>
@@ -129,7 +301,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -137,9 +308,11 @@ public sealed partial class SimpleQueryStringQuery
 	/// Query string in the simple query string syntax you wish to parse and use for search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -147,48 +320,37 @@ public sealed partial class SimpleQueryStringQuery
 	/// Suffix appended to quoted text in the query string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.SimpleQueryString(simpleQueryStringQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.SimpleQueryString(simpleQueryStringQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.SimpleQueryString(simpleQueryStringQuery);
 }
 
-public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>
+public readonly partial struct SimpleQueryStringQueryDescriptor<TDocument>
 {
-	internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Instance { get; init; }
 
-	public SimpleQueryStringQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimpleQueryStringQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private bool? AnalyzeWildcardValue { get; set; }
-	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? FlagsValue { get; set; }
-	private int? FuzzyMaxExpansionsValue { get; set; }
-	private int? FuzzyPrefixLengthValue { get; set; }
-	private bool? FuzzyTranspositionsValue { get; set; }
-	private bool? LenientValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-	private string QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private string? QuoteFieldSuffixValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimpleQueryStringQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to convert text in the query string into tokens.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -196,10 +358,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
-		AnalyzeWildcardValue = analyzeWildcard;
-		return Self;
+		Instance.AnalyzeWildcard = value;
+		return this;
 	}
 
 	/// <summary>
@@ -207,10 +369,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
-		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
-		return Self;
+		Instance.AutoGenerateSynonymsPhraseQuery = value;
+		return this;
 	}
 
 	/// <summary>
@@ -221,10 +383,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -232,10 +394,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Default boolean logic used to interpret text in the query string if no operators are specified.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
-		DefaultOperatorValue = defaultOperator;
-		return Self;
+		Instance.DefaultOperator = value;
+		return this;
 	}
 
 	/// <summary>
@@ -246,10 +408,24 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of fields you wish to search.
+	/// Accepts wildcard expressions.
+	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
+	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -257,10 +433,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// List of enabled operators for the simple query string syntax.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? flags)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? value)
 	{
-		FlagsValue = flags;
-		return Self;
+		Instance.Flags = value;
+		return this;
 	}
 
 	/// <summary>
@@ -268,10 +444,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Maximum number of terms to which the query expands for fuzzy matching.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? value)
 	{
-		FuzzyMaxExpansionsValue = fuzzyMaxExpansions;
-		return Self;
+		Instance.FuzzyMaxExpansions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -279,10 +455,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Number of beginning characters left unchanged for fuzzy matching.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? value)
 	{
-		FuzzyPrefixLengthValue = fuzzyPrefixLength;
-		return Self;
+		Instance.FuzzyPrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -290,10 +466,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? value = true)
 	{
-		FuzzyTranspositionsValue = fuzzyTranspositions;
-		return Self;
+		Instance.FuzzyTranspositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -301,10 +477,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Lenient(bool? lenient = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Lenient(bool? value = true)
 	{
-		LenientValue = lenient;
-		return Self;
+		Instance.Lenient = value;
+		return this;
 	}
 
 	/// <summary>
@@ -312,10 +488,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
+		Instance.MinimumShouldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -323,16 +499,16 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Query string in the simple query string syntax you wish to parse and use for search.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -340,138 +516,49 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// Suffix appended to quoted text in the query string.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? value)
 	{
-		QuoteFieldSuffixValue = quoteFieldSuffix;
-		return Self;
+		Instance.QuoteFieldSuffix = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (AnalyzeWildcardValue.HasValue)
-		{
-			writer.WritePropertyName("analyze_wildcard");
-			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
-		}
-
-		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
-		{
-			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-			writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DefaultOperatorValue is not null)
-		{
-			writer.WritePropertyName("default_operator");
-			JsonSerializer.Serialize(writer, DefaultOperatorValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FlagsValue is not null)
-		{
-			writer.WritePropertyName("flags");
-			JsonSerializer.Serialize(writer, FlagsValue, options);
-		}
-
-		if (FuzzyMaxExpansionsValue.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_max_expansions");
-			writer.WriteNumberValue(FuzzyMaxExpansionsValue.Value);
-		}
-
-		if (FuzzyPrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_prefix_length");
-			writer.WriteNumberValue(FuzzyPrefixLengthValue.Value);
-		}
-
-		if (FuzzyTranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_transpositions");
-			writer.WriteBooleanValue(FuzzyTranspositionsValue.Value);
-		}
-
-		if (LenientValue.HasValue)
-		{
-			writer.WritePropertyName("lenient");
-			writer.WriteBooleanValue(LenientValue.Value);
-		}
-
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(QuoteFieldSuffixValue))
-		{
-			writer.WritePropertyName("quote_field_suffix");
-			writer.WriteStringValue(QuoteFieldSuffixValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescriptor<SimpleQueryStringQueryDescriptor>
+public readonly partial struct SimpleQueryStringQueryDescriptor
 {
-	internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Instance { get; init; }
 
-	public SimpleQueryStringQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimpleQueryStringQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private bool? AnalyzeWildcardValue { get; set; }
-	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? FlagsValue { get; set; }
-	private int? FuzzyMaxExpansionsValue { get; set; }
-	private int? FuzzyPrefixLengthValue { get; set; }
-	private bool? FuzzyTranspositionsValue { get; set; }
-	private bool? LenientValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-	private string QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private string? QuoteFieldSuffixValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimpleQueryStringQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to convert text in the query string into tokens.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -479,10 +566,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? value = true)
 	{
-		AnalyzeWildcardValue = analyzeWildcard;
-		return Self;
+		Instance.AnalyzeWildcard = value;
+		return this;
 	}
 
 	/// <summary>
@@ -490,10 +577,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
-		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
-		return Self;
+		Instance.AutoGenerateSynonymsPhraseQuery = value;
+		return this;
 	}
 
 	/// <summary>
@@ -504,10 +591,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -515,10 +602,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Default boolean logic used to interpret text in the query string if no operators are specified.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
-		DefaultOperatorValue = defaultOperator;
-		return Self;
+		Instance.DefaultOperator = value;
+		return this;
 	}
 
 	/// <summary>
@@ -529,10 +616,24 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of fields you wish to search.
+	/// Accepts wildcard expressions.
+	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
+	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -540,10 +641,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// List of enabled operators for the simple query string syntax.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? flags)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? value)
 	{
-		FlagsValue = flags;
-		return Self;
+		Instance.Flags = value;
+		return this;
 	}
 
 	/// <summary>
@@ -551,10 +652,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Maximum number of terms to which the query expands for fuzzy matching.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? fuzzyMaxExpansions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? value)
 	{
-		FuzzyMaxExpansionsValue = fuzzyMaxExpansions;
-		return Self;
+		Instance.FuzzyMaxExpansions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -562,10 +663,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Number of beginning characters left unchanged for fuzzy matching.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? fuzzyPrefixLength)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? value)
 	{
-		FuzzyPrefixLengthValue = fuzzyPrefixLength;
-		return Self;
+		Instance.FuzzyPrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -573,10 +674,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? value = true)
 	{
-		FuzzyTranspositionsValue = fuzzyTranspositions;
-		return Self;
+		Instance.FuzzyTranspositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -584,10 +685,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Lenient(bool? lenient = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Lenient(bool? value = true)
 	{
-		LenientValue = lenient;
-		return Self;
+		Instance.Lenient = value;
+		return this;
 	}
 
 	/// <summary>
@@ -595,10 +696,10 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
+		Instance.MinimumShouldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -606,16 +707,16 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Query string in the simple query string syntax you wish to parse and use for search.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SimpleQueryStringQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -623,101 +724,17 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// Suffix appended to quoted text in the query string.
 	/// </para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? quoteFieldSuffix)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? value)
 	{
-		QuoteFieldSuffixValue = quoteFieldSuffix;
-		return Self;
+		Instance.QuoteFieldSuffix = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (AnalyzeWildcardValue.HasValue)
-		{
-			writer.WritePropertyName("analyze_wildcard");
-			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
-		}
-
-		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
-		{
-			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-			writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DefaultOperatorValue is not null)
-		{
-			writer.WritePropertyName("default_operator");
-			JsonSerializer.Serialize(writer, DefaultOperatorValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FlagsValue is not null)
-		{
-			writer.WritePropertyName("flags");
-			JsonSerializer.Serialize(writer, FlagsValue, options);
-		}
-
-		if (FuzzyMaxExpansionsValue.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_max_expansions");
-			writer.WriteNumberValue(FuzzyMaxExpansionsValue.Value);
-		}
-
-		if (FuzzyPrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_prefix_length");
-			writer.WriteNumberValue(FuzzyPrefixLengthValue.Value);
-		}
-
-		if (FuzzyTranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_transpositions");
-			writer.WriteBooleanValue(FuzzyTranspositionsValue.Value);
-		}
-
-		if (LenientValue.HasValue)
-		{
-			writer.WritePropertyName("lenient");
-			writer.WriteBooleanValue(LenientValue.Value);
-		}
-
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(QuoteFieldSuffixValue))
-		{
-			writer.WritePropertyName("quote_field_suffix");
-			writer.WriteStringValue(QuoteFieldSuffixValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

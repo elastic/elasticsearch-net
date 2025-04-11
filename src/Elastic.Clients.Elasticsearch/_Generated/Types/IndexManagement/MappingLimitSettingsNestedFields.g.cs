@@ -17,18 +17,70 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class MappingLimitSettingsNestedFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Limit = propLimit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsConverter))]
 public sealed partial class MappingLimitSettingsNestedFields
 {
+#if NET7_0_OR_GREATER
+	public MappingLimitSettingsNestedFields()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MappingLimitSettingsNestedFields()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when
@@ -36,19 +88,27 @@ public sealed partial class MappingLimitSettingsNestedFields
 	/// setting limits the number of unique nested types per index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
 }
 
-public sealed partial class MappingLimitSettingsNestedFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsNestedFieldsDescriptor>
+public readonly partial struct MappingLimitSettingsNestedFieldsDescriptor
 {
-	internal MappingLimitSettingsNestedFieldsDescriptor(Action<MappingLimitSettingsNestedFieldsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields Instance { get; init; }
 
-	public MappingLimitSettingsNestedFieldsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsNestedFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields instance)
 	{
+		Instance = instance;
 	}
 
-	private long? LimitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsNestedFieldsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -57,21 +117,22 @@ public sealed partial class MappingLimitSettingsNestedFieldsDescriptor : Seriali
 	/// setting limits the number of unique nested types per index.
 	/// </para>
 	/// </summary>
-	public MappingLimitSettingsNestedFieldsDescriptor Limit(long? limit)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor Limit(long? value)
 	{
-		LimitValue = limit;
-		return Self;
+		Instance.Limit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (LimitValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("limit");
-			writer.WriteNumberValue(LimitValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

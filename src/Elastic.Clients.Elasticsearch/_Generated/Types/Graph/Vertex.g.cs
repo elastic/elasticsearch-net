@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class VertexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.Vertex>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropTerm = System.Text.Json.JsonEncodedText.Encode("term");
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+
+	public override Elastic.Clients.Elasticsearch.Graph.Vertex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propDepth = default;
+		LocalJsonValue<string> propField = default;
+		LocalJsonValue<string> propTerm = default;
+		LocalJsonValue<double> propWeight = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDepth.TryReadProperty(ref reader, options, PropDepth, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propTerm.TryReadProperty(ref reader, options, PropTerm, null))
+			{
+				continue;
+			}
+
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.Vertex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Depth = propDepth.Value,
+			Field = propField.Value,
+			Term = propTerm.Value,
+			Weight = propWeight.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.Vertex value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDepth, value.Depth, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropTerm, value.Term, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.VertexConverter))]
 public sealed partial class Vertex
 {
-	[JsonInclude, JsonPropertyName("depth")]
-	public long Depth { get; init; }
-	[JsonInclude, JsonPropertyName("field")]
-	public string Field { get; init; }
-	[JsonInclude, JsonPropertyName("term")]
-	public string Term { get; init; }
-	[JsonInclude, JsonPropertyName("weight")]
-	public double Weight { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Vertex(long depth, string field, string term, double weight)
+	{
+		Depth = depth;
+		Field = field;
+		Term = term;
+		Weight = weight;
+	}
+#if NET7_0_OR_GREATER
+	public Vertex()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Vertex()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Vertex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Depth { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Term { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Weight { get; set; }
 }

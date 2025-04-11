@@ -17,212 +17,180 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class AggregateOutputConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent");
+	private static readonly System.Text.Json.JsonEncodedText PropLogisticRegression = System.Text.Json.JsonEncodedText.Encode("logistic_regression");
+	private static readonly System.Text.Json.JsonEncodedText PropWeightedMode = System.Text.Json.JsonEncodedText.Encode("weighted_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropWeightedSum = System.Text.Json.JsonEncodedText.Encode("weighted_sum");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propExponent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propLogisticRegression = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propWeightedMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propWeightedSum = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExponent.TryReadProperty(ref reader, options, PropExponent, null))
+			{
+				continue;
+			}
+
+			if (propLogisticRegression.TryReadProperty(ref reader, options, PropLogisticRegression, null))
+			{
+				continue;
+			}
+
+			if (propWeightedMode.TryReadProperty(ref reader, options, PropWeightedMode, null))
+			{
+				continue;
+			}
+
+			if (propWeightedSum.TryReadProperty(ref reader, options, PropWeightedSum, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Exponent = propExponent.Value,
+			LogisticRegression = propLogisticRegression.Value,
+			WeightedMode = propWeightedMode.Value,
+			WeightedSum = propWeightedSum.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExponent, value.Exponent, null, null);
+		writer.WriteProperty(options, PropLogisticRegression, value.LogisticRegression, null, null);
+		writer.WriteProperty(options, PropWeightedMode, value.WeightedMode, null, null);
+		writer.WriteProperty(options, PropWeightedSum, value.WeightedSum, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputConverter))]
 public sealed partial class AggregateOutput
 {
-	[JsonInclude, JsonPropertyName("exponent")]
+#if NET7_0_OR_GREATER
+	public AggregateOutput()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AggregateOutput()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.MachineLearning.Weights? Exponent { get; set; }
-	[JsonInclude, JsonPropertyName("logistic_regression")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Weights? LogisticRegression { get; set; }
-	[JsonInclude, JsonPropertyName("weighted_mode")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Weights? WeightedMode { get; set; }
-	[JsonInclude, JsonPropertyName("weighted_sum")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Weights? WeightedSum { get; set; }
 }
 
-public sealed partial class AggregateOutputDescriptor : SerializableDescriptor<AggregateOutputDescriptor>
+public readonly partial struct AggregateOutputDescriptor
 {
-	internal AggregateOutputDescriptor(Action<AggregateOutputDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput Instance { get; init; }
 
-	public AggregateOutputDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AggregateOutputDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.Weights? ExponentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor ExponentDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> ExponentDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Weights? LogisticRegressionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor LogisticRegressionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> LogisticRegressionDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Weights? WeightedModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor WeightedModeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> WeightedModeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Weights? WeightedSumValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor WeightedSumDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> WeightedSumDescriptorAction { get; set; }
-
-	public AggregateOutputDescriptor Exponent(Elastic.Clients.Elasticsearch.MachineLearning.Weights? exponent)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AggregateOutputDescriptor()
 	{
-		ExponentDescriptor = null;
-		ExponentDescriptorAction = null;
-		ExponentValue = exponent;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public AggregateOutputDescriptor Exponent(Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput instance) => new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput(Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor Exponent(Elastic.Clients.Elasticsearch.MachineLearning.Weights? value)
 	{
-		ExponentValue = null;
-		ExponentDescriptorAction = null;
-		ExponentDescriptor = descriptor;
-		return Self;
+		Instance.Exponent = value;
+		return this;
 	}
 
-	public AggregateOutputDescriptor Exponent(Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor Exponent(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> action)
 	{
-		ExponentValue = null;
-		ExponentDescriptor = null;
-		ExponentDescriptorAction = configure;
-		return Self;
+		Instance.Exponent = Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor.Build(action);
+		return this;
 	}
 
-	public AggregateOutputDescriptor LogisticRegression(Elastic.Clients.Elasticsearch.MachineLearning.Weights? logisticRegression)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor LogisticRegression(Elastic.Clients.Elasticsearch.MachineLearning.Weights? value)
 	{
-		LogisticRegressionDescriptor = null;
-		LogisticRegressionDescriptorAction = null;
-		LogisticRegressionValue = logisticRegression;
-		return Self;
+		Instance.LogisticRegression = value;
+		return this;
 	}
 
-	public AggregateOutputDescriptor LogisticRegression(Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor LogisticRegression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> action)
 	{
-		LogisticRegressionValue = null;
-		LogisticRegressionDescriptorAction = null;
-		LogisticRegressionDescriptor = descriptor;
-		return Self;
+		Instance.LogisticRegression = Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor.Build(action);
+		return this;
 	}
 
-	public AggregateOutputDescriptor LogisticRegression(Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor WeightedMode(Elastic.Clients.Elasticsearch.MachineLearning.Weights? value)
 	{
-		LogisticRegressionValue = null;
-		LogisticRegressionDescriptor = null;
-		LogisticRegressionDescriptorAction = configure;
-		return Self;
+		Instance.WeightedMode = value;
+		return this;
 	}
 
-	public AggregateOutputDescriptor WeightedMode(Elastic.Clients.Elasticsearch.MachineLearning.Weights? weightedMode)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor WeightedMode(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> action)
 	{
-		WeightedModeDescriptor = null;
-		WeightedModeDescriptorAction = null;
-		WeightedModeValue = weightedMode;
-		return Self;
+		Instance.WeightedMode = Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor.Build(action);
+		return this;
 	}
 
-	public AggregateOutputDescriptor WeightedMode(Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor WeightedSum(Elastic.Clients.Elasticsearch.MachineLearning.Weights? value)
 	{
-		WeightedModeValue = null;
-		WeightedModeDescriptorAction = null;
-		WeightedModeDescriptor = descriptor;
-		return Self;
+		Instance.WeightedSum = value;
+		return this;
 	}
 
-	public AggregateOutputDescriptor WeightedMode(Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor WeightedSum(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> action)
 	{
-		WeightedModeValue = null;
-		WeightedModeDescriptor = null;
-		WeightedModeDescriptorAction = configure;
-		return Self;
+		Instance.WeightedSum = Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor.Build(action);
+		return this;
 	}
 
-	public AggregateOutputDescriptor WeightedSum(Elastic.Clients.Elasticsearch.MachineLearning.Weights? weightedSum)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor>? action)
 	{
-		WeightedSumDescriptor = null;
-		WeightedSumDescriptorAction = null;
-		WeightedSumValue = weightedSum;
-		return Self;
-	}
-
-	public AggregateOutputDescriptor WeightedSum(Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor descriptor)
-	{
-		WeightedSumValue = null;
-		WeightedSumDescriptorAction = null;
-		WeightedSumDescriptor = descriptor;
-		return Self;
-	}
-
-	public AggregateOutputDescriptor WeightedSum(Action<Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor> configure)
-	{
-		WeightedSumValue = null;
-		WeightedSumDescriptor = null;
-		WeightedSumDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ExponentDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("exponent");
-			JsonSerializer.Serialize(writer, ExponentDescriptor, options);
-		}
-		else if (ExponentDescriptorAction is not null)
-		{
-			writer.WritePropertyName("exponent");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(ExponentDescriptorAction), options);
-		}
-		else if (ExponentValue is not null)
-		{
-			writer.WritePropertyName("exponent");
-			JsonSerializer.Serialize(writer, ExponentValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (LogisticRegressionDescriptor is not null)
-		{
-			writer.WritePropertyName("logistic_regression");
-			JsonSerializer.Serialize(writer, LogisticRegressionDescriptor, options);
-		}
-		else if (LogisticRegressionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("logistic_regression");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(LogisticRegressionDescriptorAction), options);
-		}
-		else if (LogisticRegressionValue is not null)
-		{
-			writer.WritePropertyName("logistic_regression");
-			JsonSerializer.Serialize(writer, LogisticRegressionValue, options);
-		}
-
-		if (WeightedModeDescriptor is not null)
-		{
-			writer.WritePropertyName("weighted_mode");
-			JsonSerializer.Serialize(writer, WeightedModeDescriptor, options);
-		}
-		else if (WeightedModeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("weighted_mode");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(WeightedModeDescriptorAction), options);
-		}
-		else if (WeightedModeValue is not null)
-		{
-			writer.WritePropertyName("weighted_mode");
-			JsonSerializer.Serialize(writer, WeightedModeValue, options);
-		}
-
-		if (WeightedSumDescriptor is not null)
-		{
-			writer.WritePropertyName("weighted_sum");
-			JsonSerializer.Serialize(writer, WeightedSumDescriptor, options);
-		}
-		else if (WeightedSumDescriptorAction is not null)
-		{
-			writer.WritePropertyName("weighted_sum");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.WeightsDescriptor(WeightedSumDescriptorAction), options);
-		}
-		else if (WeightedSumValue is not null)
-		{
-			writer.WritePropertyName("weighted_sum");
-			JsonSerializer.Serialize(writer, WeightedSumValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

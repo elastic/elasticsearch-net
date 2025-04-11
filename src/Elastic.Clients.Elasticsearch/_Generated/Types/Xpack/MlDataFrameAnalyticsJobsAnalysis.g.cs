@@ -17,22 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class MlDataFrameAnalyticsJobsAnalysisConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText PropOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection");
+	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propClassification = default;
+		LocalJsonValue<int?> propOutlierDetection = default;
+		LocalJsonValue<int?> propRegression = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClassification.TryReadProperty(ref reader, options, PropClassification, null))
+			{
+				continue;
+			}
+
+			if (propOutlierDetection.TryReadProperty(ref reader, options, PropOutlierDetection, null))
+			{
+				continue;
+			}
+
+			if (propRegression.TryReadProperty(ref reader, options, PropRegression, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Classification = propClassification.Value,
+			OutlierDetection = propOutlierDetection.Value,
+			Regression = propRegression.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClassification, value.Classification, null, null);
+		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection, null, null);
+		writer.WriteProperty(options, PropRegression, value.Regression, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysisConverter))]
 public sealed partial class MlDataFrameAnalyticsJobsAnalysis
 {
-	[JsonInclude, JsonPropertyName("classification")]
-	public int? Classification { get; init; }
-	[JsonInclude, JsonPropertyName("outlier_detection")]
-	public int? OutlierDetection { get; init; }
-	[JsonInclude, JsonPropertyName("regression")]
-	public int? Regression { get; init; }
+#if NET7_0_OR_GREATER
+	public MlDataFrameAnalyticsJobsAnalysis()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MlDataFrameAnalyticsJobsAnalysis()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MlDataFrameAnalyticsJobsAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public int? Classification { get; set; }
+	public int? OutlierDetection { get; set; }
+	public int? Regression { get; set; }
 }

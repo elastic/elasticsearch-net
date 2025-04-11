@@ -17,21 +17,125 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class AnalyzeIndexRequestParameters : RequestParameters
+public sealed partial class AnalyzeIndexRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class AnalyzeIndexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilter = System.Text.Json.JsonEncodedText.Encode("char_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propAttributes = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>?> propCharFilter = default;
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>?> propFilter = default;
+		LocalJsonValue<string?> propNormalizer = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propText = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.ITokenizer?> propTokenizer = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propCharFilter.TryReadProperty(ref reader, options, PropCharFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, null)))
+			{
+				continue;
+			}
+
+			if (propExplain.TryReadProperty(ref reader, options, PropExplain, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNormalizer.TryReadProperty(ref reader, options, PropNormalizer, null))
+			{
+				continue;
+			}
+
+			if (propText.TryReadProperty(ref reader, options, PropText, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTokenizer.TryReadProperty(ref reader, options, PropTokenizer, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Attributes = propAttributes.Value,
+			CharFilter = propCharFilter.Value,
+			Explain = propExplain.Value,
+			Field = propField.Value,
+			Filter = propFilter.Value,
+			Normalizer = propNormalizer.Value,
+			Text = propText.Value,
+			Tokenizer = propTokenizer.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, v, null));
+		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(o, v, null));
+		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, null);
+		writer.WriteProperty(options, PropText, value.Text, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,19 +150,31 @@ public sealed partial class AnalyzeIndexRequestParameters : RequestParameters
 /// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 /// </para>
 /// </summary>
-public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestConverter))]
+public sealed partial class AnalyzeIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>
 {
-	public AnalyzeIndexRequest()
-	{
-	}
-
 	public AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public AnalyzeIndexRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AnalyzeIndexRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementAnalyze;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementAnalyze;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -66,11 +182,19 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 
 	/// <summary>
 	/// <para>
+	/// Index used to derive the analyzer.
+	/// If specified, the <c>analyzer</c> or field parameter overrides this value.
+	/// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// The name of the analyzer that should be applied to the provided <c>text</c>.
 	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -78,23 +202,20 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("attributes")]
-	public ICollection<string>? Attributes { get; set; }
+	public System.Collections.Generic.ICollection<string>? Attributes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("char_filter")]
-	public ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response includes token attributes and additional details.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
@@ -104,7 +225,6 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 	/// If specified, the <c>analyzer</c> parameter overrides this value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -112,15 +232,13 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	public ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Normalizer to use to convert text into a single token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("normalizer")]
 	public string? Normalizer { get; set; }
 
 	/// <summary>
@@ -129,16 +247,13 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 	/// If an array of strings is provided, it is analyzed as a multi-value field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("text")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Text { get; set; }
+	public System.Collections.Generic.ICollection<string>? Text { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Tokenizer to use to convert text into tokens.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenizer? Tokenizer { get; set; }
 }
 
@@ -154,41 +269,41 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 /// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 /// </para>
 /// </summary>
-public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDescriptor<AnalyzeIndexRequestDescriptor<TDocument>, AnalyzeIndexRequestParameters>
+public readonly partial struct AnalyzeIndexRequestDescriptor
 {
-	internal AnalyzeIndexRequestDescriptor(Action<AnalyzeIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Instance { get; init; }
 
-	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public AnalyzeIndexRequestDescriptor() : this(typeof(TDocument))
+	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(index);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementAnalyze;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.analyze";
-
-	public AnalyzeIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public AnalyzeIndexRequestDescriptor()
 	{
-		RouteValues.Optional("index", index);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private ICollection<string>? AttributesValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilterValue { get; set; }
-	private bool? ExplainValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? FilterValue { get; set; }
-	private string? NormalizerValue { get; set; }
-	private ICollection<string>? TextValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.ITokenizer? TokenizerValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Index used to derive the analyzer.
+	/// If specified, the <c>analyzer</c> or field parameter overrides this value.
+	/// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -196,10 +311,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -207,10 +322,21 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Attributes(ICollection<string>? attributes)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes(System.Collections.Generic.ICollection<string>? value)
 	{
-		AttributesValue = attributes;
-		return Self;
+		Instance.Attributes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes(params string[] values)
+	{
+		Instance.Attributes = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -218,10 +344,38 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> CharFilter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? charFilter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? value)
 	{
-		CharFilterValue = charFilter;
-		return Self;
+		Instance.CharFilter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
+	{
+		Instance.CharFilter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory.Build(action));
+		}
+
+		Instance.CharFilter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -229,10 +383,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// If <c>true</c>, the response includes token attributes and additional details.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Explain(bool? explain = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Explain(bool? value = true)
 	{
-		ExplainValue = explain;
-		return Self;
+		Instance.Explain = value;
+		return this;
 	}
 
 	/// <summary>
@@ -242,10 +396,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// If specified, the <c>analyzer</c> parameter overrides this value.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -255,23 +409,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// If specified, the <c>analyzer</c> parameter overrides this value.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -279,10 +420,38 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? filter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? value)
 	{
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -290,10 +459,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// Normalizer to use to convert text into a single token.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Normalizer(string? normalizer)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Normalizer(string? value)
 	{
-		NormalizerValue = normalizer;
-		return Self;
+		Instance.Normalizer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -302,10 +471,22 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// If an array of strings is provided, it is analyzed as a multi-value field.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Text(ICollection<string>? text)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text(System.Collections.Generic.ICollection<string>? value)
 	{
-		TextValue = text;
-		return Self;
+		Instance.Text = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text to analyze.
+	/// If an array of strings is provided, it is analyzed as a multi-value field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text(params string[] values)
+	{
+		Instance.Text = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -313,70 +494,76 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	/// Tokenizer to use to convert text into tokens.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? tokenizer)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? value)
 	{
-		TokenizerValue = tokenizer;
-		return Self;
+		Instance.Tokenizer = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Tokenizer to use to convert text into tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
+		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AttributesValue is not null)
-		{
-			writer.WritePropertyName("attributes");
-			JsonSerializer.Serialize(writer, AttributesValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (CharFilterValue is not null)
-		{
-			writer.WritePropertyName("char_filter");
-			JsonSerializer.Serialize(writer, CharFilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(NormalizerValue))
-		{
-			writer.WritePropertyName("normalizer");
-			writer.WriteStringValue(NormalizerValue);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (TextValue is not null)
-		{
-			writer.WritePropertyName("text");
-			SingleOrManySerializationHelper.Serialize<string>(TextValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (TokenizerValue is not null)
-		{
-			writer.WritePropertyName("tokenizer");
-			JsonSerializer.Serialize(writer, TokenizerValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -392,41 +579,41 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 /// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 /// </para>
 /// </summary>
-public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>
+public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 {
-	internal AnalyzeIndexRequestDescriptor(Action<AnalyzeIndexRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Instance { get; init; }
 
-	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(index);
 	}
 
 	public AnalyzeIndexRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(typeof(TDocument));
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementAnalyze;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.analyze";
-
-	public AnalyzeIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	/// <summary>
+	/// <para>
+	/// Index used to derive the analyzer.
+	/// If specified, the <c>analyzer</c> or field parameter overrides this value.
+	/// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		RouteValues.Optional("index", index);
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
-
-	private string? AnalyzerValue { get; set; }
-	private ICollection<string>? AttributesValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilterValue { get; set; }
-	private bool? ExplainValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? FilterValue { get; set; }
-	private string? NormalizerValue { get; set; }
-	private ICollection<string>? TextValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.ITokenizer? TokenizerValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -434,10 +621,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -445,10 +632,21 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Attributes(ICollection<string>? attributes)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes(System.Collections.Generic.ICollection<string>? value)
 	{
-		AttributesValue = attributes;
-		return Self;
+		Instance.Attributes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes(params string[] values)
+	{
+		Instance.Attributes = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -456,10 +654,38 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor CharFilter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? charFilter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? value)
 	{
-		CharFilterValue = charFilter;
-		return Self;
+		Instance.CharFilter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
+	{
+		Instance.CharFilter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory.Build(action));
+		}
+
+		Instance.CharFilter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -467,10 +693,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// If <c>true</c>, the response includes token attributes and additional details.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Explain(bool? explain = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
-		ExplainValue = explain;
-		return Self;
+		Instance.Explain = value;
+		return this;
 	}
 
 	/// <summary>
@@ -480,10 +706,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// If specified, the <c>analyzer</c> parameter overrides this value.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -493,23 +719,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// If specified, the <c>analyzer</c> parameter overrides this value.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
-	public AnalyzeIndexRequestDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -517,10 +730,38 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? filter)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? value)
 	{
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -528,10 +769,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// Normalizer to use to convert text into a single token.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Normalizer(string? normalizer)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Normalizer(string? value)
 	{
-		NormalizerValue = normalizer;
-		return Self;
+		Instance.Normalizer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -540,10 +781,22 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// If an array of strings is provided, it is analyzed as a multi-value field.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Text(ICollection<string>? text)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text(System.Collections.Generic.ICollection<string>? value)
 	{
-		TextValue = text;
-		return Self;
+		Instance.Text = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text to analyze.
+	/// If an array of strings is provided, it is analyzed as a multi-value field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text(params string[] values)
+	{
+		Instance.Text = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -551,69 +804,75 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	/// Tokenizer to use to convert text into tokens.
 	/// </para>
 	/// </summary>
-	public AnalyzeIndexRequestDescriptor Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? tokenizer)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? value)
 	{
-		TokenizerValue = tokenizer;
-		return Self;
+		Instance.Tokenizer = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Tokenizer to use to convert text into tokens.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
+		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (AttributesValue is not null)
-		{
-			writer.WritePropertyName("attributes");
-			JsonSerializer.Serialize(writer, AttributesValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (CharFilterValue is not null)
-		{
-			writer.WritePropertyName("char_filter");
-			JsonSerializer.Serialize(writer, CharFilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(NormalizerValue))
-		{
-			writer.WritePropertyName("normalizer");
-			writer.WriteStringValue(NormalizerValue);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (TextValue is not null)
-		{
-			writer.WritePropertyName("text");
-			SingleOrManySerializationHelper.Serialize<string>(TextValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (TokenizerValue is not null)
-		{
-			writer.WritePropertyName("tokenizer");
-			JsonSerializer.Serialize(writer, TokenizerValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,44 +17,269 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class SecurityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Security>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnonymous = System.Text.Json.JsonEncodedText.Encode("anonymous");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKeyService = System.Text.Json.JsonEncodedText.Encode("api_key_service");
+	private static readonly System.Text.Json.JsonEncodedText PropAudit = System.Text.Json.JsonEncodedText.Encode("audit");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFips140 = System.Text.Json.JsonEncodedText.Encode("fips_140");
+	private static readonly System.Text.Json.JsonEncodedText PropIpfilter = System.Text.Json.JsonEncodedText.Encode("ipfilter");
+	private static readonly System.Text.Json.JsonEncodedText PropOperatorPrivileges = System.Text.Json.JsonEncodedText.Encode("operator_privileges");
+	private static readonly System.Text.Json.JsonEncodedText PropRealms = System.Text.Json.JsonEncodedText.Encode("realms");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleMapping = System.Text.Json.JsonEncodedText.Encode("role_mapping");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropSsl = System.Text.Json.JsonEncodedText.Encode("ssl");
+	private static readonly System.Text.Json.JsonEncodedText PropSystemKey = System.Text.Json.JsonEncodedText.Encode("system_key");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenService = System.Text.Json.JsonEncodedText.Encode("token_service");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.Security Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.FeatureToggle> propAnonymous = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.FeatureToggle> propApiKeyService = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Audit> propAudit = default;
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.FeatureToggle> propFips140 = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.IpFilter> propIpfilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propOperatorPrivileges = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm>> propRealms = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping>> propRoleMapping = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.SecurityRoles> propRoles = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ssl> propSsl = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.FeatureToggle?> propSystemKey = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.FeatureToggle> propTokenService = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnonymous.TryReadProperty(ref reader, options, PropAnonymous, null))
+			{
+				continue;
+			}
+
+			if (propApiKeyService.TryReadProperty(ref reader, options, PropApiKeyService, null))
+			{
+				continue;
+			}
+
+			if (propAudit.TryReadProperty(ref reader, options, PropAudit, null))
+			{
+				continue;
+			}
+
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propFips140.TryReadProperty(ref reader, options, PropFips140, null))
+			{
+				continue;
+			}
+
+			if (propIpfilter.TryReadProperty(ref reader, options, PropIpfilter, null))
+			{
+				continue;
+			}
+
+			if (propOperatorPrivileges.TryReadProperty(ref reader, options, PropOperatorPrivileges, null))
+			{
+				continue;
+			}
+
+			if (propRealms.TryReadProperty(ref reader, options, PropRealms, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Realm>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propRoleMapping.TryReadProperty(ref reader, options, PropRoleMapping, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, null))
+			{
+				continue;
+			}
+
+			if (propSsl.TryReadProperty(ref reader, options, PropSsl, null))
+			{
+				continue;
+			}
+
+			if (propSystemKey.TryReadProperty(ref reader, options, PropSystemKey, null))
+			{
+				continue;
+			}
+
+			if (propTokenService.TryReadProperty(ref reader, options, PropTokenService, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.Security(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Anonymous = propAnonymous.Value,
+			ApiKeyService = propApiKeyService.Value,
+			Audit = propAudit.Value,
+			Available = propAvailable.Value,
+			Enabled = propEnabled.Value,
+			Fips140 = propFips140.Value,
+			Ipfilter = propIpfilter.Value,
+			OperatorPrivileges = propOperatorPrivileges.Value,
+			Realms = propRealms.Value,
+			RoleMapping = propRoleMapping.Value,
+			Roles = propRoles.Value,
+			Ssl = propSsl.Value,
+			SystemKey = propSystemKey.Value,
+			TokenService = propTokenService.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Security value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnonymous, value.Anonymous, null, null);
+		writer.WriteProperty(options, PropApiKeyService, value.ApiKeyService, null, null);
+		writer.WriteProperty(options, PropAudit, value.Audit, null, null);
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFips140, value.Fips140, null, null);
+		writer.WriteProperty(options, PropIpfilter, value.Ipfilter, null, null);
+		writer.WriteProperty(options, PropOperatorPrivileges, value.OperatorPrivileges, null, null);
+		writer.WriteProperty(options, PropRealms, value.Realms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Realm>(o, v, null, null));
+		writer.WriteProperty(options, PropRoleMapping, value.RoleMapping, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping>(o, v, null, null));
+		writer.WriteProperty(options, PropRoles, value.Roles, null, null);
+		writer.WriteProperty(options, PropSsl, value.Ssl, null, null);
+		writer.WriteProperty(options, PropSystemKey, value.SystemKey, null, null);
+		writer.WriteProperty(options, PropTokenService, value.TokenService, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SecurityConverter))]
 public sealed partial class Security
 {
-	[JsonInclude, JsonPropertyName("anonymous")]
-	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Anonymous { get; init; }
-	[JsonInclude, JsonPropertyName("api_key_service")]
-	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle ApiKeyService { get; init; }
-	[JsonInclude, JsonPropertyName("audit")]
-	public Elastic.Clients.Elasticsearch.Xpack.Audit Audit { get; init; }
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("fips_140")]
-	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Fips140 { get; init; }
-	[JsonInclude, JsonPropertyName("ipfilter")]
-	public Elastic.Clients.Elasticsearch.Xpack.IpFilter Ipfilter { get; init; }
-	[JsonInclude, JsonPropertyName("operator_privileges")]
-	public Elastic.Clients.Elasticsearch.Xpack.Base OperatorPrivileges { get; init; }
-	[JsonInclude, JsonPropertyName("realms")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> Realms { get; init; }
-	[JsonInclude, JsonPropertyName("role_mapping")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> RoleMapping { get; init; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public Elastic.Clients.Elasticsearch.Xpack.SecurityRoles Roles { get; init; }
-	[JsonInclude, JsonPropertyName("ssl")]
-	public Elastic.Clients.Elasticsearch.Xpack.Ssl Ssl { get; init; }
-	[JsonInclude, JsonPropertyName("system_key")]
-	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle? SystemKey { get; init; }
-	[JsonInclude, JsonPropertyName("token_service")]
-	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle TokenService { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Security(Elastic.Clients.Elasticsearch.Xpack.FeatureToggle anonymous, Elastic.Clients.Elasticsearch.Xpack.FeatureToggle apiKeyService, Elastic.Clients.Elasticsearch.Xpack.Audit audit, bool available, bool enabled, Elastic.Clients.Elasticsearch.Xpack.FeatureToggle fips140, Elastic.Clients.Elasticsearch.Xpack.IpFilter ipfilter, Elastic.Clients.Elasticsearch.Xpack.Base operatorPrivileges, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> realms, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> roleMapping, Elastic.Clients.Elasticsearch.Xpack.SecurityRoles roles, Elastic.Clients.Elasticsearch.Xpack.Ssl ssl, Elastic.Clients.Elasticsearch.Xpack.FeatureToggle tokenService)
+	{
+		Anonymous = anonymous;
+		ApiKeyService = apiKeyService;
+		Audit = audit;
+		Available = available;
+		Enabled = enabled;
+		Fips140 = fips140;
+		Ipfilter = ipfilter;
+		OperatorPrivileges = operatorPrivileges;
+		Realms = realms;
+		RoleMapping = roleMapping;
+		Roles = roles;
+		Ssl = ssl;
+		TokenService = tokenService;
+	}
+#if NET7_0_OR_GREATER
+	public Security()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Security()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Security(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Anonymous { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle ApiKeyService { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Audit Audit { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Fips140 { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.IpFilter Ipfilter { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Base OperatorPrivileges { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> Realms { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> RoleMapping { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.SecurityRoles Roles { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Ssl Ssl { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle? SystemKey { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle TokenService { get; set; }
 }

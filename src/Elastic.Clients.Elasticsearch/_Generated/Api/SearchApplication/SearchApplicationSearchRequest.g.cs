@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class SearchApplicationSearchRequestParameters : RequestParameters
+public sealed partial class SearchApplicationSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,6 +33,45 @@ public sealed partial class SearchApplicationSearchRequestParameters : RequestPa
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
+internal sealed partial class SearchApplicationSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+
+	public override Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Params = propParams.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run a search application search.
@@ -47,15 +79,27 @@ public sealed partial class SearchApplicationSearchRequestParameters : RequestPa
 /// Unspecified template parameters are assigned their default values if applicable.
 /// </para>
 /// </summary>
-public sealed partial class SearchApplicationSearchRequest : PlainRequest<SearchApplicationSearchRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestConverter))]
+public sealed partial class SearchApplicationSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public SearchApplicationSearchRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationSearch;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchApplicationSearch;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -63,10 +107,20 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 
 	/// <summary>
 	/// <para>
+	/// The name of the search application to be searched.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// Determines whether aggregation names are prefixed by their respective types in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -74,8 +128,7 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 	/// Query parameters specific to this request, which will override any defaults specified in the template.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 }
 
 /// <summary>
@@ -85,52 +138,139 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 /// Unspecified template parameters are assigned their default values if applicable.
 /// </para>
 /// </summary>
-public sealed partial class SearchApplicationSearchRequestDescriptor : RequestDescriptor<SearchApplicationSearchRequestDescriptor, SearchApplicationSearchRequestParameters>
+public readonly partial struct SearchApplicationSearchRequestDescriptor
 {
-	internal SearchApplicationSearchRequestDescriptor(Action<SearchApplicationSearchRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest Instance { get; init; }
 
-	public SearchApplicationSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchApplicationSearchRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationSearch;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_application.search";
-
-	public SearchApplicationSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public SearchApplicationSearchRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public SearchApplicationSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest(name);
 	}
 
-	private IDictionary<string, object>? ParamsValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public SearchApplicationSearchRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the search application to be searched.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Determines whether aggregation names are prefixed by their respective types in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Query parameters specific to this request, which will override any defaults specified in the template.
 	/// </para>
 	/// </summary>
-	public SearchApplicationSearchRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Query parameters specific to this request, which will override any defaults specified in the template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params()
 	{
-		writer.WriteStartObject();
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Query parameters specific to this request, which will override any defaults specified in the template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

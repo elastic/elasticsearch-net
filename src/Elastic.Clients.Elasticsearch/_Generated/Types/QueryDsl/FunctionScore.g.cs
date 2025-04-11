@@ -17,394 +17,681 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(FunctionScoreConverter))]
+internal sealed partial class FunctionScoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+	private static readonly System.Text.Json.JsonEncodedText VariantExp = System.Text.Json.JsonEncodedText.Encode("exp");
+	private static readonly System.Text.Json.JsonEncodedText VariantFieldValueFactor = System.Text.Json.JsonEncodedText.Encode("field_value_factor");
+	private static readonly System.Text.Json.JsonEncodedText VariantGauss = System.Text.Json.JsonEncodedText.Encode("gauss");
+	private static readonly System.Text.Json.JsonEncodedText VariantLinear = System.Text.Json.JsonEncodedText.Encode("linear");
+	private static readonly System.Text.Json.JsonEncodedText VariantRandomScore = System.Text.Json.JsonEncodedText.Encode("random_score");
+	private static readonly System.Text.Json.JsonEncodedText VariantScriptScore = System.Text.Json.JsonEncodedText.Encode("script_score");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<double?> propWeight = default;
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantExp))
+			{
+				variantType = VariantExp.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFieldValueFactor))
+			{
+				variantType = VariantFieldValueFactor.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGauss))
+			{
+				variantType = VariantGauss.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLinear))
+			{
+				variantType = VariantLinear.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRandomScore))
+			{
+				variantType = VariantRandomScore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScriptScore))
+			{
+				variantType = VariantScriptScore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Filter = propFilter.Value,
+			Weight = propWeight.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "exp":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant, null, null);
+				break;
+			case "field_value_factor":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)value.Variant, null, null);
+				break;
+			case "gauss":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant, null, null);
+				break;
+			case "linear":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant, null, null);
+				break;
+			case "random_score":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)value.Variant, null, null);
+				break;
+			case "script_score":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore)}'.");
+		}
+
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreConverter))]
 public sealed partial class FunctionScore
 {
-	internal FunctionScore(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public FunctionScore()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FunctionScore()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? Exp { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>("exp"); set => SetVariant("exp", value); }
 
-	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
-	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
-	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
-	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
-	public static FunctionScore FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScore("field_value_factor", fieldValueFactorScoreFunction);
-	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
-	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
-	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
-	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
-	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
-	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
-	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
-	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
-	public static FunctionScore RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => new FunctionScore("random_score", randomScoreFunction);
-	public static FunctionScore ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => new FunctionScore("script_score", scriptScoreFunction);
+	/// <summary>
+	/// <para>
+	/// Function allows you to use a field from a document to influence the score.
+	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? FieldValueFactor { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>("field_value_factor"); set => SetVariant("field_value_factor", value); }
 
-	[JsonInclude, JsonPropertyName("filter")]
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? Gauss { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>("gauss"); set => SetVariant("gauss", value); }
+
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? Linear { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>("linear"); set => SetVariant("linear", value); }
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? RandomScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>("random_score"); set => SetVariant("random_score", value); }
+
+	/// <summary>
+	/// <para>
+	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? ScriptScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>("script_score"); set => SetVariant("script_score", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("weight")]
 	public double? Weight { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction value) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore { FieldValueFactor = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction value) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore { RandomScore = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction value) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore { ScriptScore = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionScore>
+public readonly partial struct FunctionScoreDescriptor<TDocument>
 {
-	public override FunctionScore Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FunctionScoreDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.Query? filterValue = default;
-		double? weightValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "filter")
-			{
-				filterValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "weight")
-			{
-				weightValue = JsonSerializer.Deserialize<double?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "exp")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "field_value_factor")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "gauss")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "linear")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "random_score")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "script_score")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FunctionScore' from the response.");
-		}
-
-		var result = new FunctionScore(variantNameValue, variantValue);
-		result.Filter = filterValue;
-		result.Weight = weightValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, FunctionScore value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FunctionScoreDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.Filter is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, value.Filter, options);
-		}
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		if (value.Weight.HasValue)
-		{
-			writer.WritePropertyName("weight");
-			writer.WriteNumberValue(value.Weight.Value);
-		}
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "exp":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "field_value_factor":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)value.Variant, options);
-					break;
-				case "gauss":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "linear":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "random_score":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)value.Variant, options);
-					break;
-				case "script_score":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)value.Variant, options);
-					break;
-			}
-		}
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
+	{
+		Instance.Exp = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	{
+		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Function allows you to use a field from a document to influence the score.
+	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? value)
+	{
+		Instance.FieldValueFactor = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Function allows you to use a field from a document to influence the score.
+	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> FieldValueFactor(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>> action)
+	{
+		Instance.FieldValueFactor = Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
+	{
+		Instance.Gauss = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	{
+		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
+	{
+		Instance.Linear = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? value)
+	{
+		Instance.RandomScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> RandomScore()
+	{
+		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> RandomScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>>? action)
+	{
+		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? value)
+	{
+		Instance.ScriptScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> ScriptScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> action)
+	{
+		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Weight(double? value)
+	{
+		Instance.Weight = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDescriptor<FunctionScoreDescriptor<TDocument>>
+public readonly partial struct FunctionScoreDescriptor
 {
-	internal FunctionScoreDescriptor(Action<FunctionScoreDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore Instance { get; init; }
 
-	public FunctionScoreDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FunctionScoreDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private FunctionScoreDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FunctionScoreDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private FunctionScoreDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Exp = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private double? WeightValue { get; set; }
-
-	public FunctionScoreDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		FilterValue = filter;
-		return Self;
+		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
+		return this;
 	}
 
-	public FunctionScoreDescriptor<TDocument> Weight(double? weight)
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		WeightValue = weight;
-		return Self;
+		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
+		return this;
 	}
 
-	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor<TDocument> FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
-	public FunctionScoreDescriptor<TDocument> FieldValueFactor(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor<TDocument> RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => Set(randomScoreFunction, "random_score");
-	public FunctionScoreDescriptor<TDocument> RandomScore(Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-	public FunctionScoreDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
-	public FunctionScoreDescriptor<TDocument> ScriptScore(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Function allows you to use a field from a document to influence the score.
+	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? value)
 	{
-		writer.WriteStartObject();
-		if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (WeightValue.HasValue)
-		{
-			writer.WritePropertyName("weight");
-			writer.WriteNumberValue(WeightValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class FunctionScoreDescriptor : SerializableDescriptor<FunctionScoreDescriptor>
-{
-	internal FunctionScoreDescriptor(Action<FunctionScoreDescriptor> configure) => configure.Invoke(this);
-
-	public FunctionScoreDescriptor() : base()
-	{
+		Instance.FieldValueFactor = value;
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private FunctionScoreDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Function allows you to use a field from a document to influence the score.
+	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FieldValueFactor(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.FieldValueFactor = Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor.Build(action);
+		return this;
 	}
 
-	private FunctionScoreDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Function allows you to use a field from a document to influence the score.
+	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FieldValueFactor<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<T>> action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.FieldValueFactor = Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<T>.Build(action);
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private double? WeightValue { get; set; }
-
-	public FunctionScoreDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
-		FilterValue = filter;
-		return Self;
+		Instance.Gauss = value;
+		return this;
 	}
 
-	public FunctionScoreDescriptor Weight(double? weight)
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		WeightValue = weight;
-		return Self;
+		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
+		return this;
 	}
 
-	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "exp");
-	public FunctionScoreDescriptor FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
-	public FunctionScoreDescriptor FieldValueFactor<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
-	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "gauss");
-	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "linear");
-	public FunctionScoreDescriptor RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => Set(randomScoreFunction, "random_score");
-	public FunctionScoreDescriptor RandomScore<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
-	public FunctionScoreDescriptor ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
-	public FunctionScoreDescriptor ScriptScore(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		writer.WriteStartObject();
-		if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
+		return this;
+	}
 
-		if (WeightValue.HasValue)
-		{
-			writer.WritePropertyName("weight");
-			writer.WriteNumberValue(WeightValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
+	{
+		Instance.Linear = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? value)
+	{
+		Instance.RandomScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore()
+	{
+		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor>? action)
+	{
+		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
+	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<T>>? action)
+	{
+		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? value)
+	{
+		Instance.ScriptScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor ScriptScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> action)
+	{
+		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Weight(double? value)
+	{
+		Instance.Weight = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

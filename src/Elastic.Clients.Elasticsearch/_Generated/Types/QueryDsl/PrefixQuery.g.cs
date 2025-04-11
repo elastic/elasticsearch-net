@@ -17,115 +17,133 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
+internal sealed partial class PrefixQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>
 {
-	public override PrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseInsensitive = System.Text.Json.JsonEncodedText.Encode("case_insensitive");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		var variant = new PrefixQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			var value = reader.ReadValue<string>(options, null);
+			reader.Read();
+			return new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "case_insensitive")
-				{
-					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "rewrite")
-				{
-					variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "value")
-				{
-					variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-			}
+				Field = propField.Value,
+				Value = value
+			};
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<bool?> propCaseInsensitive = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<string?> propRewrite = default;
+		LocalJsonValue<string> propValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propRewrite.TryReadProperty(ref reader, options, PropRewrite, null))
+			{
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			CaseInsensitive = propCaseInsensitive.Value,
+			Field = propField.Value,
+			QueryName = propQueryName.Value,
+			Rewrite = propRewrite.Value,
+			Value = propValue.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize PrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.CaseInsensitive.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(value.CaseInsensitive.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (!string.IsNullOrEmpty(value.Rewrite))
-		{
-			writer.WritePropertyName("rewrite");
-			writer.WriteStringValue(value.Rewrite);
-		}
-
-		writer.WritePropertyName("value");
-		writer.WriteStringValue(value.Value);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRewrite, value.Rewrite, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(PrefixQueryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryConverter))]
 public sealed partial class PrefixQuery
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public PrefixQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrefixQuery(Elastic.Clients.Elasticsearch.Field field, string value)
+	{
+		Field = field;
+		Value = value;
+	}
+#if NET7_0_OR_GREATER
+	public PrefixQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
 	/// <summary>
@@ -145,7 +163,11 @@ public sealed partial class PrefixQuery
 	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -160,28 +182,31 @@ public sealed partial class PrefixQuery
 	/// Beginning characters of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public string Value { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Prefix(prefixQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Prefix(prefixQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Prefix(prefixQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Prefix(prefixQuery);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Value { get; set; }
 }
 
-public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>
+public readonly partial struct PrefixQueryDescriptor<TDocument>
 {
-	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Instance { get; init; }
 
-	public PrefixQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? CaseInsensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private string? RewriteValue { get; set; }
-	private string ValueValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrefixQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -191,10 +216,10 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -203,34 +228,28 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
-		CaseInsensitiveValue = caseInsensitive;
-		return Self;
+		Instance.CaseInsensitive = value;
+		return this;
 	}
 
-	public PrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public PrefixQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public PrefixQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public PrefixQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -238,10 +257,10 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	/// Method used to rewrite the query.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Rewrite(string? value)
 	{
-		RewriteValue = rewrite;
-		return Self;
+		Instance.Rewrite = value;
+		return this;
 	}
 
 	/// <summary>
@@ -249,64 +268,39 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	/// Beginning characters of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor<TDocument> Value(string value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Value(string value)
 	{
-		ValueValue = value;
-		return Self;
+		Instance.Value = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (CaseInsensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(RewriteValue))
-		{
-			writer.WritePropertyName("rewrite");
-			writer.WriteStringValue(RewriteValue);
-		}
-
-		writer.WritePropertyName("value");
-		writer.WriteStringValue(ValueValue);
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<PrefixQueryDescriptor>
+public readonly partial struct PrefixQueryDescriptor
 {
-	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Instance { get; init; }
 
-	public PrefixQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? CaseInsensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private string? RewriteValue { get; set; }
-	private string ValueValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrefixQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -316,10 +310,10 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -328,34 +322,28 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor CaseInsensitive(bool? value = true)
 	{
-		CaseInsensitiveValue = caseInsensitive;
-		return Self;
+		Instance.CaseInsensitive = value;
+		return this;
 	}
 
-	public PrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public PrefixQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public PrefixQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public PrefixQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -363,10 +351,10 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	/// Method used to rewrite the query.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor Rewrite(string? rewrite)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Rewrite(string? value)
 	{
-		RewriteValue = rewrite;
-		return Self;
+		Instance.Rewrite = value;
+		return this;
 	}
 
 	/// <summary>
@@ -374,46 +362,17 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	/// Beginning characters of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public PrefixQueryDescriptor Value(string value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Value(string value)
 	{
-		ValueValue = value;
-		return Self;
+		Instance.Value = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (CaseInsensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(RewriteValue))
-		{
-			writer.WritePropertyName("rewrite");
-			writer.WriteStringValue(RewriteValue);
-		}
-
-		writer.WritePropertyName("value");
-		writer.WriteStringValue(ValueValue);
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

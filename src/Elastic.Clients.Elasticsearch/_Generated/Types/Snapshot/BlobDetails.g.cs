@@ -17,25 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class BlobDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.BlobDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropOverwritten = System.Text.Json.JsonEncodedText.Encode("overwritten");
+	private static readonly System.Text.Json.JsonEncodedText PropReadEarly = System.Text.Json.JsonEncodedText.Encode("read_early");
+	private static readonly System.Text.Json.JsonEncodedText PropReadEnd = System.Text.Json.JsonEncodedText.Encode("read_end");
+	private static readonly System.Text.Json.JsonEncodedText PropReads = System.Text.Json.JsonEncodedText.Encode("reads");
+	private static readonly System.Text.Json.JsonEncodedText PropReadStart = System.Text.Json.JsonEncodedText.Encode("read_start");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeBytes = System.Text.Json.JsonEncodedText.Encode("size_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.BlobDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<bool> propOverwritten = default;
+		LocalJsonValue<bool> propReadEarly = default;
+		LocalJsonValue<long> propReadEnd = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails> propReads = default;
+		LocalJsonValue<long> propReadStart = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propSize = default;
+		LocalJsonValue<long> propSizeBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propOverwritten.TryReadProperty(ref reader, options, PropOverwritten, null))
+			{
+				continue;
+			}
+
+			if (propReadEarly.TryReadProperty(ref reader, options, PropReadEarly, null))
+			{
+				continue;
+			}
+
+			if (propReadEnd.TryReadProperty(ref reader, options, PropReadEnd, null))
+			{
+				continue;
+			}
+
+			if (propReads.TryReadProperty(ref reader, options, PropReads, null))
+			{
+				continue;
+			}
+
+			if (propReadStart.TryReadProperty(ref reader, options, PropReadStart, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSizeBytes.TryReadProperty(ref reader, options, PropSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.BlobDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Name = propName.Value,
+			Overwritten = propOverwritten.Value,
+			ReadEarly = propReadEarly.Value,
+			ReadEnd = propReadEnd.Value,
+			Reads = propReads.Value,
+			ReadStart = propReadStart.Value,
+			Size = propSize.Value,
+			SizeBytes = propSizeBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.BlobDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropOverwritten, value.Overwritten, null, null);
+		writer.WriteProperty(options, PropReadEarly, value.ReadEarly, null, null);
+		writer.WriteProperty(options, PropReadEnd, value.ReadEnd, null, null);
+		writer.WriteProperty(options, PropReads, value.Reads, null, null);
+		writer.WriteProperty(options, PropReadStart, value.ReadStart, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSizeBytes, value.SizeBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.BlobDetailsConverter))]
 public sealed partial class BlobDetails
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BlobDetails(string name, bool overwritten, bool readEarly, long readEnd, Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails reads, long readStart, Elastic.Clients.Elasticsearch.ByteSize size, long sizeBytes)
+	{
+		Name = name;
+		Overwritten = overwritten;
+		ReadEarly = readEarly;
+		ReadEnd = readEnd;
+		Reads = reads;
+		ReadStart = readStart;
+		Size = size;
+		SizeBytes = sizeBytes;
+	}
+#if NET7_0_OR_GREATER
+	public BlobDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BlobDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BlobDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The name of the blob.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,48 +174,69 @@ public sealed partial class BlobDetails
 	/// /**
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("overwritten")]
-	public bool Overwritten { get; init; }
-	[JsonInclude, JsonPropertyName("read_early")]
-	public bool ReadEarly { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Overwritten { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool ReadEarly { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The position, in bytes, at which read operations completed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_end")]
-	public long ReadEnd { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ReadEnd { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of every read operation performed on the blob.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("reads")]
-	public Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Reads { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Reads { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The position, in bytes, at which read operations started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_start")]
-	public long ReadStart { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ReadStart { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The size of the blob.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
-	public Elastic.Clients.Elasticsearch.ByteSize Size { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The size of the blob in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size_bytes")]
-	public long SizeBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SizeBytes { get; set; }
 }

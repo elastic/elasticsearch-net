@@ -17,38 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlInvalidateResponse : ElasticsearchResponse
+internal sealed partial class SamlInvalidateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidated = System.Text.Json.JsonEncodedText.Encode("invalidated");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRedirect = System.Text.Json.JsonEncodedText.Encode("redirect");
+
+	public override Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propInvalidated = default;
+		LocalJsonValue<string> propRealm = default;
+		LocalJsonValue<string> propRedirect = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propInvalidated.TryReadProperty(ref reader, options, PropInvalidated, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (propRedirect.TryReadProperty(ref reader, options, PropRedirect, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Invalidated = propInvalidated.Value,
+			Realm = propRealm.Value,
+			Redirect = propRedirect.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropInvalidated, value.Invalidated, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRedirect, value.Redirect, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponseConverter))]
+public sealed partial class SamlInvalidateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlInvalidateResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlInvalidateResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of tokens that were invalidated as part of this logout.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("invalidated")]
-	public int Invalidated { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Invalidated { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The realm name of the SAML realm in Elasticsearch that authenticated the user.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
-	public string Realm { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A SAML logout response as a parameter so that the user can be redirected back to the SAML IdP.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("redirect")]
-	public string Redirect { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Redirect { get; set; }
 }

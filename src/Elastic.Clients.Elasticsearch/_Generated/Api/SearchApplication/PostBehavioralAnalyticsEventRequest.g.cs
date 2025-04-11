@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class PostBehavioralAnalyticsEventRequestParameters : RequestParameters
+public sealed partial class PostBehavioralAnalyticsEventRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,20 +33,52 @@ public sealed partial class PostBehavioralAnalyticsEventRequestParameters : Requ
 	public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 }
 
+internal sealed partial class PostBehavioralAnalyticsEventRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest>
+{
+	public override Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Payload = reader.ReadValue<object>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Payload, null);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create a behavioral analytics collection event.
 /// </para>
 /// </summary>
-public sealed partial class PostBehavioralAnalyticsEventRequest : PlainRequest<PostBehavioralAnalyticsEventRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestConverter))]
+public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType) : base(r => r.Required("collection_name", collectionName).Required("event_type", eventType))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationPostBehavioralAnalyticsEvent;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, object payload) : base(r => r.Required("collection_name", collectionName).Required("event_type", eventType))
+	{
+		Payload = payload;
+	}
+#if NET7_0_OR_GREATER
+	public PostBehavioralAnalyticsEventRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchApplicationPostBehavioralAnalyticsEvent;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -61,18 +86,37 @@ public sealed partial class PostBehavioralAnalyticsEventRequest : PlainRequest<P
 
 	/// <summary>
 	/// <para>
+	/// The name of the behavioral analytics collection.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name CollectionName { get => P<Elastic.Clients.Elasticsearch.Name>("collection_name"); set => PR("collection_name", value); }
+
+	/// <summary>
+	/// <para>
+	/// The analytics event type.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.SearchApplication.EventType EventType { get => P<Elastic.Clients.Elasticsearch.SearchApplication.EventType>("event_type"); set => PR("event_type", value); }
+
+	/// <summary>
+	/// <para>
 	/// Whether the response type has to include more details
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
-	[JsonIgnore]
-	public object Payload { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Payload, options);
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object Payload { get; set; }
 }
 
 /// <summary>
@@ -80,46 +124,118 @@ public sealed partial class PostBehavioralAnalyticsEventRequest : PlainRequest<P
 /// Create a behavioral analytics collection event.
 /// </para>
 /// </summary>
-public sealed partial class PostBehavioralAnalyticsEventRequestDescriptor : RequestDescriptor<PostBehavioralAnalyticsEventRequestDescriptor, PostBehavioralAnalyticsEventRequestParameters>
+public readonly partial struct PostBehavioralAnalyticsEventRequestDescriptor
 {
-	internal PostBehavioralAnalyticsEventRequestDescriptor(Action<PostBehavioralAnalyticsEventRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest Instance { get; init; }
 
-	public PostBehavioralAnalyticsEventRequestDescriptor(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType) : base(r => r.Required("collection_name", collectionName).Required("event_type", eventType))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PostBehavioralAnalyticsEventRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationPostBehavioralAnalyticsEvent;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_application.post_behavioral_analytics_event";
-
-	public PostBehavioralAnalyticsEventRequestDescriptor Debug(bool? debug = true) => Qs("debug", debug);
-
-	public PostBehavioralAnalyticsEventRequestDescriptor CollectionName(Elastic.Clients.Elasticsearch.Name collectionName)
+	public PostBehavioralAnalyticsEventRequestDescriptor(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType)
 	{
-		RouteValues.Required("collection_name", collectionName);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest(collectionName, eventType);
+#pragma warning restore CS0618
 	}
 
-	public PostBehavioralAnalyticsEventRequestDescriptor EventType(Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PostBehavioralAnalyticsEventRequestDescriptor()
 	{
-		RouteValues.Required("event_type", eventType);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private object PayloadValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor descriptor) => descriptor.Instance;
 
-	public PostBehavioralAnalyticsEventRequestDescriptor Payload(object payload)
+	/// <summary>
+	/// <para>
+	/// The name of the behavioral analytics collection.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor CollectionName(Elastic.Clients.Elasticsearch.Name value)
 	{
-		PayloadValue = payload;
-		return Self;
+		Instance.CollectionName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The analytics event type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor EventType(Elastic.Clients.Elasticsearch.SearchApplication.EventType value)
 	{
-		JsonSerializer.Serialize(writer, PayloadValue, options);
+		Instance.EventType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether the response type has to include more details
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor Debug(bool? value = true)
+	{
+		Instance.Debug = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor Payload(object value)
+	{
+		Instance.Payload = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

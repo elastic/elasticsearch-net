@@ -17,26 +17,60 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class OpenJobRequestParameters : RequestParameters
+public sealed partial class OpenJobRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class OpenJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Timeout = propTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Open anomaly detection jobs.
+/// </para>
+/// <para>
 /// An anomaly detection job must be opened to be ready to receive and analyze
 /// data. It can be opened and closed multiple times throughout its lifecycle.
 /// When you open a new job, it starts with an empty model.
@@ -45,15 +79,27 @@ public sealed partial class OpenJobRequestParameters : RequestParameters
 /// new data is received.
 /// </para>
 /// </summary>
-public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestConverter))]
+public sealed partial class OpenJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public OpenJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public OpenJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal OpenJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningOpenJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningOpenJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -61,16 +107,28 @@ public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParamete
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Refer to the description for the <c>timeout</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Open anomaly detection jobs.
+/// </para>
+/// <para>
 /// An anomaly detection job must be opened to be ready to receive and analyze
 /// data. It can be opened and closed multiple times throughout its lifecycle.
 /// When you open a new job, it starts with an empty model.
@@ -79,50 +137,99 @@ public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParamete
 /// new data is received.
 /// </para>
 /// </summary>
-public sealed partial class OpenJobRequestDescriptor : RequestDescriptor<OpenJobRequestDescriptor, OpenJobRequestParameters>
+public readonly partial struct OpenJobRequestDescriptor
 {
-	internal OpenJobRequestDescriptor(Action<OpenJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest Instance { get; init; }
 
-	public OpenJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OpenJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningOpenJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.open_job";
-
-	public OpenJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public OpenJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest(jobId);
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public OpenJobRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>timeout</c> query parameter.
 	/// </para>
 	/// </summary>
-	public OpenJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
