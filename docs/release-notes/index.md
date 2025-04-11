@@ -22,13 +22,37 @@ To check for security updates, go to [Security announcements for the Elastic sta
 
 ## 9.0.0 [elasticsearch-net-client-900-release-notes]
 
-### 1. Request Method/API Changes
+### Overview
 
-#### 1.1. Synchronous Request APIs
+- [1. Request Method/API Changes](#1-request-methodapi-changes)
+  - [1.1. Synchronous Request APIs](#11-synchronous-request-apis)
+  - [1.2. Separate Type Arguments for Request/Response](#12-separate-type-arguments-for-requestresponse)
+- [2. Improved Fluent API](#2-improved-fluent-api)
+  - [2.1. `ICollection<E>`](#21-icollectione)
+  - [2.2. `IDictionary<K, V>`](#22-idictionaryk-v)
+  - [2.3. `ICollection<KeyValuePair<K, V>>`](#23-icollectionkeyvaluepairk-v)
+  - [2.4. Union Types](#24-union-types)
+- [3. Improved Descriptor Design](#3-improved-descriptor-design)
+  - [3.1. Wrap](#31-wrap)
+  - [3.2. Unwrap / Inspect](#32-unwrap--inspect)
+  - [3.3. Removal of Side Effects](#33-removal-of-side-effects)
+- [4. Request Path Parameter Properties](#4-request-path-parameter-properties)
+- [5. Field Name Inference](#5-field-name-inference)
+- [6. Uniform Date/Time/Duration Types](#6-uniform-datetimeduration-types)
+- [7. Improved Container Design](#7-improved-container-design)
+- [8. Sorting](#8-sorting)
+- [9. Safer Object Creation](#9-safer-object-creation)
+- [10. Serialization](#10-serialization)
+
+### Features and enhancements
+
+#### 1. Request Method/API Changes
+
+##### 1.1. Synchronous Request APIs
 
 Synchronous request APIs are no longer marked as `obsolete`. We received some feedback about this deprecation and decided to revert it.
 
-#### 1.2. Separate Type Arguments for Request/Response
+##### 1.2. Separate Type Arguments for Request/Response
 
 It is now possible to specify separate type arguments for requests/responses when executing request methods:
 
@@ -44,13 +68,13 @@ var documents = response.Documents; <1>
 
 The regular APIs with merged type arguments are still available.
 
-### 2. Improved Fluent API
+#### 2. Improved Fluent API
 
 The enhanced fluent API generation is likely the most notable change in the 9.0 client.
 
 This section describes the main syntax constructs generated based on the type of the property in the corresponding object.
 
-#### 2.1. `ICollection<E>`
+##### 2.1. `ICollection<E>`
 
 Note: This syntax already existed in 8.x.
 
@@ -66,7 +90,7 @@ new SearchRequestDescriptor<Person>()
     );
 ```
 
-#### 2.2. `IDictionary<K, V>`
+##### 2.2. `IDictionary<K, V>`
 
 The 9.0 client introduces full fluent API support for dictionary types.
 
@@ -122,7 +146,7 @@ new CompletionSuggesterDescriptor<Person>()
     );
 ```
 
-#### 2.3. `ICollection<KeyValuePair<K, V>>`
+##### 2.3. `ICollection<KeyValuePair<K, V>>`
 
 Elasticsearch often uses `ICollection<KeyValuePair<K, V>>` types for ordered dictionaries.
 
@@ -139,7 +163,7 @@ new PutMappingRequestDescriptor<Person>("index")
     .AddDynamicTemplate("key", x => x.Runtime(x => x.Format("123")));    // Fluent: Key + Value.
 ```
 
-#### 2.4. Union Types
+##### 2.4. Union Types
 
 Fluent syntax is now as well available for all auto-generated union- and variant-types.
 
@@ -154,13 +178,13 @@ new TermsQueryDescriptor()
 1. `ICollection<FieldValue>`
 2. `TermsLookup`
 
-### 3. Improved Descriptor Design
+#### 3. Improved Descriptor Design
 
 The 9.0 release features a completely overhauled descriptor design.
 
 Descriptors now wrap the object representation. This brings several internal quality-of-life improvements as well as noticeable benefits to end-users.
 
-#### 3.1. Wrap
+##### 3.1. Wrap
 
 Use the wrap constructor to create a new descriptor for an existing object:
 
@@ -179,7 +203,7 @@ Descriptors are now implemented as `struct` instead of `class`, reducing allocat
 
 :::
 
-#### 3.2. Unwrap / Inspect
+##### 3.2. Unwrap / Inspect
 
 Descriptor values can now be inspected by unwrapping the object using an implicit conversion operator:
 
@@ -192,13 +216,13 @@ SearchRequest request = descriptor;
 
 Unwrapping does not allocate or copy.
 
-#### 3.3. Removal of Side Effects
+##### 3.3. Removal of Side Effects
 
 In 8.x, execution of (most but not all) lambda actions passed to descriptors was deferred until the actual request was made. It was never clear to the user when, and how often an action would be executed.
 
 In 9.0, descriptor actions are always executed immediately. This ensures no unforeseen side effects occur if the user-provided lambda action mutates external state (it is still recommended to exclusively use pure/invariant actions). Consequently, the effects of all changes performed by a descriptor method are immediately applied to the wrapped object.
 
-### 4. Request Path Parameter Properties
+#### 4. Request Path Parameter Properties
 
 In 8.x, request path parameters like `Index`, `Id`, etc. could only be set by calling the corresponding constructor of the request. Afterwards, there was no way to read or change the current value.
 
@@ -214,7 +238,7 @@ var indices = request.Indices;
 request.Indices = "my_index";
 ```
 
-### 5. Field Name Inference
+#### 5. Field Name Inference
 
 The `Field` type and especially its implicit conversion operations allowed for `null` return values. This led to a poor developer experience, as the null-forgiveness operator (`!`) had to be used frequently without good reason.
 
@@ -228,7 +252,7 @@ Field field = "field"!;
 Field field = "field";
 ```
 
-### 6. Uniform Date/Time/Duration Types
+#### 6. Uniform Date/Time/Duration Types
 
 The encoding of date, time and duration values in Elasticsearch often varies depending on the context. In addition to string representations in ISO 8601 and RFC 3339 format (always UTC), also Unix timestamps (in seconds, milliseconds, nanoseconds) or simply seconds, milliseconds, nanoseconds are frequently used.
 
@@ -242,7 +266,7 @@ There are some places where the Elasticsearch custom date/time/duration types ar
 
 :::
 
-### 7. Improved Container Design
+#### 7. Improved Container Design
 
 In 8.x, container types like `Query` or `Aggregation` had to be initialized using static factory methods.
 
@@ -284,7 +308,7 @@ Consecutive assignments of variant properties (e.g., first setting `Max`, then `
 
 :::
 
-### 8. Sorting
+#### 8. Sorting
 
 Applying a sort order to a search request using the fluent API is now more convenient:
 
@@ -325,7 +349,7 @@ new SearchRequestDescriptor<Person>()
     );
 ```
 
-### 9. Safer Object Creation
+#### 9. Safer Object Creation
 
 In version 9.0, users are better guided to correctly initialize objects and thus prevent invalid requests.
 
@@ -339,7 +363,7 @@ Please note that the use of descriptors still provides the chance to create inco
 
 :::
 
-### 10. Serialization
+#### 10. Serialization
 
 Serialization in version 9.0 has been completely overhauled, with a primary focus on robustness and performance. Additionally, initial milestones have been set for future support of native AOT.
 
