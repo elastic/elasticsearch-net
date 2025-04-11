@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct TokenizerFactory | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct TokenizerFactory | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0-preview.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory" class="text-break">
+Struct TokenizerFactory  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.html">Analysis</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct TokenizerFactory</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_CharGroup_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.CharGroup*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_CharGroup_Elastic_Clients_Elasticsearch_Analysis_CharGroupTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.CharGroup(Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer)">
+  CharGroup(CharGroupTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L142"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer CharGroup(CharGroupTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer.html">CharGroupTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_CharGroup_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.CharGroup*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_CharGroup_System_Action_Elastic_Clients_Elasticsearch_Analysis_CharGroupTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.CharGroup(System.Action{Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor})">
+  CharGroup(Action&lt;CharGroupTokenizerDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer CharGroup(Action&lt;CharGroupTokenizerDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor.html">CharGroupTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Classic_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Classic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Classic" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Classic">
+  Classic()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Classic()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Classic_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Classic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Classic_Elastic_Clients_Elasticsearch_Analysis_ClassicTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Classic(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer)">
+  Classic(ClassicTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Classic(ClassicTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer.html">ClassicTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Classic_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Classic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Classic_System_Action_Elastic_Clients_Elasticsearch_Analysis_ClassicTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Classic(System.Action{Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor})">
+  Classic(Action&lt;ClassicTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Classic(Action&lt;ClassicTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizerDescriptor.html">ClassicTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_EdgeNGram_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.EdgeNGram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_EdgeNGram" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.EdgeNGram">
+  EdgeNGram()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer EdgeNGram()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_EdgeNGram_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.EdgeNGram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_EdgeNGram_Elastic_Clients_Elasticsearch_Analysis_EdgeNGramTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.EdgeNGram(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer)">
+  EdgeNGram(EdgeNGramTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L167"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer EdgeNGram(EdgeNGramTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer.html">EdgeNGramTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_EdgeNGram_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.EdgeNGram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_EdgeNGram_System_Action_Elastic_Clients_Elasticsearch_Analysis_EdgeNGramTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.EdgeNGram(System.Action{Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor})">
+  EdgeNGram(Action&lt;EdgeNGramTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L177"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer EdgeNGram(Action&lt;EdgeNGramTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor.html">EdgeNGramTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Icu_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Icu*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Icu_Elastic_Clients_Elasticsearch_Analysis_IcuTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Icu(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer)">
+  Icu(IcuTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Icu(IcuTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer.html">IcuTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Icu_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Icu*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Icu_System_Action_Elastic_Clients_Elasticsearch_Analysis_IcuTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Icu(System.Action{Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor})">
+  Icu(Action&lt;IcuTokenizerDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Icu(Action&lt;IcuTokenizerDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor.html">IcuTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Keyword_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Keyword*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Keyword" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Keyword">
+  Keyword()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Keyword()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Keyword_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Keyword*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Keyword_Elastic_Clients_Elasticsearch_Analysis_KeywordTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Keyword(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer)">
+  Keyword(KeywordTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Keyword(KeywordTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer.html">KeywordTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Keyword_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Keyword*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Keyword_System_Action_Elastic_Clients_Elasticsearch_Analysis_KeywordTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Keyword(System.Action{Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor})">
+  Keyword(Action&lt;KeywordTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Keyword(Action&lt;KeywordTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor.html">KeywordTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Kuromoji_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Kuromoji*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Kuromoji_Elastic_Clients_Elasticsearch_Analysis_KuromojiTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Kuromoji(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer)">
+  Kuromoji(KuromojiTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L207"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Kuromoji(KuromojiTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer.html">KuromojiTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Kuromoji_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Kuromoji*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Kuromoji_System_Action_Elastic_Clients_Elasticsearch_Analysis_KuromojiTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Kuromoji(System.Action{Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor})">
+  Kuromoji(Action&lt;KuromojiTokenizerDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Kuromoji(Action&lt;KuromojiTokenizerDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor.html">KuromojiTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Letter_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Letter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Letter" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Letter">
+  Letter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Letter()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Letter_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Letter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Letter_Elastic_Clients_Elasticsearch_Analysis_LetterTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Letter(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer)">
+  Letter(LetterTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Letter(LetterTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer.html">LetterTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Letter_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Letter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Letter_System_Action_Elastic_Clients_Elasticsearch_Analysis_LetterTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Letter(System.Action{Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor})">
+  Letter(Action&lt;LetterTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Letter(Action&lt;LetterTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor.html">LetterTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Lowercase_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Lowercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Lowercase" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Lowercase">
+  Lowercase()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Lowercase()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Lowercase_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Lowercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Lowercase_Elastic_Clients_Elasticsearch_Analysis_LowercaseTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Lowercase(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer)">
+  Lowercase(LowercaseTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Lowercase(LowercaseTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer.html">LowercaseTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Lowercase_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Lowercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Lowercase_System_Action_Elastic_Clients_Elasticsearch_Analysis_LowercaseTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Lowercase(System.Action{Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizerDescriptor})">
+  Lowercase(Action&lt;LowercaseTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Lowercase(Action&lt;LowercaseTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizerDescriptor.html">LowercaseTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_NGram_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.NGram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_NGram" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.NGram">
+  NGram()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer NGram()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_NGram_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.NGram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_NGram_Elastic_Clients_Elasticsearch_Analysis_NGramTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.NGram(Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer)">
+  NGram(NGramTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer NGram(NGramTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer.html">NGramTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_NGram_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.NGram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_NGram_System_Action_Elastic_Clients_Elasticsearch_Analysis_NGramTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.NGram(System.Action{Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor})">
+  NGram(Action&lt;NGramTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer NGram(Action&lt;NGramTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor.html">NGramTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Nori_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Nori*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Nori" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Nori">
+  Nori()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Nori()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Nori_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Nori*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Nori_Elastic_Clients_Elasticsearch_Analysis_NoriTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Nori(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer)">
+  Nori(NoriTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Nori(NoriTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer.html">NoriTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Nori_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Nori*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Nori_System_Action_Elastic_Clients_Elasticsearch_Analysis_NoriTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Nori(System.Action{Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor})">
+  Nori(Action&lt;NoriTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Nori(Action&lt;NoriTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor.html">NoriTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_PathHierarchy_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.PathHierarchy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_PathHierarchy" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.PathHierarchy">
+  PathHierarchy()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer PathHierarchy()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_PathHierarchy_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.PathHierarchy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_PathHierarchy_Elastic_Clients_Elasticsearch_Analysis_PathHierarchyTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.PathHierarchy(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer)">
+  PathHierarchy(PathHierarchyTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer PathHierarchy(PathHierarchyTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer.html">PathHierarchyTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_PathHierarchy_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.PathHierarchy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_PathHierarchy_System_Action_Elastic_Clients_Elasticsearch_Analysis_PathHierarchyTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.PathHierarchy(System.Action{Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor})">
+  PathHierarchy(Action&lt;PathHierarchyTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L287"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer PathHierarchy(Action&lt;PathHierarchyTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor.html">PathHierarchyTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Pattern_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Pattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Pattern" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Pattern">
+  Pattern()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Pattern()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Pattern_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Pattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Pattern_Elastic_Clients_Elasticsearch_Analysis_PatternTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Pattern(Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer)">
+  Pattern(PatternTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Pattern(PatternTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer.html">PatternTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Pattern_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Pattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Pattern_System_Action_Elastic_Clients_Elasticsearch_Analysis_PatternTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Pattern(System.Action{Elastic.Clients.Elasticsearch.Analysis.PatternTokenizerDescriptor})">
+  Pattern(Action&lt;PatternTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L302"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Pattern(Action&lt;PatternTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.PatternTokenizerDescriptor.html">PatternTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePattern_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePattern" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePattern">
+  SimplePattern()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer SimplePattern()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePattern_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePattern_Elastic_Clients_Elasticsearch_Analysis_SimplePatternTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePattern(Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer)">
+  SimplePattern(SimplePatternTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer SimplePattern(SimplePatternTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer.html">SimplePatternTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePattern_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePattern_System_Action_Elastic_Clients_Elasticsearch_Analysis_SimplePatternTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePattern(System.Action{Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor})">
+  SimplePattern(Action&lt;SimplePatternTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer SimplePattern(Action&lt;SimplePatternTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizerDescriptor.html">SimplePatternTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePatternSplit_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePatternSplit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePatternSplit" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePatternSplit">
+  SimplePatternSplit()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L327"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer SimplePatternSplit()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePatternSplit_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePatternSplit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePatternSplit_Elastic_Clients_Elasticsearch_Analysis_SimplePatternSplitTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePatternSplit(Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer)">
+  SimplePatternSplit(SimplePatternSplitTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L322"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer SimplePatternSplit(SimplePatternSplitTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer.html">SimplePatternSplitTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePatternSplit_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePatternSplit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_SimplePatternSplit_System_Action_Elastic_Clients_Elasticsearch_Analysis_SimplePatternSplitTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.SimplePatternSplit(System.Action{Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizerDescriptor})">
+  SimplePatternSplit(Action&lt;SimplePatternSplitTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer SimplePatternSplit(Action&lt;SimplePatternSplitTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizerDescriptor.html">SimplePatternSplitTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Standard_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Standard" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Standard">
+  Standard()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Standard()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Standard_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Standard_Elastic_Clients_Elasticsearch_Analysis_StandardTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Standard(Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer)">
+  Standard(StandardTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L337"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Standard(StandardTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer.html">StandardTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Standard_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Standard_System_Action_Elastic_Clients_Elasticsearch_Analysis_StandardTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Standard(System.Action{Elastic.Clients.Elasticsearch.Analysis.StandardTokenizerDescriptor})">
+  Standard(Action&lt;StandardTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Standard(Action&lt;StandardTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.StandardTokenizerDescriptor.html">StandardTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Thai_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Thai*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Thai" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Thai">
+  Thai()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Thai()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Thai_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Thai*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Thai_Elastic_Clients_Elasticsearch_Analysis_ThaiTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Thai(Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer)">
+  Thai(ThaiTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L352"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Thai(ThaiTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer.html">ThaiTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Thai_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Thai*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Thai_System_Action_Elastic_Clients_Elasticsearch_Analysis_ThaiTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Thai(System.Action{Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor})">
+  Thai(Action&lt;ThaiTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L362"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Thai(Action&lt;ThaiTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor.html">ThaiTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_UaxEmailUrl_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.UaxEmailUrl*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_UaxEmailUrl" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.UaxEmailUrl">
+  UaxEmailUrl()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer UaxEmailUrl()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_UaxEmailUrl_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.UaxEmailUrl*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_UaxEmailUrl_Elastic_Clients_Elasticsearch_Analysis_UaxEmailUrlTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.UaxEmailUrl(Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer)">
+  UaxEmailUrl(UaxEmailUrlTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer UaxEmailUrl(UaxEmailUrlTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer.html">UaxEmailUrlTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_UaxEmailUrl_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.UaxEmailUrl*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_UaxEmailUrl_System_Action_Elastic_Clients_Elasticsearch_Analysis_UaxEmailUrlTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.UaxEmailUrl(System.Action{Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizerDescriptor})">
+  UaxEmailUrl(Action&lt;UaxEmailUrlTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer UaxEmailUrl(Action&lt;UaxEmailUrlTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizerDescriptor.html">UaxEmailUrlTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Whitespace_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Whitespace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Whitespace" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Whitespace">
+  Whitespace()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Whitespace()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Whitespace_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Whitespace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Whitespace_Elastic_Clients_Elasticsearch_Analysis_WhitespaceTokenizer_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Whitespace(Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer)">
+  Whitespace(WhitespaceTokenizer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L382"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Whitespace(WhitespaceTokenizer value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer.html">WhitespaceTokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Whitespace_" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Whitespace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Whitespace_System_Action_Elastic_Clients_Elasticsearch_Analysis_WhitespaceTokenizerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Whitespace(System.Action{Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizerDescriptor})">
+  Whitespace(Action&lt;WhitespaceTokenizerDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Analysis/Tokenizer.g.cs/#L392"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITokenizer Whitespace(Action&lt;WhitespaceTokenizerDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizerDescriptor.html">WhitespaceTokenizerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

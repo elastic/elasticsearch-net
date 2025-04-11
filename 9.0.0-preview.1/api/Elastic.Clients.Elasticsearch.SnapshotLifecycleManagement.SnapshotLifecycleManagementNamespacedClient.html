@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SnapshotLifecycleManagementNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SnapshotLifecycleManagementNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0-preview.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient" class="text-break">
+Class SnapshotLifecycleManagementNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.html">SnapshotLifecycleManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SnapshotLifecycleManagementNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">SnapshotLifecycleManagementNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.#ctor">
+  SnapshotLifecycleManagementNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.html">SnapshotLifecycleManagementNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SnapshotLifecycleManagementNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycle_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycle(Elastic.Clients.Elasticsearch.Name)">
+  DeleteLifecycle(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteLifecycleResponse DeleteLifecycle(Name policyId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycle_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_DeleteLifecycleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycle(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor})">
+  DeleteLifecycle(Name, Action&lt;DeleteLifecycleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteLifecycleResponse DeleteLifecycle(Name policyId, Action&lt;DeleteLifecycleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor.html">DeleteLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycle_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_DeleteLifecycleRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest)">
+  DeleteLifecycle(DeleteLifecycleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest.html">DeleteLifecycleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycleAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_DeleteLifecycleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteLifecycleAsync(Name, Action&lt;DeleteLifecycleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteLifecycleResponse&gt; DeleteLifecycleAsync(Name policyId, Action&lt;DeleteLifecycleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor.html">DeleteLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycleAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  DeleteLifecycleAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteLifecycleResponse&gt; DeleteLifecycleAsync(Name policyId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_DeleteLifecycleAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_DeleteLifecycleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest,System.Threading.CancellationToken)">
+  DeleteLifecycleAsync(DeleteLifecycleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteLifecycleResponse&gt; DeleteLifecycleAsync(DeleteLifecycleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest.html">DeleteLifecycleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycle_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name)">
+  ExecuteLifecycle(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecuteLifecycleResponse ExecuteLifecycle(Name policyId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycle_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteLifecycleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor})">
+  ExecuteLifecycle(Name, Action&lt;ExecuteLifecycleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecuteLifecycleResponse ExecuteLifecycle(Name policyId, Action&lt;ExecuteLifecycleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor.html">ExecuteLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycle_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteLifecycleRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest)">
+  ExecuteLifecycle(ExecuteLifecycleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecuteLifecycleResponse ExecuteLifecycle(ExecuteLifecycleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest.html">ExecuteLifecycleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycleAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteLifecycleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor},System.Threading.CancellationToken)">
+  ExecuteLifecycleAsync(Name, Action&lt;ExecuteLifecycleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteLifecycleResponse&gt; ExecuteLifecycleAsync(Name policyId, Action&lt;ExecuteLifecycleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor.html">ExecuteLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycleAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  ExecuteLifecycleAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteLifecycleResponse&gt; ExecuteLifecycleAsync(Name policyId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteLifecycleAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteLifecycleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest,System.Threading.CancellationToken)">
+  ExecuteLifecycleAsync(ExecuteLifecycleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteLifecycleResponse&gt; ExecuteLifecycleAsync(ExecuteLifecycleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest.html">ExecuteLifecycleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetention_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetention*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetention" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetention">
+  ExecuteRetention()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecuteRetentionResponse ExecuteRetention()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetention_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetention*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetention_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteRetentionRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest)">
+  ExecuteRetention(ExecuteRetentionRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecuteRetentionResponse ExecuteRetention(ExecuteRetentionRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest.html">ExecuteRetentionRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetention_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetention*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetention_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteRetentionRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetention(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor})">
+  ExecuteRetention(Action&lt;ExecuteRetentionRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecuteRetentionResponse ExecuteRetention(Action&lt;ExecuteRetentionRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor.html">ExecuteRetentionRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetentionAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetentionAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetentionAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteRetentionRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetentionAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest,System.Threading.CancellationToken)">
+  ExecuteRetentionAsync(ExecuteRetentionRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteRetentionResponse&gt; ExecuteRetentionAsync(ExecuteRetentionRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest.html">ExecuteRetentionRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetentionAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetentionAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetentionAsync_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_ExecuteRetentionRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetentionAsync(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor},System.Threading.CancellationToken)">
+  ExecuteRetentionAsync(Action&lt;ExecuteRetentionRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteRetentionResponse&gt; ExecuteRetentionAsync(Action&lt;ExecuteRetentionRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor.html">ExecuteRetentionRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetentionAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetentionAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_ExecuteRetentionAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.ExecuteRetentionAsync(System.Threading.CancellationToken)">
+  ExecuteRetentionAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteRetentionResponse&gt; ExecuteRetentionAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle">
+  GetLifecycle()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLifecycleResponse GetLifecycle()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle(Elastic.Clients.Elasticsearch.Names)">
+  GetLifecycle(Names?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLifecycleResponse GetLifecycle(Names? policyId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetLifecycleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor})">
+  GetLifecycle(Names?, Action&lt;GetLifecycleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLifecycleResponse GetLifecycle(Names? policyId, Action&lt;GetLifecycleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor.html">GetLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetLifecycleRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest)">
+  GetLifecycle(GetLifecycleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest.html">GetLifecycleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycle_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetLifecycleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycle(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor})">
+  GetLifecycle(Action&lt;GetLifecycleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLifecycleResponse GetLifecycle(Action&lt;GetLifecycleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor.html">GetLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetLifecycleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor},System.Threading.CancellationToken)">
+  GetLifecycleAsync(Names?, Action&lt;GetLifecycleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L250"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLifecycleResponse&gt; GetLifecycleAsync(Names? policyId, Action&lt;GetLifecycleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor.html">GetLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_Elastic_Clients_Elasticsearch_Names_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names,System.Threading.CancellationToken)">
+  GetLifecycleAsync(Names?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLifecycleResponse&gt; GetLifecycleAsync(Names? policyId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetLifecycleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest,System.Threading.CancellationToken)">
+  GetLifecycleAsync(GetLifecycleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLifecycleResponse&gt; GetLifecycleAsync(GetLifecycleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest.html">GetLifecycleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetLifecycleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor},System.Threading.CancellationToken)">
+  GetLifecycleAsync(Action&lt;GetLifecycleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLifecycleResponse&gt; GetLifecycleAsync(Action&lt;GetLifecycleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor.html">GetLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetLifecycleAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetLifecycleAsync(System.Threading.CancellationToken)">
+  GetLifecycleAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLifecycleResponse&gt; GetLifecycleAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStats_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStats" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStats">
+  GetStats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetStatsResponse GetStats()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStats_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStats_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStats(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest)">
+  GetStats(GetStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetStatsResponse GetStats(GetStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest.html">GetStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStats_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStats_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStats(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor})">
+  GetStats(Action&lt;GetStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetStatsResponse GetStats(Action&lt;GetStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor.html">GetStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatsAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatsAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest,System.Threading.CancellationToken)">
+  GetStatsAsync(GetStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetStatsResponse&gt; GetStatsAsync(GetStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest.html">GetStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatsAsync_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatsAsync(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor},System.Threading.CancellationToken)">
+  GetStatsAsync(Action&lt;GetStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetStatsResponse&gt; GetStatsAsync(Action&lt;GetStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor.html">GetStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatsAsync(System.Threading.CancellationToken)">
+  GetStatsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetStatsResponse&gt; GetStatsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatus_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatus" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatus">
+  GetStatus()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetSlmStatusResponse GetStatus()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatus_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatus_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetSlmStatusRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatus(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest)">
+  GetStatus(GetSlmStatusRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetSlmStatusResponse GetStatus(GetSlmStatusRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest.html">GetSlmStatusRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatus_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatus_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetSlmStatusRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatus(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor})">
+  GetStatus(Action&lt;GetSlmStatusRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetSlmStatusResponse GetStatus(Action&lt;GetSlmStatusRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor.html">GetSlmStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatusAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetSlmStatusRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatusAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest,System.Threading.CancellationToken)">
+  GetStatusAsync(GetSlmStatusRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSlmStatusResponse&gt; GetStatusAsync(GetSlmStatusRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest.html">GetSlmStatusRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatusAsync_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_GetSlmStatusRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatusAsync(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor},System.Threading.CancellationToken)">
+  GetStatusAsync(Action&lt;GetSlmStatusRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSlmStatusResponse&gt; GetStatusAsync(Action&lt;GetSlmStatusRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor.html">GetSlmStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_GetStatusAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.GetStatusAsync(System.Threading.CancellationToken)">
+  GetStatusAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L334"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSlmStatusResponse&gt; GetStatusAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycle_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycle(Elastic.Clients.Elasticsearch.Name)">
+  PutLifecycle(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutLifecycleResponse PutLifecycle(Name policyId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycle_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_PutLifecycleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycle(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor})">
+  PutLifecycle(Name, Action&lt;PutLifecycleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutLifecycleResponse PutLifecycle(Name policyId, Action&lt;PutLifecycleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor.html">PutLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycle_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycle_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_PutLifecycleRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest)">
+  PutLifecycle(PutLifecycleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest.html">PutLifecycleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycleAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_PutLifecycleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor},System.Threading.CancellationToken)">
+  PutLifecycleAsync(Name, Action&lt;PutLifecycleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutLifecycleResponse&gt; PutLifecycleAsync(Name policyId, Action&lt;PutLifecycleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor.html">PutLifecycleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycleAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  PutLifecycleAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutLifecycleResponse&gt; PutLifecycleAsync(Name policyId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policyId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycleAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_PutLifecycleAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_PutLifecycleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.PutLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest,System.Threading.CancellationToken)">
+  PutLifecycleAsync(PutLifecycleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L374"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutLifecycleResponse&gt; PutLifecycleAsync(PutLifecycleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest.html">PutLifecycleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Start_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Start*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Start" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Start">
+  Start()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartSlmResponse Start()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Start_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Start*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Start_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StartSlmRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Start(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest)">
+  Start(StartSlmRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L397"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartSlmResponse Start(StartSlmRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest.html">StartSlmRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Start_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Start*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Start_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StartSlmRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Start(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor})">
+  Start(Action&lt;StartSlmRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L411"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartSlmResponse Start(Action&lt;StartSlmRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor.html">StartSlmRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StartAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StartAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StartAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StartSlmRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StartAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest,System.Threading.CancellationToken)">
+  StartAsync(StartSlmRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartSlmResponse&gt; StartAsync(StartSlmRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest.html">StartSlmRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StartAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StartAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StartAsync_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StartSlmRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StartAsync(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor},System.Threading.CancellationToken)">
+  StartAsync(Action&lt;StartSlmRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L434"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartSlmResponse&gt; StartAsync(Action&lt;StartSlmRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor.html">StartSlmRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StartAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StartAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StartAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StartAsync(System.Threading.CancellationToken)">
+  StartAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartSlmResponse&gt; StartAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Stop_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Stop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Stop" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Stop">
+  Stop()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L449"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopSlmResponse Stop()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Stop_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Stop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Stop_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StopSlmRequest_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Stop(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest)">
+  Stop(StopSlmRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L443"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopSlmResponse Stop(StopSlmRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest.html">StopSlmRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Stop_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Stop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_Stop_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StopSlmRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.Stop(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor})">
+  Stop(Action&lt;StopSlmRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L457"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopSlmResponse Stop(Action&lt;StopSlmRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor.html">StopSlmRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StopAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StopAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StopAsync_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StopSlmRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StopAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest,System.Threading.CancellationToken)">
+  StopAsync(StopSlmRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L466"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopSlmResponse&gt; StopAsync(StopSlmRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest.html">StopSlmRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StopAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StopAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StopAsync_System_Action_Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_StopSlmRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StopAsync(System.Action{Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor},System.Threading.CancellationToken)">
+  StopAsync(Action&lt;StopSlmRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L480"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopSlmResponse&gt; StopAsync(Action&lt;StopSlmRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor.html">StopSlmRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StopAsync_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StopAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement_SnapshotLifecycleManagementNamespacedClient_StopAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.StopAsync(System.Threading.CancellationToken)">
+  StopAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Slm.g.cs/#L472"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopSlmResponse&gt; StopAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

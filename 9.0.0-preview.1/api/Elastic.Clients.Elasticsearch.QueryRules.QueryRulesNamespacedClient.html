@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class QueryRulesNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class QueryRulesNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0-preview.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient" class="text-break">
+Class QueryRulesNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.html">QueryRules</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class QueryRulesNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">QueryRulesNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.#ctor">
+  QueryRulesNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.html">QueryRulesNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected QueryRulesNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  DeleteRule(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteRuleResponse DeleteRule(Id rulesetId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse.html">DeleteRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_DeleteRuleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor})">
+  DeleteRule(Id, Id, Action&lt;DeleteRuleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteRuleResponse DeleteRule(Id rulesetId, Id ruleId, Action&lt;DeleteRuleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor.html">DeleteRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse.html">DeleteRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRule_Elastic_Clients_Elasticsearch_QueryRules_DeleteRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRule(Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest)">
+  DeleteRule(DeleteRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteRuleResponse DeleteRule(DeleteRuleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest.html">DeleteRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse.html">DeleteRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_DeleteRuleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteRuleAsync(Id, Id, Action&lt;DeleteRuleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteRuleResponse&gt; DeleteRuleAsync(Id rulesetId, Id ruleId, Action&lt;DeleteRuleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor.html">DeleteRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse.html">DeleteRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteRuleAsync(Id, Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteRuleResponse&gt; DeleteRuleAsync(Id rulesetId, Id ruleId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse.html">DeleteRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleAsync_Elastic_Clients_Elasticsearch_QueryRules_DeleteRuleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest,System.Threading.CancellationToken)">
+  DeleteRuleAsync(DeleteRuleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteRuleResponse&gt; DeleteRuleAsync(DeleteRuleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest.html">DeleteRuleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleResponse.html">DeleteRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleset_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleset(Elastic.Clients.Elasticsearch.Id)">
+  DeleteRuleset(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteRulesetResponse DeleteRuleset(Id rulesetId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse.html">DeleteRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleset_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_DeleteRulesetRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleset(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor})">
+  DeleteRuleset(Id, Action&lt;DeleteRulesetRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteRulesetResponse DeleteRuleset(Id rulesetId, Action&lt;DeleteRulesetRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor.html">DeleteRulesetRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse.html">DeleteRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRuleset_Elastic_Clients_Elasticsearch_QueryRules_DeleteRulesetRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRuleset(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest)">
+  DeleteRuleset(DeleteRulesetRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteRulesetResponse DeleteRuleset(DeleteRulesetRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest.html">DeleteRulesetRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse.html">DeleteRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRulesetAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_DeleteRulesetRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRulesetAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteRulesetAsync(Id, Action&lt;DeleteRulesetRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteRulesetResponse&gt; DeleteRulesetAsync(Id rulesetId, Action&lt;DeleteRulesetRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor.html">DeleteRulesetRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse.html">DeleteRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRulesetAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRulesetAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteRulesetAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteRulesetResponse&gt; DeleteRulesetAsync(Id rulesetId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse.html">DeleteRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_DeleteRulesetAsync_Elastic_Clients_Elasticsearch_QueryRules_DeleteRulesetRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.DeleteRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest,System.Threading.CancellationToken)">
+  DeleteRulesetAsync(DeleteRulesetRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteRulesetResponse&gt; DeleteRulesetAsync(DeleteRulesetRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest.html">DeleteRulesetRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetResponse.html">DeleteRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  GetRule(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRuleResponse GetRule(Id rulesetId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse.html">GetRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_GetRuleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor})">
+  GetRule(Id, Id, Action&lt;GetRuleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRuleResponse GetRule(Id rulesetId, Id ruleId, Action&lt;GetRuleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor.html">GetRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse.html">GetRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRule_Elastic_Clients_Elasticsearch_QueryRules_GetRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRule(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest)">
+  GetRule(GetRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRuleResponse GetRule(GetRuleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest.html">GetRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse.html">GetRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_GetRuleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor},System.Threading.CancellationToken)">
+  GetRuleAsync(Id, Id, Action&lt;GetRuleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRuleResponse&gt; GetRuleAsync(Id rulesetId, Id ruleId, Action&lt;GetRuleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor.html">GetRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse.html">GetRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetRuleAsync(Id, Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRuleResponse&gt; GetRuleAsync(Id rulesetId, Id ruleId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse.html">GetRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleAsync_Elastic_Clients_Elasticsearch_QueryRules_GetRuleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest,System.Threading.CancellationToken)">
+  GetRuleAsync(GetRuleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRuleResponse&gt; GetRuleAsync(GetRuleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest.html">GetRuleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse.html">GetRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleset_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleset(Elastic.Clients.Elasticsearch.Id)">
+  GetRuleset(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRulesetResponse GetRuleset(Id rulesetId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse.html">GetRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleset_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_GetRulesetRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleset(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor})">
+  GetRuleset(Id, Action&lt;GetRulesetRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRulesetResponse GetRuleset(Id rulesetId, Action&lt;GetRulesetRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor.html">GetRulesetRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse.html">GetRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRuleset_Elastic_Clients_Elasticsearch_QueryRules_GetRulesetRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRuleset(Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest)">
+  GetRuleset(GetRulesetRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRulesetResponse GetRuleset(GetRulesetRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest.html">GetRulesetRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse.html">GetRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRulesetAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_GetRulesetRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRulesetAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor},System.Threading.CancellationToken)">
+  GetRulesetAsync(Id, Action&lt;GetRulesetRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRulesetResponse&gt; GetRulesetAsync(Id rulesetId, Action&lt;GetRulesetRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor.html">GetRulesetRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse.html">GetRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRulesetAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRulesetAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetRulesetAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRulesetResponse&gt; GetRulesetAsync(Id rulesetId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse.html">GetRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_GetRulesetAsync_Elastic_Clients_Elasticsearch_QueryRules_GetRulesetRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.GetRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest,System.Threading.CancellationToken)">
+  GetRulesetAsync(GetRulesetRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRulesetResponse&gt; GetRulesetAsync(GetRulesetRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest.html">GetRulesetRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetResponse.html">GetRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesets_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesets" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesets">
+  ListRulesets()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListRulesetsResponse ListRulesets()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse.html">ListRulesetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesets_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesets_Elastic_Clients_Elasticsearch_QueryRules_ListRulesetsRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesets(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest)">
+  ListRulesets(ListRulesetsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListRulesetsResponse ListRulesets(ListRulesetsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest.html">ListRulesetsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse.html">ListRulesetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesets_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesets_System_Action_Elastic_Clients_Elasticsearch_QueryRules_ListRulesetsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesets(System.Action{Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor})">
+  ListRulesets(Action&lt;ListRulesetsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListRulesetsResponse ListRulesets(Action&lt;ListRulesetsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor.html">ListRulesetsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse.html">ListRulesetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesetsAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesetsAsync_Elastic_Clients_Elasticsearch_QueryRules_ListRulesetsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesetsAsync(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest,System.Threading.CancellationToken)">
+  ListRulesetsAsync(ListRulesetsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListRulesetsResponse&gt; ListRulesetsAsync(ListRulesetsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest.html">ListRulesetsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse.html">ListRulesetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesetsAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesetsAsync_System_Action_Elastic_Clients_Elasticsearch_QueryRules_ListRulesetsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesetsAsync(System.Action{Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor},System.Threading.CancellationToken)">
+  ListRulesetsAsync(Action&lt;ListRulesetsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListRulesetsResponse&gt; ListRulesetsAsync(Action&lt;ListRulesetsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor.html">ListRulesetsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse.html">ListRulesetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesetsAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_ListRulesetsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.ListRulesetsAsync(System.Threading.CancellationToken)">
+  ListRulesetsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListRulesetsResponse&gt; ListRulesetsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsResponse.html">ListRulesetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  PutRule(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutRuleResponse PutRule(Id rulesetId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse.html">PutRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor})">
+  PutRule(Id, Id, Action&lt;PutRuleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutRuleResponse PutRule(Id rulesetId, Id ruleId, Action&lt;PutRuleRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse.html">PutRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRule_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRule_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRule(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest)">
+  PutRule(PutRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutRuleResponse PutRule(PutRuleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest.html">PutRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse.html">PutRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor},System.Threading.CancellationToken)">
+  PutRuleAsync(Id, Id, Action&lt;PutRuleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutRuleResponse&gt; PutRuleAsync(Id rulesetId, Id ruleId, Action&lt;PutRuleRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse.html">PutRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutRuleAsync(Id, Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutRuleResponse&gt; PutRuleAsync(Id rulesetId, Id ruleId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse.html">PutRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleAsync_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleAsync(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest,System.Threading.CancellationToken)">
+  PutRuleAsync(PutRuleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutRuleResponse&gt; PutRuleAsync(PutRuleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest.html">PutRuleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleResponse.html">PutRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleset_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleset(Elastic.Clients.Elasticsearch.Id)">
+  PutRuleset(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutRulesetResponse PutRuleset(Id rulesetId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse.html">PutRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleset_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_PutRulesetRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleset(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor})">
+  PutRuleset(Id, Action&lt;PutRulesetRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutRulesetResponse PutRuleset(Id rulesetId, Action&lt;PutRulesetRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor.html">PutRulesetRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse.html">PutRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleset_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRuleset_Elastic_Clients_Elasticsearch_QueryRules_PutRulesetRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRuleset(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest)">
+  PutRuleset(PutRulesetRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutRulesetResponse PutRuleset(PutRulesetRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest.html">PutRulesetRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse.html">PutRulesetResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRulesetAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_PutRulesetRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRulesetAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor},System.Threading.CancellationToken)">
+  PutRulesetAsync(Id, Action&lt;PutRulesetRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutRulesetResponse&gt; PutRulesetAsync(Id rulesetId, Action&lt;PutRulesetRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor.html">PutRulesetRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse.html">PutRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRulesetAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRulesetAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutRulesetAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutRulesetResponse&gt; PutRulesetAsync(Id rulesetId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse.html">PutRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRulesetAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRulesetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_PutRulesetAsync_Elastic_Clients_Elasticsearch_QueryRules_PutRulesetRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.PutRulesetAsync(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest,System.Threading.CancellationToken)">
+  PutRulesetAsync(PutRulesetRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutRulesetResponse&gt; PutRulesetAsync(PutRulesetRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest.html">PutRulesetRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetResponse.html">PutRulesetResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_Test_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.Test*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_Test_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.Test(Elastic.Clients.Elasticsearch.Id)">
+  Test(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L369"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TestResponse Test(Id rulesetId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestResponse.html">TestResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_Test_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.Test*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_Test_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_TestRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.Test(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor})">
+  Test(Id, Action&lt;TestRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TestResponse Test(Id rulesetId, Action&lt;TestRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor.html">TestRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestResponse.html">TestResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_Test_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.Test*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_Test_Elastic_Clients_Elasticsearch_QueryRules_TestRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.Test(Elastic.Clients.Elasticsearch.QueryRules.TestRequest)">
+  Test(TestRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L363"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TestResponse Test(TestRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestRequest.html">TestRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestResponse.html">TestResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_TestAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.TestAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_TestAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_QueryRules_TestRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.TestAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor},System.Threading.CancellationToken)">
+  TestAsync(Id, Action&lt;TestRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TestResponse&gt; TestAsync(Id rulesetId, Action&lt;TestRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor.html">TestRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestResponse.html">TestResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_TestAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.TestAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_TestAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.TestAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  TestAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L392"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TestResponse&gt; TestAsync(Id rulesetId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestResponse.html">TestResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_TestAsync_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.TestAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_QueryRulesNamespacedClient_TestAsync_Elastic_Clients_Elasticsearch_QueryRules_TestRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient.TestAsync(Elastic.Clients.Elasticsearch.QueryRules.TestRequest,System.Threading.CancellationToken)">
+  TestAsync(TestRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.QueryRules.g.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TestResponse&gt; TestAsync(TestRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestRequest.html">TestRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestResponse.html">TestResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

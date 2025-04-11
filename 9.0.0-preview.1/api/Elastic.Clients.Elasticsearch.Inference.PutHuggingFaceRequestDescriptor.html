@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutHuggingFaceRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutHuggingFaceRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create a Hugging Face inference endpoint.   Create an inference endpoint to perform an inference task with the hugging_face service.   You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL. Select the model you want to use on the new endpoint creation page (for example intfloat/e5-small-v2), then select the sentence embeddings task under the advanced configuration section. Create the endpoint and copy the URL after the endpoint initialization has been finished.   The following models are recommended for the Hugging Face service:    all-MiniLM-L6-v2    all-MiniLM-L12-v2    all-mpnet-base-v2    e5-base-v2    e5-small-v2    multilingual-e5-base    multilingual-e5-small    When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running. After creating the endpoint, wait for the model deployment to complete before using it. To verify the deployment status, use the get trained model statistics API. Look for &quot;state&quot;: &quot;fully_allocated&quot; in the response and ensure that the &quot;allocation_count&quot; matches the &quot;target_allocation_count&quot;. Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0-preview.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor" class="text-break">
+Struct PutHuggingFaceRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L287"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.html">Inference</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create a Hugging Face inference endpoint.
+</p>
+<p>
+Create an inference endpoint to perform an inference task with the <code>hugging_face</code> service.
+</p>
+<p>
+You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+Select the model you want to use on the new endpoint creation page (for example <code>intfloat/e5-small-v2</code>), then select the sentence embeddings task under the advanced configuration section.
+Create the endpoint and copy the URL after the endpoint initialization has been finished.
+</p>
+<p>
+The following models are recommended for the Hugging Face service:
+</p>
+<ul><li>
+<p>
+<code>all-MiniLM-L6-v2</code>
+</p>
+</li><li>
+<p>
+<code>all-MiniLM-L12-v2</code>
+</p>
+</li><li>
+<p>
+<code>all-mpnet-base-v2</code>
+</p>
+</li><li>
+<p>
+<code>e5-base-v2</code>
+</p>
+</li><li>
+<p>
+<code>e5-small-v2</code>
+</p>
+</li><li>
+<p>
+<code>multilingual-e5-base</code>
+</p>
+</li><li>
+<p>
+<code>multilingual-e5-small</code>
+</p>
+</li></ul>
+<p>
+When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+After creating the endpoint, wait for the model deployment to complete before using it.
+To verify the deployment status, use the get trained model statistics API.
+Look for <code>"state": "fully_allocated"</code> in the response and ensure that the <code>"allocation_count"</code> matches the <code>"target_allocation_count"</code>.
+Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutHuggingFaceRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.#ctor">
+  PutHuggingFaceRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public PutHuggingFaceRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Inference_HuggingFaceTaskType_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType,Elastic.Clients.Elasticsearch.Id)">
+  PutHuggingFaceRequestDescriptor(HuggingFaceTaskType, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor(HuggingFaceTaskType taskType, Id huggingfaceInferenceId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>taskType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.html">HuggingFaceTaskType</a></dt>
+    <dd></dd>
+    <dt><code>huggingfaceInferenceId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequest_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest)">
+  PutHuggingFaceRequestDescriptor(PutHuggingFaceRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor(PutHuggingFaceRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest.html">PutHuggingFaceRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ChunkingSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ChunkingSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ChunkingSettings" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ChunkingSettings">
+  ChunkingSettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The chunking configuration object.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor ChunkingSettings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ChunkingSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ChunkingSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ChunkingSettings_Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings)">
+  ChunkingSettings(InferenceChunkingSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The chunking configuration object.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor ChunkingSettings(InferenceChunkingSettings? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.html">InferenceChunkingSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ChunkingSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ChunkingSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ChunkingSettings_System_Action_Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ChunkingSettings(System.Action{Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor})">
+  ChunkingSettings(Action&lt;InferenceChunkingSettingsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L362"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The chunking configuration object.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor ChunkingSettings(Action&lt;InferenceChunkingSettingsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.html">InferenceChunkingSettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L404"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_HuggingfaceInferenceId_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.HuggingfaceInferenceId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_HuggingfaceInferenceId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.HuggingfaceInferenceId(Elastic.Clients.Elasticsearch.Id)">
+  HuggingfaceInferenceId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier of the inference endpoint.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor HuggingfaceInferenceId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L410"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L428"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0-preview.1/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L434"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0-preview.1/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0-preview.1/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ServiceSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ServiceSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ServiceSettings_Elastic_Clients_Elasticsearch_Inference_HuggingFaceServiceSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ServiceSettings(Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings)">
+  ServiceSettings(HuggingFaceServiceSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings used to install the inference model. These settings are specific to the <code>hugging_face</code> service.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor ServiceSettings(HuggingFaceServiceSettings value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings.html">HuggingFaceServiceSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ServiceSettings_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ServiceSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_ServiceSettings_System_Action_Elastic_Clients_Elasticsearch_Inference_HuggingFaceServiceSettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.ServiceSettings(System.Action{Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor})">
+  ServiceSettings(Action&lt;HuggingFaceServiceSettingsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings used to install the inference model. These settings are specific to the <code>hugging_face</code> service.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor ServiceSettings(Action&lt;HuggingFaceServiceSettingsDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor.html">HuggingFaceServiceSettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L422"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_TaskType_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.TaskType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_TaskType_Elastic_Clients_Elasticsearch_Inference_HuggingFaceTaskType_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.TaskType(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType)">
+  TaskType(HuggingFaceTaskType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of the inference task that the model will perform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutHuggingFaceRequestDescriptor TaskType(HuggingFaceTaskType value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.html">HuggingFaceTaskType</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequest__Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest)~Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor">
+  explicit operator PutHuggingFaceRequestDescriptor(PutHuggingFaceRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutHuggingFaceRequestDescriptor(PutHuggingFaceRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest.html">PutHuggingFaceRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequestDescriptor__Elastic_Clients_Elasticsearch_Inference_PutHuggingFaceRequest" data-uid="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor)~Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest">
+  implicit operator PutHuggingFaceRequest(PutHuggingFaceRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Inference/PutHuggingFaceRequest.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutHuggingFaceRequest(PutHuggingFaceRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor.html">PutHuggingFaceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest.html">PutHuggingFaceRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

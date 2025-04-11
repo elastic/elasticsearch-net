@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct RetrieverDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct RetrieverDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0-preview.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_RetrieverDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.RetrieverDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor" class="text-break">
+Struct RetrieverDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L358"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct RetrieverDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.#ctor">
+  RetrieverDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L368"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor__ctor_Elastic_Clients_Elasticsearch_Retriever_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.#ctor(Elastic.Clients.Elasticsearch.Retriever)">
+  RetrieverDescriptor(Retriever)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L362"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor(Retriever instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Retriever.html">Retriever</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Knn_Elastic_Clients_Elasticsearch_KnnRetriever_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Knn(Elastic.Clients.Elasticsearch.KnnRetriever)">
+  Knn(KnnRetriever?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L382"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality  of a knn search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Knn(KnnRetriever? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetriever.html">KnnRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Knn_System_Action_Elastic_Clients_Elasticsearch_KnnRetrieverDescriptor__" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Knn(System.Action{Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor})">
+  Knn(Action&lt;KnnRetrieverDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality  of a knn search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Knn(Action&lt;KnnRetrieverDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor.html">KnnRetrieverDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Knn__1_System_Action_Elastic_Clients_Elasticsearch_KnnRetrieverDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Knn``1(System.Action{Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor{``0}})">
+  Knn&lt;T&gt;(Action&lt;KnnRetrieverDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L404"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality  of a knn search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Knn&lt;T&gt;(Action&lt;KnnRetrieverDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor-1.html">KnnRetrieverDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rrf_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rrf*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rrf_Elastic_Clients_Elasticsearch_RRFRetriever_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rrf(Elastic.Clients.Elasticsearch.RRFRetriever)">
+  Rrf(RRFRetriever?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L415"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that produces top documents from reciprocal rank fusion (RRF).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Rrf(RRFRetriever? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.RRFRetriever.html">RRFRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rrf_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rrf*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rrf_System_Action_Elastic_Clients_Elasticsearch_RrfRetrieverDescriptor__" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rrf(System.Action{Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor})">
+  Rrf(Action&lt;RrfRetrieverDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that produces top documents from reciprocal rank fusion (RRF).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Rrf(Action&lt;RrfRetrieverDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor.html">RrfRetrieverDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rrf_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rrf*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rrf__1_System_Action_Elastic_Clients_Elasticsearch_RrfRetrieverDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rrf``1(System.Action{Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor{``0}})">
+  Rrf&lt;T&gt;(Action&lt;RrfRetrieverDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L437"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that produces top documents from reciprocal rank fusion (RRF).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Rrf&lt;T&gt;(Action&lt;RrfRetrieverDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor-1.html">RrfRetrieverDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rule_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rule_Elastic_Clients_Elasticsearch_RuleRetriever_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rule(Elastic.Clients.Elasticsearch.RuleRetriever)">
+  Rule(RuleRetriever?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a rule query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Rule(RuleRetriever? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetriever.html">RuleRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rule_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rule_System_Action_Elastic_Clients_Elasticsearch_RuleRetrieverDescriptor__" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rule(System.Action{Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor})">
+  Rule(Action&lt;RuleRetrieverDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L459"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a rule query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Rule(Action&lt;RuleRetrieverDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor.html">RuleRetrieverDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rule_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Rule__1_System_Action_Elastic_Clients_Elasticsearch_RuleRetrieverDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Rule``1(System.Action{Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor{``0}})">
+  Rule&lt;T&gt;(Action&lt;RuleRetrieverDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L470"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a rule query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Rule&lt;T&gt;(Action&lt;RuleRetrieverDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor-1.html">RuleRetrieverDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard">
+  Standard()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a traditional query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Standard()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard_Elastic_Clients_Elasticsearch_StandardRetriever_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard(Elastic.Clients.Elasticsearch.StandardRetriever)">
+  Standard(StandardRetriever?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L481"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a traditional query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Standard(StandardRetriever? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetriever.html">StandardRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard_System_Action_Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor__" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard(System.Action{Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor})">
+  Standard(Action&lt;StandardRetrieverDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L503"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a traditional query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Standard(Action&lt;StandardRetrieverDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.html">StandardRetrieverDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_Standard__1_System_Action_Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.Standard``1(System.Action{Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor{``0}})">
+  Standard&lt;T&gt;(Action&lt;StandardRetrieverDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L514"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that replaces the functionality of a traditional query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor Standard&lt;T&gt;(Action&lt;StandardRetrieverDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_TextSimilarityReranker_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.TextSimilarityReranker*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_TextSimilarityReranker_Elastic_Clients_Elasticsearch_TextSimilarityReranker_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker)">
+  TextSimilarityReranker(TextSimilarityReranker?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L525"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor TextSimilarityReranker(TextSimilarityReranker? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityReranker.html">TextSimilarityReranker</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_TextSimilarityReranker_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.TextSimilarityReranker*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_TextSimilarityReranker_System_Action_Elastic_Clients_Elasticsearch_TextSimilarityRerankerDescriptor__" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.TextSimilarityReranker(System.Action{Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor})">
+  TextSimilarityReranker(Action&lt;TextSimilarityRerankerDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L536"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor TextSimilarityReranker(Action&lt;TextSimilarityRerankerDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor.html">TextSimilarityRerankerDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_TextSimilarityReranker_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.TextSimilarityReranker*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_TextSimilarityReranker__1_System_Action_Elastic_Clients_Elasticsearch_TextSimilarityRerankerDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.TextSimilarityReranker``1(System.Action{Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor{``0}})">
+  TextSimilarityReranker&lt;T&gt;(Action&lt;TextSimilarityRerankerDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L547"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetrieverDescriptor TextSimilarityReranker&lt;T&gt;(Action&lt;TextSimilarityRerankerDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor-1.html">TextSimilarityRerankerDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Retriever__Elastic_Clients_Elasticsearch_RetrieverDescriptor" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Retriever)~Elastic.Clients.Elasticsearch.RetrieverDescriptor">
+  explicit operator RetrieverDescriptor(Retriever)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L374"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator RetrieverDescriptor(Retriever instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Retriever.html">Retriever</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_RetrieverDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_RetrieverDescriptor__Elastic_Clients_Elasticsearch_Retriever" data-uid="Elastic.Clients.Elasticsearch.RetrieverDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.RetrieverDescriptor)~Elastic.Clients.Elasticsearch.Retriever">
+  implicit operator Retriever(RetrieverDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0-preview.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Retriever.g.cs/#L375"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Retriever(RetrieverDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Retriever.html">Retriever</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
