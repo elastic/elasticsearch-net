@@ -40,10 +40,10 @@ internal sealed partial class BulkPutRoleRequestConverter : System.Text.Json.Ser
 	public override Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>> propRoles = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>> propRoles = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, null, null)!))
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, null, null)!))
 			{
 				continue;
 			}
@@ -67,7 +67,7 @@ internal sealed partial class BulkPutRoleRequestConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null));
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }
@@ -85,7 +85,7 @@ internal sealed partial class BulkPutRoleRequestConverter : System.Text.Json.Ser
 public sealed partial class BulkPutRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public BulkPutRoleRequest(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> roles)
+	public BulkPutRoleRequest(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> roles)
 	{
 		Roles = roles;
 	}
@@ -130,7 +130,7 @@ public sealed partial class BulkPutRoleRequest : Elastic.Clients.Elasticsearch.R
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> Roles { get; set; }
+	System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> Roles { get; set; }
 }
 
 /// <summary>
@@ -176,7 +176,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> value)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> value)
 	{
 		Instance.Roles = value;
 		return this;
@@ -189,7 +189,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles()
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(null);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(null);
 		return this;
 	}
 
@@ -198,9 +198,9 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>? action)
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(action);
 		return this;
 	}
 
@@ -209,15 +209,15 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>? action)
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx value)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptor value)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		Instance.Roles.Add(key, value);
 		return this;
 	}
@@ -229,7 +229,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(string key)
 	{
-		Instance.Roles = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(null) } };
+		Instance.Roles = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null) } };
 		return this;
 	}
 
@@ -240,10 +240,10 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(params string[] keys)
 	{
-		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		foreach (var key in keys)
 		{
-			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(null));
+			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null));
 		}
 
 		Instance.Roles = items;
@@ -252,22 +252,22 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole(string key)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(null));
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>? action)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(action));
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(action));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor AddRole<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<T>>? action)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<T>.Build(action));
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<T>.Build(action));
 		return this;
 	}
 
@@ -365,7 +365,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> value)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> value)
 	{
 		Instance.Roles = value;
 		return this;
@@ -378,7 +378,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles()
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
@@ -387,15 +387,15 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>? action)
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> AddRole(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx value)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> AddRole(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptor value)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		Instance.Roles.Add(key, value);
 		return this;
 	}
@@ -407,7 +407,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(string key)
 	{
-		Instance.Roles = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(null) } };
+		Instance.Roles = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
@@ -418,10 +418,10 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(params string[] keys)
 	{
-		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		foreach (var key in keys)
 		{
-			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(null));
+			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null));
 		}
 
 		Instance.Roles = items;
@@ -430,15 +430,15 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> AddRole(string key)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(null));
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> AddRole(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> AddRole(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>? action)
 	{
-		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(action));
+		Instance.Roles ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.Roles.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(action));
 		return this;
 	}
 

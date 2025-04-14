@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class RoleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.Role>
+internal sealed partial class RoleInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleInfo>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
 	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
@@ -37,7 +37,7 @@ internal sealed partial class RoleConverter : System.Text.Json.Serialization.Jso
 	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
 	private static readonly System.Text.Json.JsonEncodedText PropTransientMetadata = System.Text.Json.JsonEncodedText.Encode("transient_metadata");
 
-	public override Elastic.Clients.Elasticsearch.Security.Role Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Security.RoleInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>> propApplications = default;
@@ -118,7 +118,7 @@ internal sealed partial class RoleConverter : System.Text.Json.Serialization.Jso
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.Role(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Security.RoleInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Applications = propApplications.Value,
 			Cluster = propCluster.Value,
@@ -134,7 +134,7 @@ internal sealed partial class RoleConverter : System.Text.Json.Serialization.Jso
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.Role value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
@@ -152,11 +152,11 @@ internal sealed partial class RoleConverter : System.Text.Json.Serialization.Jso
 	}
 }
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleConverter))]
-public sealed partial class Role
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleInfoConverter))]
+public sealed partial class RoleInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Role(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> applications, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> indices, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata)
+	public RoleInfo(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> applications, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> indices, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata)
 	{
 		Applications = applications;
 		Cluster = cluster;
@@ -164,18 +164,18 @@ public sealed partial class Role
 		Metadata = metadata;
 	}
 #if NET7_0_OR_GREATER
-	public Role()
+	public RoleInfo()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
 	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Role()
+	public RoleInfo()
 	{
 	}
 #endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal Role(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal RoleInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}

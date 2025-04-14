@@ -75,7 +75,7 @@ internal sealed partial class RankEvalMetricRecallConverter : System.Text.Json.S
 /// <para>
 /// Recall at K (R@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallConverter))]
 public sealed partial class RankEvalMetricRecall
@@ -115,7 +115,7 @@ public sealed partial class RankEvalMetricRecall
 /// <para>
 /// Recall at K (R@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct RankEvalMetricRecallDescriptor
 {

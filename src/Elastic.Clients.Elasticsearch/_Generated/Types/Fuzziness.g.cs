@@ -59,7 +59,7 @@ internal sealed partial class FuzzinessConverter : System.Text.Json.Serializatio
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/common-options#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.FuzzinessConverter))]
 public sealed partial class Fuzziness : Elastic.Clients.Elasticsearch.Union<string, int>
