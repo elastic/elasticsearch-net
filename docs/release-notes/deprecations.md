@@ -16,9 +16,6 @@ Review the deprecated functionality for Elasticsearch .NET Client. While depreca
 % **Action**<br> Steps for mitigating deprecation impact.
 % ::::
 
-% ## 9.0.0 [elasticsearch-net-client-900-deprecations]
+## 9.0.0 [elasticsearch-net-client-900-deprecations]
 
-% Description of the deprecation and steps to update implementation.
-% For more information, check [PR #](PR link).
-% **Impact**<br>
-% **Action**<br>
+_No deprecations_
