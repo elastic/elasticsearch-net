@@ -75,7 +75,7 @@ internal sealed partial class RankEvalMetricMeanReciprocalRankConverter : System
 /// <para>
 /// Mean Reciprocal Rank
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankConverter))]
 public sealed partial class RankEvalMetricMeanReciprocalRank
@@ -115,7 +115,7 @@ public sealed partial class RankEvalMetricMeanReciprocalRank
 /// <para>
 /// Mean Reciprocal Rank
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct RankEvalMetricMeanReciprocalRankDescriptor
 {

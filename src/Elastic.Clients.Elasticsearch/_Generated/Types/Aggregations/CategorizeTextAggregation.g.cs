@@ -179,8 +179,8 @@ public sealed partial class CategorizeTextAggregation
 	/// <summary>
 	/// <para>
 	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/indices-analyze.html">Analyze endpoint</a>. This property
-	/// cannot be used at the same time as categorization_filters.
+	/// The syntax is very similar to that used to define the analyzer in the analyze API. This property
+	/// cannot be used at the same time as <c>categorization_filters</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer? CategorizationAnalyzer { get; set; }
@@ -294,8 +294,8 @@ public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/indices-analyze.html">Analyze endpoint</a>. This property
-	/// cannot be used at the same time as categorization_filters.
+	/// The syntax is very similar to that used to define the analyzer in the analyze API. This property
+	/// cannot be used at the same time as <c>categorization_filters</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer? value)
@@ -307,8 +307,8 @@ public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/indices-analyze.html">Analyze endpoint</a>. This property
-	/// cannot be used at the same time as categorization_filters.
+	/// The syntax is very similar to that used to define the analyzer in the analyze API. This property
+	/// cannot be used at the same time as <c>categorization_filters</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
@@ -494,8 +494,8 @@ public readonly partial struct CategorizeTextAggregationDescriptor
 	/// <summary>
 	/// <para>
 	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/indices-analyze.html">Analyze endpoint</a>. This property
-	/// cannot be used at the same time as categorization_filters.
+	/// The syntax is very similar to that used to define the analyzer in the analyze API. This property
+	/// cannot be used at the same time as <c>categorization_filters</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationAnalyzer(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer? value)
@@ -507,8 +507,8 @@ public readonly partial struct CategorizeTextAggregationDescriptor
 	/// <summary>
 	/// <para>
 	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/indices-analyze.html">Analyze endpoint</a>. This property
-	/// cannot be used at the same time as categorization_filters.
+	/// The syntax is very similar to that used to define the analyzer in the analyze API. This property
+	/// cannot be used at the same time as <c>categorization_filters</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
