@@ -46,7 +46,7 @@ internal sealed partial class CreateApiKeyRequestConverter : System.Text.Json.Se
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExpiration = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>?> propRoleDescriptors = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>?> propRoleDescriptors = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
@@ -64,7 +64,7 @@ internal sealed partial class CreateApiKeyRequestConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, null, null)))
+			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, null, null)))
 			{
 				continue;
 			}
@@ -94,7 +94,7 @@ internal sealed partial class CreateApiKeyRequestConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null));
+		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }
@@ -192,7 +192,7 @@ public sealed partial class CreateApiKeyRequest : Elastic.Clients.Elasticsearch.
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? RoleDescriptors { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; set; }
 }
 
 /// <summary>
@@ -324,7 +324,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? value)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
@@ -346,7 +346,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(null);
 		return this;
 	}
 
@@ -364,9 +364,9 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(action);
 		return this;
 	}
 
@@ -384,15 +384,15 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx value)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptor value)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		Instance.RoleDescriptors.Add(key, value);
 		return this;
 	}
@@ -413,7 +413,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(string key)
 	{
-		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(null) } };
+		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null) } };
 		return this;
 	}
 
@@ -433,10 +433,10 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(params string[] keys)
 	{
-		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		foreach (var key in keys)
 		{
-			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(null));
+			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null));
 		}
 
 		Instance.RoleDescriptors = items;
@@ -445,22 +445,22 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(null));
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>? action)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor.Build(action));
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(action));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<T>>? action)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<T>.Build(action));
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<T>.Build(action));
 		return this;
 	}
 
@@ -649,7 +649,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? value)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
@@ -671,7 +671,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
@@ -689,15 +689,15 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx value)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptor value)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		Instance.RoleDescriptors.Add(key, value);
 		return this;
 	}
@@ -718,7 +718,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(string key)
 	{
-		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(null) } };
+		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
@@ -738,10 +738,10 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(params string[] keys)
 	{
-		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
 		foreach (var key in keys)
 		{
-			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(null));
+			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null));
 		}
 
 		Instance.RoleDescriptors = items;
@@ -750,15 +750,15 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(null));
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>? action)
 	{
-		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>();
-		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorxDescriptor<TDocument>.Build(action));
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(action));
 		return this;
 	}
 
