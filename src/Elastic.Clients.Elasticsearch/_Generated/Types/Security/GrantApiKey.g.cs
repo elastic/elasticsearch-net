@@ -36,7 +36,7 @@ internal sealed partial class GrantApiKeyConverter : System.Text.Json.Serializat
 		LocalJsonValue<string?> propExpiration = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propName = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>?> propRoleDescriptors = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>?> propRoleDescriptors = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
@@ -54,7 +54,7 @@ internal sealed partial class GrantApiKeyConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, null, null)!)))
+			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(o, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, null, null)!)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class GrantApiKeyConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null)));
+		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, v, null, null)));
 		writer.WriteEndObject();
 	}
 }
@@ -142,7 +142,7 @@ public sealed partial class GrantApiKey
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? RoleDescriptors { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? RoleDescriptors { get; set; }
 }
 
 public readonly partial struct GrantApiKeyDescriptor<TDocument>
@@ -234,7 +234,7 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? value)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
@@ -247,7 +247,7 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>[] values)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>[] values)
 	{
 		Instance.RoleDescriptors = [.. values];
 		return this;
@@ -260,12 +260,12 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(action));
 		}
 
 		Instance.RoleDescriptors = items;
@@ -370,7 +370,7 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? value)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
@@ -383,7 +383,7 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>[] values)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>[] values)
 	{
 		Instance.RoleDescriptors = [.. values];
 		return this;
@@ -396,12 +396,12 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>?[] actions)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(action));
 		}
 
 		Instance.RoleDescriptors = items;
@@ -415,12 +415,12 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>?[] actions)
 	{
-		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
+		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>.Build(action));
 		}
 
 		Instance.RoleDescriptors = items;

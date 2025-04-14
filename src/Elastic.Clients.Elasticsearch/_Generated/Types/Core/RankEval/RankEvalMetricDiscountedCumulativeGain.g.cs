@@ -75,7 +75,7 @@ internal sealed partial class RankEvalMetricDiscountedCumulativeGainConverter : 
 /// <para>
 /// Discounted cumulative gain (DCG)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainConverter))]
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
@@ -115,7 +115,7 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGain
 /// <para>
 /// Discounted cumulative gain (DCG)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct RankEvalMetricDiscountedCumulativeGainDescriptor
 {

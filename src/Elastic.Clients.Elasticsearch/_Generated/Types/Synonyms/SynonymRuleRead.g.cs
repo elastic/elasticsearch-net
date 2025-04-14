@@ -110,7 +110,7 @@ public sealed partial class SynonymRuleRead
 
 	/// <summary>
 	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
+	/// Synonyms, in Solr format, that conform the synonym rule.
 	/// </para>
 	/// </summary>
 	public
