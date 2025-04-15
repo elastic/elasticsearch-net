@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GrantApiKeyRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GrantApiKeyRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Grant an API key.   Create an API key on behalf of another user. This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API. The caller must have authentication credentials for the user on whose behalf the API key will be created. It is not possible to use this API to create an API key without that user&#39;s credentials. The supported user authentication credential types are:    username and password    Elasticsearch access tokens    JWTs    The user, for whom the authentication credentials is provided, can optionally &quot;run as&quot; (impersonate) another user. In this case, the API key will be created on behalf of the impersonated user.   This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf. The API keys are created by the Elasticsearch API key service, which is automatically enabled.   A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name. If applicable, it also returns expiration information for the API key in milliseconds.   By default, API keys never expire. You can specify expiration information when you create the API keys.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest" class="text-break">
+Class GrantApiKeyRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Grant an API key.
+</p>
+<p>
+Create an API key on behalf of another user.
+This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
+The caller must have authentication credentials for the user on whose behalf the API key will be created.
+It is not possible to use this API to create an API key without that user's credentials.
+The supported user authentication credential types are:
+</p>
+<ul><li>
+<p>
+username and password
+</p>
+</li><li>
+<p>
+Elasticsearch access tokens
+</p>
+</li><li>
+<p>
+JWTs
+</p>
+</li></ul>
+<p>
+The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
+In this case, the API key will be created on behalf of the impersonated user.
+</p>
+<p>
+This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
+The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+</p>
+<p>
+A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
+If applicable, it also returns expiration information for the API key in milliseconds.
+</p>
+<p>
+By default, API keys never expire. You can specify expiration information when you create the API keys.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(GrantApiKeyRequestConverter))]
+public sealed class GrantApiKeyRequest : PlainRequest&lt;GrantApiKeyRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters.html">GrantApiKeyRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters.html">GrantApiKeyRequestParameters</a>&gt;</div>
+      <div><span class="xref">GrantApiKeyRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;GrantApiKeyRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;GrantApiKeyRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;GrantApiKeyRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;GrantApiKeyRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;GrantApiKeyRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_RequestConfiguration">PlainRequest&lt;GrantApiKeyRequestParameters&gt;.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.#ctor">
+  GrantApiKeyRequest()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public GrantApiKeyRequest()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest__ctor_Elastic_Clients_Elasticsearch_Security_GrantApiKey_Elastic_Clients_Elasticsearch_Security_ApiKeyGrantType_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.#ctor(Elastic.Clients.Elasticsearch.Security.GrantApiKey,Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType)">
+  GrantApiKeyRequest(GrantApiKey, ApiKeyGrantType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequest(GrantApiKey apiKey, ApiKeyGrantType grantType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>apiKey</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKey.html">GrantApiKey</a></dt>
+    <dd></dd>
+    <dt><code>grantType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.html">ApiKeyGrantType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_AccessToken_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.AccessToken*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_AccessToken" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.AccessToken">
+  AccessToken
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The user's access token.
+If you specify the <code>access_token</code> grant type, this parameter is required.
+It is not valid with other grant types.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? AccessToken { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_ApiKey_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.ApiKey*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_ApiKey" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.ApiKey">
+  ApiKey
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKey ApiKey { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKey.html">GrantApiKey</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_GrantType_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.GrantType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_GrantType" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.GrantType">
+  GrantType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of grant. Supported grant types are: <code>access_token</code>, <code>password</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApiKeyGrantType GrantType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.html">ApiKeyGrantType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_Password_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.Password*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_Password" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.Password">
+  Password
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The user's password.
+If you specify the <code>password</code> grant type, this parameter is required.
+It is not valid with other grant types.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Password { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_RunAs_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.RunAs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_RunAs" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.RunAs">
+  RunAs
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the user to be impersonated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Username? RunAs { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Username.html">Username</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_Username_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.Username*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_Username" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.Username">
+  Username
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The user name that identifies the user.
+If you specify the <code>password</code> grant type, this parameter is required.
+It is not valid with other grant types.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Username? Username { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Username.html">Username</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

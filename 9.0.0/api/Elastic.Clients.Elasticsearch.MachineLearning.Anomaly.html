@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Anomaly | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Anomaly | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_Anomaly.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.Anomaly%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly" class="text-break">
+Class Anomaly  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L272"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(AnomalyConverter))]
+public sealed class Anomaly</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Anomaly</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.#ctor">
+  Anomaly()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public Anomaly()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly__ctor_System_TimeSpan_System_Int32_System_Double_System_Boolean_System_String_System_Double_System_Double_System_String_System_DateTimeOffset_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.#ctor(System.TimeSpan,System.Int32,System.Double,System.Boolean,System.String,System.Double,System.Double,System.String,System.DateTimeOffset)">
+  Anomaly(TimeSpan, int, double, bool, string, double, double, string, DateTimeOffset)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Anomaly(TimeSpan bucketSpan, int detectorIndex, double initialRecordScore, bool isInterim, string jobId, double probability, double recordScore, string resultType, DateTimeOffset timestamp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucketSpan</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+    <dt><code>detectorIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>initialRecordScore</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>isInterim</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>jobId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>probability</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>recordScore</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>resultType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>timestamp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Actual_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Actual*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Actual" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Actual">
+  Actual
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The actual value for the bucket.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;double&gt;? Actual { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_AnomalyScoreExplanation_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.AnomalyScoreExplanation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_AnomalyScoreExplanation" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.AnomalyScoreExplanation">
+  AnomalyScoreExplanation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Information about the factors impacting the initial anomaly score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnomalyExplanation? AnomalyScoreExplanation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation.html">AnomalyExplanation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_BucketSpan_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.BucketSpan*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_BucketSpan" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.BucketSpan">
+  BucketSpan
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The length of the bucket in seconds. This value matches the <code>bucket_span</code> that is specified in the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan BucketSpan { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_ByFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.ByFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_ByFieldName" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.ByFieldName">
+  ByFieldName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ByFieldName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_ByFieldValue_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.ByFieldValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_ByFieldValue" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.ByFieldValue">
+  ByFieldValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The value of <code>by_field_name</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ByFieldValue { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Causes_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Causes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Causes" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Causes">
+  Causes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L349"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+For population analysis, an over field must be specified in the detector. This property contains an array of anomaly records that are the causes for the anomaly that has been identified for the over field. This sub-resource contains the most anomalous records for the <code>over_field_name</code>. For scalability reasons, a maximum of the 10 most significant causes of the anomaly are returned. As part of the core analytical modeling, these low-level anomaly records are aggregated for their parent over field record. The <code>causes</code> resource contains similar elements to the record resource, namely <code>actual</code>, <code>typical</code>, <code>geo_results.actual_point</code>, <code>geo_results.typical_point</code>, <code>*_field_name</code> and <code>*_field_value</code>. Probability and scores are not applicable to causes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;AnomalyCause&gt;? Causes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnomalyCause.html">AnomalyCause</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_DetectorIndex_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.DetectorIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_DetectorIndex" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.DetectorIndex">
+  DetectorIndex
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L356"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A unique identifier for the detector.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DetectorIndex { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_FieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.FieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_FieldName" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.FieldName">
+  FieldName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Certain functions require a field to operate on, for example, <code>sum()</code>. For those functions, this value is the name of the field to be analyzed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? FieldName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Function_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Function*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Function" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Function">
+  Function
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L374"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The function in which the anomaly occurs, as specified in the detector configuration. For example, <code>max</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Function { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_FunctionDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.FunctionDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_FunctionDescription" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.FunctionDescription">
+  FunctionDescription
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L381"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The description of the function in which the anomaly occurs, as specified in the detector configuration.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? FunctionDescription { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_GeoResults_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.GeoResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_GeoResults" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.GeoResults">
+  GeoResults
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If the detector function is <code>lat_long</code>, this object contains comma delimited strings for the latitude and longitude of the actual and typical values.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoResults? GeoResults { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GeoResults.html">GeoResults</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Influencers_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Influencers*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Influencers" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Influencers">
+  Influencers
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L395"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If influencers were specified in the detector configuration, this array contains influencers that contributed to or were to blame for an anomaly.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;Influence&gt;? Influencers { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Influence.html">Influence</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_InitialRecordScore_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.InitialRecordScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_InitialRecordScore" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.InitialRecordScore">
+  InitialRecordScore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L402"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A normalized score between 0-100, which is based on the probability of the anomalousness of this record. This is the initial value that was calculated at the time the bucket was processed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double InitialRecordScore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_IsInterim_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.IsInterim*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_IsInterim" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.IsInterim">
+  IsInterim
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, this is an interim result. In other words, the results are calculated based on partial input data.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInterim { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_JobId" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.JobId">
+  JobId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L424"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the anomaly detection job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string JobId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_OverFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.OverFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_OverFieldName" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.OverFieldName">
+  OverFieldName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L435"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? OverFieldName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_OverFieldValue_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.OverFieldValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_OverFieldValue" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.OverFieldValue">
+  OverFieldValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L442"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The value of <code>over_field_name</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? OverFieldValue { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_PartitionFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.PartitionFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_PartitionFieldName" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.PartitionFieldName">
+  PartitionFieldName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L449"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? PartitionFieldName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_PartitionFieldValue_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.PartitionFieldValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_PartitionFieldValue" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.PartitionFieldValue">
+  PartitionFieldValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The value of <code>partition_field_name</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? PartitionFieldValue { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Probability_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Probability*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Probability" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Probability">
+  Probability
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L463"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The probability of the individual anomaly occurring, in the range 0 to 1. For example, <code>0.0000772031</code>. This value can be held to a high precision of over 300 decimal places, so the <code>record_score</code> is provided as a human-readable and friendly interpretation of this.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Probability { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_RecordScore_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.RecordScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_RecordScore" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.RecordScore">
+  RecordScore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L474"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A normalized score between 0-100, which is based on the probability of the anomalousness of this record. Unlike <code>initial_record_score</code>, this value will be updated by a re-normalization process as new data is analyzed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double RecordScore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_ResultType_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.ResultType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_ResultType" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.ResultType">
+  ResultType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L485"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Internal. This is always set to <code>record</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ResultType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Timestamp_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Timestamp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Timestamp" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Timestamp">
+  Timestamp
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The start time of the bucket for which these results were calculated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTimeOffset Timestamp { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Typical_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Typical*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Anomaly_Typical" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Anomaly.Typical">
+  Typical
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Anomaly.g.cs/#L507"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The typical value for the bucket, according to analytical modeling.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;double&gt;? Typical { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

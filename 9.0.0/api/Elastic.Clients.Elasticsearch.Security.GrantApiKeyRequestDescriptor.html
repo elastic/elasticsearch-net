@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct GrantApiKeyRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct GrantApiKeyRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Grant an API key.   Create an API key on behalf of another user. This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API. The caller must have authentication credentials for the user on whose behalf the API key will be created. It is not possible to use this API to create an API key without that user&#39;s credentials. The supported user authentication credential types are:    username and password    Elasticsearch access tokens    JWTs    The user, for whom the authentication credentials is provided, can optionally &quot;run as&quot; (impersonate) another user. In this case, the API key will be created on behalf of the impersonated user.   This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf. The API keys are created by the Elasticsearch API key service, which is automatically enabled.   A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name. If applicable, it also returns expiration information for the API key in milliseconds.   By default, API keys never expire. You can specify expiration information when you create the API keys.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor" class="text-break">
+Struct GrantApiKeyRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L293"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Grant an API key.
+</p>
+<p>
+Create an API key on behalf of another user.
+This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
+The caller must have authentication credentials for the user on whose behalf the API key will be created.
+It is not possible to use this API to create an API key without that user's credentials.
+The supported user authentication credential types are:
+</p>
+<ul><li>
+<p>
+username and password
+</p>
+</li><li>
+<p>
+Elasticsearch access tokens
+</p>
+</li><li>
+<p>
+JWTs
+</p>
+</li></ul>
+<p>
+The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
+In this case, the API key will be created on behalf of the impersonated user.
+</p>
+<p>
+This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
+The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+</p>
+<p>
+A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
+If applicable, it also returns expiration information for the API key in milliseconds.
+</p>
+<p>
+By default, API keys never expire. You can specify expiration information when you create the API keys.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct GrantApiKeyRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.#ctor">
+  GrantApiKeyRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest)">
+  GrantApiKeyRequestDescriptor(GrantApiKeyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor(GrantApiKeyRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.html">GrantApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_AccessToken_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.AccessToken*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_AccessToken_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.AccessToken(System.String)">
+  AccessToken(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The user's access token.
+If you specify the <code>access_token</code> grant type, this parameter is required.
+It is not valid with other grant types.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor AccessToken(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ApiKey_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ApiKey*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ApiKey_Elastic_Clients_Elasticsearch_Security_GrantApiKey_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey)">
+  ApiKey(GrantApiKey)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor ApiKey(GrantApiKey value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKey.html">GrantApiKey</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ApiKey_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ApiKey*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ApiKey_System_Action_Elastic_Clients_Elasticsearch_Security_GrantApiKeyDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ApiKey(System.Action{Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor})">
+  ApiKey(Action&lt;GrantApiKeyDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor ApiKey(Action&lt;GrantApiKeyDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor.html">GrantApiKeyDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ApiKey_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ApiKey*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ApiKey__1_System_Action_Elastic_Clients_Elasticsearch_Security_GrantApiKeyDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ApiKey``1(System.Action{Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor{``0}})">
+  ApiKey&lt;T&gt;(Action&lt;GrantApiKeyDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor ApiKey&lt;T&gt;(Action&lt;GrantApiKeyDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor-1.html">GrantApiKeyDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_GrantType_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.GrantType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_GrantType_Elastic_Clients_Elasticsearch_Security_ApiKeyGrantType_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType)">
+  GrantType(ApiKeyGrantType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L362"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of grant. Supported grant types are: <code>access_token</code>, <code>password</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor GrantType(ApiKeyGrantType value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.html">ApiKeyGrantType</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L425"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Password_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Password*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Password_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Password(System.String)">
+  Password(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L375"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The user's password.
+If you specify the <code>password</code> grant type, this parameter is required.
+It is not valid with other grant types.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor Password(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L431"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L443"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L449"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.0/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_RunAs_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.RunAs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_RunAs_Elastic_Clients_Elasticsearch_Username_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.RunAs(Elastic.Clients.Elasticsearch.Username)">
+  RunAs(Username?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the user to be impersonated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor RunAs(Username? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Username.html">Username</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L437"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Username_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Username*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_Username_Elastic_Clients_Elasticsearch_Username_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.Username(Elastic.Clients.Elasticsearch.Username)">
+  Username(Username?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L399"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The user name that identifies the user.
+If you specify the <code>password</code> grant type, this parameter is required.
+It is not valid with other grant types.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GrantApiKeyRequestDescriptor Username(Username? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Username.html">Username</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest__Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest)~Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor">
+  explicit operator GrantApiKeyRequestDescriptor(GrantApiKeyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator GrantApiKeyRequestDescriptor(GrantApiKeyRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.html">GrantApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequestDescriptor__Elastic_Clients_Elasticsearch_Security_GrantApiKeyRequest" data-uid="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor)~Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest">
+  implicit operator GrantApiKeyRequest(GrantApiKeyRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/GrantApiKeyRequest.g.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GrantApiKeyRequest(GrantApiKeyRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor.html">GrantApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.html">GrantApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

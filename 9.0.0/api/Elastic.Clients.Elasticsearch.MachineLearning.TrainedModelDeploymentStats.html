@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class TrainedModelDeploymentStats | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TrainedModelDeploymentStats | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats" class="text-break">
+Class TrainedModelDeploymentStats  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(TrainedModelDeploymentStatsConverter))]
+public sealed class TrainedModelDeploymentStats</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">TrainedModelDeploymentStats</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.#ctor">
+  TrainedModelDeploymentStats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public TrainedModelDeploymentStats()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats__ctor_System_String_System_String_System_Collections_Generic_IReadOnlyCollection_Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentNodesStats__System_Int64_Elastic_Clients_Elasticsearch_MachineLearning_TrainingPriority_System_DateTimeOffset_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.#ctor(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats},System.Int64,Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority,System.DateTimeOffset)">
+  TrainedModelDeploymentStats(string, string, IReadOnlyCollection&lt;TrainedModelDeploymentNodesStats&gt;, long, TrainingPriority, DateTimeOffset)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrainedModelDeploymentStats(string deploymentId, string modelId, IReadOnlyCollection&lt;TrainedModelDeploymentNodesStats&gt; nodes, long peakThroughputPerMinute, TrainingPriority priority, DateTimeOffset startTime)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>deploymentId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>modelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>nodes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats.html">TrainedModelDeploymentNodesStats</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>peakThroughputPerMinute</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>priority</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.html">TrainingPriority</a></dt>
+    <dd></dd>
+    <dt><code>startTime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_AdaptiveAllocations_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.AdaptiveAllocations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_AdaptiveAllocations" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.AdaptiveAllocations">
+  AdaptiveAllocations
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings.html">AdaptiveAllocationsSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_AllocationStatus_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.AllocationStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_AllocationStatus" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.AllocationStatus">
+  AllocationStatus
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The detailed allocation status for the deployment.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrainedModelDeploymentAllocationStatus? AllocationStatus { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus.html">TrainedModelDeploymentAllocationStatus</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_CacheSize_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.CacheSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_CacheSize" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.CacheSize">
+  CacheSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? CacheSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_DeploymentId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.DeploymentId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_DeploymentId" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.DeploymentId">
+  DeploymentId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier for the trained model deployment.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DeploymentId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_ErrorCount_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.ErrorCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_ErrorCount" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.ErrorCount">
+  ErrorCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sum of <code>error_count</code> for all nodes in the deployment.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ErrorCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_InferenceCount_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.InferenceCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_InferenceCount" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.InferenceCount">
+  InferenceCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sum of <code>inference_count</code> for all nodes in the deployment.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? InferenceCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_ModelId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.ModelId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_ModelId" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.ModelId">
+  ModelId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier for the trained model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ModelId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_Nodes_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.Nodes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_Nodes" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.Nodes">
+  Nodes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The deployment stats for each node that currently has the model allocated.
+In serverless, stats are reported for a single unnamed virtual node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;TrainedModelDeploymentNodesStats&gt; Nodes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats.html">TrainedModelDeploymentNodesStats</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_NumberOfAllocations_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.NumberOfAllocations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_NumberOfAllocations" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.NumberOfAllocations">
+  NumberOfAllocations
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of allocations requested.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? NumberOfAllocations { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_PeakThroughputPerMinute_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.PeakThroughputPerMinute*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_PeakThroughputPerMinute" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.PeakThroughputPerMinute">
+  PeakThroughputPerMinute
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long PeakThroughputPerMinute { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_Priority_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.Priority*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_Priority" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.Priority">
+  Priority
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrainingPriority Priority { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.html">TrainingPriority</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_QueueCapacity_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.QueueCapacity*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_QueueCapacity" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.QueueCapacity">
+  QueueCapacity
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of inference requests that can be queued before new requests are rejected.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? QueueCapacity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_Reason_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.Reason*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_Reason" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.Reason">
+  Reason
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L336"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The reason for the current deployment state. Usually only populated when
+the model is not deployed to a node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Reason { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_RejectedExecutionCount_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.RejectedExecutionCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_RejectedExecutionCount" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.RejectedExecutionCount">
+  RejectedExecutionCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sum of <code>rejected_execution_count</code> for all nodes in the deployment.
+Individual nodes reject an inference request if the inference queue is full.
+The queue size is controlled by the <code>queue_capacity</code> setting in the start
+trained model deployment API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? RejectedExecutionCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_StartTime_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.StartTime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_StartTime" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.StartTime">
+  StartTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L353"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The epoch timestamp when the deployment started.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTimeOffset StartTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_State_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.State*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_State" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.State">
+  State
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L364"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The overall state of the deployment.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeploymentAssignmentState? State { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.html">DeploymentAssignmentState</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_ThreadsPerAllocation_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.ThreadsPerAllocation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_ThreadsPerAllocation" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.ThreadsPerAllocation">
+  ThreadsPerAllocation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L371"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of threads used be each allocation during inference.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ThreadsPerAllocation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_TimeoutCount_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.TimeoutCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelDeploymentStats_TimeoutCount" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats.TimeoutCount">
+  TimeoutCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/TrainedModelDeploymentStats.g.cs/#L378"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sum of <code>timeout_count</code> for all nodes in the deployment.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? TimeoutCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
