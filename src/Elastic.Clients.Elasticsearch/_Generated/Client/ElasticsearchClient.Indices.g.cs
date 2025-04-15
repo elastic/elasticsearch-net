@@ -78,6 +78,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
@@ -131,6 +139,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(index);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
@@ -292,6 +308,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
@@ -345,6 +369,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
@@ -778,6 +810,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
@@ -831,6 +871,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(name);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
@@ -1904,6 +1952,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
@@ -1957,6 +2013,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
@@ -2020,6 +2084,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
@@ -2073,6 +2145,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
@@ -2268,6 +2348,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
@@ -2373,6 +2461,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
@@ -2822,6 +2918,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
@@ -2875,6 +2979,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
@@ -3070,6 +3182,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
@@ -3175,6 +3295,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(name);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
@@ -4126,6 +4254,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
@@ -4179,6 +4315,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
@@ -4242,6 +4386,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
@@ -4295,6 +4447,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
@@ -4698,6 +4858,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
@@ -4751,6 +4919,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
@@ -4814,6 +4990,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
@@ -4867,6 +5051,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
@@ -5040,6 +5232,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
@@ -5093,6 +5293,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(name);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
@@ -5254,6 +5462,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
@@ -5364,6 +5580,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
@@ -5423,6 +5647,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
@@ -5450,6 +5682,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
@@ -5499,6 +5739,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
@@ -5557,6 +5805,14 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);

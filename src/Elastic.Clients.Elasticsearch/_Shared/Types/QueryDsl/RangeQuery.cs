@@ -6,7 +6,7 @@ using System;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public readonly partial struct IRangeQueryBuilder<TDocument>
+public readonly partial struct IRangeQueryFactory<TDocument>
 {
 	[Obsolete("Use 'Date()' instead.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value)
@@ -45,7 +45,7 @@ public readonly partial struct IRangeQueryBuilder<TDocument>
 	}
 }
 
-public readonly partial struct IRangeQueryBuilder
+public readonly partial struct IRangeQueryFactory
 {
 	[Obsolete("Use 'Date()' instead.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery DateRange(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value)

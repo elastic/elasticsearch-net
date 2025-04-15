@@ -773,6 +773,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse EstimateModelMemory<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse EstimateModelMemory<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>();
@@ -800,6 +808,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>(request, cancellationToken);
@@ -902,6 +918,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
@@ -955,6 +979,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor(id);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestParameters>(request, cancellationToken);
@@ -2770,6 +2802,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
@@ -2823,6 +2863,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(id);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>(request, cancellationToken);
@@ -4157,6 +4205,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse Validate<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse Validate<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor<TDocument>();
@@ -4184,6 +4240,14 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse> ValidateAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest, Elastic.Clients.Elasticsearch.MachineLearning.ValidateResponse, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>(request, cancellationToken);

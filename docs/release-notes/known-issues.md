@@ -21,4 +21,4 @@ Known issues are significant defects or limitations that may impact your impleme
 
 :::
 
-_No known issues_
+Known issues are tracked on [GitHub](https://github.com/elastic/elasticsearch-net/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Category%3A%20Bug%22).

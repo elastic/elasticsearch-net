@@ -61,6 +61,14 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
@@ -88,6 +96,14 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
