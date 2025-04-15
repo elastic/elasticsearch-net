@@ -67,6 +67,19 @@ new SearchRequest
 };
 ```
 
+Previously required methods like e.g. `TryGet<TVariant>(out)` have been removed.
+
+The new recommended way of inspecting container types is to use simple pattern matching:
+
+```csharp
+var query = new Query();
+
+if (query.Nested is { } nested)
+{
+    // We have a nested query.
+}
+```
+
 #### 2. Removal of certain generic request descriptors [2-removal-of-certain-generic-request-descriptors]
 
 **Impact**: High.
@@ -198,6 +211,16 @@ Removed `FieldValue.IsLazyDocument`, `FieldValue.IsComposite`, and the correspon
 These values have not been used for some time.
 
 #### 9. `FieldSort` [9-fieldsort]
+
+**Impact**: High.
+
+Removed `FieldSort` parameterless constructor.
+
+Please use the new constructor instead:
+
+```csharp
+public FieldSort(Elastic.Clients.Elasticsearch.Field field)
+```
 
 **Impact**: Low.
 

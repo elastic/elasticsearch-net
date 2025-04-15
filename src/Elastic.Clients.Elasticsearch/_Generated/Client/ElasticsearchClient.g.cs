@@ -130,6 +130,14 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk<TDocument>(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
@@ -183,6 +191,14 @@ public partial class ElasticsearchClient
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(index);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
@@ -322,6 +338,14 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.CountResponse Count<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
@@ -375,6 +399,14 @@ public partial class ElasticsearchClient
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
@@ -1524,6 +1556,14 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps<TDocument>(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
@@ -1577,6 +1617,14 @@ public partial class ElasticsearchClient
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
@@ -2586,6 +2634,14 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
@@ -2639,6 +2695,14 @@ public partial class ElasticsearchClient
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(index);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
@@ -3834,6 +3898,14 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
@@ -3887,6 +3959,14 @@ public partial class ElasticsearchClient
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);

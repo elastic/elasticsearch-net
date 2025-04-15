@@ -300,6 +300,19 @@ var agg = new Aggregation
 };
 ```
 
+Previously required methods like e.g. `TryGet<TVariant>(out)` have been removed.
+
+The new recommended way of inspecting container types is to use simple pattern matching:
+
+```csharp
+var query = new Query();
+
+if (query.Nested is { } nested)
+{
+    // We have a nested query.
+}
+```
+
 :::{warning}
 
 A container can still only contain a single variant. Setting multiple variants at once is invalid.
