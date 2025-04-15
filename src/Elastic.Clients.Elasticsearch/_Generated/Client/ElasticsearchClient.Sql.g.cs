@@ -229,6 +229,14 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Sql.QueryResponse Query<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Sql.QueryResponse Query<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>();
@@ -256,6 +264,14 @@ public partial class SqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Sql.QueryResponse> QueryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Sql.QueryRequest, Elastic.Clients.Elasticsearch.Sql.QueryResponse, Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>(request, cancellationToken);

@@ -546,6 +546,14 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
@@ -703,6 +711,14 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);

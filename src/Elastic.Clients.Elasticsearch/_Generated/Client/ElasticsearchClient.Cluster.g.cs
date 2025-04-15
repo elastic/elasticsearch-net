@@ -388,6 +388,14 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>();
@@ -441,6 +449,14 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(indices);
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
