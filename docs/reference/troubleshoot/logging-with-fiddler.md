@@ -11,9 +11,7 @@ A web debugging proxy such as [Fiddler](http://www.telerik.com/fiddler) is a use
 
 To capture traffic against a remote cluster is as simple as launching Fiddler! You may want to also filter traffic to only show requests to the remote cluster by using the filters tab
 
-:::{image} ../images/elasticsearch-client-net-api-capture-requests-remotehost.png
-:alt: Capturing requests to a remote host
-:::
+![Capturing requests to a remote host](../images/elasticsearch-client-net-api-capture-requests-remotehost.png)
 
 
 ## Capturing traffic to a local cluster [_capturing_traffic_to_a_local_cluster]
@@ -37,14 +35,10 @@ var client = new ElasticClient(connectionSettings);
 
 With Fiddler running, the requests and responses will now be captured and can be inspected in the Inspectors tab
 
-:::{image} ../images/elasticsearch-client-net-api-inspect-requests.png
-:alt: Inspecting requests and responses
-:::
+![Inspecting requests and responses](../images/elasticsearch-client-net-api-inspect-requests.png)
 
 As before, you may also want to filter traffic to only show requests to `ipv4.fiddler` on the port on which you are running Elasticsearch.
 
-:::{image} ../images/elasticsearch-client-net-api-capture-requests-localhost.png
-:alt: Capturing requests to localhost
-:::
+![Capturing requests to localhost](../images/elasticsearch-client-net-api-capture-requests-localhost.png)
 
 
