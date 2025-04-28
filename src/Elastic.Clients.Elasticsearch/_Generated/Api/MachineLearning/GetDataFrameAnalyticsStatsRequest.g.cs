@@ -109,7 +109,7 @@ internal sealed partial class GetDataFrameAnalyticsStatsRequestConverter : Syste
 
 /// <summary>
 /// <para>
-/// Get data frame analytics jobs usage info.
+/// Get data frame analytics job stats.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestConverter))]
@@ -206,7 +206,7 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : Elastic.Clients.
 
 /// <summary>
 /// <para>
-/// Get data frame analytics jobs usage info.
+/// Get data frame analytics job stats.
 /// </para>
 /// </summary>
 public readonly partial struct GetDataFrameAnalyticsStatsRequestDescriptor

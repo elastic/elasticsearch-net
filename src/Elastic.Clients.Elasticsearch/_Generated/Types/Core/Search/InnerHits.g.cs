@@ -78,7 +78,7 @@ internal sealed partial class InnerHitsConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
@@ -180,7 +180,7 @@ internal sealed partial class InnerHitsConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
 		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
 		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
-		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropFrom, value.From, null, null);
 		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);
 		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);

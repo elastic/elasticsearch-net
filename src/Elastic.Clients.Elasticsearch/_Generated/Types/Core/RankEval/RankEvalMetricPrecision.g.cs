@@ -84,7 +84,7 @@ internal sealed partial class RankEvalMetricPrecisionConverter : System.Text.Jso
 /// <para>
 /// Precision at K (P@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-rank-eval#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionConverter))]
 public sealed partial class RankEvalMetricPrecision
@@ -131,7 +131,7 @@ public sealed partial class RankEvalMetricPrecision
 /// <para>
 /// Precision at K (P@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-rank-eval#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct RankEvalMetricPrecisionDescriptor
 {
