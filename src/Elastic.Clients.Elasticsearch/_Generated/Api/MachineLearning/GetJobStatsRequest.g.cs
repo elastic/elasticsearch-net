@@ -87,7 +87,7 @@ internal sealed partial class GetJobStatsRequestConverter : System.Text.Json.Ser
 
 /// <summary>
 /// <para>
-/// Get anomaly detection jobs usage info.
+/// Get anomaly detection job stats.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestConverter))]
@@ -163,7 +163,7 @@ public sealed partial class GetJobStatsRequest : Elastic.Clients.Elasticsearch.R
 
 /// <summary>
 /// <para>
-/// Get anomaly detection jobs usage info.
+/// Get anomaly detection job stats.
 /// </para>
 /// </summary>
 public readonly partial struct GetJobStatsRequestDescriptor
