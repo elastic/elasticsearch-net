@@ -1,0 +1,4895 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Query | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Query | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_Query.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.Query%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query" class="text-break">
+Class Query  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(QueryConverter))]
+public sealed class Query</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Query</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.#ctor">
+  Query()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L811"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Query()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Bool_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Bool" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Bool">
+  Bool
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+matches documents matching boolean combinations of other queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BoolQuery? Bool { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery.html">BoolQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Boosting_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Boosting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Boosting" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Boosting">
+  Boosting
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L833"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents matching a <code>positive</code> query while reducing the relevance score of documents that also match a <code>negative</code> query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BoostingQuery? Boosting { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery.html">BoostingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_CombinedFields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.CombinedFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_CombinedFields" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.CombinedFields">
+  CombinedFields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L840"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The <code>combined_fields</code> query supports searching multiple text fields as if their contents had been indexed into one combined field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CombinedFieldsQuery? CombinedFields { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery.html">CombinedFieldsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Common_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Common*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Common" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Common">
+  Common
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L841"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.3.0&#39;.&quot;)]
+public CommonTermsQuery? Common { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery.html">CommonTermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_ConstantScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.ConstantScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_ConstantScore" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.ConstantScore">
+  ConstantScore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L849"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Wraps a filter query and returns every matching document with a relevance score equal to the <code>boost</code> parameter value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConstantScoreQuery? ConstantScore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery.html">ConstantScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_DisMax_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.DisMax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_DisMax" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.DisMax">
+  DisMax
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L857"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents matching one or more wrapped queries, called query clauses or clauses.
+If a returned document matches multiple query clauses, the <code>dis_max</code> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisMaxQuery? DisMax { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery.html">DisMaxQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_DistanceFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.DistanceFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_DistanceFeature" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.DistanceFeature">
+  DistanceFeature
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L865"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Boosts the relevance score of documents closer to a provided origin date or point.
+For example, you can use this query to give more weight to documents closer to a certain date or location.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDistanceFeatureQuery? DistanceFeature { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery.html">IDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Exists_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Exists" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Exists">
+  Exists
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L872"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain an indexed value for a field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExistsQuery? Exists { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery.html">ExistsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_FunctionScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.FunctionScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_FunctionScore" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.FunctionScore">
+  FunctionScore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L879"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The <code>function_score</code> enables you to modify the score of documents that are retrieved by a query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreQuery? FunctionScore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery.html">FunctionScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Fuzzy_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Fuzzy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Fuzzy" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Fuzzy">
+  Fuzzy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L886"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FuzzyQuery? Fuzzy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery.html">FuzzyQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoBoundingBox_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoBoundingBox*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoBoundingBox" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoBoundingBox">
+  GeoBoundingBox
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L893"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches geo_point and geo_shape values that intersect a bounding box.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoBoundingBoxQuery? GeoBoundingBox { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery.html">GeoBoundingBoxQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoDistance" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoDistance">
+  GeoDistance
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L900"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches <code>geo_point</code> and <code>geo_shape</code> values within a given distance of a geopoint.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoDistanceQuery? GeoDistance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery.html">GeoDistanceQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoGrid_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoGrid" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoGrid">
+  GeoGrid
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L907"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches <code>geo_point</code> and <code>geo_shape</code> values that intersect a grid cell from a GeoGrid aggregation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridQuery? GeoGrid { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery.html">GeoGridQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoPolygon_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoPolygon*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoPolygon" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoPolygon">
+  GeoPolygon
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L908"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.12.0&#39;. Use geo-shape instead.&quot;)]
+public GeoPolygonQuery? GeoPolygon { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery.html">GeoPolygonQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoShape_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoShape*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_GeoShape" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoShape">
+  GeoShape
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L916"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Filter documents indexed using either the <code>geo_shape</code> or the <code>geo_point</code> type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapeQuery? GeoShape { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery.html">GeoShapeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_HasChild_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.HasChild*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_HasChild" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.HasChild">
+  HasChild
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L923"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns parent documents whose joined child documents match a provided query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HasChildQuery? HasChild { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery.html">HasChildQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_HasParent_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.HasParent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_HasParent" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.HasParent">
+  HasParent
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L930"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns child documents whose joined parent document matches a provided query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HasParentQuery? HasParent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery.html">HasParentQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Ids_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Ids" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Ids">
+  Ids
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L938"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents based on their IDs.
+This query uses document IDs stored in the <code>_id</code> field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IdsQuery? Ids { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery.html">IdsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Intervals_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Intervals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Intervals" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Intervals">
+  Intervals
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L945"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents based on the order and proximity of matching terms.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IntervalsQuery? Intervals { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.html">IntervalsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Knn_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Knn" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Knn">
+  Knn
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L954"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Finds the k nearest vectors to a query vector, as measured by a similarity
+metric. knn query finds nearest vectors through approximate search on indexed
+dense_vectors.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KnnQuery? Knn { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnQuery.html">KnnQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Match_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Match" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Match">
+  Match
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L962"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that match a provided text, number, date or boolean value.
+The provided text is analyzed before matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchQuery? Match { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery.html">MatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchAll" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchAll">
+  MatchAll
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L969"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches all documents, giving them all a <code>_score</code> of 1.0.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchAllQuery? MatchAll { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery.html">MatchAllQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchBoolPrefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchBoolPrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchBoolPrefix" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchBoolPrefix">
+  MatchBoolPrefix
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L978"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Analyzes its input and constructs a <code>bool</code> query from the terms.
+Each term except the last is used in a <code>term</code> query.
+The last term is used in a prefix query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchBoolPrefixQuery? MatchBoolPrefix { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.html">MatchBoolPrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchNone_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchNone*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchNone" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchNone">
+  MatchNone
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L985"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches no documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchNoneQuery? MatchNone { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery.html">MatchNoneQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchPhrase_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchPhrase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchPhrase" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchPhrase">
+  MatchPhrase
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L992"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Analyzes the text and creates a phrase query out of the analyzed text.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchPhraseQuery? MatchPhrase { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery.html">MatchPhraseQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchPhrasePrefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchPhrasePrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MatchPhrasePrefix" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchPhrasePrefix">
+  MatchPhrasePrefix
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1000"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain the words of a provided text, in the same order as provided.
+The last term of the provided text is treated as a prefix, matching any words that begin with that term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchPhrasePrefixQuery? MatchPhrasePrefix { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery.html">MatchPhrasePrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MoreLikeThis_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MoreLikeThis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MoreLikeThis" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MoreLikeThis">
+  MoreLikeThis
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1007"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that are "like" a given set of documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MoreLikeThisQuery? MoreLikeThis { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery.html">MoreLikeThisQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MultiMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MultiMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_MultiMatch" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.MultiMatch">
+  MultiMatch
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1015"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enables you to search for a provided text, number, date or boolean value across multiple fields.
+The provided text is analyzed before matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQuery? MultiMatch { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Nested_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Nested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Nested" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Nested">
+  Nested
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1023"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Wraps another query to search nested fields.
+If an object matches the search, the nested query returns the root parent document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NestedQuery? Nested { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery.html">NestedQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_ParentId_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.ParentId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_ParentId" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.ParentId">
+  ParentId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1030"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns child documents joined to a specific parent document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ParentIdQuery? ParentId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery.html">ParentIdQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Percolate_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Percolate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Percolate" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Percolate">
+  Percolate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1037"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches queries stored in an index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PercolateQuery? Percolate { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery.html">PercolateQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Pinned_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Pinned*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Pinned" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Pinned">
+  Pinned
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1044"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Promotes selected documents to rank higher than those matching a given query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PinnedQuery? Pinned { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery.html">PinnedQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Prefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Prefix" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Prefix">
+  Prefix
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1051"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain a specific prefix in a provided field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrefixQuery? Prefix { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery.html">PrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_QueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.QueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_QueryString" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.QueryString">
+  QueryString
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1058"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents based on a provided query string, using a parser with a strict syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryStringQuery? QueryString { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery.html">QueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Range" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Range">
+  Range
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1065"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain terms within a provided range.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery? Range { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_RankFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.RankFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_RankFeature" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.RankFeature">
+  RankFeature
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1072"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Boosts the relevance score of documents based on the numeric value of a <code>rank_feature</code> or <code>rank_features</code> field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RankFeatureQuery? RankFeature { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery.html">RankFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Regexp_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Regexp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Regexp" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Regexp">
+  Regexp
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1079"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain terms matching a regular expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RegexpQuery? Regexp { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery.html">RegexpQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Rule_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Rule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Rule" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Rule">
+  Rule
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1080"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RuleQuery? Rule { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery.html">RuleQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Script_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Script" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Script">
+  Script
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1088"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Filters documents based on a provided script.
+The script query is typically used in a filter context.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScriptQuery? Script { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery.html">ScriptQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_ScriptScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.ScriptScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_ScriptScore" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.ScriptScore">
+  ScriptScore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1095"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Uses a script to provide a custom score for returned documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScriptScoreQuery? ScriptScore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery.html">ScriptScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Semantic_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Semantic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Semantic" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Semantic">
+  Semantic
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A semantic query to semantic_text field types
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SemanticQuery? Semantic { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery.html">SemanticQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Shape_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Shape*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Shape" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Shape">
+  Shape
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Queries documents that contain fields indexed using the <code>shape</code> type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShapeQuery? Shape { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery.html">ShapeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SimpleQueryString" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SimpleQueryString">
+  SimpleQueryString
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQuery? SimpleQueryString { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanContaining_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanContaining*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanContaining" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanContaining">
+  SpanContaining
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns matches which enclose another span query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanContainingQuery? SpanContaining { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery.html">SpanContainingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanFieldMasking_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanFieldMasking*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanFieldMasking" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanFieldMasking">
+  SpanFieldMasking
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanFieldMaskingQuery? SpanFieldMasking { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery.html">SpanFieldMaskingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanFirst_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanFirst*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanFirst" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanFirst">
+  SpanFirst
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches spans near the beginning of a field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanFirstQuery? SpanFirst { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery.html">SpanFirstQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanMulti_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanMulti*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanMulti" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanMulti">
+  SpanMulti
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Allows you to wrap a multi term query (one of <code>wildcard</code>, <code>fuzzy</code>, <code>prefix</code>, <code>range</code>, or <code>regexp</code> query) as a <code>span</code> query, so it can be nested.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanMultiTermQuery? SpanMulti { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery.html">SpanMultiTermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanNear_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanNear*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanNear" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanNear">
+  SpanNear
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches spans which are near one another.
+You can specify <code>slop</code>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanNearQuery? SpanNear { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery.html">SpanNearQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanNot_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanNot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanNot" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanNot">
+  SpanNot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <code>pre</code>) or y tokens after (controlled by the parameter <code>post</code>) another span query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanNotQuery? SpanNot { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery.html">SpanNotQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanOr_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanOr*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanOr" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanOr">
+  SpanOr
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches the union of its span clauses.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanOrQuery? SpanOr { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery.html">SpanOrQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanTerm_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanTerm" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanTerm">
+  SpanTerm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches spans containing a term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanTermQuery? SpanTerm { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery.html">SpanTermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanWithin_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanWithin*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SpanWithin" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanWithin">
+  SpanWithin
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1180"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns matches which are enclosed inside another span query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpanWithinQuery? SpanWithin { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery.html">SpanWithinQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SparseVector_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SparseVector*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_SparseVector" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.SparseVector">
+  SparseVector
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SparseVectorQuery? SparseVector { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery.html">SparseVectorQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Term_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Term" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Term">
+  Term
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain an exact term in a provided field.
+To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermQuery? Term { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQuery.html">TermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Terms_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Terms" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Terms">
+  Terms
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain one or more exact terms in a provided field.
+To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermsQuery? Terms { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery.html">TermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_TermsSet_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.TermsSet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_TermsSet" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.TermsSet">
+  TermsSet
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain a minimum number of exact terms in a provided field.
+To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermsSetQuery? TermsSet { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery.html">TermsSetQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_TextExpansion_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.TextExpansion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_TextExpansion" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.TextExpansion">
+  TextExpansion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.15.0&#39;.&quot;)]
+public TextExpansionQuery? TextExpansion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery.html">TextExpansionQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Type_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Type" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Type">
+  Type
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1220"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.0.0&#39;. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html&quot;)]
+public TypeQuery? Type { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery.html">TypeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_WeightedTokens_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.WeightedTokens*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_WeightedTokens" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.WeightedTokens">
+  WeightedTokens
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1228"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Supports returning text_expansion query results by sending in precomputed tokens with the query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.15.0&#39;.&quot;)]
+public WeightedTokensQuery? WeightedTokens { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery.html">WeightedTokensQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Wildcard" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Wildcard">
+  Wildcard
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns documents that contain terms matching a wildcard pattern.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WildcardQuery? Wildcard { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery.html">WildcardQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Wrapper_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Wrapper*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_Wrapper" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.Wrapper">
+  Wrapper
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1243"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A query that accepts any other query as base64 encoded string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WrapperQuery? Wrapper { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery.html">WrapperQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_BitwiseAnd_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_BitwiseAnd*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_BitwiseAnd_Elastic_Clients_Elasticsearch_QueryDsl_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_BitwiseAnd(Elastic.Clients.Elasticsearch.QueryDsl.Query,Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  operator &amp;(Query, Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Query operator &amp;(Query leftContainer, Query rightContainer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>leftContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+    <dt><code>rightContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_BitwiseOr_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_BitwiseOr*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_BitwiseOr_Elastic_Clients_Elasticsearch_QueryDsl_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_BitwiseOr(Elastic.Clients.Elasticsearch.QueryDsl.Query,Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  operator |(Query, Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Query operator |(Query leftContainer, Query rightContainer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>leftContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+    <dt><code>rightContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_False_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_False*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_False_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_False(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  operator false(Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator false(Query _)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>_</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_KnnQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.KnnQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(KnnQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1270"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(KnnQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.KnnQuery.html">KnnQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_BoolQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(BoolQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(BoolQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery.html">BoolQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_BoostingQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(BoostingQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(BoostingQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery.html">BoostingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_CombinedFieldsQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(CombinedFieldsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(CombinedFieldsQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery.html">CombinedFieldsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_CommonTermsQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(CommonTermsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1249"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(CommonTermsQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery.html">CommonTermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_ConstantScoreQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(ConstantScoreQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(ConstantScoreQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery.html">ConstantScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_DateDistanceFeatureQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(DateDistanceFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(DateDistanceFeatureQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery.html">DateDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(DateRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(DateRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery.html">DateRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_DisMaxQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(DisMaxQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(DisMaxQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery.html">DisMaxQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(ExistsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(ExistsQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery.html">ExistsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(FunctionScoreQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(FunctionScoreQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery.html">FunctionScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_FuzzyQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(FuzzyQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(FuzzyQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery.html">FuzzyQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_GeoBoundingBoxQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(GeoBoundingBoxQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(GeoBoundingBoxQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery.html">GeoBoundingBoxQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_GeoDistanceFeatureQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(GeoDistanceFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(GeoDistanceFeatureQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery.html">GeoDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_GeoDistanceQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(GeoDistanceQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(GeoDistanceQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery.html">GeoDistanceQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_GeoGridQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(GeoGridQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(GeoGridQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery.html">GeoGridQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_GeoPolygonQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(GeoPolygonQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(GeoPolygonQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery.html">GeoPolygonQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_GeoShapeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(GeoShapeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(GeoShapeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery.html">GeoShapeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_HasChildQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(HasChildQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(HasChildQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery.html">HasChildQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_HasParentQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(HasParentQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(HasParentQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery.html">HasParentQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_IdsQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(IdsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(IdsQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery.html">IdsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_IntervalsQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(IntervalsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1269"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(IntervalsQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.html">IntervalsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchAllQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchAllQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery.html">MatchAllQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchBoolPrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchBoolPrefixQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.html">MatchBoolPrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchNoneQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchNoneQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchNoneQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery.html">MatchNoneQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchPhrasePrefixQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchPhrasePrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchPhrasePrefixQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery.html">MatchPhrasePrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchPhraseQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchPhraseQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchPhraseQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery.html">MatchPhraseQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery.html">MatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MoreLikeThisQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MoreLikeThisQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MoreLikeThisQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery.html">MoreLikeThisQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MultiMatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MultiMatchQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_NestedQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(NestedQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(NestedQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery.html">NestedQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(NumberRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(NumberRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery.html">NumberRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_ParentIdQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(ParentIdQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1280"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(ParentIdQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery.html">ParentIdQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_PercolateQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(PercolateQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(PercolateQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery.html">PercolateQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_PinnedQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(PinnedQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(PinnedQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery.html">PinnedQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(PrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(PrefixQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery.html">PrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_QueryStringQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(QueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1284"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(QueryStringQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery.html">QueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_RankFeatureQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(RankFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1289"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(RankFeatureQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery.html">RankFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_RegexpQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(RegexpQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1290"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(RegexpQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery.html">RegexpQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_RuleQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(RuleQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(RuleQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery.html">RuleQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_ScriptQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(ScriptQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(ScriptQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery.html">ScriptQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_ScriptScoreQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(ScriptScoreQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1293"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(ScriptScoreQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery.html">ScriptScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SemanticQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SemanticQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SemanticQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery.html">SemanticQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_ShapeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(ShapeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1295"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(ShapeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery.html">ShapeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SimpleQueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SimpleQueryStringQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanContainingQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanContainingQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanContainingQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery.html">SpanContainingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanFieldMaskingQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanFieldMaskingQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanFieldMaskingQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery.html">SpanFieldMaskingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanFirstQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanFirstQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanFirstQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery.html">SpanFirstQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanMultiTermQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanMultiTermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanMultiTermQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery.html">SpanMultiTermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanNearQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanNearQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1301"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanNearQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery.html">SpanNearQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanNotQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanNotQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1302"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanNotQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery.html">SpanNotQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanOrQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanOrQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanOrQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery.html">SpanOrQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanTermQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanTermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanTermQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery.html">SpanTermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SpanWithinQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SpanWithinQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SpanWithinQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery.html">SpanWithinQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SparseVectorQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(SparseVectorQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(SparseVectorQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery.html">SparseVectorQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_TermQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(TermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(TermQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQuery.html">TermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(TermRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1287"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(TermRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery.html">TermRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_TermsQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(TermsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(TermsQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery.html">TermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_TermsSetQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(TermsSetQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(TermsSetQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery.html">TermsSetQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_TextExpansionQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(TextExpansionQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(TextExpansionQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery.html">TextExpansionQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_TypeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(TypeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(TypeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery.html">TypeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_UntypedDistanceFeatureQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(UntypedDistanceFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(UntypedDistanceFeatureQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery.html">UntypedDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_UntypedRangeQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(UntypedRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(UntypedRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery.html">UntypedRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_WeightedTokensQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(WeightedTokensQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(WeightedTokensQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery.html">WeightedTokensQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(WildcardQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(WildcardQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery.html">WildcardQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_WrapperQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(WrapperQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(WrapperQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery.html">WrapperQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_LogicalNot_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_LogicalNot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_LogicalNot_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_LogicalNot(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  operator !(Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Query operator !(Query queryContainer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_True_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_True*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_True_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_True(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  operator true(Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator true(Query _)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>_</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_UnaryPlus_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_UnaryPlus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_Query_op_UnaryPlus_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.Query.op_UnaryPlus(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  operator +(Query)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.1/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/Query.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Query operator +(Query queryContainer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryContainer</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
