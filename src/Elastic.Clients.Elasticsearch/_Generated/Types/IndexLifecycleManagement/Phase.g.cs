@@ -32,7 +32,7 @@ public sealed partial class Phase
 	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? Actions { get; set; }
 	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Duration, long>? MinAge { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
 }
 
 public sealed partial class PhaseDescriptor : SerializableDescriptor<PhaseDescriptor>
@@ -46,7 +46,7 @@ public sealed partial class PhaseDescriptor : SerializableDescriptor<PhaseDescri
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? ActionsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor ActionsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor> ActionsDescriptorAction { get; set; }
-	private Union<Elastic.Clients.Elasticsearch.Duration, long>? MinAgeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Duration? MinAgeValue { get; set; }
 
 	public PhaseDescriptor Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? actions)
 	{
@@ -72,7 +72,7 @@ public sealed partial class PhaseDescriptor : SerializableDescriptor<PhaseDescri
 		return Self;
 	}
 
-	public PhaseDescriptor MinAge(Union<Elastic.Clients.Elasticsearch.Duration, long>? minAge)
+	public PhaseDescriptor MinAge(Elastic.Clients.Elasticsearch.Duration? minAge)
 	{
 		MinAgeValue = minAge;
 		return Self;

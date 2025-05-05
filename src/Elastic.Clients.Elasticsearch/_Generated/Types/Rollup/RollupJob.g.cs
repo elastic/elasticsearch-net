@@ -29,10 +29,29 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public sealed partial class RollupJob
 {
+	/// <summary>
+	/// <para>
+	/// The rollup job configuration.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("config")]
 	public Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration Config { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Transient statistics about the rollup job, such as how many documents have been processed and how many rollup summary docs have been indexed.
+	/// These stats are not persisted.
+	/// If a node is restarted, these stats are reset.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stats")]
 	public Elastic.Clients.Elasticsearch.Rollup.RollupJobStats Stats { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The current status of the indexer for the rollup job.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus Status { get; init; }
 }

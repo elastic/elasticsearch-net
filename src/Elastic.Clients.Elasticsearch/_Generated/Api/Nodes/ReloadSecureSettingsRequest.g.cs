@@ -43,7 +43,17 @@ public sealed partial class ReloadSecureSettingsRequestParameters : RequestParam
 
 /// <summary>
 /// <para>
-/// Reloads the keystore on nodes in the cluster.
+/// Reload the keystore on nodes in the cluster.
+/// </para>
+/// <para>
+/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+/// </para>
+/// <para>
+/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 /// </para>
 /// </summary>
 public sealed partial class ReloadSecureSettingsRequest : PlainRequest<ReloadSecureSettingsRequestParameters>
@@ -84,7 +94,17 @@ public sealed partial class ReloadSecureSettingsRequest : PlainRequest<ReloadSec
 
 /// <summary>
 /// <para>
-/// Reloads the keystore on nodes in the cluster.
+/// Reload the keystore on nodes in the cluster.
+/// </para>
+/// <para>
+/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+/// </para>
+/// <para>
+/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 /// </para>
 /// </summary>
 public sealed partial class ReloadSecureSettingsRequestDescriptor : RequestDescriptor<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsRequestParameters>

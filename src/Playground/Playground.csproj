@@ -10,12 +10,11 @@
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.18.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Elastic.Transport" Version="0.5.2" />
+    <PackageReference Include="Elastic.Transport" Version="0.5.9" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elastic.Clients.Elasticsearch.Serverless\Elastic.Clients.Elasticsearch.Serverless.csproj" />
     <ProjectReference Include="..\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
   </ItemGroup>
 

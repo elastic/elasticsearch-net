@@ -31,12 +31,40 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [JsonConverter(typeof(AccessTokenGrantTypeConverter))]
 public enum AccessTokenGrantType
 {
+	/// <summary>
+	/// <para>
+	/// This grant type implements the Refresh Token Grant of OAuth2.
+	/// In this grant a user exchanges a previously issued refresh token for a new access token and a new refresh token.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "refresh_token")]
 	RefreshToken,
+	/// <summary>
+	/// <para>
+	/// This grant type implements the Resource Owner Password Credentials Grant of OAuth2.
+	/// In this grant, a trusted client exchanges the end user's credentials for an access token and (possibly) a refresh token.
+	/// The request needs to be made by an authenticated user but happens on behalf of another authenticated user (the one whose credentials are passed as request parameters).
+	/// This grant type is not suitable or designed for the self-service user creation of tokens.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "password")]
 	Password,
+	/// <summary>
+	/// <para>
+	/// This grant type is supported internally and implements SPNEGO based Kerberos support.
+	/// The <c>_kerberos</c> grant type may change from version to version.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "_kerberos")]
 	Kerberos,
+	/// <summary>
+	/// <para>
+	/// This grant type implements the Client Credentials Grant of OAuth2.
+	/// It is geared for machine to machine communication and is not suitable or designed for the self-service user creation of tokens.
+	/// It generates only access tokens that cannot be refreshed.
+	/// The premise is that the entity that uses <c>client_credentials</c> has constant access to a set of (client, not end-user) credentials and can authenticate itself at will.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "client_credentials")]
 	ClientCredentials
 }
@@ -126,6 +154,48 @@ internal sealed class ApiKeyGrantTypeConverter : JsonConverter<ApiKeyGrantType>
 	}
 }
 
+[JsonConverter(typeof(ApiKeyTypeConverter))]
+public enum ApiKeyType
+{
+	[EnumMember(Value = "rest")]
+	Rest,
+	[EnumMember(Value = "cross_cluster")]
+	CrossCluster
+}
+
+internal sealed class ApiKeyTypeConverter : JsonConverter<ApiKeyType>
+{
+	public override ApiKeyType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "rest":
+				return ApiKeyType.Rest;
+			case "cross_cluster":
+				return ApiKeyType.CrossCluster;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ApiKeyType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ApiKeyType.Rest:
+				writer.WriteStringValue("rest");
+				return;
+			case ApiKeyType.CrossCluster:
+				writer.WriteStringValue("cross_cluster");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(EnumStructConverter<ClusterPrivilege>))]
 public readonly partial struct ClusterPrivilege : IEnumStruct<ClusterPrivilege>
 {
@@ -148,6 +218,7 @@ public readonly partial struct ClusterPrivilege : IEnumStruct<ClusterPrivilege>
 	public static ClusterPrivilege MonitorWatcher { get; } = new ClusterPrivilege("monitor_watcher");
 	public static ClusterPrivilege MonitorTransform { get; } = new ClusterPrivilege("monitor_transform");
 	public static ClusterPrivilege MonitorTextStructure { get; } = new ClusterPrivilege("monitor_text_structure");
+	public static ClusterPrivilege MonitorStats { get; } = new ClusterPrivilege("monitor_stats");
 	public static ClusterPrivilege MonitorSnapshot { get; } = new ClusterPrivilege("monitor_snapshot");
 	public static ClusterPrivilege MonitorRollup { get; } = new ClusterPrivilege("monitor_rollup");
 	public static ClusterPrivilege MonitorMl { get; } = new ClusterPrivilege("monitor_ml");
@@ -219,6 +290,7 @@ public enum GrantType
 	/// <summary>
 	/// <para>
 	/// In this type of grant, you must supply an access token that was created by the Elasticsearch token service.
+	/// If you are activating a user profile, you can alternatively supply a JWT (either a JWT <c>access_token</c> or a JWT <c>id_token</c>).
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "access_token")]
@@ -305,6 +377,8 @@ public readonly partial struct IndexPrivilege : IEnumStruct<IndexPrivilege>
 [JsonConverter(typeof(RemoteClusterPrivilegeConverter))]
 public enum RemoteClusterPrivilege
 {
+	[EnumMember(Value = "monitor_stats")]
+	MonitorStats,
 	[EnumMember(Value = "monitor_enrich")]
 	MonitorEnrich
 }
@@ -316,6 +390,8 @@ internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClus
 		var enumString = reader.GetString();
 		switch (enumString)
 		{
+			case "monitor_stats":
+				return RemoteClusterPrivilege.MonitorStats;
 			case "monitor_enrich":
 				return RemoteClusterPrivilege.MonitorEnrich;
 		}
@@ -328,6 +404,9 @@ internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClus
 	{
 		switch (value)
 		{
+			case RemoteClusterPrivilege.MonitorStats:
+				writer.WriteStringValue("monitor_stats");
+				return;
 			case RemoteClusterPrivilege.MonitorEnrich:
 				writer.WriteStringValue("monitor_enrich");
 				return;

@@ -34,7 +34,9 @@ public sealed partial class QueryRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Format for the response.
+	/// The format for the response.
+	/// You can also specify a format using the <c>Accept</c> HTTP header.
+	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
@@ -42,7 +44,8 @@ public sealed partial class QueryRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
@@ -57,7 +60,9 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Format for the response.
+	/// The format for the response.
+	/// You can also specify a format using the <c>Accept</c> HTTP header.
+	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -65,7 +70,17 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.
+	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
+	/// If <c>false</c>, the API returns an error with no partial results.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
+	public bool? AllowPartialSearchResults { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The default catalog (cluster) for queries.
+	/// If unspecified, the queries execute on the data in the local cluster only.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("catalog")]
@@ -73,7 +88,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("columnar")]
@@ -81,7 +97,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Cursor used to retrieve a set of paginated results.
+	/// The cursor used to retrieve a set of paginated results.
 	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
 	/// It ignores other request body parameters.
 	/// </para>
@@ -91,7 +107,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of rows (or entries) to return in one response
+	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fetch_size")]
@@ -99,7 +115,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).
+	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
+	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_multi_value_leniency")]
@@ -107,7 +124,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
@@ -115,7 +132,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, the search can run on frozen indices. Defaults to false.
+	/// If <c>true</c>, the search can run on frozen indices.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_using_frozen")]
@@ -123,7 +140,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Retention period for an async or saved synchronous search.
+	/// The retention period for an async or saved synchronous search.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_alive")]
@@ -131,7 +148,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.
+	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
+	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_on_completion")]
@@ -139,7 +157,9 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// The timeout before a pagination request fails.
+	/// The minimum retention period for the scroll cursor.
+	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
+	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("page_timeout")]
@@ -147,7 +167,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Values for parameters in the query.
+	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
@@ -155,7 +175,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -171,8 +191,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
@@ -180,7 +200,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
@@ -188,7 +208,12 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// If the search doesn't finish within this period, the search becomes async.
+	/// </para>
+	/// <para>
+	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
@@ -197,7 +222,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
 public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescriptor<QueryRequestDescriptor<TDocument>, QueryRequestParameters>
@@ -218,6 +244,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	public QueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? format) => Qs("format", format);
 
+	private bool? AllowPartialSearchResultsValue { get; set; }
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
 	private string? CursorValue { get; set; }
@@ -239,7 +266,20 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.
+	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
+	/// If <c>false</c>, the API returns an error with no partial results.
+	/// </para>
+	/// </summary>
+	public QueryRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true)
+	{
+		AllowPartialSearchResultsValue = allowPartialSearchResults;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default catalog (cluster) for queries.
+	/// If unspecified, the queries execute on the data in the local cluster only.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Catalog(string? catalog)
@@ -250,7 +290,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
@@ -261,7 +302,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Cursor used to retrieve a set of paginated results.
+	/// The cursor used to retrieve a set of paginated results.
 	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
 	/// It ignores other request body parameters.
 	/// </para>
@@ -274,7 +315,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of rows (or entries) to return in one response
+	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> FetchSize(int? fetchSize)
@@ -285,7 +326,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).
+	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
+	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
@@ -296,7 +338,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -325,7 +367,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// If true, the search can run on frozen indices. Defaults to false.
+	/// If <c>true</c>, the search can run on frozen indices.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? indexUsingFrozen = true)
@@ -336,7 +378,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Retention period for an async or saved synchronous search.
+	/// The retention period for an async or saved synchronous search.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
@@ -347,7 +389,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.
+	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
+	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
@@ -358,7 +401,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// The timeout before a pagination request fails.
+	/// The minimum retention period for the scroll cursor.
+	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
+	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
@@ -369,7 +414,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Values for parameters in the query.
+	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
@@ -380,7 +425,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Query(string? query)
@@ -402,8 +447,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
@@ -414,7 +459,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> TimeZone(string? timeZone)
@@ -425,7 +470,12 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// If the search doesn't finish within this period, the search becomes async.
+	/// </para>
+	/// <para>
+	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
@@ -437,6 +487,12 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AllowPartialSearchResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_search_results");
+			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
+		}
+
 		if (!string.IsNullOrEmpty(CatalogValue))
 		{
 			writer.WritePropertyName("catalog");
@@ -549,7 +605,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
 public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequestDescriptor, QueryRequestParameters>
@@ -570,6 +627,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	public QueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? format) => Qs("format", format);
 
+	private bool? AllowPartialSearchResultsValue { get; set; }
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
 	private string? CursorValue { get; set; }
@@ -591,7 +649,20 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.
+	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
+	/// If <c>false</c>, the API returns an error with no partial results.
+	/// </para>
+	/// </summary>
+	public QueryRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true)
+	{
+		AllowPartialSearchResultsValue = allowPartialSearchResults;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default catalog (cluster) for queries.
+	/// If unspecified, the queries execute on the data in the local cluster only.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor Catalog(string? catalog)
@@ -602,7 +673,8 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor Columnar(bool? columnar = true)
@@ -613,7 +685,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Cursor used to retrieve a set of paginated results.
+	/// The cursor used to retrieve a set of paginated results.
 	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
 	/// It ignores other request body parameters.
 	/// </para>
@@ -626,7 +698,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of rows (or entries) to return in one response
+	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor FetchSize(int? fetchSize)
@@ -637,7 +709,8 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).
+	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
+	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
@@ -648,7 +721,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -677,7 +750,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// If true, the search can run on frozen indices. Defaults to false.
+	/// If <c>true</c>, the search can run on frozen indices.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor IndexUsingFrozen(bool? indexUsingFrozen = true)
@@ -688,7 +761,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Retention period for an async or saved synchronous search.
+	/// The retention period for an async or saved synchronous search.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
@@ -699,7 +772,8 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.
+	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
+	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
@@ -710,7 +784,9 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// The timeout before a pagination request fails.
+	/// The minimum retention period for the scroll cursor.
+	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
+	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
@@ -721,7 +797,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Values for parameters in the query.
+	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
@@ -732,7 +808,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor Query(string? query)
@@ -754,8 +830,8 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
@@ -766,7 +842,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor TimeZone(string? timeZone)
@@ -777,7 +853,12 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// If the search doesn't finish within this period, the search becomes async.
+	/// </para>
+	/// <para>
+	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
 	/// </para>
 	/// </summary>
 	public QueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
@@ -789,6 +870,12 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AllowPartialSearchResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_search_results");
+			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
+		}
+
 		if (!string.IsNullOrEmpty(CatalogValue))
 		{
 			writer.WritePropertyName("catalog");

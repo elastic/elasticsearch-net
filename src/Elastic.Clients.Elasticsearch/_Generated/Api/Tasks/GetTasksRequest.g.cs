@@ -34,7 +34,7 @@ public sealed partial class GetTasksRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response.
+	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -51,7 +51,14 @@ public sealed partial class GetTasksRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get task information.
-/// Returns information about the tasks currently executing in the cluster.
+/// Get information about a task currently running in the cluster.
+/// </para>
+/// <para>
+/// WARNING: The task management API is new and should still be considered a beta feature.
+/// The API may change in ways that are not backwards compatible.
+/// </para>
+/// <para>
+/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
 /// </para>
 /// </summary>
 public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParameters>
@@ -70,7 +77,7 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response.
+	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -89,7 +96,14 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 /// <summary>
 /// <para>
 /// Get task information.
-/// Returns information about the tasks currently executing in the cluster.
+/// Get information about a task currently running in the cluster.
+/// </para>
+/// <para>
+/// WARNING: The task management API is new and should still be considered a beta feature.
+/// The API may change in ways that are not backwards compatible.
+/// </para>
+/// <para>
+/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
 /// </para>
 /// </summary>
 public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTasksRequestDescriptor, GetTasksRequestParameters>

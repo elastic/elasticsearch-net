@@ -40,7 +40,7 @@ public sealed partial class Filter
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of terms that must be returned per field.
+	/// The maximum number of terms that must be returned per field.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_num_terms")]
@@ -49,7 +49,7 @@ public sealed partial class Filter
 	/// <summary>
 	/// <para>
 	/// Ignore words with more than this frequency in the source doc.
-	/// Defaults to unbounded.
+	/// It defaults to unbounded.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_term_freq")]
@@ -119,7 +119,7 @@ public sealed partial class FilterDescriptor : SerializableDescriptor<FilterDesc
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of terms that must be returned per field.
+	/// The maximum number of terms that must be returned per field.
 	/// </para>
 	/// </summary>
 	public FilterDescriptor MaxNumTerms(int? maxNumTerms)
@@ -131,7 +131,7 @@ public sealed partial class FilterDescriptor : SerializableDescriptor<FilterDesc
 	/// <summary>
 	/// <para>
 	/// Ignore words with more than this frequency in the source doc.
-	/// Defaults to unbounded.
+	/// It defaults to unbounded.
 	/// </para>
 	/// </summary>
 	public FilterDescriptor MaxTermFreq(int? maxTermFreq)

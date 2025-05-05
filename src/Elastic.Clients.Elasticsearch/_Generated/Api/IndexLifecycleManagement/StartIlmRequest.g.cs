@@ -32,13 +32,27 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public sealed partial class StartIlmRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Start the index lifecycle management (ILM) plugin.
+/// Start the ILM plugin.
+/// Start the index lifecycle management plugin if it is currently stopped.
+/// ILM is started automatically when the cluster is formed.
+/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 /// </para>
 /// </summary>
 public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParameters>
@@ -51,15 +65,29 @@ public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParame
 
 	internal override string OperationName => "ilm.start";
 
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout
+	/// </para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Start the index lifecycle management (ILM) plugin.
+/// Start the ILM plugin.
+/// Start the index lifecycle management plugin if it is currently stopped.
+/// ILM is started automatically when the cluster is formed.
+/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 /// </para>
 /// </summary>
 public sealed partial class StartIlmRequestDescriptor : RequestDescriptor<StartIlmRequestDescriptor, StartIlmRequestParameters>

@@ -34,9 +34,9 @@ public sealed partial class GetUserProfileRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// List of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>. To return a subset of content
-	/// use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
+	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
+	/// To return all content use <c>data=*</c>.
+	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
 	/// By default returns no <c>data</c> content.
 	/// </para>
 	/// </summary>
@@ -49,6 +49,11 @@ public sealed partial class GetUserProfileRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Get a user's profile using the unique profile ID.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 /// </para>
 /// </summary>
 public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileRequestParameters>
@@ -67,9 +72,9 @@ public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileR
 
 	/// <summary>
 	/// <para>
-	/// List of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>. To return a subset of content
-	/// use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
+	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
+	/// To return all content use <c>data=*</c>.
+	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
 	/// By default returns no <c>data</c> content.
 	/// </para>
 	/// </summary>
@@ -83,6 +88,11 @@ public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileR
 /// </para>
 /// <para>
 /// Get a user's profile using the unique profile ID.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 /// </para>
 /// </summary>
 public sealed partial class GetUserProfileRequestDescriptor : RequestDescriptor<GetUserProfileRequestDescriptor, GetUserProfileRequestParameters>

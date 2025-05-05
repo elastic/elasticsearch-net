@@ -33,7 +33,7 @@ public enum GroupBy
 {
 	/// <summary>
 	/// <para>
-	/// Parent task ID
+	/// Group tasks by parent task ID.
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "parents")]
@@ -47,7 +47,7 @@ public enum GroupBy
 	None,
 	/// <summary>
 	/// <para>
-	/// Node ID
+	/// Group tasks by node ID.
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "nodes")]

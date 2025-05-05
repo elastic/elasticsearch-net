@@ -37,7 +37,13 @@ public sealed partial class AnalyzeIndexRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get tokens from text analysis.
-/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
+/// The analyze API performs analysis on a text string and returns the resulting tokens.
+/// </para>
+/// <para>
+/// Generating excessive amount of tokens may cause a node to run out of memory.
+/// The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
+/// If more than this limit of tokens gets generated, an error occurs.
+/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 /// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexRequestParameters>
@@ -139,7 +145,13 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 /// <summary>
 /// <para>
 /// Get tokens from text analysis.
-/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
+/// The analyze API performs analysis on a text string and returns the resulting tokens.
+/// </para>
+/// <para>
+/// Generating excessive amount of tokens may cause a node to run out of memory.
+/// The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
+/// If more than this limit of tokens gets generated, an error occurs.
+/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 /// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDescriptor<AnalyzeIndexRequestDescriptor<TDocument>, AnalyzeIndexRequestParameters>
@@ -371,7 +383,13 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 /// <summary>
 /// <para>
 /// Get tokens from text analysis.
-/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
+/// The analyze API performs analysis on a text string and returns the resulting tokens.
+/// </para>
+/// <para>
+/// Generating excessive amount of tokens may cause a node to run out of memory.
+/// The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
+/// If more than this limit of tokens gets generated, an error occurs.
+/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 /// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>

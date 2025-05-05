@@ -49,8 +49,59 @@ public sealed partial class RecoveryRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns information about ongoing and completed shard recoveries for one or more indices.
-/// For data streams, the API returns information for the stream’s backing indices.
+/// Get index recovery information.
+/// Get information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream's backing indices.
+/// </para>
+/// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+/// </para>
+/// <para>
+/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+/// When a shard recovery completes, the recovered shard is available for search and indexing.
+/// </para>
+/// <para>
+/// Recovery automatically occurs during the following processes:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When creating an index for the first time.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Creation of new replica shard copies from the primary.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Relocation of a shard copy to a different node in the same cluster.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A snapshot restore operation.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A clone, shrink, or split operation.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+/// </para>
+/// <para>
+/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 /// </para>
 /// </summary>
 public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParameters>
@@ -90,8 +141,59 @@ public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParame
 
 /// <summary>
 /// <para>
-/// Returns information about ongoing and completed shard recoveries for one or more indices.
-/// For data streams, the API returns information for the stream’s backing indices.
+/// Get index recovery information.
+/// Get information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream's backing indices.
+/// </para>
+/// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+/// </para>
+/// <para>
+/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+/// When a shard recovery completes, the recovered shard is available for search and indexing.
+/// </para>
+/// <para>
+/// Recovery automatically occurs during the following processes:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When creating an index for the first time.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Creation of new replica shard copies from the primary.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Relocation of a shard copy to a different node in the same cluster.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A snapshot restore operation.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A clone, shrink, or split operation.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+/// </para>
+/// <para>
+/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 /// </para>
 /// </summary>
 public sealed partial class RecoveryRequestDescriptor<TDocument> : RequestDescriptor<RecoveryRequestDescriptor<TDocument>, RecoveryRequestParameters>
@@ -130,8 +232,59 @@ public sealed partial class RecoveryRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Returns information about ongoing and completed shard recoveries for one or more indices.
-/// For data streams, the API returns information for the stream’s backing indices.
+/// Get index recovery information.
+/// Get information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream's backing indices.
+/// </para>
+/// <para>
+/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+/// </para>
+/// <para>
+/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+/// When a shard recovery completes, the recovered shard is available for search and indexing.
+/// </para>
+/// <para>
+/// Recovery automatically occurs during the following processes:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When creating an index for the first time.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Creation of new replica shard copies from the primary.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Relocation of a shard copy to a different node in the same cluster.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A snapshot restore operation.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A clone, shrink, or split operation.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+/// </para>
+/// <para>
+/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 /// </para>
 /// </summary>
 public sealed partial class RecoveryRequestDescriptor : RequestDescriptor<RecoveryRequestDescriptor, RecoveryRequestParameters>

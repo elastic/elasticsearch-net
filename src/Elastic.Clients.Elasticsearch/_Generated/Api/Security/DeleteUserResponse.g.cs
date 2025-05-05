@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class DeleteUserResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// If the user is successfully deleted, the request returns <c>{"found": true}</c>.
+	/// Otherwise, <c>found</c> is set to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 }

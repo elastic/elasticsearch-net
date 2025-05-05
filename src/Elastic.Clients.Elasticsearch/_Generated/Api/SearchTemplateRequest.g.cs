@@ -50,20 +50,13 @@ public sealed partial class SearchTemplateRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match.
+	/// The type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
-	/// </para>
-	/// </summary>
-	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
@@ -74,22 +67,23 @@ public sealed partial class SearchTemplateRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, hits.total are rendered as an integer in the response.
+	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
+	/// If <c>false</c>, it is rendered as an object.
 	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -160,7 +154,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 	/// <summary>
 	/// <para>
-	/// Type of index that wildcard patterns can match.
+	/// The type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
@@ -168,14 +162,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
@@ -187,8 +173,8 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -196,7 +182,8 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 	/// <summary>
 	/// <para>
-	/// If true, hits.total are rendered as an integer in the response.
+	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
+	/// If <c>false</c>, it is rendered as an object.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -204,7 +191,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -238,6 +225,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
@@ -245,7 +233,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 	/// <summary>
 	/// <para>
-	/// ID of the search template to use. If no source is specified,
+	/// The ID of the search template to use. If no <c>source</c> is specified,
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
@@ -273,7 +261,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// <summary>
 	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
 	/// </para>
 	/// </summary>
@@ -309,7 +297,6 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	public SearchTemplateRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public SearchTemplateRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SearchTemplateRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchTemplateRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public SearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
@@ -333,6 +320,7 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
 	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Explain(bool? explain = true)
@@ -343,7 +331,7 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 
 	/// <summary>
 	/// <para>
-	/// ID of the search template to use. If no source is specified,
+	/// The ID of the search template to use. If no <c>source</c> is specified,
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
@@ -380,7 +368,7 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	/// <summary>
 	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
 	/// </para>
 	/// </summary>
@@ -455,7 +443,6 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	public SearchTemplateRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public SearchTemplateRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public SearchTemplateRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SearchTemplateRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchTemplateRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public SearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
@@ -479,6 +466,7 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
 	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor Explain(bool? explain = true)
@@ -489,7 +477,7 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 
 	/// <summary>
 	/// <para>
-	/// ID of the search template to use. If no source is specified,
+	/// The ID of the search template to use. If no <c>source</c> is specified,
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
@@ -526,7 +514,7 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	/// <summary>
 	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
 	/// </para>
 	/// </summary>

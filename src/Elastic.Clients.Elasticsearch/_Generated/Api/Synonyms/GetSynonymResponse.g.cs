@@ -28,8 +28,19 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public sealed partial class GetSynonymResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The total number of synonyms rules that the synonyms set contains.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Synonym rule details.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_set")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead> SynonymsSet { get; init; }
 }

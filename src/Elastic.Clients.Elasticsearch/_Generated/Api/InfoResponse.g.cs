@@ -28,14 +28,31 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class InfoResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The responding cluster's name.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 	[JsonInclude, JsonPropertyName("cluster_uuid")]
 	public string ClusterUuid { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The responding node's name.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 	[JsonInclude, JsonPropertyName("tagline")]
 	public string Tagline { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The running version of Elasticsearch.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; init; }
 }

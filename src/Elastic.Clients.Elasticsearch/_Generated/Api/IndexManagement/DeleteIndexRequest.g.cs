@@ -77,7 +77,13 @@ public sealed partial class DeleteIndexRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete indices.
-/// Deletes one or more indices.
+/// Deleting an index deletes its documents, shards, and metadata.
+/// It does not delete related Kibana components, such as data views, visualizations, or dashboards.
+/// </para>
+/// <para>
+/// You cannot delete the current write index of a data stream.
+/// To delete the index, you must roll over the data stream so a new write index is created.
+/// You can then use the delete index API to delete the previous write index.
 /// </para>
 /// </summary>
 public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequestParameters>
@@ -144,7 +150,13 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 /// <summary>
 /// <para>
 /// Delete indices.
-/// Deletes one or more indices.
+/// Deleting an index deletes its documents, shards, and metadata.
+/// It does not delete related Kibana components, such as data views, visualizations, or dashboards.
+/// </para>
+/// <para>
+/// You cannot delete the current write index of a data stream.
+/// To delete the index, you must roll over the data stream so a new write index is created.
+/// You can then use the delete index API to delete the previous write index.
 /// </para>
 /// </summary>
 public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDescriptor<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexRequestParameters>
@@ -187,7 +199,13 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 /// <summary>
 /// <para>
 /// Delete indices.
-/// Deletes one or more indices.
+/// Deleting an index deletes its documents, shards, and metadata.
+/// It does not delete related Kibana components, such as data views, visualizations, or dashboards.
+/// </para>
+/// <para>
+/// You cannot delete the current write index of a data stream.
+/// To delete the index, you must roll over the data stream so a new write index is created.
+/// You can then use the delete index API to delete the previous write index.
 /// </para>
 /// </summary>
 public sealed partial class DeleteIndexRequestDescriptor : RequestDescriptor<DeleteIndexRequestDescriptor, DeleteIndexRequestParameters>

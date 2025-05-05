@@ -92,6 +92,8 @@ public sealed partial class IcuCollationProperty : IProperty
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("strength")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_collation_keyword";
@@ -132,6 +134,7 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	private string? RulesValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? StrengthValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private string? VariableTopValue { get; set; }
 	private string? VariantValue { get; set; }
 
@@ -310,6 +313,12 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	public IcuCollationPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public IcuCollationPropertyDescriptor<TDocument> VariableTop(string? variableTop)
 	{
 		VariableTopValue = variableTop;
@@ -457,6 +466,12 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, StrengthValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("icu_collation_keyword");
 		if (!string.IsNullOrEmpty(VariableTopValue))
@@ -498,6 +513,7 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 		Rules = RulesValue,
 		Store = StoreValue,
 		Strength = StrengthValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		VariableTop = VariableTopValue,
 		Variant = VariantValue
 	};
@@ -533,6 +549,7 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	private string? RulesValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? StrengthValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 	private string? VariableTopValue { get; set; }
 	private string? VariantValue { get; set; }
 
@@ -711,6 +728,12 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	public IcuCollationPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	public IcuCollationPropertyDescriptor VariableTop(string? variableTop)
 	{
 		VariableTopValue = variableTop;
@@ -858,6 +881,12 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, StrengthValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("icu_collation_keyword");
 		if (!string.IsNullOrEmpty(VariableTopValue))
@@ -899,6 +928,7 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 		Rules = RulesValue,
 		Store = StoreValue,
 		Strength = StrengthValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
 		VariableTop = VariableTopValue,
 		Variant = VariantValue
 	};

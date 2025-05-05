@@ -6,17 +6,9 @@ using System;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
-#else
 namespace Elastic.Clients.Elasticsearch.Mapping;
-#endif
 
 [JsonConverter(typeof(PropertiesConverter))]
 public partial class Properties

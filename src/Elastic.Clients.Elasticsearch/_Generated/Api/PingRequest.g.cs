@@ -37,7 +37,7 @@ public sealed partial class PingRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Ping the cluster.
-/// Returns whether the cluster is running.
+/// Get information about whether the cluster is running.
 /// </para>
 /// </summary>
 public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
@@ -54,7 +54,7 @@ public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 /// <summary>
 /// <para>
 /// Ping the cluster.
-/// Returns whether the cluster is running.
+/// Get information about whether the cluster is running.
 /// </para>
 /// </summary>
 public sealed partial class PingRequestDescriptor : RequestDescriptor<PingRequestDescriptor, PingRequestParameters>

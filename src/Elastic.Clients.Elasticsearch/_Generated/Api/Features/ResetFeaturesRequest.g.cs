@@ -36,7 +36,29 @@ public sealed partial class ResetFeaturesRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Resets the internal state of features, usually by deleting system indices
+/// Reset the features.
+/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+/// </para>
+/// <para>
+/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+/// </para>
+/// <para>
+/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+/// This deletes all state information stored in system indices.
+/// </para>
+/// <para>
+/// The response code is HTTP 200 if the state is successfully reset for all features.
+/// It is HTTP 500 if the reset operation failed for any feature.
+/// </para>
+/// <para>
+/// Note that select features might provide a way to reset particular system indices.
+/// Using this API resets all features, both those that are built-in and implemented as plugins.
+/// </para>
+/// <para>
+/// To list the features that will be affected, use the get features API.
+/// </para>
+/// <para>
+/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 /// </para>
 /// </summary>
 public sealed partial class ResetFeaturesRequest : PlainRequest<ResetFeaturesRequestParameters>
@@ -52,7 +74,29 @@ public sealed partial class ResetFeaturesRequest : PlainRequest<ResetFeaturesReq
 
 /// <summary>
 /// <para>
-/// Resets the internal state of features, usually by deleting system indices
+/// Reset the features.
+/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+/// </para>
+/// <para>
+/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+/// </para>
+/// <para>
+/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+/// This deletes all state information stored in system indices.
+/// </para>
+/// <para>
+/// The response code is HTTP 200 if the state is successfully reset for all features.
+/// It is HTTP 500 if the reset operation failed for any feature.
+/// </para>
+/// <para>
+/// Note that select features might provide a way to reset particular system indices.
+/// Using this API resets all features, both those that are built-in and implemented as plugins.
+/// </para>
+/// <para>
+/// To list the features that will be affected, use the get features API.
+/// </para>
+/// <para>
+/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 /// </para>
 /// </summary>
 public sealed partial class ResetFeaturesRequestDescriptor : RequestDescriptor<ResetFeaturesRequestDescriptor, ResetFeaturesRequestParameters>

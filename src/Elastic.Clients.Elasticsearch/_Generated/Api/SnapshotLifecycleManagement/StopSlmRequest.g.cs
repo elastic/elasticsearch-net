@@ -32,11 +32,36 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public sealed partial class StopSlmRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Turns off snapshot lifecycle management (SLM).
+/// Stop snapshot lifecycle management.
+/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+/// Stopping SLM does not stop any snapshots that are in progress.
+/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+/// </para>
+/// <para>
+/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+/// Use the get snapshot lifecycle management status API to see if SLM is running.
 /// </para>
 /// </summary>
 public sealed partial class StopSlmRequest : PlainRequest<StopSlmRequestParameters>
@@ -48,11 +73,39 @@ public sealed partial class StopSlmRequest : PlainRequest<StopSlmRequestParamete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.stop";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Turns off snapshot lifecycle management (SLM).
+/// Stop snapshot lifecycle management.
+/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+/// Stopping SLM does not stop any snapshots that are in progress.
+/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+/// </para>
+/// <para>
+/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+/// Use the get snapshot lifecycle management status API to see if SLM is running.
 /// </para>
 /// </summary>
 public sealed partial class StopSlmRequestDescriptor : RequestDescriptor<StopSlmRequestDescriptor, StopSlmRequestParameters>
@@ -70,6 +123,9 @@ public sealed partial class StopSlmRequestDescriptor : RequestDescriptor<StopSlm
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.stop";
+
+	public StopSlmRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public StopSlmRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

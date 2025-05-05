@@ -230,7 +230,8 @@ public sealed partial class RoleDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
@@ -251,7 +252,9 @@ public sealed partial class RoleDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? RunAs { get; set; }
@@ -453,7 +456,8 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
-	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
 	public RoleDescriptorDescriptor<TDocument> RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
@@ -564,7 +568,9 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
-	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
 	public RoleDescriptorDescriptor<TDocument> RunAs(ICollection<string>? runAs)
@@ -980,7 +986,8 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 
 	/// <summary>
 	/// <para>
-	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// A list of cluster permissions for remote clusters.
+	/// NOTE: This is limited a subset of the cluster permissions.
 	/// </para>
 	/// </summary>
 	public RoleDescriptorDescriptor RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
@@ -1091,7 +1098,9 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 
 	/// <summary>
 	/// <para>
-	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
 	public RoleDescriptorDescriptor RunAs(ICollection<string>? runAs)

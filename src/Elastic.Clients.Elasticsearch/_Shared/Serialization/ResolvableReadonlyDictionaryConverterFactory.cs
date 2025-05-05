@@ -8,11 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 internal sealed class ResolvableReadonlyDictionaryConverterFactory : JsonConverterFactory
 {

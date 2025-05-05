@@ -10,11 +10,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal static class TypeExtensions
 {

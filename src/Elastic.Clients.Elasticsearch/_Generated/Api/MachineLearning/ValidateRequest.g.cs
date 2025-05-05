@@ -36,7 +36,7 @@ public sealed partial class ValidateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Validates an anomaly detection job.
+/// Validate an anomaly detection job.
 /// </para>
 /// </summary>
 public sealed partial class ValidateRequest : PlainRequest<ValidateRequestParameters>
@@ -71,7 +71,7 @@ public sealed partial class ValidateRequest : PlainRequest<ValidateRequestParame
 
 /// <summary>
 /// <para>
-/// Validates an anomaly detection job.
+/// Validate an anomaly detection job.
 /// </para>
 /// </summary>
 public sealed partial class ValidateRequestDescriptor<TDocument> : RequestDescriptor<ValidateRequestDescriptor<TDocument>, ValidateRequestParameters>
@@ -337,7 +337,7 @@ public sealed partial class ValidateRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Validates an anomaly detection job.
+/// Validate an anomaly detection job.
 /// </para>
 /// </summary>
 public sealed partial class ValidateRequestDescriptor : RequestDescriptor<ValidateRequestDescriptor, ValidateRequestParameters>

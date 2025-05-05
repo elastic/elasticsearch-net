@@ -40,6 +40,193 @@ public sealed partial class SearchMvtRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Search a vector tile for geospatial values.
+/// Before using this API, you should be familiar with the Mapbox vector tile specification.
+/// The API returns results as a binary mapbox vector tile.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
+/// </para>
+/// <code>
+/// GET my-index/_search
+/// {
+///   "size": 10000,
+///   "query": {
+///     "geo_bounding_box": {
+///       "my-geo-field": {
+///         "top_left": {
+///           "lat": -40.979898069620134,
+///           "lon": -45
+///         },
+///         "bottom_right": {
+///           "lat": -66.51326044311186,
+///           "lon": 0
+///         }
+///       }
+///     }
+///   },
+///   "aggregations": {
+///     "grid": {
+///       "geotile_grid": {
+///         "field": "my-geo-field",
+///         "precision": 11,
+///         "size": 65536,
+///         "bounds": {
+///           "top_left": {
+///             "lat": -40.979898069620134,
+///             "lon": -45
+///           },
+///           "bottom_right": {
+///             "lat": -66.51326044311186,
+///             "lon": 0
+///           }
+///         }
+///       }
+///     },
+///     "bounds": {
+///       "geo_bounds": {
+///         "field": "my-geo-field",
+///         "wrap_longitude": false
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The API returns results as a binary Mapbox vector tile.
+/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A meta layer containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A feature containing a bounding box. By default, this is the bounding box of the tile.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Metadata for the search.
+/// </para>
+/// </item>
+/// </list>
+/// </item>
+/// </list>
+/// <para>
+/// The API only returns features that can display at its zoom level.
+/// For example, if a polygon feature has no area at its zoom level, the API omits it.
+/// The API returns errors as UTF-8 encoded JSON.
+/// </para>
+/// <para>
+/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+/// If you specify both parameters, the query parameter takes precedence.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geotile</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
+/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
+/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
+/// The maximum final precision is 29.
+/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
+/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+/// The <c>aggs</c> layer only contains features for cells with matching data.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geohex</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
+/// </para>
+/// <para>
+/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
+/// The following table maps the H3 resolution for each precision.
+/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
+/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
+/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
+/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
+/// </para>
+/// <para>
+/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+/// | --------- | ---------------- | ------------- | ----------------| ----- |
+/// | 1  | 4                  | 0  | 122             | 30.5           |
+/// | 2  | 16                 | 0  | 122             | 7.625          |
+/// | 3  | 64                 | 1  | 842             | 13.15625       |
+/// | 4  | 256                | 1  | 842             | 3.2890625      |
+/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
+/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
+/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
+/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
+/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
+/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+/// </para>
+/// <para>
+/// Hexagonal cells don't align perfectly on a vector tile.
+/// Some cells may intersect more than one vector tile.
+/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 /// </para>
 /// </summary>
 public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestParameters>
@@ -61,42 +248,80 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
-	/// Supports the following aggregation types:
+	/// It supports the following aggregation types:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// avg
+	/// <c>avg</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// cardinality
+	/// <c>boxplot</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// max
+	/// <c>cardinality</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// min
+	/// <c>extended stats</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// sum
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
 	/// </para>
 	/// </item>
 	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggs")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggs { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
@@ -105,10 +330,10 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// If false, the meta layer’s feature is the bounding box of the tile.
-	/// If true, the meta layer’s feature is a bounding box resulting from a
-	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
+	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
+	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
@@ -117,7 +342,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("extent")]
@@ -125,7 +350,8 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
 	/// This parameter does not support fields with array values. Fields with array
 	/// values may return inconsistent results.
 	/// </para>
@@ -136,7 +362,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Aggregation used to create a grid for the <c>field</c>.
+	/// The aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grid_agg")]
@@ -144,9 +370,9 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
-	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don’t include the aggs layer.
+	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
+	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don't include the aggs layer.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grid_precision")]
@@ -155,8 +381,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// <summary>
 	/// <para>
 	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
-	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
 	/// of the cell.
 	/// </para>
 	/// </summary>
@@ -165,7 +390,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Query DSL used to filter documents for the search.
+	/// The query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -182,8 +407,8 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don’t include the hits layer.
+	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don't include the hits layer.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
@@ -191,8 +416,8 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Sorts features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
@@ -202,7 +427,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
 	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
 	/// not include the total number of hits matching the query.
 	/// </para>
@@ -215,6 +440,32 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
 	/// suggested label positions for the original features.
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The aggregation results will provide one central point for each aggregation bucket.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All attributes from the original features will also be copied to the new label features.
+	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("with_labels")]
 	public bool? WithLabels { get; set; }
@@ -226,6 +477,193 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 /// </para>
 /// <para>
 /// Search a vector tile for geospatial values.
+/// Before using this API, you should be familiar with the Mapbox vector tile specification.
+/// The API returns results as a binary mapbox vector tile.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
+/// </para>
+/// <code>
+/// GET my-index/_search
+/// {
+///   "size": 10000,
+///   "query": {
+///     "geo_bounding_box": {
+///       "my-geo-field": {
+///         "top_left": {
+///           "lat": -40.979898069620134,
+///           "lon": -45
+///         },
+///         "bottom_right": {
+///           "lat": -66.51326044311186,
+///           "lon": 0
+///         }
+///       }
+///     }
+///   },
+///   "aggregations": {
+///     "grid": {
+///       "geotile_grid": {
+///         "field": "my-geo-field",
+///         "precision": 11,
+///         "size": 65536,
+///         "bounds": {
+///           "top_left": {
+///             "lat": -40.979898069620134,
+///             "lon": -45
+///           },
+///           "bottom_right": {
+///             "lat": -66.51326044311186,
+///             "lon": 0
+///           }
+///         }
+///       }
+///     },
+///     "bounds": {
+///       "geo_bounds": {
+///         "field": "my-geo-field",
+///         "wrap_longitude": false
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The API returns results as a binary Mapbox vector tile.
+/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A meta layer containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A feature containing a bounding box. By default, this is the bounding box of the tile.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Metadata for the search.
+/// </para>
+/// </item>
+/// </list>
+/// </item>
+/// </list>
+/// <para>
+/// The API only returns features that can display at its zoom level.
+/// For example, if a polygon feature has no area at its zoom level, the API omits it.
+/// The API returns errors as UTF-8 encoded JSON.
+/// </para>
+/// <para>
+/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+/// If you specify both parameters, the query parameter takes precedence.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geotile</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
+/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
+/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
+/// The maximum final precision is 29.
+/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
+/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+/// The <c>aggs</c> layer only contains features for cells with matching data.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geohex</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
+/// </para>
+/// <para>
+/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
+/// The following table maps the H3 resolution for each precision.
+/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
+/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
+/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
+/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
+/// </para>
+/// <para>
+/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+/// | --------- | ---------------- | ------------- | ----------------| ----- |
+/// | 1  | 4                  | 0  | 122             | 30.5           |
+/// | 2  | 16                 | 0  | 122             | 7.625          |
+/// | 3  | 64                 | 1  | 842             | 13.15625       |
+/// | 4  | 256                | 1  | 842             | 3.2890625      |
+/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
+/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
+/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
+/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
+/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
+/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+/// </para>
+/// <para>
+/// Hexagonal cells don't align perfectly on a vector tile.
+/// Some cells may intersect more than one vector tile.
+/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 /// </para>
 /// </summary>
 public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescriptor<SearchMvtRequestDescriptor<TDocument>, SearchMvtRequestParameters>
@@ -303,35 +741,73 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
-	/// Supports the following aggregation types:
+	/// It supports the following aggregation types:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// avg
+	/// <c>avg</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// cardinality
+	/// <c>boxplot</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// max
+	/// <c>cardinality</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// min
+	/// <c>extended stats</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// sum
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
 	/// </para>
 	/// </item>
 	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Aggs(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -341,7 +817,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
@@ -353,10 +829,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// If false, the meta layer’s feature is the bounding box of the tile.
-	/// If true, the meta layer’s feature is a bounding box resulting from a
-	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
+	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
+	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
@@ -368,7 +844,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Extent(int? extent)
@@ -379,7 +855,8 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
 	/// This parameter does not support fields with array values. Fields with array
 	/// values may return inconsistent results.
 	/// </para>
@@ -392,7 +869,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Aggregation used to create a grid for the <c>field</c>.
+	/// The aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? gridAgg)
@@ -403,9 +880,9 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
-	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don’t include the aggs layer.
+	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
+	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don't include the aggs layer.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> GridPrecision(int? gridPrecision)
@@ -417,8 +894,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	/// <summary>
 	/// <para>
 	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
-	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
 	/// of the cell.
 	/// </para>
 	/// </summary>
@@ -430,7 +906,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Query DSL used to filter documents for the search.
+	/// The query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -471,8 +947,8 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don’t include the hits layer.
+	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don't include the hits layer.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Size(int? size)
@@ -483,8 +959,8 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Sorts features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
@@ -526,7 +1002,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
 	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
 	/// not include the total number of hits matching the query.
 	/// </para>
@@ -541,6 +1017,32 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	/// <para>
 	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
 	/// suggested label positions for the original features.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The aggregation results will provide one central point for each aggregation bucket.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All attributes from the original features will also be copied to the new label features.
+	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> WithLabels(bool? withLabels = true)
@@ -679,6 +1181,193 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 /// </para>
 /// <para>
 /// Search a vector tile for geospatial values.
+/// Before using this API, you should be familiar with the Mapbox vector tile specification.
+/// The API returns results as a binary mapbox vector tile.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
+/// </para>
+/// <code>
+/// GET my-index/_search
+/// {
+///   "size": 10000,
+///   "query": {
+///     "geo_bounding_box": {
+///       "my-geo-field": {
+///         "top_left": {
+///           "lat": -40.979898069620134,
+///           "lon": -45
+///         },
+///         "bottom_right": {
+///           "lat": -66.51326044311186,
+///           "lon": 0
+///         }
+///       }
+///     }
+///   },
+///   "aggregations": {
+///     "grid": {
+///       "geotile_grid": {
+///         "field": "my-geo-field",
+///         "precision": 11,
+///         "size": 65536,
+///         "bounds": {
+///           "top_left": {
+///             "lat": -40.979898069620134,
+///             "lon": -45
+///           },
+///           "bottom_right": {
+///             "lat": -66.51326044311186,
+///             "lon": 0
+///           }
+///         }
+///       }
+///     },
+///     "bounds": {
+///       "geo_bounds": {
+///         "field": "my-geo-field",
+///         "wrap_longitude": false
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The API returns results as a binary Mapbox vector tile.
+/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A meta layer containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A feature containing a bounding box. By default, this is the bounding box of the tile.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Metadata for the search.
+/// </para>
+/// </item>
+/// </list>
+/// </item>
+/// </list>
+/// <para>
+/// The API only returns features that can display at its zoom level.
+/// For example, if a polygon feature has no area at its zoom level, the API omits it.
+/// The API returns errors as UTF-8 encoded JSON.
+/// </para>
+/// <para>
+/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+/// If you specify both parameters, the query parameter takes precedence.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geotile</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
+/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
+/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
+/// The maximum final precision is 29.
+/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
+/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+/// The <c>aggs</c> layer only contains features for cells with matching data.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geohex</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
+/// </para>
+/// <para>
+/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
+/// The following table maps the H3 resolution for each precision.
+/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
+/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
+/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
+/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
+/// </para>
+/// <para>
+/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+/// | --------- | ---------------- | ------------- | ----------------| ----- |
+/// | 1  | 4                  | 0  | 122             | 30.5           |
+/// | 2  | 16                 | 0  | 122             | 7.625          |
+/// | 3  | 64                 | 1  | 842             | 13.15625       |
+/// | 4  | 256                | 1  | 842             | 3.2890625      |
+/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
+/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
+/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
+/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
+/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
+/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+/// </para>
+/// <para>
+/// Hexagonal cells don't align perfectly on a vector tile.
+/// Some cells may intersect more than one vector tile.
+/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 /// </para>
 /// </summary>
 public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<SearchMvtRequestDescriptor, SearchMvtRequestParameters>
@@ -752,35 +1441,73 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
-	/// Supports the following aggregation types:
+	/// It supports the following aggregation types:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// avg
+	/// <c>avg</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// cardinality
+	/// <c>boxplot</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// max
+	/// <c>cardinality</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// min
+	/// <c>extended stats</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// sum
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
 	/// </para>
 	/// </item>
 	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Aggs(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -790,7 +1517,7 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
@@ -802,10 +1529,10 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// If false, the meta layer’s feature is the bounding box of the tile.
-	/// If true, the meta layer’s feature is a bounding box resulting from a
-	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
+	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
+	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
@@ -817,7 +1544,7 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Extent(int? extent)
@@ -828,7 +1555,8 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
 	/// This parameter does not support fields with array values. Fields with array
 	/// values may return inconsistent results.
 	/// </para>
@@ -841,7 +1569,7 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Aggregation used to create a grid for the <c>field</c>.
+	/// The aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? gridAgg)
@@ -852,9 +1580,9 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
-	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don’t include the aggs layer.
+	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
+	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don't include the aggs layer.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor GridPrecision(int? gridPrecision)
@@ -866,8 +1594,7 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	/// <summary>
 	/// <para>
 	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
-	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
 	/// of the cell.
 	/// </para>
 	/// </summary>
@@ -879,7 +1606,7 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Query DSL used to filter documents for the search.
+	/// The query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -920,8 +1647,8 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don’t include the hits layer.
+	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don't include the hits layer.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Size(int? size)
@@ -932,8 +1659,8 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Sorts features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
@@ -975,7 +1702,7 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
 	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
 	/// not include the total number of hits matching the query.
 	/// </para>
@@ -990,6 +1717,32 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	/// <para>
 	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
 	/// suggested label positions for the original features.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The aggregation results will provide one central point for each aggregation bucket.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All attributes from the original features will also be copied to the new label features.
+	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
 	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor WithLabels(bool? withLabels = true)

@@ -28,6 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class DeleteServiceTokenResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// If the service account token is successfully deleted, the request returns <c>{"found": true}</c>.
+	/// Otherwise, the response will have status code 404 and <c>found</c> is set to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 }

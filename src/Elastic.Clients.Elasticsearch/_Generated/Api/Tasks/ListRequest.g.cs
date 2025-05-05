@@ -34,49 +34,57 @@ public sealed partial class ListRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// A comma-separated list or wildcard expression of actions used to limit the request.
+	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
 	/// </para>
 	/// </summary>
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// If <c>true</c>, the response includes detailed information about the running tasks.
+	/// This information is useful to distinguish tasks from each other but is more costly to run.
 	/// </para>
 	/// </summary>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
 	/// <summary>
 	/// <para>
-	/// Key used to group tasks in the response.
+	/// A key that is used to group tasks in the response.
+	/// The task lists can be grouped either by nodes or by parent tasks.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// A comma-separated list of node IDs or names that is used to limit the returned information.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.NodeIds? Nodes { get => Q<Elastic.Clients.Elasticsearch.NodeIds?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
 	/// <para>
-	/// Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of <c>-1</c>.
+	/// A parent task identifier that is used to limit returned information.
+	/// To return all tasks, omit this parameter or use a value of <c>-1</c>.
+	/// If the parent task is not found, the API does not return a 404 response code.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for each node to respond.
+	/// If a node does not respond before its timeout expires, the response does not include its information.
+	/// However, timed out nodes are included in the <c>node_failures</c> property.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -91,7 +99,69 @@ public sealed partial class ListRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+/// Get all tasks.
+/// Get information about the tasks currently running on one or more nodes in the cluster.
+/// </para>
+/// <para>
+/// WARNING: The task management API is new and should still be considered a beta feature.
+/// The API may change in ways that are not backwards compatible.
+/// </para>
+/// <para>
+/// <strong>Identifying running tasks</strong>
+/// </para>
+/// <para>
+/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
+/// This enables you to track certain calls or associate certain tasks with the client that started them.
+/// For example:
+/// </para>
+/// <code>
+/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
+/// </code>
+/// <para>
+/// The API returns the following result:
+/// </para>
+/// <code>
+/// HTTP/1.1 200 OK
+/// X-Opaque-Id: 123456
+/// content-type: application/json; charset=UTF-8
+/// content-length: 831
+/// 
+/// {
+///   "tasks" : {
+///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
+///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
+///       "id" : 45,
+///       "type" : "transport",
+///       "action" : "cluster:monitor/tasks/lists",
+///       "start_time_in_millis" : 1513823752749,
+///       "running_time_in_nanos" : 293139,
+///       "cancellable" : false,
+///       "headers" : {
+///         "X-Opaque-Id" : "123456"
+///       },
+///       "children" : [
+///         {
+///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
+///           "id" : 46,
+///           "type" : "direct",
+///           "action" : "cluster:monitor/tasks/lists[n]",
+///           "start_time_in_millis" : 1513823752750,
+///           "running_time_in_nanos" : 92133,
+///           "cancellable" : false,
+///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
+///           "headers" : {
+///             "X-Opaque-Id" : "123456"
+///           }
+///         }
+///       ]
+///     }
+///   }
+///  }
+/// </code>
+/// <para>
+/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
+/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
+/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
 /// </para>
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
@@ -106,7 +176,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// A comma-separated list or wildcard expression of actions used to limit the request.
+	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -114,7 +185,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// If <c>true</c>, the response includes detailed information about the running tasks.
+	/// This information is useful to distinguish tasks from each other but is more costly to run.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -122,7 +194,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Key used to group tasks in the response.
+	/// A key that is used to group tasks in the response.
+	/// The task lists can be grouped either by nodes or by parent tasks.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -130,7 +203,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -138,7 +212,7 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// A comma-separated list of node IDs or names that is used to limit the returned information.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -146,7 +220,9 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of <c>-1</c>.
+	/// A parent task identifier that is used to limit returned information.
+	/// To return all tasks, omit this parameter or use a value of <c>-1</c>.
+	/// If the parent task is not found, the API does not return a 404 response code.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -154,7 +230,9 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for each node to respond.
+	/// If a node does not respond before its timeout expires, the response does not include its information.
+	/// However, timed out nodes are included in the <c>node_failures</c> property.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -171,7 +249,69 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 /// <summary>
 /// <para>
-/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+/// Get all tasks.
+/// Get information about the tasks currently running on one or more nodes in the cluster.
+/// </para>
+/// <para>
+/// WARNING: The task management API is new and should still be considered a beta feature.
+/// The API may change in ways that are not backwards compatible.
+/// </para>
+/// <para>
+/// <strong>Identifying running tasks</strong>
+/// </para>
+/// <para>
+/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
+/// This enables you to track certain calls or associate certain tasks with the client that started them.
+/// For example:
+/// </para>
+/// <code>
+/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
+/// </code>
+/// <para>
+/// The API returns the following result:
+/// </para>
+/// <code>
+/// HTTP/1.1 200 OK
+/// X-Opaque-Id: 123456
+/// content-type: application/json; charset=UTF-8
+/// content-length: 831
+/// 
+/// {
+///   "tasks" : {
+///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
+///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
+///       "id" : 45,
+///       "type" : "transport",
+///       "action" : "cluster:monitor/tasks/lists",
+///       "start_time_in_millis" : 1513823752749,
+///       "running_time_in_nanos" : 293139,
+///       "cancellable" : false,
+///       "headers" : {
+///         "X-Opaque-Id" : "123456"
+///       },
+///       "children" : [
+///         {
+///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
+///           "id" : 46,
+///           "type" : "direct",
+///           "action" : "cluster:monitor/tasks/lists[n]",
+///           "start_time_in_millis" : 1513823752750,
+///           "running_time_in_nanos" : 92133,
+///           "cancellable" : false,
+///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
+///           "headers" : {
+///             "X-Opaque-Id" : "123456"
+///           }
+///         }
+///       ]
+///     }
+///   }
+///  }
+/// </code>
+/// <para>
+/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
+/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
+/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
 /// </para>
 /// </summary>
 public sealed partial class ListRequestDescriptor : RequestDescriptor<ListRequestDescriptor, ListRequestParameters>

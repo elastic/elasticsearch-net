@@ -34,14 +34,14 @@ public sealed partial class GetSynonymRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Starting offset for query rules to be retrieved
+	/// The starting offset for query rules to retrieve.
 	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
 	/// <para>
-	/// specifies a max number of query rules to retrieve
+	/// The max number of query rules to retrieve.
 	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -49,7 +49,7 @@ public sealed partial class GetSynonymRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves a synonym set
+/// Get a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestParameters>
@@ -68,7 +68,7 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 
 	/// <summary>
 	/// <para>
-	/// Starting offset for query rules to be retrieved
+	/// The starting offset for query rules to retrieve.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -76,7 +76,7 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 
 	/// <summary>
 	/// <para>
-	/// specifies a max number of query rules to retrieve
+	/// The max number of query rules to retrieve.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -85,7 +85,7 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 
 /// <summary>
 /// <para>
-/// Retrieves a synonym set
+/// Get a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymRequestDescriptor<TDocument> : RequestDescriptor<GetSynonymRequestDescriptor<TDocument>, GetSynonymRequestParameters>
@@ -120,7 +120,7 @@ public sealed partial class GetSynonymRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Retrieves a synonym set
+/// Get a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymRequestDescriptor : RequestDescriptor<GetSynonymRequestDescriptor, GetSynonymRequestParameters>

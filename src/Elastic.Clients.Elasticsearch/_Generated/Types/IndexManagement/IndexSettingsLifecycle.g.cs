@@ -69,6 +69,15 @@ public sealed partial class IndexSettingsLifecycle
 
 	/// <summary>
 	/// <para>
+	/// Preference for the system that manages a data stream backing index (preferring ILM when both ILM and DLM are
+	/// applicable for an index).
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("prefer_ilm")]
+	public object? PreferIlm { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The index alias to update when the index rolls over. Specify when using a policy that contains a rollover action.
 	/// When the index rolls over, the alias is updated to reflect that the index is no longer the write index. For more
 	/// information about rolling indices, see Rollover.
@@ -92,6 +101,7 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
 	private long? OriginationDateValue { get; set; }
 	private bool? ParseOriginationDateValue { get; set; }
+	private object? PreferIlmValue { get; set; }
 	private string? RolloverAliasValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? StepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor StepDescriptor { get; set; }
@@ -144,6 +154,18 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	public IndexSettingsLifecycleDescriptor ParseOriginationDate(bool? parseOriginationDate = true)
 	{
 		ParseOriginationDateValue = parseOriginationDate;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Preference for the system that manages a data stream backing index (preferring ILM when both ILM and DLM are
+	/// applicable for an index).
+	/// </para>
+	/// </summary>
+	public IndexSettingsLifecycleDescriptor PreferIlm(object? preferIlm)
+	{
+		PreferIlmValue = preferIlm;
 		return Self;
 	}
 
@@ -209,6 +231,12 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("parse_origination_date");
 			writer.WriteBooleanValue(ParseOriginationDateValue.Value);
+		}
+
+		if (PreferIlmValue is not null)
+		{
+			writer.WritePropertyName("prefer_ilm");
+			JsonSerializer.Serialize(writer, PreferIlmValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(RolloverAliasValue))

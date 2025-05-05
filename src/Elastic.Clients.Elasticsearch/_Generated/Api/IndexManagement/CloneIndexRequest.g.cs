@@ -59,7 +59,93 @@ public sealed partial class CloneIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clones an existing index.
+/// Clone an index.
+/// Clone an existing index into a new index.
+/// Each original primary shard is cloned into a new primary shard in the new index.
+/// </para>
+/// <para>
+/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+/// The API also does not copy index metadata from the original index.
+/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+/// </para>
+/// <para>
+/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
+/// To set the number of replicas in the resulting index, configure these settings in the clone request.
+/// </para>
+/// <para>
+/// Cloning works as follows:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// First, it creates a new target index with the same definition as the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be marked as read-only and have a cluster health status of green.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have the same number of primary shards as the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The current write index on a data stream cannot be cloned.
+/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+/// </para>
+/// <para>
+/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
+/// </para>
+/// <para>
+/// <strong>Monitor the cloning process</strong>
+/// </para>
+/// <para>
+/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
+/// </para>
+/// <para>
+/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+/// At this point, all shards are in the state unassigned.
+/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+/// </para>
+/// <para>
+/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+/// When the clone operation completes, the shard will become active.
+/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 /// </para>
 /// </summary>
 public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestParameters>
@@ -122,7 +208,93 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 
 /// <summary>
 /// <para>
-/// Clones an existing index.
+/// Clone an index.
+/// Clone an existing index into a new index.
+/// Each original primary shard is cloned into a new primary shard in the new index.
+/// </para>
+/// <para>
+/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+/// The API also does not copy index metadata from the original index.
+/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+/// </para>
+/// <para>
+/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
+/// To set the number of replicas in the resulting index, configure these settings in the clone request.
+/// </para>
+/// <para>
+/// Cloning works as follows:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// First, it creates a new target index with the same definition as the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be marked as read-only and have a cluster health status of green.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have the same number of primary shards as the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The current write index on a data stream cannot be cloned.
+/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+/// </para>
+/// <para>
+/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
+/// </para>
+/// <para>
+/// <strong>Monitor the cloning process</strong>
+/// </para>
+/// <para>
+/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
+/// </para>
+/// <para>
+/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+/// At this point, all shards are in the state unassigned.
+/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+/// </para>
+/// <para>
+/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+/// When the clone operation completes, the shard will become active.
+/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 /// </para>
 /// </summary>
 public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDescriptor<CloneIndexRequestDescriptor<TDocument>, CloneIndexRequestParameters>
@@ -207,7 +379,93 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Clones an existing index.
+/// Clone an index.
+/// Clone an existing index into a new index.
+/// Each original primary shard is cloned into a new primary shard in the new index.
+/// </para>
+/// <para>
+/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+/// The API also does not copy index metadata from the original index.
+/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+/// </para>
+/// <para>
+/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
+/// To set the number of replicas in the resulting index, configure these settings in the clone request.
+/// </para>
+/// <para>
+/// Cloning works as follows:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// First, it creates a new target index with the same definition as the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be marked as read-only and have a cluster health status of green.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have the same number of primary shards as the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The current write index on a data stream cannot be cloned.
+/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+/// </para>
+/// <para>
+/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
+/// </para>
+/// <para>
+/// <strong>Monitor the cloning process</strong>
+/// </para>
+/// <para>
+/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
+/// </para>
+/// <para>
+/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+/// At this point, all shards are in the state unassigned.
+/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+/// </para>
+/// <para>
+/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+/// When the clone operation completes, the shard will become active.
+/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 /// </para>
 /// </summary>
 public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<CloneIndexRequestDescriptor, CloneIndexRequestParameters>

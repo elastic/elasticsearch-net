@@ -36,7 +36,14 @@ public sealed partial class PutRuleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates or updates a query rule within a query ruleset.
+/// Create or update a query rule.
+/// Create or update a query rule within a query ruleset.
+/// </para>
+/// <para>
+/// IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule.
+/// It is advised to use one or the other in query rulesets, to avoid errors.
+/// Additionally, pinned queries have a maximum limit of 100 pinned hits.
+/// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
 /// </para>
 /// </summary>
 public sealed partial class PutRuleRequest : PlainRequest<PutRuleRequestParameters>
@@ -53,20 +60,46 @@ public sealed partial class PutRuleRequest : PlainRequest<PutRuleRequestParamete
 
 	internal override string OperationName => "query_rules.put_rule";
 
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("criteria")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The type of rule.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Creates or updates a query rule within a query ruleset.
+/// Create or update a query rule.
+/// Create or update a query rule within a query ruleset.
+/// </para>
+/// <para>
+/// IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule.
+/// It is advised to use one or the other in query rulesets, to avoid errors.
+/// Additionally, pinned queries have a maximum limit of 100 pinned hits.
+/// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
 /// </para>
 /// </summary>
 public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRuleRequestDescriptor, PutRuleRequestParameters>
@@ -107,6 +140,12 @@ public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRule
 	private int? PriorityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
 	public PutRuleRequestDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions actions)
 	{
 		ActionsDescriptor = null;
@@ -131,6 +170,12 @@ public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRule
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
 	public PutRuleRequestDescriptor Criteria(ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> criteria)
 	{
 		CriteriaDescriptor = null;
@@ -173,6 +218,11 @@ public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRule
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The type of rule.
+	/// </para>
+	/// </summary>
 	public PutRuleRequestDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType type)
 	{
 		TypeValue = type;

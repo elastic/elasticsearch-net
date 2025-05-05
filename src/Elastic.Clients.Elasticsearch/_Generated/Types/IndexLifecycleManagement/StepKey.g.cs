@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public sealed partial class StepKey
 {
+	/// <summary>
+	/// <para>
+	/// The optional action to which the index will be moved.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("action")]
 	public string? Action { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The optional step name to which the index will be moved.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string? Name { get; set; }
 	[JsonInclude, JsonPropertyName("phase")]
@@ -49,12 +60,22 @@ public sealed partial class StepKeyDescriptor : SerializableDescriptor<StepKeyDe
 	private string? NameValue { get; set; }
 	private string PhaseValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The optional action to which the index will be moved.
+	/// </para>
+	/// </summary>
 	public StepKeyDescriptor Action(string? action)
 	{
 		ActionValue = action;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The optional step name to which the index will be moved.
+	/// </para>
+	/// </summary>
 	public StepKeyDescriptor Name(string? name)
 	{
 		NameValue = name;

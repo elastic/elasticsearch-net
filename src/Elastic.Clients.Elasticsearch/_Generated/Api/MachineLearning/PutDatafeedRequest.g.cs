@@ -68,7 +68,7 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "aggregations")
+				if (property == "aggregations" || property == "aggs")
 				{
 					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
 					continue;
@@ -254,7 +254,9 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
-/// If you are concerned about delayed data, you can add a delay (<c>query_delay</c>) at each interval.
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. By default, the datafeed uses the following query: </c>{"match_all": {"boost": 1}}`.
+/// </para>
+/// <para>
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
 /// at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
 /// those credentials are used instead.
@@ -355,8 +357,8 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 
 	/// <summary>
 	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the master
+	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
@@ -443,7 +445,9 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
-/// If you are concerned about delayed data, you can add a delay (<c>query_delay</c>) at each interval.
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. By default, the datafeed uses the following query: </c>{"match_all": {"boost": 1}}`.
+/// </para>
+/// <para>
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
 /// at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
 /// those credentials are used instead.
@@ -600,8 +604,8 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 
 	/// <summary>
 	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the master
+	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -881,7 +885,9 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
-/// If you are concerned about delayed data, you can add a delay (<c>query_delay</c>) at each interval.
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. By default, the datafeed uses the following query: </c>{"match_all": {"boost": 1}}`.
+/// </para>
+/// <para>
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
 /// at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
 /// those credentials are used instead.
@@ -1038,8 +1044,8 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 
 	/// <summary>
 	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the master
+	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)

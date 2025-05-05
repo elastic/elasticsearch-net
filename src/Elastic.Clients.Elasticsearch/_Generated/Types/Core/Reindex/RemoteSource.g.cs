@@ -32,7 +32,6 @@ public sealed partial class RemoteSource
 	/// <summary>
 	/// <para>
 	/// The remote connection timeout.
-	/// Defaults to 30 seconds.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("connect_timeout")]
@@ -49,6 +48,7 @@ public sealed partial class RemoteSource
 	/// <summary>
 	/// <para>
 	/// The URL for the remote instance of Elasticsearch that you want to index from.
+	/// This information is required when you're indexing from remote.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("host")]
@@ -64,7 +64,7 @@ public sealed partial class RemoteSource
 
 	/// <summary>
 	/// <para>
-	/// The remote socket read timeout. Defaults to 30 seconds.
+	/// The remote socket read timeout.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("socket_timeout")]
@@ -97,7 +97,6 @@ public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<Remo
 	/// <summary>
 	/// <para>
 	/// The remote connection timeout.
-	/// Defaults to 30 seconds.
 	/// </para>
 	/// </summary>
 	public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Duration? connectTimeout)
@@ -120,6 +119,7 @@ public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<Remo
 	/// <summary>
 	/// <para>
 	/// The URL for the remote instance of Elasticsearch that you want to index from.
+	/// This information is required when you're indexing from remote.
 	/// </para>
 	/// </summary>
 	public RemoteSourceDescriptor Host(string host)
@@ -141,7 +141,7 @@ public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<Remo
 
 	/// <summary>
 	/// <para>
-	/// The remote socket read timeout. Defaults to 30 seconds.
+	/// The remote socket read timeout.
 	/// </para>
 	/// </summary>
 	public RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Duration? socketTimeout)

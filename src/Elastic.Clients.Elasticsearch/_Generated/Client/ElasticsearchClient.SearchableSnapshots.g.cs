@@ -41,9 +41,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats(CacheStatsRequest request)
@@ -54,9 +55,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CacheStatsResponse> CacheStatsAsync(CacheStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -66,9 +68,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats(CacheStatsRequestDescriptor descriptor)
@@ -79,9 +82,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
@@ -93,9 +97,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<CacheStatsRequestDescriptor> configureRequest)
@@ -108,9 +113,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats()
@@ -122,9 +128,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats(Action<CacheStatsRequestDescriptor> configureRequest)
@@ -137,9 +144,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CacheStatsResponse> CacheStatsAsync(CacheStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -149,9 +157,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
@@ -162,9 +171,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<CacheStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -176,9 +186,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CacheStatsResponse> CacheStatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -189,9 +200,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-cache-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CacheStatsResponse> CacheStatsAsync(Action<CacheStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -203,9 +215,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(ClearCacheRequest request)
@@ -216,9 +229,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(ClearCacheRequest request, CancellationToken cancellationToken = default)
 	{
@@ -228,9 +242,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(ClearCacheRequestDescriptor<TDocument> descriptor)
@@ -241,9 +256,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -255,9 +271,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor<TDocument>> configureRequest)
@@ -270,9 +287,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>()
@@ -284,9 +302,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Action<ClearCacheRequestDescriptor<TDocument>> configureRequest)
@@ -299,9 +318,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(ClearCacheRequestDescriptor descriptor)
@@ -312,9 +332,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -326,9 +347,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor> configureRequest)
@@ -341,9 +363,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache()
@@ -355,9 +378,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(Action<ClearCacheRequestDescriptor> configureRequest)
@@ -370,9 +394,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(ClearCacheRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -382,9 +407,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -395,9 +421,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -409,9 +436,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -422,9 +450,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Action<ClearCacheRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -436,9 +465,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(ClearCacheRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -448,9 +478,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -461,9 +492,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -475,9 +507,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(CancellationToken cancellationToken = default)
 	{
@@ -488,9 +521,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(Action<ClearCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -502,9 +536,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MountResponse Mount(MountRequest request)
@@ -515,9 +552,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MountResponse> MountAsync(MountRequest request, CancellationToken cancellationToken = default)
 	{
@@ -527,9 +567,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MountResponse Mount(MountRequestDescriptor descriptor)
@@ -540,9 +583,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
@@ -554,9 +600,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<MountRequestDescriptor> configureRequest)
@@ -569,9 +618,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MountResponse> MountAsync(MountRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -581,9 +633,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
 	{
@@ -594,9 +649,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<MountRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -608,9 +666,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats(SearchableSnapshotsStatsRequest request)
@@ -621,9 +679,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync(SearchableSnapshotsStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -633,9 +691,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(SearchableSnapshotsStatsRequestDescriptor<TDocument> descriptor)
@@ -646,9 +704,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -660,9 +718,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest)
@@ -675,9 +733,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>()
@@ -689,9 +747,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest)
@@ -704,9 +762,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats(SearchableSnapshotsStatsRequestDescriptor descriptor)
@@ -717,9 +775,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -731,9 +789,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest)
@@ -746,9 +804,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats()
@@ -760,9 +818,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest)
@@ -775,9 +833,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(SearchableSnapshotsStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -787,9 +845,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -800,9 +858,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -814,9 +872,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -827,9 +885,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -841,9 +899,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync(SearchableSnapshotsStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -853,9 +911,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -866,9 +924,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -880,9 +938,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -893,9 +951,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/searchable-snapshots-api-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

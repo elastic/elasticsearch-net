@@ -32,11 +32,27 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public sealed partial class GetLifecycleRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+/// Get policy information.
+/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 /// </para>
 /// </summary>
 public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleRequestParameters>
@@ -56,11 +72,30 @@ public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.get_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+/// Get policy information.
+/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 /// </para>
 /// </summary>
 public sealed partial class GetLifecycleRequestDescriptor : RequestDescriptor<GetLifecycleRequestDescriptor, GetLifecycleRequestParameters>
@@ -82,6 +117,9 @@ public sealed partial class GetLifecycleRequestDescriptor : RequestDescriptor<Ge
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.get_lifecycle";
+
+	public GetLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public GetLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public GetLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Names? policyId)
 	{

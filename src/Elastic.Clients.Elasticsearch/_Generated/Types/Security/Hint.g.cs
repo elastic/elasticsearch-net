@@ -41,7 +41,7 @@ public sealed partial class Hint
 
 	/// <summary>
 	/// <para>
-	/// A list of Profile UIDs to match against.
+	/// A list of profile UIDs to match against.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("uids")]
@@ -74,7 +74,7 @@ public sealed partial class HintDescriptor : SerializableDescriptor<HintDescript
 
 	/// <summary>
 	/// <para>
-	/// A list of Profile UIDs to match against.
+	/// A list of profile UIDs to match against.
 	/// </para>
 	/// </summary>
 	public HintDescriptor Uids(ICollection<string>? uids)

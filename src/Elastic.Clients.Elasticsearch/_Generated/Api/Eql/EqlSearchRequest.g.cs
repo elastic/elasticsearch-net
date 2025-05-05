@@ -45,7 +45,9 @@ public sealed partial class EqlSearchRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
 public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestParameters>
@@ -117,16 +119,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 	/// <summary>
 	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("max_samples_per_key")]
-	public int? MaxSamplesPerKey { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
@@ -166,7 +158,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
 public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
@@ -212,7 +206,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
-	private int? MaxSamplesPerKeyValue { get; set; }
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
@@ -362,19 +355,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	public EqlSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
 	{
 		KeepOnCompletionValue = keepOnCompletion;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> MaxSamplesPerKey(int? maxSamplesPerKey)
-	{
-		MaxSamplesPerKeyValue = maxSamplesPerKey;
 		return Self;
 	}
 
@@ -575,12 +555,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
 		}
 
-		if (MaxSamplesPerKeyValue.HasValue)
-		{
-			writer.WritePropertyName("max_samples_per_key");
-			writer.WriteNumberValue(MaxSamplesPerKeyValue.Value);
-		}
-
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
 		if (ResultPositionValue is not null)
@@ -625,7 +599,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
 public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSearchRequestDescriptor, EqlSearchRequestParameters>
@@ -667,7 +643,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
-	private int? MaxSamplesPerKeyValue { get; set; }
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
@@ -817,19 +792,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	public EqlSearchRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
 	{
 		KeepOnCompletionValue = keepOnCompletion;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor MaxSamplesPerKey(int? maxSamplesPerKey)
-	{
-		MaxSamplesPerKeyValue = maxSamplesPerKey;
 		return Self;
 	}
 
@@ -1028,12 +990,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		{
 			writer.WritePropertyName("keep_on_completion");
 			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-		}
-
-		if (MaxSamplesPerKeyValue.HasValue)
-		{
-			writer.WritePropertyName("max_samples_per_key");
-			writer.WriteNumberValue(MaxSamplesPerKeyValue.Value);
 		}
 
 		writer.WritePropertyName("query");

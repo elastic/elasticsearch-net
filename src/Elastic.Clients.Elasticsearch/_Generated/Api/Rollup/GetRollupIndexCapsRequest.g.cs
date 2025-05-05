@@ -36,8 +36,22 @@ public sealed partial class GetRollupIndexCapsRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+/// Get the rollup index capabilities.
+/// Get the rollup capabilities of all jobs inside of a rollup index.
+/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// What jobs are stored in an index (or indices specified via a pattern)?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetRollupIndexCapsRequest : PlainRequest<GetRollupIndexCapsRequestParameters>
 {
@@ -56,8 +70,22 @@ public sealed partial class GetRollupIndexCapsRequest : PlainRequest<GetRollupIn
 
 /// <summary>
 /// <para>
-/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+/// Get the rollup index capabilities.
+/// Get the rollup capabilities of all jobs inside of a rollup index.
+/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// What jobs are stored in an index (or indices specified via a pattern)?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetRollupIndexCapsRequestDescriptor<TDocument> : RequestDescriptor<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsRequestParameters>
 {
@@ -88,8 +116,22 @@ public sealed partial class GetRollupIndexCapsRequestDescriptor<TDocument> : Req
 
 /// <summary>
 /// <para>
-/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+/// Get the rollup index capabilities.
+/// Get the rollup capabilities of all jobs inside of a rollup index.
+/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// What jobs are stored in an index (or indices specified via a pattern)?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetRollupIndexCapsRequestDescriptor : RequestDescriptor<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsRequestParameters>
 {

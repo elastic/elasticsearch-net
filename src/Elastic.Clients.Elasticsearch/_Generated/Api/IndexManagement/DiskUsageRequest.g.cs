@@ -76,7 +76,15 @@ public sealed partial class DiskUsageRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Analyzes the disk usage of each field of an index or data stream.
+/// Analyze the index disk usage.
+/// Analyze the disk usage of each field of an index or data stream.
+/// This API might not support indices created in previous Elasticsearch versions.
+/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
+/// </para>
+/// <para>
+/// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
+/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
+/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 /// </para>
 /// </summary>
 public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestParameters>
@@ -142,7 +150,15 @@ public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestPara
 
 /// <summary>
 /// <para>
-/// Analyzes the disk usage of each field of an index or data stream.
+/// Analyze the index disk usage.
+/// Analyze the disk usage of each field of an index or data stream.
+/// This API might not support indices created in previous Elasticsearch versions.
+/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
+/// </para>
+/// <para>
+/// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
+/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
+/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 /// </para>
 /// </summary>
 public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescriptor<DiskUsageRequestDescriptor<TDocument>, DiskUsageRequestParameters>
@@ -184,7 +200,15 @@ public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Analyzes the disk usage of each field of an index or data stream.
+/// Analyze the index disk usage.
+/// Analyze the disk usage of each field of an index or data stream.
+/// This API might not support indices created in previous Elasticsearch versions.
+/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
+/// </para>
+/// <para>
+/// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
+/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
+/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 /// </para>
 /// </summary>
 public sealed partial class DiskUsageRequestDescriptor : RequestDescriptor<DiskUsageRequestDescriptor, DiskUsageRequestParameters>

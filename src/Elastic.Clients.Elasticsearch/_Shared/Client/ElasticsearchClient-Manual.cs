@@ -6,11 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class ElasticsearchClient
 {

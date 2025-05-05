@@ -36,7 +36,15 @@ public sealed partial class PauseAutoFollowPatternRequestParameters : RequestPar
 
 /// <summary>
 /// <para>
-/// Pauses an auto-follow pattern
+/// Pause an auto-follow pattern.
+/// Pause a cross-cluster replication auto-follow pattern.
+/// When the API returns, the auto-follow pattern is inactive.
+/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
+/// </para>
+/// <para>
+/// You can resume auto-following with the resume auto-follow pattern API.
+/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
 /// </para>
 /// </summary>
 public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAutoFollowPatternRequestParameters>
@@ -56,7 +64,15 @@ public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAu
 
 /// <summary>
 /// <para>
-/// Pauses an auto-follow pattern
+/// Pause an auto-follow pattern.
+/// Pause a cross-cluster replication auto-follow pattern.
+/// When the API returns, the auto-follow pattern is inactive.
+/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
+/// </para>
+/// <para>
+/// You can resume auto-following with the resume auto-follow pattern API.
+/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
 /// </para>
 /// </summary>
 public sealed partial class PauseAutoFollowPatternRequestDescriptor : RequestDescriptor<PauseAutoFollowPatternRequestDescriptor, PauseAutoFollowPatternRequestParameters>

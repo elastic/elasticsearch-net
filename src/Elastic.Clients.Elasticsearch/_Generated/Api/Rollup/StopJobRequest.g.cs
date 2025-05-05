@@ -36,6 +36,8 @@ public sealed partial class StopJobRequestParameters : RequestParameters
 	/// <para>
 	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
 	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
+	/// NOTE: Even if a timeout occurs, the stop request is still processing and eventually moves the job to STOPPED.
+	/// The timeout simply means the API call itself timed out while waiting for the status change.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -51,7 +53,20 @@ public sealed partial class StopJobRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Stops an existing, started rollup job.
+/// Stop rollup jobs.
+/// If you try to stop a job that does not exist, an exception occurs.
+/// If you try to stop a job that is already stopped, nothing happens.
+/// </para>
+/// <para>
+/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+/// </para>
+/// <code>
+/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+/// </code>
+/// <para>
+/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 /// </para>
 /// </summary>
 public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParameters>
@@ -72,6 +87,8 @@ public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParamete
 	/// <para>
 	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
 	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
+	/// NOTE: Even if a timeout occurs, the stop request is still processing and eventually moves the job to STOPPED.
+	/// The timeout simply means the API call itself timed out while waiting for the status change.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -89,7 +106,20 @@ public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParamete
 
 /// <summary>
 /// <para>
-/// Stops an existing, started rollup job.
+/// Stop rollup jobs.
+/// If you try to stop a job that does not exist, an exception occurs.
+/// If you try to stop a job that is already stopped, nothing happens.
+/// </para>
+/// <para>
+/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+/// </para>
+/// <code>
+/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+/// </code>
+/// <para>
+/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 /// </para>
 /// </summary>
 public sealed partial class StopJobRequestDescriptor<TDocument> : RequestDescriptor<StopJobRequestDescriptor<TDocument>, StopJobRequestParameters>
@@ -124,7 +154,20 @@ public sealed partial class StopJobRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// Stops an existing, started rollup job.
+/// Stop rollup jobs.
+/// If you try to stop a job that does not exist, an exception occurs.
+/// If you try to stop a job that is already stopped, nothing happens.
+/// </para>
+/// <para>
+/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+/// </para>
+/// <code>
+/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+/// </code>
+/// <para>
+/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 /// </para>
 /// </summary>
 public sealed partial class StopJobRequestDescriptor : RequestDescriptor<StopJobRequestDescriptor, StopJobRequestParameters>

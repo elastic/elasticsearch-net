@@ -11,11 +11,7 @@ using System.Threading.Tasks;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 /// <summary>
 /// The built-in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize built in types.
@@ -23,6 +19,10 @@ namespace Elastic.Clients.Elasticsearch.Serialization;
 internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 {
 	private readonly IElasticsearchClientSettings _settings;
+
+#if !NET8_0_OR_GREATER
+	private readonly object _lock = new();
+#endif
 
 	public DefaultRequestResponseSerializer(IElasticsearchClientSettings settings) :
 		base(new DefaultRequestResponseSerializerOptionsProvider(settings))
@@ -62,15 +62,23 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 		var options = GetJsonSerializerOptions(SerializationFormatting.None);
 		var indentedOptions = GetJsonSerializerOptions(SerializationFormatting.Indented);
 
-		if (!ElasticsearchClient.SettingsTable.TryGetValue(options, out _))
+#if NET8_0_OR_GREATER
+		ElasticsearchClient.SettingsTable.TryAdd(options, settings);
+		ElasticsearchClient.SettingsTable.TryAdd(indentedOptions, settings);
+#else
+		lock (_lock)
 		{
-			ElasticsearchClient.SettingsTable.Add(options, settings);
-		}
+			if (!ElasticsearchClient.SettingsTable.TryGetValue(options, out _))
+			{
+				ElasticsearchClient.SettingsTable.Add(options, settings);
+			}
 
-		if (!ElasticsearchClient.SettingsTable.TryGetValue(indentedOptions, out _))
-		{
-			ElasticsearchClient.SettingsTable.Add(indentedOptions, settings);
+			if (!ElasticsearchClient.SettingsTable.TryGetValue(indentedOptions, out _))
+			{
+				ElasticsearchClient.SettingsTable.Add(indentedOptions, settings);
+			}
 		}
+#endif
 	}
 }
 

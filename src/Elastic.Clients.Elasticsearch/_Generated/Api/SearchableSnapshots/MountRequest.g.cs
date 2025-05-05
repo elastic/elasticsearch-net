@@ -34,21 +34,23 @@ public sealed partial class MountRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Selects the kind of local storage used to accelerate searches. Experimental, and defaults to <c>full_copy</c>
+	/// The mount option for the searchable snapshot index.
 	/// </para>
 	/// </summary>
 	public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 
 	/// <summary>
 	/// <para>
-	/// Should this request wait until the operation has completed before returning
+	/// If true, the request blocks until the operation is complete.
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -56,7 +58,10 @@ public sealed partial class MountRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Mount a snapshot as a searchable index.
+/// Mount a snapshot.
+/// Mount a snapshot as a searchable snapshot index.
+/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 /// </para>
 /// </summary>
 public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
@@ -75,7 +80,9 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -83,7 +90,7 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Selects the kind of local storage used to accelerate searches. Experimental, and defaults to <c>full_copy</c>
+	/// The mount option for the searchable snapshot index.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -91,24 +98,52 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Should this request wait until the operation has completed before returning
+	/// If true, the request blocks until the operation is complete.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+	/// <summary>
+	/// <para>
+	/// The names of settings that should be removed from the index when it is mounted.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_index_settings")]
 	public ICollection<string>? IgnoreIndexSettings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index contained in the snapshot whose data is to be mounted.
+	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The settings that should be added to the index when it is mounted.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_settings")]
 	public IDictionary<string, object>? IndexSettings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index that will be created.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("renamed_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? RenamedIndex { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Mount a snapshot as a searchable index.
+/// Mount a snapshot.
+/// Mount a snapshot as a searchable snapshot index.
+/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 /// </para>
 /// </summary>
 public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequestDescriptor, MountRequestParameters>
@@ -148,24 +183,45 @@ public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequ
 	private IDictionary<string, object>? IndexSettingsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? RenamedIndexValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The names of settings that should be removed from the index when it is mounted.
+	/// </para>
+	/// </summary>
 	public MountRequestDescriptor IgnoreIndexSettings(ICollection<string>? ignoreIndexSettings)
 	{
 		IgnoreIndexSettingsValue = ignoreIndexSettings;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The name of the index contained in the snapshot whose data is to be mounted.
+	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
+	/// </para>
+	/// </summary>
 	public MountRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The settings that should be added to the index when it is mounted.
+	/// </para>
+	/// </summary>
 	public MountRequestDescriptor IndexSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		IndexSettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The name of the index that will be created.
+	/// </para>
+	/// </summary>
 	public MountRequestDescriptor RenamedIndex(Elastic.Clients.Elasticsearch.IndexName? renamedIndex)
 	{
 		RenamedIndexValue = renamedIndex;

@@ -34,8 +34,8 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// The analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
@@ -43,6 +43,7 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -50,13 +51,15 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
 	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
+	/// The field to use as default where no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
@@ -64,35 +67,36 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
 	/// <para>
-	/// Query in the Lucene query string syntax.
+	/// The query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
+	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
@@ -100,6 +104,8 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -107,6 +113,9 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
@@ -122,7 +131,8 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Explain a document match result.
-/// Returns information about why a specific document matches, or doesn’t match, a query.
+/// Get information about why a specific document matches, or doesn't match, a query.
+/// It computes a score explanation for a query and a specific document.
 /// </para>
 /// </summary>
 public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParameters>
@@ -141,8 +151,8 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// The analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -151,6 +161,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -159,6 +170,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	/// <summary>
 	/// <para>
 	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -166,7 +178,8 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
+	/// The field to use as default where no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -175,6 +188,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -182,8 +196,8 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node or shard the operation should be performed on.
-	/// Random by default.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -191,7 +205,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Query in the Lucene query string syntax.
+	/// The query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -199,7 +213,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -207,7 +221,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
+	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -216,6 +230,8 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -224,6 +240,9 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -249,7 +268,8 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 /// <summary>
 /// <para>
 /// Explain a document match result.
-/// Returns information about why a specific document matches, or doesn’t match, a query.
+/// Get information about why a specific document matches, or doesn't match, a query.
+/// It computes a score explanation for a query and a specific document.
 /// </para>
 /// </summary>
 public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescriptor<ExplainRequestDescriptor<TDocument>, ExplainRequestParameters>
@@ -368,7 +388,8 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 /// <summary>
 /// <para>
 /// Explain a document match result.
-/// Returns information about why a specific document matches, or doesn’t match, a query.
+/// Get information about why a specific document matches, or doesn't match, a query.
+/// It computes a score explanation for a query and a specific document.
 /// </para>
 /// </summary>
 public sealed partial class ExplainRequestDescriptor : RequestDescriptor<ExplainRequestDescriptor, ExplainRequestParameters>

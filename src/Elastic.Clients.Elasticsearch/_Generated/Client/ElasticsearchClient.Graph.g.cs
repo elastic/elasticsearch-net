@@ -41,9 +41,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(ExploreRequest request)
@@ -54,9 +59,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequest request, CancellationToken cancellationToken = default)
 	{
@@ -66,9 +76,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(ExploreRequestDescriptor<TDocument> descriptor)
@@ -79,9 +94,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -93,9 +113,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor<TDocument>> configureRequest)
@@ -108,9 +133,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>()
@@ -122,9 +152,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(Action<ExploreRequestDescriptor<TDocument>> configureRequest)
@@ -137,9 +172,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(ExploreRequestDescriptor descriptor)
@@ -150,9 +190,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices)
@@ -164,9 +209,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest)
@@ -179,9 +229,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(ExploreRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -191,9 +246,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -204,9 +264,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -218,9 +283,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -231,9 +301,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(Action<ExploreRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -245,9 +320,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -257,9 +337,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -270,9 +355,14 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+	/// Explore graph analytics.
+	/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+	/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+	/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+	/// Subsequent requests enable you to spider out from one more vertices of interest.
+	/// You can exclude vertices that have already been returned.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

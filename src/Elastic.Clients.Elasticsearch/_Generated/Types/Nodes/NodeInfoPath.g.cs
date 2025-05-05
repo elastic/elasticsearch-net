@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class NodeInfoPath
 {
 	[JsonInclude, JsonPropertyName("data")]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string>? Data { get; init; }
 	[JsonInclude, JsonPropertyName("home")]
 	public string? Home { get; init; }

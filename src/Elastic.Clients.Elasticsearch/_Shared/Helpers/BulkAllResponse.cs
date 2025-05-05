@@ -3,17 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 using Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public sealed class BulkAllResponse
 {

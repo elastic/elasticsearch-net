@@ -34,14 +34,14 @@ public sealed partial class GetSynonymsSetsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Starting offset
+	/// The starting offset for synonyms sets to retrieve.
 	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
 	/// <para>
-	/// specifies a max number of results to get
+	/// The maximum number of synonyms sets to retrieve.
 	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -49,7 +49,8 @@ public sealed partial class GetSynonymsSetsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves a summary of all defined synonym sets
+/// Get all synonym sets.
+/// Get a summary of all defined synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSetsRequestParameters>
@@ -64,7 +65,7 @@ public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSet
 
 	/// <summary>
 	/// <para>
-	/// Starting offset
+	/// The starting offset for synonyms sets to retrieve.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -72,7 +73,7 @@ public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSet
 
 	/// <summary>
 	/// <para>
-	/// specifies a max number of results to get
+	/// The maximum number of synonyms sets to retrieve.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -81,7 +82,8 @@ public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSet
 
 /// <summary>
 /// <para>
-/// Retrieves a summary of all defined synonym sets
+/// Get all synonym sets.
+/// Get a summary of all defined synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymsSetsRequestDescriptor : RequestDescriptor<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsRequestParameters>

@@ -41,9 +41,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)
@@ -54,9 +78,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -66,9 +114,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob<TDocument>(DeleteJobRequestDescriptor<TDocument> descriptor)
@@ -79,9 +151,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -93,9 +189,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor<TDocument>> configureRequest)
@@ -108,9 +228,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequestDescriptor descriptor)
@@ -121,9 +265,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
@@ -135,9 +303,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest)
@@ -150,9 +342,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(DeleteJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -162,9 +378,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -175,9 +415,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -189,9 +453,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -201,9 +489,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -214,9 +526,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing rollup job.
+	/// Delete a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A job must be stopped before it can be deleted.
+	/// If you attempt to delete a started job, an error occurs.
+	/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+	/// The API does not delete any previously rolled up data.
+	/// This is by design; a user may wish to roll up a static data set.
+	/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+	/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
+	/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+	/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+	/// </para>
+	/// <code>
+	/// POST my_rollup_index/_delete_by_query
+	/// {
+	///   "query": {
+	///     "term": {
+	///       "_rollup.id": "the_rollup_job_id"
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -228,9 +564,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequest request)
@@ -241,9 +583,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -253,9 +601,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(GetJobsRequestDescriptor<TDocument> descriptor)
@@ -266,9 +620,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -280,9 +640,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor<TDocument>> configureRequest)
@@ -295,9 +661,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>()
@@ -309,9 +681,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(Action<GetJobsRequestDescriptor<TDocument>> configureRequest)
@@ -324,9 +702,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequestDescriptor descriptor)
@@ -337,9 +721,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
@@ -351,9 +741,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest)
@@ -366,9 +762,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs()
@@ -380,9 +782,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(Action<GetJobsRequestDescriptor> configureRequest)
@@ -395,9 +803,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(GetJobsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -407,9 +821,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -420,9 +840,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -434,9 +860,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -447,9 +879,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Action<GetJobsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -461,9 +899,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -473,9 +917,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -486,9 +936,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -500,9 +956,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(CancellationToken cancellationToken = default)
 	{
@@ -513,9 +975,15 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the configuration, stats, and status of rollup jobs.
+	/// Get rollup job information.
+	/// Get the configuration, stats, and status of rollup jobs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -527,9 +995,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequest request)
@@ -540,9 +1026,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -552,9 +1056,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(GetRollupCapsRequestDescriptor<TDocument> descriptor)
@@ -565,9 +1087,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -579,9 +1119,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest)
@@ -594,9 +1152,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>()
@@ -608,9 +1184,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest)
@@ -623,9 +1217,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequestDescriptor descriptor)
@@ -636,9 +1248,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
@@ -650,9 +1280,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest)
@@ -665,9 +1313,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps()
@@ -679,9 +1345,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(Action<GetRollupCapsRequestDescriptor> configureRequest)
@@ -694,9 +1378,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(GetRollupCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -706,9 +1408,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -719,9 +1439,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -733,9 +1471,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -746,9 +1502,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -760,9 +1534,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -772,9 +1564,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -785,9 +1595,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -799,9 +1627,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(CancellationToken cancellationToken = default)
 	{
@@ -812,9 +1658,27 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+	/// Get the rollup job capabilities.
+	/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+	/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+	/// This API enables you to inspect an index and determine:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Does this index have associated rollup data somewhere in the cluster?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -826,9 +1690,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequest request)
@@ -839,9 +1717,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -851,9 +1743,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(GetRollupIndexCapsRequestDescriptor<TDocument> descriptor)
@@ -864,9 +1770,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index)
@@ -878,9 +1798,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor<TDocument>> configureRequest)
@@ -893,9 +1827,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequestDescriptor descriptor)
@@ -906,9 +1854,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
@@ -920,9 +1882,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest)
@@ -935,9 +1911,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(GetRollupIndexCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -947,9 +1937,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
 	{
@@ -960,9 +1964,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -974,9 +1992,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -986,9 +2018,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
 	{
@@ -999,9 +2045,23 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+	/// Get the rollup index capabilities.
+	/// Get the rollup capabilities of all jobs inside of a rollup index.
+	/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// What jobs are stored in an index (or indices specified via a pattern)?
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1013,9 +2073,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequest request)
@@ -1026,9 +2098,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1038,9 +2122,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(PutJobRequestDescriptor<TDocument> descriptor)
@@ -1051,9 +2147,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -1065,9 +2173,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest)
@@ -1080,9 +2200,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequestDescriptor descriptor)
@@ -1093,9 +2225,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id)
@@ -1107,9 +2251,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest)
@@ -1122,9 +2278,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(PutJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1134,9 +2302,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1147,9 +2327,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1161,9 +2353,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1173,9 +2377,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1186,9 +2402,21 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a rollup job.
+	/// Create a rollup job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+	/// </para>
+	/// <para>
+	/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+	/// </para>
+	/// <para>
+	/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+	/// </para>
+	/// <para>
+	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1200,9 +2428,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequest request)
@@ -1213,9 +2490,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1225,9 +2551,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor)
@@ -1238,9 +2613,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -1252,9 +2676,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RollupSearchRequestDescriptor<TDocument>> configureRequest)
@@ -1267,9 +2740,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>()
@@ -1281,9 +2803,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Action<RollupSearchRequestDescriptor<TDocument>> configureRequest)
@@ -1296,9 +2867,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1308,9 +2928,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -1321,9 +2990,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RollupSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1335,9 +3053,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1348,9 +3115,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables searching rolled-up data using the standard Query DSL.
+	/// Search rolled-up data.
+	/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+	/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// The request body supports a subset of features from the regular search API.
+	/// The following functionality is not available:
+	/// </para>
+	/// <para>
+	/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+	/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+	/// </para>
+	/// <para>
+	/// <strong>Searching both historical rollup and non-rollup data</strong>
+	/// </para>
+	/// <para>
+	/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+	/// This is done by simply adding the live indices to the URI. For example:
+	/// </para>
+	/// <code>
+	/// GET sensor-1,sensor_rollup/_rollup_search
+	/// {
+	///   "size": 0,
+	///   "aggregations": {
+	///      "max_temperature": {
+	///       "max": {
+	///         "field": "temperature"
+	///       }
+	///     }
+	///   }
+	/// }
+	/// </code>
+	/// <para>
+	/// The rollup search endpoint does two things when the search runs:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The original request is sent to the non-rollup index unaltered.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A rewritten version of the original request is sent to the rollup index.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Action<RollupSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1362,9 +3178,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(StartJobRequest request)
@@ -1375,9 +3193,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1387,9 +3207,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob<TDocument>(StartJobRequestDescriptor<TDocument> descriptor)
@@ -1400,9 +3222,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -1414,9 +3238,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor<TDocument>> configureRequest)
@@ -1429,9 +3255,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(StartJobRequestDescriptor descriptor)
@@ -1442,9 +3270,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
@@ -1456,9 +3286,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest)
@@ -1471,9 +3303,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(StartJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1483,9 +3317,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1496,9 +3332,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1510,9 +3348,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1522,9 +3362,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1535,9 +3377,11 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts an existing, stopped rollup job.
+	/// Start rollup jobs.
+	/// If you try to start a job that does not exist, an exception occurs.
+	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1549,9 +3393,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(StopJobRequest request)
@@ -1562,9 +3419,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1574,9 +3444,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob<TDocument>(StopJobRequestDescriptor<TDocument> descriptor)
@@ -1587,9 +3470,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -1601,9 +3497,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor<TDocument>> configureRequest)
@@ -1616,9 +3525,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(StopJobRequestDescriptor descriptor)
@@ -1629,9 +3551,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
@@ -1643,9 +3578,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest)
@@ -1658,9 +3606,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(StopJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1670,9 +3631,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1683,9 +3657,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1697,9 +3684,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1709,9 +3709,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1722,9 +3735,22 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops an existing, started rollup job.
+	/// Stop rollup jobs.
+	/// If you try to stop a job that does not exist, an exception occurs.
+	/// If you try to stop a job that is already stopped, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+	/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
+	/// </para>
+	/// <code>
+	/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
+	/// </code>
+	/// <para>
+	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

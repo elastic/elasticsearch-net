@@ -40,6 +40,12 @@ public sealed partial class ClearCachedServiceTokensRequestParameters : RequestP
 /// </para>
 /// <para>
 /// Evict a subset of all entries from the service account token caches.
+/// Two separate caches exist for service account tokens: one cache for tokens backed by the <c>service_tokens</c> file, and another for tokens backed by the <c>.security</c> index.
+/// This API clears matching entries from both caches.
+/// </para>
+/// <para>
+/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
+/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<ClearCachedServiceTokensRequestParameters>
@@ -63,6 +69,12 @@ public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<Clear
 /// </para>
 /// <para>
 /// Evict a subset of all entries from the service account token caches.
+/// Two separate caches exist for service account tokens: one cache for tokens backed by the <c>service_tokens</c> file, and another for tokens backed by the <c>.security</c> index.
+/// This API clears matching entries from both caches.
+/// </para>
+/// <para>
+/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
+/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedServiceTokensRequestDescriptor : RequestDescriptor<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensRequestParameters>

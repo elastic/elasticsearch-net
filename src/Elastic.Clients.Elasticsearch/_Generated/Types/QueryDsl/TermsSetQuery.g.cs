@@ -74,7 +74,7 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 
 				if (property == "terms")
 				{
-					variant.Terms = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(ref reader, options);
+					variant.Terms = JsonSerializer.Deserialize<ICollection<string>>(ref reader, options);
 					continue;
 				}
 			}
@@ -178,7 +178,7 @@ public sealed partial class TermsSetQuery
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue> Terms { get; set; }
+	public ICollection<string> Terms { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(TermsSetQuery termsSetQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.TermsSet(termsSetQuery);
 }
@@ -199,7 +199,7 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue> TermsValue { get; set; }
+	private ICollection<string> TermsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -317,7 +317,7 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<Elastic.Clients.Elasticsearch.FieldValue> terms)
+	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<string> terms)
 	{
 		TermsValue = terms;
 		return Self;
@@ -393,7 +393,7 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue> TermsValue { get; set; }
+	private ICollection<string> TermsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -511,7 +511,7 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public TermsSetQueryDescriptor Terms(ICollection<Elastic.Clients.Elasticsearch.FieldValue> terms)
+	public TermsSetQueryDescriptor Terms(ICollection<string> terms)
 	{
 		TermsValue = terms;
 		return Self;

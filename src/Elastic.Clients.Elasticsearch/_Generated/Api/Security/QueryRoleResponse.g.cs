@@ -38,7 +38,12 @@ public sealed partial class QueryRoleResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// The list of roles.
+	/// A list of roles that match the query.
+	/// The returned role format is an extension of the role definition format.
+	/// It adds the <c>transient_metadata.enabled</c> and the <c>_sort</c> fields.
+	/// <c>transient_metadata.enabled</c> is set to <c>false</c> in case the role is automatically disabled, for example when the role grants privileges that are not allowed by the installed license.
+	/// <c>_sort</c> is present when the search query sorts on some field.
+	/// It contains the array of values that have been used for sorting.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("roles")]

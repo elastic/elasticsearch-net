@@ -55,52 +55,52 @@ public sealed partial class UpdateRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search, if 'wait_for' then wait for a refresh to make this operation
-	/// visible to search, if 'false' do nothing with refreshes.
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', it does nothing with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, the destination must be an index alias.
+	/// If <c>true</c>, the destination must be an index alias.
 	/// </para>
 	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify how many times should the operation be retried when a conflict occurs.
+	/// The number of times the operation should be retried when a conflict occurs.
 	/// </para>
 	/// </summary>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify the source fields you want to exclude.
+	/// The source fields you want to exclude.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify the source fields you want to retrieve.
+	/// The source fields you want to retrieve.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for dynamic mapping updates and active shards.
-	/// This guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The period to wait for the following operations: dynamic mapping updates and waiting for active shards.
+	/// Elasticsearch waits for at least the timeout period before failing.
 	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
@@ -108,9 +108,9 @@ public sealed partial class UpdateRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operations.
-	/// Set to 'all' or any positive integer up to the total number of shards in the index
-	/// (number_of_replicas+1). Defaults to 1 meaning the primary shard.
+	/// The number of copies of each shard that must be active before proceeding with the operation.
+	/// Set to 'all' or any positive integer up to the total number of shards in the index (<c>number_of_replicas</c>+1).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -119,7 +119,42 @@ public sealed partial class UpdateRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Update a document.
-/// Updates a document by running a script or passing a partial document.
+/// </para>
+/// <para>
+/// Update a document by running a script or passing a partial document.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the <c>index</c> or <c>write</c> index privilege for the target index or index alias.
+/// </para>
+/// <para>
+/// The script can update, delete, or skip modifying the document.
+/// The API also supports passing a partial document, which is merged into the existing document.
+/// To fully replace an existing document, use the index API.
+/// This operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Gets the document (collocated with the shard) from the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Runs the specified script.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Indexes the result.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The document must still be reindexed, but using this API removes some network roundtrips and reduces chances of version conflicts between the GET and the index operation.
+/// </para>
+/// <para>
+/// The <c>_source</c> field must be enabled to use this API.
+/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 /// </para>
 /// </summary>
 public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequest<UpdateRequestParameters>
@@ -162,9 +197,9 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search, if 'wait_for' then wait for a refresh to make this operation
-	/// visible to search, if 'false' do nothing with refreshes.
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', it does nothing with refreshes.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -172,7 +207,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// If true, the destination must be an index alias.
+	/// If <c>true</c>, the destination must be an index alias.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -180,7 +215,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Specify how many times should the operation be retried when a conflict occurs.
+	/// The number of times the operation should be retried when a conflict occurs.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -188,7 +223,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Custom value used to route operations to a specific shard.
+	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -196,7 +231,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Specify the source fields you want to exclude.
+	/// The source fields you want to exclude.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -204,7 +239,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Specify the source fields you want to retrieve.
+	/// The source fields you want to retrieve.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -212,8 +247,8 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for dynamic mapping updates and active shards.
-	/// This guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The period to wait for the following operations: dynamic mapping updates and waiting for active shards.
+	/// Elasticsearch waits for at least the timeout period before failing.
 	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
@@ -222,9 +257,9 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operations.
-	/// Set to 'all' or any positive integer up to the total number of shards in the index
-	/// (number_of_replicas+1). Defaults to 1 meaning the primary shard.
+	/// The number of copies of each shard that must be active before proceeding with the operation.
+	/// Set to 'all' or any positive integer up to the total number of shards in the index (<c>number_of_replicas</c>+1).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -232,8 +267,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Set to false to disable setting 'result' in the response
-	/// to 'noop' if no change to the document occurred.
+	/// If <c>true</c>, the <c>result</c> in the response is set to <c>noop</c> (no operation) when there are no changes to the document.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("detect_noop")]
@@ -242,6 +276,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// <summary>
 	/// <para>
 	/// A partial update to an existing document.
+	/// If both <c>doc</c> and <c>script</c> are specified, <c>doc</c> is ignored.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
@@ -250,7 +285,8 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Set to true to use the contents of 'doc' as the value of 'upsert'
+	/// If <c>true</c>, use the contents of 'doc' as the value of 'upsert'.
+	/// NOTE: Using ingest pipelines with <c>doc_as_upsert</c> is not supported.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc_as_upsert")]
@@ -258,7 +294,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Script to execute to update the document.
+	/// The script to run to update the document.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
@@ -266,7 +302,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Set to true to execute the script whether or not the document exists.
+	/// If <c>true</c>, run the script whether or not the document exists.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scripted_upsert")]
@@ -274,8 +310,8 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// Set to false to disable source retrieval. You can also specify a comma-separated
-	/// list of the fields you want to retrieve.
+	/// If <c>false</c>, turn off source retrieval.
+	/// You can also specify a comma-separated list of the fields you want to retrieve.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
@@ -283,8 +319,8 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
-	/// If the document does not already exist, the contents of 'upsert' are inserted as a
-	/// new document. If the document exists, the 'script' is executed.
+	/// If the document does not already exist, the contents of 'upsert' are inserted as a new document.
+	/// If the document exists, the 'script' is run.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("upsert")]
@@ -295,7 +331,42 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 /// <summary>
 /// <para>
 /// Update a document.
-/// Updates a document by running a script or passing a partial document.
+/// </para>
+/// <para>
+/// Update a document by running a script or passing a partial document.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the <c>index</c> or <c>write</c> index privilege for the target index or index alias.
+/// </para>
+/// <para>
+/// The script can update, delete, or skip modifying the document.
+/// The API also supports passing a partial document, which is merged into the existing document.
+/// To fully replace an existing document, use the index API.
+/// This operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Gets the document (collocated with the shard) from the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Runs the specified script.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Indexes the result.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The document must still be reindexed, but using this API removes some network roundtrips and reduces chances of version conflicts between the GET and the index operation.
+/// </para>
+/// <para>
+/// The <c>_source</c> field must be enabled to use this API.
+/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 /// </para>
 /// </summary>
 public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument> : RequestDescriptor<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
@@ -366,8 +437,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	/// <summary>
 	/// <para>
-	/// Set to false to disable setting 'result' in the response
-	/// to 'noop' if no change to the document occurred.
+	/// If <c>true</c>, the <c>result</c> in the response is set to <c>noop</c> (no operation) when there are no changes to the document.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true)
@@ -379,6 +449,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	/// <summary>
 	/// <para>
 	/// A partial update to an existing document.
+	/// If both <c>doc</c> and <c>script</c> are specified, <c>doc</c> is ignored.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc)
@@ -389,7 +460,8 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	/// <summary>
 	/// <para>
-	/// Set to true to use the contents of 'doc' as the value of 'upsert'
+	/// If <c>true</c>, use the contents of 'doc' as the value of 'upsert'.
+	/// NOTE: Using ingest pipelines with <c>doc_as_upsert</c> is not supported.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true)
@@ -400,7 +472,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	/// <summary>
 	/// <para>
-	/// Script to execute to update the document.
+	/// The script to run to update the document.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
@@ -429,7 +501,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	/// <summary>
 	/// <para>
-	/// Set to true to execute the script whether or not the document exists.
+	/// If <c>true</c>, run the script whether or not the document exists.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true)
@@ -440,8 +512,8 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	/// <summary>
 	/// <para>
-	/// Set to false to disable source retrieval. You can also specify a comma-separated
-	/// list of the fields you want to retrieve.
+	/// If <c>false</c>, turn off source retrieval.
+	/// You can also specify a comma-separated list of the fields you want to retrieve.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
@@ -452,8 +524,8 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	/// <summary>
 	/// <para>
-	/// If the document does not already exist, the contents of 'upsert' are inserted as a
-	/// new document. If the document exists, the 'script' is executed.
+	/// If the document does not already exist, the contents of 'upsert' are inserted as a new document.
+	/// If the document exists, the 'script' is run.
 	/// </para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert)

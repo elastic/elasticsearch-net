@@ -41,6 +41,11 @@ public sealed partial class SuggestUserProfilesRequestParameters : RequestParame
 /// <para>
 /// Get suggestions for user profiles that match specified search criteria.
 /// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
 /// </summary>
 public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUserProfilesRequestParameters>
 {
@@ -54,10 +59,11 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 
 	/// <summary>
 	/// <para>
-	/// List of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>. To return a subset of content
-	/// use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
+	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
+	/// To return all content use <c>data=*</c>.
+	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
+	/// By default, the API returns no <c>data</c> content.
+	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data")]
@@ -68,8 +74,7 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 	/// <para>
 	/// Extra search criteria to improve relevance of the suggestion result.
 	/// Profiles matching the spcified hint are ranked higher in the response.
-	/// Profiles not matching the hint don't exclude the profile from the response
-	/// as long as the profile matches the <c>name</c> field query.
+	/// Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hint")]
@@ -77,7 +82,7 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 
 	/// <summary>
 	/// <para>
-	/// Query string used to match name-related fields in user profile documents.
+	/// A query string used to match name-related fields in user profile documents.
 	/// Name-related fields are the user's <c>username</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
@@ -86,7 +91,7 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 
 	/// <summary>
 	/// <para>
-	/// Number of profiles to return.
+	/// The number of profiles to return.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
@@ -99,6 +104,11 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 /// </para>
 /// <para>
 /// Get suggestions for user profiles that match specified search criteria.
+/// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+/// Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 /// </para>
 /// </summary>
 public sealed partial class SuggestUserProfilesRequestDescriptor : RequestDescriptor<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesRequestParameters>
@@ -126,10 +136,11 @@ public sealed partial class SuggestUserProfilesRequestDescriptor : RequestDescri
 
 	/// <summary>
 	/// <para>
-	/// List of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>. To return a subset of content
-	/// use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
+	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
+	/// To return all content use <c>data=*</c>.
+	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
+	/// By default, the API returns no <c>data</c> content.
+	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
 	/// </para>
 	/// </summary>
 	public SuggestUserProfilesRequestDescriptor Data(ICollection<string>? data)
@@ -142,8 +153,7 @@ public sealed partial class SuggestUserProfilesRequestDescriptor : RequestDescri
 	/// <para>
 	/// Extra search criteria to improve relevance of the suggestion result.
 	/// Profiles matching the spcified hint are ranked higher in the response.
-	/// Profiles not matching the hint don't exclude the profile from the response
-	/// as long as the profile matches the <c>name</c> field query.
+	/// Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
 	/// </para>
 	/// </summary>
 	public SuggestUserProfilesRequestDescriptor Hint(Elastic.Clients.Elasticsearch.Security.Hint? hint)
@@ -172,7 +182,7 @@ public sealed partial class SuggestUserProfilesRequestDescriptor : RequestDescri
 
 	/// <summary>
 	/// <para>
-	/// Query string used to match name-related fields in user profile documents.
+	/// A query string used to match name-related fields in user profile documents.
 	/// Name-related fields are the user's <c>username</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
@@ -184,7 +194,7 @@ public sealed partial class SuggestUserProfilesRequestDescriptor : RequestDescri
 
 	/// <summary>
 	/// <para>
-	/// Number of profiles to return.
+	/// The number of profiles to return.
 	/// </para>
 	/// </summary>
 	public SuggestUserProfilesRequestDescriptor Size(long? size)

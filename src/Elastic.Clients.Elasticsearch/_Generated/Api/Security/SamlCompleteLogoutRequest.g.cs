@@ -41,6 +41,17 @@ public sealed partial class SamlCompleteLogoutRequestParameters : RequestParamet
 /// <para>
 /// Verifies the logout response sent from the SAML IdP.
 /// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// The SAML IdP may send a logout response back to the SP after handling the SP-initiated SAML Single Logout.
+/// This API verifies the response by ensuring the content is relevant and validating its signature.
+/// An empty response is returned if the verification process is successful.
+/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
+/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
+/// </para>
 /// </summary>
 public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlCompleteLogoutRequestParameters>
 {
@@ -62,7 +73,7 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 
 	/// <summary>
 	/// <para>
-	/// A json array with all the valid SAML Request Ids that the caller of the API has for the current user.
+	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
@@ -91,6 +102,17 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 /// </para>
 /// <para>
 /// Verifies the logout response sent from the SAML IdP.
+/// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// The SAML IdP may send a logout response back to the SP after handling the SP-initiated SAML Single Logout.
+/// This API verifies the response by ensuring the content is relevant and validating its signature.
+/// An empty response is returned if the verification process is successful.
+/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
+/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 /// </para>
 /// </summary>
 public sealed partial class SamlCompleteLogoutRequestDescriptor : RequestDescriptor<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutRequestParameters>
@@ -127,7 +149,7 @@ public sealed partial class SamlCompleteLogoutRequestDescriptor : RequestDescrip
 
 	/// <summary>
 	/// <para>
-	/// A json array with all the valid SAML Request Ids that the caller of the API has for the current user.
+	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
 	public SamlCompleteLogoutRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids ids)

@@ -10,9 +10,6 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);ELASTICSEARCH_STACK</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.0;net462;netstandard2.1;net8.0</TargetFrameworks>
@@ -21,7 +18,7 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.5.2" />
+    <PackageReference Include="Elastic.Transport" Version="0.5.9" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />

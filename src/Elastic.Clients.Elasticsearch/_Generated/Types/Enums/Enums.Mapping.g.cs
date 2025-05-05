@@ -1102,6 +1102,75 @@ internal sealed class SourceFieldModeConverter : JsonConverter<SourceFieldMode>
 	}
 }
 
+[JsonConverter(typeof(SyntheticSourceKeepEnumConverter))]
+public enum SyntheticSourceKeepEnum
+{
+	/// <summary>
+	/// <para>
+	/// Synthetic source diverges from the original source (default)
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "none")]
+	None,
+	/// <summary>
+	/// <para>
+	/// Arrays of the corresponding field or object preserve the original element ordering and duplicate elements.
+	/// The synthetic source fragment for such arrays is not guaranteed to match the original source exactly,
+	/// e.g. array [1, 2, [5], [[4, [3]]], 5] may appear as-is or in an equivalent format like [1, 2, 5, 4, 3, 5].
+	/// The exact format may change in the future, in an effort to reduce the storage overhead of this option.
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "arrays")]
+	Arrays,
+	/// <summary>
+	/// <para>
+	/// The source for both singleton instances and arrays of the corresponding field or object gets recorded.
+	/// When applied to objects, the source of all sub-objects and sub-fields gets captured.
+	/// Furthermore, the original source of arrays gets captured and appears in synthetic source with no modifications.
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "all")]
+	All
+}
+
+internal sealed class SyntheticSourceKeepEnumConverter : JsonConverter<SyntheticSourceKeepEnum>
+{
+	public override SyntheticSourceKeepEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "none":
+				return SyntheticSourceKeepEnum.None;
+			case "arrays":
+				return SyntheticSourceKeepEnum.Arrays;
+			case "all":
+				return SyntheticSourceKeepEnum.All;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, SyntheticSourceKeepEnum value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case SyntheticSourceKeepEnum.None:
+				writer.WriteStringValue("none");
+				return;
+			case SyntheticSourceKeepEnum.Arrays:
+				writer.WriteStringValue("arrays");
+				return;
+			case SyntheticSourceKeepEnum.All:
+				writer.WriteStringValue("all");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(TermVectorOptionConverter))]
 public enum TermVectorOption
 {

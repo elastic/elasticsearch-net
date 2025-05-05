@@ -32,11 +32,28 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public sealed partial class DeleteLifecycleRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Deletes an existing snapshot lifecycle policy.
+/// Delete a policy.
+/// Delete a snapshot lifecycle policy definition.
+/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 /// </para>
 /// </summary>
 public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycleRequestParameters>
@@ -52,11 +69,31 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.delete_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Deletes an existing snapshot lifecycle policy.
+/// Delete a policy.
+/// Delete a snapshot lifecycle policy definition.
+/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 /// </para>
 /// </summary>
 public sealed partial class DeleteLifecycleRequestDescriptor : RequestDescriptor<DeleteLifecycleRequestDescriptor, DeleteLifecycleRequestParameters>
@@ -74,6 +111,9 @@ public sealed partial class DeleteLifecycleRequestDescriptor : RequestDescriptor
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.delete_lifecycle";
+
+	public DeleteLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public DeleteLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public DeleteLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name policyId)
 	{

@@ -6,18 +6,10 @@ using System;
 using System.ComponentModel;
 using System.Text.Json;
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 namespace Elastic.Clients.Elasticsearch.Requests;
-#endif
 
 /// <summary>
 /// Base class for all request descriptor types.
@@ -59,8 +51,9 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> :
 	/// </summary>
 	public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 	{
-		var rc = RequestConfig;
-		RequestConfig = configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
+		RequestConfig = configurationSelector?.Invoke(RequestConfig is null
+			? new RequestConfigurationDescriptor()
+			: new RequestConfigurationDescriptor(RequestConfig)) ?? RequestConfig;
 		return _descriptor;
 	}
 

@@ -76,7 +76,6 @@ public sealed partial class GetMappingRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get mapping definitions.
-/// Retrieves mapping definitions for one or more indices.
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
 /// </para>
 /// </summary>
@@ -147,7 +146,6 @@ public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestPa
 /// <summary>
 /// <para>
 /// Get mapping definitions.
-/// Retrieves mapping definitions for one or more indices.
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
 /// </para>
 /// </summary>
@@ -191,7 +189,6 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 /// <summary>
 /// <para>
 /// Get mapping definitions.
-/// Retrieves mapping definitions for one or more indices.
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
 /// </para>
 /// </summary>

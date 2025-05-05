@@ -32,11 +32,28 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public sealed partial class ExecuteRetentionRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Deletes any snapshots that are expired according to the policy's retention rules.
+/// Run a retention policy.
+/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+/// The retention policy is normally applied according to its schedule.
 /// </para>
 /// </summary>
 public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetentionRequestParameters>
@@ -48,11 +65,31 @@ public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetent
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.execute_retention";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Deletes any snapshots that are expired according to the policy's retention rules.
+/// Run a retention policy.
+/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+/// The retention policy is normally applied according to its schedule.
 /// </para>
 /// </summary>
 public sealed partial class ExecuteRetentionRequestDescriptor : RequestDescriptor<ExecuteRetentionRequestDescriptor, ExecuteRetentionRequestParameters>
@@ -70,6 +107,9 @@ public sealed partial class ExecuteRetentionRequestDescriptor : RequestDescripto
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.execute_retention";
+
+	public ExecuteRetentionRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public ExecuteRetentionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

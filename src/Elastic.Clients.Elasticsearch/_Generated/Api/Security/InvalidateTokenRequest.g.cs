@@ -44,8 +44,14 @@ public sealed partial class InvalidateTokenRequestParameters : RequestParameters
 /// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 /// </para>
 /// <para>
-/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+/// The refresh tokens returned by the get token API are only valid for 24 hours.
+/// They can also be used exactly once.
 /// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
+/// </para>
+/// <para>
+/// NOTE: While all parameters are optional, at least one of them is required.
+/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
+/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 /// </para>
 /// </summary>
 public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateTokenRequestParameters>
@@ -58,12 +64,39 @@ public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateToke
 
 	internal override string OperationName => "security.invalidate_token";
 
+	/// <summary>
+	/// <para>
+	/// The name of an authentication realm.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("realm_name")]
 	public Elastic.Clients.Elasticsearch.Name? RealmName { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A refresh token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string? RefreshToken { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// An access token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("token")]
 	public string? Token { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The username of a user.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
@@ -78,8 +111,14 @@ public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateToke
 /// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 /// </para>
 /// <para>
-/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+/// The refresh tokens returned by the get token API are only valid for 24 hours.
+/// They can also be used exactly once.
 /// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
+/// </para>
+/// <para>
+/// NOTE: While all parameters are optional, at least one of them is required.
+/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
+/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 /// </para>
 /// </summary>
 public sealed partial class InvalidateTokenRequestDescriptor : RequestDescriptor<InvalidateTokenRequestDescriptor, InvalidateTokenRequestParameters>
@@ -103,24 +142,48 @@ public sealed partial class InvalidateTokenRequestDescriptor : RequestDescriptor
 	private string? TokenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The name of an authentication realm.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
 	public InvalidateTokenRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name? realmName)
 	{
 		RealmNameValue = realmName;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A refresh token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
 	public InvalidateTokenRequestDescriptor RefreshToken(string? refreshToken)
 	{
 		RefreshTokenValue = refreshToken;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// An access token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
 	public InvalidateTokenRequestDescriptor Token(string? token)
 	{
 		TokenValue = token;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The username of a user.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
 	public InvalidateTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
 	{
 		UsernameValue = username;

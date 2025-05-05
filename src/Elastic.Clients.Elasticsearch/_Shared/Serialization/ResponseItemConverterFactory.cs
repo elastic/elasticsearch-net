@@ -5,22 +5,10 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Get;
-#else
 using Elastic.Clients.Elasticsearch.Core.Get;
-#endif
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.MGet;
-#else
 using Elastic.Clients.Elasticsearch.Core.MGet;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 /// <summary>
 /// A converter factory able to provide a converter to handle (de)serializing <see cref="MultiGetResponseItem{TDocument}"/>.

@@ -46,6 +46,7 @@ public sealed partial class EnableUserRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Enable users in the native realm.
+/// By default, when you create users, they are enabled.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserRequest : PlainRequest<EnableUserRequestParameters>
@@ -77,6 +78,7 @@ public sealed partial class EnableUserRequest : PlainRequest<EnableUserRequestPa
 /// </para>
 /// <para>
 /// Enable users in the native realm.
+/// By default, when you create users, they are enabled.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserRequestDescriptor : RequestDescriptor<EnableUserRequestDescriptor, EnableUserRequestParameters>

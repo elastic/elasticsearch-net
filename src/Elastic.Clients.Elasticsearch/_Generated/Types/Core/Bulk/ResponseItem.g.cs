@@ -31,12 +31,14 @@ public partial class ResponseItem
 {
 	/// <summary>
 	/// <para>
-	/// Contains additional information about the failed operation.
-	/// The parameter is only returned for failed operations.
+	/// Additional information about the failed operation.
+	/// The property is returned only for failed operations.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
+	[JsonInclude, JsonPropertyName("failure_store")]
+	public Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? FailureStore { get; init; }
 	[JsonInclude, JsonPropertyName("forced_refresh")]
 	public bool? ForcedRefresh { get; init; }
 	[JsonInclude, JsonPropertyName("get")]
@@ -52,7 +54,7 @@ public partial class ResponseItem
 
 	/// <summary>
 	/// <para>
-	/// Name of the index associated with the operation.
+	/// The name of the index associated with the operation.
 	/// If the operation targeted a data stream, this is the backing index into which the document was written.
 	/// </para>
 	/// </summary>
@@ -62,6 +64,7 @@ public partial class ResponseItem
 	/// <summary>
 	/// <para>
 	/// The primary term assigned to the document for the operation.
+	/// This property is returned only for successful operations.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_primary_term")]
@@ -69,7 +72,7 @@ public partial class ResponseItem
 
 	/// <summary>
 	/// <para>
-	/// Result of the operation.
+	/// The result of the operation.
 	/// Successful values are <c>created</c>, <c>deleted</c>, and <c>updated</c>.
 	/// </para>
 	/// </summary>
@@ -79,7 +82,7 @@ public partial class ResponseItem
 	/// <summary>
 	/// <para>
 	/// The sequence number assigned to the document for the operation.
-	/// Sequence numbers are used to ensure an older version of a document doesn’t overwrite a newer version.
+	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_seq_no")]
@@ -87,7 +90,7 @@ public partial class ResponseItem
 
 	/// <summary>
 	/// <para>
-	/// Contains shard information for the operation.
+	/// Shard information for the operation.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
@@ -95,7 +98,7 @@ public partial class ResponseItem
 
 	/// <summary>
 	/// <para>
-	/// HTTP status code returned for the operation.
+	/// The HTTP status code returned for the operation.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
@@ -105,6 +108,7 @@ public partial class ResponseItem
 	/// <para>
 	/// The document version associated with the operation.
 	/// The document version is incremented each time the document is updated.
+	/// This property is returned only for successful actions.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_version")]

@@ -6,18 +6,10 @@ using System;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using Elastic.Transport;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using System.Runtime;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal sealed class JoinFieldConverter : JsonConverter<JoinField>
 {

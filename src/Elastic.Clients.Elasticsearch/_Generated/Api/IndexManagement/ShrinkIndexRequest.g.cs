@@ -59,8 +59,92 @@ public sealed partial class ShrinkIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Shrinks an existing index into a new index with fewer primary shards.
+/// Shrink an index.
+/// Shrink an index into a new index with fewer primary shards.
 /// </para>
+/// <para>
+/// Before you can shrink an index:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A copy of every shard in the index must reside on the same node.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must have a green health status.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// To make shard allocation easier, we recommend you also remove the index's replica shards.
+/// You can later re-add replica shards as part of the shrink operation.
+/// </para>
+/// <para>
+/// The requested number of primary shards in the target index must be a factor of the number of shards in the source index.
+/// For example an index with 8 primary shards can be shrunk into 4, 2 or 1 primary shards or an index with 15 primary shards can be shrunk into 5, 3 or 1.
+/// If the number of shards in the index is a prime number it can only be shrunk into a single primary shard
+/// Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+/// </para>
+/// <para>
+/// The current write index on a data stream cannot be shrunk. In order to shrink the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be shrunk.
+/// </para>
+/// <para>
+/// A shrink operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a smaller number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system does not support hard-linking, then all segments are copied into the new index, which is a much more time consuming process. Also if using multiple data paths, shards on different data paths require a full copy of segment files if they are not on the same disk since hardlinks do not work across disks.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened. Recovers shards to the <c>.routing.allocation.initial_recovery._id</c> index setting.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be shrunk if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must not contain more than 2,147,483,519 documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequestParameters>
 {
@@ -123,8 +207,92 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 
 /// <summary>
 /// <para>
-/// Shrinks an existing index into a new index with fewer primary shards.
+/// Shrink an index.
+/// Shrink an index into a new index with fewer primary shards.
 /// </para>
+/// <para>
+/// Before you can shrink an index:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A copy of every shard in the index must reside on the same node.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must have a green health status.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// To make shard allocation easier, we recommend you also remove the index's replica shards.
+/// You can later re-add replica shards as part of the shrink operation.
+/// </para>
+/// <para>
+/// The requested number of primary shards in the target index must be a factor of the number of shards in the source index.
+/// For example an index with 8 primary shards can be shrunk into 4, 2 or 1 primary shards or an index with 15 primary shards can be shrunk into 5, 3 or 1.
+/// If the number of shards in the index is a prime number it can only be shrunk into a single primary shard
+/// Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+/// </para>
+/// <para>
+/// The current write index on a data stream cannot be shrunk. In order to shrink the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be shrunk.
+/// </para>
+/// <para>
+/// A shrink operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a smaller number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system does not support hard-linking, then all segments are copied into the new index, which is a much more time consuming process. Also if using multiple data paths, shards on different data paths require a full copy of segment files if they are not on the same disk since hardlinks do not work across disks.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened. Recovers shards to the <c>.routing.allocation.initial_recovery._id</c> index setting.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be shrunk if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must not contain more than 2,147,483,519 documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDescriptor<ShrinkIndexRequestDescriptor<TDocument>, ShrinkIndexRequestParameters>
 {
@@ -205,8 +373,92 @@ public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Shrinks an existing index into a new index with fewer primary shards.
+/// Shrink an index.
+/// Shrink an index into a new index with fewer primary shards.
 /// </para>
+/// <para>
+/// Before you can shrink an index:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A copy of every shard in the index must reside on the same node.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must have a green health status.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// To make shard allocation easier, we recommend you also remove the index's replica shards.
+/// You can later re-add replica shards as part of the shrink operation.
+/// </para>
+/// <para>
+/// The requested number of primary shards in the target index must be a factor of the number of shards in the source index.
+/// For example an index with 8 primary shards can be shrunk into 4, 2 or 1 primary shards or an index with 15 primary shards can be shrunk into 5, 3 or 1.
+/// If the number of shards in the index is a prime number it can only be shrunk into a single primary shard
+/// Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+/// </para>
+/// <para>
+/// The current write index on a data stream cannot be shrunk. In order to shrink the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be shrunk.
+/// </para>
+/// <para>
+/// A shrink operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a smaller number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system does not support hard-linking, then all segments are copied into the new index, which is a much more time consuming process. Also if using multiple data paths, shards on different data paths require a full copy of segment files if they are not on the same disk since hardlinks do not work across disks.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened. Recovers shards to the <c>.routing.allocation.initial_recovery._id</c> index setting.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be shrunk if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must not contain more than 2,147,483,519 documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters>
 {

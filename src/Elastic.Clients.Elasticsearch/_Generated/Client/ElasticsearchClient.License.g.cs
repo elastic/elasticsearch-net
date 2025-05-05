@@ -41,7 +41,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +58,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +74,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +91,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +109,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +128,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +144,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +161,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes licensing information for the cluster
+	/// Delete the license.
+	/// When the license expires, your subscription level reverts to Basic.
+	/// </para>
+	/// <para>
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -148,8 +180,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -163,8 +198,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -177,8 +215,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -192,8 +233,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -208,8 +252,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -225,8 +272,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -239,8 +289,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -254,8 +307,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -269,7 +325,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -282,7 +338,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -294,7 +350,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -307,7 +363,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -321,7 +377,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -336,7 +392,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -348,7 +404,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -361,7 +417,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the basic license.
+	/// Get the basic license status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -375,7 +431,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -388,7 +444,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -400,7 +456,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -413,7 +469,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -427,7 +483,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -442,7 +498,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -454,7 +510,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -467,7 +523,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the status of the trial license.
+	/// Get the trial status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -481,7 +537,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -494,7 +558,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -506,7 +578,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -519,7 +599,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -533,7 +621,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -548,7 +644,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -560,7 +664,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -573,7 +685,15 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the license for the cluster.
+	/// Update the license.
+	/// You can update your license at runtime without shutting down your nodes.
+	/// License updates take effect immediately.
+	/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+	/// You must then re-submit the API request with the acknowledge parameter set to true.
+	/// </para>
+	/// <para>
+	/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+	/// If the operator privileges feature is enabled, only operator users can use this API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -587,8 +707,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -601,8 +731,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -614,8 +754,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -628,8 +778,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -643,8 +803,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -659,8 +829,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -672,8 +852,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -686,8 +876,18 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+	/// Start a basic license.
+	/// Start an indefinite basic license, which gives access to all the basic features.
+	/// </para>
+	/// <para>
+	/// NOTE: In order to start a basic license, you must not currently have a basic license.
+	/// </para>
+	/// <para>
+	/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+	/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+	/// </para>
+	/// <para>
+	/// To check the status of your basic license, use the get basic license API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -701,9 +901,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequest request)
@@ -714,9 +922,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequest request, CancellationToken cancellationToken = default)
 	{
@@ -726,9 +942,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequestDescriptor descriptor)
@@ -739,9 +963,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial()
@@ -753,9 +985,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(Action<PostStartTrialRequestDescriptor> configureRequest)
@@ -768,9 +1008,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -780,9 +1028,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
 	{
@@ -793,9 +1049,17 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+	/// Start a trial.
+	/// Start a 30-day trial, which gives access to all subscription features.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
+	/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
+	/// </para>
+	/// <para>
+	/// To check the status of your trial, use the get trial status API.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(Action<PostStartTrialRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

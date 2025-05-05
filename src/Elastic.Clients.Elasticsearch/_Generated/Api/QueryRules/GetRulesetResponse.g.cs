@@ -30,7 +30,7 @@ public sealed partial class GetRulesetResponse : ElasticsearchResponse
 {
 	/// <summary>
 	/// <para>
-	/// Rules associated with the query ruleset
+	/// Rules associated with the query ruleset.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rules")]
@@ -38,7 +38,7 @@ public sealed partial class GetRulesetResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Query Ruleset unique identifier
+	/// A unique identifier for the ruleset.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ruleset_id")]

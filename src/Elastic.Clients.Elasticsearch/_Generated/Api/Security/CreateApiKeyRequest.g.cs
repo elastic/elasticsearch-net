@@ -46,9 +46,21 @@ public sealed partial class CreateApiKeyRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Create an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+/// If you specify privileges, the API returns an error.
+/// </para>
+/// <para>
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
+/// </para>
+/// <para>
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
+/// </para>
+/// <para>
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+/// To configure or turn off the API key service, refer to API key service setting documentation.
 /// </para>
 /// </summary>
 public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyRequestParameters>
@@ -71,7 +83,8 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expiration")]
@@ -87,7 +100,7 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name for this API key.
+	/// A name for the API key.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
@@ -95,7 +108,16 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("role_descriptors")]
@@ -108,9 +130,21 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 /// </para>
 /// <para>
 /// Create an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+/// If you specify privileges, the API returns an error.
+/// </para>
+/// <para>
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
+/// </para>
+/// <para>
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
+/// </para>
+/// <para>
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+/// To configure or turn off the API key service, refer to API key service setting documentation.
 /// </para>
 /// </summary>
 public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDescriptor<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyRequestParameters>
@@ -138,7 +172,8 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
 	/// </para>
 	/// </summary>
 	public CreateApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
@@ -160,7 +195,7 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name for this API key.
+	/// A name for the API key.
 	/// </para>
 	/// </summary>
 	public CreateApiKeyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name)
@@ -171,7 +206,16 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
 	public CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>> selector)
@@ -217,9 +261,21 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 /// </para>
 /// <para>
 /// Create an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+/// If you specify privileges, the API returns an error.
+/// </para>
+/// <para>
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
+/// </para>
+/// <para>
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
+/// </para>
+/// <para>
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+/// To configure or turn off the API key service, refer to API key service setting documentation.
 /// </para>
 /// </summary>
 public sealed partial class CreateApiKeyRequestDescriptor : RequestDescriptor<CreateApiKeyRequestDescriptor, CreateApiKeyRequestParameters>
@@ -247,7 +303,8 @@ public sealed partial class CreateApiKeyRequestDescriptor : RequestDescriptor<Cr
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
 	/// </para>
 	/// </summary>
 	public CreateApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
@@ -269,7 +326,7 @@ public sealed partial class CreateApiKeyRequestDescriptor : RequestDescriptor<Cr
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name for this API key.
+	/// A name for the API key.
 	/// </para>
 	/// </summary>
 	public CreateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
@@ -280,7 +337,16 @@ public sealed partial class CreateApiKeyRequestDescriptor : RequestDescriptor<Cr
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
 	public CreateApiKeyRequestDescriptor RoleDescriptors(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>> selector)

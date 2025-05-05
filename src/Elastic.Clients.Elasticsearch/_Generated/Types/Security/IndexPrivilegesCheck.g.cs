@@ -31,9 +31,9 @@ public sealed partial class IndexPrivilegesCheck
 {
 	/// <summary>
 	/// <para>
-	/// This needs to be set to true (default is false) if using wildcards or regexps for patterns that cover restricted indices.
+	/// This needs to be set to <c>true</c> (default is <c>false</c>) if using wildcards or regexps for patterns that cover restricted indices.
 	/// Implicitly, restricted indices do not match index patterns because restricted indices usually have limited privileges and including them in pattern tests would render most such tests false.
-	/// If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of allow_restricted_indices.
+	/// If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_restricted_indices")]
@@ -70,9 +70,9 @@ public sealed partial class IndexPrivilegesCheckDescriptor : SerializableDescrip
 
 	/// <summary>
 	/// <para>
-	/// This needs to be set to true (default is false) if using wildcards or regexps for patterns that cover restricted indices.
+	/// This needs to be set to <c>true</c> (default is <c>false</c>) if using wildcards or regexps for patterns that cover restricted indices.
 	/// Implicitly, restricted indices do not match index patterns because restricted indices usually have limited privileges and including them in pattern tests would render most such tests false.
-	/// If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of allow_restricted_indices.
+	/// If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
 	public IndexPrivilegesCheckDescriptor AllowRestrictedIndices(bool? allowRestrictedIndices = true)

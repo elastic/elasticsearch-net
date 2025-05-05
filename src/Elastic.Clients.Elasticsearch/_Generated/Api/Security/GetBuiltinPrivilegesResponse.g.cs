@@ -28,10 +28,28 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class GetBuiltinPrivilegesResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// The list of cluster privileges that are understood by this version of Elasticsearch.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The list of index privileges that are understood by this version of Elasticsearch.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
-	public IReadOnlyCollection<string> Index { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string> Indices { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The list of remote_cluster privileges that are understood by this version of Elasticsearch.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_cluster")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> RemoteCluster { get; init; }
 }

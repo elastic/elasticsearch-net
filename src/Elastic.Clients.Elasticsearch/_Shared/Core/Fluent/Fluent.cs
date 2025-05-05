@@ -5,11 +5,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 namespace Elastic.Clients.Elasticsearch.Fluent;
-#endif
 
 internal static class FluentAssign
 {

@@ -35,6 +35,7 @@ public sealed partial class UpdateByQueryRethrottleRequestParameters : RequestPa
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
+	/// To turn off throttling, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
@@ -66,6 +67,7 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
+	/// To turn off throttling, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]

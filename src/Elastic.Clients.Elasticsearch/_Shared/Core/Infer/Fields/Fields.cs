@@ -12,11 +12,7 @@ using System.Reflection;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
 public sealed class Fields :

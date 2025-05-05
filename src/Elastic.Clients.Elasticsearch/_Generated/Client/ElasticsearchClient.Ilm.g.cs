@@ -41,7 +41,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +55,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +68,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +82,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +97,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +113,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +126,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +140,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+	/// Delete a lifecycle policy.
+	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -147,7 +155,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -160,7 +168,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -172,7 +180,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -185,7 +193,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -199,7 +207,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -214,7 +222,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -228,7 +236,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -243,7 +251,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -255,7 +263,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -268,7 +276,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -282,7 +290,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -295,7 +303,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a lifecycle policy.
+	/// Get lifecycle policies.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -309,7 +317,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -322,7 +331,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -334,7 +344,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -347,7 +358,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -361,7 +373,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -376,7 +389,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -388,7 +402,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -401,7 +416,8 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
+	/// Get the ILM status.
+	/// Get the current index lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -415,9 +431,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -430,9 +472,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -444,9 +512,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -459,9 +553,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -475,9 +595,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -492,9 +638,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -506,9 +678,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -521,9 +719,35 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+	/// Migrate to data tiers routing.
+	/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+	/// Optionally, delete one legacy index template.
 	/// Using node roles enables ILM to automatically move the indices between data tiers.
+	/// </para>
+	/// <para>
+	/// Migrating away from custom node attributes routing can be manually performed.
+	/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Stop setting the custom hot attribute on new indices.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Remove custom allocation settings from existing ILM policies.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// ILM must be stopped before performing the migration.
+	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -537,7 +761,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -550,7 +790,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -562,7 +818,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -575,7 +847,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -589,7 +877,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -604,7 +908,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -618,7 +938,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -633,7 +969,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -646,7 +998,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -660,7 +1028,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -675,7 +1059,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -687,7 +1087,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -700,7 +1116,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -714,7 +1146,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -727,7 +1175,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -741,7 +1205,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -753,7 +1233,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -766,7 +1262,23 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
+	/// Move to a lifecycle step.
+	/// Manually move an index into a specific step in the lifecycle policy and run that step.
+	/// </para>
+	/// <para>
+	/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+	/// </para>
+	/// <para>
+	/// You must specify both the current step and the step to be executed in the body of the request.
+	/// The request will fail if the current step does not match the step currently running for the index
+	/// This is to prevent the index from being moved from an unexpected step into the next step.
+	/// </para>
+	/// <para>
+	/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+	/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+	/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+	/// Only actions specified in the ILM policy are considered valid.
+	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -780,7 +1292,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -793,7 +1309,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -805,7 +1325,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -818,7 +1342,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -832,7 +1360,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -847,7 +1379,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -859,7 +1395,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -872,7 +1412,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+	/// Create or update a lifecycle policy.
+	/// If the specified policy exists, it is replaced and the policy version is incremented.
+	/// </para>
+	/// <para>
+	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -886,7 +1430,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -899,7 +1445,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -911,7 +1459,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -924,7 +1474,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -938,7 +1490,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -953,7 +1507,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -967,7 +1523,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -982,7 +1540,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -995,7 +1555,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1009,7 +1571,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1024,7 +1588,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1036,7 +1602,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1049,7 +1617,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1063,7 +1633,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1076,7 +1648,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1090,7 +1664,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1102,7 +1678,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1115,7 +1693,9 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
+	/// Remove policies from an index.
+	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+	/// It also stops managing the indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1129,7 +1709,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1142,7 +1725,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1154,7 +1740,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1167,7 +1756,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1181,7 +1773,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1196,7 +1791,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1210,7 +1808,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1225,7 +1826,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1238,7 +1842,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1252,7 +1859,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1267,7 +1877,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1279,7 +1892,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1292,7 +1908,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1306,7 +1925,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1319,7 +1941,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1333,7 +1958,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1345,7 +1973,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1358,7 +1989,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
+	/// Retry a policy.
+	/// Retry running the lifecycle policy for an index that is in the ERROR step.
+	/// The API sets the policy back to the step where the error occurred and runs the step.
+	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1372,7 +2006,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1385,7 +2022,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1397,7 +2037,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1410,7 +2053,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1424,7 +2070,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1439,7 +2088,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1451,7 +2103,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1464,7 +2119,10 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
+	/// Start the ILM plugin.
+	/// Start the index lifecycle management plugin if it is currently stopped.
+	/// ILM is started automatically when the cluster is formed.
+	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1478,7 +2136,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1491,7 +2155,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1503,7 +2173,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1516,7 +2192,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1530,7 +2212,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1545,7 +2233,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1557,7 +2251,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1570,7 +2270,13 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 
 	/// <summary>
 	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+	/// Stop the ILM plugin.
+	/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+	/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+	/// </para>
+	/// <para>
+	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

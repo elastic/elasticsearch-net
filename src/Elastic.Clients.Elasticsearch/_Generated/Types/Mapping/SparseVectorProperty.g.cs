@@ -45,6 +45,8 @@ public sealed partial class SparseVectorProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "sparse_vector";
@@ -63,6 +65,7 @@ public sealed partial class SparseVectorPropertyDescriptor<TDocument> : Serializ
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public SparseVectorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -127,6 +130,12 @@ public sealed partial class SparseVectorPropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	public SparseVectorPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -160,6 +169,12 @@ public sealed partial class SparseVectorPropertyDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("sparse_vector");
 		writer.WriteEndObject();
@@ -171,7 +186,8 @@ public sealed partial class SparseVectorPropertyDescriptor<TDocument> : Serializ
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -188,6 +204,7 @@ public sealed partial class SparseVectorPropertyDescriptor : SerializableDescrip
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public SparseVectorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -252,6 +269,12 @@ public sealed partial class SparseVectorPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	public SparseVectorPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -285,6 +308,12 @@ public sealed partial class SparseVectorPropertyDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("sparse_vector");
 		writer.WriteEndObject();
@@ -296,6 +325,7 @@ public sealed partial class SparseVectorPropertyDescriptor : SerializableDescrip
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
-		Properties = PropertiesValue
+		Properties = PropertiesValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

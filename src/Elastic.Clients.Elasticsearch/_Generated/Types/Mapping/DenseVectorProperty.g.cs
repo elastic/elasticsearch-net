@@ -104,6 +104,8 @@ public sealed partial class DenseVectorProperty : IProperty
 	/// </summary>
 	[JsonInclude, JsonPropertyName("similarity")]
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? Similarity { get; set; }
+	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "dense_vector";
@@ -129,6 +131,7 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? SimilarityValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -286,6 +289,12 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	public DenseVectorPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -359,6 +368,12 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, SimilarityValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("dense_vector");
 		writer.WriteEndObject();
@@ -399,7 +414,8 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 		IndexOptions = BuildIndexOptions(),
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue
+		Similarity = SimilarityValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }
 
@@ -423,6 +439,7 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? SimilarityValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -580,6 +597,12 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	public DenseVectorPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	{
+		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -653,6 +676,12 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, SimilarityValue, options);
 		}
 
+		if (SyntheticSourceKeepValue is not null)
+		{
+			writer.WritePropertyName("synthetic_source_keep");
+			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("dense_vector");
 		writer.WriteEndObject();
@@ -693,6 +722,7 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 		IndexOptions = BuildIndexOptions(),
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue
+		Similarity = SimilarityValue,
+		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
 }

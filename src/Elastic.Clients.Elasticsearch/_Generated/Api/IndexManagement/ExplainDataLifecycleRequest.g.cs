@@ -50,7 +50,7 @@ public sealed partial class ExplainDataLifecycleRequestParameters : RequestParam
 /// <summary>
 /// <para>
 /// Get the status for a data stream lifecycle.
-/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 /// </para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDataLifecycleRequestParameters>
@@ -87,7 +87,7 @@ public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDa
 /// <summary>
 /// <para>
 /// Get the status for a data stream lifecycle.
-/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 /// </para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : RequestDescriptor<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleRequestParameters>
@@ -127,7 +127,7 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : R
 /// <summary>
 /// <para>
 /// Get the status for a data stream lifecycle.
-/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 /// </para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequestDescriptor : RequestDescriptor<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleRequestParameters>
