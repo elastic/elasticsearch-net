@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PutTemplateRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PutTemplateRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create or update an index template. Index templates define settings, mappings, and aliases that can be applied automatically to new indices. Elasticsearch applies templates to new indices based on an index pattern that matches the index name.   IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.   Composable templates always take precedence over legacy templates. If no composable template matches a new index, matching legacy templates are applied according to their order.   Index templates are only applied during index creation. Changes to index templates do not affect existing indices. Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.   You can use C-style /* *\/ block comments in index templates. You can include comments anywhere in the request body, except before the opening curly bracket.   Indices matching multiple templates   Multiple index templates can potentially match an index, in this case, both the settings and mappings are merged into the final configuration of the index. The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them. NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1" class="text-break">
+Class PutTemplateRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
+</p>
+<p>
+IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+</p>
+<p>
+Composable templates always take precedence over legacy templates.
+If no composable template matches a new index, matching legacy templates are applied according to their order.
+</p>
+<p>
+Index templates are only applied during index creation.
+Changes to index templates do not affect existing indices.
+Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
+</p>
+<p>
+You can use C-style <code>/* *\/</code> block comments in index templates.
+You can include comments anywhere in the request body, except before the opening curly bracket.
+</p>
+<p>
+<strong>Indices matching multiple templates</strong>
+</p>
+<p>
+Multiple index templates can potentially match an index, in this case, both the settings and mappings are merged into the final configuration of the index.
+The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
+NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class PutTemplateRequestDescriptor&lt;TDocument&gt; : RequestDescriptor&lt;PutTemplateRequestDescriptor&lt;TDocument&gt;, PutTemplateRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters.html">PutTemplateRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters.html">PutTemplateRequestParameters</a>&gt;</div>
+      <div><span class="xref">PutTemplateRequestDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;PutTemplateRequestDescriptor&lt;TDocument&gt;, PutTemplateRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;PutTemplateRequestDescriptor&lt;TDocument&gt;, PutTemplateRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;PutTemplateRequestDescriptor&lt;TDocument&gt;, PutTemplateRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;PutTemplateRequestDescriptor&lt;TDocument&gt;, PutTemplateRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Name)">
+  PutTemplateRequestDescriptor(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.18.0/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Aliases_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_IndexManagement_AliasDescriptor__0___Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_IndexManagement_AliasDescriptor__0____" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Aliases(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor{`0}},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor{`0}}})">
+  Aliases(Func&lt;FluentDescriptorDictionary&lt;IndexName, AliasDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;IndexName, AliasDescriptor&lt;TDocument&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Aliases(Func&lt;FluentDescriptorDictionary&lt;IndexName, AliasDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;IndexName, AliasDescriptor&lt;TDocument&gt;&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor-1.html">AliasDescriptor</a>&lt;TDocument&gt;&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor-1.html">AliasDescriptor</a>&lt;TDocument&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Cause_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Cause*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Cause_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Cause(System.String)">
+  Cause(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Cause(string? cause)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cause</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Create_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Create*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Create_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Create(System.Nullable{System.Boolean})">
+  Create(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Create(bool? create = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>create</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_IndexPatterns_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.IndexPatterns*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_IndexPatterns_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.IndexPatterns(System.Collections.Generic.ICollection{System.String})">
+  IndexPatterns(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard expressions used to match the names
+of indices during creation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; IndexPatterns(ICollection&lt;string&gt;? indexPatterns)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indexPatterns</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Mappings_Elastic_Clients_Elasticsearch_Mapping_TypeMapping_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping)">
+  Mappings(TypeMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for fields in the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Mappings(TypeMapping? mappings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mappings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMapping.html">TypeMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Mappings_Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor{`0})">
+  Mappings(TypeMappingDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L290"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Mappings(TypeMappingDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor-1.html">TypeMappingDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Mappings_System_Action_Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Mappings(System.Action{Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor{`0}})">
+  Mappings(Action&lt;TypeMappingDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Mappings(Action&lt;TypeMappingDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor-1.html">TypeMappingDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_MasterTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.MasterTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  MasterTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; MasterTimeout(Duration? masterTimeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>masterTimeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Name(Elastic.Clients.Elasticsearch.Name)">
+  Name(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Name(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Order_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Order*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Order_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Order(System.Nullable{System.Int32})">
+  Order(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Order in which Elasticsearch applies this template if index
+matches multiple templates.
+</p>
+<p>
+Templates with lower 'order' values are merged first. Templates with higher
+'order' values are merged later, overriding templates with lower values.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Order(int? order)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>order</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L364"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Settings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings)">
+  Settings(IndexSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L327"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration options for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Settings(IndexSettings? settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings.html">IndexSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Settings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{`0})">
+  Settings(IndexSettingsDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Settings(IndexSettingsDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Settings_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Settings(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{`0}})">
+  Settings(Action&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L343"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Settings(Action&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutTemplateRequestDescriptor_1_Version_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor`1.Version(System.Nullable{System.Int64})">
+  Version(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutTemplateRequest.g.cs/#L358"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Version number used to manage index templates externally. This number
+is not automatically generated by Elasticsearch.
+To unset a version, replace the template without specifying one.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTemplateRequestDescriptor&lt;TDocument&gt; Version(long? version)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

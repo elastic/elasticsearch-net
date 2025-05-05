@@ -1,0 +1,3778 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SubmitAsyncSearchRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SubmitAsyncSearchRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Run an async search.   When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.   Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.   By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error. The maximum allowed size for a stored async search response can be set by changing the search.max_async_search_response_size cluster level setting.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor" class="text-break">
+Class SubmitAsyncSearchRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Shared/Api/AsyncSearch/SubmitAsyncSearchRequest.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.html">AsyncSearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Run an async search.
+</p>
+<p>
+When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+</p>
+<p>
+Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+</p>
+<p>
+By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+The maximum allowed size for a stored async search response can be set by changing the <code>search.max_async_search_response_size</code> cluster level setting.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class SubmitAsyncSearchRequestDescriptor : RequestDescriptor&lt;SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters.html">SubmitAsyncSearchRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters.html">SubmitAsyncSearchRequestParameters</a>&gt;</div>
+      <div><span class="xref">SubmitAsyncSearchRequestDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.#ctor">
+  SubmitAsyncSearchRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  SubmitAsyncSearchRequestDescriptor(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.18.0/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Aggregations_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_AggregationDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_AggregationDescriptor___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Aggregations(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor}})">
+  Aggregations(Func&lt;FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;, FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Aggregations(Func&lt;FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;, FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.html">AggregationDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.html">AggregationDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>allowNoIndices</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_AllowPartialSearchResults_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.AllowPartialSearchResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_AllowPartialSearchResults_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.AllowPartialSearchResults(System.Nullable{System.Boolean})">
+  AllowPartialSearchResults(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>allowPartialSearchResults</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_AnalyzeWildcard_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.AnalyzeWildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_AnalyzeWildcard_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.AnalyzeWildcard(System.Nullable{System.Boolean})">
+  AnalyzeWildcard(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>analyzeWildcard</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Analyzer(string? analyzer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>analyzer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_BatchedReduceSize_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.BatchedReduceSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_BatchedReduceSize_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.BatchedReduceSize(System.Nullable{System.Int64})">
+  BatchedReduceSize(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor BatchedReduceSize(long? batchedReduceSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batchedReduceSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_CcsMinimizeRoundtrips_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.CcsMinimizeRoundtrips*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_CcsMinimizeRoundtrips_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.CcsMinimizeRoundtrips(System.Nullable{System.Boolean})">
+  CcsMinimizeRoundtrips(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ccsMinimizeRoundtrips</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Collapse_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Collapse_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapse_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse)">
+  Collapse(FieldCollapse?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Collapse(FieldCollapse? collapse)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collapse</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse.html">FieldCollapse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Collapse_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Collapse_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapseDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor)">
+  Collapse(FieldCollapseDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2417"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Collapse(FieldCollapseDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.html">FieldCollapseDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Collapse_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Collapse_System_Action_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapseDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Collapse(System.Action{Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor})">
+  Collapse(Action&lt;FieldCollapseDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2425"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Collapse(Action&lt;FieldCollapseDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.html">FieldCollapseDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DefaultOperator_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DefaultOperator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DefaultOperator_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_Operator__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DefaultOperator(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.Operator})">
+  DefaultOperator(Operator?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor DefaultOperator(Operator? defaultOperator)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>defaultOperator</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Df_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Df*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Df_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Df(System.String)">
+  Df(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Df(string? df)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>df</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor)">
+  DocvalueFields(FieldAndFormatDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor DocvalueFields(FieldAndFormatDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor})">
+  DocvalueFields(Action&lt;FieldAndFormatDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2457"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor DocvalueFields(Action&lt;FieldAndFormatDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor____" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor}[])">
+  DocvalueFields(params Action&lt;FieldAndFormatDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2466"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor DocvalueFields(params Action&lt;FieldAndFormatDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_DocvalueFields_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.DocvalueFields(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat})">
+  DocvalueFields(ICollection&lt;FieldAndFormat&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2439"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The request returns doc values for field
+names matching these patterns in the hits.fields property of the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor DocvalueFields(ICollection&lt;FieldAndFormat&gt;? docvalueFields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>docvalueFields</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? expandWildcards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expandWildcards</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Explain_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Explain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Explain_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Explain(System.Nullable{System.Boolean})">
+  Explain(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2480"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, returns detailed information about score computation as part of a hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Explain(bool? explain = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>explain</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Ext_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Ext*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Ext_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object__Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Ext(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object},Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object}})">
+  Ext(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2491"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration of search extensions defined by Elasticsearch plugins.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Ext(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor)">
+  Fields(FieldAndFormatDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Fields(FieldAndFormatDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor})">
+  Fields(Action&lt;FieldAndFormatDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2521"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Fields(Action&lt;FieldAndFormatDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor____" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor}[])">
+  Fields(params Action&lt;FieldAndFormatDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2530"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Fields(params Action&lt;FieldAndFormatDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Fields_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Fields(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat})">
+  Fields(ICollection&lt;FieldAndFormat&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2503"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The request returns values for field names
+matching these patterns in the hits.fields property of the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Fields(ICollection&lt;FieldAndFormat&gt;? fields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fields</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_From_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.From*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_From_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.From(System.Nullable{System.Int32})">
+  From(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Starting document offset. By default, you cannot page through more than 10,000
+hits using the from and size parameters. To page through more hits, use the
+search_after parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor From(int? from)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Highlight_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Highlight_Elastic_Clients_Elasticsearch_Core_Search_Highlight_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight)">
+  Highlight(Highlight?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2552"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Highlight(Highlight? highlight)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>highlight</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Highlight.html">Highlight</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Highlight_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Highlight_Elastic_Clients_Elasticsearch_Core_Search_HighlightDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor)">
+  Highlight(HighlightDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2560"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Highlight(HighlightDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.html">HighlightDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Highlight_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Highlight_System_Action_Elastic_Clients_Elasticsearch_Core_Search_HighlightDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Highlight(System.Action{Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor})">
+  Highlight(Action&lt;HighlightDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Highlight(Action&lt;HighlightDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.html">HighlightDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_IgnoreThrottled_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.IgnoreThrottled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_IgnoreThrottled_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.IgnoreThrottled(System.Nullable{System.Boolean})">
+  IgnoreThrottled(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreThrottled</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreUnavailable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Indices(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_IndicesBoost_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.IndicesBoost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_IndicesBoost_System_Collections_Generic_ICollection_System_Collections_Generic_KeyValuePair_Elastic_Clients_Elasticsearch_IndexName_System_Double___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.IndicesBoost(System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{Elastic.Clients.Elasticsearch.IndexName,System.Double}})">
+  IndicesBoost(ICollection&lt;KeyValuePair&lt;IndexName, double&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2581"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Boosts the _score of documents from specified indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection&lt;KeyValuePair&lt;IndexName, double&gt;&gt;? indicesBoost)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indicesBoost</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_KeepAlive_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.KeepAlive*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_KeepAlive_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.KeepAlive(Elastic.Clients.Elasticsearch.Duration)">
+  KeepAlive(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2315"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor KeepAlive(Duration? keepAlive)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keepAlive</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_KeepOnCompletion_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.KeepOnCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_KeepOnCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.KeepOnCompletion(System.Nullable{System.Boolean})">
+  KeepOnCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keepOnCompletion</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_Elastic_Clients_Elasticsearch_KnnSearchDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn(Elastic.Clients.Elasticsearch.KnnSearchDescriptor)">
+  Knn(KnnSearchDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2601"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Knn(KnnSearchDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_System_Action_Elastic_Clients_Elasticsearch_KnnSearchDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn(System.Action{Elastic.Clients.Elasticsearch.KnnSearchDescriptor})">
+  Knn(Action&lt;KnnSearchDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2610"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Knn(Action&lt;KnnSearchDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_System_Action_Elastic_Clients_Elasticsearch_KnnSearchDescriptor____" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn(System.Action{Elastic.Clients.Elasticsearch.KnnSearchDescriptor}[])">
+  Knn(params Action&lt;KnnSearchDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2619"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Knn(params Action&lt;KnnSearchDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Knn_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_KnnSearch__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Knn(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.KnnSearch})">
+  Knn(ICollection&lt;KnnSearch&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2592"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the approximate kNN search to run.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Knn(ICollection&lt;KnnSearch&gt;? knn)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>knn</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearch.html">KnnSearch</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Lenient_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Lenient*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Lenient_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Lenient(System.Nullable{System.Boolean})">
+  Lenient(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Lenient(bool? lenient = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lenient</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MatchAll_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MatchAll(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor})">
+  MatchAll(Action&lt;MatchAllQueryDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Shared/Api/AsyncSearch/SubmitAsyncSearchRequest.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor MatchAll(Action&lt;MatchAllQueryDescriptor&gt;? selector = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.html">MatchAllQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MaxConcurrentShardRequests_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MaxConcurrentShardRequests*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MaxConcurrentShardRequests_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MaxConcurrentShardRequests(System.Nullable{System.Int64})">
+  MaxConcurrentShardRequests(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxConcurrentShardRequests</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MinCompatibleShardNode_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MinCompatibleShardNode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MinCompatibleShardNode_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MinCompatibleShardNode(System.String)">
+  MinCompatibleShardNode(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>minCompatibleShardNode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MinScore_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MinScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_MinScore_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.MinScore(System.Nullable{System.Double})">
+  MinScore(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2634"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Minimum _score for matching documents. Documents with a lower _score are
+not included in the search results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor MinScore(double? minScore)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>minScore</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Pit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Pit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Pit_Elastic_Clients_Elasticsearch_Core_Search_PointInTimeReference_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference)">
+  Pit(PointInTimeReference?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2646"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits the search to a point in time (PIT). If you provide a PIT, you
+cannot specify an &lt;index&gt; in the request path.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Pit(PointInTimeReference? pit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pit</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference.html">PointInTimeReference</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Pit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Pit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Pit_Elastic_Clients_Elasticsearch_Core_Search_PointInTimeReferenceDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor)">
+  Pit(PointInTimeReferenceDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2654"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Pit(PointInTimeReferenceDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.html">PointInTimeReferenceDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Pit_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Pit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Pit_System_Action_Elastic_Clients_Elasticsearch_Core_Search_PointInTimeReferenceDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Pit(System.Action{Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor})">
+  Pit(Action&lt;PointInTimeReferenceDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2662"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Pit(Action&lt;PointInTimeReferenceDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.html">PointInTimeReferenceDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_PostFilter_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.PostFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_PostFilter_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  PostFilter(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor PostFilter(Query? postFilter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>postFilter</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_PostFilter_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.PostFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_PostFilter_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor)">
+  PostFilter(QueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2678"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor PostFilter(QueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_PostFilter_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.PostFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_PostFilter_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.PostFilter(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor})">
+  PostFilter(Action&lt;QueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2686"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor PostFilter(Action&lt;QueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Preference_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Preference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Preference_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Preference(System.String)">
+  Preference(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Preference(string? preference)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>preference</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Profile_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Profile*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Profile_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Profile(System.Nullable{System.Boolean})">
+  Profile(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2694"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Profile(bool? profile = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>profile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Query(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Query(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2705"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the search definition using the Query DSL.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Query(Query? query)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>query</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Query_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor)">
+  Query(QueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2713"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Query(QueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Query_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Query(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor})">
+  Query(Action&lt;QueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2721"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Query(Action&lt;QueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_QueryLuceneSyntax_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.QueryLuceneSyntax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_QueryLuceneSyntax_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.QueryLuceneSyntax(System.String)">
+  QueryLuceneSyntax(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2321"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryLuceneSyntax</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_RequestCache_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.RequestCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_RequestCache_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.RequestCache(System.Nullable{System.Boolean})">
+  RequestCache(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2322"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor RequestCache(bool? requestCache = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestCache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_Elastic_Clients_Elasticsearch_Core_Search_RescoreDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor)">
+  Rescore(RescoreDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2738"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Rescore(RescoreDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_System_Action_Elastic_Clients_Elasticsearch_Core_Search_RescoreDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore(System.Action{Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor})">
+  Rescore(Action&lt;RescoreDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2747"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Rescore(Action&lt;RescoreDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_System_Action_Elastic_Clients_Elasticsearch_Core_Search_RescoreDescriptor____" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore(System.Action{Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor}[])">
+  Rescore(params Action&lt;RescoreDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2756"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Rescore(params Action&lt;RescoreDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Rescore_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Core_Search_Rescore__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Rescore(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Core.Search.Rescore})">
+  Rescore(ICollection&lt;Rescore&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2729"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Rescore(ICollection&lt;Rescore&gt;? rescore)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rescore</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Rescore.html">Rescore</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_RestTotalHitsAsInt_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.RestTotalHitsAsInt*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_RestTotalHitsAsInt_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.RestTotalHitsAsInt(System.Nullable{System.Boolean})">
+  RestTotalHitsAsInt(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>restTotalHitsAsInt</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Routing_Elastic_Clients_Elasticsearch_Routing_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Routing(Elastic.Clients.Elasticsearch.Routing)">
+  Routing(Routing?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Routing(Routing? routing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routing</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_RuntimeMappings_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.RuntimeMappings(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor}})">
+  RuntimeMappings(Func&lt;FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;, FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2771"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines one or more runtime fields in the search request. These fields take
+precedence over mapped fields with the same name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor RuntimeMappings(Func&lt;FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;, FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_ScriptFields_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor___" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.ScriptFields(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.ScriptFieldDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.ScriptFieldDescriptor}})">
+  ScriptFields(Func&lt;FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;, FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2782"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Retrieve a script evaluation (based on different fields) for each hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor ScriptFields(Func&lt;FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;, FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SearchAfter_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SearchAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SearchAfter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_FieldValue__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SearchAfter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.FieldValue})">
+  SearchAfter(ICollection&lt;FieldValue&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2788"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SearchAfter(ICollection&lt;FieldValue&gt;? searchAfter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>searchAfter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SearchType_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SearchType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SearchType_System_Nullable_Elastic_Clients_Elasticsearch_SearchType__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SearchType(System.Nullable{Elastic.Clients.Elasticsearch.SearchType})">
+  SearchType(SearchType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2325"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SearchType(SearchType? searchType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>searchType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchType.html">SearchType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SeqNoPrimaryTerm_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SeqNoPrimaryTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SeqNoPrimaryTerm_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SeqNoPrimaryTerm(System.Nullable{System.Boolean})">
+  SeqNoPrimaryTerm(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2800"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, returns sequence number and primary term of the last modification
+of each hit. See Optimistic concurrency control.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>seqNoPrimaryTerm</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L3004"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2813"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of hits to return. By default, you cannot page through more
+than 10,000 hits using the from and size parameters. To page through more
+hits, use the search_after parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Size(int? size)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Slice_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Slice*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Slice_Elastic_Clients_Elasticsearch_SlicedScroll_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Slice(Elastic.Clients.Elasticsearch.SlicedScroll)">
+  Slice(SlicedScroll?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2819"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Slice(SlicedScroll? slice)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>slice</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScroll.html">SlicedScroll</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Slice_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Slice*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Slice_Elastic_Clients_Elasticsearch_SlicedScrollDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor)">
+  Slice(SlicedScrollDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2827"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Slice(SlicedScrollDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.html">SlicedScrollDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Slice_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Slice*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Slice_System_Action_Elastic_Clients_Elasticsearch_SlicedScrollDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Slice(System.Action{Elastic.Clients.Elasticsearch.SlicedScrollDescriptor})">
+  Slice(Action&lt;SlicedScrollDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2835"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Slice(Action&lt;SlicedScrollDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.html">SlicedScrollDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_Elastic_Clients_Elasticsearch_SortOptionsDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor)">
+  Sort(SortOptionsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2852"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Sort(SortOptionsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor})">
+  Sort(Action&lt;SortOptionsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2861"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Sort(Action&lt;SortOptionsDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor____" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor}[])">
+  Sort(params Action&lt;SortOptionsDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2870"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Sort(params Action&lt;SortOptionsDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Sort_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_SortOptions__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Sort(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.SortOptions})">
+  Sort(ICollection&lt;SortOptions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2843"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Sort(ICollection&lt;SortOptions&gt;? sort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Source_Elastic_Clients_Elasticsearch_Core_Search_SourceConfig_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig)">
+  Source(SourceConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2885"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates which source fields are returned for matching documents. These
+fields are returned in the hits._source property of the search response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Source(SourceConfig? source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfig.html">SourceConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SourceExcludes_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SourceExcludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SourceExcludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SourceExcludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceExcludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SourceExcludes(Fields? sourceExcludes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceExcludes</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SourceIncludes_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SourceIncludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SourceIncludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SourceIncludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceIncludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2327"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SourceIncludes(Fields? sourceIncludes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceIncludes</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Stats_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Stats_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Stats(System.Collections.Generic.ICollection{System.String})">
+  Stats(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2898"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Stats groups to associate with the search. Each group maintains a statistics
+aggregation for its associated searches. You can retrieve these stats using
+the indices stats API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Stats(ICollection&lt;string&gt;? stats)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_StoredFields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.StoredFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_StoredFields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.StoredFields(Elastic.Clients.Elasticsearch.Fields)">
+  StoredFields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2912"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+List of stored fields to return as part of a hit. If no fields are specified,
+no stored fields are included in the response. If this field is specified, the _source
+parameter defaults to false. You can pass _source: true to return both source fields
+and stored fields in the search response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor StoredFields(Fields? storedFields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>storedFields</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Suggest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Suggest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Suggest_Elastic_Clients_Elasticsearch_Core_Search_Suggester_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester)">
+  Suggest(Suggester?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2918"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Suggest(Suggester? suggest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>suggest</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Suggester.html">Suggester</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Suggest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Suggest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Suggest_Elastic_Clients_Elasticsearch_Core_Search_SuggesterDescriptor_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Suggest(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor)">
+  Suggest(SuggesterDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2926"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Suggest(SuggesterDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.html">SuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Suggest_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Suggest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Suggest_System_Action_Elastic_Clients_Elasticsearch_Core_Search_SuggesterDescriptor__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Suggest(System.Action{Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor})">
+  Suggest(Action&lt;SuggesterDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2934"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Suggest(Action&lt;SuggesterDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.html">SuggesterDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestField_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestField(Elastic.Clients.Elasticsearch.Field)">
+  SuggestField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SuggestField(Field? suggestField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>suggestField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestMode_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestMode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestMode_System_Nullable_Elastic_Clients_Elasticsearch_SuggestMode__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestMode(System.Nullable{Elastic.Clients.Elasticsearch.SuggestMode})">
+  SuggestMode(SuggestMode?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SuggestMode(SuggestMode? suggestMode)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>suggestMode</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SuggestMode.html">SuggestMode</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestSize_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestSize_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestSize(System.Nullable{System.Int64})">
+  SuggestSize(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2330"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SuggestSize(long? suggestSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>suggestSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestText_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestText*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_SuggestText_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.SuggestText(System.String)">
+  SuggestText(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor SuggestText(string? suggestText)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>suggestText</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TerminateAfter_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TerminateAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TerminateAfter_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TerminateAfter(System.Nullable{System.Int64})">
+  TerminateAfter(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2949"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of documents to collect for each shard. If a query reaches this
+limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+before sorting. Defaults to 0, which does not terminate query execution early.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor TerminateAfter(long? terminateAfter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>terminateAfter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Timeout_System_String_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Timeout(System.String)">
+  Timeout(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2962"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the period of time to wait for a response from each shard. If no response
+is received before the timeout expires, the request fails and returns an error.
+Defaults to no timeout.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Timeout(string? timeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TrackScores_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TrackScores*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TrackScores_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TrackScores(System.Nullable{System.Boolean})">
+  TrackScores(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2973"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, calculate and return document scores, even if the scores are not used for sorting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor TrackScores(bool? trackScores = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>trackScores</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TrackTotalHits_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TrackTotalHits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TrackTotalHits_Elastic_Clients_Elasticsearch_Core_Search_TrackHits_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits)">
+  TrackTotalHits(TrackHits?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2987"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Number of hits matching the query to count accurately. If true, the exact
+number of hits is returned at the cost of some performance. If false, the
+response does not include the total number of hits matching the query.
+Defaults to 10,000 hits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor TrackTotalHits(TrackHits? trackTotalHits)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>trackTotalHits</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TrackHits.html">TrackHits</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TypedKeys_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TypedKeys*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_TypedKeys_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.TypedKeys(System.Nullable{System.Boolean})">
+  TypedKeys(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>typedKeys</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Version_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_Version_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.Version(System.Nullable{System.Boolean})">
+  Version(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2998"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, returns document version as part of a hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor Version(bool? version = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_WaitForCompletionTimeout_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.WaitForCompletionTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_AsyncSearch_SubmitAsyncSearchRequestDescriptor_WaitForCompletionTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  WaitForCompletionTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/AsyncSearch/SubmitAsyncSearchRequest.g.cs/#L2333"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SubmitAsyncSearchRequestDescriptor WaitForCompletionTimeout(Duration? waitForCompletionTimeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>waitForCompletionTimeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor.html">SubmitAsyncSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

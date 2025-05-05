@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.Rollup | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.Rollup | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Rollup">
+
+  <h1 id="Elastic_Clients_Elasticsearch_Rollup" data-uid="Elastic.Clients.Elasticsearch.Rollup" class="text-break">Namespace Elastic.Clients.Elasticsearch.Rollup</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping.html">DateHistogramGrouping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor.html">DateHistogramGroupingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor-1.html">DateHistogramGroupingDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest.html">DeleteJobRequest</a></dt>
+      <dd><p>
+Delete a rollup job.
+</p>
+<p>
+A job must be stopped before it can be deleted.
+If you attempt to delete a started job, an error occurs.
+Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+</p>
+<p>
+IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+The API does not delete any previously rolled up data.
+This is by design; a user may wish to roll up a static data set.
+Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+Thus the job can be deleted, leaving behind the rolled up data for analysis.
+If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+</p>
+<pre><code class="lang-csharp">POST my_rollup_index/_delete_by_query
+{
+  "query": {
+    "term": {
+      "_rollup.id": "the_rollup_job_id"
+    }
+  }
+}</code></pre>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor.html">DeleteJobRequestDescriptor</a></dt>
+      <dd><p>
+Delete a rollup job.
+</p>
+<p>
+A job must be stopped before it can be deleted.
+If you attempt to delete a started job, an error occurs.
+Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+</p>
+<p>
+IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+The API does not delete any previously rolled up data.
+This is by design; a user may wish to roll up a static data set.
+Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+Thus the job can be deleted, leaving behind the rolled up data for analysis.
+If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+</p>
+<pre><code class="lang-csharp">POST my_rollup_index/_delete_by_query
+{
+  "query": {
+    "term": {
+      "_rollup.id": "the_rollup_job_id"
+    }
+  }
+}</code></pre>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor-1.html">DeleteJobRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Delete a rollup job.
+</p>
+<p>
+A job must be stopped before it can be deleted.
+If you attempt to delete a started job, an error occurs.
+Similarly, if you attempt to delete a nonexistent job, an exception occurs.
+</p>
+<p>
+IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
+The API does not delete any previously rolled up data.
+This is by design; a user may wish to roll up a static data set.
+Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
+Thus the job can be deleted, leaving behind the rolled up data for analysis.
+If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
+If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
+</p>
+<pre><code class="lang-csharp">POST my_rollup_index/_delete_by_query
+{
+  "query": {
+    "term": {
+      "_rollup.id": "the_rollup_job_id"
+    }
+  }
+}</code></pre>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters.html">DeleteJobRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetric.html">FieldMetric</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor.html">FieldMetricDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor-1.html">FieldMetricDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest.html">GetJobsRequest</a></dt>
+      <dd><p>
+Get rollup job information.
+Get the configuration, stats, and status of rollup jobs.
+</p>
+<p>
+NOTE: This API returns only active (both <code>STARTED</code> and <code>STOPPED</code>) jobs.
+If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+For details about a historical rollup job, the rollup capabilities API may be more useful.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor.html">GetJobsRequestDescriptor</a></dt>
+      <dd><p>
+Get rollup job information.
+Get the configuration, stats, and status of rollup jobs.
+</p>
+<p>
+NOTE: This API returns only active (both <code>STARTED</code> and <code>STOPPED</code>) jobs.
+If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+For details about a historical rollup job, the rollup capabilities API may be more useful.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor-1.html">GetJobsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get rollup job information.
+Get the configuration, stats, and status of rollup jobs.
+</p>
+<p>
+NOTE: This API returns only active (both <code>STARTED</code> and <code>STOPPED</code>) jobs.
+If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+For details about a historical rollup job, the rollup capabilities API may be more useful.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters.html">GetJobsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest.html">GetRollupCapsRequest</a></dt>
+      <dd><p>
+Get the rollup job capabilities.
+Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+</p>
+<p>
+This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+This API enables you to inspect an index and determine:
+</p>
+<ol><li>
+<p>
+Does this index have associated rollup data somewhere in the cluster?
+</p>
+</li><li>
+<p>
+If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+</p>
+</li></ol>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor.html">GetRollupCapsRequestDescriptor</a></dt>
+      <dd><p>
+Get the rollup job capabilities.
+Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+</p>
+<p>
+This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+This API enables you to inspect an index and determine:
+</p>
+<ol><li>
+<p>
+Does this index have associated rollup data somewhere in the cluster?
+</p>
+</li><li>
+<p>
+If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+</p>
+</li></ol>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor-1.html">GetRollupCapsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get the rollup job capabilities.
+Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+</p>
+<p>
+This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+This API enables you to inspect an index and determine:
+</p>
+<ol><li>
+<p>
+Does this index have associated rollup data somewhere in the cluster?
+</p>
+</li><li>
+<p>
+If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+</p>
+</li></ol>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters.html">GetRollupCapsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest.html">GetRollupIndexCapsRequest</a></dt>
+      <dd><p>
+Get the rollup index capabilities.
+Get the rollup capabilities of all jobs inside of a rollup index.
+A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
+</p>
+<ul><li>
+<p>
+What jobs are stored in an index (or indices specified via a pattern)?
+</p>
+</li><li>
+<p>
+What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+</p>
+</li></ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor.html">GetRollupIndexCapsRequestDescriptor</a></dt>
+      <dd><p>
+Get the rollup index capabilities.
+Get the rollup capabilities of all jobs inside of a rollup index.
+A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
+</p>
+<ul><li>
+<p>
+What jobs are stored in an index (or indices specified via a pattern)?
+</p>
+</li><li>
+<p>
+What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+</p>
+</li></ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor-1.html">GetRollupIndexCapsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get the rollup index capabilities.
+Get the rollup capabilities of all jobs inside of a rollup index.
+A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
+</p>
+<ul><li>
+<p>
+What jobs are stored in an index (or indices specified via a pattern)?
+</p>
+</li><li>
+<p>
+What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+</p>
+</li></ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters.html">GetRollupIndexCapsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.Groupings.html">Groupings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor.html">GroupingsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor-1.html">GroupingsDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping.html">HistogramGrouping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor.html">HistogramGroupingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor-1.html">HistogramGroupingDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities.html">IndexCapabilities</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequest.html">PutJobRequest</a></dt>
+      <dd><p>
+Create a rollup job.
+</p>
+<p>
+WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+</p>
+<p>
+The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+</p>
+<p>
+There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+</p>
+<p>
+Jobs are created in a <code>STOPPED</code> state. You can start them with the start rollup jobs API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+      <dd><p>
+Create a rollup job.
+</p>
+<p>
+WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+</p>
+<p>
+The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+</p>
+<p>
+There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+</p>
+<p>
+Jobs are created in a <code>STOPPED</code> state. You can start them with the start rollup jobs API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor-1.html">PutJobRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create a rollup job.
+</p>
+<p>
+WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+</p>
+<p>
+The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+</p>
+<p>
+There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+</p>
+<p>
+Jobs are created in a <code>STOPPED</code> state. You can start them with the start rollup jobs API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters.html">PutJobRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities.html">RollupCapabilities</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary.html">RollupCapabilitySummary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary.html">RollupFieldSummary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupJob.html">RollupJob</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration.html">RollupJobConfiguration</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupJobStats.html">RollupJobStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus.html">RollupJobStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupJobSummary.html">RollupJobSummary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField.html">RollupJobSummaryField</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.html">RollupNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest.html">RollupSearchRequest</a></dt>
+      <dd><p>
+Search rolled-up data.
+The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+</p>
+<p>
+The request body supports a subset of features from the regular search API.
+The following functionality is not available:
+</p>
+<p>
+<code>size</code>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+<code>highlighter</code>, <code>suggestors</code>, <code>post_filter</code>, <code>profile</code>, <code>explain</code>: These are similarly disallowed.
+</p>
+<p>
+<strong>Searching both historical rollup and non-rollup data</strong>
+</p>
+<p>
+The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+This is done by simply adding the live indices to the URI. For example:
+</p>
+<pre><code class="lang-csharp">GET sensor-1,sensor_rollup/_rollup_search
+{
+  "size": 0,
+  "aggregations": {
+     "max_temperature": {
+      "max": {
+        "field": "temperature"
+      }
+    }
+  }
+}</code></pre>
+<p>
+The rollup search endpoint does two things when the search runs:
+</p>
+<ul><li>
+<p>
+The original request is sent to the non-rollup index unaltered.
+</p>
+</li><li>
+<p>
+A rewritten version of the original request is sent to the rollup index.
+</p>
+</li></ul>
+<p>
+When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor.html">RollupSearchRequestDescriptor</a></dt>
+      <dd><p>
+Search rolled-up data.
+The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+</p>
+<p>
+The request body supports a subset of features from the regular search API.
+The following functionality is not available:
+</p>
+<p>
+<code>size</code>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+<code>highlighter</code>, <code>suggestors</code>, <code>post_filter</code>, <code>profile</code>, <code>explain</code>: These are similarly disallowed.
+</p>
+<p>
+<strong>Searching both historical rollup and non-rollup data</strong>
+</p>
+<p>
+The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+This is done by simply adding the live indices to the URI. For example:
+</p>
+<pre><code class="lang-csharp">GET sensor-1,sensor_rollup/_rollup_search
+{
+  "size": 0,
+  "aggregations": {
+     "max_temperature": {
+      "max": {
+        "field": "temperature"
+      }
+    }
+  }
+}</code></pre>
+<p>
+The rollup search endpoint does two things when the search runs:
+</p>
+<ul><li>
+<p>
+The original request is sent to the non-rollup index unaltered.
+</p>
+</li><li>
+<p>
+A rewritten version of the original request is sent to the rollup index.
+</p>
+</li></ul>
+<p>
+When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Search rolled-up data.
+The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+</p>
+<p>
+The request body supports a subset of features from the regular search API.
+The following functionality is not available:
+</p>
+<p>
+<code>size</code>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+<code>highlighter</code>, <code>suggestors</code>, <code>post_filter</code>, <code>profile</code>, <code>explain</code>: These are similarly disallowed.
+</p>
+<p>
+<strong>Searching both historical rollup and non-rollup data</strong>
+</p>
+<p>
+The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+This is done by simply adding the live indices to the URI. For example:
+</p>
+<pre><code class="lang-csharp">GET sensor-1,sensor_rollup/_rollup_search
+{
+  "size": 0,
+  "aggregations": {
+     "max_temperature": {
+      "max": {
+        "field": "temperature"
+      }
+    }
+  }
+}</code></pre>
+<p>
+The rollup search endpoint does two things when the search runs:
+</p>
+<ul><li>
+<p>
+The original request is sent to the non-rollup index unaltered.
+</p>
+</li><li>
+<p>
+A rewritten version of the original request is sent to the rollup index.
+</p>
+</li></ul>
+<p>
+When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters.html">RollupSearchRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequest.html">StartJobRequest</a></dt>
+      <dd><p>
+Start rollup jobs.
+If you try to start a job that does not exist, an exception occurs.
+If you try to start a job that is already started, nothing happens.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor.html">StartJobRequestDescriptor</a></dt>
+      <dd><p>
+Start rollup jobs.
+If you try to start a job that does not exist, an exception occurs.
+If you try to start a job that is already started, nothing happens.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor-1.html">StartJobRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Start rollup jobs.
+If you try to start a job that does not exist, an exception occurs.
+If you try to start a job that is already started, nothing happens.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters.html">StartJobRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequest.html">StopJobRequest</a></dt>
+      <dd><p>
+Stop rollup jobs.
+If you try to stop a job that does not exist, an exception occurs.
+If you try to stop a job that is already stopped, nothing happens.
+</p>
+<p>
+Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+This is accomplished with the <code>wait_for_completion</code> query parameter, and optionally a timeout. For example:
+</p>
+<pre><code class="lang-csharp">POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s</code></pre>
+<p>
+The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor.html">StopJobRequestDescriptor</a></dt>
+      <dd><p>
+Stop rollup jobs.
+If you try to stop a job that does not exist, an exception occurs.
+If you try to stop a job that is already stopped, nothing happens.
+</p>
+<p>
+Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+This is accomplished with the <code>wait_for_completion</code> query parameter, and optionally a timeout. For example:
+</p>
+<pre><code class="lang-csharp">POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s</code></pre>
+<p>
+The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor-1.html">StopJobRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Stop rollup jobs.
+If you try to stop a job that does not exist, an exception occurs.
+If you try to stop a job that is already stopped, nothing happens.
+</p>
+<p>
+Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
+This is accomplished with the <code>wait_for_completion</code> query parameter, and optionally a timeout. For example:
+</p>
+<pre><code class="lang-csharp">POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s</code></pre>
+<p>
+The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
+If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters.html">StopJobRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.TermsGrouping.html">TermsGrouping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor.html">TermsGroupingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor-1.html">TermsGroupingDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.html">IndexingJobState</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.Metric.html">Metric</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class NodeInfo | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class NodeInfo | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Nodes_NodeInfo.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Nodes.NodeInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo" class="text-break">
+Class NodeInfo  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.html">Nodes</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class NodeInfo</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">NodeInfo</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Aggregations" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Aggregations">
+  Aggregations
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;aggregations&quot;)]
+public IReadOnlyDictionary&lt;string, NodeInfoAggregation&gt;? Aggregations { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeInfoAggregation.html">NodeInfoAggregation</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Attributes_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Attributes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Attributes" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Attributes">
+  Attributes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;attributes&quot;)]
+public IReadOnlyDictionary&lt;string, string&gt; Attributes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_BuildFlavor_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.BuildFlavor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_BuildFlavor" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.BuildFlavor">
+  BuildFlavor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;build_flavor&quot;)]
+public string BuildFlavor { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_BuildHash_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.BuildHash*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_BuildHash" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.BuildHash">
+  BuildHash
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Short hash of the last git commit in this release.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;build_hash&quot;)]
+public string BuildHash { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_BuildType_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.BuildType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_BuildType" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.BuildType">
+  BuildType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;build_type&quot;)]
+public string BuildType { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Host_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Host*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Host" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Host">
+  Host
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The node’s host name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;host&quot;)]
+public string Host { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Http_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Http*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Http" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Http">
+  Http
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;http&quot;)]
+public NodeInfoHttp? Http { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp.html">NodeInfoHttp</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Ingest_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Ingest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Ingest" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Ingest">
+  Ingest
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;ingest&quot;)]
+public NodeInfoIngest? Ingest { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest.html">NodeInfoIngest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Ip_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Ip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Ip" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Ip">
+  Ip
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The node’s IP address.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;ip&quot;)]
+public string Ip { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Jvm_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Jvm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Jvm" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Jvm">
+  Jvm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;jvm&quot;)]
+public NodeJvmInfo? Jvm { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo.html">NodeJvmInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Modules_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Modules*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Modules" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Modules">
+  Modules
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;modules&quot;)]
+public IReadOnlyCollection&lt;PluginStats&gt;? Modules { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.PluginStats.html">PluginStats</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Name_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Name" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The node's name
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;name&quot;)]
+public string Name { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Network_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Network*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Network" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Network">
+  Network
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;network&quot;)]
+public NodeInfoNetwork? Network { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork.html">NodeInfoNetwork</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Os_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Os*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Os" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Os">
+  Os
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;os&quot;)]
+public NodeOperatingSystemInfo? Os { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo.html">NodeOperatingSystemInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Plugins_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Plugins*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Plugins" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Plugins">
+  Plugins
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;plugins&quot;)]
+public IReadOnlyCollection&lt;PluginStats&gt;? Plugins { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.PluginStats.html">PluginStats</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Process_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Process*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Process" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Process">
+  Process
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;process&quot;)]
+public NodeProcessInfo? Process { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo.html">NodeProcessInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Roles_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Roles*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Roles" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Roles">
+  Roles
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;roles&quot;)]
+public IReadOnlyCollection&lt;NodeRole&gt; Roles { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.NodeRole.html">NodeRole</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Settings_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Settings" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Settings">
+  Settings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;settings&quot;)]
+public NodeInfoSettings? Settings { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings.html">NodeInfoSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_ThreadPool_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.ThreadPool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_ThreadPool" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.ThreadPool">
+  ThreadPool
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;thread_pool&quot;)]
+public IReadOnlyDictionary&lt;string, NodeThreadPoolInfo&gt;? ThreadPool { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo.html">NodeThreadPoolInfo</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_TotalIndexingBuffer_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.TotalIndexingBuffer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_TotalIndexingBuffer" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.TotalIndexingBuffer">
+  TotalIndexingBuffer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by Indexing Buffer settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;total_indexing_buffer&quot;)]
+public long? TotalIndexingBuffer { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_TotalIndexingBufferInBytes_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.TotalIndexingBufferInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_TotalIndexingBufferInBytes" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.TotalIndexingBufferInBytes">
+  TotalIndexingBufferInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Same as total_indexing_buffer, but expressed in bytes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;total_indexing_buffer_in_bytes&quot;)]
+public ByteSize? TotalIndexingBufferInBytes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Transport_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Transport*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Transport" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Transport">
+  Transport
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;transport&quot;)]
+public NodeInfoTransport? Transport { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodeInfoTransport.html">NodeInfoTransport</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_TransportAddress_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.TransportAddress*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_TransportAddress" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.TransportAddress">
+  TransportAddress
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Host and port where transport HTTP connections are accepted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;transport_address&quot;)]
+public string TransportAddress { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Version_" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Nodes_NodeInfo_Version" data-uid="Elastic.Clients.Elasticsearch.Nodes.NodeInfo.Version">
+  Version
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Nodes/NodeInfo.g.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Elasticsearch version running on this node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;version&quot;)]
+public string Version { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
